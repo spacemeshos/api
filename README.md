@@ -17,8 +17,10 @@ to test the build. To output the image in json format, run:
 
 ## Linting
 
+`buf` runs several [linters](https://buf.build/docs/lint-checkers).
+
 ```
 > buf check lint
 ```
 
-This command should have exit code 0 and no output.
+This command should have exit code 0 and no output. See the [style guide](https://buf.build/docs/style-guide).
