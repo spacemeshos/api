@@ -16,13 +16,14 @@ message TxConfirmation {
 }
 
 enum TxStatus {
-    REJECTED = 0;
-    //INSUFFICIENT_FUNDS = 1;
-    //CONFLICTING = 2;
-    PENDING = 3;
-    //PROCESSING = 4;
-    //APPROVED = 5;
-    CONFIRMED = 6;
+    UNDEFINED = 0;
+    REJECTED = 1;
+    //INSUFFICIENT_FUNDS = 2;
+    //CONFLICTING = 3;
+    PENDING = 4;
+    //PROCESSING = 5;
+    //APPROVED = 6;
+    CONFIRMED = 7;
 }
 
 message TransactionId {
