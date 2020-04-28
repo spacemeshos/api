@@ -1,7 +1,7 @@
 syntax = "proto3";
 package pb;
 
-import "google/api/annotations.proto";
+/* import "google/api/annotations.proto"; */
 import "google/protobuf/empty.proto";
 
 message SimpleMessage {
@@ -61,21 +61,9 @@ message NodeStatus {
 
 service SpacemeshService {
     rpc Echo (SimpleMessage) returns (SimpleMessage) {
-        option (google.api.http) = {
-          post: "/v1/example/echo"
-          body: "*"
-        };
     }
     rpc GetNodeStatus (google.protobuf.Empty) returns (NodeStatus) {
-        option (google.api.http) = {
-          post: "/v1/nodestatus"
-          body: "*"
-        };
     }
     rpc GetGenesisTime (google.protobuf.Empty) returns (SimpleMessage) {
-        option (google.api.http) = {
-          post: "/v1/genesis"
-          body: "*"
-        };
     }
 }
