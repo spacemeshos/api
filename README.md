@@ -1,2 +1,16 @@
 # api
 Spacemesh API
+
+## To build
+
+Use the [`buf`](https://buf.build/) tool to compile the API to an [image](https://buf.build/docs/inputs). First, [install `buf`](https://buf.build/docs/installation), then run:
+
+```
+> buf image build -o /dev/null
+```
+
+to test the build. To output the image in json format, run:
+
+```
+> buf image build --exclude-source-info -o -#format=json
+```
