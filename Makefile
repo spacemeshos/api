@@ -70,6 +70,12 @@ local: $(BUF)
 	buf check lint
 	buf check breaking --experimental-git-clone --against-input '.git#branch=master'
 
+# Linter only. This does not do breaking change detection.
+
+.PHONY: lint
+lint: $(BUF)
+	buf check lint
+
 # https is what we run when testing in most CI providers.
 # This does breaking change detection against our remote HTTPS git repository.
 
