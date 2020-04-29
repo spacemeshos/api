@@ -55,8 +55,7 @@ message TransactionFee { // = gas * gas_price
     uint64 gas_price = 2;
 }
 
-// common fields to all transactions. Allows demuxing of message to
-// specific transaction type messages. e.g. CoinTransaction
+// Simple coin transaction
 message Transaction {
     // every transaction message has all these fields
     TransactionType type = 1;
@@ -70,62 +69,23 @@ message Transaction {
     Amount amount = 9;
 }
 
-message CoinTransaction {
-    TransactionType type = 1;
-    TransactionId id = 2;
-    AccountId sender = 3;
-    TransactionFee fee = 4;
-    TransactionStatus status = 5;
-    uint64 timestamp = 6;
-    uint64 layer_id = 7;
-    AccountId receiver = 8;
-    Amount amount = 9;
-}
-
+// App method call transaction
 message AppTransaction {
-    TransactionType type = 1;
-    TransactionId id = 2;
-    AccountId sender = 3;
-    TransactionFee fee = 4;
-    TransactionStatus status = 5;
-    uint64 timestamp = 6;
-    uint64 layer_id = 7;
-    AccountId receiver = 8;
-    Amount amount = 9;
-
-    bytes data = 10; // method id and arguments - packed binary
+    Transaction transaction = 1;
+    bytes data = 2; // method id and arguments - packed binary
 }
 
 message DeployAppTransaction {
-
-    TransactionType type = 1;
-    TransactionId id = 2;
-    AccountId sender = 3;
-    TransactionFee fee = 4;
-    TransactionStatus status = 5;
-    uint64 timestamp = 6;
-    uint64 layer_id = 7;
-    AccountId receiver = 8; // unused - maybe use as creator id?
-    Amount amount = 9;      // amount to transfer to app instance
-
-    bytes data = 10;        // packed deploy data
+    Transaction transaction = 1;
+    bytes data = 2;        // packed deploy data
 }
 
 message ActivationTransaction {
-    
-    TransactionType type = 1;
-    TransactionId id = 2;
-    AccountId sender = 3;
-    TransactionFee fee = 4;
-    TransactionStatus status = 5;
-    uint64 timestamp = 6;
-    uint64 layer_id = 7;
-    AccountId receiver = 8; // used as coinbase for atx!
-    Amount amount = 9;      // amount to burn ????
 
-    SmesherId smesher_id = 10;
-    TransactionId prev_atx = 11;  // previous ATX
-    bytes data = 12;        // packed atx data - post+poet proof...
+    Transaction transaction = 1;
+    SmesherId smesher_id = 2;
+    TransactionId prev_atx = 3;  // previous ATX
+    bytes data = 4;        // packed atx data - post+poet proof...
 }
 
 message Reward {
