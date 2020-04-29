@@ -10,6 +10,10 @@ message SimpleInt {
     uint64 value = 1;
 }
 
+message AccountId {
+    bytes address = 1;
+}
+
 message TxConfirmation {
     string value = 1;
     string id = 2;
@@ -30,26 +34,72 @@ message TransactionId {
     bytes id = 1;
 }
 
-message Transaction {
-    TransactionId tx_id = 1;
+message SmesherId {
+    bytes id = 1;
+}
+
+
+
+message TransactionFee {
+    uint64 gas = 1;
+    uint64 gas_price = 2;
+}
+
+message CoinTransaction {
+    TransactionId id = 1;
     AccountId sender = 2;
     AccountId receiver = 3;
     uint64 amount = 4;
-    uint64 fee = 5;
+    TransactionFee fee = 5;
     TxStatus status = 6;
     uint64 layer_id = 7;
-    uint64 timestamp = 8;
+    uint64 timestamp = 8; // what does this time mean?
 }
 
-message AccountId {
-    string address = 1;
+message AppTransaction {
+    TransactionId id = 1;
+    AccountId sender = 2;
+    AccountId app_id = 3;
+    uint64 amount = 4;
+    TransactionFee fee = 5;
+    TxStatus status = 6;
+    uint64 layer_id = 7;
+    uint64 timestamp = 8; // what does this time mean?
+    bytes meta_data = 9;
 }
+
+message DeployAppTransaction {
+    TransactionId id = 1;
+    AccountId sender = 2;
+    AccountId app_template_id = 3;
+    uint64 amount = 4;
+    TransactionFee fee = 5;
+    TxStatus status = 6;
+    uint64 layer_id = 7;
+    uint64 timestamp = 8; // what does this time mean?
+    bytes meta_data = 9;
+}
+
+message ActivationTransaction {
+    TransactionId id = 1;
+    AccountId sender = 2;
+    bytes atx_data = 3;
+    TransactionId prev_id = 4;
+    SmesherId smesher_id = 5;
+    AccountId coinbase = 6;
+    TransactionFee fee = 7;
+    TxStatus status = 8;
+    uint64 layer_id = 9;
+    uint64 timestamp = 10; // what does this time mean?
+}
+
+
 
 message Reward {
     uint64 layer = 1;
     uint64 total_reward = 2;
-    uint64 layer_reward_estimate = 3;
-    // total_reward - layer_reward_estimate = fees_estimate
+    uint64 layer_reward = 3;
+    // tx_fee = total_reward - layer_reward
     AccountId recipient = 4;
 }
 
