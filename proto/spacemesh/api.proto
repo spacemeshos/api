@@ -8,17 +8,18 @@ service SpacemeshService {
     // A simple test endpoint
     rpc Echo(SimpleString) returns (SimpleString);
 
-    // Node facade
+    ////////// Node facade
 
     // Returns the version of the node software as a semver string
     rpc NodeVersion(google.protobuf.Empty) returns (SimpleString);
 
-    // Returns node status object
+    // Returns node status
     rpc NodeStatus(google.protobuf.Empty) returns (NodeStatus);
-    // Tell the node to start sync
+
+    // Tell the node to start syncing
     rpc NodeSyncStart(google.protobuf.Empty) returns (google.protobuf.Empty);
 
-    // Mesh facade
+    ///////// Mesh facade
 
     // Returns mesh genesis time as unix epoch time
     rpc MeshGenesisTime(google.protobuf.Empty) returns (SimpleInt);
@@ -35,19 +36,20 @@ service SpacemeshService {
     // Returns number of layers per epoch
     rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
-    // STREAM
+    // STREAMS
 
-    // Node stream facade
+    ////////// Node stream facade
 
     // Sync status events
     rpc NodeStreamSyncStatus(google.protobuf.Empty) returns (stream SyncStatus);
+
     // Node error events
     rpc NodeStreamError(google.protobuf.Empty) returns (stream NodeError);
 
-    // Mesh stream facade
+    //////////////// Mesh stream facade
 
-    // Transcation status change method - emitted after tx was processed by STF
-    rpc TranscationProcessor(google.protobuf.Empty) returns (stream Transaction);
+    // Transcation receipts - emitted after tx was processed by STF (or rejected before STF)
+    rpc TranscationProcessor(google.protobuf.Empty) returns (stream TransactionReceipt);
 
     // Accounts
     rpc MeshStreamAccount(google.protobuf.Empty) returns (stream Account);

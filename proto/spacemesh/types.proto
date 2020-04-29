@@ -9,7 +9,8 @@ message SimpleString {
     string value = 1;
 }
 
-message Amount { // a smidge non-negative coin amount
+// a non-negative coin amount
+message Amount {
     uint64 value = 1;
 }
 
@@ -19,7 +20,7 @@ message AccountId {
 
 message Account {
     AccountId address = 1;
-    uint64 counter = 2; // none
+    uint64 counter = 2; // aka nonce
     Amount balance = 3;
 }
 
@@ -42,9 +43,17 @@ enum TransactionType {
     DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
 }
 
-message TransactionConfirmation {
-    string value = 1;
-    string id = 2;
+enum TransactionResult {
+    RUNTIME_EXCEPTION = 0;
+    INSUFFICIENT_GAS_PROVIDED = 1;
+    INVALID_DATA = 2;
+}
+
+message TransactionReceipt {
+    TransactionId transaction_id = 1;  // the source transaction
+    TransactionResult result = 2;   // tx processing result
+    uint64 gas_used = 3;            // gas units used by the transaction
+    Amount fee = 4;                 // transaction fee charged for the transaction
 }
 
 message TransactionId {
@@ -63,16 +72,14 @@ message TransactionFee { // = gas * gas_price
 // Simple coin transaction
 message Transaction {
     TransactionType type = 1;
-
     TransactionId id = 2;
-
     AccountId sender = 3;
     TransactionFee fee = 4;
-    uint64 timestamp = 6;  // shouldn't this be part of the event envelope?
-    uint64 layer_id = 7;
-    AccountId receiver = 8; // depending on tx type
-    Amount amount = 9; // amount of coin transfered in this tx by sender
-    TransactionStatus status = 5;
+    uint64 timestamp = 5;  // shouldn't this be part of the event envelope?
+    uint64 layer_id = 6;
+    AccountId receiver = 7; // depending on tx type
+    Amount amount = 8; // amount of coin transfered in this tx by sender
+    TransactionStatus status = 9;
 
     bytes data = 10; // binary payload - used for app, deploy, atx and spwan transactions
     SmesherId smesher_id = 11;    // used in atx only
@@ -89,7 +96,7 @@ message Reward {
 }
 
 message Block {
-    bytes id = 1;
+    bytes id = 1;                           // basically transactions hash
     repeated Transaction transactions = 2;
 }
 
@@ -100,17 +107,18 @@ enum LayerStatus {
 }
 
 message Layer {
-    uint64 number = 1;        // layer number - not hash - layer content may change
+    uint64 number = 1;              // layer number - not hash - layer content may change
     LayerStatus status = 2;
     bytes hash = 3;                 // computer layer hash - do we need this?
     repeated Block blocks = 4;
+    bytes root_state_hash = 5;      // when computed
 }
 
 message NodeStatus {
-    uint64 peers = 1;
+    uint64 known_peers = 1;
     uint64 min_peers = 2;
     uint64 max_peers = 3;
-    bool synced = 4;
+    bool   is_synced = 4;
     uint64 synced_layer = 5;
     uint64 current_layer = 6;
     uint64 verified_layer = 7;
@@ -120,8 +128,17 @@ message NodeStatus {
    Represents a critical node error.
    TODO: add an enum with clearly-defined error types.
  */
+
+enum ErrorType {
+    UNKNOWN_PANIC = 0;
+    SYNC_PANIC = 1;
+    SHUT_DOWN = 2;
+}
+
 message NodeError {
-    string error = 1;
+    ErrorType type = 1;
+    string message = 2;
+    string stack_trace = 3;
 }
 
 message SyncStatus {
