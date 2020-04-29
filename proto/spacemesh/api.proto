@@ -74,7 +74,6 @@ message Transaction {
     TransactionId prev_atx = 12;  // previous ATX. used in atx.
 }
 
-
 message Reward {
     uint64 layer = 1;
     uint64 total_reward = 2;
@@ -189,6 +188,9 @@ service SpacemeshService {
     rpc NodeStreamError(google.protobuf.Empty) returns (stream NodeError);
 
     // Mesh stream facade
+
+    // Transcation status change method - emitted after tx was processed by STF
+    rpc StreamTranscationProcessing(google.protobuf.Empty) returns (stream Transcation);
 
     // Account events
     rpc MeshStreamAccount(google.protobuf.Empty) returns (stream AccountEvent);
