@@ -27,13 +27,13 @@ message Account {
 
 enum TransactionProcessingStatus {
     UNDEFINED = 0;
-    REJECTED = 1;
-    //INSUFFICIENT_FUNDS = 2;
-    //CONFLICTING = 3;
-    PENDING = 4;
+    REJECTED = 1;               // rejected pre STF processing. e.g. bad data
+    INSUFFICIENT_FUNDS = 2;     // rejected pre STF processing by funds check.
+    CONFLICTING = 3;            // rejected pre STF due to conflicting counter.
+    PENDING = 4;                // pending processing by STF
     //PROCESSING = 5;
     //APPROVED = 6;
-    CONFIRMED = 7;
+    PROCESSED = 7;              // processed. Results are in the tx receipt.
 }
 
 enum TransactionType {
@@ -44,18 +44,17 @@ enum TransactionType {
     DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
 }
 
-enum TransactionResult {
-    RUNTIME_EXCEPTION = 0;
-    INSUFFICIENT_GAS_PROVIDED = 1;
-    INVALID_TX_DATA = 2;
-    APP_DEPLOYED = 3;
-    APP_TEMPLATE_DEPLOYED = 4;
+enum TransactionResult { // results of processing a transaction by the STF
+    RUNTIME_EXCEPTION = 0;              // app code exception
+    INSUFFICIENT_GAS_PROVIDED = 1;      // out of gas
+    INSUFFICIENT_BALANCE = 2;           // failed due to sender insufficient funds
+    EXECUTED = 3;                      // executed w/o error
 }
 
 message TransactionReceipt {
-    TransactionId transaction_id = 1;  // the source transaction
+    TransactionId id = 1;  // the source transaction
     TransactionResult result = 2;   // tx processing result
-    uint64 gas_used = 3;            // gas units used by the transaction
+    uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
 }
 
@@ -80,7 +79,7 @@ message TransactionFee { // = gas * gas_price
 // Simple coin transaction
 message Transaction {
     TransactionType type = 1;
-    TransactionId id = 2;
+    TransactionId id = 2; // hash
     AccountId sender = 3;
     TransactionFee fee = 4;
     uint64 timestamp = 5;  // shouldn't this be part of the event envelope?
@@ -88,10 +87,11 @@ message Transaction {
     AccountId receiver = 7; // depending on tx type
     Amount amount = 8; // amount of coin transfered in this tx by sender
     TransactionProcessingStatus status = 9;
+    uint64 counter = 10;    // tx counter aka nonce
 
-    bytes data = 10; // binary payload - used for app, deploy, atx and spwan transactions
-    SmesherId smesher_id = 11;    // used in atx only
-    TransactionId prev_atx = 12;  // previous ATX. used in atx.
+    bytes data = 11; // binary payload - used for app, deploy, atx and spwan transactions
+    SmesherId smesher_id = 12;    // used in atx only
+    TransactionId prev_atx = 13;  // previous ATX. used in atx.
 }
 
 message Reward {
