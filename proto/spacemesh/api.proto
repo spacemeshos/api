@@ -39,23 +39,21 @@ service SpacemeshService {
     // Returns number of layers per epoch
     rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
-    // STREAMS
-
-    ////////// Node stream facade
+    ////////// Node streaming data facade
 
     // Sync status events
-    rpc NodeStreamSyncStatus(google.protobuf.Empty) returns (stream NodeSyncStatus);
+    rpc NodeSyncStatuses(google.protobuf.Empty) returns (stream NodeSyncStatus);
 
     // Node error events
-    rpc NodeStreamError(google.protobuf.Empty) returns (stream NodeError);
+    rpc NodeErrors(google.protobuf.Empty) returns (stream NodeError);
 
-    //////////////// Mesh stream facade
+    //////////////// Mesh streaming data facade
 
     // Receipts - emitted after tx was processed by STF (or rejected before STF)
-    rpc TransactionProcessing(google.protobuf.Empty) returns (stream TransactionReceipt);
+    rpc MeshTransactionReceipts(google.protobuf.Empty) returns (stream TransactionReceipt);
 
     // App Events - emitted by app methods impl code trigged by an app transaction
-    rpc AppEvents(google.protobuf.Empty) returns (stream AppEvent);
+    rpc MeshAppEvents(google.protobuf.Empty) returns (stream AppEvent);
 
     // Accounts
     rpc MeshStreamAccount(google.protobuf.Empty) returns (stream Account);
