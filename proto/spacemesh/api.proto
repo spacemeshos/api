@@ -10,7 +10,7 @@ message SimpleInt {
     uint64 value = 1;
 }
 
-message Amount { // a smidge non-negative amount
+message Amount { // a smidge non-negative coin amount
     uint64 value = 1;
 }
 
@@ -18,7 +18,7 @@ message AccountId {
     bytes address = 1;
 }
 
-enum TxStatus {
+enum TransactionStatus {
     UNDEFINED = 0;
     REJECTED = 1;
     //INSUFFICIENT_FUNDS = 2;
@@ -29,7 +29,7 @@ enum TxStatus {
     CONFIRMED = 7;
 }
 
-enum TxType {
+enum TransactionType {
     COIN = 0;            // simple coin transaction
     ATX = 1;             // smesher activation transaction
     APP = 2;             // smart contract method
@@ -37,7 +37,7 @@ enum TxType {
     DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
 }
 
-message TxConfirmation { ?????
+message TransactionConfirmation { ?????
     string value = 1;
     string id = 2;
 }
@@ -58,51 +58,51 @@ message TransactionFee { // = gas * gas_price
 // common fields to all transactions. Allows demuxing of message to
 // specific transaction type messages. e.g. CoinTransaction
 message Transaction {
-    TxType type = 1;
+    TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
 }
 
 message CoinTransaction {
-    TxType type = 1;
+    TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
     AccountId receiver = 4;
     Amount amount = 5;
     TransactionFee fee = 6;
-    TxStatus status = 7;
+    TransactionStatus status = 7;
     uint64 layer_id = 8;
     uint64 timestamp = 9; // what does this time mean?
 }
 
 message AppTransaction {
-    TxType type = 1;
+    TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
     AccountId app_id = 4;
     Amount amount = 5;
     TransactionFee fee = 6;
-    TxStatus status = 7;
+    TransactionStatus status = 7;
     uint64 layer_id = 8;
     uint64 timestamp = 9; // what does this time mean?
     bytes meta_data = 10;
 }
 
 message DeployAppTransaction {
-    TxType type = 1;
+    TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
     AccountId app_template_id = 4;
     Amount amount = 5;
     TransactionFee fee = 6;
-    TxStatus status = 7;
+    TransactionStatus status = 7;
     uint64 layer_id = 8;
     uint64 timestamp = 9; // what does this time mean?
     bytes meta_data = 10;
 }
 
 message ActivationTransaction {
-    TxType type = 1;
+    TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
     bytes atx_data = 4;
@@ -110,7 +110,7 @@ message ActivationTransaction {
     SmesherId smesher_id = 6;
     AccountId coinbase = 7;
     TransactionFee fee = 8;
-    TxStatus status = 9;
+    TransactionStatus status = 9;
     uint64 layer_id = 10;
     uint64 timestamp = 11; // what does this time mean?
 }
