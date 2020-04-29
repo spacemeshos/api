@@ -29,6 +29,13 @@ enum TxStatus {
     //APPROVED = 6;
     CONFIRMED = 7;
 }
+enum TxType {
+    COIN = 0;
+    ATX = 1;
+    APP = 2;
+    DEPLOY = 3;
+}
+
 
 message TransactionId {
     bytes id = 1;
@@ -38,62 +45,62 @@ message SmesherId {
     bytes id = 1;
 }
 
-
-
 message TransactionFee {
     uint64 gas = 1;
     uint64 gas_price = 2;
 }
 
 message CoinTransaction {
-    TransactionId id = 1;
-    AccountId sender = 2;
-    AccountId receiver = 3;
-    uint64 amount = 4;
-    TransactionFee fee = 5;
-    TxStatus status = 6;
-    uint64 layer_id = 7;
-    uint64 timestamp = 8; // what does this time mean?
+    TxType type = 1;
+    TransactionId id = 2;
+    AccountId sender = 3;
+    AccountId receiver = 4;
+    uint64 amount = 5;
+    TransactionFee fee = 6;
+    TxStatus status = 7;
+    uint64 layer_id = 8;
+    uint64 timestamp = 9; // what does this time mean?
 }
 
 message AppTransaction {
-    TransactionId id = 1;
-    AccountId sender = 2;
-    AccountId app_id = 3;
-    uint64 amount = 4;
-    TransactionFee fee = 5;
-    TxStatus status = 6;
-    uint64 layer_id = 7;
-    uint64 timestamp = 8; // what does this time mean?
-    bytes meta_data = 9;
+    TxType type = 1;
+    TransactionId id = 2;
+    AccountId sender = 3;
+    AccountId app_id = 4;
+    uint64 amount = 5;
+    TransactionFee fee = 6;
+    TxStatus status = 7;
+    uint64 layer_id = 8;
+    uint64 timestamp = 9; // what does this time mean?
+    bytes meta_data = 10;
 }
 
 message DeployAppTransaction {
-    TransactionId id = 1;
-    AccountId sender = 2;
-    AccountId app_template_id = 3;
-    uint64 amount = 4;
-    TransactionFee fee = 5;
-    TxStatus status = 6;
-    uint64 layer_id = 7;
-    uint64 timestamp = 8; // what does this time mean?
-    bytes meta_data = 9;
+    TxType type = 1;
+    TransactionId id = 2;
+    AccountId sender = 3;
+    AccountId app_template_id = 4;
+    uint64 amount = 5;
+    TransactionFee fee = 6;
+    TxStatus status = 7;
+    uint64 layer_id = 8;
+    uint64 timestamp = 9; // what does this time mean?
+    bytes meta_data = 10;
 }
 
 message ActivationTransaction {
-    TransactionId id = 1;
-    AccountId sender = 2;
-    bytes atx_data = 3;
-    TransactionId prev_id = 4;
-    SmesherId smesher_id = 5;
-    AccountId coinbase = 6;
-    TransactionFee fee = 7;
-    TxStatus status = 8;
-    uint64 layer_id = 9;
-    uint64 timestamp = 10; // what does this time mean?
+    TxType type = 1;
+    TransactionId id = 2;
+    AccountId sender = 3;
+    bytes atx_data = 4;
+    TransactionId prev_atx_id = 5;
+    SmesherId smesher_id = 6;
+    AccountId coinbase = 7;
+    TransactionFee fee = 8;
+    TxStatus status = 9;
+    uint64 layer_id = 10;
+    uint64 timestamp = 11; // what does this time mean?
 }
-
-
 
 message Reward {
     uint64 layer = 1;
