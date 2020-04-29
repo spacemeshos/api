@@ -58,61 +58,74 @@ message TransactionFee { // = gas * gas_price
 // common fields to all transactions. Allows demuxing of message to
 // specific transaction type messages. e.g. CoinTransaction
 message Transaction {
+    // every transaction message has all these fields
     TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
+    TransactionFee fee = 4;
+    TransactionStatus status = 5;
+    uint64 timestamp = 6; // shouldn't this be part of the event envelope?
+    uint64 layer_id = 7;
+    AccountId receiver = 8;
+    Amount amount = 9;
 }
 
 message CoinTransaction {
     TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
-    AccountId receiver = 4;
-    Amount amount = 5;
-    TransactionFee fee = 6;
-    TransactionStatus status = 7;
-    uint64 layer_id = 8;
-    uint64 timestamp = 9; // what does this time mean?
+    TransactionFee fee = 4;
+    TransactionStatus status = 5;
+    uint64 timestamp = 6;
+    uint64 layer_id = 7;
+    AccountId receiver = 8;
+    Amount amount = 9;
 }
 
 message AppTransaction {
     TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
-    AccountId app_id = 4;
-    Amount amount = 5;
-    TransactionFee fee = 6;
-    TransactionStatus status = 7;
-    uint64 layer_id = 8;
-    uint64 timestamp = 9; // what does this time mean?
-    bytes meta_data = 10;
+    TransactionFee fee = 4;
+    TransactionStatus status = 5;
+    uint64 timestamp = 6;
+    uint64 layer_id = 7;
+    AccountId receiver = 8;
+    Amount amount = 9;
+
+    bytes data = 10; // method id and arguments - packed binary
 }
 
 message DeployAppTransaction {
+
     TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
-    AccountId app_template_id = 4;
-    Amount amount = 5;
-    TransactionFee fee = 6;
-    TransactionStatus status = 7;
-    uint64 layer_id = 8;
-    uint64 timestamp = 9; // what does this time mean?
-    bytes meta_data = 10;
+    TransactionFee fee = 4;
+    TransactionStatus status = 5;
+    uint64 timestamp = 6;
+    uint64 layer_id = 7;
+    AccountId receiver = 8; // unused - maybe use as creator id?
+    Amount amount = 9;      // amount to transfer to app instance
+
+    bytes data = 10;        // packed deploy data
 }
 
 message ActivationTransaction {
+    
     TransactionType type = 1;
     TransactionId id = 2;
     AccountId sender = 3;
-    bytes atx_data = 4;
-    TransactionId prev_atx_id = 5;
-    SmesherId smesher_id = 6;
-    AccountId coinbase = 7;
-    TransactionFee fee = 8;
-    TransactionStatus status = 9;
-    uint64 layer_id = 10;
-    uint64 timestamp = 11; // what does this time mean?
+    TransactionFee fee = 4;
+    TransactionStatus status = 5;
+    uint64 timestamp = 6;
+    uint64 layer_id = 7;
+    AccountId receiver = 8; // used as coinbase for atx!
+    Amount amount = 9;      // amount to burn ????
+
+    SmesherId smesher_id = 10;
+    TransactionId prev_atx = 11;  // previous ATX
+    bytes data = 12;        // packed atx data - post+poet proof...
 }
 
 message Reward {
