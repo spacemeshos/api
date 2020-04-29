@@ -57,36 +57,23 @@ message TransactionFee { // = gas * gas_price
 
 // Simple coin transaction
 message Transaction {
-    // every transaction message has all these fields
     TransactionType type = 1;
+
     TransactionId id = 2;
+
     AccountId sender = 3;
     TransactionFee fee = 4;
-    TransactionStatus status = 5;
-    uint64 timestamp = 6; // shouldn't this be part of the event envelope?
+    uint64 timestamp = 6;  // shouldn't this be part of the event envelope?
     uint64 layer_id = 7;
-    AccountId receiver = 8;
-    Amount amount = 9;
+    AccountId receiver = 8; // depending on tx type
+    Amount amount = 9; // amount of coin transfered in this tx by sender
+    TransactionStatus status = 5;
+
+    bytes data = 10; // binary payload - used for app, deploy, atx and spwan transactions
+    SmesherId smesher_id = 11;    // used in atx only
+    TransactionId prev_atx = 12;  // previous ATX. used in atx.
 }
 
-// App method call transaction
-message AppTransaction {
-    Transaction transaction = 1;
-    bytes data = 2; // method id and arguments - packed binary
-}
-
-message DeployAppTransaction {
-    Transaction transaction = 1;
-    bytes data = 2;        // packed deploy data
-}
-
-message ActivationTransaction {
-
-    Transaction transaction = 1;
-    SmesherId smesher_id = 2;
-    TransactionId prev_atx = 3;  // previous ATX
-    bytes data = 4;        // packed atx data - post+poet proof...
-}
 
 message Reward {
     uint64 layer = 1;
