@@ -18,6 +18,12 @@ message AccountId {
     bytes address = 1;
 }
 
+message Account {
+    AccountId address = 1;
+    uint64 counter = 2; // none
+    Amount balance = 3;
+}
+
 enum TransactionStatus {
     UNDEFINED = 0;
     REJECTED = 1;
@@ -37,7 +43,7 @@ enum TransactionType {
     DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
 }
 
-message TransactionConfirmation { ?????
+message TransactionConfirmation {
     string value = 1;
     string id = 2;
 }
@@ -105,19 +111,10 @@ enum LayerStatus {
 }
 
 message LayerEvent {
-    Id layer_id = 1;
+    bytes layer_id = 1;
     LayerStatus status = 2;
 }
 
-enum AccountEvent {
-    UNKNOWN = 0;
-    BALANCE_CHANGE = 1;
-    NONCE_CHANGE = 2;
-}
-message AccountEvent {
-    AccountEvent events = 1;
-    Account account = 2;
-}
 
 message NodeStatus {
     uint64 peers = 1;
@@ -190,10 +187,10 @@ service SpacemeshService {
     // Mesh stream facade
 
     // Transcation status change method - emitted after tx was processed by STF
-    rpc StreamTranscationProcessing(google.protobuf.Empty) returns (stream Transcation);
+    rpc TranscationProcessor(google.protobuf.Empty) returns (stream Transaction);
 
     // Account events
-    rpc MeshStreamAccount(google.protobuf.Empty) returns (stream AccountEvent);
+    rpc MeshStreamAccount(google.protobuf.Empty) returns (stream Account);
     // Reward events
     rpc MeshStreamReward(google.protobuf.Empty) returns (stream Reward);
     // Layer events
