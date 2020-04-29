@@ -39,7 +39,7 @@ service SpacemeshService {
     // Returns network ID
     rpc MeshNetId(google.protobuf.Empty) returns (SimpleInt);
 
-    // Returns number of layers per epoch
+    // Returns number of layers per epoch (a network constant)
     rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
     ////////// Node streaming data facade
@@ -59,12 +59,12 @@ service SpacemeshService {
     rpc MeshAppEvents(google.protobuf.Empty) returns (stream AppEvent);
 
     // Accounts
-    rpc MeshStreamAccount(google.protobuf.Empty) returns (stream Account);
+    rpc MeshAccounts(google.protobuf.Empty) returns (stream Account);
 
     // Rewards
-    rpc MeshStreamReward(google.protobuf.Empty) returns (stream Reward);
+    rpc MeshRewards(google.protobuf.Empty) returns (stream Reward);
 
     // Layers
-    rpc MeshStreamLayer(google.protobuf.Empty) returns (stream Layer);
+    rpc MeshLayer(google.protobuf.Empty) returns (stream Layer);
 
 }
