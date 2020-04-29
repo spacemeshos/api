@@ -28,7 +28,7 @@ This command should have exit code 0 and no output. See the [style guide](https:
 ## API Usage Patterns
 
 ### Mesh data processing flow
-1. Start a full node with a flag to not start syncing and to open the V2 GRPC APIs.
+1. Clients starts a full node with flags set to turn syncing off and to open the V2 GRPC APIs.
 2. Client Registers on the streaming GRPC api methods that are of interest to it.
 3. Client call NodeSyncStart() to request the node to start syncing.
 4. Client processes server sides streaming data pushed by the node to it.
