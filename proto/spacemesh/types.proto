@@ -96,9 +96,9 @@ message Transaction {
 
 message Reward {
     uint64 layer = 1;
-    uint64 total = 2;
-    uint64 layer_reward = 3;
-    uint64 layer_computer = 4; // layer number of the layer when reward was computed
+    Amount total = 2;
+    Amount layer_reward = 3;
+    uint64 layer_computed = 4; // layer number of the layer when reward was computed
     // tx_fee = total- layer_reward
     AccountId coinbase = 5; // account awarded this reward
     SmesherId smesher = 6;  // it will be nice to always have this in reward events
