@@ -37,11 +37,12 @@ enum TransactionProcessingStatus {
 }
 
 enum TransactionType {
-    COIN = 0;            // simple coin transaction
-    ATX = 1;             // smesher activation transaction
-    APP = 2;             // smart contract method
-    DEPLOY = 3;          // deploy app from template
-    DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
+    UNDEFINED = 0;
+    COIN = 1;            // simple coin transaction
+    ATX = 2;             // smesher activation transaction
+    APP = 3;             // smart contract method
+    DEPLOY = 4;          // deploy app from template
+    DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
 }
 
 enum TransactionResult { // results of processing a transaction by the STF
@@ -56,11 +57,6 @@ message TransactionReceipt {
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
-}
-
-message AppEvent {                     // an event emitted from an app instance
-    TransactionId transaction_id = 1;  // the transaction that called the code
-    string message = 2;                // the event's string emitted from code
 }
 
 message TransactionId {
@@ -131,6 +127,11 @@ message NodeStatus {
     uint64 synced_layer = 5;
     uint64 current_layer = 6;
     uint64 verified_layer = 7;
+}
+
+message AppEvent {                     // an event emitted from an app instance
+    TransactionId transaction_id = 1;  // the transaction that called the code
+    string message = 2;                // the event's string emitted from code
 }
 
 /*
