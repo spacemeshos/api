@@ -50,7 +50,7 @@ service SpacemeshService {
     // Node error events
     rpc NodeErrors(google.protobuf.Empty) returns (stream NodeError);
 
-    //////////////// Mesh streaming data facade
+    ///////// Mesh streaming data facade
 
     // Receipts - emitted after tx was processed by STF (or rejected before STF)
     rpc MeshTransactionReceipts(google.protobuf.Empty) returns (stream TransactionReceipt);
