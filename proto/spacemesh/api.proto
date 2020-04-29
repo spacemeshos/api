@@ -30,12 +30,12 @@ enum TxStatus {
     CONFIRMED = 7;
 }
 enum TxType {
-    COIN = 0;
-    ATX = 1;
-    APP = 2;
-    DEPLOY = 3;
+    COIN = 0;            // simple coin transaction
+    ATX = 1;             // smesher activation transaction
+    APP = 2;             // smart contract method
+    DEPLOY = 3;          // deploy app from templlate
+    DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
 }
-
 
 message TransactionId {
     bytes id = 1;
