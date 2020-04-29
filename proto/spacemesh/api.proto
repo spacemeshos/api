@@ -10,13 +10,12 @@ message SimpleInt {
     uint64 value = 1;
 }
 
-message AccountId {
-    bytes address = 1;
+message Amount { // a smidge non-negative amount
+    uint64 value = 1;
 }
 
-message TxConfirmation {
-    string value = 1;
-    string id = 2;
+message AccountId {
+    bytes address = 1;
 }
 
 enum TxStatus {
@@ -29,12 +28,18 @@ enum TxStatus {
     //APPROVED = 6;
     CONFIRMED = 7;
 }
+
 enum TxType {
     COIN = 0;            // simple coin transaction
     ATX = 1;             // smesher activation transaction
     APP = 2;             // smart contract method
     DEPLOY = 3;          // deploy app from templlate
     DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
+}
+
+message TxConfirmation { ?????
+    string value = 1;
+    string id = 2;
 }
 
 message TransactionId {
@@ -45,7 +50,7 @@ message SmesherId {
     bytes id = 1;
 }
 
-message TransactionFee {
+message TransactionFee { // = gas * gas_price
     uint64 gas = 1;
     uint64 gas_price = 2;
 }
@@ -63,7 +68,7 @@ message CoinTransaction {
     TransactionId id = 2;
     AccountId sender = 3;
     AccountId receiver = 4;
-    uint64 amount = 5;
+    Amount amount = 5;
     TransactionFee fee = 6;
     TxStatus status = 7;
     uint64 layer_id = 8;
@@ -75,7 +80,7 @@ message AppTransaction {
     TransactionId id = 2;
     AccountId sender = 3;
     AccountId app_id = 4;
-    uint64 amount = 5;
+    Amount amount = 5;
     TransactionFee fee = 6;
     TxStatus status = 7;
     uint64 layer_id = 8;
@@ -88,7 +93,7 @@ message DeployAppTransaction {
     TransactionId id = 2;
     AccountId sender = 3;
     AccountId app_template_id = 4;
-    uint64 amount = 5;
+    Amount amount = 5;
     TransactionFee fee = 6;
     TxStatus status = 7;
     uint64 layer_id = 8;
@@ -115,7 +120,8 @@ message Reward {
     uint64 total_reward = 2;
     uint64 layer_reward = 3;
     // tx_fee = total_reward - layer_reward
-    AccountId recipient = 4;
+    AccountId coinbase = 4;
+    SmesherId smesher = 5; // it will be nice to always have this in reward events
 }
 
 message Block {
@@ -132,22 +138,26 @@ message Layer {
     repeated Block blocks = 2;
 }
 
-message LayerEvent {
-    LayerId layer_id = 1;
-    enum Event {
-        UNDEFINED = 0;
-        APPROVED = 1;
-        CONFIRMED = 2;
-    }
+enum LayerStatus {
+    UNKNOWN = 0;
+    APPROVED = 1;
+    CONFIRMED = 2;
+    REJECTED = 3;
 }
 
+message LayerEvent {
+    Id layer_id = 1;
+    LayerStatus status = 2;
+}
+
+enum AccountEvent {
+    UNKNOWN = 0;
+    BALANCE_CHANGE = 1;
+    NONCE_CHANGE = 2;
+}
 message AccountEvent {
-    enum Event {
-        UNDEFINED = 0;
-        BALANCE_CHANGE = 1;
-        NONCE_CHANGE = 2;
-    }
-    uint64 value = 1;
+    AccountEvent events = 1;
+    Account account = 2;
 }
 
 message NodeStatus {
