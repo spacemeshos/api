@@ -24,7 +24,7 @@ message Account {
     Amount balance = 3;
 }
 
-enum TransactionStatus {
+enum TransactionProcessingStatus {
     UNDEFINED = 0;
     REJECTED = 1;
     //INSUFFICIENT_FUNDS = 2;
@@ -46,7 +46,9 @@ enum TransactionType {
 enum TransactionResult {
     RUNTIME_EXCEPTION = 0;
     INSUFFICIENT_GAS_PROVIDED = 1;
-    INVALID_DATA = 2;
+    INVALID_TX_DATA = 2;
+    APP_DEPLOYED = 3;
+    APP_TEMPLATE_DEPLOYED = 4;
 }
 
 message TransactionReceipt {
@@ -84,7 +86,7 @@ message Transaction {
     uint64 layer_id = 6;
     AccountId receiver = 7; // depending on tx type
     Amount amount = 8; // amount of coin transfered in this tx by sender
-    TransactionStatus status = 9;
+    TransactionProcessingStatus status = 9;
 
     bytes data = 10; // binary payload - used for app, deploy, atx and spwan transactions
     SmesherId smesher_id = 11;    // used in atx only
