@@ -22,6 +22,9 @@ service SpacemeshService {
     // Tell the node to start syncing
     rpc NodeSyncStart(google.protobuf.Empty) returns (google.protobuf.Empty);
 
+    // Gracefully shut down the node
+    rpc NodeShutdown(google.protobuf.Empty) returns (google.protobuf.Empty);
+
     ///////// Mesh facade
 
     // Returns mesh genesis time as unix epoch time

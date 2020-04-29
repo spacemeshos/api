@@ -138,14 +138,14 @@ message NodeStatus {
    TODO: add an enum with clearly-defined error types.
  */
 
-enum ErrorType {
+enum NodeErrorType {
     UNKNOWN_PANIC = 0;
     SYNC_PANIC = 1;
-    SHUT_DOWN = 2;
+    SHUT_DOWN_SIGNAL = 2;
 }
 
 message NodeError {
-    ErrorType type = 1;
+    NodeErrorType type = 1;
     string message = 2;
     string stack_trace = 3;
 }
