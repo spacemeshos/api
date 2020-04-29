@@ -10,13 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v1
-        with:
-          ref: master
-      - name: checkout-master
-        run: git checkout master
-      - name: checkout
-        uses: actions/checkout@v1
-      - name: make local
-        run: make local
+    - uses: actions/checkout@v2
+    - name: make lint
+      run: make lint
