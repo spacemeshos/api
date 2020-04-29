@@ -13,6 +13,9 @@ service SpacemeshService {
     // Returns the version of the node software as a semver string
     rpc NodeVersion(google.protobuf.Empty) returns (SimpleString);
 
+    // Returns the version of the github tag or branch used to build the node
+    rpc NodeBuild(google.protobuf.Empty) returns (SimpleString);
+
     // Returns node status
     rpc NodeStatus(google.protobuf.Empty) returns (NodeStatus);
 
@@ -41,7 +44,7 @@ service SpacemeshService {
     ////////// Node stream facade
 
     // Sync status events
-    rpc NodeStreamSyncStatus(google.protobuf.Empty) returns (stream SyncStatus);
+    rpc NodeStreamSyncStatus(google.protobuf.Empty) returns (stream NodeSyncStatus);
 
     // Node error events
     rpc NodeStreamError(google.protobuf.Empty) returns (stream NodeError);

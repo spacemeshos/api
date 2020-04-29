@@ -19,9 +19,10 @@ message AccountId {
 }
 
 message Account {
-    AccountId address = 1;
-    uint64 counter = 2; // aka nonce
-    Amount balance = 3;
+    AccountId address = 1;  // account public address
+    bytes public_key = 2;   // nice to include the account full public key
+    uint64 counter = 3;     // aka nonce
+    Amount balance = 4;     // known account balance
 }
 
 enum TransactionProcessingStatus {
@@ -94,16 +95,17 @@ message Transaction {
 }
 
 message Reward {
-    uint64 layer_number = 1;
-    uint64 total_reward = 2;
+    uint64 layer = 1;
+    uint64 total = 2;
     uint64 layer_reward = 3;
-    // tx_fee = total_reward - layer_reward
-    AccountId coinbase = 4;
-    SmesherId smesher = 5; // it will be nice to always have this in reward events
+    uint64 layer_computer = 4; // layer number of the layer when reward was computed
+    // tx_fee = total- layer_reward
+    AccountId coinbase = 5; // account awarded this reward
+    SmesherId smesher = 6;  // it will be nice to always have this in reward events
 }
 
 message Block {
-    bytes id = 1;                           // basically transactions hash
+    bytes id = 1;                           // block hash
     repeated Transaction transactions = 2;
 }
 
@@ -117,8 +119,8 @@ message Layer {
     uint64 number = 1;              // layer number - not hash - layer content may change
     LayerStatus status = 2;
     bytes hash = 3;                 // computer layer hash - do we need this?
-    repeated Block blocks = 4;
-    bytes root_state_hash = 5;      // when computed
+    repeated Block blocks = 4;      // layer's blocks
+    bytes root_state_hash = 5;      // when available - the root state hash of global state in this layer
 }
 
 message NodeStatus {
@@ -148,8 +150,8 @@ message NodeError {
     string stack_trace = 3;
 }
 
-message SyncStatus {
-  enum SyncStatus {
+message NodeSyncStatus {
+  enum NodeSyncStatus {
       UNDEFINED = 0;
       NEW_LAYER_VERIFIED = 1;
       NEW_TOP_LAYER = 2;
