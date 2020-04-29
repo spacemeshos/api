@@ -50,6 +50,14 @@ message TransactionFee {
     uint64 gas_price = 2;
 }
 
+// common fields to all transactions. Allows demuxing of message to
+// specific transaction type messages. e.g. CoinTransaction
+message Transaction {
+    TxType type = 1;
+    TransactionId id = 2;
+    AccountId sender = 3;
+}
+
 message CoinTransaction {
     TxType type = 1;
     TransactionId id = 2;
