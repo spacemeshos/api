@@ -56,6 +56,11 @@ message TransactionReceipt {
     Amount fee = 4;                 // transaction fee charged for the transaction
 }
 
+message AppEvent {                     // an event emitted from an app instance
+    TransactionId transaction_id = 1;  // the transaction that called the code
+    string message = 2;                // the event's string emitted from code
+}
+
 message TransactionId {
     bytes id = 1;
 }

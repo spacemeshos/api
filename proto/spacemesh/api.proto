@@ -49,7 +49,10 @@ service SpacemeshService {
     //////////////// Mesh stream facade
 
     // Transcation receipts - emitted after tx was processed by STF (or rejected before STF)
-    rpc TranscationProcessor(google.protobuf.Empty) returns (stream TransactionReceipt);
+    rpc TransactionProcessing(google.protobuf.Empty) returns (stream TransactionReceipt);
+
+    // App events - emitted by app methods impl code
+    rpc AppEvents(google.protobuf.Empty) returns (stream AppEvent);
 
     // Accounts
     rpc MeshStreamAccount(google.protobuf.Empty) returns (stream Account);
