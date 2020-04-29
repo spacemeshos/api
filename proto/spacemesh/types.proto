@@ -1,12 +1,12 @@
 syntax = "proto3";
 package spacemesh;
 
-message SimpleMessage {
-    string value = 1;
-}
-
 message SimpleInt {
     uint64 value = 1;
+}
+
+message SimpleString {
+    string value = 1;
 }
 
 message Amount { // a smidge non-negative coin amount
@@ -80,7 +80,7 @@ message Transaction {
 }
 
 message Reward {
-    uint64 layer = 1;
+    uint64 layer_number = 1;
     uint64 total_reward = 2;
     uint64 layer_reward = 3;
     // tx_fee = total_reward - layer_reward
@@ -93,27 +93,18 @@ message Block {
     repeated Transaction transactions = 2;
 }
 
-message LayerId {
-    bytes id = 1;
-}
-
-message Layer {
-    LayerId id = 1;
-    repeated Block blocks = 2;
-}
-
 enum LayerStatus {
     UNKNOWN = 0;
     APPROVED = 1;
     CONFIRMED = 2;
-    REJECTED = 3;
 }
 
-message LayerEvent {
-    bytes layer_id = 1;
+message Layer {
+    uint64 number = 1;        // layer number - not hash - layer content may change
     LayerStatus status = 2;
+    bytes hash = 3;                 // computer layer hash - do we need this?
+    repeated Block blocks = 4;
 }
-
 
 message NodeStatus {
     uint64 peers = 1;

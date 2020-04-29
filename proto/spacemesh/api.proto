@@ -4,17 +4,15 @@ import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
 service SpacemeshService {
-    // SCALAR
-
-    // Test facade
 
     // A simple test endpoint
-    rpc Echo(SimpleMessage) returns (SimpleMessage);
+    rpc Echo(SimpleString) returns (SimpleString);
 
     // Node facade
 
     // Returns the version of the node software as a semver string
-    rpc NodeVersion(google.protobuf.Empty) returns (SimpleMessage);
+    rpc NodeVersion(google.protobuf.Empty) returns (SimpleString);
+
     // Returns node status object
     rpc NodeStatus(google.protobuf.Empty) returns (NodeStatus);
     // Tell the node to start sync
@@ -22,14 +20,18 @@ service SpacemeshService {
 
     // Mesh facade
 
-    // Returns mesh genesis time (as UTC string)
-    rpc MeshGenesisTime(google.protobuf.Empty) returns (SimpleMessage);
-    // Returns current layer
+    // Returns mesh genesis time as unix epoch time
+    rpc MeshGenesisTime(google.protobuf.Empty) returns (SimpleInt);
+
+    // Returns current layer number
     rpc MeshCurrentLayer(google.protobuf.Empty) returns (SimpleInt);
-    // Returns current epoch
+
+    // Returns current epoch number
     rpc MeshCurrentEpoch(google.protobuf.Empty) returns (SimpleInt);
+
     // Returns network ID
     rpc MeshNetId(google.protobuf.Empty) returns (SimpleInt);
+
     // Returns number of layers per epoch
     rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
@@ -47,12 +49,13 @@ service SpacemeshService {
     // Transcation status change method - emitted after tx was processed by STF
     rpc TranscationProcessor(google.protobuf.Empty) returns (stream Transaction);
 
-    // Account events
+    // Accounts
     rpc MeshStreamAccount(google.protobuf.Empty) returns (stream Account);
-    // Reward events
+
+    // Rewards
     rpc MeshStreamReward(google.protobuf.Empty) returns (stream Reward);
-    // Layer events
+
+    // Layers
     rpc MeshStreamLayer(google.protobuf.Empty) returns (stream Layer);
-    // Layer state change events
-    rpc MeshStreamLayerState(google.protobuf.Empty) returns (stream SimpleInt);
+
 }
