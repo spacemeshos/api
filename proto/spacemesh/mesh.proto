@@ -6,48 +6,33 @@ import "spacemesh/types.proto";
 // Readonly API for basic mesh info
 service MeshService {
 
-    // Returns mesh genesis time as unix epoch time
-    rpc MeshGenesisTime(google.protobuf.Empty) returns (SimpleInt);
+    // Network genesis time as unix epoch time
+    rpc GenesisTime(google.protobuf.Empty) returns (SimpleInt);
 
-    // Returns current layer number
-    rpc MeshCurrentLayer(google.protobuf.Empty) returns (SimpleInt);
+    // Current layer number
+    rpc CurrentLayer(google.protobuf.Empty) returns (SimpleInt);
 
-    // Returns current epoch number
-    rpc MeshCurrentEpoch(google.protobuf.Empty) returns (SimpleInt);
+    // Current epoch number
+    rpc CurrentEpoch(google.protobuf.Empty) returns (SimpleInt);
 
-    // Returns network ID
-    rpc MeshNetId(google.protobuf.Empty) returns (SimpleInt);
+    // Network ID
+    rpc NetId(google.protobuf.Empty) returns (SimpleInt);
 
-    // Returns number of layers per epoch (a network constant)
-    rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
+    // Number of layers per epoch (a network parameter)
+    rpc EpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
     ////////// Methods designed for light-weight clients such as wallets
     ////////// Please don't use in clients such as dash, explore or backup. Use streams for these.
 
     // Get transactions to an account or from an account
-    rpc MeshAccountTransactions(AccountIdWithOffset) returns (Transactions);
+    rpc AccountTransactions(AccountIdWithOffset) returns (Transactions);
 
-    // All rewards awarded to an account are emitted
-    rpc MeshAccountRewards(AccountIdWithOffset) returns (Rewards);
+    // A stream of new txs (or update to a tx data) where the account is sender or receiver. These should include activation transations (ATXs) and all transactions in the mesh
+    rpc AccountTransactionsStream(AccountId) returns (stream Transaction);
 
-    // All rewards awarded to a smesher id are emitted
-    rpc MeshSmesherRewards(SmesherIdWithOffset) returns (Rewards);
-
-    // Get account info
-    rpc MeshAccount(AccountId) returns (Account);
-
-    // A stream of new txs (or update to a tx data) where the account is sender or receiver
-    // These should include activation transations (ATXs)
-    rpc MeshAccountTransactionsStream(AccountId) returns (stream Transaction);
-
-    // Returns a stream of rewards awarded to an account
-    rpc MeshAccountRewardsStream(AccountId) returns (stream Reward);
-
-    // Returns stream of rewards awarded to a smesher id
-    rpc MeshSmesherRewardsStream(SmesherId) returns (stream Reward);
-
-    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
-    rpc MeshAccountStream(AccountId) returns (stream Account);
+    // Layer with blocks and transactions.
+    // Sent each time layer data changes. Designed for heavy-duty clients
+    rpc LayersStream(google.protobuf.Empty) returns (stream Layer);
 
     //////////
 }

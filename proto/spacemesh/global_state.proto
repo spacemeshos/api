@@ -1,0 +1,45 @@
+syntax = "proto3";
+package spacemesh;
+import "google/protobuf/empty.proto";
+import "spacemesh/types.proto";
+
+// Readonly global state data - current and historical.
+// Global state data is data which is not stored in the mesh.
+// Global state is modified only by the state transition function.
+service GlobalStateService {
+
+    // Account info in the current global state
+    rpc Account(AccountId) returns (Account);
+
+    // Rewards awarded to an account
+    rpc AccountRewards(AccountIdWithOffset) returns (Rewards);
+
+    // Rewards awarded to a smesher
+    rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
+
+    //// Streaming global state data
+
+    // Rewards awarded to a specific account
+    rpc AccountRewardsStream(AccountId) returns (stream Reward);
+
+    // Rewards awarded to a smesher id
+    rpc SmesherRewardsStream(SmesherId) returns (stream Reward);
+
+    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
+    rpc AccountStream(AccountId) returns (stream Account);
+
+    // Receipts - emitted after tx was processed by STF (or rejected before STF)
+    rpc TransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
+
+    // App Events - emitted by app methods impl code trigged by an app transaction
+    rpc AppEventsStream(google.protobuf.Empty) returns (stream AppEvent);
+
+    // Account changes. Accounts are part of global state.
+    rpc AccountsStream(google.protobuf.Empty) returns (stream Account);
+
+    // Rewards
+    rpc RewardsStream(google.protobuf.Empty) returns (stream Reward);
+
+    // new global state computed for a layer by the STF
+    rpc GlobalState(google.protobuf.Empty) returns (stream GlobalState);
+}
