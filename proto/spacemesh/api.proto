@@ -25,7 +25,7 @@ service SpacemeshService {
     // Gracefully shut down the node
     rpc NodeShutdown(google.protobuf.Empty) returns (google.protobuf.Empty);
 
-    ///////// Mesh facade
+    ///////// Mesh facade. low-level data access for clients such as backup, explore and dash.
 
     // Returns mesh genesis time as unix epoch time
     rpc MeshGenesisTime(google.protobuf.Empty) returns (SimpleInt);
@@ -65,6 +65,22 @@ service SpacemeshService {
     rpc MeshRewards(google.protobuf.Empty) returns (stream Reward);
 
     // Layers
-    rpc MeshLayer(google.protobuf.Empty) returns (stream Layer);
+    rpc MeshLayers(google.protobuf.Empty) returns (stream Layer);
+
+
+    //// Streaming mesh methods designed for light-weight clients such as wallets.
+    //// Clients register to receive events for a specific account.
+
+    // A stream of new txs (or update to a tx fields) where the account is sender or receiver
+    rpc MeshAccountTransactions(AccountId) returns (stream Transaction);
+
+    // All rewards awarded to an account are emitted
+    rpc MeshAccountRewards(AccountId) returns (stream Reward);
+
+    // All rewards awarded to a smesher id are emitted
+    rpc MeshSmesherRewards(SmesherId) returns (stream Reward);
+
+    // Account emitted on account data change. e.g. balance change, counter change, etc...
+    rpc MeshAccount(AccountId) returns (stream Account);
 
 }
