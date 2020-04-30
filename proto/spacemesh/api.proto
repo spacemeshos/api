@@ -25,7 +25,7 @@ service SpacemeshService {
     // Gracefully shut down the node
     rpc NodeShutdown(google.protobuf.Empty) returns (google.protobuf.Empty);
 
-    ///////// Mesh facade. low-level data access for clients such as backup, explore and dash.
+    ///////// Mesh facade
 
     // Returns mesh genesis time as unix epoch time
     rpc MeshGenesisTime(google.protobuf.Empty) returns (SimpleInt);
@@ -42,47 +42,66 @@ service SpacemeshService {
     // Returns number of layers per epoch (a network constant)
     rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
+    ////// Methods designed for light-weight clients such as wallets
+    ////// Please don't use in clients such as dash, explore or backup. Use streams for these.
+    // Get transactions to an account or from an account
+    rpc MeshAccountTransactions(AccountIdWithOffset) returns (Transactions);
+
+    // All rewards awarded to an account are emitted
+    rpc MeshAccountRewards(AccountIdWithOffset) returns (Rewards);
+
+    // All rewards awarded to a smesher id are emitted
+    rpc MeshSmesherRewards(SmesherWithOffset) returns (Rewards);
+
+    // Account emitted on account data change. e.g. balance change, counter change or balance change
+    rpc MeshAccount(AccountId) returns (Account);
+
+    // submit a new transaction to the tx pool
+    rpc MeshSubmitTransaction(Transaction) returns (TransactionProcessingData);
+
+
+
     ////////// Node streaming data facade
 
     // Sync status events
-    rpc NodeSyncStatuses(google.protobuf.Empty) returns (stream NodeSyncStatus);
+    rpc NodeSyncStatusStream(google.protobuf.Empty) returns (stream NodeSyncStatus);
 
     // Node error events
-    rpc NodeErrors(google.protobuf.Empty) returns (stream NodeError);
+    rpc NodeErrorsStream(google.protobuf.Empty) returns (stream NodeError);
 
     ///////// Mesh streaming data facade
     ///////// Designed for heavy-duty clinets such as backup, dash and explore.
 
     // Receipts - emitted after tx was processed by STF (or rejected before STF)
-    rpc MeshTransactionReceipts(google.protobuf.Empty) returns (stream TransactionReceipt);
+    rpc MeshTransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
 
     // App Events - emitted by app methods impl code trigged by an app transaction
-    rpc MeshAppEvents(google.protobuf.Empty) returns (stream AppEvent);
+    rpc MeshAppEventsStream(google.protobuf.Empty) returns (stream AppEvent);
 
     // Accounts
-    rpc MeshAccounts(google.protobuf.Empty) returns (stream Account);
+    rpc MeshAccountsStream(google.protobuf.Empty) returns (stream Account);
 
     // Rewards
-    rpc MeshRewards(google.protobuf.Empty) returns (stream Reward);
+    rpc MeshRewardsStream(google.protobuf.Empty) returns (stream Reward);
 
     // Layers
-    rpc MeshLayers(google.protobuf.Empty) returns (stream Layer);
-
+    rpc MeshLayersStream(google.protobuf.Empty) returns (stream Layer);
 
 
     //// Mesh streaming data methods designed for light-weight clients such as wallets.
     //// Clients register to receive events for a specific entity.
 
     // A stream of new txs (or update to a tx fields) where the account is sender or receiver
-    rpc MeshAccountTransactions(AccountId) returns (stream Transaction);
+    // These should include ATXs
+    rpc MeshAccountTransactionsStream(AccountId) returns (stream Transaction);
 
     // All rewards awarded to an account are emitted
-    rpc MeshAccountRewards(AccountId) returns (stream Reward);
+    rpc MeshAccountRewardsStream(AccountId) returns (stream Reward);
 
     // All rewards awarded to a smesher id are emitted
-    rpc MeshSmesherRewards(SmesherId) returns (stream Reward);
+    rpc MeshSmesherRewardsStream(SmesherId) returns (stream Reward);
 
     // Account emitted on account data change. e.g. balance change, counter change or balance change
-    rpc MeshAccount(AccountId) returns (stream Account);
+    rpc MeshAccountStream(AccountId) returns (stream Account);
 
 }

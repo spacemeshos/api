@@ -25,6 +25,17 @@ message Account {
     Amount balance = 4;     // known account balance
 }
 
+message AccountIdWithOffset {
+    AccountId account_id = 1;
+    uint64 offset = 2;
+};
+
+message SmesherWithOffset {
+    SmesherId smesher_id = 1;
+    uint64 offset = 2;
+};
+
+
 enum TransactionProcessingStatus {
     UNDEFINED = 0;
     REJECTED = 1;               // rejected pre STF processing. e.g. bad data
@@ -34,6 +45,10 @@ enum TransactionProcessingStatus {
     //PROCESSING = 5;
     //APPROVED = 6;
     PROCESSED = 7;              // processed. Results are in the tx receipt.
+}
+
+message TransactionProcessingData {
+    TransactionProcessingStatus status = 1;
 }
 
 enum TransactionType {
@@ -50,6 +65,11 @@ enum TransactionResult { // results of processing a transaction by the STF
     INSUFFICIENT_GAS = 1;               // out of gas
     INSUFFICIENT_BALANCE = 2;           // failed due to sender insufficient funds
     EXECUTED = 3;                       // executed w/o error
+}
+
+message Transactions {
+    uint64 total_items = 1; // total server available items. Used to query with new offset
+    repeated Transaction transactions = 2;
 }
 
 message TransactionReceipt {
@@ -98,6 +118,11 @@ message Reward {
     // tx_fee = total- layer_reward
     AccountId coinbase = 5; // account awarded this reward
     SmesherId smesher = 6;  // it will be nice to always have this in reward events
+}
+
+message Rewards {
+    uint64 total_items = 1; // total server available items. Used to query with new offset
+    repeated Reward rewards = 2;
 }
 
 message Block {
