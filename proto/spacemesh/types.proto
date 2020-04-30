@@ -40,13 +40,13 @@ message SmesherIdWithOffset {
 
 enum TransactionProcessingStatus {
     UNDEFINED = 0;
-    REJECTED = 1;               // rejected pre STF processing. e.g. bad data
-    INSUFFICIENT_FUNDS = 2;     // rejected pre STF processing by funds check
-    CONFLICTING = 3;            // rejected pre STF due to conflicting counter
-    PENDING = 4;                // pending processing by STF
+    REJECTED = 1;               // Rejected pre STF processing. e.g. bad data
+    INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
+    CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
+    PENDING = 4;                // Pending processing by STF
     //PROCESSING = 5;
     //APPROVED = 6;
-    PROCESSED = 7;              // processed. Processing results are in the tx receipt.
+    ONMESH = 7;                 // processed. Processing results are in the tx receipt.
 }
 
 message TransactionProcessingData {
@@ -67,6 +67,7 @@ enum TransactionResult { // results of processing a transaction by the STF
     INSUFFICIENT_GAS = 1;               // out of gas
     INSUFFICIENT_BALANCE = 2;           // failed due to sender insufficient funds
     EXECUTED = 3;                       // executed w/o error
+    WRONG_NONCE = 4;                    // transaction counter mismatch
 }
 
 message Transactions {
@@ -79,6 +80,7 @@ message TransactionReceipt {
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
+    LayerId layer_number = 5;       // The layer in which the STF processed this transcation
 }
 
 message TransactionId {
@@ -101,15 +103,14 @@ message Transaction {
     AccountId sender = 3;
     TransactionFee fee = 4;
     uint64 timestamp = 5;  // shouldn't this be part of the event envelope?
-    uint64 layer_id = 6;
-    AccountId receiver = 7; // depending on tx type
-    Amount amount = 8; // amount of coin transfered in this tx by sender
-    TransactionProcessingStatus status = 9;
-    uint64 counter = 10;    // tx counter aka nonce
+    AccountId receiver = 6; // depending on tx type
+    Amount amount = 7; // amount of coin transfered in this tx by sender
+    TransactionProcessingStatus status = 8;
+    uint64 counter = 9;    // tx counter aka nonce
 
-    bytes data = 11; // binary payload - used for app, deploy, atx and spwan transactions
-    SmesherId smesher_id = 12;    // used in atx only
-    TransactionId prev_atx = 13;  // previous ATX. used in atx.
+    bytes data = 10; // binary payload - used for app, deploy, atx and spwan transactions
+    SmesherId smesher_id = 11;    // used in atx only
+    TransactionId prev_atx = 12;  // previous ATX. used in atx.
 }
 
 message Reward {

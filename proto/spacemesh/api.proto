@@ -93,7 +93,7 @@ service SpacemeshService {
 
     // Layers
     rpc MeshLayersStream(google.protobuf.Empty) returns (stream Layer);
-
+    
     //////////
 
     ////////// Mesh streaming data methods designed for light-weight clients such as wallets.
