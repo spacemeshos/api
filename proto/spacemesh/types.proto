@@ -28,8 +28,8 @@ message Account {
 enum TransactionProcessingStatus {
     UNDEFINED = 0;
     REJECTED = 1;               // rejected pre STF processing. e.g. bad data
-    INSUFFICIENT_FUNDS = 2;     // rejected pre STF processing by funds check.
-    CONFLICTING = 3;            // rejected pre STF due to conflicting counter.
+    INSUFFICIENT_FUNDS = 2;     // rejected pre STF processing by funds check
+    CONFLICTING = 3;            // rejected pre STF due to conflicting counter
     PENDING = 4;                // pending processing by STF
     //PROCESSING = 5;
     //APPROVED = 6;
@@ -37,18 +37,19 @@ enum TransactionProcessingStatus {
 }
 
 enum TransactionType {
-    COIN = 0;            // simple coin transaction
-    ATX = 1;             // smesher activation transaction
-    APP = 2;             // smart contract method
-    DEPLOY = 3;          // deploy app from templlate
-    DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
+    UNDEFINED = 0;
+    COIN = 1;            // simple coin transaction
+    ATX = 2;             // smesher activation transaction
+    APP = 3;             // smart contract method
+    DEPLOY = 4;          // deploy app from template
+    DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
 }
 
 enum TransactionResult { // results of processing a transaction by the STF
     RUNTIME_EXCEPTION = 0;              // app code exception
-    INSUFFICIENT_GAS_PROVIDED = 1;      // out of gas
+    INSUFFICIENT_GAS = 1;               // out of gas
     INSUFFICIENT_BALANCE = 2;           // failed due to sender insufficient funds
-    EXECUTED = 3;                      // executed w/o error
+    EXECUTED = 3;                       // executed w/o error
 }
 
 message TransactionReceipt {
@@ -56,11 +57,6 @@ message TransactionReceipt {
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
-}
-
-message AppEvent {                     // an event emitted from an app instance
-    TransactionId transaction_id = 1;  // the transaction that called the code
-    string message = 2;                // the event's string emitted from code
 }
 
 message TransactionId {
@@ -72,7 +68,7 @@ message SmesherId {
 }
 
 message TransactionFee { // = gas * gas_price
-    uint64 gas = 1;
+    uint64 gas_consumed = 1;
     uint64 gas_price = 2;
 }
 
@@ -133,15 +129,21 @@ message NodeStatus {
     uint64 verified_layer = 7;
 }
 
+message AppEvent {                     // an event emitted from an app instance
+    TransactionId transaction_id = 1;  // the transaction that called the code
+    string message = 2;                // the event's string emitted from code
+}
+
 /*
    Represents a critical node error.
    TODO: add an enum with clearly-defined error types.
  */
 
 enum NodeErrorType {
-    UNKNOWN_PANIC = 0;
-    SYNC_PANIC = 1;
-    SHUT_DOWN_SIGNAL = 2;
+    UNDEFINED = 0;
+    PANIC_UNSPECIFIED = 1;
+    PANIC_SYNC = 2;
+    SIGNAL_SHUT_DOWN = 3;
 }
 
 message NodeError {
