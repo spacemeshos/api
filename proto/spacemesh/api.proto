@@ -51,7 +51,7 @@ service SpacemeshService {
     rpc MeshAccountRewards(AccountIdWithOffset) returns (Rewards);
 
     // All rewards awarded to a smesher id are emitted
-    rpc MeshSmesherRewards(SmesherWithOffset) returns (Rewards);
+    rpc MeshSmesherRewards(SmesherIdWithOffset) returns (Rewards);
 
     // Account emitted on account data change. e.g. balance change, counter change or balance change
     rpc MeshAccount(AccountId) returns (Account);

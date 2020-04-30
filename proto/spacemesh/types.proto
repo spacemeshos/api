@@ -30,7 +30,7 @@ message AccountIdWithOffset {
     uint64 offset = 2;
 };
 
-message SmesherWithOffset {
+message SmesherIdWithOffset {
     SmesherId smesher_id = 1;
     uint64 offset = 2;
 };
