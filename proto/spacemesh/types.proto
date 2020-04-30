@@ -46,7 +46,7 @@ enum TransactionProcessingStatus {
     PENDING = 4;                // pending processing by STF
     //PROCESSING = 5;
     //APPROVED = 6;
-    PROCESSED = 7;              // processed. Results are in the tx receipt.
+    PROCESSED = 7;              // processed. Processing results are in the tx receipt.
 }
 
 message TransactionProcessingData {

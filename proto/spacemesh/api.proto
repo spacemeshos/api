@@ -5,10 +5,10 @@ import "spacemesh/types.proto";
 
 service SpacemeshService {
 
-    // A simple test endpoint
-    rpc Echo(SimpleString) returns (SimpleString);
-
     ////////// Node facade
+
+    // A simple test endpoint
+    rpc NodeEcho(SimpleString) returns (SimpleString);
 
     // Returns the version of the node software as a semver string
     rpc NodeVersion(google.protobuf.Empty) returns (SimpleString);
@@ -19,11 +19,13 @@ service SpacemeshService {
     // Returns node status
     rpc NodeStatus(google.protobuf.Empty) returns (NodeStatus);
 
-    // Tell the node to start syncing
+    // Request the node to start syncing the mesh
     rpc NodeSyncStart(google.protobuf.Empty) returns (google.protobuf.Empty);
 
-    // Gracefully shut down the node
+    // Initite node gracefull shitodwn
     rpc NodeShutdown(google.protobuf.Empty) returns (google.protobuf.Empty);
+
+    //////////
 
     ///////// Mesh facade
 
@@ -42,8 +44,11 @@ service SpacemeshService {
     // Returns number of layers per epoch (a network constant)
     rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
-    ////// Methods designed for light-weight clients such as wallets
-    ////// Please don't use in clients such as dash, explore or backup. Use streams for these.
+    //////////
+
+    ////////// Methods designed for light-weight clients such as wallets
+    ////////// Please don't use in clients such as dash, explore or backup. Use streams for these.
+
     // Get transactions to an account or from an account
     rpc MeshAccountTransactions(AccountIdWithOffset) returns (Transactions);
 
@@ -53,13 +58,13 @@ service SpacemeshService {
     // All rewards awarded to a smesher id are emitted
     rpc MeshSmesherRewards(SmesherIdWithOffset) returns (Rewards);
 
-    // Account emitted on account data change. e.g. balance change, counter change or balance change
+    // Get account info
     rpc MeshAccount(AccountId) returns (Account);
 
-    // submit a new transaction to the tx pool
+    // Submit a new transaction to the tx pool
     rpc MeshSubmitTransaction(Transaction) returns (TransactionProcessingData);
 
-
+    //////////
 
     ////////// Node streaming data facade
 
@@ -69,8 +74,10 @@ service SpacemeshService {
     // Node error events
     rpc NodeErrorsStream(google.protobuf.Empty) returns (stream NodeError);
 
-    ///////// Mesh streaming data facade
-    ///////// Designed for heavy-duty clinets such as backup, dash and explore.
+    //////////
+
+    ////////// Mesh streaming data facade
+    ////////// Designed for heavy-duty clinets such as backup, dash and explore.
 
     // Receipts - emitted after tx was processed by STF (or rejected before STF)
     rpc MeshTransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
@@ -87,21 +94,23 @@ service SpacemeshService {
     // Layers
     rpc MeshLayersStream(google.protobuf.Empty) returns (stream Layer);
 
+    //////////
 
-    //// Mesh streaming data methods designed for light-weight clients such as wallets.
-    //// Clients register to receive events for a specific entity.
+    ////////// Mesh streaming data methods designed for light-weight clients such as wallets.
+    ////////// Clients register to receive events for a specific entity.
 
-    // A stream of new txs (or update to a tx fields) where the account is sender or receiver
-    // These should include ATXs
+    // A stream of new txs (or update to a tx data) where the account is sender or receiver
+    // These should include activation transations (ATXs)
     rpc MeshAccountTransactionsStream(AccountId) returns (stream Transaction);
 
-    // All rewards awarded to an account are emitted
+    // Returns a stream of rewards awarded to an account
     rpc MeshAccountRewardsStream(AccountId) returns (stream Reward);
 
-    // All rewards awarded to a smesher id are emitted
+    // Returns stream of rewards awarded to a smesher id
     rpc MeshSmesherRewardsStream(SmesherId) returns (stream Reward);
 
-    // Account emitted on account data change. e.g. balance change, counter change or balance change
+    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
     rpc MeshAccountStream(AccountId) returns (stream Account);
 
+    //////////
 }
