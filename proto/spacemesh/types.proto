@@ -80,7 +80,7 @@ message TransactionReceipt {
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
-    LayerId layer_number = 5;       // The layer in which the STF processed this transcation
+    uint64 layer_number = 5;       // The layer in which the STF processed this transcation
 }
 
 message TransactionId {

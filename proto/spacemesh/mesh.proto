@@ -1,0 +1,53 @@
+syntax = "proto3";
+package spacemesh;
+import "google/protobuf/empty.proto";
+import "spacemesh/types.proto";
+
+// Readonly API for basic mesh info
+service MeshService {
+
+    // Returns mesh genesis time as unix epoch time
+    rpc MeshGenesisTime(google.protobuf.Empty) returns (SimpleInt);
+
+    // Returns current layer number
+    rpc MeshCurrentLayer(google.protobuf.Empty) returns (SimpleInt);
+
+    // Returns current epoch number
+    rpc MeshCurrentEpoch(google.protobuf.Empty) returns (SimpleInt);
+
+    // Returns network ID
+    rpc MeshNetId(google.protobuf.Empty) returns (SimpleInt);
+
+    // Returns number of layers per epoch (a network constant)
+    rpc MeshEpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
+
+    ////////// Methods designed for light-weight clients such as wallets
+    ////////// Please don't use in clients such as dash, explore or backup. Use streams for these.
+
+    // Get transactions to an account or from an account
+    rpc MeshAccountTransactions(AccountIdWithOffset) returns (Transactions);
+
+    // All rewards awarded to an account are emitted
+    rpc MeshAccountRewards(AccountIdWithOffset) returns (Rewards);
+
+    // All rewards awarded to a smesher id are emitted
+    rpc MeshSmesherRewards(SmesherIdWithOffset) returns (Rewards);
+
+    // Get account info
+    rpc MeshAccount(AccountId) returns (Account);
+
+    // A stream of new txs (or update to a tx data) where the account is sender or receiver
+    // These should include activation transations (ATXs)
+    rpc MeshAccountTransactionsStream(AccountId) returns (stream Transaction);
+
+    // Returns a stream of rewards awarded to an account
+    rpc MeshAccountRewardsStream(AccountId) returns (stream Reward);
+
+    // Returns stream of rewards awarded to a smesher id
+    rpc MeshSmesherRewardsStream(SmesherId) returns (stream Reward);
+
+    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
+    rpc MeshAccountStream(AccountId) returns (stream Account);
+
+    //////////
+}

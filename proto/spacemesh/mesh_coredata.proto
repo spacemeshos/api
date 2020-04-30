@@ -1,0 +1,26 @@
+syntax = "proto3";
+package spacemesh;
+import "google/protobuf/empty.proto";
+import "spacemesh/types.proto";
+
+// Readonly API for mesh core data
+// Designed for clients such as backup agents, dashboard and explroer data backends.
+
+service MeshCoreDataService {
+
+    // Receipts - emitted after tx was processed by STF (or rejected before STF)
+    rpc MeshTransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
+
+    // App Events - emitted by app methods impl code trigged by an app transaction
+    rpc MeshAppEventsStream(google.protobuf.Empty) returns (stream AppEvent);
+
+    // Accounts
+    rpc MeshAccountsStream(google.protobuf.Empty) returns (stream Account);
+
+    // Rewards
+    rpc MeshRewardsStream(google.protobuf.Empty) returns (stream Reward);
+
+    // Layers
+    rpc MeshLayersStream(google.protobuf.Empty) returns (stream Layer);
+
+}
