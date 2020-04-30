@@ -88,6 +88,11 @@ message TransactionReceipt {
     uint64 layer_number = 5;       // The layer in which the STF processed this transcation
 }
 
+message TransactionReceipts {
+    uint64 total_items = 1; // total server available items. Used to query with new offset
+    repeated TransactionReceipt receipts = 2;
+}
+
 message TransactionId {
     bytes id = 1;
 }

@@ -15,7 +15,7 @@ service GlobalStateService {
     rpc AccountRewards(AccountIdWithOffset) returns (Rewards);
 
     // Transaction recipts for transactions to/from an account
-    rpc AccountTransactionReceipts(AccountIdWithOffset) returns (TransactionReceipt);
+    rpc AccountTransactionReceipts(AccountIdWithOffset) returns (TransactionReceipts);
 
     // Rewards awarded to a smesher
     rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
