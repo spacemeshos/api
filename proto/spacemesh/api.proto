@@ -51,6 +51,7 @@ service SpacemeshService {
     rpc NodeErrors(google.protobuf.Empty) returns (stream NodeError);
 
     ///////// Mesh streaming data facade
+    ///////// Designed for heavy-duty clinets such as backup, dash and explore.
 
     // Receipts - emitted after tx was processed by STF (or rejected before STF)
     rpc MeshTransactionReceipts(google.protobuf.Empty) returns (stream TransactionReceipt);
@@ -68,8 +69,9 @@ service SpacemeshService {
     rpc MeshLayers(google.protobuf.Empty) returns (stream Layer);
 
 
-    //// Streaming mesh methods designed for light-weight clients such as wallets.
-    //// Clients register to receive events for a specific account.
+
+    //// Mesh streaming data methods designed for light-weight clients such as wallets.
+    //// Clients register to receive events for a specific entity.
 
     // A stream of new txs (or update to a tx fields) where the account is sender or receiver
     rpc MeshAccountTransactions(AccountId) returns (stream Transaction);
@@ -80,7 +82,7 @@ service SpacemeshService {
     // All rewards awarded to a smesher id are emitted
     rpc MeshSmesherRewards(SmesherId) returns (stream Reward);
 
-    // Account emitted on account data change. e.g. balance change, counter change, etc...
+    // Account emitted on account data change. e.g. balance change, counter change or balance change
     rpc MeshAccount(AccountId) returns (stream Account);
 
 }
