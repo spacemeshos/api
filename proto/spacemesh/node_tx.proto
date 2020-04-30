@@ -4,6 +4,7 @@ import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
 // Provides clients a way to submit transaction to the network for processing
+// Having a service for transaction processing enables client to easily turn this feature on and off.
 service NodeTxsService {
 
     // Submit a new transaction for processing

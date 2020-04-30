@@ -3,9 +3,8 @@ package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
-// Readonly API for mesh core data
+// A low-level readonly API for reading mesh core data
 // Designed for clients such as backup agents, dashboard and explroer data backends.
-
 service MeshCoreDataService {
 
     // Receipts - emitted after tx was processed by STF (or rejected before STF)
