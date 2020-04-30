@@ -44,5 +44,5 @@ service GlobalStateService {
     rpc RewardsStream(google.protobuf.Empty) returns (stream Reward);
 
     // new global state computed for a layer by the STF
-    rpc GlobalState(google.protobuf.Empty) returns (stream GlobalState);
+    rpc GlobalStateStream(google.protobuf.Empty) returns (stream GlobalState);
 }
