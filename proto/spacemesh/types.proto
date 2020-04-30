@@ -28,11 +28,13 @@ message Account {
 message AccountIdWithOffset {
     AccountId account_id = 1;
     uint64 offset = 2;
+    uint64 items = 3;       // total number of client requested items
 };
 
 message SmesherIdWithOffset {
     SmesherId smesher_id = 1;
     uint64 offset = 2;
+    uint64 items = 3;        // total number of client requested items
 };
 
 
