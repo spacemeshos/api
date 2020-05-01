@@ -8,6 +8,6 @@ import "spacemesh/types.proto";
 service NodeTxsService {
 
     // Submit a new transaction to the node for processing
-    rpc SubmitTransaction(Transaction) returns (TransactionProcessingData);
+    rpc SubmitTransaction(Transaction) returns (TransactionStateData);
 
 }

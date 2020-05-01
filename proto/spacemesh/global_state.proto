@@ -8,6 +8,13 @@ import "spacemesh/types.proto";
 // Global state is modified only by the state transition function.
 service GlobalStateService {
 
+    // Latest computed global state - layer and its root hash
+    rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
+
+    // Get the current transaction state. Note that tx state is not part of global state.
+    // It is meta-data about a transaction on its journey to the mesh and from the mesh to the global state (or to null)
+    rpc TransactionState(TransactionId) returns (TransactionStateData);
+
     // Account info in the current global state
     rpc Account(AccountId) returns (Account);
 

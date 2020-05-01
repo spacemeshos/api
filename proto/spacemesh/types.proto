@@ -43,19 +43,17 @@ message GlobalState {
 }
 
 
-enum TransactionProcessingStatus {
+enum TransactionState {
     UNDEFINED = 0;
     REJECTED = 1;               // Rejected pre STF processing. e.g. bad data
     INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
     CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
-    PENDING = 4;                // Pending processing by STF
-    //PROCESSING = 5;
-    //APPROVED = 6;
-    ONMESH = 7;                 // processed. Processing results are in the tx receipt.
+    PENDING = 4;                // Got to a block on the mesh. Pending processing by STF
+    PROCESSED = 7;              // Process by th STF. Processing result will be in the tx receipt
 }
 
-message TransactionProcessingData {
-    TransactionProcessingStatus status = 1;
+message TransactionStateData {
+    TransactionState state = 1;
 }
 
 enum TransactionType {
@@ -67,7 +65,8 @@ enum TransactionType {
     DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
 }
 
-enum TransactionResult { // results of processing a transaction by the STF
+// Teh results of STF transaction processing
+enum TransactionResult {
     RUNTIME_EXCEPTION = 0;              // app code exception
     INSUFFICIENT_GAS = 1;               // out of gas
     INSUFFICIENT_BALANCE = 2;           // failed due to sender insufficient funds
@@ -107,6 +106,8 @@ message TransactionFee { // = gas * gas_price
 }
 
 // Simple coin transaction
+// This filed are the immutable signed tx data which is part of the signed transaction body and do not include
+// any transaction processing or state which is mutable.
 message Transaction {
     TransactionType type = 1;
     TransactionId id = 2; // hash
@@ -115,12 +116,10 @@ message Transaction {
     uint64 timestamp = 5;  // shouldn't this be part of the event envelope?
     AccountId receiver = 6; // depending on tx type
     Amount amount = 7; // amount of coin transfered in this tx by sender
-    TransactionProcessingStatus status = 8;
-    uint64 counter = 9;    // tx counter aka nonce
-
-    bytes data = 10; // binary payload - used for app, deploy, atx and spwan transactions
-    SmesherId smesher_id = 11;    // used in atx only
-    TransactionId prev_atx = 12;  // previous ATX. used in atx.
+    uint64 counter = 8;    // tx counter aka nonce
+    bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
+    SmesherId smesher_id = 10;    // used in atx only
+    TransactionId prev_atx = 11;  // previous ATX. used in atx.
 }
 
 message Reward {
