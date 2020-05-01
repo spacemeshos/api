@@ -68,10 +68,10 @@ enum TransactionType {
 // Teh results of STF transaction processing
 enum TransactionResult {
     RUNTIME_EXCEPTION = 0;              // app code exception
-    INSUFFICIENT_GAS = 1;               // out of gas
-    INSUFFICIENT_BALANCE = 2;           // failed due to sender insufficient funds
-    EXECUTED = 3;                       // executed w/o error
-    WRONG_NONCE = 4;                    // transaction counter mismatch
+    BAD_COUNTER = 1;
+    INSUFFICIENT_GAS = 2;               // out of gas
+    INSUFFICIENT_BALANCE = 3;           // failed due to sender insufficient funds
+    EXECUTED = 4;                       // executed w/o error
 }
 
 message Transactions {
