@@ -44,12 +44,12 @@ message GlobalState {
 
 
 enum TransactionState {
-    UNDEFINED = 0;
+    UNKNOWN = 0;                // Default state
     REJECTED = 1;               // Rejected pre STF processing. e.g. bad data
     INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
     CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
     PENDING = 4;                // Got to a block on the mesh. Pending processing by STF
-    PROCESSED = 7;              // Process by th STF. Processing result will be in the tx receipt
+    PROCESSED = 7;              // Process by th STF. Processing results are in the tx receipt
 }
 
 message TransactionStateData {
@@ -67,11 +67,12 @@ enum TransactionType {
 
 // Teh results of STF transaction processing
 enum TransactionResult {
-    RUNTIME_EXCEPTION = 0;              // app code exception
-    BAD_COUNTER = 1;
-    INSUFFICIENT_GAS = 2;               // out of gas
-    INSUFFICIENT_BALANCE = 3;           // failed due to sender insufficient funds
-    EXECUTED = 4;                       // executed w/o error
+    UNKNOWN = 0;                        // Not yet known
+    EXECUTED = 1;                       // executed w/o error by the STF
+    BAD_COUNTER = 2;                    // unexepcted transaction counter
+    RUNTIME_EXCEPTION = 3;              // app code exception
+    INSUFFICIENT_GAS = 4;               // out of gas
+    INSUFFICIENT_BALANCE = 5;           // failed due to sender's insufficient funds
 }
 
 message Transactions {
