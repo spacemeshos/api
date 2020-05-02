@@ -20,6 +20,9 @@ service NodeService {
     // Request that the node start syncing the mesh
     rpc SyncStart(google.protobuf.Empty) returns (google.protobuf.Empty);
 
+    // Initiate graceful shutdown
+    rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty);
+
     ////////// Node streaming data
 
     // Sync status events

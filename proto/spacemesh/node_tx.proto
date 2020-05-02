@@ -1,0 +1,13 @@
+syntax = "proto3";
+package spacemesh;
+import "google/protobuf/empty.proto";
+import "spacemesh/types.proto";
+
+// Provides clients a way to submit a tx to the network for processing.
+// Having a service for transaction processing enables the client to easily
+// turn this feature on and off. Transactions are submitted to a node's mempool
+// and not to the mesh.
+service NodeTxService {
+    // Submit a new transaction to the node for processing
+    rpc SubmitTransaction(Transaction) returns (TransactionStateData);
+}
