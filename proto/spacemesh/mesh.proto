@@ -24,5 +24,5 @@ service MeshService {
 
     // Layer with blocks and transactions.
     // Sent each time layer data changes. Designed for heavy-duty clients.
-    rpc LayersStream(google.protobuf.Empty) returns (stream Layer);
+    rpc LayerStream(google.protobuf.Empty) returns (stream Layer);
 }
