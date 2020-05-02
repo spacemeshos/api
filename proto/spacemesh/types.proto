@@ -52,18 +52,6 @@ message GlobalState {
     uint64 layer_number = 2;
 }
 
-message TransactionStateData {
-    enum {
-        UNDEFINED = 0;
-        UNKNOWN = 1;                // Default state
-        REJECTED = 2;               // Rejected pre STF processing. e.g. bad data
-        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
-        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
-        PENDING = 5;                // Got to a block on the mesh. Pending processing by STF
-        PROCESSED = 6;              // Process by th STF. Processing results are in the tx receipt
-    }
-}
-
 // The results of STF transaction processing
 enum TransactionResult {
     UNDEFINED = 0;
