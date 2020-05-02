@@ -42,18 +42,16 @@ message GlobalState {
     uint64 layer_number = 2;
 }
 
-
-enum TransactionState {
-    UNKNOWN = 0;                // Default state
-    REJECTED = 1;               // Rejected pre STF processing. e.g. bad data
-    INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
-    CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
-    PENDING = 4;                // Got to a block on the mesh. Pending processing by STF
-    PROCESSED = 5;              // Process by th STF. Processing results are in the tx receipt
-}
-
 message TransactionStateData {
-    TransactionState state = 1;
+    enum {
+        UNDEFINED = 1;
+        UNKNOWN = 1;                // Default state
+        REJECTED = 2;               // Rejected pre STF processing. e.g. bad data
+        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
+        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
+        PENDING = 5;                // Got to a block on the mesh. Pending processing by STF
+        PROCESSED = 6;              // Process by th STF. Processing results are in the tx receipt
+    }
 }
 
 enum TransactionType {
@@ -67,12 +65,13 @@ enum TransactionType {
 
 // The results of STF transaction processing
 enum TransactionResult {
-    UNKNOWN = 0;                        // Not yet known
-    EXECUTED = 1;                       // executed w/o error by the STF
-    BAD_COUNTER = 2;                    // unexpected transaction counter
-    RUNTIME_EXCEPTION = 3;              // app code exception
-    INSUFFICIENT_GAS = 4;               // out of gas
-    INSUFFICIENT_FUNDS = 5;           // failed due to sender's insufficient funds
+    UNDEFINED = 0;
+    UNKNOWN = 1;                        // Not yet known
+    EXECUTED = 2;                       // executed w/o error by the STF
+    BAD_COUNTER = 3;                    // unexpected transaction counter
+    RUNTIME_EXCEPTION = 4;              // app code exception
+    INSUFFICIENT_GAS = 5;               // out of gas
+    INSUFFICIENT_FUNDS = 6;           // failed due to sender's insufficient funds
 }
 
 message Transactions {
@@ -81,11 +80,11 @@ message Transactions {
 }
 
 message TransactionReceipt {
-    TransactionId id = 1;  // the source transaction
+    TransactionId id = 1;           // the source transaction
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
-    uint64 layer_number = 5;       // The layer in which the STF processed this transaction
+    uint64 layer_number = 5;        // The layer in which the STF processed this transaction
 }
 
 message TransactionReceipts {
@@ -144,9 +143,10 @@ message Block {
 }
 
 enum LayerStatus {
-    UNKNOWN = 0;
-    APPROVED = 1;
-    CONFIRMED = 2;
+    UNDEFINED = 0;
+    UNKNOWN = 1;
+    APPROVED = 2;
+    CONFIRMED = 3;
 }
 
 message Layer {
@@ -177,15 +177,13 @@ message AppEvent {                     // an event emitted from an app instance
    TODO: add an enum with clearly-defined error types.
  */
 
-enum NodeErrorType {
-    UNDEFINED = 0;
-    PANIC_UNSPECIFIED = 1;
-    PANIC_SYNC = 2;
-    SIGNAL_SHUT_DOWN = 3;
-}
-
 message NodeError {
-    NodeErrorType type = 1;
+    enum NodeErrorType {
+        UNDEFINED = 0;
+        PANIC_UNSPECIFIED = 1;
+        PANIC_SYNC = 2;
+        SIGNAL_SHUT_DOWN = 3;
+    }
     string message = 2;
     string stack_trace = 3;
 }

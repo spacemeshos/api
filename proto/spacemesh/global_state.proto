@@ -7,12 +7,12 @@ import "spacemesh/types.proto";
 // Global state data is data which is not stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
-
     // Latest computed global state - layer and its root hash
     rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
-    // Get the current transaction state. Note that tx state is not part of global state.
-    // It is meta-data about a transaction on its journey to the mesh and from the mesh to the global state (or to null)
+    // Get the current transaction state. Note that tx state is not part of
+    // global state. It is metadata about a transaction on its journey to the
+    // mesh and from the mesh to the global state (or to null).
     rpc TransactionState(TransactionId) returns (TransactionStateData);
 
     // Account info in the current global state
@@ -27,7 +27,7 @@ service GlobalStateService {
     // Rewards awarded to a smesher
     rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
 
-    //// Streaming global state data
+    //// Streams
 
     // Rewards awarded to a specific account
     rpc AccountRewardsStream(AccountId) returns (stream Reward);
@@ -45,11 +45,11 @@ service GlobalStateService {
     rpc AppEventsStream(google.protobuf.Empty) returns (stream AppEvent);
 
     // Account changes. Accounts are part of global state.
-    rpc AccountsStream(google.protobuf.Empty) returns (stream Account);
+    rpc AccountStream(google.protobuf.Empty) returns (stream Account);
 
     // Rewards
-    rpc RewardsStream(google.protobuf.Empty) returns (stream Reward);
+    rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
 
-    // new global state computed for a layer by the STF
+    // New global state computed for a layer by the STF
     rpc GlobalStateStream(google.protobuf.Empty) returns (stream GlobalState);
 }
