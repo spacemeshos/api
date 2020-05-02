@@ -49,7 +49,7 @@ enum TransactionState {
     INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
     CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
     PENDING = 4;                // Got to a block on the mesh. Pending processing by STF
-    PROCESSED = 7;              // Process by th STF. Processing results are in the tx receipt
+    PROCESSED = 5;              // Process by th STF. Processing results are in the tx receipt
 }
 
 message TransactionStateData {
@@ -65,11 +65,11 @@ enum TransactionType {
     DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
 }
 
-// Teh results of STF transaction processing
+// The results of STF transaction processing
 enum TransactionResult {
     UNKNOWN = 0;                        // Not yet known
     EXECUTED = 1;                       // executed w/o error by the STF
-    BAD_COUNTER = 2;                    // unexepcted transaction counter
+    BAD_COUNTER = 2;                    // unexpected transaction counter
     RUNTIME_EXCEPTION = 3;              // app code exception
     INSUFFICIENT_GAS = 4;               // out of gas
     INSUFFICIENT_BALANCE = 5;           // failed due to sender's insufficient funds
@@ -85,7 +85,7 @@ message TransactionReceipt {
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
-    uint64 layer_number = 5;       // The layer in which the STF processed this transcation
+    uint64 layer_number = 5;       // The layer in which the STF processed this transaction
 }
 
 message TransactionReceipts {
