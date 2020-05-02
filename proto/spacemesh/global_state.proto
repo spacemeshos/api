@@ -35,7 +35,7 @@ service GlobalStateService {
     // Rewards awarded to a smesher id
     rpc SmesherRewardsStream(SmesherId) returns (stream Reward);
 
-    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
+    // Returns a stream of Account changes, e.g., balance and counter (nonce) changes
     rpc AccountStream(AccountId) returns (stream Account);
 
     // Receipts - emitted after tx was processed by STF (or rejected before STF)
@@ -43,9 +43,6 @@ service GlobalStateService {
 
     // App Events - emitted by app methods impl code trigged by an app transaction
     rpc AppEventsStream(google.protobuf.Empty) returns (stream AppEvent);
-
-    // Account changes. Accounts are part of global state.
-    rpc AccountStream(google.protobuf.Empty) returns (stream Account);
 
     // Rewards
     rpc RewardStream(google.protobuf.Empty) returns (stream Reward);

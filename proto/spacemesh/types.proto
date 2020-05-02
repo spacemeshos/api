@@ -43,8 +43,8 @@ message GlobalState {
 }
 
 message TransactionStateData {
-    enum {
-        UNDEFINED = 1;
+    enum TransactionState {
+        UNDEFINED = 0;
         UNKNOWN = 1;                // Default state
         REJECTED = 2;               // Rejected pre STF processing. e.g. bad data
         INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
