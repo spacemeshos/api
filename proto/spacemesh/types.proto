@@ -72,7 +72,7 @@ enum TransactionResult {
     BAD_COUNTER = 2;                    // unexpected transaction counter
     RUNTIME_EXCEPTION = 3;              // app code exception
     INSUFFICIENT_GAS = 4;               // out of gas
-    INSUFFICIENT_BALANCE = 5;           // failed due to sender's insufficient funds
+    INSUFFICIENT_FUNDS = 5;           // failed due to sender's insufficient funds
 }
 
 message Transactions {
