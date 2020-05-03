@@ -20,9 +20,8 @@ message AccountId {
 
 message Account {
     AccountId address = 1;  // account public address
-    bytes public_key = 2;   // nice to include the account full public key
-    uint64 counter = 3;     // aka nonce
-    Amount balance = 4;     // known account balance
+    uint64 counter = 2;     // aka nonce
+    Amount balance = 3;     // known account balance
 }
 
 message AccountIdWithOffset {
