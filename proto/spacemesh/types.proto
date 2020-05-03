@@ -36,7 +36,7 @@ message Reward {
 
 enum TransactionType {
     UNDEFINED = 0;
-    COIN = 1;            // simple coin transaction
+    SIMPLE = 1;            // simple coin transaction
     ATX = 2;             // smesher activation transaction
     APP = 3;             // smart contract method
     DEPLOY = 4;          // deploy app from template
