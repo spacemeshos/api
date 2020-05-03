@@ -15,4 +15,7 @@ service GlobalStateService {
     // Rewards are computed by the protocol outside the STF but are a special
     // case and are passed through the STF since they touch account balances.
     rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
+
+    // Receipts - emitted after tx was processed by STF (or rejected before STF)
+    rpc TransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
 }

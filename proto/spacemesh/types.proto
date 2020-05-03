@@ -36,7 +36,7 @@ message Reward {
 
 enum TransactionType {
     UNDEFINED = 0;
-    SIMPLE = 1;            // simple coin transaction
+    SIMPLE = 1;          // simple coin transaction
     ATX = 2;             // smesher activation transaction
     APP = 3;             // smart contract method
     DEPLOY = 4;          // deploy app from template
@@ -56,11 +56,41 @@ message TransactionFee { // = gas * gas_price
     uint64 gas_price = 2;
 }
 
+message TransactionReceipt {
+    TransactionId id = 1;           // the source transaction
+    // The results of STF transaction processing
+    enum TransactionResult {
+        UNDEFINED = 0;
+        UNKNOWN = 1;                // Not yet known
+        EXECUTED = 2;               // executed w/o error by the STF
+        BAD_COUNTER = 3;            // unexpected transaction counter
+        RUNTIME_EXCEPTION = 4;      // app code exception
+        INSUFFICIENT_GAS = 5;       // out of gas
+        INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
+    } // = 2
+    uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
+    Amount fee = 4;                 // transaction fee charged for the transaction
+    uint64 layer_number = 5;        // The layer in which the STF processed this transaction
+}
+
 // Simple coin transaction
-// This filed are the immutable signed tx data which is part of the signed transaction body and do not include
-// any transaction processing or state which is mutable.
+// These fields are the immutable signed tx data which is part of the signed
+// transaction body as well as mutable transaction state.
 message Transaction {
     TransactionType type = 1;
+    // TransactionState is the "journey" of a tx from newly-submitted, to being
+    // rejected or accepted into the mempool, to being included in the mesh (in a
+    // block), to (finally) being processed by the STF. It tells us nothing about the
+    // result of the processing.
+    enum TransactionState {
+        UNDEFINED = 0;
+        UNKNOWN = 1;                // Default state
+        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
+        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
+        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
+        PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
+        PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
+    } // = 1
     TransactionId id = 2; // hash
     AccountId sender = 3;
     TransactionFee fee = 4;
@@ -113,7 +143,7 @@ message NodeError {
         PANIC_UNSPECIFIED = 1;
         PANIC_SYNC = 2;
         SIGNAL_SHUT_DOWN = 3;
-    }
+    } // = 1
     string message = 2;
     string stack_trace = 3;
 }
@@ -126,5 +156,5 @@ message NodeSyncStatus {
       SYNCED = 3;
       SYNCING = 4;
       NOT_SYNCED = 5;
-  }
+  } // = 1
 }
