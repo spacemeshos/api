@@ -7,49 +7,12 @@ import "spacemesh/types.proto";
 // Global state data is data which is not stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
-
-    // Latest computed global state - layer and its root hash
-    rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
-
-    // Get the current transaction state. Note that tx state is not part of global state.
-    // It is meta-data about a transaction on its journey to the mesh and from the mesh to the global state (or to null)
-    rpc TransactionState(TransactionId) returns (TransactionStateData);
-
-    // Account info in the current global state
-    rpc Account(AccountId) returns (Account);
-
-    // Rewards awarded to an account
-    rpc AccountRewards(AccountIdWithOffset) returns (Rewards);
-
-    // Transaction recipts for transactions to/from an account
-    rpc AccountTransactionReceipts(AccountIdWithOffset) returns (TransactionReceipts);
-
-    // Rewards awarded to a smesher
-    rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
-
     //// Streaming global state data
 
-    // Rewards awarded to a specific account
-    rpc AccountRewardsStream(AccountId) returns (stream Reward);
+    // Account changes (e.g., balance and counter/nonce changes).
+    rpc AccountStream(google.protobuf.Empty) returns (stream Account);
 
-    // Rewards awarded to a smesher id
-    rpc SmesherRewardsStream(SmesherId) returns (stream Reward);
-
-    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
-    rpc AccountStream(AccountId) returns (stream Account);
-
-    // Receipts - emitted after tx was processed by STF (or rejected before STF)
-    rpc TransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
-
-    // App Events - emitted by app methods impl code trigged by an app transaction
-    rpc AppEventsStream(google.protobuf.Empty) returns (stream AppEvent);
-
-    // Account changes. Accounts are part of global state.
-    rpc AccountsStream(google.protobuf.Empty) returns (stream Account);
-
-    // Rewards
-    rpc RewardsStream(google.protobuf.Empty) returns (stream Reward);
-
-    // new global state computed for a layer by the STF
-    rpc GlobalStateStream(google.protobuf.Empty) returns (stream GlobalState);
+    // Rewards are computed by the protocol outside the STF but are a special
+    // case and are passed through the STF since they touch account balances.
+    rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
 }

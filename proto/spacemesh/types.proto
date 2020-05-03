@@ -24,35 +24,14 @@ message Account {
     Amount balance = 3;     // known account balance
 }
 
-message AccountIdWithOffset {
-    AccountId account_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;       // total number of client requested items
-};
-
-message SmesherIdWithOffset {
-    SmesherId smesher_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;        // total number of client requested items
-};
-
-message GlobalState {
-    bytes root_hash = 1;
-    uint64 layer_number = 2;
-}
-
-
-enum TransactionState {
-    UNKNOWN = 0;                // Default state
-    REJECTED = 1;               // Rejected pre STF processing. e.g. bad data
-    INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
-    CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
-    PENDING = 4;                // Got to a block on the mesh. Pending processing by STF
-    PROCESSED = 5;              // Process by th STF. Processing results are in the tx receipt
-}
-
-message TransactionStateData {
-    TransactionState state = 1;
+message Reward {
+    uint64 layer = 1;
+    Amount total = 2;
+    Amount layer_reward = 3;
+    uint64 layer_computed = 4; // layer number of the layer when reward was computed
+    // tx_fee = total- layer_reward
+    AccountId coinbase = 5; // account awarded this reward
+    SmesherId smesher = 6;  // it will be nice to always have this in reward events
 }
 
 enum TransactionType {
@@ -62,34 +41,6 @@ enum TransactionType {
     APP = 3;             // smart contract method
     DEPLOY = 4;          // deploy app from template
     DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
-}
-
-// The results of STF transaction processing
-enum TransactionResult {
-    UNKNOWN = 0;                        // Not yet known
-    EXECUTED = 1;                       // executed w/o error by the STF
-    BAD_COUNTER = 2;                    // unexpected transaction counter
-    RUNTIME_EXCEPTION = 3;              // app code exception
-    INSUFFICIENT_GAS = 4;               // out of gas
-    INSUFFICIENT_FUNDS = 5;           // failed due to sender's insufficient funds
-}
-
-message Transactions {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Transaction transactions = 2;
-}
-
-message TransactionReceipt {
-    TransactionId id = 1;  // the source transaction
-    TransactionResult result = 2;   // tx processing result
-    uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
-    Amount fee = 4;                 // transaction fee charged for the transaction
-    uint64 layer_number = 5;       // The layer in which the STF processed this transaction
-}
-
-message TransactionReceipts {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated TransactionReceipt receipts = 2;
 }
 
 message TransactionId {
@@ -122,30 +73,16 @@ message Transaction {
     TransactionId prev_atx = 11;  // previous ATX. used in atx.
 }
 
-message Reward {
-    uint64 layer = 1;
-    Amount total = 2;
-    Amount layer_reward = 3;
-    uint64 layer_computed = 4; // layer number of the layer when reward was computed
-    // tx_fee = total- layer_reward
-    AccountId coinbase = 5; // account awarded this reward
-    SmesherId smesher = 6;  // it will be nice to always have this in reward events
-}
-
-message Rewards {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Reward rewards = 2;
-}
-
 message Block {
     bytes id = 1;                           // block hash
     repeated Transaction transactions = 2;
 }
 
 enum LayerStatus {
-    UNKNOWN = 0;
-    APPROVED = 1;
-    CONFIRMED = 2;
+    UNDEFINED = 0;
+    UNKNOWN = 1;
+    APPROVED = 2;
+    CONFIRMED = 3;
 }
 
 message Layer {
@@ -166,25 +103,17 @@ message NodeStatus {
     uint64 verified_layer = 7;
 }
 
-message AppEvent {                     // an event emitted from an app instance
-    TransactionId transaction_id = 1;  // the transaction that called the code
-    string message = 2;                // the event's string emitted from code
-}
-
 /*
    Represents a critical node error.
-   TODO: add an enum with clearly-defined error types.
  */
 
-enum NodeErrorType {
-    UNDEFINED = 0;
-    PANIC_UNSPECIFIED = 1;
-    PANIC_SYNC = 2;
-    SIGNAL_SHUT_DOWN = 3;
-}
-
 message NodeError {
-    NodeErrorType type = 1;
+    enum NodeErrorType {
+        UNDEFINED = 0;
+        PANIC_UNSPECIFIED = 1;
+        PANIC_SYNC = 2;
+        SIGNAL_SHUT_DOWN = 3;
+    }
     string message = 2;
     string stack_trace = 3;
 }
