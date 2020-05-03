@@ -16,6 +16,11 @@ service GlobalStateService {
     // case and are passed through the STF since they touch account balances.
     rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
 
-    // Receipts - emitted after tx was processed by STF (or rejected before STF)
-    rpc TransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
+    // Transaction State - rejected pre-STF, or pending STF, or processed by
+    // STF
+    rpc TransactionStateStream(google.protobuf.Empty) returns (stream TransactionState);
+
+    // Receipts - emitted after tx was processed by STF (or rejected before
+    // STF)
+    rpc TransactionReceiptStream(google.protobuf.Empty) returns (stream TransactionReceipt);
 }

@@ -56,6 +56,22 @@ message TransactionFee { // = gas * gas_price
     uint64 gas_price = 2;
 }
 
+// TransactionState is the "journey" of a tx from newly-submitted, to being
+// rejected or accepted into the mempool, to being included in the mesh (in a
+// block), to (finally) being processed by the STF. It tells us nothing about the
+// result of the processing.
+message TransactionState {
+    enum TransactionState {
+        UNDEFINED = 0;
+        UNKNOWN = 1;                // Default state
+        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
+        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
+        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
+        PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
+        PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
+    } // = 1
+}
+
 message TransactionReceipt {
     TransactionId id = 1;           // the source transaction
     // The results of STF transaction processing
@@ -75,22 +91,10 @@ message TransactionReceipt {
 
 // Simple coin transaction
 // These fields are the immutable signed tx data which is part of the signed
-// transaction body as well as mutable transaction state.
+// transaction body and do not include mutable data such as tx state or
+// receipt.
 message Transaction {
     TransactionType type = 1;
-    // TransactionState is the "journey" of a tx from newly-submitted, to being
-    // rejected or accepted into the mempool, to being included in the mesh (in a
-    // block), to (finally) being processed by the STF. It tells us nothing about the
-    // result of the processing.
-    enum TransactionState {
-        UNDEFINED = 0;
-        UNKNOWN = 1;                // Default state
-        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
-        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
-        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
-        PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
-        PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
-    } // = 1
     TransactionId id = 2; // hash
     AccountId sender = 3;
     TransactionFee fee = 4;
