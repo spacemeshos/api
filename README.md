@@ -16,9 +16,10 @@ In addition to these services, there is also a set of [global types](proto/space
 ### Mesh data processing flow
 1. Client starts a full node with flags set to turn syncing off and to open the GRPC APIs
 1. Client registers on the streaming GRPC api methods that are of interest
-1. Client calls `node.SyncStart()` to request that the node start syncing
+1. Client calls `NodeSyncStart()` to request that the node start syncing
 1. Client processes streaming data it receives from the node
-1. Client monitors node using `node.SyncStatusStream()` and `node.ErrorStream()` and handle node critical errors. Return to step 1 as necessary.
+1. Client monitors node using `NodeSyncStatus()` and `NodeErrors()` and handle node critical errors, e.g., goto step 1
+1. Client gracefully shuts down the node by calling `NodeShutdown()` when it is done processing data
 
 ## Dev
 

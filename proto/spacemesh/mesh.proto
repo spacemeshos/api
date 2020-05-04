@@ -5,6 +5,7 @@ import "spacemesh/types.proto";
 
 // Readonly API for basic mesh info
 service MeshService {
+
     // Network genesis time as unix epoch time
     rpc GenesisTime(google.protobuf.Empty) returns (SimpleInt);
 
@@ -20,7 +21,16 @@ service MeshService {
     // Number of layers per epoch (a network parameter)
     rpc EpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
+    ////////// Methods designed for light-weight clients such as wallets
+    ////////// Please don't use in clients such as dash, explore or backup. Use streams for these.
+
+    // Get transactions to an account or from an account
+    rpc AccountTransactions(AccountIdWithOffset) returns (Transactions);
+
     ////////// Streams
+
+    // A stream of new txs (or update to a tx data) where the account is sender or receiver. These should include activation transations (ATXs) and all transactions in the mesh
+    rpc AccountTransactionStream(AccountId) returns (stream Transaction);
 
     // Layer with blocks and transactions.
     // Sent each time layer data changes. Designed for heavy-duty clients.
