@@ -45,8 +45,7 @@ message GlobalState {
     uint64 layer_number = 2;
 }
 
-
-enum TransactionState {
+enum TransactionStateType {
     UNKNOWN = 0;                // Default state
     REJECTED = 1;               // Rejected pre STF processing. e.g. bad data
     INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
@@ -56,26 +55,18 @@ enum TransactionState {
 }
 
 message TransactionStateData {
-    TransactionState state = 1;
-}
-
-enum TransactionType {
-    UNDEFINED = 0;
-    COIN = 1;            // simple coin transaction
-    ATX = 2;             // smesher activation transaction
-    APP = 3;             // smart contract method
-    DEPLOY = 4;          // deploy app from template
-    DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
+    TransactionStateType state = 1;
 }
 
 // The results of STF transaction processing
 enum TransactionResult {
-    UNKNOWN = 0;                        // Not yet known
-    EXECUTED = 1;                       // executed w/o error by the STF
-    BAD_COUNTER = 2;                    // unexpected transaction counter
-    RUNTIME_EXCEPTION = 3;              // app code exception
-    INSUFFICIENT_GAS = 4;               // out of gas
-    INSUFFICIENT_FUNDS = 5;           // failed due to sender's insufficient funds
+    UNDEFINED = 0;
+    UNKNOWN = 1;                // Not yet known
+    EXECUTED = 2;               // executed w/o error by the STF
+    BAD_COUNTER = 3;            // unexpected transaction counter
+    RUNTIME_EXCEPTION = 4;      // app code exception
+    INSUFFICIENT_GAS = 5;       // out of gas
+    INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
 }
 
 message Transactions {
@@ -148,15 +139,6 @@ message TransactionFee {
 // block), to (finally) being processed by the STF. It tells us nothing about the
 // result of the processing.
 message TransactionState {
-    enum TransactionStateType {
-        UNDEFINED = 0;
-        UNKNOWN = 1;                // Default state
-        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
-        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
-        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
-        PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
-        PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
-    }
     TransactionStateType state = 1;
 }
 
