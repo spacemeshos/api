@@ -1,0 +1,167 @@
+syntax = "proto3";
+package spacemesh;
+
+message SimpleInt {
+    uint64 value = 1;
+}
+
+message SimpleString {
+    string value = 1;
+}
+
+// a non-negative coin amount
+message Amount {
+    uint64 value = 1;
+}
+
+message AccountId {
+    bytes address = 1;
+}
+
+message Account {
+    AccountId address = 1;  // account public address
+    uint64 counter = 2;     // aka nonce
+    Amount balance = 3;     // known account balance
+}
+
+message Reward {
+    uint64 layer = 1;
+    Amount total = 2;
+    Amount layer_reward = 3;
+    uint64 layer_computed = 4; // layer number of the layer when reward was computed
+    // tx_fee = total - layer_reward
+    AccountId coinbase = 5; // account awarded this reward
+    SmesherId smesher = 6;  // it will be nice to always have this in reward events
+}
+
+message TransactionId {
+    bytes id = 1;
+}
+
+message SmesherId {
+    bytes id = 1;
+}
+
+message TransactionFee {
+    uint64 gas_consumed = 1;
+    uint64 gas_price = 2;
+    // tx_fee = gas_consumed * gas_price
+}
+
+// TransactionState is the "journey" of a tx from newly-submitted, to being
+// rejected from or accepted into the mempool, to being included in the mesh (in a
+// block), to (finally) being processed by the STF. It tells us nothing about the
+// result of the processing.
+message TransactionState {
+    enum TransactionStateType {
+        UNDEFINED = 0;
+        UNKNOWN = 1;                // Default state
+        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
+        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
+        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
+        PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
+        PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
+    }
+    TransactionStateType state = 1;
+}
+
+message TransactionReceipt {
+    TransactionId id = 1;           // the source transaction
+    // The results of STF transaction processing
+    enum TransactionResult {
+        UNDEFINED = 0;
+        UNKNOWN = 1;                // Not yet known
+        EXECUTED = 2;               // executed w/o error by the STF
+        BAD_COUNTER = 3;            // unexpected transaction counter
+        RUNTIME_EXCEPTION = 4;      // app code exception
+        INSUFFICIENT_GAS = 5;       // out of gas
+        INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
+    }
+    TransactionResult result = 2;
+    uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
+    Amount fee = 4;                 // transaction fee charged for the transaction
+    uint64 layer_number = 5;        // The layer in which the STF processed this transaction
+}
+
+// Simple coin transaction
+// These fields are the immutable signed tx data which is part of the signed
+// transaction body and do not include mutable data such as tx state or
+// receipt.
+message Transaction {
+    enum TransactionType {
+        UNDEFINED = 0;
+        SIMPLE = 1;          // simple coin transaction
+        ATX = 2;             // smesher activation transaction
+        APP = 3;             // smart contract method
+        DEPLOY = 4;          // deploy app from template
+        DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
+    }
+    TransactionType type = 1;
+    TransactionId id = 2; // hash
+    AccountId sender = 3;
+    TransactionFee fee = 4;
+    uint64 timestamp = 5;  // shouldn't this be part of the event envelope?
+    AccountId receiver = 6; // depending on tx type
+    Amount amount = 7; // amount of coin transfered in this tx by sender
+    uint64 counter = 8;    // tx counter aka nonce
+    bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
+    SmesherId smesher_id = 10;    // used in atx only
+    TransactionId prev_atx = 11;  // previous ATX. used in atx.
+}
+
+message Block {
+    bytes id = 1;                           // block hash
+    repeated Transaction transactions = 2;
+}
+
+message Layer {
+    uint64 number = 1;              // layer number - not hash - layer content may change
+    enum LayerStatus {
+        UNDEFINED = 0;
+        UNKNOWN = 1;
+        APPROVED = 2;
+        CONFIRMED = 3;
+    }
+    LayerStatus status = 2;
+    bytes hash = 3;                 // computer layer hash - do we need this?
+    repeated Block blocks = 4;      // layer's blocks
+    bytes root_state_hash = 5;      // when available - the root state hash of global state in this layer
+}
+
+message NodeStatus {
+    uint64 known_peers = 1;
+    uint64 min_peers = 2;
+    uint64 max_peers = 3;
+    bool   is_synced = 4;
+    uint64 synced_layer = 5;
+    uint64 current_layer = 6;
+    uint64 verified_layer = 7;
+}
+
+/*
+   Represents a critical node error.
+ */
+
+message NodeError {
+    enum NodeErrorType {
+        UNDEFINED = 0;
+        PANIC_UNSPECIFIED = 1;
+        PANIC_SYNC = 2;
+        SIGNAL_SHUT_DOWN = 3;
+    }
+    NodeErrorType type = 1;
+    string message = 2;
+    string stack_trace = 3;
+}
+
+message NodeSyncStatus {
+  enum NodeSyncStatusType {
+      UNDEFINED = 0;
+      NEW_LAYER_VERIFIED = 1;
+      NEW_TOP_LAYER = 2;
+      SYNCED = 3;
+      SYNCING = 4;
+      NOT_SYNCED = 5;
+  }
+  NodeSyncStatusType status = 1;
+}

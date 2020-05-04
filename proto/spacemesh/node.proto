@@ -1,0 +1,30 @@
+syntax = "proto3";
+package spacemesh;
+import "google/protobuf/empty.proto";
+import "spacemesh/types.proto";
+
+// Readonly basic node data
+service NodeService {
+    // A simple test endpoint
+    rpc Echo(SimpleString) returns (SimpleString);
+
+    // Returns the version of the node software as a semver string
+    rpc Version(google.protobuf.Empty) returns (SimpleString);
+
+    // Returns the github tag or branch used to build the node
+    rpc Build(google.protobuf.Empty) returns (SimpleString);
+
+    //  Current node status
+    rpc Status(google.protobuf.Empty) returns (NodeStatus);
+
+    // Request that the node start syncing the mesh
+    rpc SyncStart(google.protobuf.Empty) returns (google.protobuf.Empty);
+
+    ////////// Node streaming data
+
+    // Sync status events
+    rpc SyncStatusStream(google.protobuf.Empty) returns (stream NodeSyncStatus);
+
+    // Node error events
+    rpc ErrorStream(google.protobuf.Empty) returns (stream NodeError);
+}

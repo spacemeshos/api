@@ -1,0 +1,26 @@
+syntax = "proto3";
+package spacemesh;
+import "google/protobuf/empty.proto";
+import "spacemesh/types.proto";
+
+// Readonly global state data.
+// Global state data is data which is not explicitly stored in the mesh.
+// Global state is modified only by the state transition function.
+service GlobalStateService {
+    //// Streaming global state data
+
+    // Account changes (e.g., balance and counter/nonce changes).
+    rpc AccountStream(google.protobuf.Empty) returns (stream Account);
+
+    // Rewards are computed by the protocol outside the STF but are a special
+    // case and are passed through the STF since they touch account balances.
+    rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
+
+    // Transaction State - rejected pre-STF, or pending STF, or processed by
+    // STF
+    rpc TransactionStateStream(google.protobuf.Empty) returns (stream TransactionState);
+
+    // Receipts - emitted after tx was processed by STF (or rejected before
+    // STF)
+    rpc TransactionReceiptStream(google.protobuf.Empty) returns (stream TransactionReceipt);
+}

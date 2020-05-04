@@ -1,0 +1,28 @@
+syntax = "proto3";
+package spacemesh;
+import "google/protobuf/empty.proto";
+import "spacemesh/types.proto";
+
+// Readonly API for basic mesh info
+service MeshService {
+    // Network genesis time as unix epoch time
+    rpc GenesisTime(google.protobuf.Empty) returns (SimpleInt);
+
+    // Current layer number
+    rpc CurrentLayer(google.protobuf.Empty) returns (SimpleInt);
+
+    // Current epoch number
+    rpc CurrentEpoch(google.protobuf.Empty) returns (SimpleInt);
+
+    // Network ID
+    rpc NetId(google.protobuf.Empty) returns (SimpleInt);
+
+    // Number of layers per epoch (a network parameter)
+    rpc EpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
+
+    ////////// Streams
+
+    // Layer with blocks and transactions.
+    // Sent each time layer data changes. Designed for heavy-duty clients.
+    rpc LayerStream(google.protobuf.Empty) returns (stream Layer);
+}
