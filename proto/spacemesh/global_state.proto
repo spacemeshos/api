@@ -7,7 +7,6 @@ import "spacemesh/types.proto";
 // Global state data is data which is not explicitly stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
-
     // Latest computed global state - layer and its root hash
     rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
@@ -30,8 +29,38 @@ service GlobalStateService {
 
     //// Streams
 
-    // Account changes (e.g., balance and counter/nonce changes).
-    rpc AccountStream(google.protobuf.Empty) returns (stream Account);
+    // Latest computed global state - layer and its root hash
+    rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
+
+    // Get the current transaction state. Note that tx state is not part of global state.
+    // It is meta-data about a transaction on its journey to the mesh and from the mesh to the global state (or to null)
+    rpc TransactionState(TransactionId) returns (TransactionStateData);
+
+    // Account info in the current global state
+    rpc Account(AccountId) returns (Account);
+
+    // Rewards awarded to an account
+    rpc AccountRewards(AccountIdWithOffset) returns (Rewards);
+
+    // Transaction recipts for transactions to/from an account
+    rpc AccountTransactionReceipts(AccountIdWithOffset) returns (TransactionReceipts);
+
+    // Rewards awarded to a smesher
+    rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
+
+    ////////// Streams
+
+    // Rewards awarded to a specific account
+    rpc AccountRewardStream(AccountId) returns (stream Reward);
+
+    // Rewards awarded to a smesher id
+    rpc SmesherRewardStream(SmesherId) returns (stream Reward);
+
+    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
+    rpc AccountStream(AccountId) returns (stream Account);
+
+    // App Events - emitted by app methods impl code trigged by an app transaction
+    rpc AppEventStream(google.protobuf.Empty) returns (stream AppEvent);
 
     // Rewards awarded to a specific account
     rpc AccountRewardsStream(AccountId) returns (stream Reward);

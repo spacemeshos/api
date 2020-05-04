@@ -5,6 +5,7 @@ import "spacemesh/types.proto";
 
 // Readonly API for basic mesh info
 service MeshService {
+
     // Network genesis time as unix epoch time
     rpc GenesisTime(google.protobuf.Empty) returns (SimpleInt);
 
@@ -32,7 +33,7 @@ service MeshService {
     // A stream of new txs (or update to a tx data) where the account is sender
     // or receiver. These should include activation transations (ATXs) and all
     // transactions in the mesh
-    rpc AccountTransactionsStream(AccountId) returns (stream Transaction);
+    rpc AccountTransactionStream(AccountId) returns (stream Transaction);
 
     // Layer with blocks and transactions.
     // Sent each time layer data changes. Designed for heavy-duty clients.
