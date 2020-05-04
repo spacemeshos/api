@@ -53,7 +53,7 @@ message TransactionFee {
 // block), to (finally) being processed by the STF. It tells us nothing about the
 // result of the processing.
 message TransactionState {
-    enum TransactionState {
+    enum TransactionStateType {
         UNDEFINED = 0;
         UNKNOWN = 1;                // Default state
         REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
@@ -62,7 +62,7 @@ message TransactionState {
         PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
         PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
     }
-    TransactionState state = 1;
+    TransactionStateType state = 1;
 }
 
 message TransactionReceipt {
