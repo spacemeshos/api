@@ -29,18 +29,9 @@ message Reward {
     Amount total = 2;
     Amount layer_reward = 3;
     uint64 layer_computed = 4; // layer number of the layer when reward was computed
-    // tx_fee = total- layer_reward
+    // tx_fee = total - layer_reward
     AccountId coinbase = 5; // account awarded this reward
     SmesherId smesher = 6;  // it will be nice to always have this in reward events
-}
-
-enum TransactionType {
-    UNDEFINED = 0;
-    SIMPLE = 1;          // simple coin transaction
-    ATX = 2;             // smesher activation transaction
-    APP = 3;             // smart contract method
-    DEPLOY = 4;          // deploy app from template
-    DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
 }
 
 message TransactionId {
@@ -51,13 +42,14 @@ message SmesherId {
     bytes id = 1;
 }
 
-message TransactionFee { // = gas * gas_price
+message TransactionFee {
     uint64 gas_consumed = 1;
     uint64 gas_price = 2;
+    // tx_fee = gas_consumed * gas_price
 }
 
 // TransactionState is the "journey" of a tx from newly-submitted, to being
-// rejected or accepted into the mempool, to being included in the mesh (in a
+// rejected from or accepted into the mempool, to being included in the mesh (in a
 // block), to (finally) being processed by the STF. It tells us nothing about the
 // result of the processing.
 message TransactionState {
@@ -69,7 +61,8 @@ message TransactionState {
         CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
         PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
         PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
-    } // = 1
+    }
+    TransactionState state = 1;
 }
 
 message TransactionReceipt {
@@ -83,7 +76,8 @@ message TransactionReceipt {
         RUNTIME_EXCEPTION = 4;      // app code exception
         INSUFFICIENT_GAS = 5;       // out of gas
         INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
-    } // = 2
+    }
+    TransactionResult result = 2;
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
     uint64 layer_number = 5;        // The layer in which the STF processed this transaction
@@ -94,6 +88,14 @@ message TransactionReceipt {
 // transaction body and do not include mutable data such as tx state or
 // receipt.
 message Transaction {
+    enum TransactionType {
+        UNDEFINED = 0;
+        SIMPLE = 1;          // simple coin transaction
+        ATX = 2;             // smesher activation transaction
+        APP = 3;             // smart contract method
+        DEPLOY = 4;          // deploy app from template
+        DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
+    }
     TransactionType type = 1;
     TransactionId id = 2; // hash
     AccountId sender = 3;
@@ -112,15 +114,14 @@ message Block {
     repeated Transaction transactions = 2;
 }
 
-enum LayerStatus {
-    UNDEFINED = 0;
-    UNKNOWN = 1;
-    APPROVED = 2;
-    CONFIRMED = 3;
-}
-
 message Layer {
     uint64 number = 1;              // layer number - not hash - layer content may change
+    enum LayerStatus {
+        UNDEFINED = 0;
+        UNKNOWN = 1;
+        APPROVED = 2;
+        CONFIRMED = 3;
+    }
     LayerStatus status = 2;
     bytes hash = 3;                 // computer layer hash - do we need this?
     repeated Block blocks = 4;      // layer's blocks
@@ -147,7 +148,8 @@ message NodeError {
         PANIC_UNSPECIFIED = 1;
         PANIC_SYNC = 2;
         SIGNAL_SHUT_DOWN = 3;
-    } // = 1
+    }
+    NodeErrorType type = 1;
     string message = 2;
     string stack_trace = 3;
 }
@@ -160,5 +162,6 @@ message NodeSyncStatus {
       SYNCED = 3;
       SYNCING = 4;
       NOT_SYNCED = 5;
-  } // = 1
+  }
+  NodeSyncStatus status = 1;
 }
