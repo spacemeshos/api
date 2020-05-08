@@ -9,6 +9,7 @@
 1. Client calls `node.SyncStart()` to request that the node start syncing
 1. Client processes streaming data it receives from the node
 1. Client monitors node using `node.SyncStatusStream()` and `node.ErrorStream()` and handle node critical errors. Return to step 1 as necessary.
+1. Client gracefully shuts down the node by calling `node.Shutdown()` when it is done processing data.
 
 ## Dev
 
