@@ -5,7 +5,6 @@ import "spacemesh/types.proto";
 
 // Readonly API for basic mesh info
 service MeshService {
-
     // Network genesis time as unix epoch time
     rpc GenesisTime(google.protobuf.Empty) returns (SimpleInt);
 
