@@ -5,6 +5,10 @@ message SimpleInt {
     uint64 value = 1;
 }
 
+message BoolResult {
+    bool value = 1;
+}
+
 message SimpleString {
     string value = 1;
 }
@@ -156,14 +160,26 @@ message Layer {
     bytes root_state_hash = 5;      // when available - the root state hash of global state in this layer
 }
 
+// current node status
 message NodeStatus {
-    uint64 known_peers = 1;
-    uint64 min_peers = 2;
-    uint64 max_peers = 3;
-    bool   is_synced = 4;
-    uint64 synced_layer = 5;          // the last layer node has synced
-    uint64 top_layer = 6;             // top layer is the tip
-    uint64 verified_layer = 7;        // the last layer node has verified
+    uint64 connected_peers = 1;       // number of connected neighbors
+    bool   is_synced = 2;             // Is meshed synced
+    uint64 synced_layer = 3;          // the last layer node has synced
+    uint64 top_layer = 4;             // top layer is the tip
+    uint64 verified_layer = 5;        // the last layer node has verified
+}
+
+// Indicates a change in node status
+message NodeStatusEvent {
+  enum NodeStatusEvent {
+      NEW_LAYER_VERIFIED = 0;    // a new layer was verified event
+      NEW_TOP_LAYER = 1;         // new top layer started
+      SYNCED = 2;                // node synced event
+      SYNCING = 3;               // node is syncing event (but not sycned)
+      NOT_SYNCING = 4;           // sync did not start
+      NEIGHBOR_CONNECTED = 5;    // Connected to a neighbor
+      NEIGHBOR_DISCONNECTED = 6; // Disconnected from a neighbor
+  }
 }
 
 message AppEvent {                     // an event emitted from an app instance
@@ -178,21 +194,12 @@ message AppEvent {                     // an event emitted from an app instance
 
 message NodeError {
     enum NodeErrorType {
-        UNDEFINED = 0;
-        PANIC_UNSPECIFIED = 1;
-        PANIC_SYNC = 2;
-        SIGNAL_SHUT_DOWN = 3;
+        PANIC_UNSPECIFIED = 0;
+        PANIC_SYNC = 1;
+        PANIC_P2P = 2;
+        PANIC_HARE = 3;
+        SIGNAL_SHUT_DOWN = 4;
     }
     string message = 2;
     string stack_trace = 3;
-}
-
-message NodeSyncStatus {
-  enum NodeSyncStatus {
-      NEW_LAYER_VERIFIED = 0;   // a new layer was verified event
-      NEW_TOP_LAYER = 1;        // new top layer started
-      SYNCED = 2;               // node synced event
-      SYNCING = 3;              // node is syncing event (but not sycned)
-      NOT_SYNCING = 4;          // sync did not start
-  }
 }

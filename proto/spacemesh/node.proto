@@ -25,8 +25,8 @@ service NodeService {
 
     ////////// Node streaming data
 
-    // Sync status events
-    rpc SyncStatusStream(google.protobuf.Empty) returns (stream NodeSyncStatus);
+    // Node status events (sync and net)
+    rpc StatusStream(google.protobuf.Empty) returns (stream NodeStatus);
 
     // Node error events
     rpc ErrorStream(google.protobuf.Empty) returns (stream NodeError);
