@@ -3,7 +3,7 @@ package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
-// Readonly global state data.
+// Readonly global state data - current and historical.
 // Global state data is data which is not explicitly stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
@@ -14,7 +14,6 @@ service GlobalStateService {
     // global state. It is metadata about a transaction on its journey to the
     // mesh and from the mesh to the global state (or to null).
     rpc TransactionState(TransactionId) returns (TransactionStateData);
-
     // Account info in the current global state
     rpc Account(AccountId) returns (Account);
 
