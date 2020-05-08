@@ -189,7 +189,7 @@ message NodeSyncStatus {
       NEW_TOP_LAYER = 2;        // new top layer started
       SYNCED = 3;               // node synced event
       SYNCING = 4;              // node is syncing event (but not sycned)
-      NOT_SYNCED = 5;
+      NOT_SYNCING = 5;          // sync did not start
       SYNC_FAILED = 6;          // node sync fail event. Node will never by syncing or synced again in this session.
   }
   NodeSyncStatusType status = 1;
