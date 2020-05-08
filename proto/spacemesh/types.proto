@@ -160,10 +160,10 @@ message NodeStatus {
     uint64 known_peers = 1;
     uint64 min_peers = 2;
     uint64 max_peers = 3;
-    bool   is_synced = 4;
-    uint64 synced_layer = 5;
-    uint64 current_layer = 6;
-    uint64 verified_layer = 7;
+    bool   is_synced = 4;           
+    uint64 synced_layer = 5;          // the last layer node has synced
+    uint64 top_layer = 6;             // top layer is the tip
+    uint64 verified_layer = 7;        // the last layer node has verified
 }
 
 message AppEvent {                     // an event emitted from an app instance
@@ -189,11 +189,10 @@ message NodeError {
 
 message NodeSyncStatus {
   enum NodeSyncStatus {
-      UNDEFINED = 0;
-      NEW_LAYER_VERIFIED = 1;
-      NEW_TOP_LAYER = 2;
-      SYNCED = 3;
-      SYNCING = 4;
-      NOT_SYNCED = 5;
+      NEW_LAYER_VERIFIED = 0;   // a new layer was verified event
+      NEW_TOP_LAYER = 1;        // new top layer started
+      SYNCED = 2;               // node synced event
+      SYNCING = 3;              // node is syncing event (but not sycned)
+      SYNC_FAILED = 4;          // node sync fail event. Node will never by syncing or synced again in this session.
   }
 }
