@@ -18,10 +18,10 @@ message PostData {
     enum PostData {
         NOT_SETUP = 0;     // Post file was not initialized
         IN_PROGRESS = 1;   // init is in progress in this smesher session
-        DONE = 2;          // init is done and init file is available
-        ERROR = 3;         // init file creation or verification failed
+        DONE = 2;          // init is done (in this or previous node sessions) and init file is available
+        ERROR = 3;         // init file creation or verification failed. See PostInitErrors and error fields.
     }
-    string path = 1;            // Init file(s) path in local system
+    string path = 1;            // Init file path on a system volume
     uint64 bytes_written = 2;   // bytes written if init is in progress
     uint64 commitment_size = 3; // Commitment size in bytes
     string errer = 4;           // last post related error message
