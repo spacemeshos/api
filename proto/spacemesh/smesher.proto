@@ -13,14 +13,14 @@ service SmesherService {
 
     rpc IsSmeshing(google.protobuf.Empty) returns (BoolResult);
 
-    // Start smeshing using the user provided post data
+    // Returns a list of available post processors (including CPU as fallback)
+    rpc PostInitProcessor(google.protobuf.Empty) returns (PostProcessors);
+
+    // Start smeshing using the user provided post init data
     rpc StartSmeshing(PostUserData) returns (BoolResult);
 
-    // Stop smeshing
-    rpc StopSmeshing(google.protobuf.Empty) returns (BoolResult);
-
-    // Stop smeshing and attempt to delete post commitment file(s)
-    rpc DeletePostCommitment(google.protobuf.Empty) returns (BoolResult);
+    // Stop smeshing and optionally attempt to delete post init file(s)
+    rpc StopSmeshing(StopSmeshingArgs) returns (BoolResult);
 
     // Coinbase commands
     rpc Coinbase(google.protobuf.Empty) returns (AccountId);
@@ -31,7 +31,7 @@ service SmesherService {
 
     //// Streams
 
-    // A stream of post data changes. e.g. bytes written to commitment file
+    // A stream of post data changes. e.g. bytes written to commitment file during init phase
     rpc PostDataStream(google.protobuf.Empty) returns (PostData);
 
 }
