@@ -14,7 +14,7 @@ service NodeService {
     // Returns the version of the github tag or branch used to build the node
     rpc Build(google.protobuf.Empty) returns (SimpleString);
 
-    //  Current node status
+    //  Current node status (net and sync)
     rpc Status(google.protobuf.Empty) returns (NodeStatus);
 
     // Request the node to start syncing the mesh

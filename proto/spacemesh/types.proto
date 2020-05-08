@@ -193,5 +193,6 @@ message NodeSyncStatus {
       NEW_TOP_LAYER = 1;        // new top layer started
       SYNCED = 2;               // node synced event
       SYNCING = 3;              // node is syncing event (but not sycned)
+      NOT_SYNCING = 4;          // sync did not start
   }
 }
