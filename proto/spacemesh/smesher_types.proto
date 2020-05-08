@@ -1,0 +1,33 @@
+syntax = "proto3";
+package spacemesh;
+
+// User provided post data
+message PostUserData {
+    string path = 1;                // os path to post file(s)
+    uint64 commitment_size = 2;     // user specified post commitment size in bytes
+}
+
+message SmeshingState {
+    enum SmeshingStatsus {
+        NOT_SMESHING = 0;       // node is not setup to smesh
+        SMESHING = 1;           // node is setup to smesh
+    }
+}
+
+message PostData {
+    enum PostData {
+        NOT_SETUP = 0;     // Post file was not initialized
+        IN_PROGRESS = 1;   // init is in progress in this smesher session
+        DONE = 2;          // init is done and init file is available
+        ERROR = 3;         // init file creation or verification failed
+    }
+    string path = 1;            // Init file(s) path in local system
+    uint64 bytes_written = 2;   // bytes written if init is in progress
+    uint64 commitment_size = 3; // Commitment size in bytes
+    string errer = 4;           // last post related error message
+    enum PostInitErrors {
+        FILE_NOT_FOUND = 0;     // post init file not found in expected path
+        READ_ERROR = 1;         // failure to read post init file
+        WRITE_ERROR = 2;        // failure to write to post init file
+    }
+}
