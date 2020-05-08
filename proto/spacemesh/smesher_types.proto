@@ -17,10 +17,9 @@ message PostProcessors {
     repeated PostProcessor processor = 1;
 }
 
-message StopSmeshingArgs {
+message DeleteCommitment {
     bool delete_commitment = 1;
 }
-
 
 message SmeshingState {
     enum SmeshingStatsus {
@@ -30,18 +29,18 @@ message SmeshingState {
 }
 
 // Proof of space commitment data
-message PostData {
+message PostCommitmentData {
     enum PostData {
-        NOT_SETUP = 0;     // Post file was not initialized
-        IN_PROGRESS = 1;   // init is in progress in this smesher session
-        DONE = 2;          // init is done (in this or previous node sessions) and init file is available
-        ERROR = 3;         // init file creation or verification failed. See PostInitErrors and error fields.
+        NOT_SETUP = 0;     // Post commitment file was not initialized (in this or in previous node sessions)
+        IN_PROGRESS = 1;   // Init is in progress in this smesher session
+        DONE = 2;          // Init is done (in this or previous node sessions) and commitment file is available and verified
+        ERROR = 3;         // Commitment file creation or verification failed. See PostInitErrors and error fields.
     }
     string path = 1;            // Init file path on a system volume
     uint64 bytes_written = 2;   // bytes written if init is in progress
     uint64 commitment_size = 3; // Commitment size in bytes
     string errer = 4;           // last post related error message
-    enum PostInitErrors {
+    enum Errors {
         FILE_NOT_FOUND = 0;     // post init file not found in expected path
         READ_ERROR = 1;         // failure to read post init file
         WRITE_ERROR = 2;        // failure to write to post init file

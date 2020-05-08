@@ -7,20 +7,26 @@ import "spacemesh/smesher_types.proto";
 // Readonly basic node data
 service SmesherService {
 
-    // Smeshing and post state
+    // Smeshing state - is the node setup to smesh or not?
     rpc SmeshingState(google.protobuf.Empty) returns (SmeshingState);
-    rpc PostData(google.protobuf.Empty) returns (PostData);
 
-    rpc IsSmeshing(google.protobuf.Empty) returns (BoolResult);
+    // Get post commitment data
+    rpc PostData(google.protobuf.Empty) returns (PostCommitmentData);
 
-    // Returns a list of available post processors (including CPU as fallback)
+    // Returns a list of available post init processors (including CPU as fallback)
     rpc PostInitProcessor(google.protobuf.Empty) returns (PostProcessors);
 
-    // Start smeshing using the user provided post init data
-    rpc StartSmeshing(PostUserData) returns (BoolResult);
+    // Start post commitment init phsae
+    rpc StartPostInit(PostUserData) returns (BoolResult);
+
+    // About ongoing post commitment init phase and optionally attempt to delete commitment file(s)
+    rpc AbortPostInit(DeleteCommitment) returns (BoolResult);
+
+    // Start smeshing
+    rpc StartSmeshing(google.protobuf.Empty) returns (BoolResult);
 
     // Stop smeshing and optionally attempt to delete post init file(s)
-    rpc StopSmeshing(StopSmeshingArgs) returns (BoolResult);
+    rpc StopSmeshing(DeleteCommitment) returns (BoolResult);
 
     // Coinbase commands
     rpc Coinbase(google.protobuf.Empty) returns (AccountId);
@@ -31,7 +37,7 @@ service SmesherService {
 
     //// Streams
 
-    // A stream of post data changes. e.g. bytes written to commitment file during init phase
-    rpc PostDataStream(google.protobuf.Empty) returns (PostData);
+    // A stream of updates to the post commitment file. e.g. bytes written to commitment file during init phase
+    rpc PostInitDataStream(google.protobuf.Empty) returns (PostCommitmentData);
 
 }
