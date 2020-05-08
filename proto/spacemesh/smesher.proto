@@ -22,7 +22,7 @@ service SmesherService {
     // Stop an ongoing post commitment init phase and optionally attempt to delete commitment file(s)
     rpc StopCommitmentCreation(DeleteCommitment) returns (BoolResult);
 
-    // Start smeshing. Will return false of init phase is incomplete
+    // Start smeshing. Will return false if commitment is incomplete or missing.
     rpc StartSmeshing(google.protobuf.Empty) returns (BoolResult);
 
     // Stop smeshing and optionally attempt to delete post init file(s)
