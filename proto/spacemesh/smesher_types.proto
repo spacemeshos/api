@@ -10,7 +10,7 @@ message CommitmentUserData {
 }
 
 message CommitmentProcessor {
-    uint32 id = 1;                  // Numberical identifier - unique per system
+    uint32 id = 1;                  // Numerical identifier - unique per system
     string info = 2;                // Proc info, e.g. Nvidia `Geforce RTX (Cuda)` or `AMD Radeon (Vulkan)`
 }
 
