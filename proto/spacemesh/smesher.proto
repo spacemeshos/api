@@ -7,7 +7,7 @@ import "spacemesh/smesher_types.proto";
 // Readonly basic node data
 service SmesherService {
 
-    // Returns true iff node is currently smeshing.
+    // Returns true iff node is currently smeshing
     rpc IsSmeshing(google.protobuf.Empty) returns (BoolResult);
 
     // Returns post commitment data from the node
@@ -37,7 +37,7 @@ service SmesherService {
 
     //// Streams
 
-    // A stream of updates to the post commitment during init phase
+    // A stream of updates to the post commitment during the init phase
     rpc CommitmentProgressStream(google.protobuf.Empty) returns (CommitmentData);
 
 }

@@ -3,10 +3,10 @@ package spacemesh;
 
 // User provided post data
 message CommitmentUserData {
-    string path = 1;                // OS path to post file(s)
-    uint64 commitment_size = 2;     // User specified post commitment size in bytes
+    string path = 1;                // Path to post file(s) on a volume
+    uint64 commitment_size = 2;     // User specified commitment size in bytes
     uint32 processor_id = 3;        // Processor to be used for smeshing. e.g. cpu, gpu0, gpu1, etc...
-    bool   append = 4;              // Append to existing file if it exists. Otherwise - overwrite.
+    bool   append = 4;              // Append to existing file if it exists. Otherwise - overwrite
 }
 
 message CommitmentProcessor {
@@ -22,16 +22,16 @@ message DeleteCommitment {
     bool delete_commitment = 1;
 }
 
-enum CommitmentFileStatus {
-    NOT_FOUND = 0;  // Post commitment file was not initialized (in this or in previous node sessions)
-    EXISTS = 2;     // Complete commitment file is available and verified
+enum FileStatus {
+    NOT_FOUND = 0;  // Commitment file was not initialized (in this or in previous node sessions)
+    COMPLETE = 2;   // Complete commitment file is available and verified
     PARTIAL = 3;    // Init commitment file is partially written and init can be continued but is not in progress
 }
 
 // Proof of space commitment data
 message CommitmentData {
-    bool   init_in_progress = 1;      // True if init process is currently in progress
-    CommitmentFileStatus commitment_status = 2; // Commitment file status
+    bool init_in_progress = 1;  // True if init process is currently in progress
+    FileStatus file_status = 2; // Commitment file status
     string path = 3;            // Commitment file path on a system volume
     uint64 bytes_written = 4;   // Bytes written to the commitment file (actual file size)
     uint64 commitment_size = 5; // User provided commitmentsize in bytes
