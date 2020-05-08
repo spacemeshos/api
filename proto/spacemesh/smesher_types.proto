@@ -5,15 +5,31 @@ package spacemesh;
 message PostUserData {
     string path = 1;                // os path to post file(s)
     uint64 commitment_size = 2;     // user specified post commitment size in bytes
+    uint32 processor_id = 3;        // processor to be used for smeshing. e.g. cpu, gpu0, gpu1, etc...
 }
+
+message PostProcessor {
+    uint32 id = 1;                  // numberical identifier - unique per system
+    string info = 2;                // e.g. Nvidia `Geforce RTX (Cuda)` or `AMD Radeon (Vulkan)`
+}
+
+message PostProcessors {
+    repeated PostProcessor processor = 1;
+}
+
+message StopSmeshingArgs {
+    bool delete_commitment = 1;
+}
+
 
 message SmeshingState {
     enum SmeshingStatsus {
-        NOT_SMESHING = 0;       // node is not setup to smesh
-        SMESHING = 1;           // node is setup to smesh
+        NOT_SMESHING = 0;       // node is not smeshing
+        SMESHING = 1;           // node is smeshing
     }
 }
 
+// Proof of space commitment data
 message PostData {
     enum PostData {
         NOT_SETUP = 0;     // Post file was not initialized
