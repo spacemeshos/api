@@ -5,7 +5,6 @@ import "spacemesh/types.proto";
 
 // Readonly basic node data
 service NodeService {
-
     // A simple test endpoint
     rpc Echo(SimpleString) returns (SimpleString);
 
@@ -30,6 +29,5 @@ service NodeService {
     rpc StatusStream(google.protobuf.Empty) returns (stream NodeStatus);
 
     // Node error events
-    rpc ErrorsStream(google.protobuf.Empty) returns (stream NodeError);
-
+    rpc ErrorStream(google.protobuf.Empty) returns (stream NodeError);
 }
