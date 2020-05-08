@@ -3,6 +3,9 @@ package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
+
+
+
 // Readonly global state data - current and historical.
 // Global state data is data which is not stored in the mesh.
 // Global state is modified only by the state transition function.

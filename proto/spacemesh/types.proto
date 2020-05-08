@@ -55,23 +55,21 @@ message TransactionStateData {
 }
 
 enum TransactionType {
-    UNDEFINED = 0;
-    COIN = 1;            // simple coin transaction
-    ATX = 2;             // smesher activation transaction
-    APP = 3;             // smart contract method
-    DEPLOY = 4;          // deploy app from template
-    DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
+    SIMPLE = 0;            // simple coin transaction
+    ATX = 1;             // smesher activation transaction
+    APP = 2;             // smart contract method execution
+    SPAWN_APP = 3;          // deploy app from template
+    DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
 }
 
 // The results of STF transaction processing
 enum TransactionResult {
-    UNDEFINED = 0;
-    UNKNOWN = 1;                        // Not yet known
-    EXECUTED = 2;                       // executed w/o error by the STF
-    BAD_COUNTER = 3;                    // unexpected transaction counter
-    RUNTIME_EXCEPTION = 4;              // app code exception
-    INSUFFICIENT_GAS = 5;               // out of gas
-    INSUFFICIENT_FUNDS = 6;           // failed due to sender's insufficient funds
+    UNKNOWN = 0;                        // Not yet known
+    EXECUTED = 1;                       // executed w/o error by the STF
+    BAD_COUNTER = 2;                    // unexpected transaction counter
+    RUNTIME_EXCEPTION = 3;              // app code exception
+    INSUFFICIENT_GAS = 4;               // out of gas
+    INSUFFICIENT_FUNDS = 5;             // failed due to sender's insufficient funds
 }
 
 message Transactions {
@@ -85,6 +83,7 @@ message TransactionReceipt {
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
     uint64 layer_number = 5;        // The layer in which the STF processed this transaction
+    AccountId app_address = 6;      // Deployed app address or code template address !!!
 }
 
 message TransactionReceipts {
