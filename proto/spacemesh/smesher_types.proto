@@ -34,7 +34,7 @@ message CommitmentData {
     FileStatus file_status = 2; // Commitment file status
     string path = 3;            // Commitment file path on a system volume
     uint64 bytes_written = 4;   // Bytes written to the commitment file (actual file size)
-    uint64 commitment_size = 5; // User provided commitmentsize in bytes
+    uint64 commitment_size = 5; // User provided commitment size in bytes
     string error_message = 6;   // Last init process error message
     enum Errors {
         FILE_NOT_FOUND = 0;     // Post commitment file not found in expected path
