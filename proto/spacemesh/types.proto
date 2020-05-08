@@ -182,7 +182,6 @@ message AppEvent {                     // an event emitted from an app instance
 
 /*
    Represents a critical node error.
-   TODO: add an enum with clearly-defined error types.
  */
 
 message NodeError {
