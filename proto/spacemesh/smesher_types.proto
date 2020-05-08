@@ -22,20 +22,20 @@ message DeleteCommitment {
     bool delete_commitment = 1;
 }
 
+enum CommitmentFileStatus {
+    NOT_FOUND = 0;  // Post commitment file was not initialized (in this or in previous node sessions)
+    EXISTS = 2;     // Complete commitment file is available and verified
+    PARTIAL = 3;    // Init commitment file is partially written and init can be continued but is not in progress
+}
+
 // Proof of space commitment data
 message CommitmentData {
-    enum PostData {
-        NOT_SETUP = 0;     // Post commitment file was not initialized (in this or in previous node sessions)
-        IN_PROGRESS = 1;   // Init phase is currently in progress in this smesher session
-        DONE = 2;          // Init pashe is done (in this or previous node sessions) and commitment file is available and verified
-        PARTIAL = 3;       // Init commitment file is partially written and init can be continued.
-        ERROR = 4;         // Commitment file creation or verification failed. See PostInitErrors and error fields.
-
-    }
-    string path = 1;            // Init file path on a system volume
-    uint64 bytes_written = 2;   // Bytes written if init is in progress
-    uint64 commitment_size = 3; // Commitment size in bytes
-    string error_message = 4;   // Last init phase error message
+    bool   init_in_progress = 1;      // True if init process is currently in progress
+    CommitmentFileStatus commitment_status = 2; // Commitment file status
+    string path = 3;            // Commitment file path on a system volume
+    uint64 bytes_written = 4;   // Bytes written to the commitment file (actual file size)
+    uint64 commitment_size = 5; // User provided commitmentsize in bytes
+    string error_message = 6;   // Last init process error message
     enum Errors {
         FILE_NOT_FOUND = 0;     // Post commitment file not found in expected path
         READ_ERROR = 1;         // Failure to read commitment file
