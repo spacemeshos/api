@@ -8,5 +8,5 @@ import "spacemesh/types.proto";
 // this feature on and off. Transactions are submitted to a node and not the mesh
 service NodeTxsService {
     // Submit a new transaction to the node for processing
-    rpc SubmitTransaction(Transaction) returns (TransactionStateData);
+    rpc SubmitTransaction(Transaction) returns (TransactionState);
 }

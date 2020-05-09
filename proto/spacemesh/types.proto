@@ -110,7 +110,7 @@ message TransactionFee {
 // rejected from or accepted into the mempool, to being included in the mesh (in a
 // block), to (finally) being processed by the STF. It tells us nothing about the
 // result of the processing.
-message TransactionStateData {
+message TransactionState {
     TransactionStateType state = 1;
 }
 
