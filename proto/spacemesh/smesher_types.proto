@@ -42,4 +42,5 @@ message CommitmentData {
         READ_ERROR = 1;         // Failure to read commitment file
         WRITE_ERROR = 2;        // Failure to write to commitment file
     }
+    ErrorType error_type = 7;
 }
