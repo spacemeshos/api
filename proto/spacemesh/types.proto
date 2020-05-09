@@ -176,6 +176,7 @@ message NodeStatus {
 
 // Indicates a change in node status
 message NodeStatusEvent {
+    NodeStatusEvent status = 1;
   enum NodeStatusEvent {
       UNDEFINED = 0;
       NEW_LAYER_VERIFIED = 1;   // a new layer was verified event
