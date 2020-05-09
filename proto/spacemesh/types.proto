@@ -89,29 +89,25 @@ message TransactionReceipts {
 // result of the processing.
 message TransactionState {
     enum TransactionStateType {
-        UNDEFINED = 0;
-        UNKNOWN = 1;                // Default state
-        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
-        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
-        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
-        PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
-        PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
+        UNKNOWN = 0;                // Default state
+        REJECTED = 1;               // Rejected pre STF processing due to, e.g., bad data
+        INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
+        CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
+        PENDING = 4;                // Included in a block on the mesh. Pending processing by STF
+        PROCESSED = 5;              // Processed by the STF. Processing results are in the tx receipt
     }
     TransactionStateType state = 1;
 }
 
-// Simple coin transaction
-// These fields are the immutable signed tx data which is part of the signed
-// transaction body and do not include mutable data such as tx state or
-// receipt.
+// An immutable Spacemesh transaction.
+// do not include mutable data such as tx state or result.
 message Transaction {
     enum TransactionType {
-        UNDEFINED = 0;
-        SIMPLE = 1;          // simple coin transaction
-        ATX = 2;             // smesher activation transaction
-        APP = 3;             // smart contract method
-        DEPLOY = 4;          // deploy app from template
-        DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
+        SIMPLE = 0;          // simple coin transaction
+        ATX = 1;             // smesher activation transaction
+        APP = 2;             // smart contract method
+        SPAWN_APP = 3;       // deploy app from template using svm terminology
+        DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
     }
     TransactionType type = 1;
     TransactionId id = 2; // hash
@@ -147,18 +143,18 @@ message Rewards {
 }
 
 message Block {
-    bytes id = 1;                           // block hash
+    bytes id = 1; // block hash
     repeated Transaction transactions = 2;
 }
 
 message Layer {
-    uint64 number = 1;              // layer number - not hash - layer content may change
     enum LayerStatus {
-        UNDEFINED = 0;
-        UNKNOWN = 1;
-        APPROVED = 2;
-        CONFIRMED = 3;
+        UNKNOWN = 0;
+        APPROVED = 1;
+        CONFIRMED = 2;
     }
+
+    uint64 number = 1;  // layer number - not hash - layer content may change
     LayerStatus status = 2;
     bytes hash = 3;                 // computer layer hash - do we need this?
     repeated Block blocks = 4;      // layer's blocks
@@ -176,18 +172,17 @@ message NodeStatus {
 
 // Indicates a change in node status
 message NodeStatusEvent {
+    enum NodeStatusEvent {
+      NEW_LAYER_VERIFIED = 0;   // a new layer was verified event
+      NEW_TOP_LAYER = 1;        // new top layer started
+      SYNCED = 2;               // node synced event
+      SYNCING = 3;              // node is syncing event (but not sycned)
+      NOT_SYNCING = 4;          // sync did not start
+      SYNC_FAILED = 5;          // node sync fail event. Node will never by syncing or synced again in this session.
+      NEIGHBOR_CONNECTED = 6;    // Connected to a neighbor
+      NEIGHBOR_DISCONNECTED = 7; // Disconnected from a neighbor
+    }
     NodeStatusEvent status = 1;
-  enum NodeStatusEvent {
-      UNDEFINED = 0;
-      NEW_LAYER_VERIFIED = 1;   // a new layer was verified event
-      NEW_TOP_LAYER = 2;        // new top layer started
-      SYNCED = 3;               // node synced event
-      SYNCING = 4;              // node is syncing event (but not sycned)
-      NOT_SYNCING = 5;          // sync did not start
-      SYNC_FAILED = 6;          // node sync fail event. Node will never by syncing or synced again in this session.
-      NEIGHBOR_CONNECTED = 7;    // Connected to a neighbor
-      NEIGHBOR_DISCONNECTED = 8; // Disconnected from a neighbor
-  }
 }
 
 message AppEvent {                     // an event emitted from an app instance
@@ -195,19 +190,17 @@ message AppEvent {                     // an event emitted from an app instance
     string message = 2;                // the event's string emitted from code
 }
 
-/*
-   Represents a critical node error.
- */
 
+// Represents a critical node error.
 message NodeError {
     enum NodeErrorType {
-        UNDEFINED = 0;
-        PANIC_UNSPECIFIED = 1;
-        PANIC_SYNC = 2;
-        PANIC_P2P = 3;
-        PANIC_HARE = 4;
-        SIGNAL_SHUT_DOWN = 5;
+        PANIC_UNSPECIFIED = 0;
+        PANIC_SYNC = 1;
+        PANIC_P2P = 2;
+        PANIC_HARE = 3;
+        SIGNAL_SHUT_DOWN = 4;
     }
+    NodeErrorType error_type = 1;
     string message = 2;
     string stack_trace = 3;
 }

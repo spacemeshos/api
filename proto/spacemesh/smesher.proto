@@ -36,13 +36,16 @@ service SmesherService {
     // Returns post commitment data from the node
     rpc CommitmentData(google.protobuf.Empty) returns (CommitmentData);
 
-    // Returns a list of available commitment init processors (including CPU as fallback)
+    // Returns a list of available commitment init processors
+    // (including CPU as fallback)
     rpc CommitmentProcessors(google.protobuf.Empty) returns (CommitmentProcessors);
 
-    // Starts (or continues) a commitment init phase. Supports appending to file from a previous incomplete init phase.
+    // Starts (or continues) a commitment init phase. Supports appending to file
+    // from a previous incomplete init phase.
     rpc CreateCommitment(CommitmentUserData) returns (BoolResult);
 
-    // Stop an ongoing commitment init phase and optionally attempt to delete commitment file(s)
+    // Stop an ongoing commitment init phase and optionally attempt to delete
+    // commitment file(s)
     rpc StopCommitmentCreation(DeleteCommitment) returns (BoolResult);
 
     // Retruns a stream of updates to a post commitment during the init phase

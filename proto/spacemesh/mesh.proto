@@ -21,8 +21,8 @@ service MeshService {
     rpc EpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
     ////////// Methods designed for light-weight clients such as wallets.
-    ////////// Please don't use in clients such as dash, explore or backup. Use
-    ////////// streams for these.
+    ////////// Don't use in clients such as dash, explore or backup.
+    ////////// Use streams for these.
 
     // Get transactions to an account or from an account
     rpc AccountTransactions(AccountIdWithOffset) returns (Transactions);
