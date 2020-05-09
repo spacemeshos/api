@@ -37,11 +37,7 @@ service SmesherService {
     rpc CommitmentData(google.protobuf.Empty) returns (CommitmentData);
 
     // Returns a list of available commitment init processors (including CPU as fallback)
-<<<<<<< HEAD
-    rpc CommitmentProcessor(google.protobuf.Empty) returns (CommitmentProcessors);
-=======
     rpc CommitmentProcessors(google.protobuf.Empty) returns (CommitmentProcessors);
->>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
 
     // Starts (or continues) a commitment init phase. Supports appending to file from a previous incomplete init phase.
     rpc CreateCommitment(CommitmentUserData) returns (BoolResult);

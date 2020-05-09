@@ -31,26 +31,18 @@ message CommitmentData {
         COMPLETE = 1;   // Complete commitment file is available and verified
         PARTIAL = 2;    // Init commitment file is partially written and init can be continued but is not in progress
     }
-<<<<<<< HEAD
-=======
+
     FileStatus file_status = 1;
->>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
     bool init_in_progress = 2;  // True if init process is currently in progress
     string path = 3;            // Commitment file path on a system volume
     uint64 bytes_written = 4;   // Bytes written to the commitment file (actual file size)
     uint64 commitment_size = 5; // User provided commitment size in bytes
     string error_message = 6;   // Last init process error message
-<<<<<<< HEAD
-    enum Errors {
-=======
+
     enum ErrorType {
->>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
         FILE_NOT_FOUND = 0;     // Post commitment file not found in expected path
         READ_ERROR = 1;         // Failure to read commitment file
         WRITE_ERROR = 2;        // Failure to write to commitment file
     }
-<<<<<<< HEAD
-=======
     ErrorType error_type = 7;
->>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
 }

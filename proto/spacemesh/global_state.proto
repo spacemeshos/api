@@ -4,22 +4,12 @@ import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
 // Readonly global state data - current and historical.
-<<<<<<< HEAD
-// Global state data is data which is not stored in the mesh.
-// Global state is modified only by the state transition function.
-service GlobalStateService {
-
-    // Latest computed global state - layer and its root hash
-    rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
-
-=======
 // Global state data is data which is not explicitly stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
     // Latest computed global state - layer and its root hash
     rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
->>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
     // Get the current transaction state. Note that tx state is not part of
     // global state. It is metadata about a transaction on its journey to the
     // mesh and from the mesh to the global state (or to null).
@@ -37,11 +27,7 @@ service GlobalStateService {
     // Rewards awarded to a smesher
     rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
 
-<<<<<<< HEAD
-    //// Streams
-=======
     ////////// Streams
->>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
 
     // Rewards awarded to a specific account
     rpc AccountRewardStream(AccountId) returns (stream Reward);
@@ -49,11 +35,7 @@ service GlobalStateService {
     // Rewards awarded to a smesher id
     rpc SmesherRewardStream(SmesherId) returns (stream Reward);
 
-<<<<<<< HEAD
-    // Returns a stream of Account changes, e.g., balance and counter (nonce) changes
-=======
     // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
->>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
     rpc AccountStream(AccountId) returns (stream Account);
 
     // App Events - emitted by app methods impl code trigged by an app transaction
