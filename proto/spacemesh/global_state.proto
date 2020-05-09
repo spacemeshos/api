@@ -27,21 +27,6 @@ service GlobalStateService {
     // Rewards awarded to a smesher
     rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
 
-    // Latest computed global state - layer and its root hash
-    rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
-
-    // Account info in the current global state
-    rpc Account(AccountId) returns (Account);
-
-    // Rewards awarded to an account
-    rpc AccountRewards(AccountIdWithOffset) returns (Rewards);
-
-    // Transaction recipts for transactions to/from an account
-    rpc AccountTransactionReceipts(AccountIdWithOffset) returns (TransactionReceipts);
-
-    // Rewards awarded to a smesher
-    rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
-
     ////////// Streams
 
     // Rewards awarded to a specific account

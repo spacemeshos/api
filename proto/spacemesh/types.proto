@@ -45,24 +45,6 @@ message GlobalState {
     uint64 layer_number = 2;
 }
 
-
-message AccountIdWithOffset {
-    AccountId account_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;       // total number of client requested items
-};
-
-message SmesherIdWithOffset {
-    SmesherId smesher_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;        // total number of client requested items
-};
-
-message GlobalState {
-    bytes root_hash = 1;
-    uint64 layer_number = 2;
-}
-
 message TransactionId {
     bytes id = 1;
 }
