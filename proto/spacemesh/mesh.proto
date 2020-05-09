@@ -29,7 +29,13 @@ service MeshService {
 
     ////////// Streams
 
+<<<<<<< HEAD
     // A stream of new txs (or update to a tx data) where the account is sender or receiver. These should include activation transations (ATXs) and all transactions in the mesh
+=======
+    // A stream of new txs (or update to a tx data) where the account is sender
+    // or receiver. These should include activation transations (ATXs) and all
+    // transactions in the mesh
+>>>>>>> 4793ab1290c3ea4a9c99be85456f06cf0086c3f4
     rpc AccountTransactionStream(AccountId) returns (stream Transaction);
 
     // Layer with blocks and transactions.
