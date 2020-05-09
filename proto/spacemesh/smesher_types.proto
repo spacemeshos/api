@@ -10,16 +10,19 @@ message CommitmentUserData {
     bool   throttle = 5;            // Throttle down init phase computations while user is interactive on system
 }
 
+// A commitment init processor. e.g. a cpu or a gpu
 message CommitmentProcessor {
     uint32 id = 1;                  // Numerical identifier - unique per system
     string processor_name = 2;      // Proc info, e.g. Nvidia `Geforce RTX`, `AMD Radeon`, `Intel Genuine i7 CPU`
     string api = 3;                 // Pprocessing api to be used with the processor. e.g. `Vulkan`, `Cuda` or `x86-64`
 }
 
+// A list of CommitmentProcessor
 message CommitmentProcessors {
     repeated CommitmentProcessor processors = 1;
 }
 
+// Param passed to methods to indicate a request to delete commitment file
 message DeleteCommitment {
     bool delete_commitment = 1;
 }
