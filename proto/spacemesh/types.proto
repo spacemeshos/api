@@ -77,19 +77,18 @@ message TransactionFee {
     // tx_fee = gas_consumed * gas_price
 }
 
-// The results of STF transaction processing
-enum TransactionResult {
-    UNDEFINED = 0;
-    UNKNOWN = 1;                // Not yet known
-    EXECUTED = 2;               // executed w/o error by the STF
-    BAD_COUNTER = 3;            // unexpected transaction counter
-    RUNTIME_EXCEPTION = 4;      // app code exception
-    INSUFFICIENT_GAS = 5;       // out of gas
-    INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
-}
-
 message TransactionReceipt {
     TransactionId id = 1;           // the source transaction
+    // The results of STF transaction processing
+    enum TransactionResult {
+        UNDEFINED = 0;
+        UNKNOWN = 1;                // Not yet known
+        EXECUTED = 2;               // executed w/o error by the STF
+        BAD_COUNTER = 3;            // unexpected transaction counter
+        RUNTIME_EXCEPTION = 4;      // app code exception
+        INSUFFICIENT_GAS = 5;       // out of gas
+        INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
+    }
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
