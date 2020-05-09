@@ -12,11 +12,12 @@ message CommitmentUserData {
 
 message CommitmentProcessor {
     uint32 id = 1;                  // Numerical identifier - unique per system
-    string info = 2;                // Proc info, e.g. Nvidia `Geforce RTX (Cuda)` or `AMD Radeon (Vulkan)`
+    string processor_name = 2;      // Proc info, e.g. Nvidia `Geforce RTX`, `AMD Radeon`, `Intel Genuine i7 CPU`
+    string api = 3;                 // Pprocessing api to be used with the processor. e.g. `Vulkan`, `Cuda` or `x86-64`
 }
 
 message CommitmentProcessors {
-    repeated CommitmentProcessor processor = 1;
+    repeated CommitmentProcessor processors = 1;
 }
 
 message DeleteCommitment {
