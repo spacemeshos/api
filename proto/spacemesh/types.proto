@@ -46,22 +46,6 @@ message GlobalState {
 }
 
 
-// The results of STF transaction processing
-enum TransactionResult {
-    UNDEFINED = 0;
-    UNKNOWN = 1;                // Not yet known
-    EXECUTED = 2;               // executed w/o error by the STF
-    BAD_COUNTER = 3;            // unexpected transaction counter
-    RUNTIME_EXCEPTION = 4;      // app code exception
-    INSUFFICIENT_GAS = 5;       // out of gas
-    INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
-}
-
-message Transactions {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Transaction transactions = 2;
-}
-
 message AccountIdWithOffset {
     AccountId account_id = 1;
     uint64 offset = 2;
@@ -79,19 +63,29 @@ message GlobalState {
     uint64 layer_number = 2;
 }
 
-// The results of STF transaction processing
-enum TransactionResult {
-    UNKNOWN = 0;                        // Not yet known
-    EXECUTED = 1;                       // executed w/o error by the STF
-    BAD_COUNTER = 2;                    // unexpected transaction counter
-    RUNTIME_EXCEPTION = 3;              // app code exception
-    INSUFFICIENT_GAS = 4;               // out of gas
-    INSUFFICIENT_FUNDS = 5;             // failed due to sender's insufficient funds
+message TransactionId {
+    bytes id = 1;
 }
 
-message Transactions {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Transaction transactions = 2;
+message SmesherId {
+    bytes id = 1;
+}
+
+message TransactionFee {
+    uint64 gas_consumed = 1;
+    uint64 gas_price = 2;
+    // tx_fee = gas_consumed * gas_price
+}
+
+// The results of STF transaction processing
+enum TransactionResult {
+    UNDEFINED = 0;
+    UNKNOWN = 1;                // Not yet known
+    EXECUTED = 2;               // executed w/o error by the STF
+    BAD_COUNTER = 3;            // unexpected transaction counter
+    RUNTIME_EXCEPTION = 4;      // app code exception
+    INSUFFICIENT_GAS = 5;       // out of gas
+    INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
 }
 
 message TransactionReceipt {
@@ -108,20 +102,6 @@ message TransactionReceipts {
     repeated TransactionReceipt receipts = 2;
 }
 
-message TransactionId {
-    bytes id = 1;
-}
-
-message SmesherId {
-    bytes id = 1;
-}
-
-message TransactionFee {
-    uint64 gas_consumed = 1;
-    uint64 gas_price = 2;
-    // tx_fee = gas_consumed * gas_price
-}
-
 // TransactionState is the "journey" of a tx from newly-submitted, to being
 // rejected from or accepted into the mempool, to being included in the mesh (in a
 // block), to (finally) being processed by the STF. It tells us nothing about the
@@ -130,7 +110,7 @@ message TransactionState {
     enum TransactionStateType {
         UNDEFINED = 0;
         UNKNOWN = 1;                // Default state
-        REJECTED = 2;               // Rejected pre STF processing. e.g. bad data
+        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
         INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
         CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
         PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
@@ -163,6 +143,11 @@ message Transaction {
     bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
     SmesherId smesher_id = 10;    // used in atx only
     TransactionId prev_atx = 11;  // previous ATX. used in atx.
+}
+
+message Transactions {
+    uint64 total_items = 1; // total server available items. Used to query with new offset
+    repeated Transaction transactions = 2;
 }
 
 message Reward {
@@ -234,11 +219,12 @@ message AppEvent {                     // an event emitted from an app instance
 
 message NodeError {
     enum NodeErrorType {
-        PANIC_UNSPECIFIED = 0;
-        PANIC_SYNC = 1;
-        PANIC_P2P = 2;
-        PANIC_HARE = 3;
-        SIGNAL_SHUT_DOWN = 4;
+        UNDEFINED = 0;
+        PANIC_UNSPECIFIED = 1;
+        PANIC_SYNC = 2;
+        PANIC_P2P = 3;
+        PANIC_HARE = 4;
+        SIGNAL_SHUT_DOWN = 5;
     }
     NodeErrorType type = 1;
     string message = 2;

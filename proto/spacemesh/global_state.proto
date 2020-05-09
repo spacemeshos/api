@@ -27,8 +27,6 @@ service GlobalStateService {
     // Rewards awarded to a smesher
     rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
 
-    //// Streams
-
     // Latest computed global state - layer and its root hash
     rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
