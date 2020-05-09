@@ -13,7 +13,7 @@ service GlobalStateService {
     // Get the current transaction state. Note that tx state is not part of
     // global state. It is metadata about a transaction on its journey to the
     // mesh and from the mesh to the global state (or to null).
-    rpc TransactionState(TransactionId) returns (TransactionStateData);
+    rpc TransactionState(TransactionId) returns (TransactionState);
 
     // Account info in the current global state
     rpc Account(AccountId) returns (Account);
