@@ -12,7 +12,7 @@ service GlobalStateService {
 
     // Get the current transaction state. Note that tx state is not part of
     // global state. It is metadata about a transaction on its journey to the
-    // mesh and from the mesh to the global state (or to null).
+    // mesh and from the mesh to the global state (or to null)
     rpc TransactionState(TransactionId) returns (TransactionState);
 
     // Account info in the current global state
@@ -35,14 +35,16 @@ service GlobalStateService {
     // Rewards awarded to a smesher id
     rpc SmesherRewardStream(SmesherId) returns (stream Reward);
 
-    // Returns a stream of Account changes. e.g. balance and counter (nonce) changes
+    // Returns a stream of Account changes. e.g. balance and counter
+    // (nonce) changes
     rpc AccountStream(AccountId) returns (stream Account);
 
-    // App Events - emitted by app methods impl code trigged by an app transaction
+    // App Events - emitted by app methods impl code trigged by an
+    // app transaction
     rpc AppEventStream(google.protobuf.Empty) returns (stream AppEvent);
 
     // Rewards are computed by the protocol outside the STF but are a special
-    // case and are passed through the STF since they touch account balances.
+    // case and are passed through the STF since they touch account balances
     rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
 
     // Transaction State - rejected pre-STF, or pending STF, or processed by

@@ -12,7 +12,7 @@ service SmesherService {
     // Returns true iff node is currently smeshing
     rpc IsSmeshing(google.protobuf.Empty) returns (BoolResult);
 
-    // Start smeshing. Will return false if commitment is incomplete or missing.
+    // Start smeshing. Will return false if commitment is incomplete or missing
     rpc StartSmeshing(google.protobuf.Empty) returns (BoolResult);
 
     // Stop smeshing and optionally attempt to delete post init file(s)

@@ -109,6 +109,7 @@ message Transaction {
         SPAWN_APP = 3;       // deploy app from template using svm terminology
         DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
     }
+    
     TransactionType type = 1;
     TransactionId id = 2; // hash
     AccountId sender = 3;
