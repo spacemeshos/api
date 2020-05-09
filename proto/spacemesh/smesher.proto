@@ -25,6 +25,11 @@ service SmesherService {
     rpc Coinbase(google.protobuf.Empty) returns (AccountId);
     rpc SetCoinbase(AccountId) returns (BoolResult);
 
+    // Get the current min gas for including txs in blocks by this smesher
+    rpc MinGas(google.protobuf.Empty) returns (SimpleInt);
+
+    // Set a min gas units for including txs in blocks by this smesher
+    rpc SetMinGas(SimpleInt) returns (BoolResult);
 
     /////// Commitment file (post init phase) management
 
