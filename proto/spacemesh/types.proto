@@ -24,9 +24,8 @@ message AccountId {
 
 message Account {
     AccountId address = 1;  // account public address
-    bytes public_key = 2;   // nice to include the account full public key
-    uint64 counter = 3;     // aka nonce
-    Amount balance = 4;     // known account balance
+    uint64 counter = 2;     // aka nonce
+    Amount balance = 3;     // known account balance
 }
 
 message AccountIdWithOffset {
@@ -46,16 +45,14 @@ message GlobalState {
     uint64 layer_number = 2;
 }
 
-message TransactionStateData {
-    enum TransactionState {
-        UNDEFINED = 0;
-        UNKNOWN = 1;                // Default state
-        REJECTED = 2;               // Rejected pre STF processing. e.g. bad data
-        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
-        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
-        PENDING = 5;                // Got to a block on the mesh. Pending processing by STF
-        PROCESSED = 6;              // Process by th STF. Processing results are in the tx receipt
-    }
+enum TransactionStateType {
+    UNDEFINED = 0;
+    UNKNOWN = 1;                // Default state
+    REJECTED = 2;               // Rejected pre STF processing. e.g. bad data
+    INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
+    CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
+    PENDING = 5;                // Got to a block on the mesh. Pending processing by STF
+    PROCESSED = 6;              // Process by th STF. Processing results are in the tx receipt
 }
 
 enum TransactionType {
@@ -103,14 +100,24 @@ message SmesherId {
     bytes id = 1;
 }
 
-message TransactionFee { // = gas * gas_price
+message TransactionFee {
     uint64 gas_consumed = 1;
     uint64 gas_price = 2;
+    // tx_fee = gas_consumed * gas_price
+}
+
+// TransactionState is the "journey" of a tx from newly-submitted, to being
+// rejected from or accepted into the mempool, to being included in the mesh (in a
+// block), to (finally) being processed by the STF. It tells us nothing about the
+// result of the processing.
+message TransactionStateData {
+    TransactionStateType state = 1;
 }
 
 // Simple coin transaction
-// This filed are the immutable signed tx data which is part of the signed transaction body and do not include
-// any transaction processing or state which is mutable.
+// These fields are the immutable signed tx data which is part of the signed
+// transaction body and do not include mutable data such as tx state or
+// receipt.
 message Transaction {
     TransactionType type = 1;
     TransactionId id = 2; // hash
@@ -145,15 +152,14 @@ message Block {
     repeated Transaction transactions = 2;
 }
 
-enum LayerStatus {
-    UNDEFINED = 0;
-    UNKNOWN = 1;
-    APPROVED = 2;
-    CONFIRMED = 3;
-}
-
 message Layer {
     uint64 number = 1;              // layer number - not hash - layer content may change
+    enum LayerStatus {
+        UNDEFINED = 0;
+        UNKNOWN = 1;
+        APPROVED = 2;
+        CONFIRMED = 3;
+    }
     LayerStatus status = 2;
     bytes hash = 3;                 // computer layer hash - do we need this?
     repeated Block blocks = 4;      // layer's blocks
@@ -189,7 +195,6 @@ message AppEvent {                     // an event emitted from an app instance
 
 /*
    Represents a critical node error.
-   TODO: add an enum with clearly-defined error types.
  */
 
 message NodeError {

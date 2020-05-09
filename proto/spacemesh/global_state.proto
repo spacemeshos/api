@@ -3,7 +3,6 @@ package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
-
 // Readonly global state data - current and historical.
 // Global state data is data which is not stored in the mesh.
 // Global state is modified only by the state transition function.
@@ -32,22 +31,28 @@ service GlobalStateService {
     //// Streams
 
     // Rewards awarded to a specific account
-    rpc AccountRewardsStream(AccountId) returns (stream Reward);
+    rpc AccountRewardStream(AccountId) returns (stream Reward);
 
     // Rewards awarded to a smesher id
-    rpc SmesherRewardsStream(SmesherId) returns (stream Reward);
+    rpc SmesherRewardStream(SmesherId) returns (stream Reward);
 
     // Returns a stream of Account changes, e.g., balance and counter (nonce) changes
     rpc AccountStream(AccountId) returns (stream Account);
 
-    // Receipts - emitted after tx was processed by STF (or rejected before STF)
-    rpc TransactionReceiptsStream(google.protobuf.Empty) returns (stream TransactionReceipt);
-
     // App Events - emitted by app methods impl code trigged by an app transaction
-    rpc AppEventsStream(google.protobuf.Empty) returns (stream AppEvent);
+    rpc AppEventStream(google.protobuf.Empty) returns (stream AppEvent);
 
-    // Rewards
+    // Rewards are computed by the protocol outside the STF but are a special
+    // case and are passed through the STF since they touch account balances.
     rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
+
+    // Transaction State - rejected pre-STF, or pending STF, or processed by
+    // STF
+    rpc TransactionStateStream(google.protobuf.Empty) returns (stream TransactionStateData);
+
+    // Receipts - emitted after tx was processed by STF (or rejected before
+    // STF)
+    rpc TransactionReceiptStream(google.protobuf.Empty) returns (stream TransactionReceipt);
 
     // New global state computed for a layer by the STF
     rpc GlobalStateStream(google.protobuf.Empty) returns (stream GlobalState);

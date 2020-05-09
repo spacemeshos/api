@@ -11,16 +11,16 @@ service NodeService {
     // Returns the version of the node software as a semver string
     rpc Version(google.protobuf.Empty) returns (SimpleString);
 
-    // Returns the version of the github tag or branch used to build the node
+    // Returns the github tag or branch used to build the node
     rpc Build(google.protobuf.Empty) returns (SimpleString);
 
     //  Current node status (net and sync)
     rpc Status(google.protobuf.Empty) returns (NodeStatus);
 
-    // Request the node to start syncing the mesh
+    // Request that the node start syncing the mesh
     rpc SyncStart(google.protobuf.Empty) returns (google.protobuf.Empty);
 
-    // Initiate graceful shutdown
+    // Request that the node initiate graceful shutdown
     rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty);
 
     ////////// Node streaming data
