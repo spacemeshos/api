@@ -158,11 +158,9 @@ message NodeError {
 message NodeSyncStatus {
   enum NodeSyncStatusType {
       UNDEFINED = 0;
-      NEW_LAYER_VERIFIED = 1;
-      NEW_TOP_LAYER = 2;
-      SYNCED = 3;
-      SYNCING = 4;
-      NOT_SYNCED = 5;
+      SYNCED = 1;
+      SYNCING = 2;
+      NOT_SYNCED = 3;
   }
   NodeSyncStatusType status = 1;
 }
