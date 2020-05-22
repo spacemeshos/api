@@ -160,7 +160,7 @@ message NodeSyncStatus {
       UNDEFINED = 0;
       SYNCED = 1;
       SYNCING = 2;
-      NOT_SYNCED = 3;
+      NOT_SYNCING = 3;
   }
   NodeSyncStatusType status = 1;
 }
