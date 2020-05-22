@@ -21,7 +21,7 @@ service MeshService {
     rpc EpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
     // Number of transactions per second (a network parameter)
-    rpc TransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
+    rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
 
     ////////// Streams
 
