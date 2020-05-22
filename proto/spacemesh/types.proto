@@ -103,11 +103,12 @@ message TransactionState {
 // do not include mutable data such as tx state or result.
 message Transaction {
     enum TransactionType {
-        SIMPLE = 0;          // simple coin transaction
-        ATX = 1;             // smesher activation transaction
-        APP = 2;             // smart contract method
-        SPAWN_APP = 3;       // deploy app from template using svm terminology
-        DEPLOY_TEMPLATE = 4; // deploy app template code to mesh
+        UNDEFINED = 0;
+        SIMPLE = 1;          // simple coin transaction
+        ATX = 2;             // smesher activation transaction
+        APP = 3;             // smart contract method
+        SPAWN_APP = 4;       // deploy app from template using svm terminology
+        DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
     }
     
     TransactionType type = 1;
@@ -129,11 +130,11 @@ message Transactions {
 }
 
 message Reward {
-    uint64 layer = 1;
-    Amount total = 2;
+    uint64 layer = 1; // layer award was paid in
+    Amount total = 2; // total reward paid (sum of tx fee and layer reward)
     Amount layer_reward = 3;
     uint64 layer_computed = 4; // layer number of the layer when reward was computed
-    // tx_fee = total- layer_reward
+    // tx_fee = total - layer_reward
     AccountId coinbase = 5; // account awarded this reward
     SmesherId smesher = 6;  // it will be nice to always have this in reward events
 }
@@ -174,14 +175,13 @@ message NodeStatus {
 // Indicates a change in node status
 message NodeStatusEvent {
     enum NodeStatusEvent {
-      NEW_LAYER_VERIFIED = 0;   // a new layer was verified event
-      NEW_TOP_LAYER = 1;        // new top layer started
-      SYNCED = 2;               // node synced event
-      SYNCING = 3;              // node is syncing event (but not sycned)
-      NOT_SYNCING = 4;          // sync did not start
-      SYNC_FAILED = 5;          // node sync fail event. Node will never by syncing or synced again in this session.
-      NEIGHBOR_CONNECTED = 6;    // Connected to a neighbor
-      NEIGHBOR_DISCONNECTED = 7; // Disconnected from a neighbor
+      UNDEFINED = 0;
+      SYNCED = 1;                // node is synced
+      SYNCING = 2;               // node is syncing (but not synced)
+      NOT_SYNCING = 3;           // sync did not start
+      SYNC_FAILED = 4;           // node sync fail event. Node will never be syncing or synced again in this session.
+      NEIGHBOR_CONNECTED = 5;    // Connected to a neighbor
+      NEIGHBOR_DISCONNECTED = 6; // Disconnected from a neighbor
     }
     NodeStatusEvent status = 1;
 }
@@ -195,11 +195,12 @@ message AppEvent {                     // an event emitted from an app instance
 // Represents a critical node error.
 message NodeError {
     enum NodeErrorType {
-        PANIC_UNSPECIFIED = 0;
-        PANIC_SYNC = 1;
-        PANIC_P2P = 2;
-        PANIC_HARE = 3;
-        SIGNAL_SHUT_DOWN = 4;
+        UNDEFINED = 0;
+        PANIC_UNSPECIFIED = 1;
+        PANIC_SYNC = 2;
+        PANIC_P2P = 3;
+        PANIC_HARE = 4;
+        SIGNAL_SHUT_DOWN = 5;
     }
     NodeErrorType error_type = 1;
     string message = 2;
