@@ -20,6 +20,9 @@ service MeshService {
     // Number of layers per epoch (a network parameter)
     rpc EpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
 
+    // Number of transactions per second (a network parameter)
+    rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
+
     ////////// Streams
 
     // Layer with blocks and transactions.

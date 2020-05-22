@@ -53,6 +53,7 @@ message TransactionFee {
 // block), to (finally) being processed by the STF. It tells us nothing about the
 // result of the processing.
 message TransactionState {
+    TransactionId id = 1;
     enum TransactionStateType {
         UNDEFINED = 0;
         UNKNOWN = 1;                // Default state
@@ -62,7 +63,7 @@ message TransactionState {
         PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
         PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
     }
-    TransactionStateType state = 1;
+    TransactionStateType state = 2;
 }
 
 message TransactionReceipt {
@@ -157,11 +158,9 @@ message NodeError {
 message NodeSyncStatus {
   enum NodeSyncStatusType {
       UNDEFINED = 0;
-      NEW_LAYER_VERIFIED = 1;
-      NEW_TOP_LAYER = 2;
-      SYNCED = 3;
-      SYNCING = 4;
-      NOT_SYNCED = 5;
+      SYNCED = 1;
+      SYNCING = 2;
+      NOT_SYNCING = 3;
   }
   NodeSyncStatusType status = 1;
 }
