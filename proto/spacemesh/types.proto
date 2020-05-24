@@ -75,7 +75,7 @@ message TransactionReceipt {
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
     uint64 layer_number = 5;        // The layer in which the STF processed this transaction
-    AccountId app_address = 6;      // Deployed app address or code template address !!!
+    AccountId app_address = 6;      // Deployed app address or code template address
 }
 
 message TransactionReceipts {
