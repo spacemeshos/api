@@ -151,7 +151,7 @@ message Block {
 
 message Layer {
     enum LayerStatus {
-        UNKNOWN = 0;
+        UNDEFINED = 0;
         APPROVED = 1;
         CONFIRMED = 2;
     }
