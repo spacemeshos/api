@@ -88,6 +88,7 @@ message TransactionReceipts {
 // block), to (finally) being processed by the STF. It tells us nothing about the
 // result of the processing.
 message TransactionState {
+    TransactionId id = 1;
     enum TransactionStateType {
         UNDEFINED = 0;              // Default state
         REJECTED = 1;               // Rejected pre STF processing due to, e.g., bad data
@@ -96,7 +97,7 @@ message TransactionState {
         PENDING = 4;                // Included in a block on the mesh. Pending processing by STF
         PROCESSED = 5;              // Processed by the STF. Processing results are in the tx receipt
     }
-    TransactionStateType state = 1;
+    TransactionStateType state = 2;
 }
 
 // An immutable Spacemesh transaction.
