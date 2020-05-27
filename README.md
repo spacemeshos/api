@@ -37,6 +37,24 @@ to test the build. To output the image in json format, run:
 > buf image build --exclude-source-info -o -#format=json
 ```
 
+### Breaking changes detection
+
+`buf` also supports [detection of breaking changes](https://buf.build/docs/tour-5). To do this, first create an image from the current state:
+
+```
+> buf image build -o image.bin
+```
+
+Make a breaking change, then run against this change:
+
+```
+> buf check breaking --against-input image.bin
+```
+
+`buf` will report all breaking changes.
+
+Detection of breaking changes is turned off in GitHub actions [continuous integration](.github/workflows/ci.yml) for now, until the API has stabilized, but it's still good practice to run this check when committing changes.
+
 ### Linting
 
 `buf` runs several [linters](https://buf.build/docs/lint-checkers).
