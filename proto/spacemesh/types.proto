@@ -5,8 +5,11 @@ message SimpleInt {
     uint64 value = 1;
 }
 
-message BoolResult {
+// a simple, extensible return type that encapsulates both error and success.
+// may be extended in future to add more data, e.g., specific error types.
+message TypedResult {
     bool value = 1;
+    string msg = 2;
 }
 
 message SimpleString {
