@@ -111,7 +111,6 @@ message Transaction {
         SPAWN_APP = 4;       // deploy app from template using svm terminology
         DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
     }
-    
     TransactionType type = 1;
     TransactionId id = 2; // hash
     AccountId sender = 3;
@@ -137,7 +136,7 @@ message Reward {
     uint64 layer_computed = 4; // layer number of the layer when reward was computed
     // tx_fee = total - layer_reward
     AccountId coinbase = 5; // account awarded this reward
-    SmesherId smesher = 6;  // it will be nice to always have this in reward events
+    SmesherId smesher = 6;  // ID of smesher who earned this reward
 }
 
 message Rewards {
@@ -156,7 +155,6 @@ message Layer {
         APPROVED = 1;
         CONFIRMED = 2;
     }
-
     uint64 number = 1;  // layer number - not hash - layer content may change
     LayerStatus status = 2;
     bytes hash = 3;                 // computer layer hash - do we need this?
@@ -199,9 +197,9 @@ message NodeError {
         UNDEFINED = 0;
         PANIC_UNSPECIFIED = 1;
         PANIC_SYNC = 2;
-        PANIC_P2P = 3;
-        PANIC_HARE = 4;
-        SIGNAL_SHUT_DOWN = 5;
+        SIGNAL_SHUT_DOWN = 3;
+        PANIC_P2P = 4;
+        PANIC_HARE = 5;
     }
     NodeErrorType error_type = 1;
     string message = 2;
