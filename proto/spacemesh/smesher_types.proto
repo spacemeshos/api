@@ -1,0 +1,55 @@
+syntax = "proto3";
+package spacemesh;
+
+// Data on commitment file
+message CommitmentFile {
+    string path = 1;                // Path to post file(s) on a volume
+    uint64 commitment_size = 2;     // Size of commitment data (in bytes)
+}
+
+// User-provided post data
+message CommitmentUserData {
+    CommitmentFile file_data = 1;   // Data on commitment file
+    uint32 processor_id = 2;        // Processor to be used for smeshing, e.g., cpu, gpu0, gpu1, etc.
+    bool   append = 3;              // Append to existing file if it exists. Otherwise overwrite.
+    bool   throttle = 4;            // Throttle down init phase computations while user is interactive on system
+}
+
+// A commitment init processor, e.g., a cpu or a gpu
+message CommitmentProcessor {
+    uint32 id = 1;                  // Numerical identifier - unique per system
+    string processor_name = 2;      // Proc info, e.g., Nvidia `Geforce RTX`, `AMD Radeon`, `Intel Genuine i7 CPU`
+    string api = 3;                 // Processing api to be used with the processor, e.g., `Vulkan`, `Cuda` or `x86-64`
+}
+
+// A list of CommitmentProcessor
+message CommitmentProcessors {
+    repeated CommitmentProcessor processors = 1;
+}
+
+// Param passed to methods to indicate a request to delete commitment file
+message DeleteCommitment {
+    bool delete_commitment = 1;
+}
+
+// Proof of space commitment data
+message CommitmentData {
+    enum FileStatus {
+        UNDEFINED = 0;
+        NOT_FOUND = 1;  // Commitment file was not initialized (in this or in previous node sessions)
+        COMPLETE = 2;   // Complete commitment file is available and verified
+        PARTIAL = 3;    // Init commitment file is partially written and init can be continued (and may be in progress)
+    }
+    FileStatus file_status = 1;
+    bool init_in_progress = 2;    // True if init process is currently in progress
+    CommitmentFile file_data = 3; // Data on commitment file
+    uint64 bytes_written = 4;     // Bytes written to the commitment file (actual file size)
+    string error_message = 5;     // Last init process error message
+    enum ErrorType {
+        UNDEFINED = 0;
+        FILE_NOT_FOUND = 1;       // Post commitment file not found in expected path
+        READ_ERROR = 2;           // Failure to read commitment file
+        WRITE_ERROR = 3;          // Failure to write to commitment file
+    }
+    ErrorType error_type = 6;
+}

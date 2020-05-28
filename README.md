@@ -10,7 +10,7 @@ The Spacemesh API consists of several logical services, each of which contains a
 - [GlobalStateService](proto/spacemesh/global_state.proto) is a readonly interfact that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts. In the future this service will be expanded to include additional endpoints for things such as global state hash and events emitted by smart contracts.
 
 In addition to these services, there is also a set of [global types](proto/spacemesh/types.proto) which are shared among all of the services.
- 
+
 ## Intended Usage Pattern
 
 ### Mesh data processing flow
@@ -19,6 +19,7 @@ In addition to these services, there is also a set of [global types](proto/space
 1. Client calls `node.SyncStart()` to request that the node start syncing
 1. Client processes streaming data it receives from the node
 1. Client monitors node using `node.SyncStatusStream()` and `node.ErrorStream()` and handle node critical errors. Return to step 1 as necessary.
+1. Client gracefully shuts down the node by calling `node.Shutdown()` when it is done processing data.
 
 ## Dev
 
@@ -36,6 +37,24 @@ to test the build. To output the image in json format, run:
 > buf image build --exclude-source-info -o -#format=json
 ```
 
+### Breaking changes detection
+
+`buf` also supports [detection of breaking changes](https://buf.build/docs/tour-5). To do this, first create an image from the current state:
+
+```
+> buf image build -o image.bin
+```
+
+Make a breaking change, then run against this change:
+
+```
+> buf check breaking --against-input image.bin
+```
+
+`buf` will report all breaking changes.
+
+Detection of breaking changes is turned off in GitHub actions [continuous integration](.github/workflows/ci.yml) for now, until the API has stabilized, but it's still good practice to run this check when committing changes.
+
 ### Linting
 
 `buf` runs several [linters](https://buf.build/docs/lint-checkers).
@@ -45,4 +64,3 @@ to test the build. To output the image in json format, run:
 ```
 
 This command should have exit code 0 and no output. See the [style guide](https://buf.build/docs/style-guide).
-

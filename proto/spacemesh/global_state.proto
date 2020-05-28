@@ -3,17 +3,48 @@ package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
 
-// Readonly global state data.
+// Readonly global state data - current and historical.
 // Global state data is data which is not explicitly stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
-    //// Streaming global state data
+    // Latest computed global state - layer and its root hash
+    rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
-    // Account changes (e.g., balance and counter/nonce changes).
-    rpc AccountStream(google.protobuf.Empty) returns (stream Account);
+    // Get the current transaction state. Note that tx state is not part of
+    // global state. It is metadata about a transaction on its journey to the
+    // mesh and from the mesh to the global state (or to null)
+    rpc TransactionState(TransactionId) returns (TransactionState);
+
+    // Account info in the current global state
+    rpc Account(AccountId) returns (Account);
+
+    // Rewards awarded to an account
+    rpc AccountRewards(AccountIdWithOffset) returns (Rewards);
+
+    // Transaction recipts for transactions to/from an account
+    rpc AccountTransactionReceipts(AccountIdWithOffset) returns (TransactionReceipts);
+
+    // Rewards awarded to a smesher
+    rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
+
+    ////////// Streams
+
+    // Rewards awarded to a specific account
+    rpc AccountRewardStream(AccountId) returns (stream Reward);
+
+    // Rewards awarded to a smesher id
+    rpc SmesherRewardStream(SmesherId) returns (stream Reward);
+
+    // Returns a stream of Account changes. e.g. balance and counter
+    // (nonce) changes
+    rpc AccountStream(AccountId) returns (stream Account);
+
+    // App Events - emitted by app methods impl code trigged by an
+    // app transaction
+    rpc AppEventStream(google.protobuf.Empty) returns (stream AppEvent);
 
     // Rewards are computed by the protocol outside the STF but are a special
-    // case and are passed through the STF since they touch account balances.
+    // case and are passed through the STF since they touch account balances
     rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
 
     // Transaction State - rejected pre-STF, or pending STF, or processed by
@@ -23,4 +54,7 @@ service GlobalStateService {
     // Receipts - emitted after tx was processed by STF (or rejected before
     // STF)
     rpc TransactionReceiptStream(google.protobuf.Empty) returns (stream TransactionReceipt);
+
+    // New global state computed for a layer by the STF
+    rpc GlobalStateStream(google.protobuf.Empty) returns (stream GlobalState);
 }

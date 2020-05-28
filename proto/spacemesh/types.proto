@@ -5,6 +5,13 @@ message SimpleInt {
     uint64 value = 1;
 }
 
+// a simple, extensible return type that encapsulates both error and success.
+// may be extended in future to add more data, e.g., specific error types.
+message TypedResult {
+    bool value = 1;
+    string msg = 2;
+}
+
 message SimpleString {
     string value = 1;
 }
@@ -24,14 +31,21 @@ message Account {
     Amount balance = 3;     // known account balance
 }
 
-message Reward {
-    uint64 layer = 1;
-    Amount total = 2;
-    Amount layer_reward = 3;
-    uint64 layer_computed = 4; // layer number of the layer when reward was computed
-    // tx_fee = total - layer_reward
-    AccountId coinbase = 5; // account awarded this reward
-    SmesherId smesher = 6;  // it will be nice to always have this in reward events
+message AccountIdWithOffset {
+    AccountId account_id = 1;
+    uint64 offset = 2;
+    uint64 items = 3;       // total number of client requested items
+};
+
+message SmesherIdWithOffset {
+    SmesherId smesher_id = 1;
+    uint64 offset = 2;
+    uint64 items = 3;        // total number of client requested items
+};
+
+message GlobalState {
+    bytes root_hash = 1;
+    uint64 layer_number = 2;
 }
 
 message TransactionId {
@@ -48,24 +62,6 @@ message TransactionFee {
     // tx_fee = gas_consumed * gas_price
 }
 
-// TransactionState is the "journey" of a tx from newly-submitted, to being
-// rejected from or accepted into the mempool, to being included in the mesh (in a
-// block), to (finally) being processed by the STF. It tells us nothing about the
-// result of the processing.
-message TransactionState {
-    TransactionId id = 1;
-    enum TransactionStateType {
-        UNDEFINED = 0;
-        UNKNOWN = 1;                // Default state
-        REJECTED = 2;               // Rejected pre STF processing due to, e.g., bad data
-        INSUFFICIENT_FUNDS = 3;     // Rejected pre STF processing by funds check
-        CONFLICTING = 4;            // Rejected pre STF due to conflicting counter
-        PENDING = 5;                // Included in a block on the mesh. Pending processing by STF.
-        PROCESSED = 6;              // Processed by the STF. Processing results are in the tx receipt.
-    }
-    TransactionStateType state = 2;
-}
-
 message TransactionReceipt {
     TransactionId id = 1;           // the source transaction
     // The results of STF transaction processing
@@ -78,23 +74,44 @@ message TransactionReceipt {
         INSUFFICIENT_GAS = 5;       // out of gas
         INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
     }
-    TransactionResult result = 2;
+    TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
     Amount fee = 4;                 // transaction fee charged for the transaction
     uint64 layer_number = 5;        // The layer in which the STF processed this transaction
+    AccountId app_address = 6;      // Deployed app address or code template address
 }
 
-// Simple coin transaction
-// These fields are the immutable signed tx data which is part of the signed
-// transaction body and do not include mutable data such as tx state or
-// receipt.
+message TransactionReceipts {
+    uint64 total_items = 1; // total server available items. Used to query with new offset
+    repeated TransactionReceipt receipts = 2;
+}
+
+// TransactionState is the "journey" of a tx from newly-submitted, to being
+// rejected from or accepted into the mempool, to being included in the mesh (in a
+// block), to (finally) being processed by the STF. It tells us nothing about the
+// result of the processing.
+message TransactionState {
+    TransactionId id = 1;
+    enum TransactionStateType {
+        UNDEFINED = 0;              // Default state
+        REJECTED = 1;               // Rejected pre STF processing due to, e.g., bad data
+        INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
+        CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
+        PENDING = 4;                // Included in a block on the mesh. Pending processing by STF
+        PROCESSED = 5;              // Processed by the STF. Processing results are in the tx receipt
+    }
+    TransactionStateType state = 2;
+}
+
+// An immutable Spacemesh transaction.
+// do not include mutable data such as tx state or result.
 message Transaction {
     enum TransactionType {
         UNDEFINED = 0;
         SIMPLE = 1;          // simple coin transaction
         ATX = 2;             // smesher activation transaction
         APP = 3;             // smart contract method
-        DEPLOY = 4;          // deploy app from template
+        SPAWN_APP = 4;       // deploy app from template using svm terminology
         DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
     }
     TransactionType type = 1;
@@ -110,57 +127,84 @@ message Transaction {
     TransactionId prev_atx = 11;  // previous ATX. used in atx.
 }
 
+message Transactions {
+    uint64 total_items = 1; // total server available items. Used to query with new offset
+    repeated Transaction transactions = 2;
+}
+
+message Reward {
+    uint64 layer = 1; // layer award was paid in
+    Amount total = 2; // total reward paid (sum of tx fee and layer reward)
+    Amount layer_reward = 3;
+    uint64 layer_computed = 4; // layer number of the layer when reward was computed
+    // tx_fee = total - layer_reward
+    AccountId coinbase = 5; // account awarded this reward
+    SmesherId smesher = 6;  // ID of smesher who earned this reward
+}
+
+message Rewards {
+    uint64 total_items = 1; // total server available items. Used to query with new offset
+    repeated Reward rewards = 2;
+}
+
 message Block {
-    bytes id = 1;                           // block hash
+    bytes id = 1; // block hash
     repeated Transaction transactions = 2;
 }
 
 message Layer {
-    uint64 number = 1;              // layer number - not hash - layer content may change
     enum LayerStatus {
         UNDEFINED = 0;
-        UNKNOWN = 1;
-        APPROVED = 2;
-        CONFIRMED = 3;
+        APPROVED = 1;
+        CONFIRMED = 2;
     }
+    uint64 number = 1;  // layer number - not hash - layer content may change
     LayerStatus status = 2;
     bytes hash = 3;                 // computer layer hash - do we need this?
     repeated Block blocks = 4;      // layer's blocks
     bytes root_state_hash = 5;      // when available - the root state hash of global state in this layer
 }
 
+// current node status
 message NodeStatus {
-    uint64 known_peers = 1;
-    uint64 min_peers = 2;
-    uint64 max_peers = 3;
-    bool   is_synced = 4;
-    uint64 synced_layer = 5;
-    uint64 current_layer = 6;
-    uint64 verified_layer = 7;
+    uint64 connected_peers = 1;       // number of connected neighbors
+    bool   is_synced = 2;             // Is meshed synced
+    uint64 synced_layer = 3;          // the last layer node has synced
+    uint64 top_layer = 4;             // top layer is the tip
+    uint64 verified_layer = 5;        // the last layer node has verified
 }
 
-/*
-   Represents a critical node error.
- */
+// Indicates a change in node status
+message NodeStatusEvent {
+    enum NodeStatusEvent {
+      UNDEFINED = 0;
+      SYNCED = 1;                // node is synced
+      SYNCING = 2;               // node is syncing (but not synced)
+      NOT_SYNCING = 3;           // sync did not start
+      SYNC_FAILED = 4;           // node sync fail event. Node will never be syncing or synced again in this session.
+      NEIGHBOR_CONNECTED = 5;    // Connected to a neighbor
+      NEIGHBOR_DISCONNECTED = 6; // Disconnected from a neighbor
+    }
+    NodeStatusEvent status = 1;
+}
 
+message AppEvent {                     // an event emitted from an app instance
+    TransactionId transaction_id = 1;  // the transaction that called the code
+    string message = 2;                // the event's string emitted from code
+}
+
+
+// Represents a critical node error.
 message NodeError {
     enum NodeErrorType {
         UNDEFINED = 0;
         PANIC_UNSPECIFIED = 1;
         PANIC_SYNC = 2;
         SIGNAL_SHUT_DOWN = 3;
+        PANIC_P2P = 4;
+        PANIC_HARE = 5;
     }
-    NodeErrorType type = 1;
+    NodeErrorType error_type = 1;
     string message = 2;
     string stack_trace = 3;
-}
-
-message NodeSyncStatus {
-  enum NodeSyncStatusType {
-      UNDEFINED = 0;
-      SYNCED = 1;
-      SYNCING = 2;
-      NOT_SYNCING = 3;
-  }
-  NodeSyncStatusType status = 1;
 }
