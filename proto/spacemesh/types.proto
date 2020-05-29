@@ -123,9 +123,9 @@ message Transaction {
     Amount amount = 7; // amount of coin transfered in this tx by sender
     uint64 counter = 8; // tx counter aka nonce
     bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
-    SmesherId smesher_id = 10; // used in atx only
-    TransactionId prev_atx = 11; // previous ATX. used in atx.
-    uint64 atx_commitmment_size = 12; // ATX commitment size
+    SmesherId smesher_id = 10; // ATX smesher id. Used only in atx
+    TransactionId prev_atx = 11; // previous ATX. Used only in atx
+    uint64 atx_commitmment_size = 12; // ATX commitment size. Used only in atx
 }
 
 message Transactions {
