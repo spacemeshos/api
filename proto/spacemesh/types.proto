@@ -125,6 +125,7 @@ message Transaction {
     bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
     SmesherId smesher_id = 10;    // used in atx only
     TransactionId prev_atx = 11;  // previous ATX. used in atx.
+    uint64 atx_commitmment_size = 12; // ATX commitment size
 }
 
 message Transactions {
