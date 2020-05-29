@@ -25,15 +25,15 @@ service SmesherService {
     // Get the current coinbase
     rpc Coinbase(google.protobuf.Empty) returns (AccountId);
 
-    // Set the coinbase.
-    // Returns true if request succeeds, false if it fails.
+    // Set the coinbase
+    // Returns true if request succeeds, false if it fails
     rpc SetCoinbase(AccountId) returns (TypedResult);
 
     // Get the current min gas for including txs in blocks by this smesher
     rpc MinGas(google.protobuf.Empty) returns (SimpleInt);
 
     // Set a min gas units for including txs in blocks by this smesher
-    // Returns true if request succeeds, false if it fails.
+    // Returns true if request succeeds, false if it fails
     rpc SetMinGas(SimpleInt) returns (TypedResult);
 
     /////// PoSpace commitments management
