@@ -103,28 +103,54 @@ message TransactionState {
     TransactionStateType state = 2;
 }
 
+// Data specific to an activation transaction.
+message ActivationTransactionData {
+    SmesherId smesher_id = 1;    // used in atx only
+    TransactionId prev_atx = 2;  // previous ATX. used in atx.
+    uint64 commitetmnet_size = 3; // commitment size in bytes
+}
+
+// Data specific to a simple coin transaction.
+message CoinTransactionData {
+    AccountId receiver = 1;
+}
+
+message SmartContractTransactionData {
+    enum TransactionType {
+        APP = 0;             // smart contract method
+        SPAWN_APP = 1;       // deploy app from template using svm terminology
+        DEPLOY_TEMPLATE = 2; // deploy app template code to mesh
+    }
+    TransactionType type = 1;
+    bytes data = 2;          // packed binary arguments
+}
+
+// A simple signature data
+message Signature {
+    enum Scheme {
+        ED25519 = 0;            // Standard Ed25519 scheme
+        ED25519_PLUS_PLUS = 1;    // Spacemesh modified ED25519 scheme. a.k.a ED25519++
+    }
+    Scheme scheme = 1;    // The signature's scheme
+    bytes signature = 2;  // The signature itself
+    bytes public_key = 3; // Included in schemes which require signer to provide a public key
+}
+
 // An immutable Spacemesh transaction.
 // do not include mutable data such as tx state or result.
 message Transaction {
-    enum TransactionType {
-        UNDEFINED = 0;
-        SIMPLE = 1;          // simple coin transaction
-        ATX = 2;             // smesher activation transaction
-        APP = 3;             // smart contract method
-        SPAWN_APP = 4;       // deploy app from template using svm terminology
-        DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
+    TransactionId id = 1;
+    oneof data {
+        ActivationTransactionData activation_data = 2;
+        CoinTransactionData coin_transfer_data = 3;
+        SmartContractTransactionData smart_contract_data = 4;
     }
-    TransactionType type = 1;
-    TransactionId id = 2; // hash
-    AccountId sender = 3;
-    TransactionFee fee = 4;
-    uint64 timestamp = 5;  // shouldn't this be part of the event envelope?
-    AccountId receiver = 6; // depending on tx type
-    Amount amount = 7; // amount of coin transfered in this tx by sender
-    uint64 counter = 8;    // tx counter aka nonce
-    bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
-    SmesherId smesher_id = 10;    // used in atx only
-    TransactionId prev_atx = 11;  // previous ATX. used in atx.
+    AccountId sender = 5;
+    TransactionFee fee = 6;
+    uint64 timestamp = 7;  // shouldn't this be part of the event envelope?
+    Amount amount = 8; // amount of coin transfered in this tx by sender
+    uint64 counter = 9;    // tx counter aka nonce
+    Signature signature = 10; // sender signature on transaction
 }
 
 message Transactions {
