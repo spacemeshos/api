@@ -107,7 +107,7 @@ message TransactionState {
 message ActivationTransactionData {
     SmesherId smesher_id = 1;    // used in atx only
     TransactionId prev_atx = 2;  // previous ATX. used in atx.
-    uint64 commitetmnet_size = 3; // commitment size in bytes
+    uint64 commitment_size = 3; // commitment size in bytes
 }
 
 // Data specific to a simple coin transaction.
@@ -129,7 +129,7 @@ message SmartContractTransactionData {
 message Signature {
     enum Scheme {
         ED25519 = 0;            // Standard Ed25519 scheme
-        ED25519_PLUS_PLUS = 1;    // Spacemesh modified ED25519 scheme. a.k.a ED25519++
+        ED25519_PLUS_PLUS = 1;  // Spacemesh-modified ED25519 scheme, a.k.a. ED25519++
     }
     Scheme scheme = 1;    // The signature's scheme
     bytes signature = 2;  // The signature itself
