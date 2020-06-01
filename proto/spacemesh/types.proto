@@ -105,9 +105,9 @@ message TransactionState {
 
 // Data specific to an activation transaction.
 message ActivationTransactionData {
-    SmesherId smesher_id = 1;    // used in atx only
-    TransactionId prev_atx = 2;  // previous ATX. used in atx.
-    uint64 commitment_size = 3; // commitment size in bytes
+    SmesherId smesher_id = 1;    // ID of smesher who created the ATX
+    TransactionId prev_atx = 2;  // previous ATX pointed to
+    uint64 commitment_size = 3;  // commitment size in bytes
 }
 
 // Data specific to a simple coin transaction.
@@ -117,12 +117,13 @@ message CoinTransactionData {
 
 message SmartContractTransactionData {
     enum TransactionType {
-        APP = 0;             // smart contract method
-        SPAWN_APP = 1;       // deploy app from template using svm terminology
-        DEPLOY_TEMPLATE = 2; // deploy app template code to mesh
+        APP = 0;              // smart contract method
+        SPAWN_APP = 1;        // deploy app from template using svm terminology
+        DEPLOY_TEMPLATE = 2;  // deploy app template code to mesh
     }
     TransactionType type = 1;
-    bytes data = 2;          // packed binary arguments
+    bytes data = 2;           // packed binary arguments, including ABI selector
+    AccountId address = 3;    // address of smart contract or template
 }
 
 // A simple signature data
@@ -145,11 +146,11 @@ message Transaction {
         CoinTransactionData coin_transfer_data = 3;
         SmartContractTransactionData smart_contract_data = 4;
     }
-    AccountId sender = 5;
-    TransactionFee fee = 6;
-    uint64 timestamp = 7;  // shouldn't this be part of the event envelope?
-    Amount amount = 8; // amount of coin transfered in this tx by sender
-    uint64 counter = 9;    // tx counter aka nonce
+    AccountId sender = 5;     // tx originator, should match signer inside Signature
+    TransactionFee fee = 6;   // fee paid, in smidge
+    uint64 timestamp = 7;     // shouldn't this be part of the event envelope?
+    Amount amount = 8;        // amount of coin transfered in this tx by sender
+    uint64 counter = 9;       // tx counter aka nonce
     Signature signature = 10; // sender signature on transaction
 }
 
