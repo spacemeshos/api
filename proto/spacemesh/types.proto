@@ -115,13 +115,13 @@ message Signature {
     bytes public_key = 3; // Included in schemes which require signer to provide a public key
 }
 
-// An activation transaction.
+// An Activation "transaction" (ATX)
 message Activation {
-    ActivationId id = 1;
-    uint64 layer = 2; // The layer that this activation is part of
-    SmesherId smesher_id = 3; // ID of smesher who created the ATX
-    AccountId coinbase = 4; // Coinbase account id
-    ActivationId prev_atx = 5; // previous ATX pointed to
+    ActivationId id = 1;        // Its ID
+    uint64 layer = 2;           // The layer that this Activation is part of
+    SmesherId smesher_id = 3;   // ID of smesher who created it
+    AccountId coinbase = 4;     // Coinbase account id
+    ActivationId prev_atx = 5;  // previous Activation pointed to
     uint64 commitment_size = 6; // commitment size in bytes
 }
 
