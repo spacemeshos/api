@@ -18,16 +18,10 @@ service GlobalStateService {
     // Account info in the current global state
     rpc Account(AccountId) returns (Account);
 
-    // Rewards awarded to an account
-    rpc AccountRewards(AccountIdWithOffset) returns (Rewards);
+    ////////// Streams
 
     // Transaction recipts for transactions to/from an account
-    rpc AccountTransactionReceipts(AccountIdWithOffset) returns (TransactionReceipts);
-
-    // Rewards awarded to a smesher
-    rpc SmesherRewards(SmesherIdWithOffset) returns (Rewards);
-
-    ////////// Streams
+    rpc AccountTransactionReceiptStream(AccountId) returns (stream TransactionReceipt);
 
     // Rewards awarded to a specific account
     rpc AccountRewardStream(AccountId) returns (stream Reward);

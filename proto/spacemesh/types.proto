@@ -5,7 +5,7 @@ message SimpleInt {
     uint64 value = 1;
 }
 
-// a simple, extensible return type that encapsulates both error and success.
+// A simple, extensible return type that encapsulates both error and success.
 // may be extended in future to add more data, e.g., specific error types.
 message TypedResult {
     bool value = 1;
@@ -16,7 +16,7 @@ message SimpleString {
     string value = 1;
 }
 
-// a non-negative coin amount
+// A non-negative coin amount, in smidge
 message Amount {
     uint64 value = 1;
 }
@@ -27,21 +27,9 @@ message AccountId {
 
 message Account {
     AccountId address = 1;  // account public address
-    uint64 counter = 2;     // aka nonce
-    Amount balance = 3;     // known account balance
+    uint64 counter = 2; // aka nonce
+    Amount balance = 3; // known account balance
 }
-
-message AccountIdWithOffset {
-    AccountId account_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;       // total number of client requested items
-};
-
-message SmesherIdWithOffset {
-    SmesherId smesher_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;        // total number of client requested items
-};
 
 message GlobalState {
     bytes root_hash = 1;
@@ -52,38 +40,34 @@ message TransactionId {
     bytes id = 1;
 }
 
+message ActivationId {
+    bytes id = 1;
+}
+
 message SmesherId {
     bytes id = 1;
 }
 
-message TransactionFee {
-    uint64 gas_consumed = 1;
+message GasOffered {
+    uint64 gas_provided = 1;
     uint64 gas_price = 2;
-    // tx_fee = gas_consumed * gas_price
 }
 
 message TransactionReceipt {
-    TransactionId id = 1;           // the source transaction
-    // The results of STF transaction processing
-    enum TransactionResult {
+    TransactionId id = 1; // the source transaction
+    enum TransactionResult { // the results of STF transaction processing
         UNDEFINED = 0;
-        UNKNOWN = 1;                // Not yet known
-        EXECUTED = 2;               // executed w/o error by the STF
-        BAD_COUNTER = 3;            // unexpected transaction counter
-        RUNTIME_EXCEPTION = 4;      // app code exception
-        INSUFFICIENT_GAS = 5;       // out of gas
-        INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
+        EXECUTED = 1; // executed w/o error by the STF
+        BAD_COUNTER = 2; // unexpected transaction counter
+        RUNTIME_EXCEPTION = 3; // app code exception
+        INSUFFICIENT_GAS = 4; // out of gas
+        INSUFFICIENT_FUNDS = 5; // failed due to sender's insufficient funds
     }
-    TransactionResult result = 2;   // tx processing result
-    uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
-    Amount fee = 4;                 // transaction fee charged for the transaction
-    uint64 layer_number = 5;        // The layer in which the STF processed this transaction
-    AccountId app_address = 6;      // Deployed app address or code template address
-}
-
-message TransactionReceipts {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated TransactionReceipt receipts = 2;
+    TransactionResult result = 2; // tx processing result
+    uint64 gas_used = 3; // gas units used by the transaction
+    Amount fee = 4; // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
+    uint64 layer_number = 5; // the layer in which the STF processed this transaction
+    AccountId app_address = 6; // deployed app address or code template address
 }
 
 // TransactionState is the "journey" of a tx from newly-submitted, to being
@@ -93,64 +77,76 @@ message TransactionReceipts {
 message TransactionState {
     TransactionId id = 1;
     enum TransactionStateType {
-        UNDEFINED = 0;              // Default state
-        REJECTED = 1;               // Rejected pre STF processing due to, e.g., bad data
-        INSUFFICIENT_FUNDS = 2;     // Rejected pre STF processing by funds check
-        CONFLICTING = 3;            // Rejected pre STF due to conflicting counter
-        PENDING = 4;                // Included in a block on the mesh. Pending processing by STF
-        PROCESSED = 5;              // Processed by the STF. Processing results are in the tx receipt
+        UNDEFINED = 0; // default state
+        REJECTED = 1; // rejected pre STF processing due to, e.g., bad data
+        INSUFFICIENT_FUNDS = 2; // rejected pre STF processing by funds check
+        CONFLICTING = 3; // rejected pre STF due to conflicting counter
+        PENDING = 4; // included in a block on the mesh. Pending processing by STF
+        PROCESSED = 5; // processed by the STF. Processing results are in the tx receipt
     }
     TransactionStateType state = 2;
 }
 
-// An activation transaction, a subtype of transaction
-message Atx {
-    SmesherId smesher_id = 1; // Smesher ID
-    TransactionId prev_atx = 2; // previous ATX
-    uint64 atx_commitment_size = 3; // commitment size
+// Data specific to a simple coin transaction.
+message CoinTransferTransaction {
+    AccountId receiver = 1;
+}
+
+// Data specific to a smart contract transaction.
+message SmartContractTransaction {
+    enum TransactionType {
+        APP = 0; // smart contract method
+        SPAWN_APP = 1; // deploy app from template using svm terminology
+        DEPLOY_TEMPLATE = 2; // deploy app template code to mesh
+    }
+    TransactionType type = 1;
+    bytes data = 2; // packed binary arguments, including ABI selector
+    AccountId address = 3; // address of smart contract or template
+}
+
+// A simple signature data
+message Signature {
+    enum Scheme {
+        ED25519 = 0; // standard Ed25519 scheme
+        ED25519_PLUS_PLUS = 1; // sm-modified ED25519 , a.k.a. ED25519++
+    }
+    Scheme scheme = 1; // the signature's scheme
+    bytes signature = 2; // the signature itself
+    bytes public_key = 3; // included in schemes which require signer to provide a public key
+}
+
+// An Activation "transaction" (ATX)
+message Activation {
+    ActivationId id = 1;
+    uint64 layer = 2; // the layer that this activation is part of
+    SmesherId smesher_id = 3; // id of smesher who created the ATX
+    AccountId coinbase = 4; // coinbase account id
+    ActivationId prev_atx = 5; // previous ATX pointed to
+    uint64 commitment_size = 6; // commitment size in bytes
 }
 
 // An immutable Spacemesh transaction.
 // do not include mutable data such as tx state or result.
 message Transaction {
-    enum TransactionType {
-        UNDEFINED = 0;
-        SIMPLE = 1;          // simple coin transaction
-        ATX = 2;             // smesher activation transaction
-        APP = 3;             // smart contract method
-        SPAWN_APP = 4;       // deploy app from template using svm terminology
-        DEPLOY_TEMPLATE = 5; // deploy app template code to mesh
+    TransactionId id = 1;
+    oneof data {
+        CoinTransferTransaction coin_transfer = 2;
+        SmartContractTransaction smart_contract = 3;
     }
-    TransactionType type = 1;
-    TransactionId id = 2; // hash
-    AccountId sender = 3;
-    TransactionFee fee = 4;
-    uint64 timestamp = 5; // shouldn't this be part of the event envelope?
-    AccountId receiver = 6; // depending on tx type
-    Amount amount = 7; // amount of coin transfered in this tx by sender
-    uint64 counter = 8; // tx counter aka nonce
-    bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
-    Atx atx_data = 10; // ATX-related fields, used for ATX only
-}
-
-message Transactions {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Transaction transactions = 2;
+    AccountId sender = 4; // tx originator, should match signer inside Signature
+    GasOffered gas_offered = 5; // gas price and max gas offered
+    Amount amount = 6; // amount of coin transfered in this tx by sender
+    uint64 counter = 7; // tx counter aka nonce
+    Signature signature = 8; // sender signature on transaction
 }
 
 message Reward {
     uint64 layer = 1; // layer award was paid in
     Amount total = 2; // total reward paid (sum of tx fee and layer reward)
-    Amount layer_reward = 3;
+    Amount layer_reward = 3; // tx_fee = total - layer_reward
     uint64 layer_computed = 4; // layer number of the layer when reward was computed
-    // tx_fee = total - layer_reward
     AccountId coinbase = 5; // account awarded this reward
-    SmesherId smesher = 6;  // ID of smesher who earned this reward
-}
-
-message Rewards {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Reward rewards = 2;
+    SmesherId smesher = 6;  // id of smesher who earned this reward
 }
 
 message Block {
@@ -159,44 +155,45 @@ message Block {
 }
 
 message Layer {
-    enum LayerStatus {
-        UNDEFINED = 0;
-        APPROVED = 1;
-        CONFIRMED = 2;
-    }
     uint64 number = 1;  // layer number - not hash - layer content may change
+    enum LayerStatus {
+        UNDEFINED = 0; // not yet approved or confirmed
+        APPROVED = 1;  // approved by hare
+        CONFIRMED = 2; // confirmed by tortoise
+    }
     LayerStatus status = 2;
-    bytes hash = 3;                 // computer layer hash - do we need this?
-    repeated Block blocks = 4;      // layer's blocks
-    bytes root_state_hash = 5;      // when available - the root state hash of global state in this layer
+    bytes hash = 3; // computer layer hash - do we need this?
+    repeated Block blocks = 4; // layer's blocks
+    repeated Activation activations = 5; // list of layer's activations
+    bytes root_state_hash = 6; // when available - the root state hash of global state in this layer
 }
 
 // current node status
 message NodeStatus {
-    uint64 connected_peers = 1;       // number of connected neighbors
-    bool   is_synced = 2;             // Is meshed synced
-    uint64 synced_layer = 3;          // the last layer node has synced
-    uint64 top_layer = 4;             // top layer is the tip
-    uint64 verified_layer = 5;        // the last layer node has verified
+    uint64 connected_peers = 1; // number of connected neighbors
+    bool   is_synced = 2; // true when meshed is synced
+    uint64 synced_layer = 3; // the last layer node has synced
+    uint64 top_layer = 4; // top layer is the tip
+    uint64 verified_layer = 5; // the last layer node has verified
 }
 
 // Indicates a change in node status
 message NodeStatusEvent {
     enum NodeStatusEvent {
-      UNDEFINED = 0;
-      SYNCED = 1;                // node is synced
-      SYNCING = 2;               // node is syncing (but not synced)
-      NOT_SYNCING = 3;           // sync did not start
-      SYNC_FAILED = 4;           // node sync fail event. Node will never be syncing or synced again in this session
-      NEIGHBOR_CONNECTED = 5;    // Connected to a neighbor
-      NEIGHBOR_DISCONNECTED = 6; // Disconnected from a neighbor
+      UNDEFINED = 0; // default value
+      SYNCED = 1; // node is synced
+      SYNCING = 2; // node is syncing (but not synced)
+      NOT_SYNCING = 3; // sync did not start
+      SYNC_FAILED = 4; // node sync fail event. Node will never be syncing or synced again in this session
+      NEIGHBOR_CONNECTED = 5; // connected to a neighbor
+      NEIGHBOR_DISCONNECTED = 6; // disconnected from a neighbor
     }
     NodeStatusEvent status = 1;
 }
 
-message AppEvent {                     // an event emitted from an app instance
-    TransactionId transaction_id = 1;  // the transaction that called the code
-    string message = 2;                // the event's string emitted from code
+message AppEvent { // an event emitted from an app instance
+    TransactionId transaction_id = 1; // the transaction that called the code
+    string message = 2; // the event's string emitted from code
 }
 
 
@@ -204,7 +201,7 @@ message AppEvent {                     // an event emitted from an app instance
 message NodeError {
     enum NodeErrorType {
         UNDEFINED = 0;
-        PANIC_UNSPECIFIED = 1; // general panic
+        PANIC = 1; // general panic
         PANIC_SYNC = 2; // panic while trying to sync in the sync module
         SIGNAL_SHUT_DOWN = 3; // received a shut down signal
         PANIC_P2P = 4; // p2p module panic

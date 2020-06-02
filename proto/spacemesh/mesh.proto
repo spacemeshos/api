@@ -24,19 +24,14 @@ service MeshService {
     // Number of transactions per second (a network parameter)
     rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
 
-    ////////// Methods designed for light-weight clients such as wallets
-    ////////// Don't use in clients such as dash, explore or backup
-    ////////// Use streams for these
-
-    // Get transactions to an account or from an account
-    rpc AccountTransactions(AccountIdWithOffset) returns (Transactions);
-
     ////////// Streams
 
-    // A stream of new txs (or update to a tx data) where the account is sender
-    // or receiver. These should include activation transations (ATXs) and all
-    // transactions in the mesh
+    // A stream of txs (or update to a tx) where the account is sender
+    // or receiver
     rpc AccountTransactionStream(AccountId) returns (stream Transaction);
+
+    // A stream of activations where the account is coinbase account
+    rpc AccountActivationStream(AccountId) returns (stream Activation);
 
     // Layer with blocks and transactions
     // Sent each time layer data changes. Designed for heavy-duty clients
