@@ -91,11 +91,11 @@ message TransactionState {
 }
 
 // Data specific to a simple coin transaction.
-message CoinTransactionData {
+message CoinTransferTransaction {
     AccountId receiver = 1;
 }
 
-message SmartContractTransactionData {
+message SmartContractTransaction {
     enum TransactionType {
         APP = 0;              // smart contract method
         SPAWN_APP = 1;        // deploy app from template using svm terminology
@@ -132,8 +132,8 @@ message Activation {
 message Transaction {
     TransactionId id = 1;
     oneof data {
-        CoinTransactionData coin_transfer_data = 2;
-        SmartContractTransactionData smart_contract_data = 3;
+        CoinTransferTransaction coin_transfer = 2;
+        SmartContractTransaction smart_contract = 3;
     }
     AccountId sender = 4;     // tx originator, should match signer inside Signature
     TransactionFee fee = 5;   // fee paid, in smidge
