@@ -103,6 +103,7 @@ message TransactionState {
     TransactionStateType state = 2;
 }
 
+<<<<<<< HEAD
 // Data specific to an activation transaction.
 message ActivationTransactionData {
     SmesherId smesher_id = 1;    // ID of smesher who created the ATX
@@ -135,6 +136,13 @@ message Signature {
     Scheme scheme = 1;    // The signature's scheme
     bytes signature = 2;  // The signature itself
     bytes public_key = 3; // Included in schemes which require signer to provide a public key
+=======
+// An activation transaction, a subtype of transaction
+message Atx {
+    SmesherId smesher_id = 1; // Smesher ID
+    TransactionId prev_atx = 2; // previous ATX
+    uint64 atx_commitment_size = 3; // commitment size
+>>>>>>> 9bad756ca9248d64e6ed84dcc6c88412ecc59ef4
 }
 
 // An immutable Spacemesh transaction.
@@ -146,12 +154,25 @@ message Transaction {
         CoinTransactionData coin_transfer_data = 3;
         SmartContractTransactionData smart_contract_data = 4;
     }
+<<<<<<< HEAD
     AccountId sender = 5;     // tx originator, should match signer inside Signature
     TransactionFee fee = 6;   // fee paid, in smidge
     uint64 timestamp = 7;     // shouldn't this be part of the event envelope?
     Amount amount = 8;        // amount of coin transfered in this tx by sender
     uint64 counter = 9;       // tx counter aka nonce
     Signature signature = 10; // sender signature on transaction
+=======
+    TransactionType type = 1;
+    TransactionId id = 2; // hash
+    AccountId sender = 3;
+    TransactionFee fee = 4;
+    uint64 timestamp = 5; // shouldn't this be part of the event envelope?
+    AccountId receiver = 6; // depending on tx type
+    Amount amount = 7; // amount of coin transfered in this tx by sender
+    uint64 counter = 8; // tx counter aka nonce
+    bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
+    Atx atx_data = 10; // ATX-related fields, used for ATX only
+>>>>>>> 9bad756ca9248d64e6ed84dcc6c88412ecc59ef4
 }
 
 message Transactions {
@@ -208,7 +229,7 @@ message NodeStatusEvent {
       SYNCED = 1;                // node is synced
       SYNCING = 2;               // node is syncing (but not synced)
       NOT_SYNCING = 3;           // sync did not start
-      SYNC_FAILED = 4;           // node sync fail event. Node will never be syncing or synced again in this session.
+      SYNC_FAILED = 4;           // node sync fail event. Node will never be syncing or synced again in this session
       NEIGHBOR_CONNECTED = 5;    // Connected to a neighbor
       NEIGHBOR_DISCONNECTED = 6; // Disconnected from a neighbor
     }
@@ -225,11 +246,11 @@ message AppEvent {                     // an event emitted from an app instance
 message NodeError {
     enum NodeErrorType {
         UNDEFINED = 0;
-        PANIC_UNSPECIFIED = 1;
-        PANIC_SYNC = 2;
-        SIGNAL_SHUT_DOWN = 3;
-        PANIC_P2P = 4;
-        PANIC_HARE = 5;
+        PANIC_UNSPECIFIED = 1; // general panic
+        PANIC_SYNC = 2; // panic while trying to sync in the sync module
+        SIGNAL_SHUT_DOWN = 3; // received a shut down signal
+        PANIC_P2P = 4; // p2p module panic
+        PANIC_HARE = 5; // hare protocol panic
     }
     NodeErrorType error_type = 1;
     string message = 2;
