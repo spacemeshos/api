@@ -56,6 +56,6 @@ service SmesherService {
     rpc StopCommitmentCreation(DeleteCommitment) returns (TypedResult);
 
     // Retruns a stream of updates to a post commitment during the init phase
-    rpc CommitmentProgressStream(google.protobuf.Empty) returns (CommitmentData);
+    rpc CommitmentProgressStream(google.protobuf.Empty) returns (stream CommitmentData);
 
 }
