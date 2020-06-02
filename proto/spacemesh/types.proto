@@ -31,24 +31,16 @@ message Account {
     Amount balance = 3;     // known account balance
 }
 
-message AccountIdWithOffset {
-    AccountId account_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;       // total number of client requested items
-};
-
-message SmesherIdWithOffset {
-    SmesherId smesher_id = 1;
-    uint64 offset = 2;
-    uint64 items = 3;        // total number of client requested items
-};
-
 message GlobalState {
     bytes root_hash = 1;
     uint64 layer_number = 2;
 }
 
 message TransactionId {
+    bytes id = 1;
+}
+
+message ActivationId {
     bytes id = 1;
 }
 
@@ -81,11 +73,6 @@ message TransactionReceipt {
     AccountId app_address = 6;      // Deployed app address or code template address
 }
 
-message TransactionReceipts {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated TransactionReceipt receipts = 2;
-}
-
 // TransactionState is the "journey" of a tx from newly-submitted, to being
 // rejected from or accepted into the mempool, to being included in the mesh (in a
 // block), to (finally) being processed by the STF. It tells us nothing about the
@@ -101,14 +88,6 @@ message TransactionState {
         PROCESSED = 5;              // Processed by the STF. Processing results are in the tx receipt
     }
     TransactionStateType state = 2;
-}
-
-<<<<<<< HEAD
-// Data specific to an activation transaction.
-message ActivationTransactionData {
-    SmesherId smesher_id = 1;    // ID of smesher who created the ATX
-    TransactionId prev_atx = 2;  // previous ATX pointed to
-    uint64 commitment_size = 3;  // commitment size in bytes
 }
 
 // Data specific to a simple coin transaction.
@@ -136,13 +115,15 @@ message Signature {
     Scheme scheme = 1;    // The signature's scheme
     bytes signature = 2;  // The signature itself
     bytes public_key = 3; // Included in schemes which require signer to provide a public key
-=======
-// An activation transaction, a subtype of transaction
-message Atx {
-    SmesherId smesher_id = 1; // Smesher ID
-    TransactionId prev_atx = 2; // previous ATX
-    uint64 atx_commitment_size = 3; // commitment size
->>>>>>> 9bad756ca9248d64e6ed84dcc6c88412ecc59ef4
+}
+
+// An activation transaction.
+message Activation {
+    ActivationId id = 1;
+    SmesherId smesher_id = 2; // ID of smesher who created the ATX
+    AccountId coinbase = 3; // Coinbase account id
+    ActivationId prev_atx = 4; // previous ATX pointed to
+    uint64 commitment_size = 5; // commitment size in bytes
 }
 
 // An immutable Spacemesh transaction.
@@ -150,34 +131,15 @@ message Atx {
 message Transaction {
     TransactionId id = 1;
     oneof data {
-        ActivationTransactionData activation_data = 2;
-        CoinTransactionData coin_transfer_data = 3;
-        SmartContractTransactionData smart_contract_data = 4;
+        CoinTransactionData coin_transfer_data = 2;
+        SmartContractTransactionData smart_contract_data = 3;
     }
-<<<<<<< HEAD
-    AccountId sender = 5;     // tx originator, should match signer inside Signature
-    TransactionFee fee = 6;   // fee paid, in smidge
-    uint64 timestamp = 7;     // shouldn't this be part of the event envelope?
-    Amount amount = 8;        // amount of coin transfered in this tx by sender
-    uint64 counter = 9;       // tx counter aka nonce
-    Signature signature = 10; // sender signature on transaction
-=======
-    TransactionType type = 1;
-    TransactionId id = 2; // hash
-    AccountId sender = 3;
-    TransactionFee fee = 4;
-    uint64 timestamp = 5; // shouldn't this be part of the event envelope?
-    AccountId receiver = 6; // depending on tx type
-    Amount amount = 7; // amount of coin transfered in this tx by sender
-    uint64 counter = 8; // tx counter aka nonce
-    bytes data = 9; // binary payload - used for app, deploy, atx and spwan transactions
-    Atx atx_data = 10; // ATX-related fields, used for ATX only
->>>>>>> 9bad756ca9248d64e6ed84dcc6c88412ecc59ef4
-}
-
-message Transactions {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Transaction transactions = 2;
+    AccountId sender = 4;     // tx originator, should match signer inside Signature
+    TransactionFee fee = 5;   // fee paid, in smidge
+    uint64 timestamp = 6;     // shouldn't this be part of the event envelope?
+    Amount amount = 7;        // amount of coin transfered in this tx by sender
+    uint64 counter = 8;       // tx counter aka nonce
+    Signature signature = 9; // sender signature on transaction
 }
 
 message Reward {
