@@ -125,7 +125,6 @@ message Activation {
     AccountId coinbase = 4; // Coinbase account id
     ActivationId prev_atx = 5; // previous ATX pointed to
     uint64 commitment_size = 6; // commitment size in bytes
-
 }
 
 // An immutable Spacemesh transaction.
@@ -138,10 +137,9 @@ message Transaction {
     }
     AccountId sender = 4;     // tx originator, should match signer inside Signature
     TransactionFee fee = 5;   // fee paid, in smidge
-    uint64 timestamp = 6;     // shouldn't this be part of the event envelope?
-    Amount amount = 7;        // amount of coin transfered in this tx by sender
-    uint64 counter = 8;       // tx counter aka nonce
-    Signature signature = 9; // sender signature on transaction
+    Amount amount = 6;        // amount of coin transfered in this tx by sender
+    uint64 counter = 7;       // tx counter aka nonce
+    Signature signature = 8;  // sender signature on transaction
 }
 
 message Reward {
