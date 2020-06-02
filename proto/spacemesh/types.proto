@@ -59,7 +59,7 @@ message TransactionReceipt {
     // The results of STF transaction processing
     enum TransactionResult {
         UNDEFINED = 0;
-        UNKNOWN = 1;                // Not yet known
+        UNKNOWN = 1;                // Not yet processed by the STF
         EXECUTED = 2;               // executed w/o error by the STF
         BAD_COUNTER = 3;            // unexpected transaction counter
         RUNTIME_EXCEPTION = 4;      // app code exception

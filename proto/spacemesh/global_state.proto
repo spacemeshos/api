@@ -20,9 +20,6 @@ service GlobalStateService {
 
     ////////// Streams
 
-    // Rewards awarded to an account
-    rpc AccountRewards(AccountId) returns (stream Reward);
-
     // Transaction recipts for transactions to/from an account
     rpc AccountTransactionReceiptStream(AccountId) returns (stream TransactionReceipt);
 
