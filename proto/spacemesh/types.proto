@@ -58,13 +58,11 @@ message TransactionReceipt {
     TransactionId id = 1;           // the source transaction
     // The results of STF transaction processing
     enum TransactionResult {
-        UNDEFINED = 0;
-        UNKNOWN = 1;                // Not yet processed by the STF
-        EXECUTED = 2;               // executed w/o error by the STF
-        BAD_COUNTER = 3;            // unexpected transaction counter
-        RUNTIME_EXCEPTION = 4;      // app code exception
-        INSUFFICIENT_GAS = 5;       // out of gas
-        INSUFFICIENT_FUNDS = 6;     // failed due to sender's insufficient funds
+        EXECUTED = 0;               // executed w/o error by the STF
+        BAD_COUNTER = 1;            // unexpected transaction counter
+        RUNTIME_EXCEPTION = 2;      // app code exception
+        INSUFFICIENT_GAS = 3;       // out of gas
+        INSUFFICIENT_FUNDS = 4;     // failed due to sender's insufficient funds
     }
     TransactionResult result = 2;   // tx processing result
     uint64 gas_used = 3;            // gas units used by the transaction (gas price in tx)
@@ -159,9 +157,9 @@ message Block {
 
 message Layer {
     enum LayerStatus {
-        UNDEFINED = 0;
-        APPROVED = 1;
-        CONFIRMED = 2;
+        UNDEFINED = 0; // not yet approved or confirmed
+        APPROVED = 1; // approved by hare
+        CONFIRMED = 2; // confirmed by tortoise
     }
     uint64 number = 1;  // layer number - not hash - layer content may change
     LayerStatus status = 2;
@@ -183,13 +181,12 @@ message NodeStatus {
 // Indicates a change in node status
 message NodeStatusEvent {
     enum NodeStatusEvent {
-      UNDEFINED = 0;
-      SYNCED = 1;                // node is synced
-      SYNCING = 2;               // node is syncing (but not synced)
-      NOT_SYNCING = 3;           // sync did not start
-      SYNC_FAILED = 4;           // node sync fail event. Node will never be syncing or synced again in this session
-      NEIGHBOR_CONNECTED = 5;    // Connected to a neighbor
-      NEIGHBOR_DISCONNECTED = 6; // Disconnected from a neighbor
+      SYNCED = 0;                // node is synced
+      SYNCING = 1;               // node is syncing (but not synced)
+      NOT_SYNCING = 2;           // sync did not start
+      SYNC_FAILED = 3;           // node sync fail event. Node will never be syncing or synced again in this session
+      NEIGHBOR_CONNECTED = 4;    // Connected to a neighbor
+      NEIGHBOR_DISCONNECTED = 5; // Disconnected from a neighbor
     }
     NodeStatusEvent status = 1;
 }
@@ -203,12 +200,11 @@ message AppEvent {                     // an event emitted from an app instance
 // Represents a critical node error.
 message NodeError {
     enum NodeErrorType {
-        UNDEFINED = 0;
-        PANIC_UNSPECIFIED = 1; // general panic
-        PANIC_SYNC = 2; // panic while trying to sync in the sync module
-        SIGNAL_SHUT_DOWN = 3; // received a shut down signal
-        PANIC_P2P = 4; // p2p module panic
-        PANIC_HARE = 5; // hare protocol panic
+        PANIC = 0; // general panic
+        PANIC_SYNC = 1; // panic while trying to sync in the sync module
+        SIGNAL_SHUT_DOWN = 2; // received a shut down signal
+        PANIC_P2P = 3; // p2p module panic
+        PANIC_HARE = 4; // hare protocol panic
     }
     NodeErrorType error_type = 1;
     string message = 2;
