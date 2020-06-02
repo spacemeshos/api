@@ -16,7 +16,7 @@ message SimpleString {
     string value = 1;
 }
 
-// A non-negative coin amount.
+// A non-negative coin amount, in smidge
 message Amount {
     uint64 value = 1;
 }
@@ -48,7 +48,7 @@ message SmesherId {
     bytes id = 1;
 }
 
-message TransactionFee {
+message GasOffered {
     uint64 gas_provided = 1;
     uint64 gas_price = 2;
 }
@@ -64,8 +64,8 @@ message TransactionReceipt {
         INSUFFICIENT_FUNDS = 5; // failed due to sender's insufficient funds
     }
     TransactionResult result = 2; // tx processing result
-    uint64 gas_used = 3; // gas units used by the transaction (gas price in tx)
-    Amount fee = 4; // transaction fee charged for the transaction
+    uint64 gas_used = 3; // gas units used by the transaction
+    Amount fee = 4; // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
     uint64 layer_number = 5; // the layer in which the STF processed this transaction
     AccountId app_address = 6; // deployed app address or code template address
 }
@@ -92,7 +92,6 @@ message CoinTransferTransaction {
     AccountId receiver = 1;
 }
 
-// Data specific to a smart contract transaction.
 message SmartContractTransaction {
     enum TransactionType {
         APP = 0; // smart contract method
@@ -134,7 +133,7 @@ message Transaction {
         SmartContractTransaction smart_contract = 3;
     }
     AccountId sender = 4; // tx originator, should match signer inside Signature
-    TransactionFee fee = 5; // fee paid, in smidge
+    GasOffered gas_offered = 5; // gas price and max gas offered
     Amount amount = 6; // amount of coin transfered in this tx by sender
     uint64 counter = 7; // tx counter aka nonce
     Signature signature = 8; // sender signature on transaction
@@ -158,7 +157,7 @@ message Layer {
     uint64 number = 1;  // layer number - not hash - layer content may change
     enum LayerStatus {
         UNDEFINED = 0; // not yet approved or confirmed
-        APPROVED = 1; // approved by hare
+        APPROVED = 1;  // approved by hare
         CONFIRMED = 2; // confirmed by tortoise
     }
     LayerStatus status = 2;
