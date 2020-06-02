@@ -93,6 +93,7 @@ message CoinTransferTransaction {
     AccountId receiver = 1;
 }
 
+// Data specific to a smart contract transaction.
 message SmartContractTransaction {
     enum TransactionType {
         APP = 0;              // smart contract method
