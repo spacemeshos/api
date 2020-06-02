@@ -49,7 +49,7 @@ message SmesherId {
 }
 
 message TransactionFee {
-    uint64 gas_consumed = 1;
+    uint64 gas_provided = 1;
     uint64 gas_price = 2;
     // tx_fee = gas_consumed * gas_price
 }
