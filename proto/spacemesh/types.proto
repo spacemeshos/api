@@ -92,6 +92,7 @@ message CoinTransferTransaction {
     AccountId receiver = 1;
 }
 
+// Data specific to a smart contract transaction.
 message SmartContractTransaction {
     enum TransactionType {
         APP = 0; // smart contract method
@@ -157,7 +158,7 @@ message Layer {
     uint64 number = 1;  // layer number - not hash - layer content may change
     enum LayerStatus {
         UNDEFINED = 0; // not yet approved or confirmed
-        APPROVED = 1;  // approved by hare
+        APPROVED = 1; // approved by hare
         CONFIRMED = 2; // confirmed by tortoise
     }
     LayerStatus status = 2;
