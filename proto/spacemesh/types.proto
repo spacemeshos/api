@@ -120,10 +120,12 @@ message Signature {
 // An activation transaction.
 message Activation {
     ActivationId id = 1;
-    SmesherId smesher_id = 2; // ID of smesher who created the ATX
-    AccountId coinbase = 3; // Coinbase account id
-    ActivationId prev_atx = 4; // previous ATX pointed to
-    uint64 commitment_size = 5; // commitment size in bytes
+    uint64 layer = 2; // The layer that this activation is part of
+    SmesherId smesher_id = 3; // ID of smesher who created the ATX
+    AccountId coinbase = 4; // Coinbase account id
+    ActivationId prev_atx = 5; // previous ATX pointed to
+    uint64 commitment_size = 6; // commitment size in bytes
+
 }
 
 // An immutable Spacemesh transaction.
@@ -150,11 +152,6 @@ message Reward {
     // tx_fee = total - layer_reward
     AccountId coinbase = 5; // account awarded this reward
     SmesherId smesher = 6;  // ID of smesher who earned this reward
-}
-
-message Rewards {
-    uint64 total_items = 1; // total server available items. Used to query with new offset
-    repeated Reward rewards = 2;
 }
 
 message Block {
