@@ -54,7 +54,7 @@ service SmesherService {
     // Returns true if request is accepted by node, false if it fails
     rpc StopPostDataCreationSession(DeletePostData) returns (TypedResult);
 
-    // Retruns a stream of updates to post data file(s) during the init phase
+    // Returns a stream of updates to post data file(s) during the init phase
     rpc PostDataCreationProgressStream(google.protobuf.Empty) returns (stream PostStatus);
 
 }

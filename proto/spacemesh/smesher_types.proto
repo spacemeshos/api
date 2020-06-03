@@ -2,7 +2,7 @@ syntax = "proto3";
 package spacemesh;
 
 
-// Bit flags for compute engine slection
+// Bit flags for compute engine selection
 enum ComputeEngineFlag {
     NONE = 0;
     CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
@@ -21,7 +21,7 @@ message PostData {
     uint64 data_size = 2; // Requested post data size
     bool   append = 3; // Append to existing files if they exist. Otherwise overwrite.
     bool   throttle = 4; // Throttle down setup phase computations while user is interactive on ///system
-    uint32 compute_engine_flags = 5; // One ore more avaialble compute engines to be used for gpu post
+    uint32 compute_engine_flags = 5; // One ore more available compute engines to be used for gpu post
 }
 
 // Param passed to methods to indicate a request to delete data files
@@ -31,12 +31,12 @@ message DeletePostData {
 
 // Proof of space data status
 message PostStatus {
-    PostData post_data = 1; // basic post data (set previosuly by the user)
+    PostData post_data = 1; // basic post data (set previously by the user)
     enum FilesStatus {
         UNDEFINED = 0; // Lane's favorite imposible value
         NOT_FOUND = 1; // Expected data files do not exist
         PARTIAL = 2; // Some files exist and init can be continued (and may be in progress)
-        COMPLETE = 3; // Expecgted data files are available and verified
+        COMPLETE = 3; // Expected data files are available and verified
     }
     FilesStatus files_status = 2;
     bool init_in_progress = 3; // True if init process is currently in progress
