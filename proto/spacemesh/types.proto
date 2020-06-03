@@ -25,6 +25,10 @@ message AccountId {
     bytes address = 1;
 }
 
+message LayerNumber {
+    uint64 layer_number = 1;
+}
+
 message Account {
     AccountId address = 1;  // account public address
     uint64 counter = 2; // aka nonce
