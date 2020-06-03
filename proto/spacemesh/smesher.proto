@@ -42,7 +42,7 @@ service SmesherService {
     rpc PostData(google.protobuf.Empty) returns (PostStatus);
 
     // Returns a bit field of all available setup compute engines
-    rpc AvailableComputeEngines(google.protobuf.Empty) returns (ComputeEngingeFlags);
+    rpc AvailableComputeEngines(google.protobuf.Empty) returns (ComputeEngineFlags);
 
     // Starts (or continues) a post init phase. Supports resuming a previously
     // started init session.
