@@ -1,0 +1,44 @@
+syntax = "proto3";
+package spacemesh;
+
+import "spacemesh/types.proto";
+
+enum AccountMeshDataFlags {
+    NONE = 0;
+    TRANSACTIONS = 1;
+    ACTIVATIONS = 2;
+}
+
+message AccountMeshDataStreamFilter {
+    AccountId account_id = 1;
+    uint32 flags = 2; // A bit field of AccountMeshDataFlags
+}
+
+message AccountMeshDataQueryParams {
+    AccountId account_id = 1;
+    uint32 flags = 2; // A bit field of AccountMeshDataFlags
+    uint64 min_layer = 3; // return data only from this layer or later
+    uint32 max_results = 4; // max number of results to return
+    uint32 offset = 5; // query offset
+}
+
+message AccountMeshData {
+    oneof data_item {
+        Transaction transction = 1;
+        Activation activation = 2;
+    }
+}
+
+message AccountMeshDataResult {
+    repeated AccountMeshData data = 1;
+    uint64 total_results = 2; // total number of availble results
+}
+
+message LayersQueryParams {
+    uint32 start_layer = 1;
+    uint32 end_layer = 2;
+}
+
+message LayersQueryResult {
+    repeated Layer layer = 1;
+}

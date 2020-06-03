@@ -2,6 +2,8 @@ syntax = "proto3";
 package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
+import "spacemesh/mesh_types.proto";
+
 
 // Readonly API for basic mesh info
 service MeshService {
@@ -24,14 +26,19 @@ service MeshService {
     // Number of transactions per second (a network parameter)
     rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
 
+    // Get account data query
+    rpc AccountData(AccountMeshDataQueryParams) returns (AccountMeshDataResult);
+
+    // Layers data query
+    rpc Layers(LayersQueryParams) returns (LayersQueryResult);
+
     ////////// Streams
+    // These streams only return new data available to the node and not
+    // historical data. Historical data is obtained via queries
 
-    // A stream of txs (or update to a tx) where the account is sender
-    // or receiver
-    rpc AccountTransactionStream(AccountId) returns (stream Transaction);
-
-    // A stream of activations where the account is coinbase account
-    rpc AccountActivationStream(AccountId) returns (stream Activation);
+    // A stream of transactions or activations from an account.
+    // Includes simple coin transactions with the account as the destination.
+    rpc AccountDataStream(AccountMeshDataStreamFilter) returns (stream AccountMeshData);
 
     // Layer with blocks and transactions
     // Sent each time layer data changes. Designed for heavy-duty clients
