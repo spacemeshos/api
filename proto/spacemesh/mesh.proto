@@ -26,6 +26,9 @@ service MeshService {
     // Number of transactions per second (a network parameter)
     rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
 
+    ////////// Queries
+    // Queries return paginated, historical data.
+
     // Get account data query
     rpc AccountData(AccountMeshDataQueryParams) returns (AccountMeshDataResult);
 
@@ -33,8 +36,8 @@ service MeshService {
     rpc Layers(LayersQueryParams) returns (LayersQueryResult);
 
     ////////// Streams
-    // These streams only return new data available to the node and not
-    // historical data. Historical data is obtained via queries
+    // Streams return live, new data as it becomes available to the node and not
+    // historical data.
 
     // A stream of transactions or activations from an account.
     // Includes simple coin transactions with the account as the destination.
