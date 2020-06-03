@@ -5,7 +5,7 @@ package spacemesh;
 // Bit flags for compute engine slection
 enum ComputeEngineFlag {
     NONE = 0;
-    CPU = 1;    // useful for testing on systems without a cuda or vulkan GPU
+    CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
     CUDA = 2;
     VULKAN = 4;
 }
@@ -21,7 +21,7 @@ message PostData {
     uint64 data_size = 2; // Requested post data size
     bool   append = 3; // Append to existing files if they exist. Otherwise overwrite.
     bool   throttle = 4; // Throttle down setup phase computations while user is interactive on ///system
-    uint32 compute_engine_flags = 5;     // One ore more avaialble compute engines to be used for gpu post
+    uint32 compute_engine_flags = 5; // One ore more avaialble compute engines to be used for gpu post
 }
 
 // Param passed to methods to indicate a request to delete data files
@@ -31,23 +31,22 @@ message DeletePostData {
 
 // Proof of space data status
 message PostStatus {
-    PostData post_data = 1; // basic post data
+    PostData post_data = 1; // basic post data (set previosuly by the user)
     enum FilesStatus {
-        UNDEFINED = 0;  // Lane's favorite illegal thing
-        NOT_FOUND = 1;  // Expected data files do not exist
-        PARTIAL = 2;    // Some files exist and init can be continued (and may be in progress)
-        COMPLETE = 3;   // Expecgted data files are available and verified
-
+        UNDEFINED = 0; // Lane's favorite imposible value
+        NOT_FOUND = 1; // Expected data files do not exist
+        PARTIAL = 2; // Some files exist and init can be continued (and may be in progress)
+        COMPLETE = 3; // Expecgted data files are available and verified
     }
     FilesStatus files_status = 2;
-    bool init_in_progress = 3;    // True if init process is currently in progress
-    uint64 bytes_written = 4;     // Bytes written to the data files (actual total files sizes)
-    string error_message = 5;     // Last init process error message
+    bool init_in_progress = 3; // True if init process is currently in progress
+    uint64 bytes_written = 4; // Bytes written to the data files (actual total files sizes)
+    string error_message = 5;  // Last init process error message
     enum ErrorType {
-        UNDEFINED = 0;
-        FILE_NOT_FOUND = 1;       // All expected post data files not found in expected path
-        READ_ERROR = 2;           // Failure to read from a data file
-        WRITE_ERROR = 3;          // Failure to write to a data file
+        UNDEFINED = 0; // Lane's favorite imposible value
+        FILE_NOT_FOUND = 1; // All expected post data files not found in expected path
+        READ_ERROR = 2; // Failure to read from a data file
+        WRITE_ERROR = 3; // Failure to write to a data file
     }
     ErrorType error_type = 6;
 }
