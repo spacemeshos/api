@@ -5,7 +5,7 @@ import "spacemesh/types.proto";
 // Data items related to an account
 enum AccountDataFlag {
     NONE = 0;
-    TRANSACTION_RECIEPT = 1; // tx receipt for a tx to or from an account
+    TRANSACTION_RECEIPT = 1; // tx receipt for a tx to or from an account
     REWARD = 2; // reward awarded to an account
 }
 
@@ -30,8 +30,8 @@ message AccountData {
 }
 
 message AccountDataQueryResults {
-    repeated AccountData account_item = 1;
-    uint32 total_results = 2;
+    uint32 total_results = 1;
+    repeated AccountData account_item = 2;
 }
 
 message SmesherDataQueryParams {
@@ -41,8 +41,8 @@ message SmesherDataQueryParams {
 }
 
 message SmesherDataQueryResults {
-    repeated Reward rewards = 1;
-    uint32 total_results = 2;
+    uint32 total_results = 1;
+    repeated Reward rewards = 2;
 }
 
 enum GlobalStateEntityFlag {
