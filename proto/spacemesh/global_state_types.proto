@@ -11,7 +11,7 @@ enum AccountDataFlag {
 
 message AccountDataParams {
     AccountId account_id = 1;
-    uint32 account_data_bit_field = 2; // A bit field of AccountDataFlag
+    uint32 account_data_flags = 2; // bit field of AccountDataFlag
 }
 
 message AccountDataQueryParams {
@@ -54,7 +54,7 @@ enum GlobalStateDataItemFlag {
 }
 
 message GlobalStateStreamParams {
-    uint32 global_state_data_item_flags = 1; // bitmap of GlobalStateDataItemFlag
+    uint32 global_state_data_item_flags = 1; // bit field of GlobalStateDataItemFlag
 }
 
 message GlobalStateDataItem {
