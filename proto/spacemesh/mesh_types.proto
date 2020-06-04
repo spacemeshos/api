@@ -31,7 +31,7 @@ message AccountMeshData {
 
 message AccountMeshDataQueryResult {
     repeated AccountMeshData data = 1;
-    uint64 total_results = 2; // total number of availble results
+    uint32 total_results = 2; // total number of availble results
 }
 
 message LayersQueryParams {
