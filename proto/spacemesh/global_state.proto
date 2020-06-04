@@ -51,5 +51,5 @@ service GlobalStateService {
     // a specific app instance...
 
     // New global state computed for a layer by the STF
-    rpc GlobalStateStream(GlobalStateEntities) returns (stream GlboalStateEntitiesResponse);
+    rpc GlobalStateStream(GlobalStateStreamParams) returns (stream GlboalStateStreamResponse);
 }

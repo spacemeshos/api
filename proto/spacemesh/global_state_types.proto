@@ -45,7 +45,7 @@ message SmesherDataQueryResults {
     repeated Reward rewards = 2;
 }
 
-enum GlobalStateEntityFlag {
+enum GlobalStateDataItemFlag {
     NONE = 0;
     REWARD = 1;
     TRANSACTION_STATE = 2;
@@ -53,11 +53,11 @@ enum GlobalStateEntityFlag {
     GLOBAL_STATE = 8;
 }
 
-message GlobalStateEntities {
-    uint32 global_state_entity_flags = 1; // bitmap of GlobalStateEntityFlags
+message GlobalStateStreamParams {
+    uint32 global_state_data_item_flags = 1; // bitmap of GlobalStateDataItemFlags
 }
 
-message GlobalStateEntity {
+message GlobalStateDataItem {
     oneof data {
         Reward reward = 1;
         TransactionState transaction_state = 2;
@@ -66,6 +66,6 @@ message GlobalStateEntity {
     }
 }
 
-message GlboalStateEntitiesResponse {
-    repeated GlobalStateEntity entity = 1;
+message GlboalStateStreamResponse {
+    repeated GlobalStateDataItem data_item = 1;
 }
