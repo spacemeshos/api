@@ -30,7 +30,7 @@ service MeshService {
     // Queries return paginated, historical data.
 
     // Get account data query
-    rpc AccountData(AccountMeshDataQueryParams) returns (AccountMeshDataResult);
+    rpc AccountData(AccountMeshDataQueryParams) returns (AccountMeshDataQueryResult);
 
     // Layers data query
     rpc Layers(LayersQueryParams) returns (LayersQueryResult);
