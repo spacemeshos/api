@@ -1,0 +1,66 @@
+syntax = "proto3";
+package spacemesh;
+import "spacemesh/types.proto";
+
+enum AccountDataQueryFlag {
+    NONE = 0;
+    TRANSACTION_RECIEPT = 1; // tx receipt for a tx to or from an account
+    REWARD = 2; // rewards awarded to an account
+}
+
+message AccountDataParams {
+    AccountId account_id = 1;
+    uint32 account_data_bit_field = 2; // A bit field of AccountDataQueryFlag
+    uint32 max_results = 3; // max numbers of results client would like to get
+    uint32 offset = 4; // return results from offset
+}
+
+message AccountData {
+    oneof data {
+        Reward reward = 1;
+        TransactionReceipt receipt = 2;
+        Account account = 3;
+    }
+}
+
+message AccountDataQueryResults {
+    repeated AccountData account_data = 1;
+    uint32 total_results = 2;
+}
+
+
+message SmesherDataQueryParams {
+    SmesherId smesher_id = 1;
+    uint32 max_results = 3; // max numbers of results client would like to get
+    uint32 offset = 4;      // return results from offset
+}
+
+message SmesherDataQueryResults {
+    repeated Reward rewards = 1;
+    uint32 total_results = 2;
+}
+
+enum GlobalStateEntityFlag {
+    NONE = 0;
+    REWARD = 1;
+    TRANSACTION_STATE = 2;
+    TRANSACTION_RECIEPT = 4;
+    GLOBAL_STATE = 8;
+}
+
+message GlobalStateParams {
+    uint32 flags = 1; // bitmap of GlobalStateEntityFlags
+}
+
+message GlobalStateData {
+    oneof data {
+        Reward reward = 1;
+        TransactionState transaction_state = 2;
+        TransactionReceipt receipt = 3;
+        GlobalState global_state = 4;
+    }
+}
+
+message GlboalStateStreamResult {
+    repeated GlobalStateData global_state_data_items = 1;
+}

@@ -1,6 +1,6 @@
 syntax = "proto3";
 package spacemesh;
-
+import "spacemesh/types.proto";
 
 // Bit flags for compute engine selection
 enum ComputeEngineFlag {

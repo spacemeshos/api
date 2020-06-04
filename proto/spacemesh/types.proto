@@ -25,6 +25,7 @@ message AccountId {
     bytes address = 1;
 }
 
+
 message Account {
     AccountId address = 1;  // account public address
     uint64 counter = 2; // aka nonce
@@ -38,6 +39,10 @@ message GlobalState {
 
 message TransactionId {
     bytes id = 1;
+}
+
+message TransactionsIds {
+    repeated TransactionId transaction_id = 1;
 }
 
 message ActivationId {
@@ -85,6 +90,10 @@ message TransactionState {
         PROCESSED = 5; // processed by the STF. Processing results are in the tx receipt
     }
     TransactionStateType state = 2;
+}
+
+message TransactionsState {
+    repeated TransactionState transactions_state = 1;
 }
 
 // Data specific to a simple coin transaction.

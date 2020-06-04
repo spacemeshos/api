@@ -3,7 +3,7 @@ package spacemesh;
 
 import "spacemesh/types.proto";
 
-enum AccountMeshDataFlags {
+enum AccountMeshDataFlag {
     NONE = 0;
     TRANSACTIONS = 1;
     ACTIVATIONS = 2;

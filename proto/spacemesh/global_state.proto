@@ -2,6 +2,7 @@ syntax = "proto3";
 package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
+import "spacemesh/global_state_types.proto";
 
 // Readonly global state data - current and historical.
 // Global state data is data which is not explicitly stored in the mesh.
@@ -10,45 +11,45 @@ service GlobalStateService {
     // Latest computed global state - layer and its root hash
     rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
-    // Get the current transaction state. Note that tx state is not part of
-    // global state. It is metadata about a transaction on its journey to the
-    // mesh and from the mesh to the global state (or to null)
+    // Returns current transaction state which describes its journey
+    // to the mesh and from the mesh to the global state (if it got processed)
     rpc TransactionState(TransactionId) returns (TransactionState);
+
+    // Returns the current state of one or more transactions
+    rpc TransactionsState(TransactionsIds) returns (TransactionsState);
 
     // Account info in the current global state
     rpc Account(AccountId) returns (Account);
 
+    // Query for account related data such as rewards, tx receipts and account info
+    //
+    // Note: it might be too expensive to add a param for layer to get these results from
+    // as it may require indexing all global state changes per account by layer.
+    // If it is possible to index by layer then we should add param start_layer to
+    // AccountDataParams. Currently it will return data from genesis.
+    rpc AccountDataQuery(AccountDataParams) returns (AccountDataQueryResults);
+
+    // Query for smesher data. Currently returns smesher rewards.
+    // Note: Not supporting start_layer yet as it may require to index all rewards by
+    // smesher and by layer id or allow for queries from a layer and later....
+    rpc SmesherDataQuery(SmesherDataQueryParams) returns (SmesherDataQueryResults);
+
     ////////// Streams
 
-    // Transaction recipts for transactions to/from an account
-    rpc AccountTransactionReceiptStream(AccountId) returns (stream TransactionReceipt);
-
-    // Rewards awarded to a specific account
-    rpc AccountRewardStream(AccountId) returns (stream Reward);
+    // Get a stream of account related changes such as account balance change,
+    // tx receipts and rewards
+    rpc AccountDataStream(AccountDataParams) returns (stream AccountData);
 
     // Rewards awarded to a smesher id
     rpc SmesherRewardStream(SmesherId) returns (stream Reward);
-
-    // Returns a stream of Account changes. e.g. balance and counter
-    // (nonce) changes
-    rpc AccountStream(AccountId) returns (stream Account);
 
     // App Events - emitted by app methods impl code trigged by an
     // app transaction
     rpc AppEventStream(google.protobuf.Empty) returns (stream AppEvent);
 
-    // Rewards are computed by the protocol outside the STF but are a special
-    // case and are passed through the STF since they touch account balances
-    rpc RewardStream(google.protobuf.Empty) returns (stream Reward);
-
-    // Transaction State - rejected pre-STF, or pending STF, or processed by
-    // STF
-    rpc TransactionStateStream(google.protobuf.Empty) returns (stream TransactionState);
-
-    // Receipts - emitted after tx was processed by STF (or rejected before
-    // STF)
-    rpc TransactionReceiptStream(google.protobuf.Empty) returns (stream TransactionReceipt);
+    // TODO: we need to add an important method here to return events emitted by
+    // a specific app instance...
 
     // New global state computed for a layer by the STF
-    rpc GlobalStateStream(google.protobuf.Empty) returns (stream GlobalState);
+    rpc GlobalStateStream(GlobalStateParams) returns (stream GlboalStateStreamResult);
 }
