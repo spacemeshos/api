@@ -37,7 +37,7 @@ message AccountDataQueryResults {
 message SmesherDataQueryParams {
     SmesherId smesher_id = 1;
     uint32 max_results = 2; // max numbers of results client would like to get
-    uint32 offset = 3;      // return results from offset
+    uint32 offset = 3; // return results from offset
 }
 
 message SmesherDataQueryResults {
@@ -54,7 +54,7 @@ enum GlobalStateEntityFlag {
 }
 
 message GlobalStateEntities {
-    uint32 flags = 1; // bitmap of GlobalStateEntityFlags
+    uint32 global_state_entity_flags = 1; // bitmap of GlobalStateEntityFlags
 }
 
 message GlobalStateEntity {
