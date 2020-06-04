@@ -2,21 +2,25 @@ syntax = "proto3";
 package spacemesh;
 import "spacemesh/types.proto";
 
-enum AccountDataQueryFlag {
+enum AccountDataFlag {
     NONE = 0;
     TRANSACTION_RECIEPT = 1; // tx receipt for a tx to or from an account
-    REWARD = 2; // rewards awarded to an account
+    REWARD = 2; // reward awarded to an account
 }
 
 message AccountDataParams {
     AccountId account_id = 1;
-    uint32 account_data_bit_field = 2; // A bit field of AccountDataQueryFlag
-    uint32 max_results = 3; // max numbers of results client would like to get
-    uint32 offset = 4; // return results from offset
+    uint32 account_data_bit_field = 2; // A bit field of AccountDataFlag
+}
+
+message AccountDataQueryParams {
+    AccountDataParams account_data = 1;
+    uint32 max_results = 2; // max numbers of results client would like to get
+    uint32 offset = 3; // return results from offset
 }
 
 message AccountData {
-    oneof data {
+    oneof item {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
         Account account = 3;
@@ -24,7 +28,7 @@ message AccountData {
 }
 
 message AccountDataQueryResults {
-    repeated AccountData account_data = 1;
+    repeated AccountData account_item = 1;
     uint32 total_results = 2;
 }
 
