@@ -18,7 +18,7 @@ service GlobalStateService {
     // Returns the current state of one or more transactions
     rpc TransactionsState(TransactionsIds) returns (TransactionsState);
 
-    // Account info in the current global state
+    // Account info in the current global state.
     rpc Account(AccountId) returns (Account);
 
     // Query for account related data such as rewards, tx receipts and account info
@@ -51,5 +51,5 @@ service GlobalStateService {
     // a specific app instance...
 
     // New global state computed for a layer by the STF
-    rpc GlobalStateStream(GlobalStateParams) returns (stream GlboalStateStreamResult);
+    rpc GlobalStateStream(GlobalStateEntities) returns (stream GlboalStateEntitiesResponse);
 }
