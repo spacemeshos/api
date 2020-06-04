@@ -1,55 +1,52 @@
 syntax = "proto3";
 package spacemesh;
 
-// Data on commitment file
-message CommitmentFile {
-    string path = 1;                // Path to post file(s) on a volume
-    uint64 commitment_size = 2;     // Size of commitment data (in bytes)
+
+// Bit flags for compute engine selection
+enum ComputeEngineFlag {
+    NONE = 0;
+    CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
+    CUDA = 2;
+    VULKAN = 4;
 }
 
-// User-provided post data
-message CommitmentUserData {
-    CommitmentFile file_data = 1;   // Data on commitment file
-    uint32 processor_id = 2;        // Processor to be used for smeshing, e.g., cpu, gpu0, gpu1, etc.
-    bool   append = 3;              // Append to existing file if it exists. Otherwise overwrite.
-    bool   throttle = 4;            // Throttle down init phase computations while user is interactive on system
+message ComputeEngineFlags {
+    uint32 flags = 1;
 }
 
-// A commitment init processor, e.g., a cpu or a gpu
-message CommitmentProcessor {
-    uint32 id = 1;                  // Numerical identifier - unique per system
-    string processor_name = 2;      // Proc info, e.g., Nvidia `Geforce RTX`, `AMD Radeon`, `Intel Genuine i7 CPU`
-    string api = 3;                 // Processing api to be used with the processor, e.g., `Vulkan`, `Cuda` or `x86-64`
+// Basic post data. Used for users to provide requested post data and by
+// other messages which contain post data.
+message PostData {
+    string path = 1; // User provided path to create the post data files at
+    uint64 data_size = 2; // Requested post data size
+    bool   append = 3; // Append to existing files if they exist. Otherwise overwrite.
+    bool   throttle = 4; // Throttle down setup phase computations while user is interactive on ///system
+    ComputeEngineFlags compute_engine_flags = 5; // One or more available compute engines to be used for gpu post
 }
 
-// A list of CommitmentProcessor
-message CommitmentProcessors {
-    repeated CommitmentProcessor processors = 1;
+// Param passed to methods to indicate a request to delete data files
+message DeletePostData {
+    bool delete_files = 1;
 }
 
-// Param passed to methods to indicate a request to delete commitment file
-message DeleteCommitment {
-    bool delete_commitment = 1;
-}
-
-// Proof of space commitment data
-message CommitmentData {
-    enum FileStatus {
-        UNDEFINED = 0;
-        NOT_FOUND = 1;  // Commitment file was not initialized (in this or in previous node sessions)
-        COMPLETE = 2;   // Complete commitment file is available and verified
-        PARTIAL = 3;    // Init commitment file is partially written and init can be continued (and may be in progress)
+// Proof of space data status
+message PostStatus {
+    PostData post_data = 1; // basic post data (set previously by the user)
+    enum FilesStatus {
+        UNDEFINED = 0; // Lane's favorite impossible value
+        NOT_FOUND = 1; // Expected data files do not exist
+        PARTIAL = 2; // Some files exist and init can be continued (and may be in progress)
+        COMPLETE = 3; // Expected data files are available and verified
     }
-    FileStatus file_status = 1;
-    bool init_in_progress = 2;    // True if init process is currently in progress
-    CommitmentFile file_data = 3; // Data on commitment file
-    uint64 bytes_written = 4;     // Bytes written to the commitment file (actual file size)
-    string error_message = 5;     // Last init process error message
+    FilesStatus files_status = 2;
+    bool init_in_progress = 3; // True if init process is currently in progress
+    uint64 bytes_written = 4; // Bytes written to the data files (actual total files sizes)
+    string error_message = 5; // Last init process error message
     enum ErrorType {
-        UNDEFINED = 0;
-        FILE_NOT_FOUND = 1;       // Post commitment file not found in expected path
-        READ_ERROR = 2;           // Failure to read commitment file
-        WRITE_ERROR = 3;          // Failure to write to commitment file
+        UNDEFINED = 0; // Lane's favorite imposible value
+        FILE_NOT_FOUND = 1; // All expected post data files not found in expected path
+        READ_ERROR = 2; // Failure to read from a data file
+        WRITE_ERROR = 3; // Failure to write to a data file
     }
     ErrorType error_type = 6;
 }
