@@ -2,6 +2,7 @@ syntax = "proto3";
 package spacemesh;
 import "spacemesh/types.proto";
 
+// Data items related to an account
 enum AccountDataFlag {
     NONE = 0;
     TRANSACTION_RECIEPT = 1; // tx receipt for a tx to or from an account
@@ -19,6 +20,7 @@ message AccountDataQueryParams {
     uint32 offset = 3; // return results from offset
 }
 
+// An account related data item
 message AccountData {
     oneof item {
         Reward reward = 1;
@@ -32,11 +34,10 @@ message AccountDataQueryResults {
     uint32 total_results = 2;
 }
 
-
 message SmesherDataQueryParams {
     SmesherId smesher_id = 1;
-    uint32 max_results = 3; // max numbers of results client would like to get
-    uint32 offset = 4;      // return results from offset
+    uint32 max_results = 2; // max numbers of results client would like to get
+    uint32 offset = 3;      // return results from offset
 }
 
 message SmesherDataQueryResults {
