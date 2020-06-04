@@ -39,7 +39,7 @@ service SmesherService {
     /////// Proofs of space data files management
 
     // Returns post data status from the node
-    rpc PostData(google.protobuf.Empty) returns (PostStatus);
+    rpc PostStatus(google.protobuf.Empty) returns (PostStatus);
 
     // Returns a bit field of all available setup compute engines
     rpc AvailableComputeEngines(google.protobuf.Empty) returns (ComputeEngineFlags);
