@@ -29,7 +29,7 @@ message AccountMeshData {
     }
 }
 
-message AccountMeshDataResult {
+message AccountMeshDataQueryResult {
     repeated AccountMeshData data = 1;
     uint64 total_results = 2; // total number of availble results
 }
