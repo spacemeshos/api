@@ -21,7 +21,7 @@ message PostData {
     uint64 data_size = 2; // Requested post data size
     bool   append = 3; // Append to existing files if they exist. Otherwise overwrite.
     bool   throttle = 4; // Throttle down setup phase computations while user is interactive on ///system
-    uint32 compute_engine_flags = 5; // One or more available compute engines to be used for gpu post
+    ComputeEngineFlags compute_engine_flags = 5; // One or more available compute engines to be used for gpu post
 }
 
 // Param passed to methods to indicate a request to delete data files
