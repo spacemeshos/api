@@ -49,12 +49,12 @@ enum GlobalStateDataItemFlag {
     NONE = 0;
     REWARD = 1;
     TRANSACTION_STATE = 2;
-    TRANSACTION_RECIEPT = 4;
+    TRANSACTION_RECEIPT = 4;
     GLOBAL_STATE = 8;
 }
 
 message GlobalStateStreamParams {
-    uint32 global_state_data_item_flags = 1; // bitmap of GlobalStateDataItemFlags
+    uint32 global_state_data_item_flags = 1; // bitmap of GlobalStateDataItemFlag
 }
 
 message GlobalStateDataItem {
