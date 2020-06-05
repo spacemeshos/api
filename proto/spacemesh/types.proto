@@ -88,8 +88,9 @@ message TransactionState {
         REJECTED = 1; // rejected pre STF processing due to, e.g., bad data
         INSUFFICIENT_FUNDS = 2; // rejected pre STF processing by funds check
         CONFLICTING = 3; // rejected pre STF due to conflicting counter
-        PENDING = 4; // included in a block on the mesh. Pending processing by STF
-        PROCESSED = 5; // processed by the STF. Processing results are in the tx receipt
+        MEMPOOL = 4; // in mem-pool but not on the mesh yet
+        PENDING = 5; // included in a block on the mesh. Pending processing by STF
+        PROCESSED = 6; // processed by the STF. Processing results are in the tx receipt
     }
     TransactionStateType state = 2;
 }
