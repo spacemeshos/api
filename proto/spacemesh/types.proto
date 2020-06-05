@@ -72,7 +72,9 @@ message TransactionReceipt {
     uint64 gas_used = 3; // gas units used by the transaction
     Amount fee = 4; // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
     uint64 layer_number = 5; // the layer in which the STF processed this transaction
-    AccountId app_address = 6; // deployed app address or code template address
+    uint32 index = 6; // the index of the tx in the ordered list of txs to be executed by stf in the layer.
+    AccountId app_address = 7; // deployed app address or code template address
+
 }
 
 // TransactionState is the "journey" of a tx from newly-submitted, to being
