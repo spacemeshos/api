@@ -84,7 +84,7 @@ message TransactionReceipt {
 message TransactionState {
     TransactionId id = 1;
     enum TransactionStateType {
-        UNDEFINED = 0; // default state
+        UNKNOWN = 0; // default state
         REJECTED = 1; // rejected pre-STF processing due to, e.g., bad data
         INSUFFICIENT_FUNDS = 2; // rejected pre-STF processing by funds check
         CONFLICTING = 3; // rejected pre-STF due to conflicting counter
