@@ -79,18 +79,17 @@ message TransactionReceipt {
 
 // TransactionState is the "journey" of a tx from newly-submitted, to being
 // rejected from or accepted into the mempool, to being included in the mesh (in a
-// block), to (finally) being processed by the STF. It tells us nothing about the
+// block in a layer). It tells us nothing about the
 // result of the processing.
 message TransactionState {
     TransactionId id = 1;
     enum TransactionStateType {
         UNDEFINED = 0; // default state
-        REJECTED = 1; // rejected pre STF processing due to, e.g., bad data
-        INSUFFICIENT_FUNDS = 2; // rejected pre STF processing by funds check
-        CONFLICTING = 3; // rejected pre STF due to conflicting counter
+        REJECTED = 1; // rejected pre-STF processing due to, e.g., bad data
+        INSUFFICIENT_FUNDS = 2; // rejected pre-STF processing by funds check
+        CONFLICTING = 3; // rejected pre-STF due to conflicting counter
         MEMPOOL = 4; // in mem-pool but not on the mesh yet
-        PENDING = 5; // included in a block on the mesh. Pending processing by STF
-        PROCESSED = 6; // processed by the STF. Processing results are in the tx receipt
+        MESH = 5; // Included in a layer on the mesh. Pending processing by STF
     }
     TransactionStateType state = 2;
 }

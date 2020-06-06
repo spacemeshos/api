@@ -26,6 +26,9 @@ service MeshService {
     // Number of transactions per second (a network parameter)
     rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
 
+    // Returns a transaction state which indictes if it is on the mesh
+    rpc TransactionState(TransactionId) returns (TransactionState);
+
     ////////// Queries
     // Queries return paginated, historical data.
 

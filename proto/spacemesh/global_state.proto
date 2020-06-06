@@ -11,10 +11,6 @@ service GlobalStateService {
     // Latest computed global state - layer and its root hash
     rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
-    // Returns current transaction state which describes its journey
-    // to the mesh and from the mesh to the global state (if it got processed)
-    rpc TransactionState(TransactionId) returns (TransactionState);
-
     // Returns the current state of one or more transactions
     rpc TransactionsState(TransactionsIds) returns (TransactionsState);
 

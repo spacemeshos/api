@@ -60,9 +60,8 @@ message GlobalStateStreamParams {
 message GlobalStateDataItem {
     oneof data {
         Reward reward = 1;
-        TransactionState transaction_state = 2;
-        TransactionReceipt receipt = 3;
-        GlobalState global_state = 4;
+        TransactionReceipt receipt = 2;
+        GlobalState global_state = 3;
     }
 }
 
