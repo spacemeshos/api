@@ -11,9 +11,6 @@ service GlobalStateService {
     // Latest computed global state - layer and its root hash
     rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
 
-    // Returns the current state of one or more transactions
-    rpc TransactionsState(TransactionsIds) returns (TransactionsState);
-
     // Account info in the current global state.
     rpc Account(AccountId) returns (Account);
 

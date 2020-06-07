@@ -48,10 +48,15 @@ message SmesherDataQueryResults {
 
 enum GlobalStateDataItemFlag {
     NONE = 0;
-    REWARD = 1;
-    TRANSACTION_STATE = 2;
-    TRANSACTION_RECEIPT = 4;
-    GLOBAL_STATE = 8;
+    TRANSACTION_RECEIPT = 1; // tx receipt generated
+    REWARD = 2; // reward awarded to an account
+    ACCOUNT = 4; // An account data changes (counter or balance)
+    GLOBAL_STATE = 8; //
+}
+
+message GlobalState {
+    bytes root_hash = 1;
+    uint64 layer_number = 2;
 }
 
 message GlobalStateStreamParams {
@@ -62,7 +67,8 @@ message GlobalStateDataItem {
     oneof data {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
-        GlobalState global_state = 3;
+        Account account = 3;
+        GlobalState global_state = 4;
     }
 }
 
