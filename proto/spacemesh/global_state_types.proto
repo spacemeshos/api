@@ -2,6 +2,7 @@ syntax = "proto3";
 package spacemesh;
 import "spacemesh/types.proto";
 
+
 // Data items related to an account
 enum AccountDataFlag {
     NONE = 0;

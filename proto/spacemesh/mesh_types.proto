@@ -3,6 +3,26 @@ package spacemesh;
 
 import "spacemesh/types.proto";
 
+// TransactionState is the "journey" of a tx from newly-submitted, to being
+// rejected from or accepted into the mempool, to being included in the mesh (in a
+// block in a layer). It tells us nothing about the result of the tx processing.
+message TransactionState {
+    TransactionId id = 1;
+    enum TransactionStateType {
+        UNKNOWN = 0; // default state
+        REJECTED = 1; // rejected pre-STF processing due to, e.g., invalid syntax
+        INSUFFICIENT_FUNDS = 2; // rejected pre-STF processing by funds check
+        CONFLICTING = 3; // rejected pre-STF due to conflicting counter
+        MEMPOOL = 4; // in mem-pool but not on the mesh yet
+        MESH = 5; // included in a layer on the mesh. Pending STF processing
+    }
+    TransactionStateType state = 2;
+}
+
+message TransactionsState {
+    repeated TransactionState transactions_state = 1;
+}
+
 enum AccountMeshDataFlag {
     NONE = 0;
     TRANSACTIONS = 1;

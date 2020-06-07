@@ -2,6 +2,7 @@ syntax = "proto3";
 package spacemesh;
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
+import "spacemesh/mesh_types.proto";
 
 // Provides clients a way to submit a tx to the network for processing.
 // Having a service for transaction processing enables the client to easily
