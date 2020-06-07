@@ -51,10 +51,10 @@ enum GlobalStateDataItemFlag {
     TRANSACTION_RECEIPT = 1; // tx receipt generated
     REWARD = 2; // reward awarded to an account
     ACCOUNT = 4; // An account data changes (counter or balance)
-    GLOBAL_STATE = 8; //
+    GLOBAL_STATE_HASH = 8; //
 }
 
-message GlobalState {
+message GlobalStateHash {
     bytes root_hash = 1;
     uint64 layer_number = 2;
 }
@@ -68,7 +68,7 @@ message GlobalStateDataItem {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
         Account account = 3;
-        GlobalState global_state = 4;
+        GlobalStateHash global_state = 4;
     }
 }
 

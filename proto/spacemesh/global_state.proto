@@ -9,7 +9,7 @@ import "spacemesh/global_state_types.proto";
 // Global state is modified only by the state transition function.
 service GlobalStateService {
     // Latest computed global state - layer and its root hash
-    rpc GlobalState(google.protobuf.Empty) returns (GlobalState);
+    rpc GlobalStateHash(google.protobuf.Empty) returns (GlobalStateHash);
 
     // Account info in the current global state.
     rpc Account(AccountId) returns (Account);
