@@ -26,7 +26,9 @@ service MeshService {
     // Number of transactions per second (a network parameter)
     rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
 
-    // Returns current transaction state for one or more transactions which indictes if a tx is on the mesh, on its way to the mesh or was rejected and will never get to the mesh.
+    // Returns current transaction state for one or more transactions which indicates
+    // if a tx is on the mesh, on its way to the mesh or was rejected and will never
+    // get to the mesh.
     rpc TransactionsState(TransactionsIds) returns (TransactionsState);
 
     ////////// Queries
