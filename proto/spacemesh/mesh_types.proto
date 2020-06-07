@@ -10,11 +10,11 @@ message TransactionState {
     TransactionId id = 1;
     enum TransactionStateType {
         UNKNOWN = 0; // default state
-        REJECTED = 1; // rejected pre-STF processing due to, e.g., invalid syntax
-        INSUFFICIENT_FUNDS = 2; // rejected pre-STF processing by funds check
-        CONFLICTING = 3; // rejected pre-STF due to conflicting counter
-        MEMPOOL = 4; // in mem-pool but not on the mesh yet
-        MESH = 5; // included in a layer on the mesh. Pending STF processing
+        REJECTED = 1; // rejected from mempool due to, e.g., invalid syntax
+        INSUFFICIENT_FUNDS = 2; // rejected from mempool by funds check
+        CONFLICTING = 3; // rejected from mempool due to conflicting counter
+        MEMPOOL = 4; // in mempool but not on the mesh yet
+        MESH = 5; // submitted to the mesh
     }
     TransactionStateType state = 2;
 }
