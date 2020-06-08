@@ -38,9 +38,11 @@ The Spacemesh API consists of several logical services, each of which contains a
 
 - [NodeService](proto/spacemesh/node.proto) is a readonly interface for reading basic node-related data such as node status, software version and build number, and errors. It also allows a consumer to request that the node start the sync process, thus enabling the stream endpoints.
 - [MeshService](proto/spacemesh/mesh.proto) is a readonly interface that provides access to mesh data such as layer number, epoch number, and network ID. It provides streams for watching layers (which contain blocks, transactions, etc.). In the future this service will be expanded to include other mesh-related endpoints.
-- [GlobalStateService](proto/spacemesh/global_state.proto) is a readonly interfact that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts. In the future this service will be expanded to include additional endpoints for things such as global state hash and events emitted by smart contracts.
+- [GlobalStateService](proto/spacemesh/global_state.proto) is a readonly interface that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts.
+- [TransactionService](proto/spacemesh/tx.proto) is a read-write interface that allows the client to submit a new transaction, and to follow the state of one or more transactions on its journey from submission to mempool to block to mesh to STF.
+- [SmesherService](proto/spacemesh/smesher.proto) is a read-write interface that allows the client to query, and set, parameters related to smeshing (mining), such as PoST commitment, coinbase, etc.
 
-In addition to these services, there is also a set of [global types](proto/spacemesh/types.proto) which are shared among all of the services.
+Each of these services relies on one or more sets of message types, which live in `*types.proto` files in the same directory as the service definition files.
 
 ## Intended Usage Pattern
 
@@ -52,7 +54,7 @@ In addition to these services, there is also a set of [global types](proto/space
 1. Client monitors node using `node.SyncStatusStream()` and `node.ErrorStream()` and handle node critical errors. Return to step 1 as necessary.
 1. Client gracefully shuts down the node by calling `node.Shutdown()` when it is done processing data.
 
-## Dev
+## Development
 
 ### Building
 
