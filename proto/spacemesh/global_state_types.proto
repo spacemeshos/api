@@ -2,8 +2,8 @@ syntax = "proto3";
 package spacemesh;
 import "spacemesh/types.proto";
 
-
-// Data items related to an account
+// All data items that touch an account (see below note, under the associated
+// message)
 enum AccountDataFlag {
     NONE = 0;
     TRANSACTION_RECEIPT = 1; // tx receipt for a tx to or from an account
@@ -22,7 +22,11 @@ message AccountDataQueryParams {
     uint32 offset = 3; // return results from offset
 }
 
-// An account related data item
+// All data items that touch an account: receipts for transactions from, or to
+// this account, as well as those that modify its state (e.g., token transfers).
+// Rewards here includes fees paid. Account contains counter and balance updates.
+// Note that this mixes concerns: transactions and rewards are _causes_ of a
+// change to account state; nonce and balance updates are _results_.
 message AccountData {
     oneof item {
         Reward reward = 1;
@@ -50,9 +54,9 @@ message SmesherDataQueryResults {
 enum GlobalStateDataItemFlag {
     NONE = 0;
     TRANSACTION_RECEIPT = 1; // tx receipt generated
-    REWARD = 2; // reward awarded to an account
-    ACCOUNT = 4; // An account data changes (counter or balance)
-    GLOBAL_STATE_HASH = 8; //
+    REWARD = 2; // reward awarded to an account (includes fees paid)
+    ACCOUNT = 4; // account data changes (counter or balance)
+    GLOBAL_STATE_HASH = 8; // hash of global state (i.e., state root)
 }
 
 message GlobalStateHash {
