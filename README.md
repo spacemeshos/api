@@ -1,5 +1,5 @@
 # Spacemesh API
-[Protobuf](https://developers.google.com/protocol-buffers) implementation of the Spacemesh API. This is a work in progress. See the more complete [master API spec](https://docs.google.com/spreadsheets/d/1P89OVWdgJocPy0CGM43Ge7Sx_6dabCBEagaVQfOk9us/edit).
+[Protobuf](https://developers.google.com/protocol-buffers) implementation of the Spacemesh API. This repository contains only API design, not implementation. For implementation work, see [go-spacemesh](https://github.com/spacemeshos/go-spacemesh/). Note that API implementation may considerably lag design.
 
 ## Design
 
