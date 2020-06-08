@@ -1,14 +1,30 @@
 syntax = "proto3";
 package spacemesh;
+
 import "google/protobuf/empty.proto";
 import "spacemesh/types.proto";
-import "spacemesh/mesh_types.proto";
+import "spacemesh/node_tx_types.proto";
 
-// Provides clients a way to submit a tx to the network for processing.
-// Having a service for transaction processing enables the client to easily
-// turn this feature on and off. Transactions are submitted to a node's mempool
-// and not to the mesh.
+// Provides clients a way to submit a tx to the network for processing, and to
+// check or follow the "journey" of a tx from mempool to block inclusion to
+// mesh to STF processing. This service is separate from the Mesh and
+// GlobalState services because txs move across both.
 service NodeTxService {
-    // Submit a new transaction to the node for processing
+    // Submit a new tx to the node for processing. The response
+    // TransactionState message contains both the txid of the new tx, as well
+    // as whether or not it was admitted into the mempool.
     rpc SubmitTransaction(Transaction) returns (TransactionState);
+
+    // Returns current tx state for one or more txs which indicates if a tx is
+    // on the mesh, on its way to the mesh or was rejected and will never get
+    // to the mesh
+    rpc TransactionsState(TransactionsIds) returns (TransactionsState);
+
+    ////////// Streams
+    // Streams return live, new data as it becomes available to the node and
+    // not historical data.
+
+    // Returns tx state for one or more txs every time the tx state changes for
+    // one of these txs
+    rpc TransactionsStateStream(TransactionsIds) returns (stream TransactionsState);
 }
