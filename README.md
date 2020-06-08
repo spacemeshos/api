@@ -3,10 +3,41 @@
 
 ## Design
 
+The API was designed with the following considerations in mind.
+
+### Mesh vs. global state
+
+In Spacemesh, "the mesh" refers to data structures that are _explicitly_ stored by all full nodes, and are subject to consensus. This consists of transactions, collated into blocks, which in turn are collated into layers. Note that, in addition to transactions, blocks contain metadata such as layer number and signature. The mesh also includes ATXs (activations).
+
+By contrast, "global state" refers to data structures that are calculated _implicitly_ based on mesh data. These data are not stored anywhere in the mesh explicitly. Global state includes account state (balance, counter/nonce value, and, for smart contract accounts, code), transaction receipts, and smart contract event logs. These data need not be stored indefinitely by all full nodes (although they should be stored indefinitely by archive nodes).
+
+The API provides access to both types of data, but they are divided into different API services. For more information on this distinction, see [SMIP-0003: Global state data, STF, APIs](https://github.com/spacemeshos/SMIPS/issues/13).
+
+### Transactions
+
+Transactions span mesh and global state data. They are submitted to a node, which may or may not admit the transaction to its mempool. If the transaction is admitted to the mempool, it will probably end up being added to a newly-mined block, and that block will be submitted to the mesh in some layer. After that, the layer containing the block will eventually be approved, and then confirmed, by the consensus mechanism. After the layer is approved, the transaction will be run through the STF (state transition function), and if it succeeds, it may update global state.
+
+Since transactions span multiple layers of abstraction, the API exposes transaction data in its own service, TransactionService.
+
+### Queries and streams
+
+Most API endpoints are one of two types: a query, or a stream. This is an important distinction, and in many cases, the same data are exposed through both a query and a stream endpoint.
+
+- **Queries** are used to read paginated historical data. A `*Query` endpoint accepts a `*Params` message which typically contains the following:
+    - `filter`: A filter (see Streams, below)
+    - `min_layer`: The first layer to return results from
+    - `max_results`: The maximum number of results to return
+    - `offset`: Page offset
+- **Streams** are used to read realtime data. They do not return historical data. Each time the node creates, or learns of, a piece of data matching the filter and type, or sees an update to a matching piece of data, it sends it over the stream. A `*Stream` endpoint accepts a `*Filter` message which typically contains the following:
+    - `*_id`: The ID of the data type to filter on (e.g., "show me all data items that touch this `account_id`")
+    - `flags`: A bit field that allows the client to select which, among multiple types multiplexed on this stream, to receive
+
+## Services
+
 The Spacemesh API consists of several logical services, each of which contains a set of one or more RPC endpoints. The node operator can enable or disable each service independently using the CLI. The current set of services is as follows:
 
 - [NodeService](proto/spacemesh/node.proto) is a readonly interface for reading basic node-related data such as node status, software version and build number, and errors. It also allows a consumer to request that the node start the sync process, thus enabling the stream endpoints.
-- [MeshService](proto/spacemesh/mesh.proto) is a readonly interface that provides access to mesh data such as layer and epoch number, and network ID. It provides streams for watching layers (which contain blocks, transactions, etc.). In the future this service will be expanded to include other mesh-related endpoints.
+- [MeshService](proto/spacemesh/mesh.proto) is a readonly interface that provides access to mesh data such as layer number, epoch number, and network ID. It provides streams for watching layers (which contain blocks, transactions, etc.). In the future this service will be expanded to include other mesh-related endpoints.
 - [GlobalStateService](proto/spacemesh/global_state.proto) is a readonly interfact that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts. In the future this service will be expanded to include additional endpoints for things such as global state hash and events emitted by smart contracts.
 
 In addition to these services, there is also a set of [global types](proto/spacemesh/types.proto) which are shared among all of the services.
