@@ -31,13 +31,12 @@ message Account {
     Amount balance = 3; // known account balance
 }
 
-message GlobalState {
-    bytes root_hash = 1;
-    uint64 layer_number = 2;
-}
-
 message TransactionId {
     bytes id = 1;
+}
+
+message TransactionsIds {
+    repeated TransactionId transaction_id = 1;
 }
 
 message ActivationId {
@@ -67,24 +66,8 @@ message TransactionReceipt {
     uint64 gas_used = 3; // gas units used by the transaction
     Amount fee = 4; // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
     uint64 layer_number = 5; // the layer in which the STF processed this transaction
-    AccountId app_address = 6; // deployed app address or code template address
-}
-
-// TransactionState is the "journey" of a tx from newly-submitted, to being
-// rejected from or accepted into the mempool, to being included in the mesh (in a
-// block), to (finally) being processed by the STF. It tells us nothing about the
-// result of the processing.
-message TransactionState {
-    TransactionId id = 1;
-    enum TransactionStateType {
-        UNDEFINED = 0; // default state
-        REJECTED = 1; // rejected pre STF processing due to, e.g., bad data
-        INSUFFICIENT_FUNDS = 2; // rejected pre STF processing by funds check
-        CONFLICTING = 3; // rejected pre STF due to conflicting counter
-        PENDING = 4; // included in a block on the mesh. Pending processing by STF
-        PROCESSED = 5; // processed by the STF. Processing results are in the tx receipt
-    }
-    TransactionStateType state = 2;
+    uint32 index = 6; // the index of the tx in the ordered list of txs to be executed by stf in the layer.
+    AccountId app_address = 7; // deployed app address or code template address
 }
 
 // Data specific to a simple coin transaction.

@@ -11,7 +11,7 @@ enum ComputeEngineFlag {
 }
 
 message ComputeEngineFlags {
-    uint32 flags = 1;
+    uint32 compute_engine_flags = 1;
 }
 
 // Basic post data. Used for users to provide requested post data and by

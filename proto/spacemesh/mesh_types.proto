@@ -3,7 +3,27 @@ package spacemesh;
 
 import "spacemesh/types.proto";
 
-enum AccountMeshDataFlags {
+// TransactionState is the "journey" of a tx from newly-submitted, to being
+// rejected from or accepted into the mempool, to being included in the mesh (in a
+// block in a layer). It tells us nothing about the result of the tx processing.
+message TransactionState {
+    TransactionId id = 1;
+    enum TransactionStateType {
+        UNKNOWN = 0; // default state
+        REJECTED = 1; // rejected from mempool due to, e.g., invalid syntax
+        INSUFFICIENT_FUNDS = 2; // rejected from mempool by funds check
+        CONFLICTING = 3; // rejected from mempool due to conflicting counter
+        MEMPOOL = 4; // in mempool but not on the mesh yet
+        MESH = 5; // submitted to the mesh
+    }
+    TransactionStateType state = 2;
+}
+
+message TransactionsState {
+    repeated TransactionState transactions_state = 1;
+}
+
+enum AccountMeshDataFlag {
     NONE = 0;
     TRANSACTIONS = 1;
     ACTIVATIONS = 2;
@@ -11,12 +31,12 @@ enum AccountMeshDataFlags {
 
 message AccountMeshDataStreamFilter {
     AccountId account_id = 1;
-    uint32 flags = 2; // A bit field of AccountMeshDataFlags
+    uint32 account_mesh_data_flags = 2; // A bit field of AccountMeshDataFlags
 }
 
 message AccountMeshDataQueryParams {
     AccountId account_id = 1;
-    uint32 flags = 2; // A bit field of AccountMeshDataFlags
+    uint32 account_mesh_data_flags = 2; // A bit field of AccountMeshDataFlags
     uint64 min_layer = 3; // return data only from this layer or later
     uint32 max_results = 4; // max number of results to return
     uint32 offset = 5; // query offset
@@ -31,7 +51,7 @@ message AccountMeshData {
 
 message AccountMeshDataQueryResult {
     repeated AccountMeshData data = 1;
-    uint64 total_results = 2; // total number of availble results
+    uint32 total_results = 2; // total number of availble results
 }
 
 message LayersQueryParams {

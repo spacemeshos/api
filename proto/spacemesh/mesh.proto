@@ -26,18 +26,27 @@ service MeshService {
     // Number of transactions per second (a network parameter)
     rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
 
+    // Returns current transaction state for one or more transactions which indicates
+    // if a tx is on the mesh, on its way to the mesh or was rejected and will never
+    // get to the mesh.
+    rpc TransactionsState(TransactionsIds) returns (TransactionsState);
+
     ////////// Queries
     // Queries return paginated, historical data.
 
     // Get account data query
-    rpc AccountData(AccountMeshDataQueryParams) returns (AccountMeshDataQueryResult);
+    rpc AccountDataQuery(AccountMeshDataQueryParams) returns (AccountMeshDataQueryResult);
 
     // Layers data query
-    rpc Layers(LayersQueryParams) returns (LayersQueryResult);
+    rpc LayersQuery(LayersQueryParams) returns (LayersQueryResult);
 
     ////////// Streams
     // Streams return live, new data as it becomes available to the node and not
     // historical data.
+
+    // Returns transaction state for one or more transactions every time the transaction state
+    // changes for one of these transactions
+    rpc TransactionsStateStream(TransactionsIds) returns (stream TransactionsState);
 
     // A stream of transactions or activations from an account.
     // Includes simple coin transactions with the account as the destination.
