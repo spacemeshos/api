@@ -31,7 +31,7 @@ service GlobalStateService {
 
     // Get a stream of account related changes such as account balance change,
     // tx receipts and rewards
-    rpc AccountDataStream(AccountDataParams) returns (stream AccountData);
+    rpc AccountDataStream(AccountDataFilter) returns (stream AccountData);
 
     // Rewards awarded to a smesher id
     rpc SmesherRewardStream(SmesherId) returns (stream Reward);
