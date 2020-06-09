@@ -11,13 +11,13 @@ enum AccountDataFlag {
     ACCOUNT = 4; // account data changes (counter or balance)
 }
 
-message AccountDataParams {
+message AccountDataFilter {
     AccountId account_id = 1;
     uint32 account_data_flags = 2; // bit field of AccountDataFlag
 }
 
 message AccountDataQueryParams {
-    AccountDataParams account_data = 1;
+    AccountDataFilter filter = 1;
     uint32 max_results = 2; // max numbers of results client would like to get
     uint32 offset = 3; // return results from offset
 }

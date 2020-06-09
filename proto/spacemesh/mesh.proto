@@ -41,7 +41,7 @@ service MeshService {
 
     // A stream of transactions or activations from an account.
     // Includes simple coin transactions with the account as the destination.
-    rpc AccountDataStream(AccountMeshDataStreamFilter) returns (stream AccountMeshData);
+    rpc AccountDataStream(AccountMeshDataFilter) returns (stream AccountMeshData);
 
     // Layer with blocks, transactions and activations
     // Sent each time layer data changes. Designed for heavy-duty clients.
