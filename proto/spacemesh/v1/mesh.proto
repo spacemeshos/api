@@ -1,8 +1,8 @@
 syntax = "proto3";
-package spacemesh;
+package spacemesh.v1;
 import "google/protobuf/empty.proto";
-import "spacemesh/types.proto";
-import "spacemesh/mesh_types.proto";
+import "spacemesh/v1/types.proto";
+import "spacemesh/v1/mesh_types.proto";
 
 
 // Readonly API for basic mesh info

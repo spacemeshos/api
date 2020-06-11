@@ -1,7 +1,7 @@
 syntax = "proto3";
-package spacemesh;
+package spacemesh.v1;
 
-import "spacemesh/types.proto";
+import "spacemesh/v1/types.proto";
 
 enum AccountMeshDataFlag {
     NONE = 0;

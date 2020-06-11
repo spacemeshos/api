@@ -1,5 +1,5 @@
 syntax = "proto3";
-package spacemesh;
+package spacemesh.v1;
 
 message SimpleInt {
     uint64 value = 1;

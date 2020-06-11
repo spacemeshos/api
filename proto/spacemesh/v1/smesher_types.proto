@@ -1,5 +1,5 @@
 syntax = "proto3";
-package spacemesh;
+package spacemesh.v1;
 
 
 // Bit flags for compute engine selection
