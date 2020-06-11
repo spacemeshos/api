@@ -122,7 +122,8 @@ ssh: $(BUF)
 .PHONY: protoc
 protoc: $(PROTOC)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
-	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null | grep -v warning 2>&1
+	(protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
+	  && { echo "one or more warnings detected"; exit 1; } || exit 0
 
 # clean deletes any files not checked in and the cache for all platforms.
 
