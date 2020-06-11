@@ -1,33 +1,33 @@
 syntax = "proto3";
 package spacemesh.v1;
 import "google/protobuf/empty.proto";
-import "spacemesh/v1/types.proto";
+import "spacemesh/v1/node_types.proto";
 
 // Readonly basic node data
 service NodeService {
     // A simple test endpoint
-    rpc Echo(SimpleString) returns (SimpleString);
+    rpc Echo(EchoRequest) returns (EchoResponse);
 
     // Returns the version of the node software as a semver string
-    rpc Version(google.protobuf.Empty) returns (SimpleString);
+    rpc Version(google.protobuf.Empty) returns (VersionResponse);
 
     // Returns the github tag or branch used to build the node
-    rpc Build(google.protobuf.Empty) returns (SimpleString);
+    rpc Build(google.protobuf.Empty) returns (BuildResponse);
 
     //  Current node status (net and sync)
-    rpc Status(google.protobuf.Empty) returns (NodeStatus);
+    rpc Status(google.protobuf.Empty) returns (StatusResponse);
 
     // Request that the node start syncing the mesh
-    rpc SyncStart(google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc SyncStart(SyncStartRequest) returns (google.protobuf.Empty);
 
     // Request that the node initiate graceful shutdown
-    rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc Shutdown(ShutdownRequest) returns (google.protobuf.Empty);
 
     ////////// Node streaming data
 
     // Node status events (sync and net)
-    rpc StatusStream(google.protobuf.Empty) returns (stream NodeStatus);
+    rpc StatusStream(StatusStreamRequest) returns (stream StatusStreamResponse);
 
     // Node error events
-    rpc ErrorStream(google.protobuf.Empty) returns (stream NodeError);
+    rpc ErrorStream(ErrorStreamRequest) returns (stream ErrorStreamResponse);
 }
