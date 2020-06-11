@@ -45,7 +45,8 @@ service SmesherService {
     rpc AvailableComputeEngines(google.protobuf.Empty) returns (ComputeEngineFlags);
 
     // Starts (or continues) a post init phase. Supports resuming a previously
-    // started init session.
+    // started init session, as well as changing post params (e.g., post data size)
+    // after initial setup.
     // Returns true if request is accepted by node, false if it fails
     rpc CreatePostData(PostData) returns (TypedResult);
 
