@@ -1,6 +1,14 @@
 syntax = "proto3";
 package spacemesh.v1;
+import "spacemesh/v1/types.proto";
 
+message SmesherIdResponse {
+    AccountId account_id = 1;
+}
+
+message CoinbaseResponse {
+    AccountId account_id = 1;
+}
 
 // Bit flags for compute engine selection
 enum ComputeEngineFlag {
