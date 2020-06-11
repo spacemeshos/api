@@ -97,3 +97,12 @@ Detection of breaking changes is turned off in GitHub actions [continuous integr
 ```
 
 This command should have exit code 0 and no output. See the [style guide](https://buf.build/docs/style-guide).
+
+### Third party files
+
+The `third_party/` directory includes several third-party libraries, which are required by some of the Google extensions used in the API definition files. These have manually been copied in from two sources:
+
+- https://github.com/googleapis/googleapis/tree/master/google (`google.api`, `google.rpc`)
+- https://github.com/protocolbuffers/protobuf/tree/master/src/google/protobuf (`google.protobuf`)
+
+These files do not change often and probably do not need to be updated. However, if updates were to be more common, it might make more sense to add a dynamic dependency on these external libraries using a Makefile or `git submodule`.
