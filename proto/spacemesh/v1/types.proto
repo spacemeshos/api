@@ -28,10 +28,6 @@ message TransactionId {
     bytes id = 1;
 }
 
-message TransactionsIds {
-    repeated TransactionId transaction_id = 1;
-}
-
 message ActivationId {
     bytes id = 1;
 }
