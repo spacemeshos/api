@@ -9,41 +9,41 @@ import "spacemesh/v1/mesh_types.proto";
 service MeshService {
 
     // Network genesis time as unix epoch time
-    rpc GenesisTime(google.protobuf.Empty) returns (SimpleInt);
+    rpc GenesisTime(google.protobuf.Empty) returns (GenesisTimeResponse);
 
     // Current layer number
-    rpc CurrentLayer(google.protobuf.Empty) returns (SimpleInt);
+    rpc CurrentLayer(google.protobuf.Empty) returns (CurrentLayerResponse);
 
     // Current epoch number
-    rpc CurrentEpoch(google.protobuf.Empty) returns (SimpleInt);
+    rpc CurrentEpoch(google.protobuf.Empty) returns (CurrentEpochResponse);
 
     // Network ID
-    rpc NetId(google.protobuf.Empty) returns (SimpleInt);
+    rpc NetId(google.protobuf.Empty) returns (NetIdResponse);
 
     // Number of layers per epoch (a network parameter)
-    rpc EpochNumLayers(google.protobuf.Empty) returns (SimpleInt);
+    rpc EpochNumLayers(google.protobuf.Empty) returns (EpochNumLayersResponse);
 
     // Number of transactions per second (a network parameter)
-    rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (SimpleInt);
+    rpc MaxTransactionsPerSecond(google.protobuf.Empty) returns (MaxTransactionsPerSecondResponse);
 
     ////////// Queries
     // Queries return paginated, historical data.
 
     // Get account data query
-    rpc AccountDataQuery(AccountMeshDataQueryParams) returns (AccountMeshDataQueryResult);
+    rpc AccountMeshDataQuery(AccountMeshDataQueryRequest) returns (AccountMeshDataQueryResponse);
 
     // Layers data query
-    rpc LayersQuery(LayersQueryParams) returns (LayersQueryResult);
+    rpc LayersQuery(LayersQueryRequest) returns (LayersQueryResponse);
 
     ////////// Streams
     // Streams return live, new data as it becomes available to the node and not
     // historical data.
 
-    // A stream of transactions or activations from an account.
+    // A stream of transactions and activations from an account.
     // Includes simple coin transactions with the account as the destination.
-    rpc AccountDataStream(AccountMeshDataFilter) returns (stream AccountMeshData);
+    rpc AccountMeshDataStream(AccountMeshDataStreamRequest) returns (stream AccountMeshDataStreamResponse);
 
     // Layer with blocks, transactions and activations
     // Sent each time layer data changes. Designed for heavy-duty clients.
-    rpc LayerStream(google.protobuf.Empty) returns (stream Layer);
+    rpc LayerStream(google.protobuf.Empty) returns (stream LayerStreamResponse);
 }
