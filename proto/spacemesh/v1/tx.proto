@@ -1,7 +1,6 @@
 syntax = "proto3";
 package spacemesh.v1;
 
-import "google/protobuf/empty.proto";
 import "spacemesh/v1/tx_types.proto";
 
 // Provides clients a way to submit a tx to the network for processing, and to
