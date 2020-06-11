@@ -22,12 +22,22 @@ HTTPS_GIT := https://github.com/spacemesh/api.git
 # See https://buf.build/docs/inputs#ssh for more details.
 SSH_GIT := ssh://git@github.com/spacemesh/api.git
 # This controls the version of buf to install and use.
-BUF_VERSION := 0.11.0
+BUF_VERSION := 0.16.0
+
+# This controls the version of protoc to install and use.
+PROTOC_VERSION = 3.12.3
+
+# The include flags to pass to protoc.
+PROTOC_INCLUDES := -I ./proto -I ./third_party
+
+# The files to run protoc on
+PROTOC_INPUTS := $(shell find . -name *.proto)
 
 ### Everything below this line is meant to be static, i.e. only adjust the above variables. ###
 
 UNAME_OS := $(shell uname -s)
 UNAME_ARCH := $(shell uname -m)
+UNAME_OS_PROTOC := $(shell uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/osx/')
 # Buf will be cached to ~/.cache/buf-example.
 CACHE_BASE := $(HOME)/.cache/$(PROJECT)
 # This allows switching between i.e a Docker container and your local setup without overwriting.
@@ -54,6 +64,19 @@ $(BUF):
 	@rm -rf $(dir $(BUF))
 	@mkdir -p $(dir $(BUF))
 	@touch $(BUF)
+
+PROTOC := $(CACHE_VERSIONS)/protoc/$(PROTOC_VERSION)
+$(PROTOC):
+	@rm -f /tmp/protoc.zip /tmp/bin/protoc
+	@rm -f $(CACHE_BIN)/protoc
+	@mkdir -p $(CACHE_BIN)
+	curl -sSL \
+		"https://github.com/protocolbuffers/protobuf/releases/download/v$(PROTOC_VERSION)/protoc-$(PROTOC_VERSION)-$(UNAME_OS_PROTOC)-$(UNAME_ARCH).zip" \
+		-o "/tmp/protoc.zip"
+	unzip /tmp/protoc.zip bin/protoc -d $(CACHE)
+	@rm -rf $(dir $(PROTOC))
+	@mkdir -p $(dir $(PROTOC))
+	@touch $(PROTOC)
 
 .DEFAULT_GOAL := local
 
@@ -92,6 +115,12 @@ https: $(BUF)
 ssh: $(BUF)
 	buf check lint
 	buf check breaking --experimental-git-clone --against-input "$(SSH_GIT)#branch=master"
+
+# Try to build using protoc. This performs different checks and surfaces
+# different errors than linting alone.
+.PHONY: protoc
+protoc: $(PROTOC)
+	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
 
 # clean deletes any files not checked in and the cache for all platforms.
 
