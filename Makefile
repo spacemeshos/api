@@ -117,10 +117,12 @@ ssh: $(BUF)
 	buf check breaking --experimental-git-clone --against-input "$(SSH_GIT)#branch=master"
 
 # Try to build using protoc. This performs different checks and surfaces
-# different errors than linting alone.
+# different errors than linting alone. We want this to fail on warnings as well
+# as errors, for which purpose we use grep.
 .PHONY: protoc
 protoc: $(PROTOC)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
+	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null | grep -v warning 2>&1
 
 # clean deletes any files not checked in and the cache for all platforms.
 
