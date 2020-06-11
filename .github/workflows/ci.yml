@@ -13,3 +13,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: make lint
       run: make lint
+    - name: make protoc
+      run: make protoc
