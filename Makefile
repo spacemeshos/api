@@ -46,6 +46,8 @@ CACHE := $(CACHE_BASE)/$(UNAME_OS)/$(UNAME_ARCH)
 CACHE_BIN := $(CACHE)/bin
 # Marker files are put into this directory to denote the current version of binaries that are installed.
 CACHE_VERSIONS := $(CACHE)/versions
+# We do some temporary work here
+CACHE_TMP := $(CACHE_BASE)/tmp
 
 # Update the $PATH so we can use buf directly
 export PATH := $(abspath $(CACHE_BIN)):$(PATH)
@@ -67,13 +69,14 @@ $(BUF):
 
 PROTOC := $(CACHE_VERSIONS)/protoc/$(PROTOC_VERSION)
 $(PROTOC):
-	@rm -f /tmp/protoc.zip /tmp/bin/protoc
+	@rm -f $(CACHE_TMP)/protoc.zip
 	@rm -f $(CACHE_BIN)/protoc
+	@mkdir -p $(CACHE_TMP)
 	@mkdir -p $(CACHE_BIN)
 	curl -sSL \
 		"https://github.com/protocolbuffers/protobuf/releases/download/v$(PROTOC_VERSION)/protoc-$(PROTOC_VERSION)-$(UNAME_OS_PROTOC)-$(UNAME_ARCH).zip" \
-		-o "/tmp/protoc.zip"
-	unzip /tmp/protoc.zip bin/protoc -d $(CACHE)
+		-o "$(CACHE_TMP)/protoc.zip"
+	unzip $(CACHE_TMP)/protoc.zip bin/protoc -d $(CACHE)
 	@rm -rf $(dir $(PROTOC))
 	@mkdir -p $(dir $(PROTOC))
 	@touch $(PROTOC)
