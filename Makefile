@@ -31,7 +31,16 @@ PROTOC_VERSION = 3.12.3
 PROTOC_INCLUDES := -I ./proto -I ./third_party
 
 # The files to run protoc on
-PROTOC_INPUTS := $(shell find . -name *.proto)
+PROTOC_INPUTS := $(shell find ./proto -name *.proto)
+
+# The directory to store go builds
+PROTOC_GO_BUILD_DIR := ./release/go
+
+# Plugins string for go builds (must end in ':')
+PROTOC_GO_PLUGINS := plugins=grpc:
+
+# go_opt appended to go build command (optional, obviously)
+PROTOC_GO_OPT := --go_opt=paths=source_relative
 
 ### Everything below this line is meant to be static, i.e. only adjust the above variables. ###
 
@@ -127,6 +136,14 @@ protoc: $(PROTOC)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
 	(protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
 	  && { echo "one or more warnings detected"; exit 1; } || exit 0
+
+## LANGUAGE-SPECIFIC BUILDS
+
+# Golang
+.PHONY: golang
+golang: $(PROTOC)
+	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
 
 # clean deletes any files not checked in and the cache for all platforms.
 
