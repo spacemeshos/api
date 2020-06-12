@@ -90,6 +90,10 @@ $(PROTOC):
 	@mkdir -p $(dir $(PROTOC))
 	@touch $(PROTOC)
 
+PROTOC_GEN_GO := $(GOPATH)/bin/protoc-gen-go
+$(PROTOC_GEN_GO):
+	go get -u github.com/golang/protobuf/protoc-gen-go
+
 .DEFAULT_GOAL := local
 
 # deps allows us to install deps without running any checks.
@@ -141,7 +145,7 @@ protoc: $(PROTOC)
 
 # Golang
 .PHONY: golang
-golang: $(PROTOC)
+golang: $(PROTOC) | $(PROTOC_GEN_GO)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
 
