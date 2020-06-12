@@ -39,8 +39,14 @@ PROTOC_GO_BUILD_DIR := ./release/go
 # Plugins string for go builds (must end in ':')
 PROTOC_GO_PLUGINS := plugins=grpc:
 
-# go_opt appended to go build command (optional, obviously)
+# Options string appended to go build command (optional, obviously)
 PROTOC_GO_OPT := --go_opt=paths=source_relative
+
+# Plugins string for grpc-gateway (must end in ':')
+PROTOC_GATEWAY_PLUGINS := logtostderr=true:
+
+# Options string appended to grpc-gateway build command (optional)
+PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative
 
 ### Everything below this line is meant to be static, i.e. only adjust the above variables. ###
 
@@ -93,6 +99,10 @@ $(PROTOC):
 PROTOC_GEN_GO := $(GOPATH)/bin/protoc-gen-go
 $(PROTOC_GEN_GO):
 	go get -u github.com/golang/protobuf/protoc-gen-go
+
+PROTOC_GEN_GRPC_GATEWAY := $(GOPATH)/bin/protoc-gen-grpc-gateway
+$(PROTOC_GEN_GRPC_GATEWAY):
+	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 
 .DEFAULT_GOAL := local
 
@@ -148,6 +158,12 @@ protoc: $(PROTOC)
 golang: $(PROTOC) | $(PROTOC_GEN_GO)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
+
+# grpc-gateway
+.PHONY: grpc-gateway
+grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
+	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	  --grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
 
 # clean deletes any files not checked in and the cache for all platforms.
 
