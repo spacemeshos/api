@@ -31,6 +31,8 @@ message NodeStatus {
     uint64 verified_layer = 5; // the last layer node has verified
 }
 
+message StatusRequest {}
+
 message StatusResponse {
     NodeStatus status = 1;
 }
