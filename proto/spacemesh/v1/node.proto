@@ -14,14 +14,14 @@ service NodeService {
     // Returns the github tag or branch used to build the node
     rpc Build(google.protobuf.Empty) returns (BuildResponse);
 
-    //  Current node status (net and sync)
+    // Current node status (net and sync)
     rpc Status(StatusRequest) returns (StatusResponse);
 
     // Request that the node start syncing the mesh
-    rpc SyncStart(SyncStartRequest) returns (google.protobuf.Empty);
+    rpc SyncStart(SyncStartRequest) returns (SyncStartResponse);
 
     // Request that the node initiate graceful shutdown
-    rpc Shutdown(ShutdownRequest) returns (google.protobuf.Empty);
+    rpc Shutdown(ShutdownRequest) returns (ShutdownResponse);
 
     ////////// Node streaming data
 
