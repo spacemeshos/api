@@ -1,12 +1,18 @@
 syntax = "proto3";
 package spacemesh.v1;
+import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "spacemesh/v1/node_types.proto";
 
 // Readonly basic node data
 service NodeService {
     // A simple test endpoint
-    rpc Echo(EchoRequest) returns (EchoResponse);
+    rpc Echo(EchoRequest) returns (EchoResponse) {
+        option (google.api.http) = {
+            post: "/v1/node/echo"
+            body: "*"
+        };
+    }
 
     // Returns the version of the node software as a semver string
     rpc Version(google.protobuf.Empty) returns (VersionResponse);
