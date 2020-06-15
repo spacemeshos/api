@@ -1,0 +1,75 @@
+syntax = "proto3";
+package spacemesh.v1;
+import "spacemesh/v1/types.proto";
+import "google/rpc/status.proto";
+
+message EchoRequest {
+    SimpleString msg = 1;
+}
+
+message EchoResponse {
+    SimpleString msg = 1;
+}
+
+message VersionResponse {
+    SimpleString version_string = 1;
+}
+
+message BuildResponse {
+    SimpleString build_string = 1;
+}
+
+message SyncStartRequest {}
+
+message SyncStartResponse {
+    google.rpc.Status status = 1;
+}
+
+message ShutdownRequest {}
+
+message ShutdownResponse {
+    google.rpc.Status status = 1;
+}
+
+// current node status
+message NodeStatus {
+    uint64 connected_peers = 1; // number of connected neighbors
+    bool   is_synced = 2; // true when meshed is synced
+    uint64 synced_layer = 3; // the last layer node has synced
+    uint64 top_layer = 4; // top layer is the tip
+    uint64 verified_layer = 5; // the last layer node has verified
+}
+
+message StatusRequest {}
+
+message StatusResponse {
+    NodeStatus status = 1;
+}
+
+message StatusStreamRequest {}
+
+message StatusStreamResponse {
+    NodeStatus status = 1;
+}
+
+// Represents a critical node error.
+message NodeError {
+    enum NodeErrorType {
+        NODE_ERROR_TYPE_UNSPECIFIED = 0;
+        NODE_ERROR_TYPE_PANIC = 1; // general panic
+        NODE_ERROR_TYPE_PANIC_SYNC = 2; // panic while trying to sync in the sync module
+        NODE_ERROR_TYPE_SIGNAL_SHUT_DOWN = 3; // received a shut down signal
+        NODE_ERROR_TYPE_PANIC_P2P = 4; // p2p module panic
+        NODE_ERROR_TYPE_PANIC_HARE = 5; // hare protocol panic
+    }
+    NodeErrorType error_type = 1;
+    string message = 2;
+    string stack_trace = 3;
+}
+
+message ErrorStreamRequest {}
+
+message ErrorStreamResponse {
+    NodeError error = 1;
+}
+

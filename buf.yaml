@@ -4,8 +4,11 @@ build:
     - third_party
 lint:
   use:
-    - BASIC
-    - FILE_LOWER_SNAKE_CASE
+    - DEFAULT
+  ignore:
+    - google
+  rpc_allow_google_protobuf_empty_requests: true
+  rpc_allow_google_protobuf_empty_responses: true
 breaking:
   use:
     - WIRE_JSON

@@ -23,12 +23,12 @@ Since transactions span multiple layers of abstraction, the API exposes transact
 
 Most API endpoints are one of two types: a query, or a stream. This is an important distinction, and in many cases, the same data are exposed through both a query and a stream endpoint.
 
-- **Queries** are used to read paginated historical data. A `*Query` endpoint accepts a `*Params` message which typically contains the following:
+- **Queries** are used to read paginated historical data. A `*Query` endpoint accepts a `*Request` message that typically contains the following:
     - `filter`: A filter (see Streams, below)
     - `min_layer`: The first layer to return results from
     - `max_results`: The maximum number of results to return
     - `offset`: Page offset
-- **Streams** are used to read realtime data. They do not return historical data. Each time the node creates, or learns of, a piece of data matching the filter and type, or sees an update to a matching piece of data, it sends it over the stream. A `*Stream` endpoint accepts a `*Filter` message which typically contains the following:
+- **Streams** are used to read realtime data. They do not return historical data. Each time the node creates, or learns of, a piece of data matching the filter and type, or sees an update to a matching piece of data, it sends it over the stream. A `*Stream` endpoint accepts a `*Request` message, containing the following, that functions as a filter:
     - `*_id`: The ID of the data type to filter on (e.g., "show me all data items that touch this `account_id`")
     - `flags`: A bit field that allows the client to select which, among multiple types multiplexed on this stream, to receive
 
@@ -49,10 +49,10 @@ Each of these services relies on one or more sets of message types, which live i
 ### Mesh data processing flow
 1. Client starts a full node with flags set to turn syncing off and to open the GRPC APIs
 1. Client registers on the streaming GRPC api methods that are of interest
-1. Client calls `node.SyncStart()` to request that the node start syncing
+1. Client calls `NodeService.SyncStart()` to request that the node start syncing
 1. Client processes streaming data it receives from the node
-1. Client monitors node using `node.SyncStatusStream()` and `node.ErrorStream()` and handle node critical errors. Return to step 1 as necessary.
-1. Client gracefully shuts down the node by calling `node.Shutdown()` when it is done processing data.
+1. Client monitors node using `NodeService.SyncStatusStream()` and `NodeService.ErrorStream()` and handle node critical errors. Return to step 1 as necessary.
+1. Client gracefully shuts down the node by calling `NodeService.Shutdown()` when it is done processing data.
 
 ## Development
 
@@ -90,13 +90,17 @@ Detection of breaking changes is turned off in GitHub actions [continuous integr
 
 ### Linting
 
-`buf` runs several [linters](https://buf.build/docs/lint-checkers).
+`buf` runs several [linters](https://buf.build/docs/lint-checkers). It's pretty strict about things such as naming conventions, to prevent downstream issues in the various languages and framework that rely upon the protobuf definition files. You can run the linter like this:
 
 ```
 > buf check lint
 ```
 
-This command should have exit code 0 and no output. See the [style guide](https://buf.build/docs/style-guide).
+If there are no issues, this command should have exit code 0 and no output.
+
+Linting also occurs automatically as part of this repository's [continuous integration](.github/workflows/ci.yml), built on GitHub Actions. In addition to linting, CI also runs the `protoc` compiler, since that tends to surface a slightly different set of warnings and errors.
+
+For more information on linting, see the [style guide](https://buf.build/docs/style-guide). For more information on the difference between the `buf` tool and the `protoc` compiler, see [Use protoc input instead of the internal compiler](https://buf.build/docs/tour-7).
 
 ### Third party files
 
