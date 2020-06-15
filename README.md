@@ -101,3 +101,12 @@ If there are no issues, this command should have exit code 0 and no output.
 Linting also occurs automatically as part of this repository's [continuous integration](.github/workflows/ci.yml), built on GitHub Actions. In addition to linting, CI also runs the `protoc` compiler, since that tends to surface a slightly different set of warnings and errors.
 
 For more information on linting, see the [style guide](https://buf.build/docs/style-guide). For more information on the difference between the `buf` tool and the `protoc` compiler, see [Use protoc input instead of the internal compiler](https://buf.build/docs/tour-7).
+
+### Third party files
+
+The `third_party/` directory includes several third-party libraries, which are required by some of the Google extensions used in the API definition files. These have manually been copied in from two sources:
+
+- https://github.com/googleapis/googleapis/tree/master/google (`google.api`, `google.rpc`)
+- https://github.com/protocolbuffers/protobuf/tree/master/src/google/protobuf (`google.protobuf`)
+
+These files do not change often and probably do not need to be updated. However, if updates were to be more common, it might make more sense to add a dynamic dependency on these external libraries using a Makefile or `git submodule`.
