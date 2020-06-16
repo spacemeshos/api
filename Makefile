@@ -40,6 +40,9 @@ PROTOC_INPUTS := $(shell find ./proto -name *.proto)
 # The directory to store go builds
 PROTOC_GO_BUILD_DIR := ./release/go
 
+# Name of go module corresponding to this path
+GO_MODULE_PATH := github.com/spacemeshos/api/release/go
+
 # Plugins string for go builds (must end in ':')
 PROTOC_GO_PLUGINS := plugins=grpc:
 
@@ -105,22 +108,22 @@ $(PROTOC):
 	@mkdir -p $(dir $(PROTOC))
 	@touch $(PROTOC)
 
-# In order to install versioned modules, go requires a dummy module
-go.mod:
-	go mod init spacemesh.io/dummy
+GO_MOD := $(PROTOC_GO_BUILD_DIR)/go.mod
+$(GO_MOD):
+	cd $(PROTOC_GO_BUILD_DIR) && go mod init $(GO_MODULE_PATH)
 
 PROTOC_GEN_GO := $(CACHE_VERSIONS)/protoc-gen-go/$(PROTOC_GEN_GO_VERSION)
-$(PROTOC_GEN_GO):
-	make go.mod
-	go get -u github.com/golang/protobuf/protoc-gen-go@$(PROTOC_GEN_GO_VERSION)
+$(PROTOC_GEN_GO): $(GO_MOD)
+	cd $(PROTOC_GO_BUILD_DIR) && \
+	  go get -u github.com/golang/protobuf/protoc-gen-go@$(PROTOC_GEN_GO_VERSION)
 	@rm -rf $(dir $(PROTOC_GEN_GO))
 	@mkdir -p $(dir $(PROTOC_GEN_GO))
 	@touch $(PROTOC_GEN_GO)
 
 PROTOC_GEN_GRPC_GATEWAY := $(CACHE_VERSIONS)/protoc-gen-grpc-gateway/$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
-$(PROTOC_GEN_GRPC_GATEWAY):
-	make go.mod
-	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
+$(PROTOC_GEN_GRPC_GATEWAY): $(GO_MOD)
+	cd $(PROTOC_GO_BUILD_DIR) && \
+	  go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
 	@rm -rf $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@mkdir -p $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@touch $(PROTOC_GEN_GRPC_GATEWAY)
