@@ -14,8 +14,12 @@ jobs:
       uses: actions/checkout@v1
       with:
         ref: master
+    # Used inside breaking change detection
     - name: checkout-master
       run: git checkout master
+    # Go back to the HEAD
+    - name: checkout
+      uses: actions/checkout@v1
     # Not required in Github actions as the image already has these
     # It's sometimes useful when running locally (e.g., using `act')
     - name: install required packages
