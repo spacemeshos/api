@@ -11,15 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    # Just runs the buf linter
-    - name: make lint
-      run: make lint
-    # Attempts to build using `protoc`
-    - name: make protoc
-      run: make protoc
-    # Create an actual build, then diff it to make sure build is up to date
-    - name: check build
+    # Not required in Github actions as the image already has these
+    # It's sometimes useful when running locally (e.g., using `act')
+    - name: install required packages
+      if: env.NEED_INSTALL
+      run: apt-get update && apt-get install -y --no-install-recommends make unzip golang git
+    - name: lint and check build
       run: |
-        make build
-        # --exit-code causes it to fail if there are differences
-        git diff --name-only --diff-filter=AM --exit-code
+        # Just runs the buf linter
+        make lint
+        # Attempts to build using `protoc`
+        make protoc
+        # Create an actual build, then diff it to make sure build is up to date
+        make check

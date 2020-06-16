@@ -109,7 +109,7 @@ $(PROTOC_GEN_GRPC_GATEWAY):
 # deps allows us to install deps without running any checks.
 
 .PHONY: deps
-deps: $(BUF)
+deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 
 # local is what we run when testing locally.
 # This does breaking change detection against our local git repository.
@@ -153,10 +153,6 @@ protoc: $(PROTOC)
 
 ## LANGUAGE-SPECIFIC BUILDS
 
-# Run all builds
-build: golang grpc-gateway
-.PHONY: build
-
 # Golang
 .PHONY: golang
 golang: $(PROTOC) | $(PROTOC_GEN_GO)
@@ -168,6 +164,17 @@ golang: $(PROTOC) | $(PROTOC_GEN_GO)
 grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
+
+# Run all builds
+.PHONY: build
+build: golang grpc-gateway
+
+# Make sure build is up to date
+.PHONY: check
+check:
+	git add -N $(PROTOC_GO_BUILD_DIR)
+	git diff --name-only --diff-filter=AM --exit-code $(PROTOC_GO_BUILD_DIR) \
+	  || { echo "please update build"; exit 1; }
 
 # clean deletes any files not checked in and the cache for all platforms.
 
