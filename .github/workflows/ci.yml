@@ -20,7 +20,8 @@ jobs:
       run: |
         # Just runs the buf linter
         make lint
-        # Attempts to build using `protoc`
+        # Attempts to build using `protoc`. Probably redundant given the next
+        # step.
         make protoc
         # Create an actual build, then diff it to make sure build is up to date
         make check

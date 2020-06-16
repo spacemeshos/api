@@ -64,8 +64,13 @@ CACHE_VERSIONS := $(CACHE)/versions
 # We do some temporary work here
 CACHE_TMP := $(CACHE_BASE)/tmp
 
-# Update the $PATH so we can use buf directly
-export PATH := $(abspath $(CACHE_BIN)):$(PATH)
+# Go tools require that this be set
+ifndef GOPATH
+	export GOPATH=$(shell go env GOPATH)
+endif
+
+# Update the $PATH so we can use buf and protoc directly
+export PATH := $(abspath $(CACHE_BIN)):$(abspath $(GOPATH)/bin):$(PATH)
 
 # BUF points to the marker file for the installed version.
 #
@@ -171,7 +176,7 @@ build: golang grpc-gateway
 
 # Make sure build is up to date
 .PHONY: check
-check:
+check: build
 	git add -N $(PROTOC_GO_BUILD_DIR)
 	git diff --name-only --diff-filter=AM --exit-code $(PROTOC_GO_BUILD_DIR) \
 	  || { echo "please update build"; exit 1; }
