@@ -68,7 +68,6 @@ func local_request_NodeService_Echo_0(ctx context.Context, marshaler runtime.Mar
 // RegisterNodeServiceHandlerServer registers the http handlers for service NodeService to "mux".
 // UnaryRPC     :call NodeServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features (such as grpc.SendHeader, etc) to stop working. Consider using RegisterNodeServiceHandlerFromEndpoint instead.
 func RegisterNodeServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server NodeServiceServer) error {
 
 	mux.Handle("POST", pattern_NodeService_Echo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {

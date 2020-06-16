@@ -27,6 +27,10 @@ BUF_VERSION := 0.16.0
 # This controls the version of protoc to install and use.
 PROTOC_VERSION = 3.12.3
 
+# Version of go protoc tools
+PROTOC_GEN_GO_VERSION = v1.4.2
+PROTOC_GEN_GRPC_GATEWAY_VERSION = v1.14.6
+
 # The include flags to pass to protoc.
 PROTOC_INCLUDES := -I ./proto -I ./third_party
 
@@ -101,13 +105,25 @@ $(PROTOC):
 	@mkdir -p $(dir $(PROTOC))
 	@touch $(PROTOC)
 
-PROTOC_GEN_GO := $(GOPATH)/bin/protoc-gen-go
-$(PROTOC_GEN_GO):
-	go get -u github.com/golang/protobuf/protoc-gen-go
+# In order to install versioned modules, go requires a dummy module
+go.mod:
+	go mod init spacemesh.io/dummy
 
-PROTOC_GEN_GRPC_GATEWAY := $(GOPATH)/bin/protoc-gen-grpc-gateway
+PROTOC_GEN_GO := $(CACHE_VERSIONS)/protoc-gen-go/$(PROTOC_GEN_GO_VERSION)
+$(PROTOC_GEN_GO):
+	make go.mod
+	go get -u github.com/golang/protobuf/protoc-gen-go@$(PROTOC_GEN_GO_VERSION)
+	@rm -rf $(dir $(PROTOC_GEN_GO))
+	@mkdir -p $(dir $(PROTOC_GEN_GO))
+	@touch $(PROTOC_GEN_GO)
+
+PROTOC_GEN_GRPC_GATEWAY := $(CACHE_VERSIONS)/protoc-gen-grpc-gateway/$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
 $(PROTOC_GEN_GRPC_GATEWAY):
-	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+	make go.mod
+	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
+	@rm -rf $(dir $(PROTOC_GEN_GRPC_GATEWAY))
+	@mkdir -p $(dir $(PROTOC_GEN_GRPC_GATEWAY))
+	@touch $(PROTOC_GEN_GRPC_GATEWAY)
 
 .DEFAULT_GOAL := local
 
