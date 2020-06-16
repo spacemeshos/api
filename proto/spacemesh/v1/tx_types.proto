@@ -5,7 +5,7 @@ import "google/rpc/status.proto";
 import "spacemesh/v1/types.proto";
 
 message TransactionsIds {
-    TransactionId transaction_id = 1;
+    repeated TransactionId transaction_id = 1;
 }
 
 message SubmitTransactionRequest {
