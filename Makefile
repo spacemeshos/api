@@ -154,8 +154,8 @@ protoc: $(PROTOC)
 ## LANGUAGE-SPECIFIC BUILDS
 
 # Run all builds
-.PHONY: build
 build: golang grpc-gateway
+.PHONY: build
 
 # Golang
 .PHONY: golang
