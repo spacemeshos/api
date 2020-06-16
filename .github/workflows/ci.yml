@@ -10,7 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: checkout
+      uses: actions/checkout@v1
+      with:
+        ref: master
+    - name: checkout-master
+      run: git checkout master
     # Not required in Github actions as the image already has these
     # It's sometimes useful when running locally (e.g., using `act')
     - name: install required packages
