@@ -11,7 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    # Just runs the buf linter
     - name: make lint
       run: make lint
+    # Attempts to build using `protoc`
     - name: make protoc
       run: make protoc
+    # Create an actual build, then diff it to make sure build is up to date
+    - name: check build
+      run: |
+        make build
+        # --exit-code causes it to fail if there are differences
+        git diff --name-only --diff-filter=AM --exit-code
