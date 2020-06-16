@@ -10,7 +10,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: checkout
+      uses: actions/checkout@v1
+      with:
+        ref: master
+    # Used inside breaking change detection
+    - name: checkout-master
+      run: git checkout master
+    # Go back to the HEAD
+    - name: checkout
+      uses: actions/checkout@v1
     # Not required in Github actions as the image already has these
     # It's sometimes useful when running locally (e.g., using `act')
     - name: install required packages
@@ -18,8 +27,8 @@ jobs:
       run: apt-get update && apt-get install -y --no-install-recommends make unzip golang git
     - name: lint and check build
       run: |
-        # Just runs the buf linter
-        make lint
+        # Runs the buf linter and checks for breaking changes
+        make local
         # Attempts to build using `protoc`. Probably redundant given the next
         # step.
         make protoc

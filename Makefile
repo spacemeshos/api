@@ -138,7 +138,7 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 .PHONY: local
 local: $(BUF)
 	buf check lint
-	buf check breaking --experimental-git-clone --against-input '.git#branch=master'
+	buf check breaking --against-input '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
 
@@ -152,7 +152,7 @@ lint: $(BUF)
 .PHONY: https
 https: $(BUF)
 	buf check lint
-	buf check breaking --experimental-git-clone --against-input "$(HTTPS_GIT)#branch=master"
+	buf check breaking --against-input "$(HTTPS_GIT)#branch=master"
 
 # ssh is what we run when testing in CI providers that provide ssh public key authentication.
 # This does breaking change detection against our remote HTTPS ssh repository.
@@ -161,7 +161,7 @@ https: $(BUF)
 .PHONY: ssh
 ssh: $(BUF)
 	buf check lint
-	buf check breaking --experimental-git-clone --against-input "$(SSH_GIT)#branch=master"
+	buf check breaking --against-input "$(SSH_GIT)#branch=master"
 
 # Try to build using protoc. This performs different checks and surfaces
 # different errors than linting alone. We want this to fail on warnings as well
