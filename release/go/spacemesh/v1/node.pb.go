@@ -169,7 +169,7 @@ type NodeServiceClient interface {
 	Echo(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (*EchoResponse, error)
 	// Returns the version of the node software as a semver string
 	Version(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*VersionResponse, error)
-	// Returns the github tag or branch used to build the node
+	// Returns the github commit hash used to build the node
 	Build(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*BuildResponse, error)
 	// Current node status (net and sync)
 	Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error)
@@ -315,7 +315,7 @@ type NodeServiceServer interface {
 	Echo(context.Context, *EchoRequest) (*EchoResponse, error)
 	// Returns the version of the node software as a semver string
 	Version(context.Context, *empty.Empty) (*VersionResponse, error)
-	// Returns the github tag or branch used to build the node
+	// Returns the github commit hash used to build the node
 	Build(context.Context, *empty.Empty) (*BuildResponse, error)
 	// Current node status (net and sync)
 	Status(context.Context, *StatusRequest) (*StatusResponse, error)
