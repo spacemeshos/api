@@ -1,4 +1,1 @@
 .idea
-# These are dummy artifacts created by make to allow versioning of installed go commands
-go.mod
-go.sum
