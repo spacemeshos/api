@@ -4,25 +4,44 @@ option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 
 import "spacemesh/v1/types.proto";
 
+message GenesisTimeRequest {}
+
 message GenesisTimeResponse {
     SimpleInt unixtime = 1;
 }
+
+message CurrentLayerRequest {}
 
 message CurrentLayerResponse {
     SimpleInt layernum = 1;
 }
 
+message CurrentEpochRequest {}
+
 message CurrentEpochResponse {
     SimpleInt epochnum = 1;
 }
+
+message NetIdRequest {}
 
 message NetIdResponse {
     SimpleInt netid = 1;
 }
 
+message EpochNumLayersRequest {}
+
 message EpochNumLayersResponse {
     SimpleInt numlayers = 1;
 }
+
+message LayerDurationRequest {}
+
+message LayerDurationResponse {
+    // layer duration, in seconds
+    SimpleInt duration = 1;
+}
+
+message MaxTransactionsPerSecondRequest {}
 
 message MaxTransactionsPerSecondResponse {
     SimpleInt maxtxpersecond = 1;
@@ -74,6 +93,8 @@ message LayersQueryRequest {
 message LayersQueryResponse {
     repeated Layer layer = 1;
 }
+
+message LayerStreamRequest {}
 
 message LayerStreamResponse {
     Layer layer = 1;
