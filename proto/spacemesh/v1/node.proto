@@ -18,7 +18,7 @@ service NodeService {
     // Returns the version of the node software as a semver string
     rpc Version(google.protobuf.Empty) returns (VersionResponse);
 
-    // Returns the github tag or branch used to build the node
+    // Returns the github commit hash used to build the node
     rpc Build(google.protobuf.Empty) returns (BuildResponse);
 
     // Current node status (net and sync)
