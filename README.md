@@ -1,4 +1,6 @@
 # Spacemesh API
+![](https://github.com/spacemeshos/api/workflows/CI/badge.svg)
+
 [Protobuf](https://developers.google.com/protocol-buffers) implementation of the Spacemesh API. This repository contains only API design, not implementation. For implementation work, see [go-spacemesh](https://github.com/spacemeshos/go-spacemesh/). Note that API implementation may considerably lag design.
 
 ## Design
