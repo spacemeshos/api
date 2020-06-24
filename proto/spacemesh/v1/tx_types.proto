@@ -20,7 +20,6 @@ message SubmitTransactionResponse {
 message TransactionsStateRequest {
     repeated TransactionId transaction_id = 1;
     bool include_transactions = 2; // when true response will include matching transactions in addition to state
-
 }
 
 message TransactionsStateResponse {
@@ -31,7 +30,6 @@ message TransactionsStateResponse {
 message TransactionsStateStreamRequest {
     repeated TransactionId transaction_id = 1;
     bool include_transactions = 2; // when true response will include matching transactions in addition to state
-
 }
 
 message TransactionsStateStreamResponse {
@@ -41,7 +39,7 @@ message TransactionsStateStreamResponse {
 
 // TransactionState is the "journey" of a tx from mempool to block inclusion to
 // mesh to STF processing. To know whether or not the tx actually succeeded,
-// and its side effects, check the Receipt in the GlbalStateService.
+// and its side effects, check the Receipt in the GlobalStateService.
 message TransactionState {
     TransactionId id = 1;
     enum TransactionState {
