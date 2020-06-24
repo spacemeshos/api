@@ -19,18 +19,22 @@ message SubmitTransactionResponse {
 
 message TransactionsStateRequest {
     repeated TransactionId transaction_id = 1;
+    bool include_transactions = 2; // when true response will include matching transactions in addition to state
 }
 
 message TransactionsStateResponse {
     repeated TransactionState transactions_state = 1;
+    repeated Transaction transactions = 2;
 }
 
 message TransactionsStateStreamRequest {
     repeated TransactionId transaction_id = 1;
+    bool include_transactions = 2; // when true response will include matching transactions in addition to state
 }
 
 message TransactionsStateStreamResponse {
     repeated TransactionState transactions_state = 1;
+    repeated Transaction transactions = 2;
 }
 
 // TransactionState is the "journey" of a tx from mempool to block inclusion to
