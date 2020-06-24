@@ -458,7 +458,7 @@ func (x *TransactionsStateStreamResponse) GetTransactions() []*Transaction {
 
 // TransactionState is the "journey" of a tx from mempool to block inclusion to
 // mesh to STF processing. To know whether or not the tx actually succeeded,
-// and its side effects, check the Receipt in the GlbalStateService.
+// and its side effects, check the Receipt in the GlobalStateService.
 type TransactionState struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
