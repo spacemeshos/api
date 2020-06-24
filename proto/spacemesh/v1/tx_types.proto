@@ -18,7 +18,7 @@ message SubmitTransactionResponse {
 }
 
 message TransactionsStateRequest {
-    bool include_transactions = 1; // when true response will include the transaction and not just the state
+    bool include_transactions = 1; // when true response will include matching transactions in addition to state
     repeated TransactionId transaction_id = 2;
 }
 
@@ -28,7 +28,7 @@ message TransactionsStateResponse {
 }
 
 message TransactionsStateStreamRequest {
-    bool include_transactions = 1; // when true response will include the transaction and not just the state
+    bool include_transactions = 1; // when true response will include matching transactions in addition to state
     repeated TransactionId transaction_id = 2;
 }
 
