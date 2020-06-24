@@ -39,6 +39,24 @@ message AccountDataQueryRequest {
     uint32 offset = 3; // return results from offset
 }
 
+message TransactionReceipt {
+    TransactionId id = 1; // the source transaction
+    enum TransactionResult { // the results of STF transaction processing
+        TRANSACTION_RESULT_UNSPECIFIED = 0;
+        TRANSACTION_RESULT_EXECUTED = 1; // executed w/o error by the STF
+        TRANSACTION_RESULT_BAD_COUNTER = 2; // unexpected transaction counter
+        TRANSACTION_RESULT_RUNTIME_EXCEPTION = 3; // app code exception
+        TRANSACTION_RESULT_INSUFFICIENT_GAS = 4; // out of gas
+        TRANSACTION_RESULT_INSUFFICIENT_FUNDS = 5; // failed due to sender's insufficient funds
+    }
+    TransactionResult result = 2; // tx processing result
+    uint64 gas_used = 3; // gas units used by the transaction
+    Amount fee = 4; // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
+    uint64 layer_number = 5; // the layer in which the STF processed this transaction
+    uint32 index = 6; // the index of the tx in the ordered list of txs to be executed by stf in the layer.
+    AccountId app_address = 7; // deployed app address or code template address
+}
+
 // All data items that touch an account: receipts for transactions from, or to
 // this account, as well as those that modify its state (e.g., token transfers).
 // Rewards here includes fees paid. Account contains counter and balance updates.
@@ -84,7 +102,7 @@ enum GlobalStateDataItemFlag {
     GLOBAL_STATE_DATA_ITEM_FLAG_GLOBAL_STATE_HASH = 8; // hash of global state (i.e., state root)
 }
 
-message GlobalStateHash{
+message GlobalStateHash {
     bytes root_hash = 1;
     uint64 layer_number = 2;
 }
