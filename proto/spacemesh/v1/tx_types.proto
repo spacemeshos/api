@@ -18,8 +18,9 @@ message SubmitTransactionResponse {
 }
 
 message TransactionsStateRequest {
-    bool include_transactions = 1; // when true response will include matching transactions in addition to state
-    repeated TransactionId transaction_id = 2;
+    repeated TransactionId transaction_id = 1;
+    bool include_transactions = 2; // when true response will include matching transactions in addition to state
+
 }
 
 message TransactionsStateResponse {
@@ -28,15 +29,15 @@ message TransactionsStateResponse {
 }
 
 message TransactionsStateStreamRequest {
-    bool include_transactions = 1; // when true response will include matching transactions in addition to state
-    repeated TransactionId transaction_id = 2;
+    repeated TransactionId transaction_id = 1;
+    bool include_transactions = 2; // when true response will include matching transactions in addition to state
+
 }
 
 message TransactionsStateStreamResponse {
     repeated TransactionState transactions_state = 1;
     repeated Transaction transactions = 2;
 }
-
 
 // TransactionState is the "journey" of a tx from mempool to block inclusion to
 // mesh to STF processing. To know whether or not the tx actually succeeded,
