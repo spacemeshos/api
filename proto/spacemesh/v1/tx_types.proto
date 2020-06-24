@@ -9,7 +9,7 @@ message TransactionsIds {
 }
 
 message SubmitTransactionRequest {
-    Transaction tx = 1;
+    bytes  transaction = 1;  // signed binary transaction
 }
 
 message SubmitTransactionResponse {
@@ -49,4 +49,3 @@ message TransactionState {
     }
     TransactionState state = 2;
 }
-
