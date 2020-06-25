@@ -53,10 +53,10 @@ var file_spacemesh_v1_mesh_proto_rawDesc = []byte{
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
 	0x2e, 0x76, 0x31, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x45, 0x70, 0x6f, 0x63, 0x68,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x40, 0x0a, 0x05, 0x4e, 0x65, 0x74, 0x49,
-	0x64, 0x12, 0x1a, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
-	0x2e, 0x4e, 0x65, 0x74, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e,
+	0x44, 0x12, 0x1a, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x4e, 0x65, 0x74, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e,
 	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x65, 0x74,
-	0x49, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5b, 0x0a, 0x0e, 0x45, 0x70,
+	0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5b, 0x0a, 0x0e, 0x45, 0x70,
 	0x6f, 0x63, 0x68, 0x4e, 0x75, 0x6d, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x73, 0x12, 0x23, 0x2e, 0x73,
 	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x70, 0x6f, 0x63,
 	0x68, 0x4e, 0x75, 0x6d, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
@@ -111,7 +111,7 @@ var file_spacemesh_v1_mesh_proto_goTypes = []interface{}{
 	(*GenesisTimeRequest)(nil),               // 0: spacemesh.v1.GenesisTimeRequest
 	(*CurrentLayerRequest)(nil),              // 1: spacemesh.v1.CurrentLayerRequest
 	(*CurrentEpochRequest)(nil),              // 2: spacemesh.v1.CurrentEpochRequest
-	(*NetIdRequest)(nil),                     // 3: spacemesh.v1.NetIdRequest
+	(*NetIDRequest)(nil),                     // 3: spacemesh.v1.NetIDRequest
 	(*EpochNumLayersRequest)(nil),            // 4: spacemesh.v1.EpochNumLayersRequest
 	(*LayerDurationRequest)(nil),             // 5: spacemesh.v1.LayerDurationRequest
 	(*MaxTransactionsPerSecondRequest)(nil),  // 6: spacemesh.v1.MaxTransactionsPerSecondRequest
@@ -122,7 +122,7 @@ var file_spacemesh_v1_mesh_proto_goTypes = []interface{}{
 	(*GenesisTimeResponse)(nil),              // 11: spacemesh.v1.GenesisTimeResponse
 	(*CurrentLayerResponse)(nil),             // 12: spacemesh.v1.CurrentLayerResponse
 	(*CurrentEpochResponse)(nil),             // 13: spacemesh.v1.CurrentEpochResponse
-	(*NetIdResponse)(nil),                    // 14: spacemesh.v1.NetIdResponse
+	(*NetIDResponse)(nil),                    // 14: spacemesh.v1.NetIDResponse
 	(*EpochNumLayersResponse)(nil),           // 15: spacemesh.v1.EpochNumLayersResponse
 	(*LayerDurationResponse)(nil),            // 16: spacemesh.v1.LayerDurationResponse
 	(*MaxTransactionsPerSecondResponse)(nil), // 17: spacemesh.v1.MaxTransactionsPerSecondResponse
@@ -135,7 +135,7 @@ var file_spacemesh_v1_mesh_proto_depIdxs = []int32{
 	0,  // 0: spacemesh.v1.MeshService.GenesisTime:input_type -> spacemesh.v1.GenesisTimeRequest
 	1,  // 1: spacemesh.v1.MeshService.CurrentLayer:input_type -> spacemesh.v1.CurrentLayerRequest
 	2,  // 2: spacemesh.v1.MeshService.CurrentEpoch:input_type -> spacemesh.v1.CurrentEpochRequest
-	3,  // 3: spacemesh.v1.MeshService.NetId:input_type -> spacemesh.v1.NetIdRequest
+	3,  // 3: spacemesh.v1.MeshService.NetID:input_type -> spacemesh.v1.NetIDRequest
 	4,  // 4: spacemesh.v1.MeshService.EpochNumLayers:input_type -> spacemesh.v1.EpochNumLayersRequest
 	5,  // 5: spacemesh.v1.MeshService.LayerDuration:input_type -> spacemesh.v1.LayerDurationRequest
 	6,  // 6: spacemesh.v1.MeshService.MaxTransactionsPerSecond:input_type -> spacemesh.v1.MaxTransactionsPerSecondRequest
@@ -146,7 +146,7 @@ var file_spacemesh_v1_mesh_proto_depIdxs = []int32{
 	11, // 11: spacemesh.v1.MeshService.GenesisTime:output_type -> spacemesh.v1.GenesisTimeResponse
 	12, // 12: spacemesh.v1.MeshService.CurrentLayer:output_type -> spacemesh.v1.CurrentLayerResponse
 	13, // 13: spacemesh.v1.MeshService.CurrentEpoch:output_type -> spacemesh.v1.CurrentEpochResponse
-	14, // 14: spacemesh.v1.MeshService.NetId:output_type -> spacemesh.v1.NetIdResponse
+	14, // 14: spacemesh.v1.MeshService.NetID:output_type -> spacemesh.v1.NetIDResponse
 	15, // 15: spacemesh.v1.MeshService.EpochNumLayers:output_type -> spacemesh.v1.EpochNumLayersResponse
 	16, // 16: spacemesh.v1.MeshService.LayerDuration:output_type -> spacemesh.v1.LayerDurationResponse
 	17, // 17: spacemesh.v1.MeshService.MaxTransactionsPerSecond:output_type -> spacemesh.v1.MaxTransactionsPerSecondResponse
@@ -205,7 +205,7 @@ type MeshServiceClient interface {
 	// Current epoch number
 	CurrentEpoch(ctx context.Context, in *CurrentEpochRequest, opts ...grpc.CallOption) (*CurrentEpochResponse, error)
 	// Network ID
-	NetId(ctx context.Context, in *NetIdRequest, opts ...grpc.CallOption) (*NetIdResponse, error)
+	NetID(ctx context.Context, in *NetIDRequest, opts ...grpc.CallOption) (*NetIDResponse, error)
 	// Number of layers per epoch (a network parameter)
 	EpochNumLayers(ctx context.Context, in *EpochNumLayersRequest, opts ...grpc.CallOption) (*EpochNumLayersResponse, error)
 	// Layer duration (a network parameter)
@@ -259,9 +259,9 @@ func (c *meshServiceClient) CurrentEpoch(ctx context.Context, in *CurrentEpochRe
 	return out, nil
 }
 
-func (c *meshServiceClient) NetId(ctx context.Context, in *NetIdRequest, opts ...grpc.CallOption) (*NetIdResponse, error) {
-	out := new(NetIdResponse)
-	err := c.cc.Invoke(ctx, "/spacemesh.v1.MeshService/NetId", in, out, opts...)
+func (c *meshServiceClient) NetID(ctx context.Context, in *NetIDRequest, opts ...grpc.CallOption) (*NetIDResponse, error) {
+	out := new(NetIDResponse)
+	err := c.cc.Invoke(ctx, "/spacemesh.v1.MeshService/NetID", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -386,7 +386,7 @@ type MeshServiceServer interface {
 	// Current epoch number
 	CurrentEpoch(context.Context, *CurrentEpochRequest) (*CurrentEpochResponse, error)
 	// Network ID
-	NetId(context.Context, *NetIdRequest) (*NetIdResponse, error)
+	NetID(context.Context, *NetIDRequest) (*NetIDResponse, error)
 	// Number of layers per epoch (a network parameter)
 	EpochNumLayers(context.Context, *EpochNumLayersRequest) (*EpochNumLayersResponse, error)
 	// Layer duration (a network parameter)
@@ -418,8 +418,8 @@ func (*UnimplementedMeshServiceServer) CurrentLayer(context.Context, *CurrentLay
 func (*UnimplementedMeshServiceServer) CurrentEpoch(context.Context, *CurrentEpochRequest) (*CurrentEpochResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CurrentEpoch not implemented")
 }
-func (*UnimplementedMeshServiceServer) NetId(context.Context, *NetIdRequest) (*NetIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NetId not implemented")
+func (*UnimplementedMeshServiceServer) NetID(context.Context, *NetIDRequest) (*NetIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NetID not implemented")
 }
 func (*UnimplementedMeshServiceServer) EpochNumLayers(context.Context, *EpochNumLayersRequest) (*EpochNumLayersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EpochNumLayers not implemented")
@@ -501,20 +501,20 @@ func _MeshService_CurrentEpoch_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MeshService_NetId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NetIdRequest)
+func _MeshService_NetID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NetIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MeshServiceServer).NetId(ctx, in)
+		return srv.(MeshServiceServer).NetID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/spacemesh.v1.MeshService/NetId",
+		FullMethod: "/spacemesh.v1.MeshService/NetID",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MeshServiceServer).NetId(ctx, req.(*NetIdRequest))
+		return srv.(MeshServiceServer).NetID(ctx, req.(*NetIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -668,8 +668,8 @@ var _MeshService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _MeshService_CurrentEpoch_Handler,
 		},
 		{
-			MethodName: "NetId",
-			Handler:    _MeshService_NetId_Handler,
+			MethodName: "NetID",
+			Handler:    _MeshService_NetID_Handler,
 		},
 		{
 			MethodName: "EpochNumLayers",

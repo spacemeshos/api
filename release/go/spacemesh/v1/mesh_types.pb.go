@@ -329,14 +329,14 @@ func (x *CurrentEpochResponse) GetEpochnum() *SimpleInt {
 	return nil
 }
 
-type NetIdRequest struct {
+type NetIDRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *NetIdRequest) Reset() {
-	*x = NetIdRequest{}
+func (x *NetIDRequest) Reset() {
+	*x = NetIDRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -344,13 +344,13 @@ func (x *NetIdRequest) Reset() {
 	}
 }
 
-func (x *NetIdRequest) String() string {
+func (x *NetIDRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NetIdRequest) ProtoMessage() {}
+func (*NetIDRequest) ProtoMessage() {}
 
-func (x *NetIdRequest) ProtoReflect() protoreflect.Message {
+func (x *NetIDRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -362,12 +362,12 @@ func (x *NetIdRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NetIdRequest.ProtoReflect.Descriptor instead.
-func (*NetIdRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use NetIDRequest.ProtoReflect.Descriptor instead.
+func (*NetIDRequest) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_mesh_types_proto_rawDescGZIP(), []int{6}
 }
 
-type NetIdResponse struct {
+type NetIDResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -375,8 +375,8 @@ type NetIdResponse struct {
 	Netid *SimpleInt `protobuf:"bytes,1,opt,name=netid,proto3" json:"netid,omitempty"`
 }
 
-func (x *NetIdResponse) Reset() {
-	*x = NetIdResponse{}
+func (x *NetIDResponse) Reset() {
+	*x = NetIDResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -384,13 +384,13 @@ func (x *NetIdResponse) Reset() {
 	}
 }
 
-func (x *NetIdResponse) String() string {
+func (x *NetIDResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NetIdResponse) ProtoMessage() {}
+func (*NetIDResponse) ProtoMessage() {}
 
-func (x *NetIdResponse) ProtoReflect() protoreflect.Message {
+func (x *NetIDResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -402,12 +402,12 @@ func (x *NetIdResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NetIdResponse.ProtoReflect.Descriptor instead.
-func (*NetIdResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use NetIDResponse.ProtoReflect.Descriptor instead.
+func (*NetIDResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_mesh_types_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *NetIdResponse) GetNetid() *SimpleInt {
+func (x *NetIDResponse) GetNetid() *SimpleInt {
 	if x != nil {
 		return x.Netid
 	}
@@ -1238,8 +1238,8 @@ var file_spacemesh_v1_mesh_types_proto_rawDesc = []byte{
 	0x65, 0x70, 0x6f, 0x63, 0x68, 0x6e, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17,
 	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x69,
 	0x6d, 0x70, 0x6c, 0x65, 0x49, 0x6e, 0x74, 0x52, 0x08, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x6e, 0x75,
-	0x6d, 0x22, 0x0e, 0x0a, 0x0c, 0x4e, 0x65, 0x74, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x22, 0x3e, 0x0a, 0x0d, 0x4e, 0x65, 0x74, 0x49, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x6d, 0x22, 0x0e, 0x0a, 0x0c, 0x4e, 0x65, 0x74, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x3e, 0x0a, 0x0d, 0x4e, 0x65, 0x74, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x12, 0x2d, 0x0a, 0x05, 0x6e, 0x65, 0x74, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x49, 0x6e, 0x74, 0x52, 0x05, 0x6e, 0x65, 0x74, 0x69,
@@ -1365,8 +1365,8 @@ var file_spacemesh_v1_mesh_types_proto_goTypes = []interface{}{
 	(*CurrentLayerResponse)(nil),             // 4: spacemesh.v1.CurrentLayerResponse
 	(*CurrentEpochRequest)(nil),              // 5: spacemesh.v1.CurrentEpochRequest
 	(*CurrentEpochResponse)(nil),             // 6: spacemesh.v1.CurrentEpochResponse
-	(*NetIdRequest)(nil),                     // 7: spacemesh.v1.NetIdRequest
-	(*NetIdResponse)(nil),                    // 8: spacemesh.v1.NetIdResponse
+	(*NetIDRequest)(nil),                     // 7: spacemesh.v1.NetIDRequest
+	(*NetIDResponse)(nil),                    // 8: spacemesh.v1.NetIDResponse
 	(*EpochNumLayersRequest)(nil),            // 9: spacemesh.v1.EpochNumLayersRequest
 	(*EpochNumLayersResponse)(nil),           // 10: spacemesh.v1.EpochNumLayersResponse
 	(*LayerDurationRequest)(nil),             // 11: spacemesh.v1.LayerDurationRequest
@@ -1393,7 +1393,7 @@ var file_spacemesh_v1_mesh_types_proto_depIdxs = []int32{
 	25, // 0: spacemesh.v1.GenesisTimeResponse.unixtime:type_name -> spacemesh.v1.SimpleInt
 	25, // 1: spacemesh.v1.CurrentLayerResponse.layernum:type_name -> spacemesh.v1.SimpleInt
 	25, // 2: spacemesh.v1.CurrentEpochResponse.epochnum:type_name -> spacemesh.v1.SimpleInt
-	25, // 3: spacemesh.v1.NetIdResponse.netid:type_name -> spacemesh.v1.SimpleInt
+	25, // 3: spacemesh.v1.NetIDResponse.netid:type_name -> spacemesh.v1.SimpleInt
 	25, // 4: spacemesh.v1.EpochNumLayersResponse.numlayers:type_name -> spacemesh.v1.SimpleInt
 	25, // 5: spacemesh.v1.LayerDurationResponse.duration:type_name -> spacemesh.v1.SimpleInt
 	25, // 6: spacemesh.v1.MaxTransactionsPerSecondResponse.maxtxpersecond:type_name -> spacemesh.v1.SimpleInt
@@ -1493,7 +1493,7 @@ func file_spacemesh_v1_mesh_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_mesh_types_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NetIdRequest); i {
+			switch v := v.(*NetIDRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1505,7 +1505,7 @@ func file_spacemesh_v1_mesh_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_mesh_types_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NetIdResponse); i {
+			switch v := v.(*NetIDResponse); i {
 			case 0:
 				return &v.state
 			case 1:

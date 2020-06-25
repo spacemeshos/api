@@ -22,9 +22,9 @@ message CurrentEpochResponse {
     SimpleInt epochnum = 1;
 }
 
-message NetIdRequest {}
+message NetIDRequest {}
 
-message NetIdResponse {
+message NetIDResponse {
     SimpleInt netid = 1;
 }
 
