@@ -138,3 +138,12 @@ message AppEventStreamResponse {
     AppEvent event = 1;
 }
 
+message TransactionsListQueryRequest {
+    uint64 layer = 1; // the layer number requested
+    bool include_transactions = 2; // when true, response will inlcude transactions
+}
+
+message TransactionsListQueryResponse {
+    repeated TransactionId transaction_ids = 1; // ordered list of transaction ids
+    repeated Transaction transactions = 2; // ordered list of transactions
+}

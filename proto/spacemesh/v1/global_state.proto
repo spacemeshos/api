@@ -26,6 +26,10 @@ service GlobalStateService {
     // smesher and by layer id or allow for queries from a layer and later....
     rpc SmesherDataQuery(SmesherDataQueryRequest) returns (SmesherDataQueryResponse);
 
+    // Query for the transactions input list for the STF of a specific layer
+    // Returns ordered list of transaction ids and optionally the transactions
+    rpc TransactionsListQuery(TransactionsListQueryRequest) returns (TransactionsListQueryResponse);
+
     ////////// Streams
 
     // Get a stream of account related changes such as account balance change,
