@@ -52,8 +52,11 @@ PROTOC_GO_OPT := --go_opt=paths=source_relative
 # Plugins string for grpc-gateway (must end in ':')
 PROTOC_GATEWAY_PLUGINS := logtostderr=true:
 
+# Service configuration file
+PROTOC_GATEWAY_CONFIG := ./proto/spacemesh/v1/api_config.yaml
+
 # Options string appended to grpc-gateway build command (optional)
-PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative
+PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative,grpc_api_configuration=$(PROTOC_GATEWAY_CONFIG)
 
 ### Everything below this line is meant to be static, i.e. only adjust the above variables. ###
 
