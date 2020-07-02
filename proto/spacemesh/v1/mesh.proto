@@ -1,18 +1,12 @@
 syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
-import "google/api/annotations.proto";
 import "spacemesh/v1/mesh_types.proto";
 
 // Readonly API for basic mesh info
 service MeshService {
     // Network genesis time as unix epoch time
-    rpc GenesisTime(GenesisTimeRequest) returns (GenesisTimeResponse) {
-        option (google.api.http) = {
-            post: "/v1/mesh/genesistime"
-            body: "*"
-        };
-    }
+    rpc GenesisTime(GenesisTimeRequest) returns (GenesisTimeResponse);
 
     // Current layer number
     rpc CurrentLayer(CurrentLayerRequest) returns (CurrentLayerResponse);
