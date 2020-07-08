@@ -56,7 +56,7 @@ message PostComputeProvider {
     uint32 id = 1; // 0, 1, 2...
     string model = 2; // e.g. Nvidia GTX 2700
     ComputeApi compute_api = 3; // A provided compute api
-    uint64 performance = 4; // Estimated performance in hases per second
+    uint64 performance = 4; // Estimated performance in hashes per second
 }
 
 message PostComputeProvidersResponse {
