@@ -59,7 +59,7 @@ message PostComputeProvider {
     uint64 performance = 4; // Estimated performance in hases per second
 }
 
-message PostComputeProviderResponse {
+message PostComputeProvidersResponse {
     repeated PostComputeProvider post_compute_provider = 1;
 }
 

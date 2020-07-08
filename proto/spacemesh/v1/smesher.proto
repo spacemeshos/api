@@ -42,7 +42,7 @@ service SmesherService {
     rpc PostStatus(google.protobuf.Empty) returns (PostStatusResponse);
 
     // Returns a list of available post compute providers for creating post data
-    rpc PostComputeProvider(google.protobuf.Empty) returns (PostComputeProviderResponse);
+    rpc PostComputeProviders(google.protobuf.Empty) returns (PostComputeProvidersResponse);
 
     // Starts (or continues) a post init phase. Supports resuming a previously
     // started init session, as well as changing post params (e.g., post data size)
