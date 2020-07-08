@@ -87,8 +87,8 @@ http:
       body: "*"
     - selector: spacemesh.v1.SmesherService.PostStatus
       post: "/v1/smesher/poststatus"
-    - selector: spacemesh.v1.SmesherService.AvailableComputeEngines
-      post: "/v1/smesher/availablecomputeengines"
+    - selector: spacemesh.v1.SmesherService.PostComputeProviders
+      post: "/v1/smesher/postcomputeproviders"
     - selector: spacemesh.v1.SmesherService.CreatePostData
       post: "/v1/smesher/createpostdata"
       body: "*"
