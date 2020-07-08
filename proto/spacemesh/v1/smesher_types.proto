@@ -78,7 +78,7 @@ message PostData {
     uint64 data_size = 2; // Requested post data size
     bool   append = 3; // Append to existing files if they exist. Otherwise overwrite.
     bool   throttle = 4; // Throttle down setup phase computations while user is interactive on system
-    uint32 gpu_id = 5; // An id obtained from Gpus() to be used for create the data
+    uint32 provider_id = 5; // A PostProvider id
 }
 
 message CreatePostDataRequest {
