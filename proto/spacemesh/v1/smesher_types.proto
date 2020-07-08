@@ -55,7 +55,7 @@ message CoinbaseResponse {
 message PostComputeProvider {
     uint32 id = 1; // 0, 1, 2...
     string model = 2; // e.g. Nvidia GTX 2700
-    ComputeApi compute_api = 3; // A provided compute api
+    ComputeApiClass compute_api = 3; // A provided compute api
     uint64 performance = 4; // Estimated performance in hashes per second
 }
 
@@ -63,12 +63,12 @@ message PostComputeProvidersResponse {
     repeated PostComputeProvider post_compute_provider = 1;
 }
 
-// A compute api type
-enum ComputeApi {
-    COMPUTE_API_UNSPECIFIED = 0;
-    COMPUTE_API_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
-    COMPUTE_API_CUDA = 2;
-    COMPUTE_API_VULKAN = 3;
+// Compute API class
+enum ComputeApiClass {
+    COMPUTE_API_CLASS_UNSPECIFIED = 0;
+    COMPUTE_API_CLASS_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
+    COMPUTE_API_CLASS_CUDA = 2;
+    COMPUTE_API_CLASS_VULKAN = 3;
 }
 
 // Basic post data. Used for users to provide requested post data and by
