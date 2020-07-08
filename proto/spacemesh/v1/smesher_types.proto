@@ -52,18 +52,18 @@ message CoinbaseResponse {
     AccountId account_id = 1;
 }
 
-message GpuInfo {
+message PostComputeProvider {
     uint32 id = 1; // 0, 1, 2...
     string model = 2; // e.g. Nvidia GTX 2700
     ComputeApi compute_api = 3; // A provided compute api
     uint64 performance = 4; // Estimated performance in hases per second
 }
 
-message GpusResponse {
-    repeated GpuInfo gpu_info = 1;
+message PostComputeProviderResponse {
+    repeated PostComputeProvider post_compute_provider = 1;
 }
 
-// Bit flags for compute engine selection
+// A compute api type
 enum ComputeApi {
     COMPUTE_API_UNSPECIFIED = 0;
     COMPUTE_API_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
