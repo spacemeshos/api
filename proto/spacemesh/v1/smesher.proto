@@ -41,8 +41,8 @@ service SmesherService {
     // Returns post data status from the node
     rpc PostStatus(google.protobuf.Empty) returns (PostStatusResponse);
 
-    // Returns a bit field of all available setup compute engines
-    rpc AvailableComputeEngines(google.protobuf.Empty) returns (AvailableComputeEnginesResponse);
+    // Returns a list of available gpus for post init
+    rpc Gpus(google.protobuf.Empty) returns (GpusResponse);
 
     // Starts (or continues) a post init phase. Supports resuming a previously
     // started init session, as well as changing post params (e.g., post data size)
