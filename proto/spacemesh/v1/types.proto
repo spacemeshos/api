@@ -20,7 +20,7 @@ message AccountId {
 }
 
 message Account {
-    AccountId address = 1;  // account public address
+    AccountId account_id = 1; // account public address
     uint64 counter = 2; // aka nonce
     Amount balance = 3; // known account balance
 }
@@ -57,7 +57,7 @@ message SmartContractTransaction {
     }
     TransactionType type = 1;
     bytes data = 2; // packed binary arguments, including ABI selector
-    AccountId address = 3; // address of smart contract or template
+    AccountId account_id = 3; // address of smart contract or template
 }
 
 // A simple signature data
