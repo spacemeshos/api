@@ -17,7 +17,7 @@ message AccountRequest {
 }
 
 message AccountResponse {
-    Account account = 1;
+    Account account_wrapper = 1;
 }
 
 message AccountDataFilter {
@@ -66,7 +66,7 @@ message AccountData {
     oneof item {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
-        Account account = 3;
+        Account account_wrapper = 3;
     }
 }
 
@@ -123,7 +123,7 @@ message GlobalStateDataItem {
     oneof data {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
-        Account account = 3;
+        Account account_wrapper = 3;
         GlobalStateHash global_state = 4;
     }
 }
