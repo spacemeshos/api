@@ -59,7 +59,7 @@ message AccountMeshDataFilter {
 }
 
 message AccountMeshData {
-    oneof data_item {
+    oneof item {
         Transaction transaction = 1;
         Activation activation = 2;
     }
