@@ -86,7 +86,7 @@ message Activation {
 // do not include mutable data such as tx state or result.
 message Transaction {
     TransactionId id = 1;
-    oneof data {
+    oneof datum {
         CoinTransferTransaction coin_transfer = 2;
         SmartContractTransaction smart_contract = 3;
     }
