@@ -9,8 +9,9 @@ message IsSmeshingResponse {
 }
 
 message StartSmeshingRequest {
-    string data_dir = 1;
-    SimpleInt commitment_size = 2;
+    AccountId coinbase = 1;
+    string data_dir = 2;
+    SimpleInt commitment_size = 3;
 }
 
 message StartSmeshingResponse {
