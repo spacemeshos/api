@@ -52,20 +52,23 @@ message CoinbaseResponse {
     AccountId account_id = 1;
 }
 
-// Bit flags for compute engine selection
-enum ComputeEngineFlag {
-    COMPUTE_ENGINE_FLAG_UNSPECIFIED = 0;
-    COMPUTE_ENGINE_FLAG_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
-    COMPUTE_ENGINE_FLAG_CUDA = 2;
-    COMPUTE_ENGINE_FLAG_VULKAN = 4;
+message PostComputeProvider {
+    uint32 id = 1; // 0, 1, 2...
+    string model = 2; // e.g. Nvidia GTX 2700
+    ComputeApiClass compute_api = 3; // A provided compute api
+    uint64 performance = 4; // Estimated performance in hashes per second
 }
 
-message ComputeEngineFlags {
-    uint32 compute_engine_flags = 1;
+message PostComputeProvidersResponse {
+    repeated PostComputeProvider post_compute_provider = 1;
 }
 
-message AvailableComputeEnginesResponse {
-    ComputeEngineFlags flags = 1;
+// Compute API class
+enum ComputeApiClass {
+    COMPUTE_API_CLASS_UNSPECIFIED = 0;
+    COMPUTE_API_CLASS_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
+    COMPUTE_API_CLASS_CUDA = 2;
+    COMPUTE_API_CLASS_VULKAN = 3;
 }
 
 // Basic post data. Used for users to provide requested post data and by
@@ -74,8 +77,8 @@ message PostData {
     string path = 1; // User provided path to create the post data files at
     uint64 data_size = 2; // Requested post data size
     bool   append = 3; // Append to existing files if they exist. Otherwise overwrite.
-    bool   throttle = 4; // Throttle down setup phase computations while user is interactive on ///system
-    ComputeEngineFlags compute_engine_flags = 5; // One or more available compute engines to be used for gpu post
+    bool   throttle = 4; // Throttle down setup phase computations while user is interactive on system
+    uint32 provider_id = 5; // A PostProvider id
 }
 
 message CreatePostDataRequest {
