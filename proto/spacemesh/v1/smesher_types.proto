@@ -5,7 +5,12 @@ import "spacemesh/v1/types.proto";
 import "google/rpc/status.proto";
 
 message IsSmeshingResponse {
-    google.rpc.Status status = 1;
+    bool is_smeshing = 1;
+}
+
+message StartSmeshingRequest {
+    string data_dir = 1;
+    SimpleInt commitment_size = 2;
 }
 
 message StartSmeshingResponse {
