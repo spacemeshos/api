@@ -30,7 +30,7 @@ message AccountDataStreamRequest {
 }
 
 message AccountDataStreamResponse {
-    AccountData data = 1;
+    AccountData datum = 1;
 }
 
 message AccountDataQueryRequest {
@@ -129,7 +129,7 @@ message GlobalStateData {
 }
 
 message GlobalStateStreamResponse {
-    GlobalStateData item = 1;
+    GlobalStateData datum = 1;
 }
 
 message AppEventStreamRequest {}
