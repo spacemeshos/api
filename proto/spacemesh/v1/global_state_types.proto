@@ -63,7 +63,7 @@ message TransactionReceipt {
 // Note that this mixes concerns: transactions and rewards are _causes_ of a
 // change to account state; nonce and balance updates are _results_.
 message AccountData {
-    oneof item {
+    oneof datum {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
         Account account_wrapper = 3;
@@ -120,7 +120,7 @@ message GlobalStateStreamRequest {
 }
 
 message GlobalStateData {
-    oneof data {
+    oneof datum {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
         Account account_wrapper = 3;
