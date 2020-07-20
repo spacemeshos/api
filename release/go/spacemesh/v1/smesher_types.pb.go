@@ -128,7 +128,7 @@ func (x PostStatus_FilesStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PostStatus_FilesStatus.Descriptor instead.
 func (PostStatus_FilesStatus) EnumDescriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{18, 0}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{19, 0}
 }
 
 type PostStatus_ErrorType int32
@@ -180,7 +180,7 @@ func (x PostStatus_ErrorType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PostStatus_ErrorType.Descriptor instead.
 func (PostStatus_ErrorType) EnumDescriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{18, 1}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{19, 1}
 }
 
 type IsSmeshingResponse struct {
@@ -188,7 +188,7 @@ type IsSmeshingResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status *status.Status `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	IsSmeshing bool `protobuf:"varint,1,opt,name=is_smeshing,json=isSmeshing,proto3" json:"is_smeshing,omitempty"`
 }
 
 func (x *IsSmeshingResponse) Reset() {
@@ -223,9 +223,72 @@ func (*IsSmeshingResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *IsSmeshingResponse) GetStatus() *status.Status {
+func (x *IsSmeshingResponse) GetIsSmeshing() bool {
 	if x != nil {
-		return x.Status
+		return x.IsSmeshing
+	}
+	return false
+}
+
+type StartSmeshingRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Coinbase       *AccountId `protobuf:"bytes,1,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
+	DataDir        string     `protobuf:"bytes,2,opt,name=data_dir,json=dataDir,proto3" json:"data_dir,omitempty"`
+	CommitmentSize *SimpleInt `protobuf:"bytes,3,opt,name=commitment_size,json=commitmentSize,proto3" json:"commitment_size,omitempty"`
+}
+
+func (x *StartSmeshingRequest) Reset() {
+	*x = StartSmeshingRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StartSmeshingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartSmeshingRequest) ProtoMessage() {}
+
+func (x *StartSmeshingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartSmeshingRequest.ProtoReflect.Descriptor instead.
+func (*StartSmeshingRequest) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *StartSmeshingRequest) GetCoinbase() *AccountId {
+	if x != nil {
+		return x.Coinbase
+	}
+	return nil
+}
+
+func (x *StartSmeshingRequest) GetDataDir() string {
+	if x != nil {
+		return x.DataDir
+	}
+	return ""
+}
+
+func (x *StartSmeshingRequest) GetCommitmentSize() *SimpleInt {
+	if x != nil {
+		return x.CommitmentSize
 	}
 	return nil
 }
@@ -241,7 +304,7 @@ type StartSmeshingResponse struct {
 func (x *StartSmeshingResponse) Reset() {
 	*x = StartSmeshingResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[1]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -254,7 +317,7 @@ func (x *StartSmeshingResponse) String() string {
 func (*StartSmeshingResponse) ProtoMessage() {}
 
 func (x *StartSmeshingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[1]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -267,7 +330,7 @@ func (x *StartSmeshingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartSmeshingResponse.ProtoReflect.Descriptor instead.
 func (*StartSmeshingResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{1}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *StartSmeshingResponse) GetStatus() *status.Status {
@@ -288,7 +351,7 @@ type StopSmeshingResponse struct {
 func (x *StopSmeshingResponse) Reset() {
 	*x = StopSmeshingResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[2]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -301,7 +364,7 @@ func (x *StopSmeshingResponse) String() string {
 func (*StopSmeshingResponse) ProtoMessage() {}
 
 func (x *StopSmeshingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[2]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -314,7 +377,7 @@ func (x *StopSmeshingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopSmeshingResponse.ProtoReflect.Descriptor instead.
 func (*StopSmeshingResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{2}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *StopSmeshingResponse) GetStatus() *status.Status {
@@ -335,7 +398,7 @@ type SetCoinbaseRequest struct {
 func (x *SetCoinbaseRequest) Reset() {
 	*x = SetCoinbaseRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[3]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -348,7 +411,7 @@ func (x *SetCoinbaseRequest) String() string {
 func (*SetCoinbaseRequest) ProtoMessage() {}
 
 func (x *SetCoinbaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[3]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -361,7 +424,7 @@ func (x *SetCoinbaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetCoinbaseRequest.ProtoReflect.Descriptor instead.
 func (*SetCoinbaseRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{3}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SetCoinbaseRequest) GetId() *AccountId {
@@ -382,7 +445,7 @@ type SetCoinbaseResponse struct {
 func (x *SetCoinbaseResponse) Reset() {
 	*x = SetCoinbaseResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[4]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -395,7 +458,7 @@ func (x *SetCoinbaseResponse) String() string {
 func (*SetCoinbaseResponse) ProtoMessage() {}
 
 func (x *SetCoinbaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[4]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -408,7 +471,7 @@ func (x *SetCoinbaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetCoinbaseResponse.ProtoReflect.Descriptor instead.
 func (*SetCoinbaseResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{4}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SetCoinbaseResponse) GetStatus() *status.Status {
@@ -429,7 +492,7 @@ type MinGasResponse struct {
 func (x *MinGasResponse) Reset() {
 	*x = MinGasResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[5]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -442,7 +505,7 @@ func (x *MinGasResponse) String() string {
 func (*MinGasResponse) ProtoMessage() {}
 
 func (x *MinGasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[5]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -455,7 +518,7 @@ func (x *MinGasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MinGasResponse.ProtoReflect.Descriptor instead.
 func (*MinGasResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{5}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *MinGasResponse) GetMingas() *SimpleInt {
@@ -476,7 +539,7 @@ type SetMinGasRequest struct {
 func (x *SetMinGasRequest) Reset() {
 	*x = SetMinGasRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[6]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -489,7 +552,7 @@ func (x *SetMinGasRequest) String() string {
 func (*SetMinGasRequest) ProtoMessage() {}
 
 func (x *SetMinGasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[6]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -502,7 +565,7 @@ func (x *SetMinGasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetMinGasRequest.ProtoReflect.Descriptor instead.
 func (*SetMinGasRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{6}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SetMinGasRequest) GetMingas() *SimpleInt {
@@ -523,7 +586,7 @@ type SetMinGasResponse struct {
 func (x *SetMinGasResponse) Reset() {
 	*x = SetMinGasResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[7]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -536,7 +599,7 @@ func (x *SetMinGasResponse) String() string {
 func (*SetMinGasResponse) ProtoMessage() {}
 
 func (x *SetMinGasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[7]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -549,7 +612,7 @@ func (x *SetMinGasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetMinGasResponse.ProtoReflect.Descriptor instead.
 func (*SetMinGasResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{7}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SetMinGasResponse) GetStatus() *status.Status {
@@ -570,7 +633,7 @@ type CreatePostDataResponse struct {
 func (x *CreatePostDataResponse) Reset() {
 	*x = CreatePostDataResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[8]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -583,7 +646,7 @@ func (x *CreatePostDataResponse) String() string {
 func (*CreatePostDataResponse) ProtoMessage() {}
 
 func (x *CreatePostDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[8]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -596,7 +659,7 @@ func (x *CreatePostDataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePostDataResponse.ProtoReflect.Descriptor instead.
 func (*CreatePostDataResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{8}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreatePostDataResponse) GetStatus() *status.Status {
@@ -617,7 +680,7 @@ type StopPostDataCreationSessionResponse struct {
 func (x *StopPostDataCreationSessionResponse) Reset() {
 	*x = StopPostDataCreationSessionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[9]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -630,7 +693,7 @@ func (x *StopPostDataCreationSessionResponse) String() string {
 func (*StopPostDataCreationSessionResponse) ProtoMessage() {}
 
 func (x *StopPostDataCreationSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[9]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -643,7 +706,7 @@ func (x *StopPostDataCreationSessionResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use StopPostDataCreationSessionResponse.ProtoReflect.Descriptor instead.
 func (*StopPostDataCreationSessionResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{9}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StopPostDataCreationSessionResponse) GetStatus() *status.Status {
@@ -664,7 +727,7 @@ type SmesherIDResponse struct {
 func (x *SmesherIDResponse) Reset() {
 	*x = SmesherIDResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[10]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -677,7 +740,7 @@ func (x *SmesherIDResponse) String() string {
 func (*SmesherIDResponse) ProtoMessage() {}
 
 func (x *SmesherIDResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[10]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -690,7 +753,7 @@ func (x *SmesherIDResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmesherIDResponse.ProtoReflect.Descriptor instead.
 func (*SmesherIDResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{10}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SmesherIDResponse) GetAccountId() *AccountId {
@@ -711,7 +774,7 @@ type CoinbaseResponse struct {
 func (x *CoinbaseResponse) Reset() {
 	*x = CoinbaseResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[11]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -724,7 +787,7 @@ func (x *CoinbaseResponse) String() string {
 func (*CoinbaseResponse) ProtoMessage() {}
 
 func (x *CoinbaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[11]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -737,7 +800,7 @@ func (x *CoinbaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CoinbaseResponse.ProtoReflect.Descriptor instead.
 func (*CoinbaseResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{11}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CoinbaseResponse) GetAccountId() *AccountId {
@@ -761,7 +824,7 @@ type PostComputeProvider struct {
 func (x *PostComputeProvider) Reset() {
 	*x = PostComputeProvider{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[12]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -774,7 +837,7 @@ func (x *PostComputeProvider) String() string {
 func (*PostComputeProvider) ProtoMessage() {}
 
 func (x *PostComputeProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[12]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -787,7 +850,7 @@ func (x *PostComputeProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostComputeProvider.ProtoReflect.Descriptor instead.
 func (*PostComputeProvider) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{12}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *PostComputeProvider) GetId() uint32 {
@@ -829,7 +892,7 @@ type PostComputeProvidersResponse struct {
 func (x *PostComputeProvidersResponse) Reset() {
 	*x = PostComputeProvidersResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[13]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -842,7 +905,7 @@ func (x *PostComputeProvidersResponse) String() string {
 func (*PostComputeProvidersResponse) ProtoMessage() {}
 
 func (x *PostComputeProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[13]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +918,7 @@ func (x *PostComputeProvidersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostComputeProvidersResponse.ProtoReflect.Descriptor instead.
 func (*PostComputeProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{13}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *PostComputeProvidersResponse) GetPostComputeProvider() []*PostComputeProvider {
@@ -882,7 +945,7 @@ type PostData struct {
 func (x *PostData) Reset() {
 	*x = PostData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[14]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -895,7 +958,7 @@ func (x *PostData) String() string {
 func (*PostData) ProtoMessage() {}
 
 func (x *PostData) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[14]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -908,7 +971,7 @@ func (x *PostData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostData.ProtoReflect.Descriptor instead.
 func (*PostData) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{14}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *PostData) GetPath() string {
@@ -957,7 +1020,7 @@ type CreatePostDataRequest struct {
 func (x *CreatePostDataRequest) Reset() {
 	*x = CreatePostDataRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[15]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -970,7 +1033,7 @@ func (x *CreatePostDataRequest) String() string {
 func (*CreatePostDataRequest) ProtoMessage() {}
 
 func (x *CreatePostDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[15]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -983,7 +1046,7 @@ func (x *CreatePostDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePostDataRequest.ProtoReflect.Descriptor instead.
 func (*CreatePostDataRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{15}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreatePostDataRequest) GetData() *PostData {
@@ -1005,7 +1068,7 @@ type StopSmeshingRequest struct {
 func (x *StopSmeshingRequest) Reset() {
 	*x = StopSmeshingRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[16]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1018,7 +1081,7 @@ func (x *StopSmeshingRequest) String() string {
 func (*StopSmeshingRequest) ProtoMessage() {}
 
 func (x *StopSmeshingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[16]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1031,7 +1094,7 @@ func (x *StopSmeshingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopSmeshingRequest.ProtoReflect.Descriptor instead.
 func (*StopSmeshingRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{16}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *StopSmeshingRequest) GetDeleteFiles() bool {
@@ -1052,7 +1115,7 @@ type StopPostDataCreationSessionRequest struct {
 func (x *StopPostDataCreationSessionRequest) Reset() {
 	*x = StopPostDataCreationSessionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[17]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1065,7 +1128,7 @@ func (x *StopPostDataCreationSessionRequest) String() string {
 func (*StopPostDataCreationSessionRequest) ProtoMessage() {}
 
 func (x *StopPostDataCreationSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[17]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1078,7 +1141,7 @@ func (x *StopPostDataCreationSessionRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use StopPostDataCreationSessionRequest.ProtoReflect.Descriptor instead.
 func (*StopPostDataCreationSessionRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{17}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *StopPostDataCreationSessionRequest) GetDeleteFiles() bool {
@@ -1105,7 +1168,7 @@ type PostStatus struct {
 func (x *PostStatus) Reset() {
 	*x = PostStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[18]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1118,7 +1181,7 @@ func (x *PostStatus) String() string {
 func (*PostStatus) ProtoMessage() {}
 
 func (x *PostStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[18]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1131,7 +1194,7 @@ func (x *PostStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostStatus.ProtoReflect.Descriptor instead.
 func (*PostStatus) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{18}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *PostStatus) GetPostData() *PostData {
@@ -1187,7 +1250,7 @@ type PostStatusResponse struct {
 func (x *PostStatusResponse) Reset() {
 	*x = PostStatusResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[19]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1200,7 +1263,7 @@ func (x *PostStatusResponse) String() string {
 func (*PostStatusResponse) ProtoMessage() {}
 
 func (x *PostStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[19]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1213,7 +1276,7 @@ func (x *PostStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PostStatusResponse.ProtoReflect.Descriptor instead.
 func (*PostStatusResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{19}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *PostStatusResponse) GetStatus() *PostStatus {
@@ -1234,7 +1297,7 @@ type PostDataCreationProgressStreamResponse struct {
 func (x *PostDataCreationProgressStreamResponse) Reset() {
 	*x = PostDataCreationProgressStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[20]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1247,7 +1310,7 @@ func (x *PostDataCreationProgressStreamResponse) String() string {
 func (*PostDataCreationProgressStreamResponse) ProtoMessage() {}
 
 func (x *PostDataCreationProgressStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[20]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1260,7 +1323,7 @@ func (x *PostDataCreationProgressStreamResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use PostDataCreationProgressStreamResponse.ProtoReflect.Descriptor instead.
 func (*PostDataCreationProgressStreamResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{20}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PostDataCreationProgressStreamResponse) GetStatus() *PostStatus {
@@ -1279,11 +1342,21 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x1a, 0x18, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x2f, 0x74,
 	0x79, 0x70, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17, 0x67, 0x6f, 0x6f, 0x67,
 	0x6c, 0x65, 0x2f, 0x72, 0x70, 0x63, 0x2f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x22, 0x40, 0x0a, 0x12, 0x49, 0x73, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e,
-	0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x06, 0x73, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
-	0x6c, 0x65, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x43, 0x0a, 0x15, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x6d,
+	0x6f, 0x74, 0x6f, 0x22, 0x35, 0x0a, 0x12, 0x49, 0x73, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e,
+	0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f,
+	0x73, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a,
+	0x69, 0x73, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x22, 0xa8, 0x01, 0x0a, 0x14, 0x53,
+	0x74, 0x61, 0x72, 0x74, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x33, 0x0a, 0x08, 0x63, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x52, 0x08,
+	0x63, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x64, 0x61, 0x74, 0x61,
+	0x5f, 0x64, 0x69, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x64, 0x61, 0x74, 0x61,
+	0x44, 0x69, 0x72, 0x12, 0x40, 0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e,
+	0x74, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73,
+	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x69, 0x6d, 0x70,
+	0x6c, 0x65, 0x49, 0x6e, 0x74, 0x52, 0x0e, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e,
+	0x74, 0x53, 0x69, 0x7a, 0x65, 0x22, 0x43, 0x0a, 0x15, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x6d,
 	0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a,
 	0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12,
 	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x53, 0x74, 0x61, 0x74,
@@ -1445,62 +1518,64 @@ func file_spacemesh_v1_smesher_types_proto_rawDescGZIP() []byte {
 }
 
 var file_spacemesh_v1_smesher_types_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_spacemesh_v1_smesher_types_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_spacemesh_v1_smesher_types_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_spacemesh_v1_smesher_types_proto_goTypes = []interface{}{
 	(ComputeApiClass)(0),                           // 0: spacemesh.v1.ComputeApiClass
 	(PostStatus_FilesStatus)(0),                    // 1: spacemesh.v1.PostStatus.FilesStatus
 	(PostStatus_ErrorType)(0),                      // 2: spacemesh.v1.PostStatus.ErrorType
 	(*IsSmeshingResponse)(nil),                     // 3: spacemesh.v1.IsSmeshingResponse
-	(*StartSmeshingResponse)(nil),                  // 4: spacemesh.v1.StartSmeshingResponse
-	(*StopSmeshingResponse)(nil),                   // 5: spacemesh.v1.StopSmeshingResponse
-	(*SetCoinbaseRequest)(nil),                     // 6: spacemesh.v1.SetCoinbaseRequest
-	(*SetCoinbaseResponse)(nil),                    // 7: spacemesh.v1.SetCoinbaseResponse
-	(*MinGasResponse)(nil),                         // 8: spacemesh.v1.MinGasResponse
-	(*SetMinGasRequest)(nil),                       // 9: spacemesh.v1.SetMinGasRequest
-	(*SetMinGasResponse)(nil),                      // 10: spacemesh.v1.SetMinGasResponse
-	(*CreatePostDataResponse)(nil),                 // 11: spacemesh.v1.CreatePostDataResponse
-	(*StopPostDataCreationSessionResponse)(nil),    // 12: spacemesh.v1.StopPostDataCreationSessionResponse
-	(*SmesherIDResponse)(nil),                      // 13: spacemesh.v1.SmesherIDResponse
-	(*CoinbaseResponse)(nil),                       // 14: spacemesh.v1.CoinbaseResponse
-	(*PostComputeProvider)(nil),                    // 15: spacemesh.v1.PostComputeProvider
-	(*PostComputeProvidersResponse)(nil),           // 16: spacemesh.v1.PostComputeProvidersResponse
-	(*PostData)(nil),                               // 17: spacemesh.v1.PostData
-	(*CreatePostDataRequest)(nil),                  // 18: spacemesh.v1.CreatePostDataRequest
-	(*StopSmeshingRequest)(nil),                    // 19: spacemesh.v1.StopSmeshingRequest
-	(*StopPostDataCreationSessionRequest)(nil),     // 20: spacemesh.v1.StopPostDataCreationSessionRequest
-	(*PostStatus)(nil),                             // 21: spacemesh.v1.PostStatus
-	(*PostStatusResponse)(nil),                     // 22: spacemesh.v1.PostStatusResponse
-	(*PostDataCreationProgressStreamResponse)(nil), // 23: spacemesh.v1.PostDataCreationProgressStreamResponse
-	(*status.Status)(nil),                          // 24: google.rpc.Status
+	(*StartSmeshingRequest)(nil),                   // 4: spacemesh.v1.StartSmeshingRequest
+	(*StartSmeshingResponse)(nil),                  // 5: spacemesh.v1.StartSmeshingResponse
+	(*StopSmeshingResponse)(nil),                   // 6: spacemesh.v1.StopSmeshingResponse
+	(*SetCoinbaseRequest)(nil),                     // 7: spacemesh.v1.SetCoinbaseRequest
+	(*SetCoinbaseResponse)(nil),                    // 8: spacemesh.v1.SetCoinbaseResponse
+	(*MinGasResponse)(nil),                         // 9: spacemesh.v1.MinGasResponse
+	(*SetMinGasRequest)(nil),                       // 10: spacemesh.v1.SetMinGasRequest
+	(*SetMinGasResponse)(nil),                      // 11: spacemesh.v1.SetMinGasResponse
+	(*CreatePostDataResponse)(nil),                 // 12: spacemesh.v1.CreatePostDataResponse
+	(*StopPostDataCreationSessionResponse)(nil),    // 13: spacemesh.v1.StopPostDataCreationSessionResponse
+	(*SmesherIDResponse)(nil),                      // 14: spacemesh.v1.SmesherIDResponse
+	(*CoinbaseResponse)(nil),                       // 15: spacemesh.v1.CoinbaseResponse
+	(*PostComputeProvider)(nil),                    // 16: spacemesh.v1.PostComputeProvider
+	(*PostComputeProvidersResponse)(nil),           // 17: spacemesh.v1.PostComputeProvidersResponse
+	(*PostData)(nil),                               // 18: spacemesh.v1.PostData
+	(*CreatePostDataRequest)(nil),                  // 19: spacemesh.v1.CreatePostDataRequest
+	(*StopSmeshingRequest)(nil),                    // 20: spacemesh.v1.StopSmeshingRequest
+	(*StopPostDataCreationSessionRequest)(nil),     // 21: spacemesh.v1.StopPostDataCreationSessionRequest
+	(*PostStatus)(nil),                             // 22: spacemesh.v1.PostStatus
+	(*PostStatusResponse)(nil),                     // 23: spacemesh.v1.PostStatusResponse
+	(*PostDataCreationProgressStreamResponse)(nil), // 24: spacemesh.v1.PostDataCreationProgressStreamResponse
 	(*AccountId)(nil),                              // 25: spacemesh.v1.AccountId
 	(*SimpleInt)(nil),                              // 26: spacemesh.v1.SimpleInt
+	(*status.Status)(nil),                          // 27: google.rpc.Status
 }
 var file_spacemesh_v1_smesher_types_proto_depIdxs = []int32{
-	24, // 0: spacemesh.v1.IsSmeshingResponse.status:type_name -> google.rpc.Status
-	24, // 1: spacemesh.v1.StartSmeshingResponse.status:type_name -> google.rpc.Status
-	24, // 2: spacemesh.v1.StopSmeshingResponse.status:type_name -> google.rpc.Status
-	25, // 3: spacemesh.v1.SetCoinbaseRequest.id:type_name -> spacemesh.v1.AccountId
-	24, // 4: spacemesh.v1.SetCoinbaseResponse.status:type_name -> google.rpc.Status
-	26, // 5: spacemesh.v1.MinGasResponse.mingas:type_name -> spacemesh.v1.SimpleInt
-	26, // 6: spacemesh.v1.SetMinGasRequest.mingas:type_name -> spacemesh.v1.SimpleInt
-	24, // 7: spacemesh.v1.SetMinGasResponse.status:type_name -> google.rpc.Status
-	24, // 8: spacemesh.v1.CreatePostDataResponse.status:type_name -> google.rpc.Status
-	24, // 9: spacemesh.v1.StopPostDataCreationSessionResponse.status:type_name -> google.rpc.Status
-	25, // 10: spacemesh.v1.SmesherIDResponse.account_id:type_name -> spacemesh.v1.AccountId
-	25, // 11: spacemesh.v1.CoinbaseResponse.account_id:type_name -> spacemesh.v1.AccountId
-	0,  // 12: spacemesh.v1.PostComputeProvider.compute_api:type_name -> spacemesh.v1.ComputeApiClass
-	15, // 13: spacemesh.v1.PostComputeProvidersResponse.post_compute_provider:type_name -> spacemesh.v1.PostComputeProvider
-	17, // 14: spacemesh.v1.CreatePostDataRequest.data:type_name -> spacemesh.v1.PostData
-	17, // 15: spacemesh.v1.PostStatus.post_data:type_name -> spacemesh.v1.PostData
-	1,  // 16: spacemesh.v1.PostStatus.files_status:type_name -> spacemesh.v1.PostStatus.FilesStatus
-	2,  // 17: spacemesh.v1.PostStatus.error_type:type_name -> spacemesh.v1.PostStatus.ErrorType
-	21, // 18: spacemesh.v1.PostStatusResponse.status:type_name -> spacemesh.v1.PostStatus
-	21, // 19: spacemesh.v1.PostDataCreationProgressStreamResponse.status:type_name -> spacemesh.v1.PostStatus
-	20, // [20:20] is the sub-list for method output_type
-	20, // [20:20] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	25, // 0: spacemesh.v1.StartSmeshingRequest.coinbase:type_name -> spacemesh.v1.AccountId
+	26, // 1: spacemesh.v1.StartSmeshingRequest.commitment_size:type_name -> spacemesh.v1.SimpleInt
+	27, // 2: spacemesh.v1.StartSmeshingResponse.status:type_name -> google.rpc.Status
+	27, // 3: spacemesh.v1.StopSmeshingResponse.status:type_name -> google.rpc.Status
+	25, // 4: spacemesh.v1.SetCoinbaseRequest.id:type_name -> spacemesh.v1.AccountId
+	27, // 5: spacemesh.v1.SetCoinbaseResponse.status:type_name -> google.rpc.Status
+	26, // 6: spacemesh.v1.MinGasResponse.mingas:type_name -> spacemesh.v1.SimpleInt
+	26, // 7: spacemesh.v1.SetMinGasRequest.mingas:type_name -> spacemesh.v1.SimpleInt
+	27, // 8: spacemesh.v1.SetMinGasResponse.status:type_name -> google.rpc.Status
+	27, // 9: spacemesh.v1.CreatePostDataResponse.status:type_name -> google.rpc.Status
+	27, // 10: spacemesh.v1.StopPostDataCreationSessionResponse.status:type_name -> google.rpc.Status
+	25, // 11: spacemesh.v1.SmesherIDResponse.account_id:type_name -> spacemesh.v1.AccountId
+	25, // 12: spacemesh.v1.CoinbaseResponse.account_id:type_name -> spacemesh.v1.AccountId
+	0,  // 13: spacemesh.v1.PostComputeProvider.compute_api:type_name -> spacemesh.v1.ComputeApiClass
+	16, // 14: spacemesh.v1.PostComputeProvidersResponse.post_compute_provider:type_name -> spacemesh.v1.PostComputeProvider
+	18, // 15: spacemesh.v1.CreatePostDataRequest.data:type_name -> spacemesh.v1.PostData
+	18, // 16: spacemesh.v1.PostStatus.post_data:type_name -> spacemesh.v1.PostData
+	1,  // 17: spacemesh.v1.PostStatus.files_status:type_name -> spacemesh.v1.PostStatus.FilesStatus
+	2,  // 18: spacemesh.v1.PostStatus.error_type:type_name -> spacemesh.v1.PostStatus.ErrorType
+	22, // 19: spacemesh.v1.PostStatusResponse.status:type_name -> spacemesh.v1.PostStatus
+	22, // 20: spacemesh.v1.PostDataCreationProgressStreamResponse.status:type_name -> spacemesh.v1.PostStatus
+	21, // [21:21] is the sub-list for method output_type
+	21, // [21:21] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_smesher_types_proto_init() }
@@ -1523,7 +1598,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartSmeshingResponse); i {
+			switch v := v.(*StartSmeshingRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1535,7 +1610,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopSmeshingResponse); i {
+			switch v := v.(*StartSmeshingResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1547,7 +1622,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetCoinbaseRequest); i {
+			switch v := v.(*StopSmeshingResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1559,7 +1634,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetCoinbaseResponse); i {
+			switch v := v.(*SetCoinbaseRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1571,7 +1646,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MinGasResponse); i {
+			switch v := v.(*SetCoinbaseResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1583,7 +1658,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetMinGasRequest); i {
+			switch v := v.(*MinGasResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1595,7 +1670,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetMinGasResponse); i {
+			switch v := v.(*SetMinGasRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1607,7 +1682,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreatePostDataResponse); i {
+			switch v := v.(*SetMinGasResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1619,7 +1694,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopPostDataCreationSessionResponse); i {
+			switch v := v.(*CreatePostDataResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1631,7 +1706,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SmesherIDResponse); i {
+			switch v := v.(*StopPostDataCreationSessionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1643,7 +1718,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CoinbaseResponse); i {
+			switch v := v.(*SmesherIDResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1655,7 +1730,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostComputeProvider); i {
+			switch v := v.(*CoinbaseResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1667,7 +1742,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostComputeProvidersResponse); i {
+			switch v := v.(*PostComputeProvider); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1679,7 +1754,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostData); i {
+			switch v := v.(*PostComputeProvidersResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1691,7 +1766,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreatePostDataRequest); i {
+			switch v := v.(*PostData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1703,7 +1778,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopSmeshingRequest); i {
+			switch v := v.(*CreatePostDataRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1715,7 +1790,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StopPostDataCreationSessionRequest); i {
+			switch v := v.(*StopSmeshingRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1727,7 +1802,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostStatus); i {
+			switch v := v.(*StopPostDataCreationSessionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1739,7 +1814,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostStatusResponse); i {
+			switch v := v.(*PostStatus); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1751,6 +1826,18 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PostStatusResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_smesher_types_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PostDataCreationProgressStreamResponse); i {
 			case 0:
 				return &v.state
@@ -1769,7 +1856,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_smesher_types_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   21,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
