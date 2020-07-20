@@ -653,7 +653,7 @@ func (x *StopPostDataCreationSessionResponse) GetStatus() *status.Status {
 	return nil
 }
 
-type SmesherIdResponse struct {
+type SmesherIDResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -661,8 +661,8 @@ type SmesherIdResponse struct {
 	AccountId *AccountId `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 }
 
-func (x *SmesherIdResponse) Reset() {
-	*x = SmesherIdResponse{}
+func (x *SmesherIDResponse) Reset() {
+	*x = SmesherIDResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -670,13 +670,13 @@ func (x *SmesherIdResponse) Reset() {
 	}
 }
 
-func (x *SmesherIdResponse) String() string {
+func (x *SmesherIDResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SmesherIdResponse) ProtoMessage() {}
+func (*SmesherIDResponse) ProtoMessage() {}
 
-func (x *SmesherIdResponse) ProtoReflect() protoreflect.Message {
+func (x *SmesherIDResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -688,12 +688,12 @@ func (x *SmesherIdResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SmesherIdResponse.ProtoReflect.Descriptor instead.
-func (*SmesherIdResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SmesherIDResponse.ProtoReflect.Descriptor instead.
+func (*SmesherIDResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *SmesherIdResponse) GetAccountId() *AccountId {
+func (x *SmesherIDResponse) GetAccountId() *AccountId {
 	if x != nil {
 		return x.AccountId
 	}
@@ -1322,7 +1322,7 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
 	0x72, 0x70, 0x63, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x22, 0x4b, 0x0a, 0x11, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x49, 0x64, 0x52,
+	0x75, 0x73, 0x22, 0x4b, 0x0a, 0x11, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x49, 0x44, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x36, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75,
 	0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70,
 	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75,
@@ -1460,7 +1460,7 @@ var file_spacemesh_v1_smesher_types_proto_goTypes = []interface{}{
 	(*SetMinGasResponse)(nil),                      // 10: spacemesh.v1.SetMinGasResponse
 	(*CreatePostDataResponse)(nil),                 // 11: spacemesh.v1.CreatePostDataResponse
 	(*StopPostDataCreationSessionResponse)(nil),    // 12: spacemesh.v1.StopPostDataCreationSessionResponse
-	(*SmesherIdResponse)(nil),                      // 13: spacemesh.v1.SmesherIdResponse
+	(*SmesherIDResponse)(nil),                      // 13: spacemesh.v1.SmesherIDResponse
 	(*CoinbaseResponse)(nil),                       // 14: spacemesh.v1.CoinbaseResponse
 	(*PostComputeProvider)(nil),                    // 15: spacemesh.v1.PostComputeProvider
 	(*PostComputeProvidersResponse)(nil),           // 16: spacemesh.v1.PostComputeProvidersResponse
@@ -1486,7 +1486,7 @@ var file_spacemesh_v1_smesher_types_proto_depIdxs = []int32{
 	24, // 7: spacemesh.v1.SetMinGasResponse.status:type_name -> google.rpc.Status
 	24, // 8: spacemesh.v1.CreatePostDataResponse.status:type_name -> google.rpc.Status
 	24, // 9: spacemesh.v1.StopPostDataCreationSessionResponse.status:type_name -> google.rpc.Status
-	25, // 10: spacemesh.v1.SmesherIdResponse.account_id:type_name -> spacemesh.v1.AccountId
+	25, // 10: spacemesh.v1.SmesherIDResponse.account_id:type_name -> spacemesh.v1.AccountId
 	25, // 11: spacemesh.v1.CoinbaseResponse.account_id:type_name -> spacemesh.v1.AccountId
 	0,  // 12: spacemesh.v1.PostComputeProvider.compute_api:type_name -> spacemesh.v1.ComputeApiClass
 	15, // 13: spacemesh.v1.PostComputeProvidersResponse.post_compute_provider:type_name -> spacemesh.v1.PostComputeProvider
@@ -1631,7 +1631,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SmesherIdResponse); i {
+			switch v := v.(*SmesherIDResponse); i {
 			case 0:
 				return &v.state
 			case 1:

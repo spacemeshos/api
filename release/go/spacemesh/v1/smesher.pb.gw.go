@@ -102,20 +102,20 @@ func local_request_SmesherService_StopSmeshing_0(ctx context.Context, marshaler 
 
 }
 
-func request_SmesherService_SmesherId_0(ctx context.Context, marshaler runtime.Marshaler, client SmesherServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_SmesherService_SmesherID_0(ctx context.Context, marshaler runtime.Marshaler, client SmesherServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.SmesherId(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.SmesherID(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_SmesherService_SmesherId_0(ctx context.Context, marshaler runtime.Marshaler, server SmesherServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_SmesherService_SmesherID_0(ctx context.Context, marshaler runtime.Marshaler, server SmesherServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq empty.Empty
 	var metadata runtime.ServerMetadata
 
-	msg, err := server.SmesherId(ctx, &protoReq)
+	msg, err := server.SmesherID(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -393,7 +393,7 @@ func RegisterSmesherServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 
 	})
 
-	mux.Handle("POST", pattern_SmesherService_SmesherId_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_SmesherService_SmesherID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -402,14 +402,14 @@ func RegisterSmesherServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_SmesherService_SmesherId_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_SmesherService_SmesherID_0(rctx, inboundMarshaler, server, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SmesherService_SmesherId_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SmesherService_SmesherID_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -674,7 +674,7 @@ func RegisterSmesherServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 
 	})
 
-	mux.Handle("POST", pattern_SmesherService_SmesherId_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_SmesherService_SmesherID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -683,14 +683,14 @@ func RegisterSmesherServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_SmesherService_SmesherId_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_SmesherService_SmesherID_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_SmesherService_SmesherId_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_SmesherService_SmesherID_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -864,7 +864,7 @@ var (
 
 	pattern_SmesherService_StopSmeshing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "smesher", "stopsmeshing"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_SmesherService_SmesherId_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "smesher", "smesherid"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_SmesherService_SmesherID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "smesher", "smesherid"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_SmesherService_Coinbase_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "smesher", "coinbase"}, "", runtime.AssumeColonVerbOpt(true)))
 
@@ -890,7 +890,7 @@ var (
 
 	forward_SmesherService_StopSmeshing_0 = runtime.ForwardResponseMessage
 
-	forward_SmesherService_SmesherId_0 = runtime.ForwardResponseMessage
+	forward_SmesherService_SmesherID_0 = runtime.ForwardResponseMessage
 
 	forward_SmesherService_Coinbase_0 = runtime.ForwardResponseMessage
 

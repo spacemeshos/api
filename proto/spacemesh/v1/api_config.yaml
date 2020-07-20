@@ -73,7 +73,7 @@ http:
     - selector: spacemesh.v1.SmesherService.StopSmeshing
       post: "/v1/smesher/stopsmeshing"
       body: "*"
-    - selector: spacemesh.v1.SmesherService.SmesherId
+    - selector: spacemesh.v1.SmesherService.SmesherID
       post: "/v1/smesher/smesherid"
     - selector: spacemesh.v1.SmesherService.Coinbase
       post: "/v1/smesher/coinbase"
