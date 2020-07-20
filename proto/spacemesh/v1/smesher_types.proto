@@ -5,7 +5,13 @@ import "spacemesh/v1/types.proto";
 import "google/rpc/status.proto";
 
 message IsSmeshingResponse {
-    google.rpc.Status status = 1;
+    bool is_smeshing = 1;
+}
+
+message StartSmeshingRequest {
+    AccountId coinbase = 1;
+    string data_dir = 2;
+    SimpleInt commitment_size = 3;
 }
 
 message StartSmeshingResponse {

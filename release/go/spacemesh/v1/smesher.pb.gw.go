@@ -50,9 +50,20 @@ func local_request_SmesherService_IsSmeshing_0(ctx context.Context, marshaler ru
 
 }
 
+var (
+	filter_SmesherService_StartSmeshing_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_SmesherService_StartSmeshing_0(ctx context.Context, marshaler runtime.Marshaler, client SmesherServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq empty.Empty
+	var protoReq StartSmeshingRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SmesherService_StartSmeshing_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.StartSmeshing(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -60,8 +71,15 @@ func request_SmesherService_StartSmeshing_0(ctx context.Context, marshaler runti
 }
 
 func local_request_SmesherService_StartSmeshing_0(ctx context.Context, marshaler runtime.Marshaler, server SmesherServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq empty.Empty
+	var protoReq StartSmeshingRequest
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SmesherService_StartSmeshing_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := server.StartSmeshing(ctx, &protoReq)
 	return msg, metadata, err
