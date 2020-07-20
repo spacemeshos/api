@@ -44,7 +44,7 @@ message StopPostDataCreationSessionResponse {
     google.rpc.Status status = 1;
 }
 
-message SmesherIdResponse {
+message SmesherIDResponse {
     AccountId account_id = 1;
 }
 
