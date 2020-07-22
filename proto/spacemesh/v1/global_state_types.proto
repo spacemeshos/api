@@ -17,7 +17,7 @@ message AccountRequest {
 }
 
 message AccountResponse {
-    Account account = 1;
+    Account account_wrapper = 1;
 }
 
 message AccountDataFilter {
@@ -30,7 +30,7 @@ message AccountDataStreamRequest {
 }
 
 message AccountDataStreamResponse {
-    AccountData data = 1;
+    AccountData datum = 1;
 }
 
 message AccountDataQueryRequest {
@@ -63,10 +63,10 @@ message TransactionReceipt {
 // Note that this mixes concerns: transactions and rewards are _causes_ of a
 // change to account state; nonce and balance updates are _results_.
 message AccountData {
-    oneof item {
+    oneof datum {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
-        Account account = 3;
+        Account account_wrapper = 3;
     }
 }
 
@@ -94,12 +94,12 @@ message SmesherDataQueryResponse {
     repeated Reward rewards = 2;
 }
 
-enum GlobalStateDataItemFlag {
-    GLOBAL_STATE_DATA_ITEM_FLAG_UNSPECIFIED = 0;
-    GLOBAL_STATE_DATA_ITEM_FLAG_TRANSACTION_RECEIPT = 1; // tx receipt generated
-    GLOBAL_STATE_DATA_ITEM_FLAG_REWARD = 2; // reward awarded to an account (includes fees paid)
-    GLOBAL_STATE_DATA_ITEM_FLAG_ACCOUNT = 4; // account data changes (counter or balance)
-    GLOBAL_STATE_DATA_ITEM_FLAG_GLOBAL_STATE_HASH = 8; // hash of global state (i.e., state root)
+enum GlobalStateDataFlag {
+    GLOBAL_STATE_DATA_FLAG_UNSPECIFIED = 0;
+    GLOBAL_STATE_DATA_FLAG_TRANSACTION_RECEIPT = 1; // tx receipt generated
+    GLOBAL_STATE_DATA_FLAG_REWARD = 2; // reward awarded to an account (includes fees paid)
+    GLOBAL_STATE_DATA_FLAG_ACCOUNT = 4; // account data changes (counter or balance)
+    GLOBAL_STATE_DATA_FLAG_GLOBAL_STATE_HASH = 8; // hash of global state (i.e., state root)
 }
 
 message GlobalStateHash {
@@ -116,20 +116,20 @@ message GlobalStateHashResponse {
 }
 
 message GlobalStateStreamRequest {
-    uint32 global_state_data_item_flags = 1; // bit field of GlobalStateDataItemFlag
+    uint32 global_state_data_flags = 1; // bit field of GlobalStateDataFlag
 }
 
-message GlobalStateDataItem {
-    oneof data {
+message GlobalStateData {
+    oneof datum {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
-        Account account = 3;
+        Account account_wrapper = 3;
         GlobalStateHash global_state = 4;
     }
 }
 
 message GlobalStateStreamResponse {
-    repeated GlobalStateDataItem data_item = 1;
+    GlobalStateData datum = 1;
 }
 
 message AppEventStreamRequest {}
