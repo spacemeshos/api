@@ -508,8 +508,9 @@ type TransactionReceipt struct {
 	GasUsed     uint64                               `protobuf:"varint,3,opt,name=gas_used,json=gasUsed,proto3" json:"gas_used,omitempty"`                                       // gas units used by the transaction
 	Fee         *Amount                              `protobuf:"bytes,4,opt,name=fee,proto3" json:"fee,omitempty"`                                                               // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
 	LayerNumber uint64                               `protobuf:"varint,5,opt,name=layer_number,json=layerNumber,proto3" json:"layer_number,omitempty"`                           // the layer in which the STF processed this transaction
-	Index       uint32                               `protobuf:"varint,6,opt,name=index,proto3" json:"index,omitempty"`                                                          // the index of the tx in the ordered list of txs to be executed by stf in the layer.
+	Index       uint32                               `protobuf:"varint,6,opt,name=index,proto3" json:"index,omitempty"`                                                          // the index of the tx in the ordered list of txs to be executed by STF in the layer.
 	AppAddress  *AccountId                           `protobuf:"bytes,7,opt,name=app_address,json=appAddress,proto3" json:"app_address,omitempty"`                               // deployed app address or code template address
+	Delta       []*AccountDelta                      `protobuf:"bytes,8,rep,name=delta,proto3" json:"delta,omitempty"`                                                           // Side effects from execution of this tx
 }
 
 func (x *TransactionReceipt) Reset() {
@@ -593,6 +594,142 @@ func (x *TransactionReceipt) GetAppAddress() *AccountId {
 	return nil
 }
 
+func (x *TransactionReceipt) GetDelta() []*AccountDelta {
+	if x != nil {
+		return x.Delta
+	}
+	return nil
+}
+
+// All state changes due to this transaction, i.e., side effects in executing
+// the STF on this transaction, including counter, balance, and storage.
+type AccountDelta struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AccountId     *AccountId             `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	NewCounter    uint64                 `protobuf:"varint,2,opt,name=new_counter,json=newCounter,proto3" json:"new_counter,omitempty"`
+	BalanceDelta  *Amount                `protobuf:"bytes,3,opt,name=balance_delta,json=balanceDelta,proto3" json:"balance_delta,omitempty"`
+	StorageDeltas []*AccountStorageDelta `protobuf:"bytes,4,rep,name=storage_deltas,json=storageDeltas,proto3" json:"storage_deltas,omitempty"`
+}
+
+func (x *AccountDelta) Reset() {
+	*x = AccountDelta{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AccountDelta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountDelta) ProtoMessage() {}
+
+func (x *AccountDelta) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountDelta.ProtoReflect.Descriptor instead.
+func (*AccountDelta) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AccountDelta) GetAccountId() *AccountId {
+	if x != nil {
+		return x.AccountId
+	}
+	return nil
+}
+
+func (x *AccountDelta) GetNewCounter() uint64 {
+	if x != nil {
+		return x.NewCounter
+	}
+	return 0
+}
+
+func (x *AccountDelta) GetBalanceDelta() *Amount {
+	if x != nil {
+		return x.BalanceDelta
+	}
+	return nil
+}
+
+func (x *AccountDelta) GetStorageDeltas() []*AccountStorageDelta {
+	if x != nil {
+		return x.StorageDeltas
+	}
+	return nil
+}
+
+// A change to a single word of account storage
+type AccountStorageDelta struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Key   uint64 `protobuf:"varint,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value uint64 `protobuf:"varint,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *AccountStorageDelta) Reset() {
+	*x = AccountStorageDelta{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AccountStorageDelta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountStorageDelta) ProtoMessage() {}
+
+func (x *AccountStorageDelta) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountStorageDelta.ProtoReflect.Descriptor instead.
+func (*AccountStorageDelta) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AccountStorageDelta) GetKey() uint64 {
+	if x != nil {
+		return x.Key
+	}
+	return 0
+}
+
+func (x *AccountStorageDelta) GetValue() uint64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
 // All data items that touch an account: receipts for transactions from, or to
 // this account, as well as those that modify its state (e.g., token transfers).
 // Rewards here includes fees paid. Account contains counter and balance updates.
@@ -613,7 +750,7 @@ type AccountData struct {
 func (x *AccountData) Reset() {
 	*x = AccountData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[7]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -626,7 +763,7 @@ func (x *AccountData) String() string {
 func (*AccountData) ProtoMessage() {}
 
 func (x *AccountData) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[7]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -639,7 +776,7 @@ func (x *AccountData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountData.ProtoReflect.Descriptor instead.
 func (*AccountData) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{7}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{9}
 }
 
 func (m *AccountData) GetDatum() isAccountData_Datum {
@@ -704,7 +841,7 @@ type AccountDataQueryResponse struct {
 func (x *AccountDataQueryResponse) Reset() {
 	*x = AccountDataQueryResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[8]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -717,7 +854,7 @@ func (x *AccountDataQueryResponse) String() string {
 func (*AccountDataQueryResponse) ProtoMessage() {}
 
 func (x *AccountDataQueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[8]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -730,7 +867,7 @@ func (x *AccountDataQueryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountDataQueryResponse.ProtoReflect.Descriptor instead.
 func (*AccountDataQueryResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{8}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *AccountDataQueryResponse) GetTotalResults() uint32 {
@@ -758,7 +895,7 @@ type SmesherRewardStreamRequest struct {
 func (x *SmesherRewardStreamRequest) Reset() {
 	*x = SmesherRewardStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[9]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -771,7 +908,7 @@ func (x *SmesherRewardStreamRequest) String() string {
 func (*SmesherRewardStreamRequest) ProtoMessage() {}
 
 func (x *SmesherRewardStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[9]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -784,7 +921,7 @@ func (x *SmesherRewardStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmesherRewardStreamRequest.ProtoReflect.Descriptor instead.
 func (*SmesherRewardStreamRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{9}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SmesherRewardStreamRequest) GetId() *SmesherId {
@@ -805,7 +942,7 @@ type SmesherRewardStreamResponse struct {
 func (x *SmesherRewardStreamResponse) Reset() {
 	*x = SmesherRewardStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[10]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -818,7 +955,7 @@ func (x *SmesherRewardStreamResponse) String() string {
 func (*SmesherRewardStreamResponse) ProtoMessage() {}
 
 func (x *SmesherRewardStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[10]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -831,7 +968,7 @@ func (x *SmesherRewardStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmesherRewardStreamResponse.ProtoReflect.Descriptor instead.
 func (*SmesherRewardStreamResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{10}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SmesherRewardStreamResponse) GetReward() *Reward {
@@ -854,7 +991,7 @@ type SmesherDataQueryRequest struct {
 func (x *SmesherDataQueryRequest) Reset() {
 	*x = SmesherDataQueryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[11]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -867,7 +1004,7 @@ func (x *SmesherDataQueryRequest) String() string {
 func (*SmesherDataQueryRequest) ProtoMessage() {}
 
 func (x *SmesherDataQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[11]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -880,7 +1017,7 @@ func (x *SmesherDataQueryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmesherDataQueryRequest.ProtoReflect.Descriptor instead.
 func (*SmesherDataQueryRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{11}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SmesherDataQueryRequest) GetSmesherId() *SmesherId {
@@ -916,7 +1053,7 @@ type SmesherDataQueryResponse struct {
 func (x *SmesherDataQueryResponse) Reset() {
 	*x = SmesherDataQueryResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[12]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -929,7 +1066,7 @@ func (x *SmesherDataQueryResponse) String() string {
 func (*SmesherDataQueryResponse) ProtoMessage() {}
 
 func (x *SmesherDataQueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[12]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -942,7 +1079,7 @@ func (x *SmesherDataQueryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmesherDataQueryResponse.ProtoReflect.Descriptor instead.
 func (*SmesherDataQueryResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{12}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SmesherDataQueryResponse) GetTotalResults() uint32 {
@@ -971,7 +1108,7 @@ type GlobalStateHash struct {
 func (x *GlobalStateHash) Reset() {
 	*x = GlobalStateHash{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[13]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -984,7 +1121,7 @@ func (x *GlobalStateHash) String() string {
 func (*GlobalStateHash) ProtoMessage() {}
 
 func (x *GlobalStateHash) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[13]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -997,7 +1134,7 @@ func (x *GlobalStateHash) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalStateHash.ProtoReflect.Descriptor instead.
 func (*GlobalStateHash) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{13}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GlobalStateHash) GetRootHash() []byte {
@@ -1025,7 +1162,7 @@ type GlobalStateHashRequest struct {
 func (x *GlobalStateHashRequest) Reset() {
 	*x = GlobalStateHashRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[14]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1038,7 +1175,7 @@ func (x *GlobalStateHashRequest) String() string {
 func (*GlobalStateHashRequest) ProtoMessage() {}
 
 func (x *GlobalStateHashRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[14]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1051,7 +1188,7 @@ func (x *GlobalStateHashRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalStateHashRequest.ProtoReflect.Descriptor instead.
 func (*GlobalStateHashRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{14}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{16}
 }
 
 type GlobalStateHashResponse struct {
@@ -1065,7 +1202,7 @@ type GlobalStateHashResponse struct {
 func (x *GlobalStateHashResponse) Reset() {
 	*x = GlobalStateHashResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[15]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1078,7 +1215,7 @@ func (x *GlobalStateHashResponse) String() string {
 func (*GlobalStateHashResponse) ProtoMessage() {}
 
 func (x *GlobalStateHashResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[15]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1091,7 +1228,7 @@ func (x *GlobalStateHashResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalStateHashResponse.ProtoReflect.Descriptor instead.
 func (*GlobalStateHashResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{15}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GlobalStateHashResponse) GetResponse() *GlobalStateHash {
@@ -1112,7 +1249,7 @@ type GlobalStateStreamRequest struct {
 func (x *GlobalStateStreamRequest) Reset() {
 	*x = GlobalStateStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[16]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1125,7 +1262,7 @@ func (x *GlobalStateStreamRequest) String() string {
 func (*GlobalStateStreamRequest) ProtoMessage() {}
 
 func (x *GlobalStateStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[16]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1138,7 +1275,7 @@ func (x *GlobalStateStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalStateStreamRequest.ProtoReflect.Descriptor instead.
 func (*GlobalStateStreamRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{16}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GlobalStateStreamRequest) GetGlobalStateDataFlags() uint32 {
@@ -1164,7 +1301,7 @@ type GlobalStateData struct {
 func (x *GlobalStateData) Reset() {
 	*x = GlobalStateData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[17]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1177,7 +1314,7 @@ func (x *GlobalStateData) String() string {
 func (*GlobalStateData) ProtoMessage() {}
 
 func (x *GlobalStateData) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[17]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1190,7 +1327,7 @@ func (x *GlobalStateData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalStateData.ProtoReflect.Descriptor instead.
 func (*GlobalStateData) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{17}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{19}
 }
 
 func (m *GlobalStateData) GetDatum() isGlobalStateData_Datum {
@@ -1267,7 +1404,7 @@ type GlobalStateStreamResponse struct {
 func (x *GlobalStateStreamResponse) Reset() {
 	*x = GlobalStateStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[18]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1280,7 +1417,7 @@ func (x *GlobalStateStreamResponse) String() string {
 func (*GlobalStateStreamResponse) ProtoMessage() {}
 
 func (x *GlobalStateStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[18]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1293,7 +1430,7 @@ func (x *GlobalStateStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalStateStreamResponse.ProtoReflect.Descriptor instead.
 func (*GlobalStateStreamResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{18}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GlobalStateStreamResponse) GetDatum() *GlobalStateData {
@@ -1312,7 +1449,7 @@ type AppEventStreamRequest struct {
 func (x *AppEventStreamRequest) Reset() {
 	*x = AppEventStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[19]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1325,7 +1462,7 @@ func (x *AppEventStreamRequest) String() string {
 func (*AppEventStreamRequest) ProtoMessage() {}
 
 func (x *AppEventStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[19]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1338,7 +1475,7 @@ func (x *AppEventStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppEventStreamRequest.ProtoReflect.Descriptor instead.
 func (*AppEventStreamRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{19}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{21}
 }
 
 type AppEventStreamResponse struct {
@@ -1352,7 +1489,7 @@ type AppEventStreamResponse struct {
 func (x *AppEventStreamResponse) Reset() {
 	*x = AppEventStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[20]
+		mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1365,7 +1502,7 @@ func (x *AppEventStreamResponse) String() string {
 func (*AppEventStreamResponse) ProtoMessage() {}
 
 func (x *AppEventStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[20]
+	mi := &file_spacemesh_v1_global_state_types_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1378,7 +1515,7 @@ func (x *AppEventStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppEventStreamResponse.ProtoReflect.Descriptor instead.
 func (*AppEventStreamResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{20}
+	return file_spacemesh_v1_global_state_types_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *AppEventStreamResponse) GetEvent() *AppEvent {
@@ -1432,7 +1569,7 @@ var file_spacemesh_v1_global_state_types_proto_rawDesc = []byte{
 	0x1f, 0x0a, 0x0b, 0x6d, 0x61, 0x78, 0x5f, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x6d, 0x61, 0x78, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73,
 	0x12, 0x16, 0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d,
-	0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x22, 0xc0, 0x04, 0x0a, 0x12, 0x54, 0x72, 0x61,
+	0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x22, 0xf2, 0x04, 0x0a, 0x12, 0x54, 0x72, 0x61,
 	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x70, 0x74, 0x12,
 	0x2b, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x73, 0x70,
 	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73,
@@ -1452,23 +1589,45 @@ var file_spacemesh_v1_global_state_types_proto_rawDesc = []byte{
 	0x6e, 0x64, 0x65, 0x78, 0x12, 0x38, 0x0a, 0x0b, 0x61, 0x70, 0x70, 0x5f, 0x61, 0x64, 0x64, 0x72,
 	0x65, 0x73, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63,
 	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x49, 0x64, 0x52, 0x0a, 0x61, 0x70, 0x70, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0xfa,
-	0x01, 0x0a, 0x11, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x12, 0x22, 0x0a, 0x1e, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54,
-	0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
-	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x1f, 0x0a, 0x1b, 0x54, 0x52, 0x41, 0x4e,
-	0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f, 0x45,
-	0x58, 0x45, 0x43, 0x55, 0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x22, 0x0a, 0x1e, 0x54, 0x52, 0x41,
+	0x49, 0x64, 0x52, 0x0a, 0x61, 0x70, 0x70, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x30,
+	0x0a, 0x05, 0x64, 0x65, 0x6c, 0x74, 0x61, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x44, 0x65, 0x6c, 0x74, 0x61, 0x52, 0x05, 0x64, 0x65, 0x6c, 0x74, 0x61,
+	0x22, 0xfa, 0x01, 0x0a, 0x11, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x22, 0x0a, 0x1e, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41,
+	0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f, 0x55, 0x4e, 0x53,
+	0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x1f, 0x0a, 0x1b, 0x54, 0x52,
+	0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c, 0x54,
+	0x5f, 0x45, 0x58, 0x45, 0x43, 0x55, 0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x22, 0x0a, 0x1e, 0x54,
+	0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c,
+	0x54, 0x5f, 0x42, 0x41, 0x44, 0x5f, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x45, 0x52, 0x10, 0x02, 0x12,
+	0x28, 0x0a, 0x24, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52,
+	0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f, 0x52, 0x55, 0x4e, 0x54, 0x49, 0x4d, 0x45, 0x5f, 0x45, 0x58,
+	0x43, 0x45, 0x50, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x03, 0x12, 0x27, 0x0a, 0x23, 0x54, 0x52, 0x41,
 	0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f,
-	0x42, 0x41, 0x44, 0x5f, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x45, 0x52, 0x10, 0x02, 0x12, 0x28, 0x0a,
-	0x24, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53,
-	0x55, 0x4c, 0x54, 0x5f, 0x52, 0x55, 0x4e, 0x54, 0x49, 0x4d, 0x45, 0x5f, 0x45, 0x58, 0x43, 0x45,
-	0x50, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x03, 0x12, 0x27, 0x0a, 0x23, 0x54, 0x52, 0x41, 0x4e, 0x53,
-	0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f, 0x49, 0x4e,
-	0x53, 0x55, 0x46, 0x46, 0x49, 0x43, 0x49, 0x45, 0x4e, 0x54, 0x5f, 0x47, 0x41, 0x53, 0x10, 0x04,
-	0x12, 0x29, 0x0a, 0x25, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f,
-	0x52, 0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f, 0x49, 0x4e, 0x53, 0x55, 0x46, 0x46, 0x49, 0x43, 0x49,
-	0x45, 0x4e, 0x54, 0x5f, 0x46, 0x55, 0x4e, 0x44, 0x53, 0x10, 0x05, 0x22, 0xc6, 0x01, 0x0a, 0x0b,
+	0x49, 0x4e, 0x53, 0x55, 0x46, 0x46, 0x49, 0x43, 0x49, 0x45, 0x4e, 0x54, 0x5f, 0x47, 0x41, 0x53,
+	0x10, 0x04, 0x12, 0x29, 0x0a, 0x25, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f,
+	0x4e, 0x5f, 0x52, 0x45, 0x53, 0x55, 0x4c, 0x54, 0x5f, 0x49, 0x4e, 0x53, 0x55, 0x46, 0x46, 0x49,
+	0x43, 0x49, 0x45, 0x4e, 0x54, 0x5f, 0x46, 0x55, 0x4e, 0x44, 0x53, 0x10, 0x05, 0x22, 0xec, 0x01,
+	0x0a, 0x0c, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x44, 0x65, 0x6c, 0x74, 0x61, 0x12, 0x36,
+	0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76,
+	0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x52, 0x09, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x5f, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x6e, 0x65, 0x77,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x12, 0x39, 0x0a, 0x0d, 0x62, 0x61, 0x6c, 0x61, 0x6e,
+	0x63, 0x65, 0x5f, 0x64, 0x65, 0x6c, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14,
+	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x6d,
+	0x6f, 0x75, 0x6e, 0x74, 0x52, 0x0c, 0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x44, 0x65, 0x6c,
+	0x74, 0x61, 0x12, 0x48, 0x0a, 0x0e, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x5f, 0x64, 0x65,
+	0x6c, 0x74, 0x61, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x44, 0x65, 0x6c, 0x74, 0x61, 0x52, 0x0d, 0x73,
+	0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x44, 0x65, 0x6c, 0x74, 0x61, 0x73, 0x22, 0x3d, 0x0a, 0x13,
+	0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x44, 0x65,
+	0x6c, 0x74, 0x61, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0xc6, 0x01, 0x0a, 0x0b,
 	0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x2e, 0x0a, 0x06, 0x72,
 	0x65, 0x77, 0x61, 0x72, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x73, 0x70,
 	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x77, 0x61, 0x72,
@@ -1604,7 +1763,7 @@ func file_spacemesh_v1_global_state_types_proto_rawDescGZIP() []byte {
 }
 
 var file_spacemesh_v1_global_state_types_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_spacemesh_v1_global_state_types_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_spacemesh_v1_global_state_types_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_spacemesh_v1_global_state_types_proto_goTypes = []interface{}{
 	(AccountDataFlag)(0),                      // 0: spacemesh.v1.AccountDataFlag
 	(GlobalStateDataFlag)(0),                  // 1: spacemesh.v1.GlobalStateDataFlag
@@ -1616,59 +1775,65 @@ var file_spacemesh_v1_global_state_types_proto_goTypes = []interface{}{
 	(*AccountDataStreamResponse)(nil),         // 7: spacemesh.v1.AccountDataStreamResponse
 	(*AccountDataQueryRequest)(nil),           // 8: spacemesh.v1.AccountDataQueryRequest
 	(*TransactionReceipt)(nil),                // 9: spacemesh.v1.TransactionReceipt
-	(*AccountData)(nil),                       // 10: spacemesh.v1.AccountData
-	(*AccountDataQueryResponse)(nil),          // 11: spacemesh.v1.AccountDataQueryResponse
-	(*SmesherRewardStreamRequest)(nil),        // 12: spacemesh.v1.SmesherRewardStreamRequest
-	(*SmesherRewardStreamResponse)(nil),       // 13: spacemesh.v1.SmesherRewardStreamResponse
-	(*SmesherDataQueryRequest)(nil),           // 14: spacemesh.v1.SmesherDataQueryRequest
-	(*SmesherDataQueryResponse)(nil),          // 15: spacemesh.v1.SmesherDataQueryResponse
-	(*GlobalStateHash)(nil),                   // 16: spacemesh.v1.GlobalStateHash
-	(*GlobalStateHashRequest)(nil),            // 17: spacemesh.v1.GlobalStateHashRequest
-	(*GlobalStateHashResponse)(nil),           // 18: spacemesh.v1.GlobalStateHashResponse
-	(*GlobalStateStreamRequest)(nil),          // 19: spacemesh.v1.GlobalStateStreamRequest
-	(*GlobalStateData)(nil),                   // 20: spacemesh.v1.GlobalStateData
-	(*GlobalStateStreamResponse)(nil),         // 21: spacemesh.v1.GlobalStateStreamResponse
-	(*AppEventStreamRequest)(nil),             // 22: spacemesh.v1.AppEventStreamRequest
-	(*AppEventStreamResponse)(nil),            // 23: spacemesh.v1.AppEventStreamResponse
-	(*AccountId)(nil),                         // 24: spacemesh.v1.AccountId
-	(*Account)(nil),                           // 25: spacemesh.v1.Account
-	(*TransactionId)(nil),                     // 26: spacemesh.v1.TransactionId
-	(*Amount)(nil),                            // 27: spacemesh.v1.Amount
-	(*Reward)(nil),                            // 28: spacemesh.v1.Reward
-	(*SmesherId)(nil),                         // 29: spacemesh.v1.SmesherId
-	(*AppEvent)(nil),                          // 30: spacemesh.v1.AppEvent
+	(*AccountDelta)(nil),                      // 10: spacemesh.v1.AccountDelta
+	(*AccountStorageDelta)(nil),               // 11: spacemesh.v1.AccountStorageDelta
+	(*AccountData)(nil),                       // 12: spacemesh.v1.AccountData
+	(*AccountDataQueryResponse)(nil),          // 13: spacemesh.v1.AccountDataQueryResponse
+	(*SmesherRewardStreamRequest)(nil),        // 14: spacemesh.v1.SmesherRewardStreamRequest
+	(*SmesherRewardStreamResponse)(nil),       // 15: spacemesh.v1.SmesherRewardStreamResponse
+	(*SmesherDataQueryRequest)(nil),           // 16: spacemesh.v1.SmesherDataQueryRequest
+	(*SmesherDataQueryResponse)(nil),          // 17: spacemesh.v1.SmesherDataQueryResponse
+	(*GlobalStateHash)(nil),                   // 18: spacemesh.v1.GlobalStateHash
+	(*GlobalStateHashRequest)(nil),            // 19: spacemesh.v1.GlobalStateHashRequest
+	(*GlobalStateHashResponse)(nil),           // 20: spacemesh.v1.GlobalStateHashResponse
+	(*GlobalStateStreamRequest)(nil),          // 21: spacemesh.v1.GlobalStateStreamRequest
+	(*GlobalStateData)(nil),                   // 22: spacemesh.v1.GlobalStateData
+	(*GlobalStateStreamResponse)(nil),         // 23: spacemesh.v1.GlobalStateStreamResponse
+	(*AppEventStreamRequest)(nil),             // 24: spacemesh.v1.AppEventStreamRequest
+	(*AppEventStreamResponse)(nil),            // 25: spacemesh.v1.AppEventStreamResponse
+	(*AccountId)(nil),                         // 26: spacemesh.v1.AccountId
+	(*Account)(nil),                           // 27: spacemesh.v1.Account
+	(*TransactionId)(nil),                     // 28: spacemesh.v1.TransactionId
+	(*Amount)(nil),                            // 29: spacemesh.v1.Amount
+	(*Reward)(nil),                            // 30: spacemesh.v1.Reward
+	(*SmesherId)(nil),                         // 31: spacemesh.v1.SmesherId
+	(*AppEvent)(nil),                          // 32: spacemesh.v1.AppEvent
 }
 var file_spacemesh_v1_global_state_types_proto_depIdxs = []int32{
-	24, // 0: spacemesh.v1.AccountRequest.account_id:type_name -> spacemesh.v1.AccountId
-	25, // 1: spacemesh.v1.AccountResponse.account_wrapper:type_name -> spacemesh.v1.Account
-	24, // 2: spacemesh.v1.AccountDataFilter.account_id:type_name -> spacemesh.v1.AccountId
+	26, // 0: spacemesh.v1.AccountRequest.account_id:type_name -> spacemesh.v1.AccountId
+	27, // 1: spacemesh.v1.AccountResponse.account_wrapper:type_name -> spacemesh.v1.Account
+	26, // 2: spacemesh.v1.AccountDataFilter.account_id:type_name -> spacemesh.v1.AccountId
 	5,  // 3: spacemesh.v1.AccountDataStreamRequest.filter:type_name -> spacemesh.v1.AccountDataFilter
-	10, // 4: spacemesh.v1.AccountDataStreamResponse.datum:type_name -> spacemesh.v1.AccountData
+	12, // 4: spacemesh.v1.AccountDataStreamResponse.datum:type_name -> spacemesh.v1.AccountData
 	5,  // 5: spacemesh.v1.AccountDataQueryRequest.filter:type_name -> spacemesh.v1.AccountDataFilter
-	26, // 6: spacemesh.v1.TransactionReceipt.id:type_name -> spacemesh.v1.TransactionId
+	28, // 6: spacemesh.v1.TransactionReceipt.id:type_name -> spacemesh.v1.TransactionId
 	2,  // 7: spacemesh.v1.TransactionReceipt.result:type_name -> spacemesh.v1.TransactionReceipt.TransactionResult
-	27, // 8: spacemesh.v1.TransactionReceipt.fee:type_name -> spacemesh.v1.Amount
-	24, // 9: spacemesh.v1.TransactionReceipt.app_address:type_name -> spacemesh.v1.AccountId
-	28, // 10: spacemesh.v1.AccountData.reward:type_name -> spacemesh.v1.Reward
-	9,  // 11: spacemesh.v1.AccountData.receipt:type_name -> spacemesh.v1.TransactionReceipt
-	25, // 12: spacemesh.v1.AccountData.account_wrapper:type_name -> spacemesh.v1.Account
-	10, // 13: spacemesh.v1.AccountDataQueryResponse.account_item:type_name -> spacemesh.v1.AccountData
-	29, // 14: spacemesh.v1.SmesherRewardStreamRequest.id:type_name -> spacemesh.v1.SmesherId
-	28, // 15: spacemesh.v1.SmesherRewardStreamResponse.reward:type_name -> spacemesh.v1.Reward
-	29, // 16: spacemesh.v1.SmesherDataQueryRequest.smesher_id:type_name -> spacemesh.v1.SmesherId
-	28, // 17: spacemesh.v1.SmesherDataQueryResponse.rewards:type_name -> spacemesh.v1.Reward
-	16, // 18: spacemesh.v1.GlobalStateHashResponse.response:type_name -> spacemesh.v1.GlobalStateHash
-	28, // 19: spacemesh.v1.GlobalStateData.reward:type_name -> spacemesh.v1.Reward
-	9,  // 20: spacemesh.v1.GlobalStateData.receipt:type_name -> spacemesh.v1.TransactionReceipt
-	25, // 21: spacemesh.v1.GlobalStateData.account_wrapper:type_name -> spacemesh.v1.Account
-	16, // 22: spacemesh.v1.GlobalStateData.global_state:type_name -> spacemesh.v1.GlobalStateHash
-	20, // 23: spacemesh.v1.GlobalStateStreamResponse.datum:type_name -> spacemesh.v1.GlobalStateData
-	30, // 24: spacemesh.v1.AppEventStreamResponse.event:type_name -> spacemesh.v1.AppEvent
-	25, // [25:25] is the sub-list for method output_type
-	25, // [25:25] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	29, // 8: spacemesh.v1.TransactionReceipt.fee:type_name -> spacemesh.v1.Amount
+	26, // 9: spacemesh.v1.TransactionReceipt.app_address:type_name -> spacemesh.v1.AccountId
+	10, // 10: spacemesh.v1.TransactionReceipt.delta:type_name -> spacemesh.v1.AccountDelta
+	26, // 11: spacemesh.v1.AccountDelta.account_id:type_name -> spacemesh.v1.AccountId
+	29, // 12: spacemesh.v1.AccountDelta.balance_delta:type_name -> spacemesh.v1.Amount
+	11, // 13: spacemesh.v1.AccountDelta.storage_deltas:type_name -> spacemesh.v1.AccountStorageDelta
+	30, // 14: spacemesh.v1.AccountData.reward:type_name -> spacemesh.v1.Reward
+	9,  // 15: spacemesh.v1.AccountData.receipt:type_name -> spacemesh.v1.TransactionReceipt
+	27, // 16: spacemesh.v1.AccountData.account_wrapper:type_name -> spacemesh.v1.Account
+	12, // 17: spacemesh.v1.AccountDataQueryResponse.account_item:type_name -> spacemesh.v1.AccountData
+	31, // 18: spacemesh.v1.SmesherRewardStreamRequest.id:type_name -> spacemesh.v1.SmesherId
+	30, // 19: spacemesh.v1.SmesherRewardStreamResponse.reward:type_name -> spacemesh.v1.Reward
+	31, // 20: spacemesh.v1.SmesherDataQueryRequest.smesher_id:type_name -> spacemesh.v1.SmesherId
+	30, // 21: spacemesh.v1.SmesherDataQueryResponse.rewards:type_name -> spacemesh.v1.Reward
+	18, // 22: spacemesh.v1.GlobalStateHashResponse.response:type_name -> spacemesh.v1.GlobalStateHash
+	30, // 23: spacemesh.v1.GlobalStateData.reward:type_name -> spacemesh.v1.Reward
+	9,  // 24: spacemesh.v1.GlobalStateData.receipt:type_name -> spacemesh.v1.TransactionReceipt
+	27, // 25: spacemesh.v1.GlobalStateData.account_wrapper:type_name -> spacemesh.v1.Account
+	18, // 26: spacemesh.v1.GlobalStateData.global_state:type_name -> spacemesh.v1.GlobalStateHash
+	22, // 27: spacemesh.v1.GlobalStateStreamResponse.datum:type_name -> spacemesh.v1.GlobalStateData
+	32, // 28: spacemesh.v1.AppEventStreamResponse.event:type_name -> spacemesh.v1.AppEvent
+	29, // [29:29] is the sub-list for method output_type
+	29, // [29:29] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_global_state_types_proto_init() }
@@ -1763,7 +1928,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AccountData); i {
+			switch v := v.(*AccountDelta); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1775,7 +1940,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AccountDataQueryResponse); i {
+			switch v := v.(*AccountStorageDelta); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1787,7 +1952,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SmesherRewardStreamRequest); i {
+			switch v := v.(*AccountData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1799,7 +1964,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SmesherRewardStreamResponse); i {
+			switch v := v.(*AccountDataQueryResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1811,7 +1976,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SmesherDataQueryRequest); i {
+			switch v := v.(*SmesherRewardStreamRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1823,7 +1988,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SmesherDataQueryResponse); i {
+			switch v := v.(*SmesherRewardStreamResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1835,7 +2000,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GlobalStateHash); i {
+			switch v := v.(*SmesherDataQueryRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1847,7 +2012,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GlobalStateHashRequest); i {
+			switch v := v.(*SmesherDataQueryResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1859,7 +2024,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GlobalStateHashResponse); i {
+			switch v := v.(*GlobalStateHash); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1871,7 +2036,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GlobalStateStreamRequest); i {
+			switch v := v.(*GlobalStateHashRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1883,7 +2048,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GlobalStateData); i {
+			switch v := v.(*GlobalStateHashResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1895,7 +2060,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GlobalStateStreamResponse); i {
+			switch v := v.(*GlobalStateStreamRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1907,7 +2072,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AppEventStreamRequest); i {
+			switch v := v.(*GlobalStateData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1919,6 +2084,30 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_global_state_types_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GlobalStateStreamResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_global_state_types_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AppEventStreamRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_global_state_types_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AppEventStreamResponse); i {
 			case 0:
 				return &v.state
@@ -1931,12 +2120,12 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			}
 		}
 	}
-	file_spacemesh_v1_global_state_types_proto_msgTypes[7].OneofWrappers = []interface{}{
+	file_spacemesh_v1_global_state_types_proto_msgTypes[9].OneofWrappers = []interface{}{
 		(*AccountData_Reward)(nil),
 		(*AccountData_Receipt)(nil),
 		(*AccountData_AccountWrapper)(nil),
 	}
-	file_spacemesh_v1_global_state_types_proto_msgTypes[17].OneofWrappers = []interface{}{
+	file_spacemesh_v1_global_state_types_proto_msgTypes[19].OneofWrappers = []interface{}{
 		(*GlobalStateData_Reward)(nil),
 		(*GlobalStateData_Receipt)(nil),
 		(*GlobalStateData_AccountWrapper)(nil),
@@ -1948,7 +2137,7 @@ func file_spacemesh_v1_global_state_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_global_state_types_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   21,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

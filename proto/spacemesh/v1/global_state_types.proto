@@ -53,8 +53,24 @@ message TransactionReceipt {
     uint64 gas_used = 3; // gas units used by the transaction
     Amount fee = 4; // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
     uint64 layer_number = 5; // the layer in which the STF processed this transaction
-    uint32 index = 6; // the index of the tx in the ordered list of txs to be executed by stf in the layer.
+    uint32 index = 6; // the index of the tx in the ordered list of txs to be executed by STF in the layer.
     AccountId app_address = 7; // deployed app address or code template address
+    repeated AccountDelta delta = 8; // Side effects from execution of this tx
+}
+
+// All state changes due to this transaction, i.e., side effects in executing
+// the STF on this transaction, including counter, balance, and storage.
+message AccountDelta {
+    AccountId account_id = 1;
+    uint64 new_counter = 2;
+    Amount balance_delta = 3;
+    repeated AccountStorageDelta storage_deltas = 4;
+}
+
+// A change to a single word of account storage
+message AccountStorageDelta {
+    uint64 key = 1;
+    uint64 value = 2;
 }
 
 // All data items that touch an account: receipts for transactions from, or to
