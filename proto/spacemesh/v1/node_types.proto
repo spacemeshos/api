@@ -53,20 +53,22 @@ message StatusStreamResponse {
     NodeStatus status = 1;
 }
 
+enum LogLevel {
+    LOG_LEVEL_UNSPECIFIED = 0;
+    LOG_LEVEL_DEBUG = 1;
+    LOG_LEVEL_INFO = 2;
+    LOG_LEVEL_WARN = 3;
+    LOG_LEVEL_ERROR = 4;
+    LOG_LEVEL_DPANIC = 5;
+    LOG_LEVEL_PANIC = 6;
+    LOG_LEVEL_FATAL = 7;
+}
+
 message NodeError {
-    enum NodeErrorLevel {
-        NODE_ERROR_LEVEL_UNSPECIFIED = 0;
-        NODE_ERROR_LEVEL_DEBUG = 1;
-        NODE_ERROR_LEVEL_INFO = 2;
-        NODE_ERROR_LEVEL_WARN = 3;
-        NODE_ERROR_LEVEL_ERROR = 4;
-        NODE_ERROR_LEVEL_DPANIC = 5;
-        NODE_ERROR_LEVEL_PANIC = 6;
-        NODE_ERROR_LEVEL_FATAL = 7;
-    }
-    NodeErrorLevel level = 1;
-    string message = 2;
-    string stack_trace = 3;
+    LogLevel level = 1;
+    string module = 2;
+    string msg = 3;
+    string stack_trace = 4;
 }
 
 message ErrorStreamRequest {}
