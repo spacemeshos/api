@@ -130,17 +130,13 @@ message PostDataCreationProgressStreamResponse {
     PostStatus status = 1;
 }
 
-message EstimatedRewardsRequest {
-    AccountId id = 1;
-}
+message EstimatedRewardsRequest;
 
 message EstimatedRewardsResponse {
-    // Should match id in the Request
-    AccountId id = 1;
     // The amount of the total estimated reward in the next upcoming epoch
-    Amount amount = 2;
+    Amount amount = 1;
     // Epoch duration
-    SimpleInt duration = 3;
+    SimpleInt duration = 2;
     // The commitment size that this estimated reward corresponds to
-    uint64 data_size = 4;
+    uint64 data_size = 3;
 }
