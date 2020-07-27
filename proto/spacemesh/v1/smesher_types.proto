@@ -130,7 +130,7 @@ message PostDataCreationProgressStreamResponse {
     PostStatus status = 1;
 }
 
-message EstimatedRewardsRequest;
+message EstimatedRewardsRequest {}
 
 message EstimatedRewardsResponse {
     // The amount of the total estimated reward in the next upcoming epoch
