@@ -49,6 +49,9 @@ PROTOC_GO_PLUGINS := plugins=grpc:
 # Options string appended to go build command (optional, obviously)
 PROTOC_GO_OPT := --go_opt=paths=source_relative
 
+# The directory to store python builds
+PROTOC_PYTHON_BUILD_DIR := ./release/python
+
 # Plugins string for grpc-gateway (must end in ':')
 PROTOC_GATEWAY_PLUGINS := logtostderr=true:
 
@@ -183,12 +186,22 @@ protoc: $(PROTOC)
 # Golang
 .PHONY: golang
 golang: $(PROTOC) | $(PROTOC_GEN_GO)
+	mkdir -p $(PROTOC_GO_BUILD_DIR)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
+
+# Python
+.PHONY: python
+python: 
+	pip install grpcio grpcio-tools
+	mkdir -p $(PROTOC_PYTHON_BUILD_DIR)
+	python -m grpc_tools.protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	  --python_out=$(PROTOC_PYTHON_BUILD_DIR) --grpc_python_out=$(PROTOC_PYTHON_BUILD_DIR) 
 
 # grpc-gateway
 .PHONY: grpc-gateway
 grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
+	mkdir -p $(PROTOC_GO_BUILD_DIR)
 	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
 
