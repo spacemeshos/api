@@ -26,12 +26,13 @@ Since transactions span multiple layers of abstraction, the API exposes transact
 Broadly speaking, there are four types of endpoints: simple, command, query, and stream. Each type is described below. Note that in some cases, the same data are exposed through multiple endpoints, e.g., both a query and a stream endpoint.
 
 - **Simple** endpoints are used to query a single data element. Some simple endpoints accept a request object (e.g., [`GlobalStateService.Account`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/global_state.proto#L14)), while some which return data that's global to a node accept no request object (e.g., [`NodeService.Version`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/node.proto#L13)).
-- **Queries** are used to read paginated historical data. A `*Query` endpoint accepts a `*Request` message that typically contains the following:
+- **Command** endpoints are used to send a command to a node. Examples include [`TransactionService.SubmitTransaction`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/tx.proto#L15) and [`SmesherService.StartSmeshing`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/smesher.proto#L16).
+- **Query** endpoints are used to read paginated historical data. A `*Query` endpoint accepts a `*Request` message that typically contains the following:
     - `filter`: A filter (see Streams, below)
     - `min_layer`: The first layer to return results from
     - `max_results`: The maximum number of results to return
     - `offset`: Page offset
-- **Streams** are used to read realtime data. They do not return historical data. Each time the node creates, or learns of, a piece of data matching the filter and type, or sees an update to a matching piece of data, it sends it over the stream. A `*Stream` endpoint accepts a `*Request` message, containing the following, that functions as a filter:
+- **Stream** endpoints are used to read realtime data. They do not return historical data. Each time the node creates, or learns of, a piece of data matching the filter and type, or sees an update to a matching piece of data, it sends it over the stream. A `*Stream` endpoint accepts a `*Request` message, containing the following, that functions as a filter:
     - `*_id`: The ID of the data type to filter on (e.g., "show me all data items that touch this `account_id`")
     - `flags`: A bit field that allows the client to select which, among multiple types multiplexed on this stream, to receive
 
@@ -39,22 +40,23 @@ Broadly speaking, there are four types of endpoints: simple, command, query, and
 
 The Spacemesh API consists of several logical services, each of which contains a set of one or more RPC endpoints. The node operator can enable or disable each service independently using the CLI. The current set of services is as follows:
 
-- [NodeService](proto/spacemesh/node.proto) is a readonly interface for reading basic node-related data such as node status, software version and build number, and errors. It also allows a consumer to request that the node start the sync process, thus enabling the stream endpoints.
-- [MeshService](proto/spacemesh/mesh.proto) is a readonly interface that provides access to mesh data such as layer number, epoch number, and network ID. It provides streams for watching layers (which contain blocks, transactions, etc.). In the future this service will be expanded to include other mesh-related endpoints.
-- [GlobalStateService](proto/spacemesh/global_state.proto) is a readonly interface that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts.
-- [TransactionService](proto/spacemesh/tx.proto) is a read-write interface that allows the client to submit a new transaction, and to follow the state of one or more transactions on its journey from submission to mempool to block to mesh to STF.
-- [SmesherService](proto/spacemesh/smesher.proto) is a read-write interface that allows the client to query, and set, parameters related to smeshing (mining), such as PoST commitment, coinbase, etc.
+- [NodeService](/proto/spacemesh/v1/node.proto) is a readonly interface for reading basic node-related data such as node status, software version and build number, and errors. It also allows a consumer to request that the node start the sync process, thus enabling the stream endpoints.
+- [MeshService](/proto/spacemesh/v1/mesh.proto) is a readonly interface that provides access to mesh data such as layer number, epoch number, and network ID. It provides streams for watching layers (which contain blocks, transactions, etc.). In the future this service will be expanded to include other mesh-related endpoints.
+- [GlobalStateService](/proto/spacemesh/v1/global_state.proto) is a readonly interface that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts.
+- [TransactionService](/proto/spacemesh/v1/tx.proto) is a read-write interface that allows the client to submit a new transaction, and to follow the state of one or more transactions on its journey from submission to mempool to block to mesh to STF.
+- [SmesherService](/proto/spacemesh/v1/smesher.proto) is a read-write interface that allows the client to query, and set, parameters related to smeshing (mining), such as PoST commitment, coinbase, etc.
 
 Each of these services relies on one or more sets of message types, which live in `*types.proto` files in the same directory as the service definition files.
 
 ## Intended Usage Pattern
 
 ### Mesh data processing flow
-1. Client starts a full node with flags set to turn syncing off and to open the GRPC APIs
-1. Client registers on the streaming GRPC api methods that are of interest
-1. Client calls `NodeService.SyncStart()` to request that the node start syncing
+
+1. Client starts a full node with one or more relevant GRPC endpoints enabled
+1. Client subscribes to the streaming GRPC api methods that are of interest
+1. Client calls `NodeService.SyncStart()` to request that the node start syncing (note that, at present, sync is on by default and this step is unnecessary, but in future, it will be possible to [start the node with sync turned off](https://github.com/spacemeshos/go-spacemesh/issues/2080) so that the client can subscribe to streams before the sync process begins, ensuring they don't miss any data)
 1. Client processes streaming data it receives from the node
-1. Client monitors node using `NodeService.SyncStatusStream()` and `NodeService.ErrorStream()` and handle node critical errors. Return to step 1 as necessary.
+1. Client monitors node using `NodeService.SyncStatusStream()` and `NodeService.ErrorStream()` and handles node critical errors. Return to step 1 as necessary.
 1. Client gracefully shuts down the node by calling `NodeService.Shutdown()` when it is done processing data.
 
 ## Development
