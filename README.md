@@ -1,7 +1,7 @@
 # Spacemesh API
 ![](https://github.com/spacemeshos/api/workflows/CI/badge.svg)
 
-[Protobuf](https://developers.google.com/protocol-buffers) implementation of the Spacemesh API. This repository contains only API design, not implementation. For implementation work, see [go-spacemesh](https://github.com/spacemeshos/go-spacemesh/). Note that API implementation may considerably lag design.
+[Protobuf](https://developers.google.com/protocol-buffers) implementation of the Spacemesh API. This repository contains only API design, not implementation. For implementation work, see [go-spacemesh](https://github.com/spacemeshos/go-spacemesh/tree/develop/api/grpcserver). Note that API implementation may lag design.
 
 ## Design
 
@@ -9,22 +9,23 @@ The API was designed with the following considerations in mind.
 
 ### Mesh vs. global state
 
-In Spacemesh, "the mesh" refers to data structures that are _explicitly_ stored by all full nodes, and are subject to consensus. This consists of transactions, collated into blocks, which in turn are collated into layers. Note that, in addition to transactions, blocks contain metadata such as layer number and signature. The mesh also includes ATXs (activations).
+In Spacemesh, "the mesh" refers to data structures that are _explicitly_ stored by all full nodes and are subject to consensus. This consists of transactions, collated into blocks, which in turn are collated into layers. Note that, in addition to transactions, blocks contain metadata such as layer number and signature. The mesh also includes ATXs (activations).
 
-By contrast, "global state" refers to data structures that are calculated _implicitly_ based on mesh data. These data are not stored anywhere in the mesh explicitly. Global state includes account state (balance, counter/nonce value, and, for smart contract accounts, code), transaction receipts, and smart contract event logs. These data need not be stored indefinitely by all full nodes (although they should be stored indefinitely by archive nodes).
+By contrast, "global state" refers to data structures that are calculated _implicitly_ based on mesh data. These data are not explicitly stored anywhere in the mesh. Global state includes account state (balance, counter/nonce value, and, for smart contract accounts, code), transaction receipts, and smart contract event logs. These data need not be stored indefinitely by all full nodes (although they should be stored indefinitely by archive nodes).
 
-The API provides access to both types of data, but they are divided into different API services. For more information on this distinction, see [SMIP-0003: Global state data, STF, APIs](https://github.com/spacemeshos/SMIPS/issues/13).
+The API provides access to both types of data, but they are divided into different API services. For more information on this distinction, see [SMIP-0003: Global state data, STF, APIs](https://github.com/spacemeshos/SMIPS/issues/13), as well as the [`MeshService`](/proto/spacemesh/v1/mesh.proto) and the [`GlobalStateService`](/proto/spacemesh/v1/global_state.proto).
 
 ### Transactions
 
 Transactions span mesh and global state data. They are submitted to a node, which may or may not admit the transaction to its mempool. If the transaction is admitted to the mempool, it will probably end up being added to a newly-mined block, and that block will be submitted to the mesh in some layer. After that, the layer containing the block will eventually be approved, and then confirmed, by the consensus mechanism. After the layer is approved, the transaction will be run through the STF (state transition function), and if it succeeds, it may update global state.
 
-Since transactions span multiple layers of abstraction, the API exposes transaction data in its own service, TransactionService.
+Since transactions span multiple layers of abstraction, the API exposes transaction data in its own service, [`TransactionService`](/proto/spacemesh/v1/tx.proto).
 
-### Queries and streams
+### Types of endpoints
 
-Most API endpoints are one of two types: a query, or a stream. This is an important distinction, and in many cases, the same data are exposed through both a query and a stream endpoint.
+Broadly speaking, there are four types of endpoints: simple, command, query, and stream. Each type is described below. Note that in some cases, the same data are exposed through multiple endpoints, e.g., both a query and a stream endpoint.
 
+- **Simple** endpoints are used to query a single data element. Some simple endpoints accept a request object (e.g., [`GlobalStateService.Account`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/global_state.proto#L14)), while some which return data that's global to a node accept no request object (e.g., [`NodeService.Version`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/node.proto#L13)).
 - **Queries** are used to read paginated historical data. A `*Query` endpoint accepts a `*Request` message that typically contains the following:
     - `filter`: A filter (see Streams, below)
     - `min_layer`: The first layer to return results from
