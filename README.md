@@ -61,6 +61,10 @@ Each of these services relies on one or more sets of message types, which live i
 
 ## Development
 
+### Versioning
+
+We use standard [semantic versioning](https://semver.org/). Please regularly cut releases against the `master` branch and increment the version accordingly. Releases are managed at [Releases](https://github.com/spacemeshos/api/releases) and the current version line is 1.x. Note that this is especially important for downstream code that relies on individual builds, such as the golang build.
+
 ### Build targets
 
 This repository currently contains builds for two targets: golang and grpc-gateway. **Every time a protobuf definition file is changed, you must update the build** and include the updated build files with your PR in order to keep everything in sync. You can check this at any time by running `make check`, and it's also enforced by CI (see below for more information).
@@ -125,6 +129,8 @@ For more information on linting, see the [style guide](https://buf.build/docs/st
 ### Continuous integration
 
 This repository has a continuous integration (CI) [workflow](.github/workflows/ci.yml) built on GitHub Actions. In addition to linting and breaking changes detection, it also runs the `protoc` compiler, since that tends to surface a slightly different set of warnings and errors than `buf`.
+
+You can use a nifty tool called [`act`](https://github.com/nektos/act) to run the CI workflow locally, although it [doesn't always play nice](https://github.com/nektos/act/issues/322) with our workflow configuration.
 
 ### Third party files
 
