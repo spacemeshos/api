@@ -126,7 +126,7 @@ message Layer {
 }
 
 message LayerNumber {
-    uint64 number = 1;
+    uint32 number = 1;
 }
 
 message AppEvent { // an event emitted from an app instance
