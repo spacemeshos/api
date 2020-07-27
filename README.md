@@ -61,9 +61,28 @@ Each of these services relies on one or more sets of message types, which live i
 
 ## Development
 
-### Building
+### Build targets
 
-Use the [`buf`](https://buf.build/) tool to compile the API to an [image](https://buf.build/docs/inputs). First, [install `buf`](https://buf.build/docs/installation), then run:
+This repository currently contains builds for two targets: golang and grpc-gateway. **Every time a protobuf definition file is changed, you must update the build** and include the updated build files with your PR in order to keep everything in sync. You can check this at any time by running `make check`, and it's also enforced by CI (see below for more information).
+
+- golang builds live in [`release/go`](/release/go). You may use this repository directly as a go module with an import statement such as `import "github.com/spacemeshos/api/release/go/spacemesh/v1"`.
+- grpc-gateway builds are configured in [`proto/spacemesh/v1/api_config.yaml`](/proto/spacemesh/v1/api_config.yaml) and live alongside the golang builds in [`release/go/spacemesh/v1`](/release/go/spacemesh/v1) (they have a `.gw.go` extension).
+
+### Makefile
+
+The repository includes a [`Makefile`](Makefile) that makes it easy to run most regular tasks:
+
+- `make deps` installs the required dependencies, including `buf` (see below)
+- `make lint` runs the linter (see below)
+- `make local` runs the linter and checks for breaking changes (see below)
+- `make build` builds the API for all targets
+- `make check` ensures that the build is up to date with respect to the proto source files
+
+Under the hood, it uses a helpful tool called `buf`.
+
+### Buf
+
+In addition to running `make` commands, you can also manually use the [`buf`](https://buf.build/) tool to compile the API to an [image](https://buf.build/docs/inputs). First, [install `buf`](https://buf.build/docs/installation), then run:
 
 ```
 > buf image build -o /dev/null
@@ -75,7 +94,7 @@ to test the build. To output the image in json format, run:
 > buf image build --exclude-source-info -o -#format=json
 ```
 
-### Breaking changes detection
+#### Breaking changes detection
 
 `buf` also supports [detection of breaking changes](https://buf.build/docs/tour-5). To do this, first create an image from the current state:
 
@@ -91,9 +110,7 @@ Make a breaking change, then run against this change:
 
 `buf` will report all breaking changes.
 
-Detection of breaking changes is turned off in GitHub actions [continuous integration](.github/workflows/ci.yml) for now, until the API has stabilized, but it's still good practice to run this check when committing changes.
-
-### Linting
+#### Linting
 
 `buf` runs several [linters](https://buf.build/docs/lint-checkers). It's pretty strict about things such as naming conventions, to prevent downstream issues in the various languages and framework that rely upon the protobuf definition files. You can run the linter like this:
 
@@ -103,9 +120,11 @@ Detection of breaking changes is turned off in GitHub actions [continuous integr
 
 If there are no issues, this command should have exit code 0 and no output.
 
-Linting also occurs automatically as part of this repository's [continuous integration](.github/workflows/ci.yml), built on GitHub Actions. In addition to linting, CI also runs the `protoc` compiler, since that tends to surface a slightly different set of warnings and errors.
-
 For more information on linting, see the [style guide](https://buf.build/docs/style-guide). For more information on the difference between the `buf` tool and the `protoc` compiler, see [Use protoc input instead of the internal compiler](https://buf.build/docs/tour-7).
+
+### Continuous integration
+
+This repository has a continuous integration (CI) [workflow](.github/workflows/ci.yml) built on GitHub Actions. In addition to linting and breaking changes detection, it also runs the `protoc` compiler, since that tends to surface a slightly different set of warnings and errors than `buf`.
 
 ### Third party files
 
