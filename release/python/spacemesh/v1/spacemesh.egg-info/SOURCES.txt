@@ -1,0 +1,6 @@
+README.md
+setup.py
+spacemesh.egg-info/PKG-INFO
+spacemesh.egg-info/SOURCES.txt
+spacemesh.egg-info/dependency_links.txt
+spacemesh.egg-info/top_level.txt
