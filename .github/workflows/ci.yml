@@ -34,3 +34,5 @@ jobs:
         make protoc
         # Create an actual build, then diff it to make sure build is up to date
         make check
+    - name: unit tests
+      run: make test-python
