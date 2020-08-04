@@ -201,6 +201,11 @@ python:
 	python -m grpc_tools.protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --python_out=$(PROTOC_PYTHON_BUILD_DIR) --grpc_python_out=$(PROTOC_PYTHON_BUILD_DIR) 
 
+.PHONY: dist-python
+dist-python: python
+	pip install --upgrade setuptools wheel
+	cd $(PROTOC_PYTHON_BUILD_DIR)/spacemesh && python setup.py sdist bdist_wheel
+
 .PHONY: test-python
 test-python:
 	pip install -r $(PROTOC_PYTHON_BUILD_DIR)/requirements.txt
@@ -215,7 +220,7 @@ grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 
 # Run all builds
 .PHONY: build
-build: golang grpc-gateway python
+build: golang grpc-gateway dist-python
 
 # Make sure build is up to date
 .PHONY: check
