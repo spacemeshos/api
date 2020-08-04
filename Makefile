@@ -198,6 +198,11 @@ python:
 	python -m grpc_tools.protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --python_out=$(PROTOC_PYTHON_BUILD_DIR) --grpc_python_out=$(PROTOC_PYTHON_BUILD_DIR) 
 
+.PHONY: test-python
+test-python:
+	pip install -r $(PROTOC_PYTHON_BUILD_DIR)/requirements.txt
+	cd $(PROTOC_PYTHON_BUILD_DIR) && python -m unittest test.spacemesh_test
+
 # grpc-gateway
 .PHONY: grpc-gateway
 grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
