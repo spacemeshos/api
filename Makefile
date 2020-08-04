@@ -204,7 +204,7 @@ python:
 .PHONY: dist-python
 dist-python: python
 	pip install --upgrade setuptools wheel
-	cd $(PROTOC_PYTHON_BUILD_DIR)/spacemesh && python setup.py sdist bdist_wheel
+	cd $(PROTOC_PYTHON_BUILD_DIR) && python3 setup.py sdist bdist_wheel
 
 .PHONY: test-python
 test-python:
