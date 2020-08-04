@@ -215,7 +215,7 @@ grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 
 # Run all builds
 .PHONY: build
-build: golang grpc-gateway
+build: golang grpc-gateway python
 
 # Make sure build is up to date
 .PHONY: check
