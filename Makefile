@@ -52,6 +52,9 @@ PROTOC_GO_OPT := --go_opt=paths=source_relative
 # The directory to store python builds
 PROTOC_PYTHON_BUILD_DIR := ./release/python
 
+# The list of python unit tests to run
+TEST_PYTHON_UNITTESTS := test.spacemesh_test
+
 # Plugins string for grpc-gateway (must end in ':')
 PROTOC_GATEWAY_PLUGINS := logtostderr=true:
 
@@ -201,7 +204,7 @@ python:
 .PHONY: test-python
 test-python:
 	pip install -r $(PROTOC_PYTHON_BUILD_DIR)/requirements.txt
-	cd $(PROTOC_PYTHON_BUILD_DIR) && python -m unittest test.spacemesh_test
+	cd $(PROTOC_PYTHON_BUILD_DIR) && python -m unittest $(TEST_PYTHON_UNITTESTS)
 
 # grpc-gateway
 .PHONY: grpc-gateway
