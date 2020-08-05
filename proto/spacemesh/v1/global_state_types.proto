@@ -54,7 +54,7 @@ message TransactionReceipt {
     Amount fee = 4; // transaction fee charged for the transaction (in smidge, gas_price * gas_used)
     uint64 layer_number = 5; // the layer in which the STF processed this transaction
     uint32 index = 6; // the index of the tx in the ordered list of txs to be executed by stf in the layer.
-    AccountId app_address = 7; // deployed app address or code template address
+    bytes svm_data = 7; // svm binary data. Decode with svm-codec
 }
 
 // All data items that touch an account: receipts for transactions from, or to
@@ -137,4 +137,3 @@ message AppEventStreamRequest {}
 message AppEventStreamResponse {
     AppEvent event = 1;
 }
-
