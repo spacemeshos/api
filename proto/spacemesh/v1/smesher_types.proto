@@ -129,3 +129,15 @@ message PostStatusResponse {
 message PostDataCreationProgressStreamResponse {
     PostStatus status = 1;
 }
+
+message EstimatedRewardsRequest {}
+
+// Estimated rewards for the next epoch. Note that this is a global value that will be the
+// same for all smeshers, and is based on the default minimum commitment size and fixed
+// epoch length, both of which are network params.
+message EstimatedRewardsResponse {
+    // The amount of the total estimated reward in the next upcoming epoch
+    Amount amount = 1;
+    // The commitment size that this estimated reward corresponds to (part of global config)
+    uint64 data_size = 2;
+}

@@ -35,6 +35,9 @@ service SmesherService {
     // Set a min gas units for including txs in blocks by this smesher
     // Returns success if request succeeds, failure if it fails
     rpc SetMinGas(SetMinGasRequest) returns (SetMinGasResponse);
+    
+    // Estimate smeshing rewards over the next upcoming epoch
+    rpc EstimatedRewards(EstimatedRewardsRequest) returns (EstimatedRewardsResponse);
 
     /////// Proofs of space data files management
 
@@ -54,6 +57,8 @@ service SmesherService {
     // the post data file(s)
     // Returns success if request is accepted by node, failure if it fails
     rpc StopPostDataCreationSession(StopPostDataCreationSessionRequest) returns (StopPostDataCreationSessionResponse);
+    
+    // STREAMS
 
     // Returns a stream of updates to post data file(s) during the init phase
     rpc PostDataCreationProgressStream(google.protobuf.Empty) returns (stream PostDataCreationProgressStreamResponse);
