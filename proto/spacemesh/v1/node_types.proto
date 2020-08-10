@@ -53,19 +53,22 @@ message StatusStreamResponse {
     NodeStatus status = 1;
 }
 
-// Represents a critical node error.
+enum LogLevel {
+    LOG_LEVEL_UNSPECIFIED = 0;
+    LOG_LEVEL_DEBUG = 1;
+    LOG_LEVEL_INFO = 2;
+    LOG_LEVEL_WARN = 3;
+    LOG_LEVEL_ERROR = 4;
+    LOG_LEVEL_DPANIC = 5;
+    LOG_LEVEL_PANIC = 6;
+    LOG_LEVEL_FATAL = 7;
+}
+
 message NodeError {
-    enum NodeErrorType {
-        NODE_ERROR_TYPE_UNSPECIFIED = 0;
-        NODE_ERROR_TYPE_PANIC = 1; // general panic
-        NODE_ERROR_TYPE_PANIC_SYNC = 2; // panic while trying to sync in the sync module
-        NODE_ERROR_TYPE_SIGNAL_SHUT_DOWN = 3; // received a shut down signal
-        NODE_ERROR_TYPE_PANIC_P2P = 4; // p2p module panic
-        NODE_ERROR_TYPE_PANIC_HARE = 5; // hare protocol panic
-    }
-    NodeErrorType error_type = 1;
-    string message = 2;
-    string stack_trace = 3;
+    LogLevel level = 1;
+    string module = 2;
+    string msg = 3;
+    string stack_trace = 4;
 }
 
 message ErrorStreamRequest {}
