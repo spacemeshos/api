@@ -75,7 +75,7 @@ message Signature {
 // An Activation "transaction" (ATX)
 message Activation {
     ActivationId id = 1;
-    uint64 layer = 2; // the layer that this activation is part of
+    LayerNumber layer = 2; // the layer that this activation is part of
     SmesherId smesher_id = 3; // id of smesher who created the ATX
     AccountId coinbase = 4; // coinbase account id
     ActivationId prev_atx = 5; // previous ATX pointed to
@@ -98,10 +98,10 @@ message Transaction {
 }
 
 message Reward {
-    uint64 layer = 1; // layer award was paid in
+    LayerNumber layer = 1; // layer award was paid in
     Amount total = 2; // total reward paid (sum of tx fee and layer reward)
     Amount layer_reward = 3; // tx_fee = total - layer_reward
-    uint64 layer_computed = 4; // layer number of the layer when reward was computed
+    LayerNumber layer_computed = 4; // layer number of the layer when reward was computed
     AccountId coinbase = 5; // account awarded this reward
     SmesherId smesher = 6;  // id of smesher who earned this reward
 }
@@ -112,10 +112,10 @@ message Block {
 }
 
 message Layer {
-    uint64 number = 1;  // layer number - not hash - layer content may change
+    LayerNumber number = 1; // layer number - not hash - layer content may change
     enum LayerStatus {
         LAYER_STATUS_UNSPECIFIED = 0; // not yet approved or confirmed
-        LAYER_STATUS_APPROVED = 1;  // approved by hare
+        LAYER_STATUS_APPROVED = 1; // approved by hare
         LAYER_STATUS_CONFIRMED = 2; // confirmed by tortoise
     }
     LayerStatus status = 2;
@@ -123,6 +123,10 @@ message Layer {
     repeated Block blocks = 4; // layer's blocks
     repeated Activation activations = 5; // list of layer's activations
     bytes root_state_hash = 6; // when available - the root state hash of global state in this layer
+}
+
+message LayerNumber {
+    uint32 number = 1;
 }
 
 message AppEvent { // an event emitted from an app instance
