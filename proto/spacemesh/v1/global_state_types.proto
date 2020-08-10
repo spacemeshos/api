@@ -3,6 +3,17 @@ package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
 
+message AccountState {
+    uint64 counter = 1; // aka nonce
+    Amount balance = 2; // known account balance
+}
+
+message Account {
+    AccountId account_id = 1; // account public address
+    AccountState state_current = 2; // current state
+    AccountState state_projected = 3; // projected state (includes pending txs)
+}
+
 // All data items that touch an account (see below note, under the associated
 // message)
 enum AccountDataFlag {
