@@ -19,12 +19,6 @@ message AccountId {
     bytes address = 1;
 }
 
-message Account {
-    AccountId account_id = 1; // account public address
-    uint64 counter = 2; // aka nonce
-    Amount balance = 3; // known account balance
-}
-
 message TransactionId {
     bytes id = 1;
 }
