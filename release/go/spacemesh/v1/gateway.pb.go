@@ -100,9 +100,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type GatewayServiceClient interface {
-	// Submit a new tx to the node for processing. The response
-	// TransactionState message contains both the txid of the new tx, as well
-	// as whether or not it was admitted into the mempool.
+	// Submit a poet data packet to the network to broadcast
 	BroadcastPoet(ctx context.Context, in *BroadcastPoetRequest, opts ...grpc.CallOption) (*BroadcastPoetResponse, error)
 }
 
@@ -125,9 +123,7 @@ func (c *gatewayServiceClient) BroadcastPoet(ctx context.Context, in *BroadcastP
 
 // GatewayServiceServer is the server API for GatewayService service.
 type GatewayServiceServer interface {
-	// Submit a new tx to the node for processing. The response
-	// TransactionState message contains both the txid of the new tx, as well
-	// as whether or not it was admitted into the mempool.
+	// Submit a poet data packet to the network to broadcast
 	BroadcastPoet(context.Context, *BroadcastPoetRequest) (*BroadcastPoetResponse, error)
 }
 
