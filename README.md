@@ -40,11 +40,12 @@ Broadly speaking, there are four types of endpoints: simple, command, query, and
 
 The Spacemesh API consists of several logical services, each of which contains a set of one or more RPC endpoints. The node operator can enable or disable each service independently using the CLI. The current set of services is as follows:
 
-- [NodeService](/proto/spacemesh/v1/node.proto) is a readonly interface for reading basic node-related data such as node status, software version and build number, and errors. It also allows a consumer to request that the node start the sync process, thus enabling the stream endpoints.
-- [MeshService](/proto/spacemesh/v1/mesh.proto) is a readonly interface that provides access to mesh data such as layer number, epoch number, and network ID. It provides streams for watching layers (which contain blocks, transactions, etc.). In the future this service will be expanded to include other mesh-related endpoints.
+- [GatewayService](/proto/spacemesh/v1/gateway.proto) is a read-write interface that allows a [poet server](https://github.com/spacemeshos/poet) to broadcast data to the network via a poet gateway node.
 - [GlobalStateService](/proto/spacemesh/v1/global_state.proto) is a readonly interface that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts.
-- [TransactionService](/proto/spacemesh/v1/tx.proto) is a read-write interface that allows the client to submit a new transaction, and to follow the state of one or more transactions on its journey from submission to mempool to block to mesh to STF.
+- [MeshService](/proto/spacemesh/v1/mesh.proto) is a readonly interface that provides access to mesh data such as layer number, epoch number, and network ID. It provides streams for watching layers (which contain blocks, transactions, etc.). In the future this service will be expanded to include other mesh-related endpoints.
+- [NodeService](/proto/spacemesh/v1/node.proto) is a readonly interface for reading basic node-related data such as node status, software version and build number, and errors. It also allows a consumer to request that the node start the sync process, thus enabling the stream endpoints.
 - [SmesherService](/proto/spacemesh/v1/smesher.proto) is a read-write interface that allows the client to query, and set, parameters related to smeshing (mining), such as PoST commitment, coinbase, etc.
+- [TransactionService](/proto/spacemesh/v1/tx.proto) is a read-write interface that allows the client to submit a new transaction, and to follow the state of one or more transactions on its journey from submission to mempool to block to mesh to STF.
 
 Each of these services relies on one or more sets of message types, which live in `*types.proto` files in the same directory as the service definition files.
 
