@@ -4,22 +4,9 @@ config_version: 3
 
 http:
   rules:
-    # NodeService
-    - selector: spacemesh.v1.NodeService.Echo
-      post: "/v1/node/echo"
-      body: "*"
-    - selector: spacemesh.v1.NodeService.Version
-      post: "/v1/node/version"
-    - selector: spacemesh.v1.NodeService.Build
-      post: "/v1/node/build"
-    - selector: spacemesh.v1.NodeService.Status
-      post: "/v1/node/status"
-      body: "*"
-    - selector: spacemesh.v1.NodeService.SyncStart
-      post: "/v1/node/syncstart"
-      body: "*"
-    - selector: spacemesh.v1.NodeService.Shutdown
-      post: "/v1/node/shutdown"
+    # GatewayService
+    - selector: spacemesh.v1.GatewayService.BroadcastPoet
+      post: "/v1/gateway/broadcastpoet"
       body: "*"
 
     # GlobalStateService
@@ -63,6 +50,24 @@ http:
       body: "*"
     - selector: spacemesh.v1.MeshService.LayersQuery
       post: "/v1/mesh/layersquery"
+      body: "*"
+
+    # NodeService
+    - selector: spacemesh.v1.NodeService.Echo
+      post: "/v1/node/echo"
+      body: "*"
+    - selector: spacemesh.v1.NodeService.Version
+      post: "/v1/node/version"
+    - selector: spacemesh.v1.NodeService.Build
+      post: "/v1/node/build"
+    - selector: spacemesh.v1.NodeService.Status
+      post: "/v1/node/status"
+      body: "*"
+    - selector: spacemesh.v1.NodeService.SyncStart
+      post: "/v1/node/syncstart"
+      body: "*"
+    - selector: spacemesh.v1.NodeService.Shutdown
+      post: "/v1/node/shutdown"
       body: "*"
 
     # SmesherService
