@@ -29,6 +29,9 @@ http:
     - selector: spacemesh.v1.GlobalStateService.Account
       post: "/v1/globalstate/account"
       body: "*"
+    - selector: spacemesh.v1.GlobalStateService.Accounts
+      post: "/v1/globalstate/accounts"
+      body: "*"
     - selector: spacemesh.v1.GlobalStateService.AccountDataQuery
       post: "/v1/globalstate/accountdataquery"
       body: "*"

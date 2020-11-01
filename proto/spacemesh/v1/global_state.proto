@@ -2,6 +2,7 @@ syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/global_state_types.proto";
+import "google/protobuf/empty.proto";
 
 // Readonly global state data - current and historical.
 // Global state data is data which is not explicitly stored in the mesh.
@@ -12,6 +13,9 @@ service GlobalStateService {
 
     // Account info in the current global state.
     rpc Account(AccountRequest) returns (AccountResponse);
+
+    // All accounts infos in the global state.
+    rpc Accounts (google.protobuf.Empty) returns (AccountsResponse);
 
     // Query for account related data such as rewards, tx receipts and account info
     //
