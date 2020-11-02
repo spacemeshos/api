@@ -22,15 +22,17 @@ http:
       post: "/v1/node/shutdown"
       body: "*"
 
+    # DebuggingService
+    - selector: spacemesh.v1.DebuggingService.Accounts
+      post: "/v1/debuggingservice/accounts"
+      body: "*"
+
     # GlobalStateService
     - selector: spacemesh.v1.GlobalStateService.GlobalStateHash
       post: "/v1/globalstate/globalstatehash"
       body: "*"
     - selector: spacemesh.v1.GlobalStateService.Account
       post: "/v1/globalstate/account"
-      body: "*"
-    - selector: spacemesh.v1.GlobalStateService.Accounts
-      post: "/v1/globalstate/accounts"
       body: "*"
     - selector: spacemesh.v1.GlobalStateService.AccountDataQuery
       post: "/v1/globalstate/accountdataquery"
