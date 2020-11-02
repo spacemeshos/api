@@ -103,7 +103,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DebuggingServiceClient interface {
 	// Accounts returns data for all the accounts currently in the node's current global state.
-	// This includes each account's address, nonce and balance.
+	// This includes each account's address, nonce and balance but excludes account's projection.
 	Accounts(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*AccountsResponse, error)
 }
 
@@ -127,7 +127,7 @@ func (c *debuggingServiceClient) Accounts(ctx context.Context, in *empty.Empty, 
 // DebuggingServiceServer is the server API for DebuggingService service.
 type DebuggingServiceServer interface {
 	// Accounts returns data for all the accounts currently in the node's current global state.
-	// This includes each account's address, nonce and balance.
+	// This includes each account's address, nonce and balance but excludes account's projection.
 	Accounts(context.Context, *empty.Empty) (*AccountsResponse, error)
 }
 
