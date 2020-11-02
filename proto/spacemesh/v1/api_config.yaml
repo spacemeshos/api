@@ -22,9 +22,9 @@ http:
       post: "/v1/node/shutdown"
       body: "*"
 
-    # DebuggingService
-    - selector: spacemesh.v1.DebuggingService.Accounts
-      post: "/v1/debuggingservice/accounts"
+    # DebugService
+    - selector: spacemesh.v1.DebugService.Accounts
+      post: "/v1/debug/accounts"
       body: "*"
 
     # GlobalStateService
