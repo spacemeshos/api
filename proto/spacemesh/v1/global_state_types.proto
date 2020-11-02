@@ -31,10 +31,6 @@ message AccountResponse {
     Account account_wrapper = 1;
 }
 
-message AccountsResponse {
-    repeated Account account_wrapper = 1;
-}
-
 message AccountDataFilter {
     AccountId account_id = 1;
     uint32 account_data_flags = 2; // bit field of AccountDataFlag

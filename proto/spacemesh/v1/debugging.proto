@@ -1,0 +1,14 @@
+syntax = "proto3";
+package spacemesh.v1;
+option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+import "spacemesh/v1/debugging_types.proto";
+import "google/protobuf/empty.proto";
+
+// DebuggingService exposes methods used for mostly debugging and tests
+service DebuggingService {
+
+    // Accounts returns data for all the accounts currently in the node's current global state.
+    // This includes each account's address, nonce and balance.
+    rpc Accounts (google.protobuf.Empty) returns (AccountsResponse);
+
+}

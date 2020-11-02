@@ -14,9 +14,6 @@ service GlobalStateService {
     // Account info in the current global state.
     rpc Account(AccountRequest) returns (AccountResponse);
 
-    // All accounts infos in the global state.
-    rpc Accounts (google.protobuf.Empty) returns (AccountsResponse);
-
     // Query for account related data such as rewards, tx receipts and account info
     //
     // Note: it might be too expensive to add a param for layer to get these results from
