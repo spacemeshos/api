@@ -9,6 +9,11 @@ http:
       post: "/v1/gateway/broadcastpoet"
       body: "*"
 
+    # DebugService
+    - selector: spacemesh.v1.DebugService.Accounts
+      post: "/v1/debug/accounts"
+      body: "*"
+
     # GlobalStateService
     - selector: spacemesh.v1.GlobalStateService.GlobalStateHash
       post: "/v1/globalstate/globalstatehash"
