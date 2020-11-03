@@ -45,6 +45,7 @@ The Spacemesh API consists of several logical services, each of which contains a
 - [GlobalStateService](/proto/spacemesh/v1/global_state.proto) is a readonly interface that provides access to data elements that are not explicitly part of the mesh such as accounts, rewards, and transaction state and receipts.
 - [TransactionService](/proto/spacemesh/v1/tx.proto) is a read-write interface that allows the client to submit a new transaction, and to follow the state of one or more transactions on its journey from submission to mempool to block to mesh to STF.
 - [SmesherService](/proto/spacemesh/v1/smesher.proto) is a read-write interface that allows the client to query, and set, parameters related to smeshing (mining), such as PoST commitment, coinbase, etc.
+- [DebugService](/proto/spacemesh/v1/debug.proto) is an experimental service designed for debugging and testing. The endpoints in this service are volatile and subject to change without notice. They should not be relied on in production.
 
 Each of these services relies on one or more sets of message types, which live in `*types.proto` files in the same directory as the service definition files.
 
