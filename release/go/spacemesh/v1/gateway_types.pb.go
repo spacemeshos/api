@@ -31,7 +31,7 @@ type BroadcastPoetRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // signed binary transaction
+	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // encoded poet proof
 }
 
 func (x *BroadcastPoetRequest) Reset() {
