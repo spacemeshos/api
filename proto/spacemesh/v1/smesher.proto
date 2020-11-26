@@ -4,9 +4,8 @@ option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "google/protobuf/empty.proto";
 import "spacemesh/v1/smesher_types.proto";
 
-// Readonly basic node data
+// Smeshing (mining) management
 service SmesherService {
-    /////// Smeshing (mining) management
 
     // Start smeshing using client provided data
     // Returns success status if request succeeds, failure if it fails
