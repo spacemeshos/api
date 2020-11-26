@@ -8,12 +8,10 @@ import "spacemesh/v1/smesher_types.proto";
 service SmesherService {
     /////// Smeshing (mining) management
 
-    // Start smeshing
-    // Returns error if post data is incomplete or missing
+    // Start smeshing using client provided data
     rpc StartSmeshing(StartSmeshingRequest) returns (StartSmeshingResponse);
 
-    // Stop smeshing and optionally attempt to delete post init file(s)
-    // Returns success if request is accepted by node, error if it fails
+    // Stop smeshing (submitting new atxs) and optionally stop node roles that entitle it to rewards
     rpc StopSmeshing(StopSmeshingRequest) returns (StopSmeshingResponse);
 
     // Get current smeshing status
