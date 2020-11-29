@@ -51,7 +51,7 @@ message StartSmeshingResponse {
 message StopSmeshingRequest {
     // request node to stop participating in protocol. If false, node will not submit new activations to the network
     // but will continue to participate in protocol and may get additional rewards
-    bool stop_participating_in_protocol = 1;
+    bool stop_protocol_participation = 1;
 }
 
 message StopSmeshingResponse {

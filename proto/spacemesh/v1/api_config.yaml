@@ -76,8 +76,8 @@ http:
       body: "*"
 
     # SmesherService
-    - selector: spacemesh.v1.SmesherService.IsSmeshing
-      post: "/v1/smesher/issmeshing"
+    - selector: spacemesh.v1.SmesherService.SmeshingStatus
+      post: "/v1/smesher/smeshingstatus"
     - selector: spacemesh.v1.SmesherService.StartSmeshing
       post: "/v1/smesher/startsmeshing"
     - selector: spacemesh.v1.SmesherService.StopSmeshing
@@ -95,16 +95,11 @@ http:
     - selector: spacemesh.v1.SmesherService.SetMinGas
       post: "/v1/smesher/setmingas"
       body: "*"
-    - selector: spacemesh.v1.SmesherService.PostStatus
-      post: "/v1/smesher/poststatus"
+    - selector: spacemesh.v1.SmesherService.EstimatedRewards
+      post: "/v1/smesher/estimatedrewards"
+      body: "*"
     - selector: spacemesh.v1.SmesherService.PostComputeProviders
       post: "/v1/smesher/postcomputeproviders"
-    - selector: spacemesh.v1.SmesherService.CreatePostData
-      post: "/v1/smesher/createpostdata"
-      body: "*"
-    - selector: spacemesh.v1.SmesherService.StopPostDataCreationSession
-      post: "/v1/smesher/stoppostdatacreationsession"
-      body: "*"
 
     # TransactionService
     - selector: spacemesh.v1.TransactionService.SubmitTransaction
