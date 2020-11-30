@@ -35,7 +35,7 @@ service GlobalStateService {
     // Rewards awarded to a smesher id
     rpc SmesherRewardStream(SmesherRewardStreamRequest) returns (stream SmesherRewardStreamResponse);
 
-    // App Events - emitted by app methods impl code trigged by an
+    // App Events - emitted by app methods impl code triggered by an
     // app transaction
     rpc AppEventStream(AppEventStreamRequest) returns (stream AppEventStreamResponse);
 
