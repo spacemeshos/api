@@ -73,6 +73,8 @@ http:
     - selector: spacemesh.v1.SmesherService.StopSmeshing
       post: "/v1/smesher/stopsmeshing"
       body: "*"
+    - selector: spacemesh.v1.SmesherService.PostComputeProviders
+      post: "/v1/smesher/postcomputeproviders"
     - selector: spacemesh.v1.SmesherService.SmesherID
       post: "/v1/smesher/smesherid"
     - selector: spacemesh.v1.SmesherService.Coinbase
@@ -84,16 +86,6 @@ http:
       post: "/v1/smesher/mingas"
     - selector: spacemesh.v1.SmesherService.SetMinGas
       post: "/v1/smesher/setmingas"
-      body: "*"
-    - selector: spacemesh.v1.SmesherService.PostStatus
-      post: "/v1/smesher/poststatus"
-    - selector: spacemesh.v1.SmesherService.PostComputeProviders
-      post: "/v1/smesher/postcomputeproviders"
-    - selector: spacemesh.v1.SmesherService.CreatePostData
-      post: "/v1/smesher/createpostdata"
-      body: "*"
-    - selector: spacemesh.v1.SmesherService.StopPostDataCreationSession
-      post: "/v1/smesher/stoppostdatacreationsession"
       body: "*"
 
     # TransactionService
