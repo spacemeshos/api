@@ -102,7 +102,8 @@ message Reward {
 
 message Block {
     bytes id = 1; // block hash
-    repeated Transaction transactions = 2;
+    repeated Transaction transactions = 2; // block transactions
+    Activation activation = 3; // the activation the block is referencing
 }
 
 message Layer {
