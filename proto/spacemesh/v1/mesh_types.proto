@@ -44,7 +44,7 @@ message LayerDurationResponse {
 message MaxTransactionsPerSecondRequest {}
 
 message MaxTransactionsPerSecondResponse {
-    SimpleInt maxtxpersecond = 1;
+    SimpleInt max_txs_per_second = 1;
 }
 
 enum AccountMeshDataFlag {
