@@ -117,8 +117,7 @@ message Layer {
     LayerStatus status = 2;
     bytes hash = 3; // computer layer hash - do we need this?
     repeated Block blocks = 4; // layer's blocks
-    repeated Activation activations = 5; // list of layer's activations
-    bytes root_state_hash = 6; // when available - the root state hash of global state in this layer
+    bytes root_state_hash = 5; // when available - the root state hash of global state in this layer
 }
 
 message LayerNumber {
