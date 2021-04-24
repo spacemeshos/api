@@ -1,0 +1,9 @@
+syntax = "proto3";
+package spacemesh.v1;
+option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+
+import "spacemesh/v1/global_state_types.proto";
+
+message AccountsResponse {
+    repeated Account account_wrapper = 1;
+}
