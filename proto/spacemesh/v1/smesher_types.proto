@@ -90,7 +90,7 @@ message StopSmeshingRequest {
 
 // Proof of space data status
 message PostStatus {
-    PostInitOpts lastOpts = 1; // options set previously by the user
+    PostInitOpts last_opts = 1; // options set previously by the user
     enum FilesStatus {
         FILES_STATUS_UNSPECIFIED = 0; // Lane's favorite impossible value
         FILES_STATUS_NOT_FOUND = 1; // Expected data files do not exist
