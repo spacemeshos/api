@@ -45,5 +45,8 @@ service SmesherService {
 
     // Estimate smeshing rewards over the next upcoming epoch
     rpc EstimatedRewards(EstimatedRewardsRequest) returns (EstimatedRewardsResponse);
+
+    // TODO: document
+    rpc Config(google.protobuf.Empty) returns (ConfigResponse);
 }
 

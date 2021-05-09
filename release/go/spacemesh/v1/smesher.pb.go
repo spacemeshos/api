@@ -38,7 +38,7 @@ var file_spacemesh_v1_smesher_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74,
 	0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x20, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
 	0x73, 0x68, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x5f, 0x74, 0x79,
-	0x70, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xa6, 0x07, 0x0a, 0x0e, 0x53, 0x6d,
+	0x70, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xe6, 0x07, 0x0a, 0x0e, 0x53, 0x6d,
 	0x65, 0x73, 0x68, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x46, 0x0a, 0x0a,
 	0x49, 0x73, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
@@ -97,6 +97,10 @@ var file_spacemesh_v1_smesher_proto_rawDesc = []byte{
 	0x72, 0x64, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x73, 0x70, 0x61,
 	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x73, 0x74, 0x69, 0x6d, 0x61,
 	0x74, 0x65, 0x64, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x3e, 0x0a, 0x06, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x16, 0x2e, 0x67,
+	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45,
+	0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1c, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
+	0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
 	0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69,
 	0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63,
@@ -121,6 +125,7 @@ var file_spacemesh_v1_smesher_proto_goTypes = []interface{}{
 	(*MinGasResponse)(nil),                         // 14: spacemesh.v1.MinGasResponse
 	(*SetMinGasResponse)(nil),                      // 15: spacemesh.v1.SetMinGasResponse
 	(*EstimatedRewardsResponse)(nil),               // 16: spacemesh.v1.EstimatedRewardsResponse
+	(*ConfigResponse)(nil),                         // 17: spacemesh.v1.ConfigResponse
 }
 var file_spacemesh_v1_smesher_proto_depIdxs = []int32{
 	0,  // 0: spacemesh.v1.SmesherService.IsSmeshing:input_type -> google.protobuf.Empty
@@ -134,19 +139,21 @@ var file_spacemesh_v1_smesher_proto_depIdxs = []int32{
 	0,  // 8: spacemesh.v1.SmesherService.MinGas:input_type -> google.protobuf.Empty
 	4,  // 9: spacemesh.v1.SmesherService.SetMinGas:input_type -> spacemesh.v1.SetMinGasRequest
 	5,  // 10: spacemesh.v1.SmesherService.EstimatedRewards:input_type -> spacemesh.v1.EstimatedRewardsRequest
-	6,  // 11: spacemesh.v1.SmesherService.IsSmeshing:output_type -> spacemesh.v1.IsSmeshingResponse
-	7,  // 12: spacemesh.v1.SmesherService.StartSmeshing:output_type -> spacemesh.v1.StartSmeshingResponse
-	8,  // 13: spacemesh.v1.SmesherService.StopSmeshing:output_type -> spacemesh.v1.StopSmeshingResponse
-	9,  // 14: spacemesh.v1.SmesherService.PostComputeProviders:output_type -> spacemesh.v1.PostComputeProvidersResponse
-	10, // 15: spacemesh.v1.SmesherService.PostDataCreationProgressStream:output_type -> spacemesh.v1.PostDataCreationProgressStreamResponse
-	11, // 16: spacemesh.v1.SmesherService.SmesherID:output_type -> spacemesh.v1.SmesherIDResponse
-	12, // 17: spacemesh.v1.SmesherService.Coinbase:output_type -> spacemesh.v1.CoinbaseResponse
-	13, // 18: spacemesh.v1.SmesherService.SetCoinbase:output_type -> spacemesh.v1.SetCoinbaseResponse
-	14, // 19: spacemesh.v1.SmesherService.MinGas:output_type -> spacemesh.v1.MinGasResponse
-	15, // 20: spacemesh.v1.SmesherService.SetMinGas:output_type -> spacemesh.v1.SetMinGasResponse
-	16, // 21: spacemesh.v1.SmesherService.EstimatedRewards:output_type -> spacemesh.v1.EstimatedRewardsResponse
-	11, // [11:22] is the sub-list for method output_type
-	0,  // [0:11] is the sub-list for method input_type
+	0,  // 11: spacemesh.v1.SmesherService.Config:input_type -> google.protobuf.Empty
+	6,  // 12: spacemesh.v1.SmesherService.IsSmeshing:output_type -> spacemesh.v1.IsSmeshingResponse
+	7,  // 13: spacemesh.v1.SmesherService.StartSmeshing:output_type -> spacemesh.v1.StartSmeshingResponse
+	8,  // 14: spacemesh.v1.SmesherService.StopSmeshing:output_type -> spacemesh.v1.StopSmeshingResponse
+	9,  // 15: spacemesh.v1.SmesherService.PostComputeProviders:output_type -> spacemesh.v1.PostComputeProvidersResponse
+	10, // 16: spacemesh.v1.SmesherService.PostDataCreationProgressStream:output_type -> spacemesh.v1.PostDataCreationProgressStreamResponse
+	11, // 17: spacemesh.v1.SmesherService.SmesherID:output_type -> spacemesh.v1.SmesherIDResponse
+	12, // 18: spacemesh.v1.SmesherService.Coinbase:output_type -> spacemesh.v1.CoinbaseResponse
+	13, // 19: spacemesh.v1.SmesherService.SetCoinbase:output_type -> spacemesh.v1.SetCoinbaseResponse
+	14, // 20: spacemesh.v1.SmesherService.MinGas:output_type -> spacemesh.v1.MinGasResponse
+	15, // 21: spacemesh.v1.SmesherService.SetMinGas:output_type -> spacemesh.v1.SetMinGasResponse
+	16, // 22: spacemesh.v1.SmesherService.EstimatedRewards:output_type -> spacemesh.v1.EstimatedRewardsResponse
+	17, // 23: spacemesh.v1.SmesherService.Config:output_type -> spacemesh.v1.ConfigResponse
+	12, // [12:24] is the sub-list for method output_type
+	0,  // [0:12] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -218,6 +225,8 @@ type SmesherServiceClient interface {
 	SetMinGas(ctx context.Context, in *SetMinGasRequest, opts ...grpc.CallOption) (*SetMinGasResponse, error)
 	// Estimate smeshing rewards over the next upcoming epoch
 	EstimatedRewards(ctx context.Context, in *EstimatedRewardsRequest, opts ...grpc.CallOption) (*EstimatedRewardsResponse, error)
+	// TODO: document
+	Config(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ConfigResponse, error)
 }
 
 type smesherServiceClient struct {
@@ -350,6 +359,15 @@ func (c *smesherServiceClient) EstimatedRewards(ctx context.Context, in *Estimat
 	return out, nil
 }
 
+func (c *smesherServiceClient) Config(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ConfigResponse, error) {
+	out := new(ConfigResponse)
+	err := c.cc.Invoke(ctx, "/spacemesh.v1.SmesherService/Config", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SmesherServiceServer is the server API for SmesherService service.
 type SmesherServiceServer interface {
 	// Returns true iff node is currently smeshing
@@ -381,6 +399,8 @@ type SmesherServiceServer interface {
 	SetMinGas(context.Context, *SetMinGasRequest) (*SetMinGasResponse, error)
 	// Estimate smeshing rewards over the next upcoming epoch
 	EstimatedRewards(context.Context, *EstimatedRewardsRequest) (*EstimatedRewardsResponse, error)
+	// TODO: document
+	Config(context.Context, *empty.Empty) (*ConfigResponse, error)
 }
 
 // UnimplementedSmesherServiceServer can be embedded to have forward compatible implementations.
@@ -419,6 +439,9 @@ func (*UnimplementedSmesherServiceServer) SetMinGas(context.Context, *SetMinGasR
 }
 func (*UnimplementedSmesherServiceServer) EstimatedRewards(context.Context, *EstimatedRewardsRequest) (*EstimatedRewardsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EstimatedRewards not implemented")
+}
+func (*UnimplementedSmesherServiceServer) Config(context.Context, *empty.Empty) (*ConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Config not implemented")
 }
 
 func RegisterSmesherServiceServer(s *grpc.Server, srv SmesherServiceServer) {
@@ -626,6 +649,24 @@ func _SmesherService_EstimatedRewards_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SmesherService_Config_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SmesherServiceServer).Config(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/spacemesh.v1.SmesherService/Config",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SmesherServiceServer).Config(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _SmesherService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "spacemesh.v1.SmesherService",
 	HandlerType: (*SmesherServiceServer)(nil),
@@ -669,6 +710,10 @@ var _SmesherService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "EstimatedRewards",
 			Handler:    _SmesherService_EstimatedRewards_Handler,
+		},
+		{
+			MethodName: "Config",
+			Handler:    _SmesherService_Config_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

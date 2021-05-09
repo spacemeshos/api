@@ -80,6 +80,7 @@ http:
       post: "/v1/smesher/issmeshing"
     - selector: spacemesh.v1.SmesherService.StartSmeshing
       post: "/v1/smesher/startsmeshing"
+      body: "*"
     - selector: spacemesh.v1.SmesherService.StopSmeshing
       post: "/v1/smesher/stopsmeshing"
       body: "*"
@@ -96,6 +97,12 @@ http:
       post: "/v1/smesher/mingas"
     - selector: spacemesh.v1.SmesherService.SetMinGas
       post: "/v1/smesher/setmingas"
+      body: "*"
+    - selector: spacemesh.v1.SmesherService.EstimatedRewards
+      post: "/v1/smesher/estimatedrewards"
+      body: "*"
+    - selector: spacemesh.v1.SmesherService.Config
+      post: "/v1/smesher/config"
       body: "*"
 
     # TransactionService
