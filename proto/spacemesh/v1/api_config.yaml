@@ -76,8 +76,8 @@ http:
       body: "*"
 
     # SmesherService
-    - selector: spacemesh.v1.SmesherService.IsSmeshing
-      post: "/v1/smesher/issmeshing"
+    - selector: spacemesh.v1.SmesherService.SmeshingStatus
+      post: "/v1/smesher/smeshingstatus"
     - selector: spacemesh.v1.SmesherService.StartSmeshing
       post: "/v1/smesher/startsmeshing"
       body: "*"
@@ -86,6 +86,7 @@ http:
       body: "*"
     - selector: spacemesh.v1.SmesherService.PostComputeProviders
       post: "/v1/smesher/postcomputeproviders"
+      body: "*"
     - selector: spacemesh.v1.SmesherService.SmesherID
       post: "/v1/smesher/smesherid"
     - selector: spacemesh.v1.SmesherService.Coinbase
