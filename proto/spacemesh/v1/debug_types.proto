@@ -7,3 +7,7 @@ import "spacemesh/v1/global_state_types.proto";
 message AccountsResponse {
     repeated Account account_wrapper = 1;
 }
+
+message PublicKeyResponse {
+  bytes public_key = 1;
+}
