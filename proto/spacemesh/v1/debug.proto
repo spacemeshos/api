@@ -13,4 +13,7 @@ service DebugService {
     // This includes each account's address, nonce and balance but excludes projection of account state.
     rpc Accounts (google.protobuf.Empty) returns (AccountsResponse);
 
+    // PublicKey returns this node's public key
+    // Useful for quickly bootstraping nodes in development
+    rpc PublicKey (google.protobuf.Empty) returns (PublicKeyResponse);
 }

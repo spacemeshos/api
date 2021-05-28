@@ -13,6 +13,9 @@ http:
     - selector: spacemesh.v1.DebugService.Accounts
       post: "/v1/debug/accounts"
       body: "*"
+    - selector: spacemesh.v1.DebugService.PublicKey
+      post: "/v1/debug/publicKey"
+      body: "*"
 
     # GlobalStateService
     - selector: spacemesh.v1.GlobalStateService.GlobalStateHash
