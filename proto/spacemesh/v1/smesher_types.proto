@@ -4,14 +4,8 @@ option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
 import "google/rpc/status.proto";
 
-message SmeshingStatusResponse {
-    enum SmeshingStatus {
-        SMESHING_STATUS_UNSPECIFIED = 0; // Lane's favorite impossible value
-        SMESHING_STATUS_IDLE = 1;
-        SMESHING_STATUS_CREATING_POST_DATA = 2;
-        SMESHING_STATUS_ACTIVE = 3;
-    }
-    SmeshingStatus status = 1;
+message IsSmeshingResponse {
+    bool is_smeshing = 1;
 }
 
 message StartSmeshingRequest {
@@ -98,14 +92,27 @@ message PostComputeProvidersRequest {
     bool benchmark = 1;
 }
 
-// Proof of space data creation session status
-message SessionStatus {
-    PostInitOpts session_opts = 1; // The current session init options
-    uint64 num_labels_written = 2; // Number of labels written to the data files
+// Proof of space data status
+message PostStatus {
+    enum InitStatus {
+        INIT_STATUS_UNSPECIFIED = 0; // Lane's favorite impossible value
+        INIT_STATUS_NOT_STARTED = 1;
+        INIT_STATUS_IN_PROGRESS = 2;
+        INIT_STATUS_COMPLETE = 3;
+        INIT_STATUS_ERROR = 4;
+    }
+    InitStatus init_status = 1;
+    PostInitOpts init_opts = 2; // options previously set by the user
+    uint64 num_labels_written = 4; // Number of labels (hashes) written to the data files
+    string error_message = 5; // The error message, if the status is INIT_STATUS_ERROR
+}
+
+message PostStatusResponse {
+    PostStatus status = 1;
 }
 
 message PostDataCreationProgressStreamResponse {
-    SessionStatus status = 1;
+    PostStatus status = 1;
 }
 
 message EstimatedRewardsRequest {}

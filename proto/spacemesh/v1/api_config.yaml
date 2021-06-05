@@ -76,14 +76,16 @@ http:
       body: "*"
 
     # SmesherService
-    - selector: spacemesh.v1.SmesherService.SmeshingStatus
-      post: "/v1/smesher/smeshingstatus"
+    - selector: spacemesh.v1.SmesherService.IsSmeshing
+      post: "/v1/smesher/issmeshing"
     - selector: spacemesh.v1.SmesherService.StartSmeshing
       post: "/v1/smesher/startsmeshing"
       body: "*"
     - selector: spacemesh.v1.SmesherService.StopSmeshing
       post: "/v1/smesher/stopsmeshing"
       body: "*"
+    - selector: spacemesh.v1.SmesherService.PostStatus
+      post: "/v1/smesher/poststatus"
     - selector: spacemesh.v1.SmesherService.PostComputeProviders
       post: "/v1/smesher/postcomputeproviders"
       body: "*"

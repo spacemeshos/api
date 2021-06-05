@@ -6,8 +6,8 @@ import "spacemesh/v1/smesher_types.proto";
 
 // Readonly basic node data
 service SmesherService {
-    // Returns the node's current smeshing status
-    rpc SmeshingStatus (google.protobuf.Empty) returns (SmeshingStatusResponse);
+    // Returns true iff node is currently smeshing
+    rpc IsSmeshing (google.protobuf.Empty) returns (IsSmeshingResponse);
 
     // Start smeshing. If the post data is incomplete or missing, data creation
     // session will be preceded. Changing of the post potions (e.g., number of labels),
@@ -19,6 +19,9 @@ service SmesherService {
     // delete the post data files(s).
     // Returns success if request is accepted by node, failure if it fails
     rpc StopSmeshing (StopSmeshingRequest) returns (StopSmeshingResponse);
+
+    // Returns post data status from the node
+    rpc PostStatus(google.protobuf.Empty) returns (PostStatusResponse);
 
     // Returns a list of available post compute providers for creating post data
     rpc PostComputeProviders (PostComputeProvidersRequest) returns (PostComputeProvidersResponse);
