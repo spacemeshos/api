@@ -3,8 +3,6 @@ package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
 
-/////////// Basic App Related types
-
 enum VariableType {
     VARIABLE_TYPE_UNSPECIFIED = 0;
     VARIABLE_TYPE_I8 = 1;
@@ -24,19 +22,20 @@ message VariableMetadata {
     uint32 id = 1;
     string name = 2;
     VariableType type = 3;
+    bool is_array = 4; // when true, variable is an array of type with 0 or more values, otherwise, single value.
 }
 
-message Variable {
+message VariableValue {
     VariableMetadata meta_data = 1;
     repeated bytes data = 2; // One item - primitive var data. More than one item - an array of primitive data.
 }
 
-message TemplateAddress {
+message AppTemplateAddress {
     bytes address = 1;
 }
 
 message AppTemplate {
-    TemplateAddress address = 1;
+    AppTemplateAddress address = 1;
     string name = 2;
     AccountId author = 3;
     LayerNumber deploy_layer = 4;
@@ -52,7 +51,53 @@ message App {
     LayerNumber spawn_layer = 4;
     TransactionId spawn_tx_id = 5;
     AccountId spawner = 6;
-    repeated Variable variables =7; // ordered array of app vars and their data
+    repeated VariableValue variables = 8; // ordered array of app vars and their values
 }
 
-////////////////////////////
+
+message GetAppTemplateRequest {
+    AppTemplateAddress address = 1;
+    bool include_code = 2; // when true, template result will include full wasm code
+}
+
+message GetAppTemplateResponse {
+    AppTemplate template = 1;
+}
+
+message GetAllAppTemplatesRequest {
+    uint32 max_results = 1; // max number of results to return
+    uint32 offset = 2; // query offset
+    bool include_code = 3; // when try templates results will include full wasm code
+}
+
+message GetAllAppTemplatesResponse {
+    uint32 total_results = 1; // total number of templates
+    repeated AppTemplate templates = 2;
+}
+
+message GetAppVariableRequest {
+    AccountId address = 1; // app address
+    LayerNumber layer_number = 2; // pass max_ui32 to get latest value
+    uint32 id = 3; // app var id - var unique identifier
+}
+
+message GetAppVariableResponse {
+    VariableValue variable_value = 1;
+}
+
+message GetAppRequest {
+    AccountId address = 1; // app address
+    LayerNumber layer_number = 2; // layer for state. Ignored when include_var_values is set to false. pass max_ui32 to get latest state.
+    bool include_var_values = 3; // when true, var values will be included in response, false otherwise.
+}
+
+message GetAppResponse {
+    App app = 1;
+}
+
+
+
+
+
+
+
