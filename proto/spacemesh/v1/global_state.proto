@@ -9,7 +9,6 @@ import "spacemesh/v1/app_types.proto";
 // Global state is modified only by the state transition function.
 service GlobalStateService {
 
-
     // Latest computed global state - layer and its root hash
     rpc GlobalStateHash(GlobalStateHashRequest) returns (GlobalStateHashResponse);
 

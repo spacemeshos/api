@@ -47,7 +47,7 @@ message AppTemplate {
 message App {
     AccountId address = 1;
     string name = 2;
-    bytes template_address = 3;
+    AppTemplateAddress template_address = 3;
     LayerNumber spawn_layer = 4;
     TransactionId spawn_tx_id = 5;
     AccountId spawner = 6;
