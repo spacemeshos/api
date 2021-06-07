@@ -3,45 +3,6 @@ package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
 
-enum VariableType {
-    VARIABLE_TYPE_UNSPECIFIED = 0;
-    VARIABLE_TYPE_I8 = 1;
-    VARIABLE_TYPE_U8 = 2;
-    VARIABLE_TYPE_I16 = 3;
-    VARIABLE_TYPE_U16 = 4;
-    VARIABLE_TYPE_I32 = 5;
-    VARIABLE_TYPE_U32 = 6;
-    VARIABLE_TYPE_I64 = 7;
-    VARIABLE_TYPE_U64 = 8;
-    VARIABLE_TYPE_BOOL = 9;
-    VARIABLE_TYPE_AMOUNT = 10;
-    VARIABLE_TYPE_ADDRESS = 11;
-}
-
-message VariableMetadata {
-    uint32 id = 1;
-    string name = 2;
-    VariableType type = 3;
-}
-
-
-message Variable {
-    VariableMetadata meta_data = 1;
-    repeated bytes data = 2; // One item - primitive var data. More than one item - an array of primitive data.
-}
-
-message CodeTemplate {
-    bytes address = 1;
-    string name = 2;
-    AccountId author = 3;
-    LayerNumber deploy_layer = 4;
-    TransactionId deploy_tx = 5;
-    bytes code = 6;
-    repeated VariableMetadata vars = 7;
-}
-
-
-
 message AccountState {
     uint64 counter = 1; // aka nonce
     Amount balance = 2; // known account balance
