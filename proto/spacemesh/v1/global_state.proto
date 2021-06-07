@@ -22,9 +22,8 @@ service GlobalStateService {
     // Get app metadata and optionally current state
     rpc GetApp(GetAppRequest) returns (GetAppResponse);
 
-    // Get an app's variable metadata and optinally value
+    // Get an app's variable metadata and optionally value
     rpc GetAppVariable(GetAppVariableRequest) returns (GetAppVariableResponse);
-
 
     // Account info in the current global state.
     rpc Account(AccountRequest) returns (AccountResponse);
