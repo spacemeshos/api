@@ -16,7 +16,7 @@ service GlobalStateService {
     rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse);
 
     // Get all app templates
-    rpc GetAllTemplates(GetAllTemplatesRequest) returns (GetAllTemplatesResponse);
+    rpc GetTemplates(GetTemplatesRequest) returns (GetTemplatesResponse);
 
     // Get app metadata and optionally current state
     rpc GetApp(GetAppRequest) returns (GetAppResponse);

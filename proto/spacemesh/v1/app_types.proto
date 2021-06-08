@@ -17,6 +17,7 @@ enum VariableType {
     VARIABLE_TYPE_BOOL = 9;
     VARIABLE_TYPE_AMOUNT = 10;
     VARIABLE_TYPE_ADDRESS = 11;
+    // future supported types will be added here
 }
 
 // Variable metadata
@@ -35,7 +36,7 @@ message ValuesArray {
 message Variable {
     VariableMetadata meta_data = 1;
     oneof data {
-        bytes value = 2;
+        bytes value = 2; // since bytes size is arbitrary - this will support future var types
         ValuesArray values = 3;
     }
 }
@@ -85,14 +86,14 @@ message GetTemplateResponse {
 }
 
 // A request to return all templates from the templates global state store with pagination
-message GetAllTemplatesRequest {
+message GetTemplatesRequest {
     uint32 max_results = 1; // max number of results to return
     uint32 offset = 2; // query offset
     bool include_code = 3; // when try templates results will include full wasm code
 }
 
 // A response includes total templates available in store and a list of zero ore more templates
-message GetAllTemplatesResponse {
+message GetTemplatesResponse {
     uint32 total_results = 1; // total number of templates
     repeated Template templates = 2;
 }
