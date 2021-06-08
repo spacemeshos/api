@@ -13,16 +13,16 @@ service GlobalStateService {
     rpc GlobalStateHash(GlobalStateHashRequest) returns (GlobalStateHashResponse);
 
     // Get an app template meta-data and code
-    rpc GetAppTemplate(GetAppTemplateRequest) returns (GetAppTemplateResponse);
+    rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse);
 
     // Get all app templates
-    rpc GetAllAppTemplates(GetAllAppTemplatesRequest) returns (GetAllAppTemplatesResponse);
+    rpc GetAllTemplates(GetAllTemplatesRequest) returns (GetAllTemplatesResponse);
 
     // Get app metadata and optionally current state
     rpc GetApp(GetAppRequest) returns (GetAppResponse);
 
     // Get an app's variable metadata and optionally value
-    rpc GetAppVariable(GetAppVariableRequest) returns (GetAppVariableResponse);
+    rpc GetVariable(GetVariableRequest) returns (GetVariableResponse);
 
     // Account info in the current global state.
     rpc Account(AccountRequest) returns (AccountResponse);
