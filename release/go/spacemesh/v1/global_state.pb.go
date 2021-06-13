@@ -40,12 +40,12 @@ var file_spacemesh_v1_global_state_proto_rawDesc = []byte{
 	0x68, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x70, 0x70, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x32, 0xe3, 0x08, 0x0a, 0x12, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x53,
 	0x74, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x5e, 0x0a, 0x0f, 0x47,
-	0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52, 0x6f, 0x6f, 0x74, 0x12, 0x24,
+	0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x65, 0x48, 0x61, 0x73, 0x68, 0x12, 0x24,
 	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x6c,
-	0x6f, 0x62, 0x61, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52, 0x6f, 0x6f, 0x74, 0x52, 0x65, 0x71,
+	0x6f, 0x62, 0x61, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x65, 0x48, 0x61, 0x73, 0x68, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
-	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52,
-	0x6f, 0x6f, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x47,
+	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x53, 0x74, 0x61, 0x74, 0x65, 0x48,
+	0x61, 0x73, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x47,
 	0x65, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x12, 0x20, 0x2e, 0x73, 0x70, 0x61,
 	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x65, 0x6d,
 	0x70, 0x6c, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x73,
@@ -116,7 +116,7 @@ var file_spacemesh_v1_global_state_proto_rawDesc = []byte{
 }
 
 var file_spacemesh_v1_global_state_proto_goTypes = []interface{}{
-	(*GlobalStateRootRequest)(nil),      // 0: spacemesh.v1.GlobalStateRootRequest
+	(*GlobalStateHashRequest)(nil),      // 0: spacemesh.v1.GlobalStateHashRequest
 	(*GetTemplateRequest)(nil),          // 1: spacemesh.v1.GetTemplateRequest
 	(*GetTemplatesRequest)(nil),         // 2: spacemesh.v1.GetTemplatesRequest
 	(*GetAppRequest)(nil),               // 3: spacemesh.v1.GetAppRequest
@@ -128,7 +128,7 @@ var file_spacemesh_v1_global_state_proto_goTypes = []interface{}{
 	(*SmesherRewardStreamRequest)(nil),  // 9: spacemesh.v1.SmesherRewardStreamRequest
 	(*AppEventStreamRequest)(nil),       // 10: spacemesh.v1.AppEventStreamRequest
 	(*GlobalStateStreamRequest)(nil),    // 11: spacemesh.v1.GlobalStateStreamRequest
-	(*GlobalStateRootResponse)(nil),     // 12: spacemesh.v1.GlobalStateRootResponse
+	(*GlobalStateHashResponse)(nil),     // 12: spacemesh.v1.GlobalStateHashResponse
 	(*GetTemplateResponse)(nil),         // 13: spacemesh.v1.GetTemplateResponse
 	(*GetTemplatesResponse)(nil),        // 14: spacemesh.v1.GetTemplatesResponse
 	(*GetAppResponse)(nil),              // 15: spacemesh.v1.GetAppResponse
@@ -142,7 +142,7 @@ var file_spacemesh_v1_global_state_proto_goTypes = []interface{}{
 	(*GlobalStateStreamResponse)(nil),   // 23: spacemesh.v1.GlobalStateStreamResponse
 }
 var file_spacemesh_v1_global_state_proto_depIdxs = []int32{
-	0,  // 0: spacemesh.v1.GlobalStateService.GlobalStateRoot:input_type -> spacemesh.v1.GlobalStateRootRequest
+	0,  // 0: spacemesh.v1.GlobalStateService.GlobalStateHash:input_type -> spacemesh.v1.GlobalStateHashRequest
 	1,  // 1: spacemesh.v1.GlobalStateService.GetTemplate:input_type -> spacemesh.v1.GetTemplateRequest
 	2,  // 2: spacemesh.v1.GlobalStateService.GetTemplates:input_type -> spacemesh.v1.GetTemplatesRequest
 	3,  // 3: spacemesh.v1.GlobalStateService.GetApp:input_type -> spacemesh.v1.GetAppRequest
@@ -154,7 +154,7 @@ var file_spacemesh_v1_global_state_proto_depIdxs = []int32{
 	9,  // 9: spacemesh.v1.GlobalStateService.SmesherRewardStream:input_type -> spacemesh.v1.SmesherRewardStreamRequest
 	10, // 10: spacemesh.v1.GlobalStateService.AppEventStream:input_type -> spacemesh.v1.AppEventStreamRequest
 	11, // 11: spacemesh.v1.GlobalStateService.GlobalStateStream:input_type -> spacemesh.v1.GlobalStateStreamRequest
-	12, // 12: spacemesh.v1.GlobalStateService.GlobalStateRoot:output_type -> spacemesh.v1.GlobalStateRootResponse
+	12, // 12: spacemesh.v1.GlobalStateService.GlobalStateHash:output_type -> spacemesh.v1.GlobalStateHashResponse
 	13, // 13: spacemesh.v1.GlobalStateService.GetTemplate:output_type -> spacemesh.v1.GetTemplateResponse
 	14, // 14: spacemesh.v1.GlobalStateService.GetTemplates:output_type -> spacemesh.v1.GetTemplatesResponse
 	15, // 15: spacemesh.v1.GlobalStateService.GetApp:output_type -> spacemesh.v1.GetAppResponse
@@ -212,7 +212,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type GlobalStateServiceClient interface {
 	// Latest computed global state - layer and its root hash
-	GlobalStateRoot(ctx context.Context, in *GlobalStateRootRequest, opts ...grpc.CallOption) (*GlobalStateRootResponse, error)
+	GlobalStateHash(ctx context.Context, in *GlobalStateHashRequest, opts ...grpc.CallOption) (*GlobalStateHashResponse, error)
 	// Get an app template meta-data and code
 	GetTemplate(ctx context.Context, in *GetTemplateRequest, opts ...grpc.CallOption) (*GetTemplateResponse, error)
 	// Get all app templates
@@ -254,9 +254,9 @@ func NewGlobalStateServiceClient(cc grpc.ClientConnInterface) GlobalStateService
 	return &globalStateServiceClient{cc}
 }
 
-func (c *globalStateServiceClient) GlobalStateRoot(ctx context.Context, in *GlobalStateRootRequest, opts ...grpc.CallOption) (*GlobalStateRootResponse, error) {
-	out := new(GlobalStateRootResponse)
-	err := c.cc.Invoke(ctx, "/spacemesh.v1.GlobalStateService/GlobalStateRoot", in, out, opts...)
+func (c *globalStateServiceClient) GlobalStateHash(ctx context.Context, in *GlobalStateHashRequest, opts ...grpc.CallOption) (*GlobalStateHashResponse, error) {
+	out := new(GlobalStateHashResponse)
+	err := c.cc.Invoke(ctx, "/spacemesh.v1.GlobalStateService/GlobalStateHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -457,7 +457,7 @@ func (x *globalStateServiceGlobalStateStreamClient) Recv() (*GlobalStateStreamRe
 // GlobalStateServiceServer is the server API for GlobalStateService service.
 type GlobalStateServiceServer interface {
 	// Latest computed global state - layer and its root hash
-	GlobalStateRoot(context.Context, *GlobalStateRootRequest) (*GlobalStateRootResponse, error)
+	GlobalStateHash(context.Context, *GlobalStateHashRequest) (*GlobalStateHashResponse, error)
 	// Get an app template meta-data and code
 	GetTemplate(context.Context, *GetTemplateRequest) (*GetTemplateResponse, error)
 	// Get all app templates
@@ -495,8 +495,8 @@ type GlobalStateServiceServer interface {
 type UnimplementedGlobalStateServiceServer struct {
 }
 
-func (*UnimplementedGlobalStateServiceServer) GlobalStateRoot(context.Context, *GlobalStateRootRequest) (*GlobalStateRootResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GlobalStateRoot not implemented")
+func (*UnimplementedGlobalStateServiceServer) GlobalStateHash(context.Context, *GlobalStateHashRequest) (*GlobalStateHashResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GlobalStateHash not implemented")
 }
 func (*UnimplementedGlobalStateServiceServer) GetTemplate(context.Context, *GetTemplateRequest) (*GetTemplateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTemplate not implemented")
@@ -536,20 +536,20 @@ func RegisterGlobalStateServiceServer(s *grpc.Server, srv GlobalStateServiceServ
 	s.RegisterService(&_GlobalStateService_serviceDesc, srv)
 }
 
-func _GlobalStateService_GlobalStateRoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GlobalStateRootRequest)
+func _GlobalStateService_GlobalStateHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GlobalStateHashRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GlobalStateServiceServer).GlobalStateRoot(ctx, in)
+		return srv.(GlobalStateServiceServer).GlobalStateHash(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/spacemesh.v1.GlobalStateService/GlobalStateRoot",
+		FullMethod: "/spacemesh.v1.GlobalStateService/GlobalStateHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GlobalStateServiceServer).GlobalStateRoot(ctx, req.(*GlobalStateRootRequest))
+		return srv.(GlobalStateServiceServer).GlobalStateHash(ctx, req.(*GlobalStateHashRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -769,8 +769,8 @@ var _GlobalStateService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*GlobalStateServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GlobalStateRoot",
-			Handler:    _GlobalStateService_GlobalStateRoot_Handler,
+			MethodName: "GlobalStateHash",
+			Handler:    _GlobalStateService_GlobalStateHash_Handler,
 		},
 		{
 			MethodName: "GetTemplate",
