@@ -10,7 +10,7 @@ import "spacemesh/v1/app_types.proto";
 service GlobalStateService {
 
     // Latest computed global state - layer and its root hash
-    rpc GlobalStateHash(GlobalStateHashRequest) returns (GlobalStateHashResponse);
+    rpc GlobalStateRoot(GlobalStateRootRequest) returns (GlobalStateRootResponse);
 
     // Get an app template meta-data and code
     rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse);

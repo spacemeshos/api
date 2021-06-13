@@ -133,17 +133,17 @@ enum GlobalStateDataFlag {
     GLOBAL_STATE_DATA_FLAG_GLOBAL_STATE_HASH = 8; // hash of global state (i.e., state root)
 }
 
-message GlobalStateHash {
-    bytes root_hash = 1;
+message GlobalStateRoot {
+    bytes hash = 1;
     LayerNumber layer = 2;
 }
 
 // For now this is empty but in future we might want to allow this to take a
 // layer number.
-message GlobalStateHashRequest {}
+message GlobalStateRootRequest {}
 
-message GlobalStateHashResponse {
-    GlobalStateHash response = 1;
+message GlobalStateRootResponse {
+    GlobalStateRoot response = 1;
 }
 
 message GlobalStateStreamRequest {
@@ -155,7 +155,7 @@ message GlobalStateData {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
         Account account_wrapper = 3;
-        GlobalStateHash global_state = 4;
+        GlobalStateRoot global_state = 4;
     }
 }
 
