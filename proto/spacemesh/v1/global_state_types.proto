@@ -55,10 +55,14 @@ message ExecutionError {
     string message = 2; // error message
 }
 
+// From dev perspective we want to enable something like the following from the higher-level lang or rust code:
+// info([enty_name], [entry_text])
+// e.g. info("sig_verification", format!("%s : %d", str1, ui64))
 message LogEntry {
     uint32 log_level = 1; // info, debug, trace, error, etc...
     string context = 2; // function name e.g. withdraw()
-    string entry = 3; // info() from an app function data
+    string name = 3; // entry name
+    string entry = 4; // entry printed data
 }
 
 message TransactionReceipt {
@@ -155,7 +159,7 @@ message GlobalStateData {
         Reward reward = 1;
         TransactionReceipt receipt = 2;
         Account account_wrapper = 3;
-        GlobalStateRoot global_state = 4;
+        GlobalStateRoot state_root = 4;
     }
 }
 
