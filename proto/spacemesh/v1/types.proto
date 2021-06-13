@@ -74,6 +74,7 @@ message Activation {
     AccountId coinbase = 4; // coinbase account id
     ActivationId prev_atx = 5; // previous ATX pointed to
     uint64 commitment_size = 6; // commitment size in bytes
+    EpochNumber epoch = 7; // Activation on mesh epoch number (when layer is not used)
 }
 
 // An immutable Spacemesh transaction.
@@ -124,6 +125,10 @@ message Layer {
 }
 
 message LayerNumber {
+    uint32 number = 1;
+}
+
+message EpochNumber {
     uint32 number = 1;
 }
 
