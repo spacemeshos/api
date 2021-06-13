@@ -110,9 +110,11 @@ message Block {
 message Layer {
     LayerNumber number = 1; // layer number - not hash - layer content may change
     enum LayerStatus {
-        LAYER_STATUS_UNSPECIFIED = 0; // not yet approved or confirmed
+        LAYER_STATUS_UNSPECIFIED = 0;
         LAYER_STATUS_APPROVED = 1; // approved by hare
         LAYER_STATUS_CONFIRMED = 2; // confirmed by tortoise
+        LAYER_STATUS_PENDING = 3; // not yet approved, confirmed or verified
+        LAYER_STATUS_VERIFIED = 4; // verified by tortoise
     }
     LayerStatus status = 2;
     bytes hash = 3; // computer layer hash - do we need this?
