@@ -32,9 +32,9 @@ message ValuesArray {
     repeated bytes values = 1;
 }
 
-// The meta-data and value of an app's variable
+// The metadata and value of an app's variable
 message Variable {
-    VariableMetadata meta_data = 1;
+    VariableMetadata metadata = 1;
     oneof data {
         bytes value = 2; // since bytes size is arbitrary - this will support future var types
         ValuesArray values = 3;
