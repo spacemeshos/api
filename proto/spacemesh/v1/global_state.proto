@@ -21,7 +21,6 @@ service GlobalStateService {
     // Get an app's variable metadata and optionally value
     rpc GetVariable(GetVariableRequest) returns (GetVariableResponse);
 
-
     // Latest computed global state - layer and its root hash
     rpc GlobalStateHash(GlobalStateHashRequest) returns (GlobalStateHashResponse);
 
