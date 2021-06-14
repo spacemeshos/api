@@ -22,7 +22,7 @@ HTTPS_GIT := https://github.com/spacemesh/api.git
 # See https://buf.build/docs/inputs#ssh for more details.
 SSH_GIT := ssh://git@github.com/spacemesh/api.git
 # This controls the version of buf to install and use.
-BUF_VERSION := 0.41.0
+BUF_VERSION := 0.43.2
 
 # This controls the version of protoc to install and use.
 PROTOC_VERSION = 3.12.3
