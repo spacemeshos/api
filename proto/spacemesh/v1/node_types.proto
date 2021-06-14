@@ -2,7 +2,6 @@ syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
-import "google/rpc/status.proto";
 
 message EchoRequest {
     SimpleString msg = 1;
@@ -23,13 +22,11 @@ message BuildResponse {
 message SyncStartRequest {}
 
 message SyncStartResponse {
-    google.rpc.Status status = 1;
 }
 
 message ShutdownRequest {}
 
 message ShutdownResponse {
-    google.rpc.Status status = 1;
 }
 
 // current node status

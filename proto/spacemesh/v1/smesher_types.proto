@@ -2,7 +2,6 @@ syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
-import "google/rpc/status.proto";
 
 message IsSmeshingResponse {
     bool is_smeshing = 1;
@@ -15,11 +14,9 @@ message StartSmeshingRequest {
 }
 
 message StartSmeshingResponse {
-    google.rpc.Status status = 1;
 }
 
 message StopSmeshingResponse {
-    google.rpc.Status status = 1;
 }
 
 message SetCoinbaseRequest {
@@ -27,7 +24,6 @@ message SetCoinbaseRequest {
 }
 
 message SetCoinbaseResponse {
-    google.rpc.Status status = 1;
 }
 
 message MinGasResponse {
@@ -39,15 +35,12 @@ message SetMinGasRequest {
 }
 
 message SetMinGasResponse {
-    google.rpc.Status status = 1;
 }
 
 message CreatePostDataResponse {
-    google.rpc.Status status = 1;
 }
 
 message StopPostDataCreationSessionResponse {
-    google.rpc.Status status = 1;
 }
 
 message SmesherIDResponse {
