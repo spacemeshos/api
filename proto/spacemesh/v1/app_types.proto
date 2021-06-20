@@ -52,7 +52,7 @@ message Template {
     string name = 2; // template name
 
     // note - the author can be obtained from the deploy transaction but it is nice to have it here
-    AccountId author = 3; // template uploader
+    AccountId deployer = 3; // template uploader
 
     // The layer can be obtained from the tx receipt but it is convenient to have it here
     LayerNumber deploy_layer = 4; // layer that the template was deployed - 0 for genesis templates
@@ -120,7 +120,6 @@ message GetAppRequest {
 message GetAppResponse {
     App app = 1;
 }
-
 
 
 
