@@ -10,11 +10,16 @@ message IsSmeshingResponse {
 
 message StartSmeshingRequest {
     AccountId coinbase = 1;
-    PostInitOpts opts = 2;
+    PoSTSetupOpts opts = 2;
 }
 
 message StartSmeshingResponse {
     google.rpc.Status status = 1;
+}
+
+// Param passed to methods to indicate a request to delete data files
+message StopSmeshingRequest {
+    bool delete_files = 1;
 }
 
 message StopSmeshingResponse {
@@ -41,78 +46,12 @@ message SetMinGasResponse {
     google.rpc.Status status = 1;
 }
 
-
 message SmesherIDResponse {
     AccountId account_id = 1;
 }
 
 message CoinbaseResponse {
     AccountId account_id = 1;
-}
-
-message PostComputeProvider {
-    uint32 id = 1; // 0, 1, 2...
-    string model = 2; // e.g. Nvidia GTX 2700
-    ComputeApiClass compute_api = 3; // A provided compute api
-    uint64 performance = 4; // Estimated performance in hashes per second
-}
-
-message PostComputeProvidersResponse {
-    repeated PostComputeProvider post_compute_provider = 1;
-}
-
-// Compute API class
-enum ComputeApiClass {
-    COMPUTE_API_CLASS_UNSPECIFIED = 0;
-    COMPUTE_API_CLASS_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
-    COMPUTE_API_CLASS_CUDA = 2;
-    COMPUTE_API_CLASS_VULKAN = 3;
-}
-
-// Post init options. Used to define the requested options and by
-// other messages which contain the options.
-message PostInitOpts {
-    string data_dir = 1; // User provided path to create the post data files at
-    uint32 num_units = 2; // Number of PoST data commitment units to generate
-    uint32 num_files = 3; // Number of files to equally distribute the labels among
-    uint32 compute_provider_id = 4; // A PostProvider id
-    bool throttle = 5; // Throttle down setup phase computations while user is interactive on system
-}
-
-message CreatePostDataRequest {
-    PostInitOpts opts = 1;
-}
-
-// Param passed to methods to indicate a request to delete data files
-message StopSmeshingRequest {
-    bool delete_files = 1;
-}
-
-message PostComputeProvidersRequest {
-    bool benchmark = 1;
-}
-
-// Proof of space data status
-message PostStatus {
-    enum InitStatus {
-        INIT_STATUS_UNSPECIFIED = 0; // Lane's favorite impossible value
-        INIT_STATUS_NOT_STARTED = 1;
-        INIT_STATUS_IN_PROGRESS = 2;
-        INIT_STATUS_COMPLETE = 3;
-        INIT_STATUS_ERROR = 4;
-    }
-    InitStatus init_status = 1;
-    PostInitOpts init_opts = 2; // options previously set by the user
-    uint64 num_labels_written = 4; // Number of labels (hashes) written to the data files
-    string error_message = 5; // The error message, if the status is INIT_STATUS_ERROR
-}
-
-message PostStatusResponse {
-    PostStatus status = 1;
-}
-
-message PostDataCreationProgressStreamResponse {
-    PostStatus status = 1;
 }
 
 message EstimatedRewardsRequest {}
@@ -127,9 +66,63 @@ message EstimatedRewardsResponse {
     uint32 num_units = 2;
 }
 
-message ConfigResponse {
+message PoSTSetupComputeProvidersRequest {
+    bool benchmark = 1;
+}
+
+message PoSTSetupComputeProvidersResponse {
+    repeated PoSTSetupComputeProvider providers = 1;
+}
+
+message PoSTSetupStatusResponse {
+    PoSTSetupStatus status = 1;
+}
+
+message PoSTSetupStatusStreamResponse {
+    PoSTSetupStatus status = 1;
+}
+
+message PoSTConfigResponse {
     uint32 bits_per_label = 1;
     uint64 labels_per_unit = 2;
     uint32 min_num_units = 3;
     uint32 max_num_units = 4;
+}
+
+message PoSTSetupComputeProvider {
+    uint32 id = 1; // 0, 1, 2...
+    string model = 2; // e.g. Nvidia GTX 2700
+    enum compute_api_class {
+        COMPUTE_API_CLASS_UNSPECIFIED = 0;
+        COMPUTE_API_CLASS_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
+        COMPUTE_API_CLASS_CUDA = 2;
+        COMPUTE_API_CLASS_VULKAN = 3;
+    }
+    compute_api_class compute_api = 3; // A provided compute api
+    uint64 performance = 4; // Estimated performance in hashes per second
+}
+
+// Post init options. Used to define the requested options and by
+// other messages which contain the options.
+message PoSTSetupOpts {
+    string data_dir = 1; // User provided path to create the post data files at
+    uint32 num_units = 2; // Number of PoST data commitment units to generate
+    uint32 num_files = 3; // Number of files to equally distribute the labels among
+    uint32 compute_provider_id = 4; // A PostProvider id
+    bool throttle = 5; // Throttle down setup phase computations while user is interactive on system
+}
+
+// Proof of space data statusCOMPUTE_API_CLASS
+message PoSTSetupStatus {
+    enum state {
+        STATE_UNSPECIFIED = 0; // Lane's favorite impossible value
+        STATE_NOT_STARTED = 1;
+        STATE_IN_PROGRESS = 2;
+        STATE_COMPLETE = 3;
+        STATE_ERROR = 4;
+    }
+    state st = 1;
+    uint64 num_labels_written = 4; // Number of labels (hashes) written to the data files
+    PoSTSetupOpts opts = 2; // options previously set by the user
+    string error_message = 5; // The error message, if the state is ERROR
 }

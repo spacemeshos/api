@@ -38,7 +38,7 @@ var file_spacemesh_v1_smesher_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74,
 	0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x20, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
 	0x73, 0x68, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x5f, 0x74, 0x79,
-	0x70, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xc1, 0x08, 0x0a, 0x0e, 0x53, 0x6d,
+	0x70, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xd0, 0x08, 0x0a, 0x0e, 0x53, 0x6d,
 	0x65, 0x73, 0x68, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x46, 0x0a, 0x0a,
 	0x49, 0x73, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
@@ -55,113 +55,114 @@ var file_spacemesh_v1_smesher_proto_rawDesc = []byte{
 	0x6f, 0x70, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x1a, 0x22, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x74, 0x6f, 0x70, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x46, 0x0a, 0x0a, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x20, 0x2e, 0x73, 0x70,
-	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6d, 0x0a,
-	0x14, 0x50, 0x6f, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76,
-	0x69, 0x64, 0x65, 0x72, 0x73, 0x12, 0x29, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65,
-	0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x2a, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e,
-	0x50, 0x6f, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69,
-	0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x70, 0x0a, 0x1e,
-	0x50, 0x6f, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x43, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x50, 0x72, 0x6f, 0x67, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x16,
-	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
-	0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x34, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
-	0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x43, 0x72,
-	0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x67, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74,
-	0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x30, 0x01, 0x12, 0x44,
-	0x0a, 0x09, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x49, 0x44, 0x12, 0x16, 0x2e, 0x67, 0x6f,
-	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d,
-	0x70, 0x74, 0x79, 0x1a, 0x1f, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
-	0x76, 0x31, 0x2e, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x42, 0x0a, 0x08, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65,
-	0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
-	0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1e, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65,
-	0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x53, 0x65, 0x74, 0x43,
-	0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x12, 0x20, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d,
-	0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61,
-	0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x43, 0x6f, 0x69, 0x6e,
-	0x62, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e, 0x0a, 0x06,
-	0x4d, 0x69, 0x6e, 0x47, 0x61, 0x73, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1c,
-	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x69,
-	0x6e, 0x47, 0x61, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4c, 0x0a, 0x09,
-	0x53, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x47, 0x61, 0x73, 0x12, 0x1e, 0x2e, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x47,
-	0x61, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x47,
-	0x61, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x61, 0x0a, 0x10, 0x45, 0x73,
-	0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x12, 0x25,
-	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x73,
-	0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65,
-	0x77, 0x61, 0x72, 0x64, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e, 0x0a,
-	0x06, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x44, 0x0a, 0x09, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72,
+	0x49, 0x44, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1f, 0x2e, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x65,
+	0x72, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x42, 0x0a, 0x08, 0x43,
+	0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a,
-	0x1c, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x43,
-	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x34, 0x5a,
-	0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65,
-	0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
-	0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x1e, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x43,
+	0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x52, 0x0a, 0x0b, 0x53, 0x65, 0x74, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x12, 0x20,
+	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65,
+	0x74, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x21, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e,
+	0x53, 0x65, 0x74, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x3e, 0x0a, 0x06, 0x4d, 0x69, 0x6e, 0x47, 0x61, 0x73, 0x12, 0x16, 0x2e,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
+	0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1c, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x69, 0x6e, 0x47, 0x61, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x4c, 0x0a, 0x09, 0x53, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x47, 0x61, 0x73,
+	0x12, 0x1e, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e,
+	0x53, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x47, 0x61, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1f, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e,
+	0x53, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x47, 0x61, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x61, 0x0a, 0x10, 0x45, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65,
+	0x77, 0x61, 0x72, 0x64, 0x73, 0x12, 0x25, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65,
+	0x77, 0x61, 0x72, 0x64, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x73,
+	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x73, 0x74, 0x69,
+	0x6d, 0x61, 0x74, 0x65, 0x64, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x50, 0x0a, 0x0f, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75,
+	0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a,
+	0x25, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50,
+	0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5e, 0x0a, 0x15, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65,
+	0x74, 0x75, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12,
+	0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x2b, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d,
+	0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x30, 0x01, 0x12, 0x7c, 0x0a, 0x19, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65,
+	0x74, 0x75, 0x70, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64,
+	0x65, 0x72, 0x73, 0x12, 0x2e, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
+	0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x43, 0x6f, 0x6d, 0x70,
+	0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x2f, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
+	0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x43, 0x6f, 0x6d, 0x70,
+	0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x46, 0x0a, 0x0a, 0x50, 0x6f, 0x53, 0x54, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x20, 0x2e, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x34, 0x5a, 0x32,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61,
+	0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f,
+	0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_spacemesh_v1_smesher_proto_goTypes = []interface{}{
-	(*empty.Empty)(nil),                            // 0: google.protobuf.Empty
-	(*StartSmeshingRequest)(nil),                   // 1: spacemesh.v1.StartSmeshingRequest
-	(*StopSmeshingRequest)(nil),                    // 2: spacemesh.v1.StopSmeshingRequest
-	(*PostComputeProvidersRequest)(nil),            // 3: spacemesh.v1.PostComputeProvidersRequest
-	(*SetCoinbaseRequest)(nil),                     // 4: spacemesh.v1.SetCoinbaseRequest
-	(*SetMinGasRequest)(nil),                       // 5: spacemesh.v1.SetMinGasRequest
-	(*EstimatedRewardsRequest)(nil),                // 6: spacemesh.v1.EstimatedRewardsRequest
-	(*IsSmeshingResponse)(nil),                     // 7: spacemesh.v1.IsSmeshingResponse
-	(*StartSmeshingResponse)(nil),                  // 8: spacemesh.v1.StartSmeshingResponse
-	(*StopSmeshingResponse)(nil),                   // 9: spacemesh.v1.StopSmeshingResponse
-	(*PostStatusResponse)(nil),                     // 10: spacemesh.v1.PostStatusResponse
-	(*PostComputeProvidersResponse)(nil),           // 11: spacemesh.v1.PostComputeProvidersResponse
-	(*PostDataCreationProgressStreamResponse)(nil), // 12: spacemesh.v1.PostDataCreationProgressStreamResponse
-	(*SmesherIDResponse)(nil),                      // 13: spacemesh.v1.SmesherIDResponse
-	(*CoinbaseResponse)(nil),                       // 14: spacemesh.v1.CoinbaseResponse
-	(*SetCoinbaseResponse)(nil),                    // 15: spacemesh.v1.SetCoinbaseResponse
-	(*MinGasResponse)(nil),                         // 16: spacemesh.v1.MinGasResponse
-	(*SetMinGasResponse)(nil),                      // 17: spacemesh.v1.SetMinGasResponse
-	(*EstimatedRewardsResponse)(nil),               // 18: spacemesh.v1.EstimatedRewardsResponse
-	(*ConfigResponse)(nil),                         // 19: spacemesh.v1.ConfigResponse
+	(*empty.Empty)(nil),                       // 0: google.protobuf.Empty
+	(*StartSmeshingRequest)(nil),              // 1: spacemesh.v1.StartSmeshingRequest
+	(*StopSmeshingRequest)(nil),               // 2: spacemesh.v1.StopSmeshingRequest
+	(*SetCoinbaseRequest)(nil),                // 3: spacemesh.v1.SetCoinbaseRequest
+	(*SetMinGasRequest)(nil),                  // 4: spacemesh.v1.SetMinGasRequest
+	(*EstimatedRewardsRequest)(nil),           // 5: spacemesh.v1.EstimatedRewardsRequest
+	(*PoSTSetupComputeProvidersRequest)(nil),  // 6: spacemesh.v1.PoSTSetupComputeProvidersRequest
+	(*IsSmeshingResponse)(nil),                // 7: spacemesh.v1.IsSmeshingResponse
+	(*StartSmeshingResponse)(nil),             // 8: spacemesh.v1.StartSmeshingResponse
+	(*StopSmeshingResponse)(nil),              // 9: spacemesh.v1.StopSmeshingResponse
+	(*SmesherIDResponse)(nil),                 // 10: spacemesh.v1.SmesherIDResponse
+	(*CoinbaseResponse)(nil),                  // 11: spacemesh.v1.CoinbaseResponse
+	(*SetCoinbaseResponse)(nil),               // 12: spacemesh.v1.SetCoinbaseResponse
+	(*MinGasResponse)(nil),                    // 13: spacemesh.v1.MinGasResponse
+	(*SetMinGasResponse)(nil),                 // 14: spacemesh.v1.SetMinGasResponse
+	(*EstimatedRewardsResponse)(nil),          // 15: spacemesh.v1.EstimatedRewardsResponse
+	(*PoSTSetupStatusResponse)(nil),           // 16: spacemesh.v1.PoSTSetupStatusResponse
+	(*PoSTSetupStatusStreamResponse)(nil),     // 17: spacemesh.v1.PoSTSetupStatusStreamResponse
+	(*PoSTSetupComputeProvidersResponse)(nil), // 18: spacemesh.v1.PoSTSetupComputeProvidersResponse
+	(*PoSTConfigResponse)(nil),                // 19: spacemesh.v1.PoSTConfigResponse
 }
 var file_spacemesh_v1_smesher_proto_depIdxs = []int32{
 	0,  // 0: spacemesh.v1.SmesherService.IsSmeshing:input_type -> google.protobuf.Empty
 	1,  // 1: spacemesh.v1.SmesherService.StartSmeshing:input_type -> spacemesh.v1.StartSmeshingRequest
 	2,  // 2: spacemesh.v1.SmesherService.StopSmeshing:input_type -> spacemesh.v1.StopSmeshingRequest
-	0,  // 3: spacemesh.v1.SmesherService.PostStatus:input_type -> google.protobuf.Empty
-	3,  // 4: spacemesh.v1.SmesherService.PostComputeProviders:input_type -> spacemesh.v1.PostComputeProvidersRequest
-	0,  // 5: spacemesh.v1.SmesherService.PostDataCreationProgressStream:input_type -> google.protobuf.Empty
-	0,  // 6: spacemesh.v1.SmesherService.SmesherID:input_type -> google.protobuf.Empty
-	0,  // 7: spacemesh.v1.SmesherService.Coinbase:input_type -> google.protobuf.Empty
-	4,  // 8: spacemesh.v1.SmesherService.SetCoinbase:input_type -> spacemesh.v1.SetCoinbaseRequest
-	0,  // 9: spacemesh.v1.SmesherService.MinGas:input_type -> google.protobuf.Empty
-	5,  // 10: spacemesh.v1.SmesherService.SetMinGas:input_type -> spacemesh.v1.SetMinGasRequest
-	6,  // 11: spacemesh.v1.SmesherService.EstimatedRewards:input_type -> spacemesh.v1.EstimatedRewardsRequest
-	0,  // 12: spacemesh.v1.SmesherService.Config:input_type -> google.protobuf.Empty
+	0,  // 3: spacemesh.v1.SmesherService.SmesherID:input_type -> google.protobuf.Empty
+	0,  // 4: spacemesh.v1.SmesherService.Coinbase:input_type -> google.protobuf.Empty
+	3,  // 5: spacemesh.v1.SmesherService.SetCoinbase:input_type -> spacemesh.v1.SetCoinbaseRequest
+	0,  // 6: spacemesh.v1.SmesherService.MinGas:input_type -> google.protobuf.Empty
+	4,  // 7: spacemesh.v1.SmesherService.SetMinGas:input_type -> spacemesh.v1.SetMinGasRequest
+	5,  // 8: spacemesh.v1.SmesherService.EstimatedRewards:input_type -> spacemesh.v1.EstimatedRewardsRequest
+	0,  // 9: spacemesh.v1.SmesherService.PoSTSetupStatus:input_type -> google.protobuf.Empty
+	0,  // 10: spacemesh.v1.SmesherService.PoSTSetupStatusStream:input_type -> google.protobuf.Empty
+	6,  // 11: spacemesh.v1.SmesherService.PoSTSetupComputeProviders:input_type -> spacemesh.v1.PoSTSetupComputeProvidersRequest
+	0,  // 12: spacemesh.v1.SmesherService.PoSTConfig:input_type -> google.protobuf.Empty
 	7,  // 13: spacemesh.v1.SmesherService.IsSmeshing:output_type -> spacemesh.v1.IsSmeshingResponse
 	8,  // 14: spacemesh.v1.SmesherService.StartSmeshing:output_type -> spacemesh.v1.StartSmeshingResponse
 	9,  // 15: spacemesh.v1.SmesherService.StopSmeshing:output_type -> spacemesh.v1.StopSmeshingResponse
-	10, // 16: spacemesh.v1.SmesherService.PostStatus:output_type -> spacemesh.v1.PostStatusResponse
-	11, // 17: spacemesh.v1.SmesherService.PostComputeProviders:output_type -> spacemesh.v1.PostComputeProvidersResponse
-	12, // 18: spacemesh.v1.SmesherService.PostDataCreationProgressStream:output_type -> spacemesh.v1.PostDataCreationProgressStreamResponse
-	13, // 19: spacemesh.v1.SmesherService.SmesherID:output_type -> spacemesh.v1.SmesherIDResponse
-	14, // 20: spacemesh.v1.SmesherService.Coinbase:output_type -> spacemesh.v1.CoinbaseResponse
-	15, // 21: spacemesh.v1.SmesherService.SetCoinbase:output_type -> spacemesh.v1.SetCoinbaseResponse
-	16, // 22: spacemesh.v1.SmesherService.MinGas:output_type -> spacemesh.v1.MinGasResponse
-	17, // 23: spacemesh.v1.SmesherService.SetMinGas:output_type -> spacemesh.v1.SetMinGasResponse
-	18, // 24: spacemesh.v1.SmesherService.EstimatedRewards:output_type -> spacemesh.v1.EstimatedRewardsResponse
-	19, // 25: spacemesh.v1.SmesherService.Config:output_type -> spacemesh.v1.ConfigResponse
+	10, // 16: spacemesh.v1.SmesherService.SmesherID:output_type -> spacemesh.v1.SmesherIDResponse
+	11, // 17: spacemesh.v1.SmesherService.Coinbase:output_type -> spacemesh.v1.CoinbaseResponse
+	12, // 18: spacemesh.v1.SmesherService.SetCoinbase:output_type -> spacemesh.v1.SetCoinbaseResponse
+	13, // 19: spacemesh.v1.SmesherService.MinGas:output_type -> spacemesh.v1.MinGasResponse
+	14, // 20: spacemesh.v1.SmesherService.SetMinGas:output_type -> spacemesh.v1.SetMinGasResponse
+	15, // 21: spacemesh.v1.SmesherService.EstimatedRewards:output_type -> spacemesh.v1.EstimatedRewardsResponse
+	16, // 22: spacemesh.v1.SmesherService.PoSTSetupStatus:output_type -> spacemesh.v1.PoSTSetupStatusResponse
+	17, // 23: spacemesh.v1.SmesherService.PoSTSetupStatusStream:output_type -> spacemesh.v1.PoSTSetupStatusStreamResponse
+	18, // 24: spacemesh.v1.SmesherService.PoSTSetupComputeProviders:output_type -> spacemesh.v1.PoSTSetupComputeProvidersResponse
+	19, // 25: spacemesh.v1.SmesherService.PoSTConfig:output_type -> spacemesh.v1.PoSTConfigResponse
 	13, // [13:26] is the sub-list for method output_type
 	0,  // [0:13] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
@@ -217,12 +218,6 @@ type SmesherServiceClient interface {
 	// delete the post data files(s).
 	// Returns success if request is accepted by node, failure if it fails
 	StopSmeshing(ctx context.Context, in *StopSmeshingRequest, opts ...grpc.CallOption) (*StopSmeshingResponse, error)
-	// Returns post data status from the node
-	PostStatus(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PostStatusResponse, error)
-	// Returns a list of available post compute providers for creating post data
-	PostComputeProviders(ctx context.Context, in *PostComputeProvidersRequest, opts ...grpc.CallOption) (*PostComputeProvidersResponse, error)
-	// Returns a stream of updates regarding the current or the upcoming post data creation session
-	PostDataCreationProgressStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (SmesherService_PostDataCreationProgressStreamClient, error)
 	// Get the current smesher id generated by the node
 	SmesherID(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*SmesherIDResponse, error)
 	// Get the current coinbase
@@ -237,8 +232,13 @@ type SmesherServiceClient interface {
 	SetMinGas(ctx context.Context, in *SetMinGasRequest, opts ...grpc.CallOption) (*SetMinGasResponse, error)
 	// Estimate smeshing rewards over the next upcoming epoch
 	EstimatedRewards(ctx context.Context, in *EstimatedRewardsRequest, opts ...grpc.CallOption) (*EstimatedRewardsResponse, error)
-	// TODO: document
-	Config(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ConfigResponse, error)
+	// Returns post data status from the node
+	PoSTSetupStatus(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PoSTSetupStatusResponse, error)
+	// Returns a stream of updates regarding the current or the upcoming post data creation session
+	PoSTSetupStatusStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (SmesherService_PoSTSetupStatusStreamClient, error)
+	// Returns a list of available post compute providers for creating post data
+	PoSTSetupComputeProviders(ctx context.Context, in *PoSTSetupComputeProvidersRequest, opts ...grpc.CallOption) (*PoSTSetupComputeProvidersResponse, error)
+	PoSTConfig(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PoSTConfigResponse, error)
 }
 
 type smesherServiceClient struct {
@@ -274,56 +274,6 @@ func (c *smesherServiceClient) StopSmeshing(ctx context.Context, in *StopSmeshin
 		return nil, err
 	}
 	return out, nil
-}
-
-func (c *smesherServiceClient) PostStatus(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PostStatusResponse, error) {
-	out := new(PostStatusResponse)
-	err := c.cc.Invoke(ctx, "/spacemesh.v1.SmesherService/PostStatus", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smesherServiceClient) PostComputeProviders(ctx context.Context, in *PostComputeProvidersRequest, opts ...grpc.CallOption) (*PostComputeProvidersResponse, error) {
-	out := new(PostComputeProvidersResponse)
-	err := c.cc.Invoke(ctx, "/spacemesh.v1.SmesherService/PostComputeProviders", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *smesherServiceClient) PostDataCreationProgressStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (SmesherService_PostDataCreationProgressStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_SmesherService_serviceDesc.Streams[0], "/spacemesh.v1.SmesherService/PostDataCreationProgressStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &smesherServicePostDataCreationProgressStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type SmesherService_PostDataCreationProgressStreamClient interface {
-	Recv() (*PostDataCreationProgressStreamResponse, error)
-	grpc.ClientStream
-}
-
-type smesherServicePostDataCreationProgressStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *smesherServicePostDataCreationProgressStreamClient) Recv() (*PostDataCreationProgressStreamResponse, error) {
-	m := new(PostDataCreationProgressStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }
 
 func (c *smesherServiceClient) SmesherID(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*SmesherIDResponse, error) {
@@ -380,9 +330,59 @@ func (c *smesherServiceClient) EstimatedRewards(ctx context.Context, in *Estimat
 	return out, nil
 }
 
-func (c *smesherServiceClient) Config(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ConfigResponse, error) {
-	out := new(ConfigResponse)
-	err := c.cc.Invoke(ctx, "/spacemesh.v1.SmesherService/Config", in, out, opts...)
+func (c *smesherServiceClient) PoSTSetupStatus(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PoSTSetupStatusResponse, error) {
+	out := new(PoSTSetupStatusResponse)
+	err := c.cc.Invoke(ctx, "/spacemesh.v1.SmesherService/PoSTSetupStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *smesherServiceClient) PoSTSetupStatusStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (SmesherService_PoSTSetupStatusStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_SmesherService_serviceDesc.Streams[0], "/spacemesh.v1.SmesherService/PoSTSetupStatusStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &smesherServicePoSTSetupStatusStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type SmesherService_PoSTSetupStatusStreamClient interface {
+	Recv() (*PoSTSetupStatusStreamResponse, error)
+	grpc.ClientStream
+}
+
+type smesherServicePoSTSetupStatusStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *smesherServicePoSTSetupStatusStreamClient) Recv() (*PoSTSetupStatusStreamResponse, error) {
+	m := new(PoSTSetupStatusStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *smesherServiceClient) PoSTSetupComputeProviders(ctx context.Context, in *PoSTSetupComputeProvidersRequest, opts ...grpc.CallOption) (*PoSTSetupComputeProvidersResponse, error) {
+	out := new(PoSTSetupComputeProvidersResponse)
+	err := c.cc.Invoke(ctx, "/spacemesh.v1.SmesherService/PoSTSetupComputeProviders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *smesherServiceClient) PoSTConfig(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PoSTConfigResponse, error) {
+	out := new(PoSTConfigResponse)
+	err := c.cc.Invoke(ctx, "/spacemesh.v1.SmesherService/PoSTConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -402,12 +402,6 @@ type SmesherServiceServer interface {
 	// delete the post data files(s).
 	// Returns success if request is accepted by node, failure if it fails
 	StopSmeshing(context.Context, *StopSmeshingRequest) (*StopSmeshingResponse, error)
-	// Returns post data status from the node
-	PostStatus(context.Context, *empty.Empty) (*PostStatusResponse, error)
-	// Returns a list of available post compute providers for creating post data
-	PostComputeProviders(context.Context, *PostComputeProvidersRequest) (*PostComputeProvidersResponse, error)
-	// Returns a stream of updates regarding the current or the upcoming post data creation session
-	PostDataCreationProgressStream(*empty.Empty, SmesherService_PostDataCreationProgressStreamServer) error
 	// Get the current smesher id generated by the node
 	SmesherID(context.Context, *empty.Empty) (*SmesherIDResponse, error)
 	// Get the current coinbase
@@ -422,8 +416,13 @@ type SmesherServiceServer interface {
 	SetMinGas(context.Context, *SetMinGasRequest) (*SetMinGasResponse, error)
 	// Estimate smeshing rewards over the next upcoming epoch
 	EstimatedRewards(context.Context, *EstimatedRewardsRequest) (*EstimatedRewardsResponse, error)
-	// TODO: document
-	Config(context.Context, *empty.Empty) (*ConfigResponse, error)
+	// Returns post data status from the node
+	PoSTSetupStatus(context.Context, *empty.Empty) (*PoSTSetupStatusResponse, error)
+	// Returns a stream of updates regarding the current or the upcoming post data creation session
+	PoSTSetupStatusStream(*empty.Empty, SmesherService_PoSTSetupStatusStreamServer) error
+	// Returns a list of available post compute providers for creating post data
+	PoSTSetupComputeProviders(context.Context, *PoSTSetupComputeProvidersRequest) (*PoSTSetupComputeProvidersResponse, error)
+	PoSTConfig(context.Context, *empty.Empty) (*PoSTConfigResponse, error)
 }
 
 // UnimplementedSmesherServiceServer can be embedded to have forward compatible implementations.
@@ -438,15 +437,6 @@ func (*UnimplementedSmesherServiceServer) StartSmeshing(context.Context, *StartS
 }
 func (*UnimplementedSmesherServiceServer) StopSmeshing(context.Context, *StopSmeshingRequest) (*StopSmeshingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopSmeshing not implemented")
-}
-func (*UnimplementedSmesherServiceServer) PostStatus(context.Context, *empty.Empty) (*PostStatusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostStatus not implemented")
-}
-func (*UnimplementedSmesherServiceServer) PostComputeProviders(context.Context, *PostComputeProvidersRequest) (*PostComputeProvidersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostComputeProviders not implemented")
-}
-func (*UnimplementedSmesherServiceServer) PostDataCreationProgressStream(*empty.Empty, SmesherService_PostDataCreationProgressStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method PostDataCreationProgressStream not implemented")
 }
 func (*UnimplementedSmesherServiceServer) SmesherID(context.Context, *empty.Empty) (*SmesherIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SmesherID not implemented")
@@ -466,8 +456,17 @@ func (*UnimplementedSmesherServiceServer) SetMinGas(context.Context, *SetMinGasR
 func (*UnimplementedSmesherServiceServer) EstimatedRewards(context.Context, *EstimatedRewardsRequest) (*EstimatedRewardsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EstimatedRewards not implemented")
 }
-func (*UnimplementedSmesherServiceServer) Config(context.Context, *empty.Empty) (*ConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Config not implemented")
+func (*UnimplementedSmesherServiceServer) PoSTSetupStatus(context.Context, *empty.Empty) (*PoSTSetupStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PoSTSetupStatus not implemented")
+}
+func (*UnimplementedSmesherServiceServer) PoSTSetupStatusStream(*empty.Empty, SmesherService_PoSTSetupStatusStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method PoSTSetupStatusStream not implemented")
+}
+func (*UnimplementedSmesherServiceServer) PoSTSetupComputeProviders(context.Context, *PoSTSetupComputeProvidersRequest) (*PoSTSetupComputeProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PoSTSetupComputeProviders not implemented")
+}
+func (*UnimplementedSmesherServiceServer) PoSTConfig(context.Context, *empty.Empty) (*PoSTConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PoSTConfig not implemented")
 }
 
 func RegisterSmesherServiceServer(s *grpc.Server, srv SmesherServiceServer) {
@@ -526,63 +525,6 @@ func _SmesherService_StopSmeshing_Handler(srv interface{}, ctx context.Context, 
 		return srv.(SmesherServiceServer).StopSmeshing(ctx, req.(*StopSmeshingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
-}
-
-func _SmesherService_PostStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(empty.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmesherServiceServer).PostStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/spacemesh.v1.SmesherService/PostStatus",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmesherServiceServer).PostStatus(ctx, req.(*empty.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SmesherService_PostComputeProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostComputeProvidersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmesherServiceServer).PostComputeProviders(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/spacemesh.v1.SmesherService/PostComputeProviders",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmesherServiceServer).PostComputeProviders(ctx, req.(*PostComputeProvidersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SmesherService_PostDataCreationProgressStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(empty.Empty)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(SmesherServiceServer).PostDataCreationProgressStream(m, &smesherServicePostDataCreationProgressStreamServer{stream})
-}
-
-type SmesherService_PostDataCreationProgressStreamServer interface {
-	Send(*PostDataCreationProgressStreamResponse) error
-	grpc.ServerStream
-}
-
-type smesherServicePostDataCreationProgressStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *smesherServicePostDataCreationProgressStreamServer) Send(m *PostDataCreationProgressStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
 }
 
 func _SmesherService_SmesherID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -693,20 +635,77 @@ func _SmesherService_EstimatedRewards_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SmesherService_Config_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SmesherService_PoSTSetupStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SmesherServiceServer).Config(ctx, in)
+		return srv.(SmesherServiceServer).PoSTSetupStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/spacemesh.v1.SmesherService/Config",
+		FullMethod: "/spacemesh.v1.SmesherService/PoSTSetupStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmesherServiceServer).Config(ctx, req.(*empty.Empty))
+		return srv.(SmesherServiceServer).PoSTSetupStatus(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SmesherService_PoSTSetupStatusStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(empty.Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(SmesherServiceServer).PoSTSetupStatusStream(m, &smesherServicePoSTSetupStatusStreamServer{stream})
+}
+
+type SmesherService_PoSTSetupStatusStreamServer interface {
+	Send(*PoSTSetupStatusStreamResponse) error
+	grpc.ServerStream
+}
+
+type smesherServicePoSTSetupStatusStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *smesherServicePoSTSetupStatusStreamServer) Send(m *PoSTSetupStatusStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _SmesherService_PoSTSetupComputeProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PoSTSetupComputeProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SmesherServiceServer).PoSTSetupComputeProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/spacemesh.v1.SmesherService/PoSTSetupComputeProviders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SmesherServiceServer).PoSTSetupComputeProviders(ctx, req.(*PoSTSetupComputeProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SmesherService_PoSTConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SmesherServiceServer).PoSTConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/spacemesh.v1.SmesherService/PoSTConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SmesherServiceServer).PoSTConfig(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -726,14 +725,6 @@ var _SmesherService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopSmeshing",
 			Handler:    _SmesherService_StopSmeshing_Handler,
-		},
-		{
-			MethodName: "PostStatus",
-			Handler:    _SmesherService_PostStatus_Handler,
-		},
-		{
-			MethodName: "PostComputeProviders",
-			Handler:    _SmesherService_PostComputeProviders_Handler,
 		},
 		{
 			MethodName: "SmesherID",
@@ -760,14 +751,22 @@ var _SmesherService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _SmesherService_EstimatedRewards_Handler,
 		},
 		{
-			MethodName: "Config",
-			Handler:    _SmesherService_Config_Handler,
+			MethodName: "PoSTSetupStatus",
+			Handler:    _SmesherService_PoSTSetupStatus_Handler,
+		},
+		{
+			MethodName: "PoSTSetupComputeProviders",
+			Handler:    _SmesherService_PoSTSetupComputeProviders_Handler,
+		},
+		{
+			MethodName: "PoSTConfig",
+			Handler:    _SmesherService_PoSTConfig_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "PostDataCreationProgressStream",
-			Handler:       _SmesherService_PostDataCreationProgressStream_Handler,
+			StreamName:    "PoSTSetupStatusStream",
+			Handler:       _SmesherService_PoSTSetupStatusStream_Handler,
 			ServerStreams: true,
 		},
 	},
