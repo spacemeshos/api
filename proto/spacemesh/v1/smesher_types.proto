@@ -92,13 +92,13 @@ message PoSTConfigResponse {
 message PoSTSetupComputeProvider {
     uint32 id = 1; // 0, 1, 2...
     string model = 2; // e.g. Nvidia GTX 2700
-    enum compute_api_class {
+    enum ComputeApiClass {
         COMPUTE_API_CLASS_UNSPECIFIED = 0;
         COMPUTE_API_CLASS_CPU = 1; // useful for testing on systems without a cuda or vulkan GPU
         COMPUTE_API_CLASS_CUDA = 2;
         COMPUTE_API_CLASS_VULKAN = 3;
     }
-    compute_api_class compute_api = 3; // A provided compute api
+    ComputeApiClass compute_api = 3; // A provided compute api
     uint64 performance = 4; // Estimated performance in hashes per second
 }
 
@@ -114,14 +114,14 @@ message PoSTSetupOpts {
 
 // Proof of space data statusCOMPUTE_API_CLASS
 message PoSTSetupStatus {
-    enum state {
+    enum State {
         STATE_UNSPECIFIED = 0; // Lane's favorite impossible value
         STATE_NOT_STARTED = 1;
         STATE_IN_PROGRESS = 2;
         STATE_COMPLETE = 3;
         STATE_ERROR = 4;
     }
-    state st = 1;
+    State state = 1;
     uint64 num_labels_written = 4; // Number of labels (hashes) written to the data files
     PoSTSetupOpts opts = 2; // options previously set by the user
     string error_message = 5; // The error message, if the state is ERROR
