@@ -4,28 +4,36 @@ option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
 
 // Spacemesh app primitive variable types
+enum PrimitiveType {
+    PRIMITIVE_TYPE_UNSPECIFIED = 0;
+    PRIMITIVE_TYPE_I8 = 1;
+    PRIMITIVE_TYPE_U8 = 2;
+    PRIMITIVE_TYPE_I16 = 3;
+    PRIMITIVE_TYPE_U16 = 4;
+    PRIMITIVE_TYPE_I32 = 5;
+    PRIMITIVE_TYPE_U32 = 6;
+    PRIMITIVE_TYPE_I64 = 7;
+    PRIMITIVE_TYPE_U64 = 8;
+    PRIMITIVE_TYPE_BOOL = 9;
+    PRIMITIVE_TYPE_AMOUNT = 10;
+    PRIMITIVE_TYPE_ADDRESS = 11;
+    // future supported primitive types will be added here
+}
+
 enum VariableType {
     VARIABLE_TYPE_UNSPECIFIED = 0;
-    VARIABLE_TYPE_I8 = 1;
-    VARIABLE_TYPE_U8 = 2;
-    VARIABLE_TYPE_I16 = 3;
-    VARIABLE_TYPE_U16 = 4;
-    VARIABLE_TYPE_I32 = 5;
-    VARIABLE_TYPE_U32 = 6;
-    VARIABLE_TYPE_I64 = 7;
-    VARIABLE_TYPE_U64 = 8;
-    VARIABLE_TYPE_BOOL = 9;
-    VARIABLE_TYPE_AMOUNT = 10;
-    VARIABLE_TYPE_ADDRESS = 11;
-    // future supported types will be added here
+    VARIABLE_TYPE_PRIMITIVE = 1;
+    VARIABLE_TYPE_FIXED_SIZE_ARRAY = 2;
+    VARIABLE_TYPE_DYNAMIC_SIZE_ARRAY = 3;
 }
 
 // Variable metadata
 message VariableMetadata {
     uint32 id = 1; // var index in app's state
     string name = 2; // var name
-    VariableType type = 3; // type
-    bool is_array = 4; // when true, variable is an array of 0 or more primitive value types, otherwise, a single primitive type value.
+    PrimitiveType primitive_type = 3; // type
+    VariableType variable_type = 4;
+    uint32 size = 5; // 1 for primitive. 1 or more for fixed. 0 for dynamic.
 }
 
 message ValuesArray {
