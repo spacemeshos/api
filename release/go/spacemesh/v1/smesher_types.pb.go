@@ -82,10 +82,10 @@ type PoSTSetupStatus_State int32
 
 const (
 	PoSTSetupStatus_STATE_UNSPECIFIED PoSTSetupStatus_State = 0 // Lane's favorite impossible value
-	PoSTSetupStatus_STATE_NOT_STARTED PoSTSetupStatus_State = 1
-	PoSTSetupStatus_STATE_IN_PROGRESS PoSTSetupStatus_State = 2
-	PoSTSetupStatus_STATE_COMPLETE    PoSTSetupStatus_State = 3
-	PoSTSetupStatus_STATE_ERROR       PoSTSetupStatus_State = 4
+	PoSTSetupStatus_STATE_NOT_STARTED PoSTSetupStatus_State = 1 // Setup not started
+	PoSTSetupStatus_STATE_IN_PROGRESS PoSTSetupStatus_State = 2 // Setup in progress
+	PoSTSetupStatus_STATE_COMPLETE    PoSTSetupStatus_State = 3 // Setup is complete
+	PoSTSetupStatus_STATE_ERROR       PoSTSetupStatus_State = 4 // Setup last session ended with an error
 )
 
 // Enum value maps for PoSTSetupStatus_State.
@@ -185,8 +185,10 @@ type StartSmeshingRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Coinbase *AccountId     `protobuf:"bytes,1,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
-	Opts     *PoSTSetupOpts `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
+	// Coinbase account for rewards accumulation.
+	Coinbase *AccountId `protobuf:"bytes,1,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
+	// The PoST setup options.
+	Opts *PoSTSetupOpts `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
 }
 
 func (x *StartSmeshingRequest) Reset() {
@@ -809,6 +811,7 @@ type PoSTSetupComputeProvidersRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Whether to run a short benchmarking session for each provider to evaluate its performance
 	Benchmark bool `protobuf:"varint,1,opt,name=benchmark,proto3" json:"benchmark,omitempty"`
 }
 
@@ -1134,17 +1137,16 @@ func (x *PoSTSetupComputeProvider) GetPerformance() uint64 {
 	return 0
 }
 
-// Post init options. Used to define the requested options and by
-// other messages which contain the options.
+// PoST setup options, used to define the setup requirements.
 type PoSTSetupOpts struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DataDir           string `protobuf:"bytes,1,opt,name=data_dir,json=dataDir,proto3" json:"data_dir,omitempty"`                                  // User provided path to create the post data files at
-	NumUnits          uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`                              // Number of PoST data commitment units to generate
-	NumFiles          uint32 `protobuf:"varint,3,opt,name=num_files,json=numFiles,proto3" json:"num_files,omitempty"`                              // Number of files to equally distribute the labels among
-	ComputeProviderId uint32 `protobuf:"varint,4,opt,name=compute_provider_id,json=computeProviderId,proto3" json:"compute_provider_id,omitempty"` // A PostProvider id
+	DataDir           string `protobuf:"bytes,1,opt,name=data_dir,json=dataDir,proto3" json:"data_dir,omitempty"`                                  // User provided path to create the setup data files at
+	NumUnits          uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`                              // Number of PoST data units to generate
+	NumFiles          uint32 `protobuf:"varint,3,opt,name=num_files,json=numFiles,proto3" json:"num_files,omitempty"`                              // Number of files to equally distribute the data among
+	ComputeProviderId uint32 `protobuf:"varint,4,opt,name=compute_provider_id,json=computeProviderId,proto3" json:"compute_provider_id,omitempty"` // A `PoSTSetupComputeProvider` id
 	Throttle          bool   `protobuf:"varint,5,opt,name=throttle,proto3" json:"throttle,omitempty"`                                              // Throttle down setup phase computations while user is interactive on system
 }
 
@@ -1215,7 +1217,6 @@ func (x *PoSTSetupOpts) GetThrottle() bool {
 	return false
 }
 
-// Proof of space data statusCOMPUTE_API_CLASS
 type PoSTSetupStatus struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1223,8 +1224,8 @@ type PoSTSetupStatus struct {
 
 	State            PoSTSetupStatus_State `protobuf:"varint,1,opt,name=state,proto3,enum=spacemesh.v1.PoSTSetupStatus_State" json:"state,omitempty"`
 	NumLabelsWritten uint64                `protobuf:"varint,4,opt,name=num_labels_written,json=numLabelsWritten,proto3" json:"num_labels_written,omitempty"` // Number of labels (hashes) written to the data files
-	Opts             *PoSTSetupOpts        `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`                                                    // options previously set by the user
-	ErrorMessage     string                `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`                // The error message, if the state is ERROR
+	Opts             *PoSTSetupOpts        `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`                                                    // setup options previously set by the user
+	ErrorMessage     string                `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`                // The error message, if the state is STATE_ERROR
 }
 
 func (x *PoSTSetupStatus) Reset() {

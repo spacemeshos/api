@@ -9,7 +9,10 @@ message IsSmeshingResponse {
 }
 
 message StartSmeshingRequest {
+    // Coinbase account for rewards accumulation.
     AccountId coinbase = 1;
+
+    // The PoST setup options.
     PoSTSetupOpts opts = 2;
 }
 
@@ -67,6 +70,7 @@ message EstimatedRewardsResponse {
 }
 
 message PoSTSetupComputeProvidersRequest {
+    // Whether to run a short benchmarking session for each provider to evaluate its performance
     bool benchmark = 1;
 }
 
@@ -102,27 +106,25 @@ message PoSTSetupComputeProvider {
     uint64 performance = 4; // Estimated performance in hashes per second
 }
 
-// Post init options. Used to define the requested options and by
-// other messages which contain the options.
+// PoST setup options, used to define the setup requirements.
 message PoSTSetupOpts {
-    string data_dir = 1; // User provided path to create the post data files at
-    uint32 num_units = 2; // Number of PoST data commitment units to generate
-    uint32 num_files = 3; // Number of files to equally distribute the labels among
-    uint32 compute_provider_id = 4; // A PostProvider id
+    string data_dir = 1; // User provided path to create the setup data files at
+    uint32 num_units = 2; // Number of PoST data units to generate
+    uint32 num_files = 3; // Number of files to equally distribute the data among
+    uint32 compute_provider_id = 4; // A `PoSTSetupComputeProvider` id
     bool throttle = 5; // Throttle down setup phase computations while user is interactive on system
 }
 
-// Proof of space data statusCOMPUTE_API_CLASS
 message PoSTSetupStatus {
     enum State {
         STATE_UNSPECIFIED = 0; // Lane's favorite impossible value
-        STATE_NOT_STARTED = 1;
-        STATE_IN_PROGRESS = 2;
-        STATE_COMPLETE = 3;
-        STATE_ERROR = 4;
+        STATE_NOT_STARTED = 1; // Setup not started
+        STATE_IN_PROGRESS = 2; // Setup in progress
+        STATE_COMPLETE = 3; // Setup is complete
+        STATE_ERROR = 4; // Setup last session ended with an error
     }
     State state = 1;
     uint64 num_labels_written = 4; // Number of labels (hashes) written to the data files
-    PoSTSetupOpts opts = 2; // options previously set by the user
-    string error_message = 5; // The error message, if the state is ERROR
+    PoSTSetupOpts opts = 2; // setup options previously set by the user
+    string error_message = 5; // The error message, if the state is STATE_ERROR
 }
