@@ -33,7 +33,7 @@ message VariableMetadata {
     string name = 2; // var name
     PrimitiveType primitive_type = 3; // type
     VariableType variable_type = 4;
-    uint32 size = 5; // 1 for primitive. 1 or more for fixed. 0 for dynamic.
+    uint32 primitive_count = 5; // 1 for primitive. 1 or more for fixed. 0 for dynamic.
 }
 
 message ValuesArray {
@@ -45,7 +45,7 @@ message Variable {
     VariableMetadata metadata = 1;
     oneof data {
         bytes value = 2; // since bytes size is arbitrary - this will support future var types
-        ValuesArray values = 3;
+        ValuesArray values = 3; // for both fixed and dynamic size arrays
     }
 }
 
