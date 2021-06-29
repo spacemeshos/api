@@ -4,6 +4,8 @@ option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
 import "spacemesh/v1/var_types.proto";
 
+/////////////// Template API
+
 // The address of an app template in the templates global state store
 message TemplateAddress {
     bytes address = 1;
@@ -18,30 +20,18 @@ message DeployData {
     TransactionId deploy_tx_id = 4; // the id of the deploy template transaction. Empty for genesis templates.
 }
 
+// Template code
 message Code {
     string target_svm_version = 4; // at deploy time
     string kind = 5; // e.g. WASM
     repeated bytes code = 6; // wasm code
 }
 
-// Information about an app template in the global state store
+// Information about a template in the global state store
 message Template {
     DeployData deploy_data = 1; // always provided.
     Code code = 2; // template wasm code. Provided if caller specified to get code.
     bytes metadata = 3; // storage layout, api, header. Provided if caller specified to get metadata and template include metadata.
-}
-
-// A Spacemesh app
-// Note that both layer and spawner can be obtained from the transaction and transaction id for apps spawned by a transaction
-// but is convenient to return them directly as part of apps' metadata.
-message App {
-    AccountId address = 1; // App's address in global space
-    string name = 2; // short descriptive name (optional)
-    TemplateAddress template_address = 3; // App's template address
-    LayerNumber spawn_layer = 4; // Layer in which app was spawned
-    TransactionId spawn_tx_id = 5; // Transaction which spawned the app. empty for genesis apps.
-    AccountId spawner = 6; // App spawner account
-    bytes data = 7; // svm app storage
 }
 
 enum TemplateDataFlags {
@@ -65,14 +55,30 @@ message GetTemplateResponse {
 message GetTemplatesRequest {
     uint32 max_results = 1; // max number of results to return
     uint32 offset = 2; // query offset
-    bool include_code = 3;
-    bool include_meta_data = 4;
+    bool include_code = 3; // include code in response
+    bool include_meta_data = 4; // include metadata in response if provided by author
 }
 
 // A response includes total templates available in store and a list of zero ore more templates
 message GetTemplatesResponse {
     uint32 total_results = 1; // total number of templates
     repeated Template templates = 2;
+}
+
+
+///////////// App API
+
+// A Spacemesh app
+// Note that both layer and spawner can be obtained from the transaction and transaction id for apps spawned by a transaction
+// but is convenient to return them directly as part of apps' metadata.
+message App {
+    AccountId address = 1; // App's address in global space
+    string name = 2; // short descriptive name (optional)
+    TemplateAddress template_address = 3; // App's template address
+    LayerNumber spawn_layer = 4; // Layer in which app was spawned
+    TransactionId spawn_tx_id = 5; // Transaction which spawned the app. empty for genesis apps.
+    AccountId spawner = 6; // App spawner account
+    bytes data = 7; // svm app storage
 }
 
 // A request to get an app's variable by var id
