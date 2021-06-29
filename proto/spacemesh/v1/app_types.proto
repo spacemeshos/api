@@ -2,107 +2,33 @@ syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
-
-// Spacemesh app primitive variable types
-enum PrimitiveType {
-    PRIMITIVE_TYPE_UNSPECIFIED = 0;
-    PRIMITIVE_TYPE_I8 = 1;
-    PRIMITIVE_TYPE_U8 = 2;
-    PRIMITIVE_TYPE_I16 = 3;
-    PRIMITIVE_TYPE_U16 = 4;
-    PRIMITIVE_TYPE_I32 = 5;
-    PRIMITIVE_TYPE_U32 = 6;
-    PRIMITIVE_TYPE_I64 = 7;
-    PRIMITIVE_TYPE_U64 = 8;
-    PRIMITIVE_TYPE_BOOL = 9;
-    PRIMITIVE_TYPE_AMOUNT = 10;
-    PRIMITIVE_TYPE_ADDRESS = 11;
-    // future supported primitive types will be added here
-}
-
-enum VariableType {
-    VARIABLE_TYPE_UNSPECIFIED = 0;
-    VARIABLE_TYPE_PRIMITIVE = 1;
-    VARIABLE_TYPE_FIXED_SIZE_ARRAY = 2;
-    VARIABLE_TYPE_DYNAMIC_SIZE_ARRAY = 3;
-}
-
-// Variable metadata
-message VariableMetadata {
-    uint32 id = 1; // var index in app's state
-    string name = 2; // var name
-    PrimitiveType primitive_type = 3; // type
-    VariableType variable_type = 4;
-    uint32 primitive_count = 5; // 1 for primitive. 1 or more for fixed. 0 for dynamic.
-}
-
-message ValuesArray {
-    repeated bytes values = 1;
-}
-
-// The metadata and value of an app's variable
-message Variable {
-    VariableMetadata metadata = 1;
-    oneof data {
-        bytes value = 2; // since bytes size is arbitrary - this will support future var types
-        ValuesArray values = 3; // for both fixed and dynamic size arrays
-    }
-}
-
-message NamedVariable {
-    string name = 1;
-    Variable variable = 2;
-}
-
-enum MethodType {
-    METHOD_TYPE_UNSPECIFIED = 0;
-    METHOD_TYPE_CONSTRUCTOR = 1; // method can be used in spwan app to init storage
-    METHOD_TYPE_STANDARD = 2; // standard method
-}
-
-message Method {
-    string name = 1;
-    MethodType method_type = 2;
-    repeated NamedVariable input_vars = 3; // ordered
-    repeated NamedVariable output_vars = 4; // ordered
-    uint64 gas_units = 5; // gas cost in units
-}
-
-// Api defines a template's code api which includes constructor and standard methods
-// An app api is defined by its template api
-message Api {
-    repeated Method methods = 1;
-}
-
-message StorageLayout {
-    repeated VariableMetadata items = 1;
-}
+import "spacemesh/v1/var_types.proto";
 
 // The address of an app template in the templates global state store
 message TemplateAddress {
     bytes address = 1;
 }
 
+// Template deploy data
+message DeployData {
+    TemplateAddress address = 1; // template address
+    // note - the author can be obtained from the deploy transaction but it is nice to have it here
+    AccountId author = 2; // template uploader
+    LayerNumber deploy_layer = 3; // layer that the template was deployed - 0 for genesis templates
+    TransactionId deploy_tx_id = 4; // the id of the deploy template transaction. Empty for genesis templates.
+}
+
 message Code {
-    string name = 1; // program name
-    string code_version = 2; // semantic version at compile time
-    string target_svm_version = 3; // at deploy time
-    repeated bytes code = 4; // wasm code
+    string target_svm_version = 4; // at deploy time
+    string kind = 5; // e.g. WASM
+    repeated bytes code = 6; // wasm code
 }
 
 // Information about an app template in the global state store
 message Template {
-    TemplateAddress address = 1; // template address
-    string name = 2; // template name
-    Api api = 3; // the template code api
-    // note - the author can be obtained from the deploy transaction but it is nice to have it here
-    AccountId author = 4; // template uploader
-
-    // The layer can be obtained from the tx receipt but it is convenient to have it here
-    LayerNumber deploy_layer = 5; // layer that the template was deployed - 0 for genesis templates
-    TransactionId deploy_tx_id = 6; // the id of the deploy template transaction. Empty for genesis templates.
-    Code code = 7; // template wasm code
-    StorageLayout storage_layout = 8; // template storage layout
+    DeployData deploy_data = 1; // always provided.
+    Code code = 2; // template wasm code. Provided if caller specified to get code.
+    bytes metadata = 3; // storage layout, api, header. Provided if caller specified to get metadata and template include metadata.
 }
 
 // A Spacemesh app
@@ -110,22 +36,19 @@ message Template {
 // but is convenient to return them directly as part of apps' metadata.
 message App {
     AccountId address = 1; // App's address in global space
-    string name = 2; // short descriptive name
+    string name = 2; // short descriptive name (optional)
     TemplateAddress template_address = 3; // App's template address
     LayerNumber spawn_layer = 4; // Layer in which app was spawned
     TransactionId spawn_tx_id = 5; // Transaction which spawned the app. empty for genesis apps.
     AccountId spawner = 6; // App spawner account
-    repeated Variable variables = 8; // ordered array of app vars and their values
+    bytes data = 7; // svm app storage
 }
 
 enum TemplateDataFlags {
     TEMPLATE_DATA_FLAGS_UNSPECIFIED = 0;
     TEMPLATE_DATA_FLAGS_CODE = 1;
-    TEMPLATE_DATA_FLAGS_STORAGE_LAYOUT = 2;
-    TEMPLATE_DATA_FLAGS_API = 4;
+    TEMPLATE_DATA_FLAGS_METADATA = 2;
 }
-
-
 
 // A request to return a template by address from the template global state store
 message GetTemplateRequest {
@@ -142,7 +65,8 @@ message GetTemplateResponse {
 message GetTemplatesRequest {
     uint32 max_results = 1; // max number of results to return
     uint32 offset = 2; // query offset
-    uint32 data_flags = 3; // a bit field of TemplateDataFlags values
+    bool include_code = 3;
+    bool include_meta_data = 4;
 }
 
 // A response includes total templates available in store and a list of zero ore more templates
@@ -167,7 +91,7 @@ message GetVariableResponse {
 message GetAppRequest {
     AccountId address = 1; // app address
     LayerNumber layer_number = 2; // layer for state. Ignored when include_var_values is set to false. pass MAX_UI32 to get latest state.
-    bool include_var_values = 3; // when true, var values will be included in response, false otherwise.
+    bool include_storage = 3; // when true, storage data will be included in response, false otherwise.
 }
 
 message GetAppResponse {

@@ -1,0 +1,59 @@
+syntax = "proto3";
+package spacemesh.v1;
+option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+import "spacemesh/v1/types.proto";
+
+enum PrimitiveType {
+    PRIMITIVE_TYPE_UNSPECIFIED = 0;
+    PRIMITIVE_TYPE_I8 = 1;
+    PRIMITIVE_TYPE_U8 = 2;
+    PRIMITIVE_TYPE_I16 = 3;
+    PRIMITIVE_TYPE_U16 = 4;
+    PRIMITIVE_TYPE_I32 = 5;
+    PRIMITIVE_TYPE_U32 = 6;
+    PRIMITIVE_TYPE_I64 = 7;
+    PRIMITIVE_TYPE_U64 = 8;
+    PRIMITIVE_TYPE_BOOL = 9;
+    PRIMITIVE_TYPE_AMOUNT = 10;
+    PRIMITIVE_TYPE_ADDRESS = 11;
+    // future supported primitive types will be added here
+}
+
+// todo: move to abi spec
+enum VariableType {
+    VARIABLE_TYPE_UNSPECIFIED = 0;
+    VARIABLE_TYPE_PRIMITIVE = 1;
+    VARIABLE_TYPE_FIXED_SIZE_ARRAY = 2;
+    VARIABLE_TYPE_DYNAMIC_SIZE_ARRAY = 3;
+}
+
+// todo: move to abi spec
+message VariableMetadata {
+    uint32 id = 1; // var index in app's state
+    string name = 2; // var name
+    PrimitiveType primitive_type = 3; // type
+    VariableType variable_type = 4;
+    uint32 primitive_count = 5; // 1 for primitive. 1 or more for fixed. 0 for dynamic.
+}
+
+// todo: move to abi spec
+message ValuesArray {
+    repeated bytes values = 1;
+}
+
+// todo: move to abi spec
+// The metadata and value of an app's variable
+message Variable {
+    VariableMetadata metadata = 1;
+    oneof data {
+        bytes value = 2; // since bytes size is arbitrary - this will support future var types
+        ValuesArray values = 3; // for both fixed and dynamic size arrays
+    }
+}
+
+// todo: move to abi spec
+message NamedVariable {
+    string name = 1;
+    Variable variable = 2;
+}
+
