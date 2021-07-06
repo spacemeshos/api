@@ -12,7 +12,7 @@ message SubmitTransactionRequest {
 }
 
 message SubmitTransactionResponse {
-    TransactionState txstate = 2;
+    TransactionState txstate = 1;
 }
 
 message TransactionsStateRequest {
