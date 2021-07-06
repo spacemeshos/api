@@ -2,47 +2,32 @@ syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/types.proto";
-import "spacemesh/v1/var_types.proto";
 
 /////////////// Template API
 
-// The address of an app template in the templates global state store
-message TemplateAddress {
-    bytes address = 1;
-}
-
-// Template deploy data
-message DeployData {
-    TemplateAddress address = 1; // template address
-    // note - the author can be obtained from the deploy transaction but it is nice to have it here
-    AccountId author = 2; // template uploader
-    LayerNumber deploy_layer = 3; // layer that the template was deployed - 0 for genesis templates
-    TransactionId deploy_tx_id = 4; // the id of the deploy template transaction. Empty for genesis templates.
-}
-
 // Template code
 message Code {
-    string target_svm_version = 4; // at deploy time
-    string kind = 5; // e.g. WASM
-    repeated bytes code = 6; // wasm code
+    string target_svm_version = 1; // at deploy time
+    string kind = 2; // e.g. WASM
+    repeated bytes code = 3; // wasm code
 }
 
 // Information about a template in the global state store
 message Template {
-    DeployData deploy_data = 1; // always provided.
-    Code code = 2; // template wasm code. Provided if caller specified to get code.
-    bytes metadata = 3; // storage layout, api, header. Provided if caller specified to get metadata and template include metadata.
+    Code code = 1; // template wasm code. Provided if caller specified to get code.
+    bytes metadata = 2; // storage layout, api, header. Provided if caller specified to get metadata and template include metadata.
 }
 
 enum TemplateDataFlags {
     TEMPLATE_DATA_FLAGS_UNSPECIFIED = 0;
     TEMPLATE_DATA_FLAGS_CODE = 1;
     TEMPLATE_DATA_FLAGS_METADATA = 2;
+    // may need deploy data section - tbd - based on deploy tx format. Understand eth one.
 }
 
 // A request to return a template by address from the template global state store
 message GetTemplateRequest {
-    TemplateAddress address = 1; // template address
+    AccountId address = 1; // template address
     uint32 data_flags = 2; // a bit field of TemplateDataFlags values
 }
 
@@ -55,8 +40,7 @@ message GetTemplateResponse {
 message GetTemplatesRequest {
     uint32 max_results = 1; // max number of results to return
     uint32 offset = 2; // query offset
-    bool include_code = 3; // include code in response
-    bool include_meta_data = 4; // include metadata in response if provided by author
+    int32 data_flags = 3;
 }
 
 // A response includes total templates available in store and a list of zero ore more templates
@@ -74,7 +58,7 @@ message GetTemplatesResponse {
 message App {
     AccountId address = 1; // App's address in global space
     string name = 2; // short descriptive name (optional)
-    TemplateAddress template_address = 3; // App's template address
+    AccountId template_address = 3; // App's template address
     LayerNumber spawn_layer = 4; // Layer in which app was spawned
     TransactionId spawn_tx_id = 5; // Transaction which spawned the app. empty for genesis apps.
     AccountId spawner = 6; // App spawner account
@@ -82,15 +66,15 @@ message App {
 }
 
 // A request to get an app's variable by var id
-message GetVariableRequest {
+message GetStorageRequest {
     AccountId address = 1; // app's address
     LayerNumber layer_number = 2; // requested value as of a layer. Pass MAX_UI32 to get latest value
-    uint32 id = 3; // app's var id - var's unique identifier
+    uint32 id = 3; // app storage slot index
 }
 
 // A response with variable meta-data and value
-message GetVariableResponse {
-    Variable variable_value = 1;
+message GetStorageResponse {
+    bytes value = 1;
 }
 
 // A request to get a deployed app metadata and optionally all variable values as of a specific layer or latest state.

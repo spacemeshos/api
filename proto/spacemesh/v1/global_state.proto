@@ -19,7 +19,7 @@ service GlobalStateService {
     rpc GetApp(GetAppRequest) returns (GetAppResponse);
 
     // Get an app's variable metadata and optionally value
-    rpc GetVariable(GetVariableRequest) returns (GetVariableResponse);
+    rpc GetStorage(GetStorageRequest) returns (GetStorageResponse);
 
     // Latest computed global state - layer and its root hash
     rpc GlobalStateHash(GlobalStateHashRequest) returns (GlobalStateHashResponse);
