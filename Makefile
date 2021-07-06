@@ -22,7 +22,7 @@ HTTPS_GIT := https://github.com/spacemesh/api.git
 # See https://buf.build/docs/inputs#ssh for more details.
 SSH_GIT := ssh://git@github.com/spacemesh/api.git
 # This controls the version of buf to install and use.
-BUF_VERSION := 0.16.0
+BUF_VERSION := 0.43.2
 
 # This controls the version of protoc to install and use.
 PROTOC_VERSION = 3.12.3
@@ -143,22 +143,22 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 
 .PHONY: local
 local: $(BUF)
-	buf check lint
-	buf check breaking --against-input '.git#branch=master'
+	buf lint
+	buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
 
 .PHONY: lint
 lint: $(BUF)
-	buf check lint
+	buf lint
 
 # https is what we run when testing in most CI providers.
 # This does breaking change detection against our remote HTTPS git repository.
 
 .PHONY: https
 https: $(BUF)
-	buf check lint
-	buf check breaking --against-input "$(HTTPS_GIT)#branch=master"
+	buf lint
+	buf breaking --against "$(HTTPS_GIT)#branch=master"
 
 # ssh is what we run when testing in CI providers that provide ssh public key authentication.
 # This does breaking change detection against our remote HTTPS ssh repository.
@@ -166,8 +166,8 @@ https: $(BUF)
 
 .PHONY: ssh
 ssh: $(BUF)
-	buf check lint
-	buf check breaking --against-input "$(SSH_GIT)#branch=master"
+	buf lint
+	buf breaking --against "$(SSH_GIT)#branch=master"
 
 # Try to build using protoc. This performs different checks and surfaces
 # different errors than linting alone. We want this to fail on warnings as well

@@ -898,7 +898,7 @@ var (
 
 	pattern_SmesherService_CreatePostData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "smesher", "createpostdata"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_SmesherService_StopPostDataCreationSession_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "smesher", "stoppostdatacreationsession"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_SmesherService_StopPostDataCreationSession_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "smesher", "stoppost"}, "datacreationsession", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

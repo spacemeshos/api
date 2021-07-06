@@ -18,6 +18,18 @@ http:
     - selector: spacemesh.v1.GlobalStateService.GlobalStateHash
       post: "/v1/globalstate/globalstatehash"
       body: "*"
+    - selector: spacemesh.v1.GlobalStateService.GetTemplate
+      post: "/v1/globalstate/gettemplate"
+      body: "*"
+    - selector: spacemesh.v1.GlobalStateService.GetTemplates
+      post: "/v1/globalstate/gettemplates"
+      body: "*"
+    - selector: spacemesh.v1.GlobalStateService.GetApp
+      post: "/v1/globalstate/getapp"
+      body: "*"
+    - selector: spacemesh.v1.GlobalStateService.GetVariable
+      post: "/v1/globalstate/getvariable"
+      body: "*"
     - selector: spacemesh.v1.GlobalStateService.Account
       post: "/v1/globalstate/account"
       body: "*"

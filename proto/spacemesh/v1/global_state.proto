@@ -2,11 +2,25 @@ syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "spacemesh/v1/global_state_types.proto";
+import "spacemesh/v1/app_types.proto";
 
 // Readonly global state data - current and historical.
 // Global state data is data which is not explicitly stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
+
+    // Get an app template meta-data and code
+    rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse);
+
+    // Get all app templates
+    rpc GetTemplates(GetTemplatesRequest) returns (GetTemplatesResponse);
+
+    // Get app metadata and optionally current state
+    rpc GetApp(GetAppRequest) returns (GetAppResponse);
+
+    // Get an app's variable metadata and optionally value
+    rpc GetStorage(GetStorageRequest) returns (GetStorageResponse);
+
     // Latest computed global state - layer and its root hash
     rpc GlobalStateHash(GlobalStateHashRequest) returns (GlobalStateHashResponse);
 
