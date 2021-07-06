@@ -21,13 +21,11 @@ message BuildResponse {
 
 message SyncStartRequest {}
 
-message SyncStartResponse {
-}
+message SyncStartResponse {}
 
 message ShutdownRequest {}
 
-message ShutdownResponse {
-}
+message ShutdownResponse {}
 
 // current node status
 message NodeStatus {
