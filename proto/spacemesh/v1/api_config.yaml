@@ -115,7 +115,7 @@ http:
       post: "/v1/smesher/createpostdata"
       body: "*"
     - selector: spacemesh.v1.SmesherService.StopPostDataCreationSession
-      post: "/v1/smesher/stoppost:datacreationsession"
+      post: "/v1/smesher/stoppostdatacreationsession"
       body: "*"
 
     # TransactionService
