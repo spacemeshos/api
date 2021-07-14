@@ -12,8 +12,8 @@ message StartSmeshingRequest {
     // Coinbase account for rewards accumulation.
     AccountId coinbase = 1;
 
-    // The PoST setup options.
-    PoSTSetupOpts opts = 2;
+    // The Post setup options.
+    PostSetupOpts opts = 2;
 }
 
 message StartSmeshingResponse {
@@ -65,35 +65,35 @@ message EstimatedRewardsRequest {}
 message EstimatedRewardsResponse {
     // The amount of the total estimated reward in the next upcoming epoch
     Amount amount = 1;
-    // The number of PoST data commitment units that this estimated reward corresponds to (part of global config)
+    // The number of Post data commitment units that this estimated reward corresponds to (part of global config)
     uint32 num_units = 2;
 }
 
-message PoSTSetupComputeProvidersRequest {
+message PostSetupComputeProvidersRequest {
     // Whether to run a short benchmarking session for each provider to evaluate its performance
     bool benchmark = 1;
 }
 
-message PoSTSetupComputeProvidersResponse {
-    repeated PoSTSetupComputeProvider providers = 1;
+message PostSetupComputeProvidersResponse {
+    repeated PostSetupComputeProvider providers = 1;
 }
 
-message PoSTSetupStatusResponse {
-    PoSTSetupStatus status = 1;
+message PostSetupStatusResponse {
+    PostSetupStatus status = 1;
 }
 
-message PoSTSetupStatusStreamResponse {
-    PoSTSetupStatus status = 1;
+message PostSetupStatusStreamResponse {
+    PostSetupStatus status = 1;
 }
 
-message PoSTConfigResponse {
+message PostConfigResponse {
     uint32 bits_per_label = 1;
     uint64 labels_per_unit = 2;
     uint32 min_num_units = 3;
     uint32 max_num_units = 4;
 }
 
-message PoSTSetupComputeProvider {
+message PostSetupComputeProvider {
     uint32 id = 1; // 0, 1, 2...
     string model = 2; // e.g. Nvidia GTX 2700
     enum ComputeApiClass {
@@ -106,16 +106,16 @@ message PoSTSetupComputeProvider {
     uint64 performance = 4; // Estimated performance in hashes per second
 }
 
-// PoST setup options, used to define the setup requirements.
-message PoSTSetupOpts {
+// Post setup options, used to define the setup requirements.
+message PostSetupOpts {
     string data_dir = 1; // User provided path to create the setup data files at
-    uint32 num_units = 2; // Number of PoST data units to generate
+    uint32 num_units = 2; // Number of Post data units to generate
     uint32 num_files = 3; // Number of files to equally distribute the data among
-    uint32 compute_provider_id = 4; // A `PoSTSetupComputeProvider` id
+    uint32 compute_provider_id = 4; // A `PostSetupComputeProvider` id
     bool throttle = 5; // Throttle down setup phase computations while user is interactive on system
 }
 
-message PoSTSetupStatus {
+message PostSetupStatus {
     enum State {
         STATE_UNSPECIFIED = 0; // Lane's favorite impossible value
         STATE_NOT_STARTED = 1; // Setup not started
@@ -125,6 +125,6 @@ message PoSTSetupStatus {
     }
     State state = 1;
     uint64 num_labels_written = 4; // Number of labels (hashes) written to the data files
-    PoSTSetupOpts opts = 2; // setup options previously set by the user
+    PostSetupOpts opts = 2; // setup options previously set by the user
     string error_message = 5; // The error message, if the state is STATE_ERROR
 }

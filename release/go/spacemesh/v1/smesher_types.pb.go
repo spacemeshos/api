@@ -26,24 +26,24 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type PoSTSetupComputeProvider_ComputeApiClass int32
+type PostSetupComputeProvider_ComputeApiClass int32
 
 const (
-	PoSTSetupComputeProvider_COMPUTE_API_CLASS_UNSPECIFIED PoSTSetupComputeProvider_ComputeApiClass = 0
-	PoSTSetupComputeProvider_COMPUTE_API_CLASS_CPU         PoSTSetupComputeProvider_ComputeApiClass = 1 // useful for testing on systems without a cuda or vulkan GPU
-	PoSTSetupComputeProvider_COMPUTE_API_CLASS_CUDA        PoSTSetupComputeProvider_ComputeApiClass = 2
-	PoSTSetupComputeProvider_COMPUTE_API_CLASS_VULKAN      PoSTSetupComputeProvider_ComputeApiClass = 3
+	PostSetupComputeProvider_COMPUTE_API_CLASS_UNSPECIFIED PostSetupComputeProvider_ComputeApiClass = 0
+	PostSetupComputeProvider_COMPUTE_API_CLASS_CPU         PostSetupComputeProvider_ComputeApiClass = 1 // useful for testing on systems without a cuda or vulkan GPU
+	PostSetupComputeProvider_COMPUTE_API_CLASS_CUDA        PostSetupComputeProvider_ComputeApiClass = 2
+	PostSetupComputeProvider_COMPUTE_API_CLASS_VULKAN      PostSetupComputeProvider_ComputeApiClass = 3
 )
 
-// Enum value maps for PoSTSetupComputeProvider_ComputeApiClass.
+// Enum value maps for PostSetupComputeProvider_ComputeApiClass.
 var (
-	PoSTSetupComputeProvider_ComputeApiClass_name = map[int32]string{
+	PostSetupComputeProvider_ComputeApiClass_name = map[int32]string{
 		0: "COMPUTE_API_CLASS_UNSPECIFIED",
 		1: "COMPUTE_API_CLASS_CPU",
 		2: "COMPUTE_API_CLASS_CUDA",
 		3: "COMPUTE_API_CLASS_VULKAN",
 	}
-	PoSTSetupComputeProvider_ComputeApiClass_value = map[string]int32{
+	PostSetupComputeProvider_ComputeApiClass_value = map[string]int32{
 		"COMPUTE_API_CLASS_UNSPECIFIED": 0,
 		"COMPUTE_API_CLASS_CPU":         1,
 		"COMPUTE_API_CLASS_CUDA":        2,
@@ -51,53 +51,53 @@ var (
 	}
 )
 
-func (x PoSTSetupComputeProvider_ComputeApiClass) Enum() *PoSTSetupComputeProvider_ComputeApiClass {
-	p := new(PoSTSetupComputeProvider_ComputeApiClass)
+func (x PostSetupComputeProvider_ComputeApiClass) Enum() *PostSetupComputeProvider_ComputeApiClass {
+	p := new(PostSetupComputeProvider_ComputeApiClass)
 	*p = x
 	return p
 }
 
-func (x PoSTSetupComputeProvider_ComputeApiClass) String() string {
+func (x PostSetupComputeProvider_ComputeApiClass) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (PoSTSetupComputeProvider_ComputeApiClass) Descriptor() protoreflect.EnumDescriptor {
+func (PostSetupComputeProvider_ComputeApiClass) Descriptor() protoreflect.EnumDescriptor {
 	return file_spacemesh_v1_smesher_types_proto_enumTypes[0].Descriptor()
 }
 
-func (PoSTSetupComputeProvider_ComputeApiClass) Type() protoreflect.EnumType {
+func (PostSetupComputeProvider_ComputeApiClass) Type() protoreflect.EnumType {
 	return &file_spacemesh_v1_smesher_types_proto_enumTypes[0]
 }
 
-func (x PoSTSetupComputeProvider_ComputeApiClass) Number() protoreflect.EnumNumber {
+func (x PostSetupComputeProvider_ComputeApiClass) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use PoSTSetupComputeProvider_ComputeApiClass.Descriptor instead.
-func (PoSTSetupComputeProvider_ComputeApiClass) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupComputeProvider_ComputeApiClass.Descriptor instead.
+func (PostSetupComputeProvider_ComputeApiClass) EnumDescriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{19, 0}
 }
 
-type PoSTSetupStatus_State int32
+type PostSetupStatus_State int32
 
 const (
-	PoSTSetupStatus_STATE_UNSPECIFIED PoSTSetupStatus_State = 0 // Lane's favorite impossible value
-	PoSTSetupStatus_STATE_NOT_STARTED PoSTSetupStatus_State = 1 // Setup not started
-	PoSTSetupStatus_STATE_IN_PROGRESS PoSTSetupStatus_State = 2 // Setup in progress
-	PoSTSetupStatus_STATE_COMPLETE    PoSTSetupStatus_State = 3 // Setup is complete
-	PoSTSetupStatus_STATE_ERROR       PoSTSetupStatus_State = 4 // Setup last session ended with an error
+	PostSetupStatus_STATE_UNSPECIFIED PostSetupStatus_State = 0 // Lane's favorite impossible value
+	PostSetupStatus_STATE_NOT_STARTED PostSetupStatus_State = 1 // Setup not started
+	PostSetupStatus_STATE_IN_PROGRESS PostSetupStatus_State = 2 // Setup in progress
+	PostSetupStatus_STATE_COMPLETE    PostSetupStatus_State = 3 // Setup is complete
+	PostSetupStatus_STATE_ERROR       PostSetupStatus_State = 4 // Setup last session ended with an error
 )
 
-// Enum value maps for PoSTSetupStatus_State.
+// Enum value maps for PostSetupStatus_State.
 var (
-	PoSTSetupStatus_State_name = map[int32]string{
+	PostSetupStatus_State_name = map[int32]string{
 		0: "STATE_UNSPECIFIED",
 		1: "STATE_NOT_STARTED",
 		2: "STATE_IN_PROGRESS",
 		3: "STATE_COMPLETE",
 		4: "STATE_ERROR",
 	}
-	PoSTSetupStatus_State_value = map[string]int32{
+	PostSetupStatus_State_value = map[string]int32{
 		"STATE_UNSPECIFIED": 0,
 		"STATE_NOT_STARTED": 1,
 		"STATE_IN_PROGRESS": 2,
@@ -106,30 +106,30 @@ var (
 	}
 )
 
-func (x PoSTSetupStatus_State) Enum() *PoSTSetupStatus_State {
-	p := new(PoSTSetupStatus_State)
+func (x PostSetupStatus_State) Enum() *PostSetupStatus_State {
+	p := new(PostSetupStatus_State)
 	*p = x
 	return p
 }
 
-func (x PoSTSetupStatus_State) String() string {
+func (x PostSetupStatus_State) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (PoSTSetupStatus_State) Descriptor() protoreflect.EnumDescriptor {
+func (PostSetupStatus_State) Descriptor() protoreflect.EnumDescriptor {
 	return file_spacemesh_v1_smesher_types_proto_enumTypes[1].Descriptor()
 }
 
-func (PoSTSetupStatus_State) Type() protoreflect.EnumType {
+func (PostSetupStatus_State) Type() protoreflect.EnumType {
 	return &file_spacemesh_v1_smesher_types_proto_enumTypes[1]
 }
 
-func (x PoSTSetupStatus_State) Number() protoreflect.EnumNumber {
+func (x PostSetupStatus_State) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use PoSTSetupStatus_State.Descriptor instead.
-func (PoSTSetupStatus_State) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupStatus_State.Descriptor instead.
+func (PostSetupStatus_State) EnumDescriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{21, 0}
 }
 
@@ -187,8 +187,8 @@ type StartSmeshingRequest struct {
 
 	// Coinbase account for rewards accumulation.
 	Coinbase *AccountId `protobuf:"bytes,1,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
-	// The PoST setup options.
-	Opts *PoSTSetupOpts `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
+	// The post setup options.
+	Opts *PostSetupOpts `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
 }
 
 func (x *StartSmeshingRequest) Reset() {
@@ -230,7 +230,7 @@ func (x *StartSmeshingRequest) GetCoinbase() *AccountId {
 	return nil
 }
 
-func (x *StartSmeshingRequest) GetOpts() *PoSTSetupOpts {
+func (x *StartSmeshingRequest) GetOpts() *PostSetupOpts {
 	if x != nil {
 		return x.Opts
 	}
@@ -756,7 +756,7 @@ type EstimatedRewardsResponse struct {
 
 	// The amount of the total estimated reward in the next upcoming epoch
 	Amount *Amount `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	// The number of PoST data commitment units that this estimated reward corresponds to (part of global config)
+	// The number of post data commitment units that this estimated reward corresponds to (part of global config)
 	NumUnits uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`
 }
 
@@ -806,7 +806,7 @@ func (x *EstimatedRewardsResponse) GetNumUnits() uint32 {
 	return 0
 }
 
-type PoSTSetupComputeProvidersRequest struct {
+type PostSetupComputeProvidersRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -815,8 +815,8 @@ type PoSTSetupComputeProvidersRequest struct {
 	Benchmark bool `protobuf:"varint,1,opt,name=benchmark,proto3" json:"benchmark,omitempty"`
 }
 
-func (x *PoSTSetupComputeProvidersRequest) Reset() {
-	*x = PoSTSetupComputeProvidersRequest{}
+func (x *PostSetupComputeProvidersRequest) Reset() {
+	*x = PostSetupComputeProvidersRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -824,13 +824,13 @@ func (x *PoSTSetupComputeProvidersRequest) Reset() {
 	}
 }
 
-func (x *PoSTSetupComputeProvidersRequest) String() string {
+func (x *PostSetupComputeProvidersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTSetupComputeProvidersRequest) ProtoMessage() {}
+func (*PostSetupComputeProvidersRequest) ProtoMessage() {}
 
-func (x *PoSTSetupComputeProvidersRequest) ProtoReflect() protoreflect.Message {
+func (x *PostSetupComputeProvidersRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -842,28 +842,28 @@ func (x *PoSTSetupComputeProvidersRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTSetupComputeProvidersRequest.ProtoReflect.Descriptor instead.
-func (*PoSTSetupComputeProvidersRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupComputeProvidersRequest.ProtoReflect.Descriptor instead.
+func (*PostSetupComputeProvidersRequest) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *PoSTSetupComputeProvidersRequest) GetBenchmark() bool {
+func (x *PostSetupComputeProvidersRequest) GetBenchmark() bool {
 	if x != nil {
 		return x.Benchmark
 	}
 	return false
 }
 
-type PoSTSetupComputeProvidersResponse struct {
+type PostSetupComputeProvidersResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Providers []*PoSTSetupComputeProvider `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
+	Providers []*PostSetupComputeProvider `protobuf:"bytes,1,rep,name=providers,proto3" json:"providers,omitempty"`
 }
 
-func (x *PoSTSetupComputeProvidersResponse) Reset() {
-	*x = PoSTSetupComputeProvidersResponse{}
+func (x *PostSetupComputeProvidersResponse) Reset() {
+	*x = PostSetupComputeProvidersResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -871,13 +871,13 @@ func (x *PoSTSetupComputeProvidersResponse) Reset() {
 	}
 }
 
-func (x *PoSTSetupComputeProvidersResponse) String() string {
+func (x *PostSetupComputeProvidersResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTSetupComputeProvidersResponse) ProtoMessage() {}
+func (*PostSetupComputeProvidersResponse) ProtoMessage() {}
 
-func (x *PoSTSetupComputeProvidersResponse) ProtoReflect() protoreflect.Message {
+func (x *PostSetupComputeProvidersResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -889,28 +889,28 @@ func (x *PoSTSetupComputeProvidersResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTSetupComputeProvidersResponse.ProtoReflect.Descriptor instead.
-func (*PoSTSetupComputeProvidersResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupComputeProvidersResponse.ProtoReflect.Descriptor instead.
+func (*PostSetupComputeProvidersResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *PoSTSetupComputeProvidersResponse) GetProviders() []*PoSTSetupComputeProvider {
+func (x *PostSetupComputeProvidersResponse) GetProviders() []*PostSetupComputeProvider {
 	if x != nil {
 		return x.Providers
 	}
 	return nil
 }
 
-type PoSTSetupStatusResponse struct {
+type PostSetupStatusResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status *PoSTSetupStatus `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	Status *PostSetupStatus `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (x *PoSTSetupStatusResponse) Reset() {
-	*x = PoSTSetupStatusResponse{}
+func (x *PostSetupStatusResponse) Reset() {
+	*x = PostSetupStatusResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -918,13 +918,13 @@ func (x *PoSTSetupStatusResponse) Reset() {
 	}
 }
 
-func (x *PoSTSetupStatusResponse) String() string {
+func (x *PostSetupStatusResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTSetupStatusResponse) ProtoMessage() {}
+func (*PostSetupStatusResponse) ProtoMessage() {}
 
-func (x *PoSTSetupStatusResponse) ProtoReflect() protoreflect.Message {
+func (x *PostSetupStatusResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -936,28 +936,28 @@ func (x *PoSTSetupStatusResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTSetupStatusResponse.ProtoReflect.Descriptor instead.
-func (*PoSTSetupStatusResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupStatusResponse.ProtoReflect.Descriptor instead.
+func (*PostSetupStatusResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *PoSTSetupStatusResponse) GetStatus() *PoSTSetupStatus {
+func (x *PostSetupStatusResponse) GetStatus() *PostSetupStatus {
 	if x != nil {
 		return x.Status
 	}
 	return nil
 }
 
-type PoSTSetupStatusStreamResponse struct {
+type PostSetupStatusStreamResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status *PoSTSetupStatus `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	Status *PostSetupStatus `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (x *PoSTSetupStatusStreamResponse) Reset() {
-	*x = PoSTSetupStatusStreamResponse{}
+func (x *PostSetupStatusStreamResponse) Reset() {
+	*x = PostSetupStatusStreamResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -965,13 +965,13 @@ func (x *PoSTSetupStatusStreamResponse) Reset() {
 	}
 }
 
-func (x *PoSTSetupStatusStreamResponse) String() string {
+func (x *PostSetupStatusStreamResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTSetupStatusStreamResponse) ProtoMessage() {}
+func (*PostSetupStatusStreamResponse) ProtoMessage() {}
 
-func (x *PoSTSetupStatusStreamResponse) ProtoReflect() protoreflect.Message {
+func (x *PostSetupStatusStreamResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -983,19 +983,19 @@ func (x *PoSTSetupStatusStreamResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTSetupStatusStreamResponse.ProtoReflect.Descriptor instead.
-func (*PoSTSetupStatusStreamResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupStatusStreamResponse.ProtoReflect.Descriptor instead.
+func (*PostSetupStatusStreamResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *PoSTSetupStatusStreamResponse) GetStatus() *PoSTSetupStatus {
+func (x *PostSetupStatusStreamResponse) GetStatus() *PostSetupStatus {
 	if x != nil {
 		return x.Status
 	}
 	return nil
 }
 
-type PoSTConfigResponse struct {
+type PostConfigResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1006,8 +1006,8 @@ type PoSTConfigResponse struct {
 	MaxNumUnits   uint32 `protobuf:"varint,4,opt,name=max_num_units,json=maxNumUnits,proto3" json:"max_num_units,omitempty"`
 }
 
-func (x *PoSTConfigResponse) Reset() {
-	*x = PoSTConfigResponse{}
+func (x *PostConfigResponse) Reset() {
+	*x = PostConfigResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1015,13 +1015,13 @@ func (x *PoSTConfigResponse) Reset() {
 	}
 }
 
-func (x *PoSTConfigResponse) String() string {
+func (x *PostConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTConfigResponse) ProtoMessage() {}
+func (*PostConfigResponse) ProtoMessage() {}
 
-func (x *PoSTConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *PostConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1033,52 +1033,52 @@ func (x *PoSTConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTConfigResponse.ProtoReflect.Descriptor instead.
-func (*PoSTConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostConfigResponse.ProtoReflect.Descriptor instead.
+func (*PostConfigResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *PoSTConfigResponse) GetBitsPerLabel() uint32 {
+func (x *PostConfigResponse) GetBitsPerLabel() uint32 {
 	if x != nil {
 		return x.BitsPerLabel
 	}
 	return 0
 }
 
-func (x *PoSTConfigResponse) GetLabelsPerUnit() uint64 {
+func (x *PostConfigResponse) GetLabelsPerUnit() uint64 {
 	if x != nil {
 		return x.LabelsPerUnit
 	}
 	return 0
 }
 
-func (x *PoSTConfigResponse) GetMinNumUnits() uint32 {
+func (x *PostConfigResponse) GetMinNumUnits() uint32 {
 	if x != nil {
 		return x.MinNumUnits
 	}
 	return 0
 }
 
-func (x *PoSTConfigResponse) GetMaxNumUnits() uint32 {
+func (x *PostConfigResponse) GetMaxNumUnits() uint32 {
 	if x != nil {
 		return x.MaxNumUnits
 	}
 	return 0
 }
 
-type PoSTSetupComputeProvider struct {
+type PostSetupComputeProvider struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id          uint32                                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                                                              // 0, 1, 2...
 	Model       string                                   `protobuf:"bytes,2,opt,name=model,proto3" json:"model,omitempty"`                                                                                         // e.g. Nvidia GTX 2700
-	ComputeApi  PoSTSetupComputeProvider_ComputeApiClass `protobuf:"varint,3,opt,name=compute_api,json=computeApi,proto3,enum=spacemesh.v1.PoSTSetupComputeProvider_ComputeApiClass" json:"compute_api,omitempty"` // A provided compute api
+	ComputeApi  PostSetupComputeProvider_ComputeApiClass `protobuf:"varint,3,opt,name=compute_api,json=computeApi,proto3,enum=spacemesh.v1.PostSetupComputeProvider_ComputeApiClass" json:"compute_api,omitempty"` // A provided compute api
 	Performance uint64                                   `protobuf:"varint,4,opt,name=performance,proto3" json:"performance,omitempty"`                                                                            // Estimated performance in hashes per second
 }
 
-func (x *PoSTSetupComputeProvider) Reset() {
-	*x = PoSTSetupComputeProvider{}
+func (x *PostSetupComputeProvider) Reset() {
+	*x = PostSetupComputeProvider{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1086,13 +1086,13 @@ func (x *PoSTSetupComputeProvider) Reset() {
 	}
 }
 
-func (x *PoSTSetupComputeProvider) String() string {
+func (x *PostSetupComputeProvider) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTSetupComputeProvider) ProtoMessage() {}
+func (*PostSetupComputeProvider) ProtoMessage() {}
 
-func (x *PoSTSetupComputeProvider) ProtoReflect() protoreflect.Message {
+func (x *PostSetupComputeProvider) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1104,54 +1104,54 @@ func (x *PoSTSetupComputeProvider) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTSetupComputeProvider.ProtoReflect.Descriptor instead.
-func (*PoSTSetupComputeProvider) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupComputeProvider.ProtoReflect.Descriptor instead.
+func (*PostSetupComputeProvider) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *PoSTSetupComputeProvider) GetId() uint32 {
+func (x *PostSetupComputeProvider) GetId() uint32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *PoSTSetupComputeProvider) GetModel() string {
+func (x *PostSetupComputeProvider) GetModel() string {
 	if x != nil {
 		return x.Model
 	}
 	return ""
 }
 
-func (x *PoSTSetupComputeProvider) GetComputeApi() PoSTSetupComputeProvider_ComputeApiClass {
+func (x *PostSetupComputeProvider) GetComputeApi() PostSetupComputeProvider_ComputeApiClass {
 	if x != nil {
 		return x.ComputeApi
 	}
-	return PoSTSetupComputeProvider_COMPUTE_API_CLASS_UNSPECIFIED
+	return PostSetupComputeProvider_COMPUTE_API_CLASS_UNSPECIFIED
 }
 
-func (x *PoSTSetupComputeProvider) GetPerformance() uint64 {
+func (x *PostSetupComputeProvider) GetPerformance() uint64 {
 	if x != nil {
 		return x.Performance
 	}
 	return 0
 }
 
-// PoST setup options, used to define the setup requirements.
-type PoSTSetupOpts struct {
+// Post setup options, used to define the setup requirements.
+type PostSetupOpts struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	DataDir           string `protobuf:"bytes,1,opt,name=data_dir,json=dataDir,proto3" json:"data_dir,omitempty"`                                  // User provided path to create the setup data files at
-	NumUnits          uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`                              // Number of PoST data units to generate
+	NumUnits          uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`                              // Number of post data units to generate
 	NumFiles          uint32 `protobuf:"varint,3,opt,name=num_files,json=numFiles,proto3" json:"num_files,omitempty"`                              // Number of files to equally distribute the data among
-	ComputeProviderId uint32 `protobuf:"varint,4,opt,name=compute_provider_id,json=computeProviderId,proto3" json:"compute_provider_id,omitempty"` // A `PoSTSetupComputeProvider` id
+	ComputeProviderId uint32 `protobuf:"varint,4,opt,name=compute_provider_id,json=computeProviderId,proto3" json:"compute_provider_id,omitempty"` // A `PostSetupComputeProvider` id
 	Throttle          bool   `protobuf:"varint,5,opt,name=throttle,proto3" json:"throttle,omitempty"`                                              // Throttle down setup phase computations while user is interactive on system
 }
 
-func (x *PoSTSetupOpts) Reset() {
-	*x = PoSTSetupOpts{}
+func (x *PostSetupOpts) Reset() {
+	*x = PostSetupOpts{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1159,13 +1159,13 @@ func (x *PoSTSetupOpts) Reset() {
 	}
 }
 
-func (x *PoSTSetupOpts) String() string {
+func (x *PostSetupOpts) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTSetupOpts) ProtoMessage() {}
+func (*PostSetupOpts) ProtoMessage() {}
 
-func (x *PoSTSetupOpts) ProtoReflect() protoreflect.Message {
+func (x *PostSetupOpts) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1177,59 +1177,59 @@ func (x *PoSTSetupOpts) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTSetupOpts.ProtoReflect.Descriptor instead.
-func (*PoSTSetupOpts) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupOpts.ProtoReflect.Descriptor instead.
+func (*PostSetupOpts) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *PoSTSetupOpts) GetDataDir() string {
+func (x *PostSetupOpts) GetDataDir() string {
 	if x != nil {
 		return x.DataDir
 	}
 	return ""
 }
 
-func (x *PoSTSetupOpts) GetNumUnits() uint32 {
+func (x *PostSetupOpts) GetNumUnits() uint32 {
 	if x != nil {
 		return x.NumUnits
 	}
 	return 0
 }
 
-func (x *PoSTSetupOpts) GetNumFiles() uint32 {
+func (x *PostSetupOpts) GetNumFiles() uint32 {
 	if x != nil {
 		return x.NumFiles
 	}
 	return 0
 }
 
-func (x *PoSTSetupOpts) GetComputeProviderId() uint32 {
+func (x *PostSetupOpts) GetComputeProviderId() uint32 {
 	if x != nil {
 		return x.ComputeProviderId
 	}
 	return 0
 }
 
-func (x *PoSTSetupOpts) GetThrottle() bool {
+func (x *PostSetupOpts) GetThrottle() bool {
 	if x != nil {
 		return x.Throttle
 	}
 	return false
 }
 
-type PoSTSetupStatus struct {
+type PostSetupStatus struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	State            PoSTSetupStatus_State `protobuf:"varint,1,opt,name=state,proto3,enum=spacemesh.v1.PoSTSetupStatus_State" json:"state,omitempty"`
+	State            PostSetupStatus_State `protobuf:"varint,1,opt,name=state,proto3,enum=spacemesh.v1.PostSetupStatus_State" json:"state,omitempty"`
 	NumLabelsWritten uint64                `protobuf:"varint,4,opt,name=num_labels_written,json=numLabelsWritten,proto3" json:"num_labels_written,omitempty"` // Number of labels (hashes) written to the data files
-	Opts             *PoSTSetupOpts        `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`                                                    // setup options previously set by the user
+	Opts             *PostSetupOpts        `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`                                                    // setup options previously set by the user
 	ErrorMessage     string                `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`                // The error message, if the state is STATE_ERROR
 }
 
-func (x *PoSTSetupStatus) Reset() {
-	*x = PoSTSetupStatus{}
+func (x *PostSetupStatus) Reset() {
+	*x = PostSetupStatus{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1237,13 +1237,13 @@ func (x *PoSTSetupStatus) Reset() {
 	}
 }
 
-func (x *PoSTSetupStatus) String() string {
+func (x *PostSetupStatus) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PoSTSetupStatus) ProtoMessage() {}
+func (*PostSetupStatus) ProtoMessage() {}
 
-func (x *PoSTSetupStatus) ProtoReflect() protoreflect.Message {
+func (x *PostSetupStatus) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1255,33 +1255,33 @@ func (x *PoSTSetupStatus) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PoSTSetupStatus.ProtoReflect.Descriptor instead.
-func (*PoSTSetupStatus) Descriptor() ([]byte, []int) {
+// Deprecated: Use PostSetupStatus.ProtoReflect.Descriptor instead.
+func (*PostSetupStatus) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *PoSTSetupStatus) GetState() PoSTSetupStatus_State {
+func (x *PostSetupStatus) GetState() PostSetupStatus_State {
 	if x != nil {
 		return x.State
 	}
-	return PoSTSetupStatus_STATE_UNSPECIFIED
+	return PostSetupStatus_STATE_UNSPECIFIED
 }
 
-func (x *PoSTSetupStatus) GetNumLabelsWritten() uint64 {
+func (x *PostSetupStatus) GetNumLabelsWritten() uint64 {
 	if x != nil {
 		return x.NumLabelsWritten
 	}
 	return 0
 }
 
-func (x *PoSTSetupStatus) GetOpts() *PoSTSetupOpts {
+func (x *PostSetupStatus) GetOpts() *PostSetupOpts {
 	if x != nil {
 		return x.Opts
 	}
 	return nil
 }
 
-func (x *PoSTSetupStatus) GetErrorMessage() string {
+func (x *PostSetupStatus) GetErrorMessage() string {
 	if x != nil {
 		return x.ErrorMessage
 	}
@@ -1307,7 +1307,7 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x52, 0x08, 0x63,
 	0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x12, 0x2f, 0x0a, 0x04, 0x6f, 0x70, 0x74, 0x73, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x4f, 0x70,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x4f, 0x70,
 	0x74, 0x73, 0x52, 0x04, 0x6f, 0x70, 0x74, 0x73, 0x22, 0x43, 0x0a, 0x15, 0x53, 0x74, 0x61, 0x72,
 	0x74, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x12, 0x2a, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
@@ -1359,29 +1359,29 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x06, 0x61, 0x6d,
 	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x75, 0x6d, 0x5f, 0x75, 0x6e, 0x69, 0x74,
 	0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x6e, 0x75, 0x6d, 0x55, 0x6e, 0x69, 0x74,
-	0x73, 0x22, 0x40, 0x0a, 0x20, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x43, 0x6f,
+	0x73, 0x22, 0x40, 0x0a, 0x20, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x43, 0x6f,
 	0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x62, 0x65, 0x6e, 0x63, 0x68, 0x6d, 0x61,
 	0x72, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x62, 0x65, 0x6e, 0x63, 0x68, 0x6d,
-	0x61, 0x72, 0x6b, 0x22, 0x69, 0x0a, 0x21, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70,
+	0x61, 0x72, 0x6b, 0x22, 0x69, 0x0a, 0x21, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70,
 	0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x44, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x76,
 	0x69, 0x64, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x73, 0x70,
-	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53,
+	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53,
 	0x65, 0x74, 0x75, 0x70, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69,
 	0x64, 0x65, 0x72, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x22, 0x50,
-	0x0a, 0x17, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x0a, 0x17, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75,
 	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x35, 0x0a, 0x06, 0x73, 0x74, 0x61,
 	0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74,
+	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74,
 	0x75, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x22, 0x56, 0x0a, 0x1d, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74, 0x61,
+	0x22, 0x56, 0x0a, 0x1d, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74, 0x61,
 	0x74, 0x75, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x12, 0x35, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x1d, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
-	0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0xaa, 0x01, 0x0a, 0x12, 0x50, 0x6f, 0x53,
-	0x54, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0xaa, 0x01, 0x0a, 0x12, 0x50, 0x6f, 0x73,
+	0x74, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
 	0x24, 0x0a, 0x0e, 0x62, 0x69, 0x74, 0x73, 0x5f, 0x70, 0x65, 0x72, 0x5f, 0x6c, 0x61, 0x62, 0x65,
 	0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x62, 0x69, 0x74, 0x73, 0x50, 0x65, 0x72,
 	0x4c, 0x61, 0x62, 0x65, 0x6c, 0x12, 0x26, 0x0a, 0x0f, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x5f,
@@ -1391,14 +1391,14 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x0d, 0x52, 0x0b, 0x6d, 0x69, 0x6e, 0x4e, 0x75, 0x6d, 0x55, 0x6e, 0x69, 0x74,
 	0x73, 0x12, 0x22, 0x0a, 0x0d, 0x6d, 0x61, 0x78, 0x5f, 0x6e, 0x75, 0x6d, 0x5f, 0x75, 0x6e, 0x69,
 	0x74, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0b, 0x6d, 0x61, 0x78, 0x4e, 0x75, 0x6d,
-	0x55, 0x6e, 0x69, 0x74, 0x73, 0x22, 0xc7, 0x02, 0x0a, 0x18, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65,
+	0x55, 0x6e, 0x69, 0x74, 0x73, 0x22, 0xc7, 0x02, 0x0a, 0x18, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65,
 	0x74, 0x75, 0x70, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64,
 	0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02,
 	0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x05, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x12, 0x57, 0x0a, 0x0b, 0x63, 0x6f, 0x6d, 0x70,
 	0x75, 0x74, 0x65, 0x5f, 0x61, 0x70, 0x69, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x36, 0x2e,
-	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53,
-	0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73,
+	0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f,
 	0x76, 0x69, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x41, 0x70, 0x69,
 	0x43, 0x6c, 0x61, 0x73, 0x73, 0x52, 0x0a, 0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x41, 0x70,
 	0x69, 0x12, 0x20, 0x0a, 0x0b, 0x70, 0x65, 0x72, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x6e, 0x63, 0x65,
@@ -1412,7 +1412,7 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x5f, 0x41, 0x50, 0x49, 0x5f, 0x43, 0x4c, 0x41, 0x53, 0x53, 0x5f, 0x43, 0x55, 0x44, 0x41, 0x10,
 	0x02, 0x12, 0x1c, 0x0a, 0x18, 0x43, 0x4f, 0x4d, 0x50, 0x55, 0x54, 0x45, 0x5f, 0x41, 0x50, 0x49,
 	0x5f, 0x43, 0x4c, 0x41, 0x53, 0x53, 0x5f, 0x56, 0x55, 0x4c, 0x4b, 0x41, 0x4e, 0x10, 0x03, 0x22,
-	0xb0, 0x01, 0x0a, 0x0d, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x4f, 0x70, 0x74,
+	0xb0, 0x01, 0x0a, 0x0d, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x4f, 0x70, 0x74,
 	0x73, 0x12, 0x19, 0x0a, 0x08, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x64, 0x69, 0x72, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x07, 0x64, 0x61, 0x74, 0x61, 0x44, 0x69, 0x72, 0x12, 0x1b, 0x0a, 0x09,
 	0x6e, 0x75, 0x6d, 0x5f, 0x75, 0x6e, 0x69, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52,
@@ -1423,17 +1423,17 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0d, 0x52, 0x11, 0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76,
 	0x69, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x74, 0x68, 0x72, 0x6f, 0x74, 0x74,
 	0x6c, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x74, 0x68, 0x72, 0x6f, 0x74, 0x74,
-	0x6c, 0x65, 0x22, 0xc3, 0x02, 0x0a, 0x0f, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70,
+	0x6c, 0x65, 0x22, 0xc3, 0x02, 0x0a, 0x0f, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70,
 	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x39, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x23, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53, 0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74,
 	0x61, 0x74, 0x75, 0x73, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74,
 	0x65, 0x12, 0x2c, 0x0a, 0x12, 0x6e, 0x75, 0x6d, 0x5f, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x5f,
 	0x77, 0x72, 0x69, 0x74, 0x74, 0x65, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x10, 0x6e,
 	0x75, 0x6d, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x57, 0x72, 0x69, 0x74, 0x74, 0x65, 0x6e, 0x12,
 	0x2f, 0x0a, 0x04, 0x6f, 0x70, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e,
-	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x53,
-	0x54, 0x53, 0x65, 0x74, 0x75, 0x70, 0x4f, 0x70, 0x74, 0x73, 0x52, 0x04, 0x6f, 0x70, 0x74, 0x73,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73,
+	0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x4f, 0x70, 0x74, 0x73, 0x52, 0x04, 0x6f, 0x70, 0x74, 0x73,
 	0x12, 0x23, 0x0a, 0x0d, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
 	0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x4d, 0x65,
 	0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x71, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x15,
@@ -1465,8 +1465,8 @@ func file_spacemesh_v1_smesher_types_proto_rawDescGZIP() []byte {
 var file_spacemesh_v1_smesher_types_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_spacemesh_v1_smesher_types_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_spacemesh_v1_smesher_types_proto_goTypes = []interface{}{
-	(PoSTSetupComputeProvider_ComputeApiClass)(0), // 0: spacemesh.v1.PoSTSetupComputeProvider.ComputeApiClass
-	(PoSTSetupStatus_State)(0),                    // 1: spacemesh.v1.PoSTSetupStatus.State
+	(PostSetupComputeProvider_ComputeApiClass)(0), // 0: spacemesh.v1.PostSetupComputeProvider.ComputeApiClass
+	(PostSetupStatus_State)(0),                    // 1: spacemesh.v1.PostSetupStatus.State
 	(*IsSmeshingResponse)(nil),                    // 2: spacemesh.v1.IsSmeshingResponse
 	(*StartSmeshingRequest)(nil),                  // 3: spacemesh.v1.StartSmeshingRequest
 	(*StartSmeshingResponse)(nil),                 // 4: spacemesh.v1.StartSmeshingResponse
@@ -1481,14 +1481,14 @@ var file_spacemesh_v1_smesher_types_proto_goTypes = []interface{}{
 	(*CoinbaseResponse)(nil),                      // 13: spacemesh.v1.CoinbaseResponse
 	(*EstimatedRewardsRequest)(nil),               // 14: spacemesh.v1.EstimatedRewardsRequest
 	(*EstimatedRewardsResponse)(nil),              // 15: spacemesh.v1.EstimatedRewardsResponse
-	(*PoSTSetupComputeProvidersRequest)(nil),      // 16: spacemesh.v1.PoSTSetupComputeProvidersRequest
-	(*PoSTSetupComputeProvidersResponse)(nil),     // 17: spacemesh.v1.PoSTSetupComputeProvidersResponse
-	(*PoSTSetupStatusResponse)(nil),               // 18: spacemesh.v1.PoSTSetupStatusResponse
-	(*PoSTSetupStatusStreamResponse)(nil),         // 19: spacemesh.v1.PoSTSetupStatusStreamResponse
-	(*PoSTConfigResponse)(nil),                    // 20: spacemesh.v1.PoSTConfigResponse
-	(*PoSTSetupComputeProvider)(nil),              // 21: spacemesh.v1.PoSTSetupComputeProvider
-	(*PoSTSetupOpts)(nil),                         // 22: spacemesh.v1.PoSTSetupOpts
-	(*PoSTSetupStatus)(nil),                       // 23: spacemesh.v1.PoSTSetupStatus
+	(*PostSetupComputeProvidersRequest)(nil),      // 16: spacemesh.v1.PostSetupComputeProvidersRequest
+	(*PostSetupComputeProvidersResponse)(nil),     // 17: spacemesh.v1.PostSetupComputeProvidersResponse
+	(*PostSetupStatusResponse)(nil),               // 18: spacemesh.v1.PostSetupStatusResponse
+	(*PostSetupStatusStreamResponse)(nil),         // 19: spacemesh.v1.PostSetupStatusStreamResponse
+	(*PostConfigResponse)(nil),                    // 20: spacemesh.v1.PostConfigResponse
+	(*PostSetupComputeProvider)(nil),              // 21: spacemesh.v1.PostSetupComputeProvider
+	(*PostSetupOpts)(nil),                         // 22: spacemesh.v1.PostSetupOpts
+	(*PostSetupStatus)(nil),                       // 23: spacemesh.v1.PostSetupStatus
 	(*AccountId)(nil),                             // 24: spacemesh.v1.AccountId
 	(*status.Status)(nil),                         // 25: google.rpc.Status
 	(*SimpleInt)(nil),                             // 26: spacemesh.v1.SimpleInt
@@ -1496,7 +1496,7 @@ var file_spacemesh_v1_smesher_types_proto_goTypes = []interface{}{
 }
 var file_spacemesh_v1_smesher_types_proto_depIdxs = []int32{
 	24, // 0: spacemesh.v1.StartSmeshingRequest.coinbase:type_name -> spacemesh.v1.AccountId
-	22, // 1: spacemesh.v1.StartSmeshingRequest.opts:type_name -> spacemesh.v1.PoSTSetupOpts
+	22, // 1: spacemesh.v1.StartSmeshingRequest.opts:type_name -> spacemesh.v1.PostSetupOpts
 	25, // 2: spacemesh.v1.StartSmeshingResponse.status:type_name -> google.rpc.Status
 	25, // 3: spacemesh.v1.StopSmeshingResponse.status:type_name -> google.rpc.Status
 	24, // 4: spacemesh.v1.SetCoinbaseRequest.id:type_name -> spacemesh.v1.AccountId
@@ -1507,12 +1507,12 @@ var file_spacemesh_v1_smesher_types_proto_depIdxs = []int32{
 	24, // 9: spacemesh.v1.SmesherIDResponse.account_id:type_name -> spacemesh.v1.AccountId
 	24, // 10: spacemesh.v1.CoinbaseResponse.account_id:type_name -> spacemesh.v1.AccountId
 	27, // 11: spacemesh.v1.EstimatedRewardsResponse.amount:type_name -> spacemesh.v1.Amount
-	21, // 12: spacemesh.v1.PoSTSetupComputeProvidersResponse.providers:type_name -> spacemesh.v1.PoSTSetupComputeProvider
-	23, // 13: spacemesh.v1.PoSTSetupStatusResponse.status:type_name -> spacemesh.v1.PoSTSetupStatus
-	23, // 14: spacemesh.v1.PoSTSetupStatusStreamResponse.status:type_name -> spacemesh.v1.PoSTSetupStatus
-	0,  // 15: spacemesh.v1.PoSTSetupComputeProvider.compute_api:type_name -> spacemesh.v1.PoSTSetupComputeProvider.ComputeApiClass
-	1,  // 16: spacemesh.v1.PoSTSetupStatus.state:type_name -> spacemesh.v1.PoSTSetupStatus.State
-	22, // 17: spacemesh.v1.PoSTSetupStatus.opts:type_name -> spacemesh.v1.PoSTSetupOpts
+	21, // 12: spacemesh.v1.PostSetupComputeProvidersResponse.providers:type_name -> spacemesh.v1.PostSetupComputeProvider
+	23, // 13: spacemesh.v1.PostSetupStatusResponse.status:type_name -> spacemesh.v1.PostSetupStatus
+	23, // 14: spacemesh.v1.PostSetupStatusStreamResponse.status:type_name -> spacemesh.v1.PostSetupStatus
+	0,  // 15: spacemesh.v1.PostSetupComputeProvider.compute_api:type_name -> spacemesh.v1.PostSetupComputeProvider.ComputeApiClass
+	1,  // 16: spacemesh.v1.PostSetupStatus.state:type_name -> spacemesh.v1.PostSetupStatus.State
+	22, // 17: spacemesh.v1.PostSetupStatus.opts:type_name -> spacemesh.v1.PostSetupOpts
 	18, // [18:18] is the sub-list for method output_type
 	18, // [18:18] is the sub-list for method input_type
 	18, // [18:18] is the sub-list for extension type_name
@@ -1696,7 +1696,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTSetupComputeProvidersRequest); i {
+			switch v := v.(*PostSetupComputeProvidersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1708,7 +1708,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTSetupComputeProvidersResponse); i {
+			switch v := v.(*PostSetupComputeProvidersResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1720,7 +1720,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTSetupStatusResponse); i {
+			switch v := v.(*PostSetupStatusResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1732,7 +1732,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTSetupStatusStreamResponse); i {
+			switch v := v.(*PostSetupStatusStreamResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1744,7 +1744,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTConfigResponse); i {
+			switch v := v.(*PostConfigResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1756,7 +1756,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTSetupComputeProvider); i {
+			switch v := v.(*PostSetupComputeProvider); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1768,7 +1768,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTSetupOpts); i {
+			switch v := v.(*PostSetupOpts); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1780,7 +1780,7 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PoSTSetupStatus); i {
+			switch v := v.(*PostSetupStatus); i {
 			case 0:
 				return &v.state
 			case 1:

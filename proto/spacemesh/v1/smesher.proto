@@ -8,13 +8,13 @@ service SmesherService {
     // Returns true iff node is currently smeshing
     rpc IsSmeshing (google.protobuf.Empty) returns (IsSmeshingResponse);
 
-    // Starts smeshing, after completing the PoST setup.
-    // Changing of the PoST setup options (e.g., number of units), after initial setup, is supported.
+    // Starts smeshing, after completing the post setup.
+    // Changing of the post setup options (e.g., number of units), after initial setup, is supported.
     // Returns success if request is accepted by node , failure if it fails
     rpc StartSmeshing (StartSmeshingRequest) returns (StartSmeshingResponse);
 
-    // Stops smeshing, or the preceding PoST setup session, and optionally attempt to
-    // delete the PoST setup data files(s).
+    // Stops smeshing, or the preceding post setup session, and optionally attempt to
+    // delete the post setup data files(s).
     // Returns success if request is accepted by node, failure if it fails
     rpc StopSmeshing (StopSmeshingRequest) returns (StopSmeshingResponse);
 
@@ -38,17 +38,17 @@ service SmesherService {
     // Estimate smeshing rewards over the next upcoming epoch
     rpc EstimatedRewards (EstimatedRewardsRequest) returns (EstimatedRewardsResponse);
 
-    // Returns the PoST setup status
-    rpc PoSTSetupStatus (google.protobuf.Empty) returns (PoSTSetupStatusResponse);
+    // Returns the Post setup status
+    rpc PostSetupStatus (google.protobuf.Empty) returns (PostSetupStatusResponse);
 
-    // Returns a stream of updates for the PoST setup status
-    rpc PoSTSetupStatusStream (google.protobuf.Empty) returns (stream PoSTSetupStatusStreamResponse);
+    // Returns a stream of updates for the Post setup status
+    rpc PostSetupStatusStream (google.protobuf.Empty) returns (stream PostSetupStatusStreamResponse);
 
-    // Returns a list of available PoST setup compute providers
-    rpc PoSTSetupComputeProviders (PoSTSetupComputeProvidersRequest) returns (PoSTSetupComputeProvidersResponse);
+    // Returns a list of available Post setup compute providers
+    rpc PostSetupComputeProviders (PostSetupComputeProvidersRequest) returns (PostSetupComputeProvidersResponse);
 
-    // Returns the PoST protocol config
-    rpc PoSTConfig (google.protobuf.Empty) returns (PoSTConfigResponse);
+    // Returns the Post protocol config
+    rpc PostConfig (google.protobuf.Empty) returns (PostConfigResponse);
 
 }
 
