@@ -231,13 +231,13 @@ type SmesherServiceClient interface {
 	SetMinGas(ctx context.Context, in *SetMinGasRequest, opts ...grpc.CallOption) (*SetMinGasResponse, error)
 	// Estimate smeshing rewards over the next upcoming epoch
 	EstimatedRewards(ctx context.Context, in *EstimatedRewardsRequest, opts ...grpc.CallOption) (*EstimatedRewardsResponse, error)
-	// Returns the post setup status
+	// Returns the Post setup status
 	PostSetupStatus(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PostSetupStatusResponse, error)
-	// Returns a stream of updates for the post setup status
+	// Returns a stream of updates for the Post setup status
 	PostSetupStatusStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (SmesherService_PostSetupStatusStreamClient, error)
-	// Returns a list of available post setup compute providers
+	// Returns a list of available Post setup compute providers
 	PostSetupComputeProviders(ctx context.Context, in *PostSetupComputeProvidersRequest, opts ...grpc.CallOption) (*PostSetupComputeProvidersResponse, error)
-	// Returns the post protocol config
+	// Returns the Post protocol config
 	PostConfig(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*PostConfigResponse, error)
 }
 
@@ -415,13 +415,13 @@ type SmesherServiceServer interface {
 	SetMinGas(context.Context, *SetMinGasRequest) (*SetMinGasResponse, error)
 	// Estimate smeshing rewards over the next upcoming epoch
 	EstimatedRewards(context.Context, *EstimatedRewardsRequest) (*EstimatedRewardsResponse, error)
-	// Returns the post setup status
+	// Returns the Post setup status
 	PostSetupStatus(context.Context, *empty.Empty) (*PostSetupStatusResponse, error)
-	// Returns a stream of updates for the post setup status
+	// Returns a stream of updates for the Post setup status
 	PostSetupStatusStream(*empty.Empty, SmesherService_PostSetupStatusStreamServer) error
-	// Returns a list of available post setup compute providers
+	// Returns a list of available Post setup compute providers
 	PostSetupComputeProviders(context.Context, *PostSetupComputeProvidersRequest) (*PostSetupComputeProvidersResponse, error)
-	// Returns the post protocol config
+	// Returns the Post protocol config
 	PostConfig(context.Context, *empty.Empty) (*PostConfigResponse, error)
 }
 

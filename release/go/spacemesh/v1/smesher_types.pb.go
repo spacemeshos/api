@@ -187,7 +187,7 @@ type StartSmeshingRequest struct {
 
 	// Coinbase account for rewards accumulation.
 	Coinbase *AccountId `protobuf:"bytes,1,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
-	// The post setup options.
+	// The Post setup options.
 	Opts *PostSetupOpts `protobuf:"bytes,2,opt,name=opts,proto3" json:"opts,omitempty"`
 }
 
@@ -756,7 +756,7 @@ type EstimatedRewardsResponse struct {
 
 	// The amount of the total estimated reward in the next upcoming epoch
 	Amount *Amount `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	// The number of post data commitment units that this estimated reward corresponds to (part of global config)
+	// The number of Post data commitment units that this estimated reward corresponds to (part of global config)
 	NumUnits uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`
 }
 
@@ -1144,7 +1144,7 @@ type PostSetupOpts struct {
 	unknownFields protoimpl.UnknownFields
 
 	DataDir           string `protobuf:"bytes,1,opt,name=data_dir,json=dataDir,proto3" json:"data_dir,omitempty"`                                  // User provided path to create the setup data files at
-	NumUnits          uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`                              // Number of post data units to generate
+	NumUnits          uint32 `protobuf:"varint,2,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`                              // Number of Post data units to generate
 	NumFiles          uint32 `protobuf:"varint,3,opt,name=num_files,json=numFiles,proto3" json:"num_files,omitempty"`                              // Number of files to equally distribute the data among
 	ComputeProviderId uint32 `protobuf:"varint,4,opt,name=compute_provider_id,json=computeProviderId,proto3" json:"compute_provider_id,omitempty"` // A `PostSetupComputeProvider` id
 	Throttle          bool   `protobuf:"varint,5,opt,name=throttle,proto3" json:"throttle,omitempty"`                                              // Throttle down setup phase computations while user is interactive on system
