@@ -1,5 +1,5 @@
 # Pattern Usage Examples
-Examples below assume you are running a locan full node with default config file.
+Examples below assume you are running a locan full node with the default provided reference config file.
 
 ## Working with Binary Data
 Binary data submitted via grpcurl to the api must be a base64 string encoded in the following way: `base64(Int(hex_string).toBytes('big_endian', 20)`.
