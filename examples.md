@@ -6,6 +6,7 @@ Binary data submitted via grpcurl to the api must be a base64 string encoded in 
 So for example for address represted as a hex string of `0x8C99365feE31f1cEDB056A35D7f561584679ea3c`, the base64 encoding is `jJk2X+4x8c7bBWo11/VhWEZ56jw='`
 
 ## Account Balance
+Returns the current and project balance of an account identified by an address.
 
 ```bash
 grpcurl -d '{"filter" : {"accountId":{"address":"jJk2X+4x8c7bBWo11/VhWEZ56jw="}, "account_data_flags":4}}' -plaintext localhost:9092 spacemesh.v1.GlobalStateService.AccountDataQuery
@@ -35,6 +36,7 @@ grpcurl -d '{"filter" : {"accountId":{"address":"jJk2X+4x8c7bBWo11/VhWEZ56jw="},
 
 
 ## Account Rewards
+Returns the smeshing rewards of a rewards account identified by its address.
 
 ```bash
 grpcurl -d '{"filter" : {"accountId":{"address":"jJk2X+4x8c7bBWo11/VhWEZ56jw="}, "account_data_flags":4}}' -plaintext localhost:9092 spacemesh.v1.GlobalStateService.AccountDataQuery
