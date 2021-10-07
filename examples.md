@@ -1,4 +1,4 @@
-# Pattern Usage Examples
+# Usage Examples
 Examples below assume you are running a locan full node with the default provided reference config file.
 
 ## Working with Binary Data
