@@ -180,7 +180,7 @@ type SimpleInt struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Value uint64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	Value uint64 `protobuf:"varint,1,opt,name=value,proto3" json:"value"`
 }
 
 func (x *SimpleInt) Reset() {
@@ -227,7 +227,7 @@ type SimpleString struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value"`
 }
 
 func (x *SimpleString) Reset() {
@@ -275,7 +275,7 @@ type Amount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Value uint64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	Value uint64 `protobuf:"varint,1,opt,name=value,proto3" json:"value"`
 }
 
 func (x *Amount) Reset() {
@@ -510,8 +510,8 @@ type GasOffered struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GasProvided uint64 `protobuf:"varint,1,opt,name=gas_provided,json=gasProvided,proto3" json:"gas_provided,omitempty"`
-	GasPrice    uint64 `protobuf:"varint,2,opt,name=gas_price,json=gasPrice,proto3" json:"gas_price,omitempty"`
+	GasProvided uint64 `protobuf:"varint,1,opt,name=gas_provided,json=gasProvided,proto3" json:"gas_provided"`
+	GasPrice    uint64 `protobuf:"varint,2,opt,name=gas_price,json=gasPrice,proto3" json:"gas_price"`
 }
 
 func (x *GasOffered) Reset() {
@@ -747,7 +747,7 @@ type Activation struct {
 	SmesherId *SmesherId    `protobuf:"bytes,3,opt,name=smesher_id,json=smesherId,proto3" json:"smesher_id,omitempty"` // id of smesher who created the ATX
 	Coinbase  *AccountId    `protobuf:"bytes,4,opt,name=coinbase,proto3" json:"coinbase,omitempty"`                    // coinbase account id
 	PrevAtx   *ActivationId `protobuf:"bytes,5,opt,name=prev_atx,json=prevAtx,proto3" json:"prev_atx,omitempty"`       // previous ATX pointed to
-	NumUnits  uint32        `protobuf:"varint,6,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"`   // number of PoST data commitment units
+	NumUnits  uint32        `protobuf:"varint,6,opt,name=num_units,json=numUnits,proto3" json:"num_units"`             // number of PoST data commitment units
 }
 
 func (x *Activation) Reset() {
@@ -839,7 +839,7 @@ type Transaction struct {
 	Sender     *AccountId          `protobuf:"bytes,4,opt,name=sender,proto3" json:"sender,omitempty"`                           // tx originator, should match signer inside Signature
 	GasOffered *GasOffered         `protobuf:"bytes,5,opt,name=gas_offered,json=gasOffered,proto3" json:"gas_offered,omitempty"` // gas price and max gas offered
 	Amount     *Amount             `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`                           // amount of coin transfered in this tx by sender
-	Counter    uint64              `protobuf:"varint,7,opt,name=counter,proto3" json:"counter,omitempty"`                        // tx counter aka nonce
+	Counter    uint64              `protobuf:"varint,7,opt,name=counter,proto3" json:"counter"`                                  // tx counter aka nonce
 	Signature  *Signature          `protobuf:"bytes,8,opt,name=signature,proto3" json:"signature,omitempty"`                     // sender signature on transaction
 }
 
@@ -1260,7 +1260,7 @@ type LayerNumber struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Number uint32 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+	Number uint32 `protobuf:"varint,1,opt,name=number,proto3" json:"number"`
 }
 
 func (x *LayerNumber) Reset() {
