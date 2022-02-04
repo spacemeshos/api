@@ -3,6 +3,7 @@ package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 
 import "spacemesh/v1/global_state_types.proto";
+import "spacemesh/v1/types.proto";
 
 message AccountsResponse {
     repeated Account account_wrapper = 1;
@@ -10,4 +11,29 @@ message AccountsResponse {
 
 message NetworkInfoResponse {
     string id = 1;
+}
+
+message EpochData {
+    bytes beacon = 1;
+}
+
+message Eligibility {
+    uint32 j = 1;
+    bytes signature = 2; 
+}
+
+message Proposal {
+    LayerNumber layer = 1; 
+    SmesherId smesher = 2; 
+    oneof epoch_data {
+        bytes reference = 3;
+        EpochData data = 4;
+    }
+    bytes ballot = 5;
+    repeated Eligibility eligibilities = 6;
+    enum Status {
+        Created = 0;
+        Included = 1;
+    }
+    Status status = 7;
 }
