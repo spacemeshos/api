@@ -23,17 +23,19 @@ message Eligibility {
 }
 
 message Proposal {
-    LayerNumber layer = 1; 
-    SmesherId smesher = 2; 
+    bytes id = 1;
+    SimpleInt epoch = 2;
+    LayerNumber layer = 3; 
+    SmesherId smesher = 4; 
     oneof epoch_data {
-        bytes reference = 3;
-        EpochData data = 4;
+        bytes reference = 5;
+        EpochData data = 6;
     }
-    bytes ballot = 5;
-    repeated Eligibility eligibilities = 6;
+    bytes ballot = 7;
+    repeated Eligibility eligibilities = 8;
     enum Status {
         Created = 0;
         Included = 1;
     }
-    Status status = 7;
+    Status status = 9;
 }
