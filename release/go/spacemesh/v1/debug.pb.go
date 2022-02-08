@@ -38,7 +38,7 @@ var file_spacemesh_v1_debug_proto_rawDesc = []byte{
 	0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x2f, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x74, 0x79, 0x70,
 	0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0x9c, 0x01, 0x0a, 0x0c, 0x44, 0x65, 0x62, 0x75, 0x67, 0x53,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xe1, 0x01, 0x0a, 0x0c, 0x44, 0x65, 0x62, 0x75, 0x67, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x48, 0x0a, 0x0b, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
 	0x6b, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x21, 0x2e,
@@ -48,25 +48,32 @@ var file_spacemesh_v1_debug_proto_rawDesc = []byte{
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45,
 	0x6d, 0x70, 0x74, 0x79, 0x1a, 0x1e, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
 	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70,
-	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x43, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x70, 0x6f, 0x73, 0x61, 0x6c,
+	0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a,
+	0x16, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50,
+	0x72, 0x6f, 0x70, 0x6f, 0x73, 0x61, 0x6c, 0x30, 0x01, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f,
+	0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_spacemesh_v1_debug_proto_goTypes = []interface{}{
 	(*empty.Empty)(nil),         // 0: google.protobuf.Empty
 	(*NetworkInfoResponse)(nil), // 1: spacemesh.v1.NetworkInfoResponse
 	(*AccountsResponse)(nil),    // 2: spacemesh.v1.AccountsResponse
+	(*Proposal)(nil),            // 3: spacemesh.v1.Proposal
 }
 var file_spacemesh_v1_debug_proto_depIdxs = []int32{
 	0, // 0: spacemesh.v1.DebugService.NetworkInfo:input_type -> google.protobuf.Empty
 	0, // 1: spacemesh.v1.DebugService.Accounts:input_type -> google.protobuf.Empty
-	1, // 2: spacemesh.v1.DebugService.NetworkInfo:output_type -> spacemesh.v1.NetworkInfoResponse
-	2, // 3: spacemesh.v1.DebugService.Accounts:output_type -> spacemesh.v1.AccountsResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 2: spacemesh.v1.DebugService.ProposalsStream:input_type -> google.protobuf.Empty
+	1, // 3: spacemesh.v1.DebugService.NetworkInfo:output_type -> spacemesh.v1.NetworkInfoResponse
+	2, // 4: spacemesh.v1.DebugService.Accounts:output_type -> spacemesh.v1.AccountsResponse
+	3, // 5: spacemesh.v1.DebugService.ProposalsStream:output_type -> spacemesh.v1.Proposal
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -115,6 +122,8 @@ type DebugServiceClient interface {
 	// Accounts returns data for all the accounts currently in the node's current global state.
 	// This includes each account's address, nonce and balance but excludes projection of account state.
 	Accounts(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*AccountsResponse, error)
+	// ProposalsStream streams all proposals that are confirmed by hare.
+	ProposalsStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (DebugService_ProposalsStreamClient, error)
 }
 
 type debugServiceClient struct {
@@ -143,6 +152,38 @@ func (c *debugServiceClient) Accounts(ctx context.Context, in *empty.Empty, opts
 	return out, nil
 }
 
+func (c *debugServiceClient) ProposalsStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (DebugService_ProposalsStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_DebugService_serviceDesc.Streams[0], "/spacemesh.v1.DebugService/ProposalsStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &debugServiceProposalsStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type DebugService_ProposalsStreamClient interface {
+	Recv() (*Proposal, error)
+	grpc.ClientStream
+}
+
+type debugServiceProposalsStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *debugServiceProposalsStreamClient) Recv() (*Proposal, error) {
+	m := new(Proposal)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // DebugServiceServer is the server API for DebugService service.
 type DebugServiceServer interface {
 	// NetworkInfo returns p2p network information. Mostly required for integration with deployment
@@ -151,6 +192,8 @@ type DebugServiceServer interface {
 	// Accounts returns data for all the accounts currently in the node's current global state.
 	// This includes each account's address, nonce and balance but excludes projection of account state.
 	Accounts(context.Context, *empty.Empty) (*AccountsResponse, error)
+	// ProposalsStream streams all proposals that are confirmed by hare.
+	ProposalsStream(*empty.Empty, DebugService_ProposalsStreamServer) error
 }
 
 // UnimplementedDebugServiceServer can be embedded to have forward compatible implementations.
@@ -162,6 +205,9 @@ func (*UnimplementedDebugServiceServer) NetworkInfo(context.Context, *empty.Empt
 }
 func (*UnimplementedDebugServiceServer) Accounts(context.Context, *empty.Empty) (*AccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Accounts not implemented")
+}
+func (*UnimplementedDebugServiceServer) ProposalsStream(*empty.Empty, DebugService_ProposalsStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method ProposalsStream not implemented")
 }
 
 func RegisterDebugServiceServer(s *grpc.Server, srv DebugServiceServer) {
@@ -204,6 +250,27 @@ func _DebugService_Accounts_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DebugService_ProposalsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(empty.Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(DebugServiceServer).ProposalsStream(m, &debugServiceProposalsStreamServer{stream})
+}
+
+type DebugService_ProposalsStreamServer interface {
+	Send(*Proposal) error
+	grpc.ServerStream
+}
+
+type debugServiceProposalsStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *debugServiceProposalsStreamServer) Send(m *Proposal) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _DebugService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "spacemesh.v1.DebugService",
 	HandlerType: (*DebugServiceServer)(nil),
@@ -217,6 +284,12 @@ var _DebugService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _DebugService_Accounts_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ProposalsStream",
+			Handler:       _DebugService_ProposalsStream_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "spacemesh/v1/debug.proto",
 }
