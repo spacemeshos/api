@@ -57,7 +57,9 @@ message CoinbaseResponse {
     AccountId account_id = 1;
 }
 
-message EstimatedRewardsRequest {}
+message EstimatedRewardsRequest {
+    uint32 layer_id = 1;
+}
 
 // Estimated rewards for the next epoch. Note that this is a global value that will be the
 // same for all smeshers, and is based on the default minimum commitment size and fixed
@@ -65,8 +67,6 @@ message EstimatedRewardsRequest {}
 message EstimatedRewardsResponse {
     // The amount of the total estimated reward in the next upcoming epoch
     Amount amount = 1;
-    // The number of Post data commitment units that this estimated reward corresponds to (part of global config)
-    uint32 num_units = 2;
 }
 
 message PostSetupComputeProvidersRequest {
