@@ -50,5 +50,7 @@ service SmesherService {
     // Returns the Post protocol config
     rpc PostConfig (google.protobuf.Empty) returns (PostConfigResponse);
 
+    // Returns info about requested epochs.
+    rpc SmeshingStatus(SmeshingStatusRequest) returns (SmeshingStatusResponse);
 }
 
