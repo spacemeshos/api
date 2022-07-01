@@ -47,7 +47,7 @@ message Transaction {
     bytes id = 1;
     bytes principal = 2;
     bytes template = 3;
-    uint32 method = 4;
+    uint32 method = 4; // this is actually limited by uint8, but no type for that.
     Nonce nonce = 5;
     LayerLimits limits = 6;
     uint64 max_gas = 7;
@@ -111,4 +111,3 @@ message AppEvent { // an event emitted from an app instance
     TransactionId transaction_id = 1; // the transaction that called the code
     string message = 2; // the event's string emitted from code
 }
-
