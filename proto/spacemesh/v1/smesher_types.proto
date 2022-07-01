@@ -130,8 +130,7 @@ message PostSetupStatus {
 }
 
 message SmeshingStatusRequest {
-    string smesher_id = 1;
-    repeated uint32 epochs = 2; // Epochs to query status for. If empty, returns status for current, next and subsequent.
+    repeated uint32 epochs = 1; // Epochs to query status for. If empty, returns status for current, next and subsequent.
 }
 
 message SmeshingStatusResponse {
