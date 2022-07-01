@@ -87,6 +87,55 @@ func (TransactionState_TransactionState) EnumDescriptor() ([]byte, []int) {
 	return file_spacemesh_v1_tx_types_proto_rawDescGZIP(), []int{7, 0}
 }
 
+type TransactionResult_Status int32
+
+const (
+	TransactionResult_SUCCESS TransactionResult_Status = 0
+	TransactionResult_FAILURE TransactionResult_Status = 1
+	TransactionResult_INVALID TransactionResult_Status = 2
+)
+
+// Enum value maps for TransactionResult_Status.
+var (
+	TransactionResult_Status_name = map[int32]string{
+		0: "SUCCESS",
+		1: "FAILURE",
+		2: "INVALID",
+	}
+	TransactionResult_Status_value = map[string]int32{
+		"SUCCESS": 0,
+		"FAILURE": 1,
+		"INVALID": 2,
+	}
+)
+
+func (x TransactionResult_Status) Enum() *TransactionResult_Status {
+	p := new(TransactionResult_Status)
+	*p = x
+	return p
+}
+
+func (x TransactionResult_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TransactionResult_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_spacemesh_v1_tx_types_proto_enumTypes[1].Descriptor()
+}
+
+func (TransactionResult_Status) Type() protoreflect.EnumType {
+	return &file_spacemesh_v1_tx_types_proto_enumTypes[1]
+}
+
+func (x TransactionResult_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TransactionResult_Status.Descriptor instead.
+func (TransactionResult_Status) EnumDescriptor() ([]byte, []int) {
+	return file_spacemesh_v1_tx_types_proto_rawDescGZIP(), []int{9, 0}
+}
+
 type TransactionsIds struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -514,6 +563,194 @@ func (x *TransactionState) GetState() TransactionState_TransactionState {
 	return TransactionState_TRANSACTION_STATE_UNSPECIFIED
 }
 
+// TransactionResultsRequest request object for results stream.
+type TransactionResultsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// id is filter by transaction id.
+	Id []byte `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// address is a filter by account address, it could be principal or any affected address.
+	Address []byte `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	// start streaming from this layer. if 0 - stream will start from genesis.
+	Start uint32 `protobuf:"varint,3,opt,name=start,proto3" json:"start,omitempty"`
+	// end streaming at this layer. if 0 - stream till the latest available layer.
+	End uint32 `protobuf:"varint,4,opt,name=end,proto3" json:"end,omitempty"`
+	// watch live data.
+	Watch bool `protobuf:"varint,5,opt,name=watch,proto3" json:"watch,omitempty"`
+}
+
+func (x *TransactionResultsRequest) Reset() {
+	*x = TransactionResultsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_tx_types_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TransactionResultsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionResultsRequest) ProtoMessage() {}
+
+func (x *TransactionResultsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_tx_types_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionResultsRequest.ProtoReflect.Descriptor instead.
+func (*TransactionResultsRequest) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_tx_types_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *TransactionResultsRequest) GetId() []byte {
+	if x != nil {
+		return x.Id
+	}
+	return nil
+}
+
+func (x *TransactionResultsRequest) GetAddress() []byte {
+	if x != nil {
+		return x.Address
+	}
+	return nil
+}
+
+func (x *TransactionResultsRequest) GetStart() uint32 {
+	if x != nil {
+		return x.Start
+	}
+	return 0
+}
+
+func (x *TransactionResultsRequest) GetEnd() uint32 {
+	if x != nil {
+		return x.End
+	}
+	return 0
+}
+
+func (x *TransactionResultsRequest) GetWatch() bool {
+	if x != nil {
+		return x.Watch
+	}
+	return false
+}
+
+type TransactionResult struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tx               *Transaction             `protobuf:"bytes,1,opt,name=tx,proto3" json:"tx,omitempty"`
+	Status           TransactionResult_Status `protobuf:"varint,2,opt,name=status,proto3,enum=spacemesh.v1.TransactionResult_Status" json:"status,omitempty"`
+	Message          string                   `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	GasConsumed      uint64                   `protobuf:"varint,4,opt,name=gas_consumed,json=gasConsumed,proto3" json:"gas_consumed,omitempty"`
+	Fee              uint64                   `protobuf:"varint,5,opt,name=fee,proto3" json:"fee,omitempty"`
+	Block            []byte                   `protobuf:"bytes,6,opt,name=block,proto3" json:"block,omitempty"`
+	Layer            uint32                   `protobuf:"varint,7,opt,name=layer,proto3" json:"layer,omitempty"`
+	TouchedAddresses [][]byte                 `protobuf:"bytes,8,rep,name=touched_addresses,json=touchedAddresses,proto3" json:"touched_addresses,omitempty"`
+}
+
+func (x *TransactionResult) Reset() {
+	*x = TransactionResult{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_tx_types_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TransactionResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionResult) ProtoMessage() {}
+
+func (x *TransactionResult) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_tx_types_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionResult.ProtoReflect.Descriptor instead.
+func (*TransactionResult) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_tx_types_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *TransactionResult) GetTx() *Transaction {
+	if x != nil {
+		return x.Tx
+	}
+	return nil
+}
+
+func (x *TransactionResult) GetStatus() TransactionResult_Status {
+	if x != nil {
+		return x.Status
+	}
+	return TransactionResult_SUCCESS
+}
+
+func (x *TransactionResult) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *TransactionResult) GetGasConsumed() uint64 {
+	if x != nil {
+		return x.GasConsumed
+	}
+	return 0
+}
+
+func (x *TransactionResult) GetFee() uint64 {
+	if x != nil {
+		return x.Fee
+	}
+	return 0
+}
+
+func (x *TransactionResult) GetBlock() []byte {
+	if x != nil {
+		return x.Block
+	}
+	return nil
+}
+
+func (x *TransactionResult) GetLayer() uint32 {
+	if x != nil {
+		return x.Layer
+	}
+	return 0
+}
+
+func (x *TransactionResult) GetTouchedAddresses() [][]byte {
+	if x != nil {
+		return x.TouchedAddresses
+	}
+	return nil
+}
+
 var File_spacemesh_v1_tx_types_proto protoreflect.FileDescriptor
 
 var file_spacemesh_v1_tx_types_proto_rawDesc = []byte{
@@ -605,7 +842,37 @@ var file_spacemesh_v1_tx_types_proto_rawDesc = []byte{
 	0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x41, 0x54,
 	0x45, 0x5f, 0x4d, 0x45, 0x53, 0x48, 0x10, 0x05, 0x12, 0x1f, 0x0a, 0x1b, 0x54, 0x52, 0x41, 0x4e,
 	0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x50, 0x52,
-	0x4f, 0x43, 0x45, 0x53, 0x53, 0x45, 0x44, 0x10, 0x06, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74,
+	0x4f, 0x43, 0x45, 0x53, 0x53, 0x45, 0x44, 0x10, 0x06, 0x22, 0x83, 0x01, 0x0a, 0x19, 0x54, 0x72,
+	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x02, 0x69, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x72, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d,
+	0x52, 0x05, 0x73, 0x74, 0x61, 0x72, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x6e, 0x64, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x03, 0x65, 0x6e, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x77, 0x61, 0x74,
+	0x63, 0x68, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x77, 0x61, 0x74, 0x63, 0x68, 0x22,
+	0xd7, 0x02, 0x0a, 0x11, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x29, 0x0a, 0x02, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x02, 0x74, 0x78,
+	0x12, 0x3e, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x26, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e,
+	0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x67, 0x61,
+	0x73, 0x5f, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x0b, 0x67, 0x61, 0x73, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x64, 0x12, 0x10, 0x0a,
+	0x03, 0x66, 0x65, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x03, 0x66, 0x65, 0x65, 0x12,
+	0x14, 0x0a, 0x05, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05,
+	0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x18, 0x07,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x12, 0x2b, 0x0a, 0x11, 0x74,
+	0x6f, 0x75, 0x63, 0x68, 0x65, 0x64, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73,
+	0x18, 0x08, 0x20, 0x03, 0x28, 0x0c, 0x52, 0x10, 0x74, 0x6f, 0x75, 0x63, 0x68, 0x65, 0x64, 0x41,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x22, 0x2f, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x55, 0x43, 0x43, 0x45, 0x53, 0x53, 0x10, 0x00, 0x12,
+	0x0b, 0x0a, 0x07, 0x46, 0x41, 0x49, 0x4c, 0x55, 0x52, 0x45, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07,
+	0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x10, 0x02, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74,
 	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
 	0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f,
 	0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62,
@@ -624,39 +891,44 @@ func file_spacemesh_v1_tx_types_proto_rawDescGZIP() []byte {
 	return file_spacemesh_v1_tx_types_proto_rawDescData
 }
 
-var file_spacemesh_v1_tx_types_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_spacemesh_v1_tx_types_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_spacemesh_v1_tx_types_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_spacemesh_v1_tx_types_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_spacemesh_v1_tx_types_proto_goTypes = []interface{}{
 	(TransactionState_TransactionState)(0),  // 0: spacemesh.v1.TransactionState.TransactionState
-	(*TransactionsIds)(nil),                 // 1: spacemesh.v1.TransactionsIds
-	(*SubmitTransactionRequest)(nil),        // 2: spacemesh.v1.SubmitTransactionRequest
-	(*SubmitTransactionResponse)(nil),       // 3: spacemesh.v1.SubmitTransactionResponse
-	(*TransactionsStateRequest)(nil),        // 4: spacemesh.v1.TransactionsStateRequest
-	(*TransactionsStateResponse)(nil),       // 5: spacemesh.v1.TransactionsStateResponse
-	(*TransactionsStateStreamRequest)(nil),  // 6: spacemesh.v1.TransactionsStateStreamRequest
-	(*TransactionsStateStreamResponse)(nil), // 7: spacemesh.v1.TransactionsStateStreamResponse
-	(*TransactionState)(nil),                // 8: spacemesh.v1.TransactionState
-	(*TransactionId)(nil),                   // 9: spacemesh.v1.TransactionId
-	(*status.Status)(nil),                   // 10: google.rpc.Status
-	(*Transaction)(nil),                     // 11: spacemesh.v1.Transaction
+	(TransactionResult_Status)(0),           // 1: spacemesh.v1.TransactionResult.Status
+	(*TransactionsIds)(nil),                 // 2: spacemesh.v1.TransactionsIds
+	(*SubmitTransactionRequest)(nil),        // 3: spacemesh.v1.SubmitTransactionRequest
+	(*SubmitTransactionResponse)(nil),       // 4: spacemesh.v1.SubmitTransactionResponse
+	(*TransactionsStateRequest)(nil),        // 5: spacemesh.v1.TransactionsStateRequest
+	(*TransactionsStateResponse)(nil),       // 6: spacemesh.v1.TransactionsStateResponse
+	(*TransactionsStateStreamRequest)(nil),  // 7: spacemesh.v1.TransactionsStateStreamRequest
+	(*TransactionsStateStreamResponse)(nil), // 8: spacemesh.v1.TransactionsStateStreamResponse
+	(*TransactionState)(nil),                // 9: spacemesh.v1.TransactionState
+	(*TransactionResultsRequest)(nil),       // 10: spacemesh.v1.TransactionResultsRequest
+	(*TransactionResult)(nil),               // 11: spacemesh.v1.TransactionResult
+	(*TransactionId)(nil),                   // 12: spacemesh.v1.TransactionId
+	(*status.Status)(nil),                   // 13: google.rpc.Status
+	(*Transaction)(nil),                     // 14: spacemesh.v1.Transaction
 }
 var file_spacemesh_v1_tx_types_proto_depIdxs = []int32{
-	9,  // 0: spacemesh.v1.TransactionsIds.transaction_id:type_name -> spacemesh.v1.TransactionId
-	10, // 1: spacemesh.v1.SubmitTransactionResponse.status:type_name -> google.rpc.Status
-	8,  // 2: spacemesh.v1.SubmitTransactionResponse.txstate:type_name -> spacemesh.v1.TransactionState
-	9,  // 3: spacemesh.v1.TransactionsStateRequest.transaction_id:type_name -> spacemesh.v1.TransactionId
-	8,  // 4: spacemesh.v1.TransactionsStateResponse.transactions_state:type_name -> spacemesh.v1.TransactionState
-	11, // 5: spacemesh.v1.TransactionsStateResponse.transactions:type_name -> spacemesh.v1.Transaction
-	9,  // 6: spacemesh.v1.TransactionsStateStreamRequest.transaction_id:type_name -> spacemesh.v1.TransactionId
-	8,  // 7: spacemesh.v1.TransactionsStateStreamResponse.transaction_state:type_name -> spacemesh.v1.TransactionState
-	11, // 8: spacemesh.v1.TransactionsStateStreamResponse.transaction:type_name -> spacemesh.v1.Transaction
-	9,  // 9: spacemesh.v1.TransactionState.id:type_name -> spacemesh.v1.TransactionId
+	12, // 0: spacemesh.v1.TransactionsIds.transaction_id:type_name -> spacemesh.v1.TransactionId
+	13, // 1: spacemesh.v1.SubmitTransactionResponse.status:type_name -> google.rpc.Status
+	9,  // 2: spacemesh.v1.SubmitTransactionResponse.txstate:type_name -> spacemesh.v1.TransactionState
+	12, // 3: spacemesh.v1.TransactionsStateRequest.transaction_id:type_name -> spacemesh.v1.TransactionId
+	9,  // 4: spacemesh.v1.TransactionsStateResponse.transactions_state:type_name -> spacemesh.v1.TransactionState
+	14, // 5: spacemesh.v1.TransactionsStateResponse.transactions:type_name -> spacemesh.v1.Transaction
+	12, // 6: spacemesh.v1.TransactionsStateStreamRequest.transaction_id:type_name -> spacemesh.v1.TransactionId
+	9,  // 7: spacemesh.v1.TransactionsStateStreamResponse.transaction_state:type_name -> spacemesh.v1.TransactionState
+	14, // 8: spacemesh.v1.TransactionsStateStreamResponse.transaction:type_name -> spacemesh.v1.Transaction
+	12, // 9: spacemesh.v1.TransactionState.id:type_name -> spacemesh.v1.TransactionId
 	0,  // 10: spacemesh.v1.TransactionState.state:type_name -> spacemesh.v1.TransactionState.TransactionState
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	14, // 11: spacemesh.v1.TransactionResult.tx:type_name -> spacemesh.v1.Transaction
+	1,  // 12: spacemesh.v1.TransactionResult.status:type_name -> spacemesh.v1.TransactionResult.Status
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_tx_types_proto_init() }
@@ -762,14 +1034,38 @@ func file_spacemesh_v1_tx_types_proto_init() {
 				return nil
 			}
 		}
+		file_spacemesh_v1_tx_types_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TransactionResultsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_tx_types_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TransactionResult); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_tx_types_proto_rawDesc,
-			NumEnums:      1,
-			NumMessages:   8,
+			NumEnums:      2,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

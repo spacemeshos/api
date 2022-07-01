@@ -502,7 +502,7 @@ type Transaction struct {
 	Id        []byte       `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Principal []byte       `protobuf:"bytes,2,opt,name=principal,proto3" json:"principal,omitempty"`
 	Template  []byte       `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
-	Method    uint32       `protobuf:"varint,4,opt,name=method,proto3" json:"method,omitempty"`
+	Method    uint32       `protobuf:"varint,4,opt,name=method,proto3" json:"method,omitempty"` // this is actually limited by uint8, but no type for that.
 	Nonce     *Nonce       `protobuf:"bytes,5,opt,name=nonce,proto3" json:"nonce,omitempty"`
 	Limits    *LayerLimits `protobuf:"bytes,6,opt,name=limits,proto3" json:"limits,omitempty"`
 	MaxGas    uint64       `protobuf:"varint,7,opt,name=max_gas,json=maxGas,proto3" json:"max_gas,omitempty"`
