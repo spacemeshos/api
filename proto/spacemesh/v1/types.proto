@@ -16,7 +16,7 @@ message Amount {
 }
 
 message AccountId {
-    bytes address = 1;
+    string address = 1;
 }
 
 message TransactionId {
