@@ -128,6 +128,61 @@ func (PostSetupStatus_State) EnumDescriptor() ([]byte, []int) {
 	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{21, 0}
 }
 
+type SmeshingStatusResponse_EpochStatus int32
+
+const (
+	SmeshingStatusResponse_POST_NOT_FOUND       SmeshingStatusResponse_EpochStatus = 0 // No ATX and creation of post not started yet.
+	SmeshingStatusResponse_INITIALIZING_POST    SmeshingStatusResponse_EpochStatus = 1 // When node start create post file.
+	SmeshingStatusResponse_GENERATING_POS_PROOF SmeshingStatusResponse_EpochStatus = 2
+	SmeshingStatusResponse_WITING_FOR_POET      SmeshingStatusResponse_EpochStatus = 3
+	SmeshingStatusResponse_SMESHING             SmeshingStatusResponse_EpochStatus = 4
+)
+
+// Enum value maps for SmeshingStatusResponse_EpochStatus.
+var (
+	SmeshingStatusResponse_EpochStatus_name = map[int32]string{
+		0: "POST_NOT_FOUND",
+		1: "INITIALIZING_POST",
+		2: "GENERATING_POS_PROOF",
+		3: "WITING_FOR_POET",
+		4: "SMESHING",
+	}
+	SmeshingStatusResponse_EpochStatus_value = map[string]int32{
+		"POST_NOT_FOUND":       0,
+		"INITIALIZING_POST":    1,
+		"GENERATING_POS_PROOF": 2,
+		"WITING_FOR_POET":      3,
+		"SMESHING":             4,
+	}
+)
+
+func (x SmeshingStatusResponse_EpochStatus) Enum() *SmeshingStatusResponse_EpochStatus {
+	p := new(SmeshingStatusResponse_EpochStatus)
+	*p = x
+	return p
+}
+
+func (x SmeshingStatusResponse_EpochStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SmeshingStatusResponse_EpochStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_spacemesh_v1_smesher_types_proto_enumTypes[2].Descriptor()
+}
+
+func (SmeshingStatusResponse_EpochStatus) Type() protoreflect.EnumType {
+	return &file_spacemesh_v1_smesher_types_proto_enumTypes[2]
+}
+
+func (x SmeshingStatusResponse_EpochStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SmeshingStatusResponse_EpochStatus.Descriptor instead.
+func (SmeshingStatusResponse_EpochStatus) EnumDescriptor() ([]byte, []int) {
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{22, 0}
+}
+
 type IsSmeshingResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1217,10 +1272,13 @@ type PostSetupStatus struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	State            PostSetupStatus_State `protobuf:"varint,1,opt,name=state,proto3,enum=spacemesh.v1.PostSetupStatus_State" json:"state,omitempty"`
-	NumLabelsWritten uint64                `protobuf:"varint,2,opt,name=num_labels_written,json=numLabelsWritten,proto3" json:"num_labels_written,omitempty"` // Number of labels (hashes) written to the data files
-	Opts             *PostSetupOpts        `protobuf:"bytes,3,opt,name=opts,proto3" json:"opts,omitempty"`                                                    // setup options previously set by the user
-	ErrorMessage     string                `protobuf:"bytes,4,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`                // The error message, if the state is STATE_ERROR
+	State               PostSetupStatus_State `protobuf:"varint,1,opt,name=state,proto3,enum=spacemesh.v1.PostSetupStatus_State" json:"state,omitempty"`
+	NumLabelsWritten    uint64                `protobuf:"varint,2,opt,name=num_labels_written,json=numLabelsWritten,proto3" json:"num_labels_written,omitempty"`         // Number of labels (hashes) written to the data files
+	Opts                *PostSetupOpts        `protobuf:"bytes,3,opt,name=opts,proto3" json:"opts,omitempty"`                                                            // setup options previously set by the user
+	ErrorMessage        string                `protobuf:"bytes,4,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`                        // The error message, if the state is STATE_ERROR
+	ProcessedHrp        string                `protobuf:"bytes,5,opt,name=processed_hrp,json=processedHrp,proto3" json:"processed_hrp,omitempty"`                        // The processed size, like `176 GB`
+	ProcessingTotalSize string                `protobuf:"bytes,6,opt,name=processing_total_size,json=processingTotalSize,proto3" json:"processing_total_size,omitempty"` // Total size, that should be processed, like `256 GB`
+	ProcessedPercentage uint32                `protobuf:"varint,7,opt,name=processed_percentage,json=processedPercentage,proto3" json:"processed_percentage,omitempty"`  // The processed percentage, like `50`
 }
 
 func (x *PostSetupStatus) Reset() {
@@ -1283,51 +1341,25 @@ func (x *PostSetupStatus) GetErrorMessage() string {
 	return ""
 }
 
-type SmeshingStatusRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Epochs []uint32 `protobuf:"varint,1,rep,packed,name=epochs,proto3" json:"epochs,omitempty"` // Epochs to query status for. If empty, returns status for current, next and subsequent.
-}
-
-func (x *SmeshingStatusRequest) Reset() {
-	*x = SmeshingStatusRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[22]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SmeshingStatusRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SmeshingStatusRequest) ProtoMessage() {}
-
-func (x *SmeshingStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[22]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SmeshingStatusRequest.ProtoReflect.Descriptor instead.
-func (*SmeshingStatusRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *SmeshingStatusRequest) GetEpochs() []uint32 {
+func (x *PostSetupStatus) GetProcessedHrp() string {
 	if x != nil {
-		return x.Epochs
+		return x.ProcessedHrp
 	}
-	return nil
+	return ""
+}
+
+func (x *PostSetupStatus) GetProcessingTotalSize() string {
+	if x != nil {
+		return x.ProcessingTotalSize
+	}
+	return ""
+}
+
+func (x *PostSetupStatus) GetProcessedPercentage() uint32 {
+	if x != nil {
+		return x.ProcessedPercentage
+	}
+	return 0
 }
 
 type SmeshingStatusResponse struct {
@@ -1335,18 +1367,16 @@ type SmeshingStatusResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status              string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	Epoch               uint32 `protobuf:"varint,2,opt,name=epoch,proto3" json:"epoch,omitempty"`
-	Estimated           uint64 `protobuf:"varint,3,opt,name=estimated,proto3" json:"estimated,omitempty"`
-	Reason              string `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
-	ProcessedBytes      string `protobuf:"bytes,5,opt,name=processed_bytes,json=processedBytes,proto3" json:"processed_bytes,omitempty"`
-	ProcessedPercentage string `protobuf:"bytes,6,opt,name=processed_percentage,json=processedPercentage,proto3" json:"processed_percentage,omitempty"`
+	Status    SmeshingStatusResponse_EpochStatus `protobuf:"varint,1,opt,name=status,proto3,enum=spacemesh.v1.SmeshingStatusResponse_EpochStatus" json:"status,omitempty"`
+	Epoch     uint32                             `protobuf:"varint,2,opt,name=epoch,proto3" json:"epoch,omitempty"`
+	Estimated uint64                             `protobuf:"varint,3,opt,name=estimated,proto3" json:"estimated,omitempty"`
+	Reason    string                             `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
 }
 
 func (x *SmeshingStatusResponse) Reset() {
 	*x = SmeshingStatusResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[23]
+		mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1359,7 +1389,7 @@ func (x *SmeshingStatusResponse) String() string {
 func (*SmeshingStatusResponse) ProtoMessage() {}
 
 func (x *SmeshingStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[23]
+	mi := &file_spacemesh_v1_smesher_types_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1372,14 +1402,14 @@ func (x *SmeshingStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmeshingStatusResponse.ProtoReflect.Descriptor instead.
 func (*SmeshingStatusResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{23}
+	return file_spacemesh_v1_smesher_types_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *SmeshingStatusResponse) GetStatus() string {
+func (x *SmeshingStatusResponse) GetStatus() SmeshingStatusResponse_EpochStatus {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return SmeshingStatusResponse_POST_NOT_FOUND
 }
 
 func (x *SmeshingStatusResponse) GetEpoch() uint32 {
@@ -1399,20 +1429,6 @@ func (x *SmeshingStatusResponse) GetEstimated() uint64 {
 func (x *SmeshingStatusResponse) GetReason() string {
 	if x != nil {
 		return x.Reason
-	}
-	return ""
-}
-
-func (x *SmeshingStatusResponse) GetProcessedBytes() string {
-	if x != nil {
-		return x.ProcessedBytes
-	}
-	return ""
-}
-
-func (x *SmeshingStatusResponse) GetProcessedPercentage() string {
-	if x != nil {
-		return x.ProcessedPercentage
 	}
 	return ""
 }
@@ -1552,7 +1568,7 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0d, 0x52, 0x11, 0x63, 0x6f, 0x6d, 0x70, 0x75, 0x74, 0x65, 0x50, 0x72, 0x6f, 0x76,
 	0x69, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x74, 0x68, 0x72, 0x6f, 0x74, 0x74,
 	0x6c, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x74, 0x68, 0x72, 0x6f, 0x74, 0x74,
-	0x6c, 0x65, 0x22, 0xc3, 0x02, 0x0a, 0x0f, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70,
+	0x6c, 0x65, 0x22, 0xcf, 0x03, 0x0a, 0x0f, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70,
 	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x39, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x23, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
 	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x53, 0x74,
@@ -1565,35 +1581,45 @@ var file_spacemesh_v1_smesher_types_proto_rawDesc = []byte{
 	0x74, 0x53, 0x65, 0x74, 0x75, 0x70, 0x4f, 0x70, 0x74, 0x73, 0x52, 0x04, 0x6f, 0x70, 0x74, 0x73,
 	0x12, 0x23, 0x0a, 0x0d, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
 	0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x4d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x71, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x15,
-	0x0a, 0x11, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46,
-	0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x4e,
-	0x4f, 0x54, 0x5f, 0x53, 0x54, 0x41, 0x52, 0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x15, 0x0a, 0x11,
-	0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x49, 0x4e, 0x5f, 0x50, 0x52, 0x4f, 0x47, 0x52, 0x45, 0x53,
-	0x53, 0x10, 0x02, 0x12, 0x12, 0x0a, 0x0e, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x43, 0x4f, 0x4d,
-	0x50, 0x4c, 0x45, 0x54, 0x45, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b, 0x53, 0x54, 0x41, 0x54, 0x45,
-	0x5f, 0x45, 0x52, 0x52, 0x4f, 0x52, 0x10, 0x04, 0x22, 0x2f, 0x0a, 0x15, 0x53, 0x6d, 0x65, 0x73,
-	0x68, 0x69, 0x6e, 0x67, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x16, 0x0a, 0x06, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
-	0x0d, 0x52, 0x06, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x73, 0x22, 0xd8, 0x01, 0x0a, 0x16, 0x53, 0x6d,
-	0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x14, 0x0a, 0x05,
-	0x65, 0x70, 0x6f, 0x63, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x65, 0x70, 0x6f,
-	0x63, 0x68, 0x12, 0x1c, 0x0a, 0x09, 0x65, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x65, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64,
-	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x12, 0x27, 0x0a, 0x0f, 0x70, 0x72, 0x6f, 0x63,
-	0x65, 0x73, 0x73, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x74, 0x65, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x0e, 0x70, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x65, 0x64, 0x42, 0x79, 0x74, 0x65,
-	0x73, 0x12, 0x31, 0x0a, 0x14, 0x70, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x65, 0x64, 0x5f, 0x70,
-	0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x61, 0x67, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x13, 0x70, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x65, 0x64, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e,
-	0x74, 0x61, 0x67, 0x65, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70,
-	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x70, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73,
+	0x65, 0x64, 0x5f, 0x68, 0x72, 0x70, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x70, 0x72,
+	0x6f, 0x63, 0x65, 0x73, 0x73, 0x65, 0x64, 0x48, 0x72, 0x70, 0x12, 0x32, 0x0a, 0x15, 0x70, 0x72,
+	0x6f, 0x63, 0x65, 0x73, 0x73, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x73,
+	0x69, 0x7a, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x13, 0x70, 0x72, 0x6f, 0x63, 0x65,
+	0x73, 0x73, 0x69, 0x6e, 0x67, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x31,
+	0x0a, 0x14, 0x70, 0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x65, 0x64, 0x5f, 0x70, 0x65, 0x72, 0x63,
+	0x65, 0x6e, 0x74, 0x61, 0x67, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x13, 0x70, 0x72,
+	0x6f, 0x63, 0x65, 0x73, 0x73, 0x65, 0x64, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x61, 0x67,
+	0x65, 0x22, 0x71, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x54,
+	0x41, 0x54, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10,
+	0x00, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x4e, 0x4f, 0x54, 0x5f, 0x53,
+	0x54, 0x41, 0x52, 0x54, 0x45, 0x44, 0x10, 0x01, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x54, 0x41, 0x54,
+	0x45, 0x5f, 0x49, 0x4e, 0x5f, 0x50, 0x52, 0x4f, 0x47, 0x52, 0x45, 0x53, 0x53, 0x10, 0x02, 0x12,
+	0x12, 0x0a, 0x0e, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x43, 0x4f, 0x4d, 0x50, 0x4c, 0x45, 0x54,
+	0x45, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x45, 0x52, 0x52,
+	0x4f, 0x52, 0x10, 0x04, 0x22, 0xa5, 0x02, 0x0a, 0x16, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e,
+	0x67, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x48, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32,
+	0x30, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53,
+	0x6d, 0x65, 0x73, 0x68, 0x69, 0x6e, 0x67, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x70, 0x6f,
+	0x63, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x12,
+	0x1c, 0x0a, 0x09, 0x65, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x09, 0x65, 0x73, 0x74, 0x69, 0x6d, 0x61, 0x74, 0x65, 0x64, 0x12, 0x16, 0x0a,
+	0x06, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72,
+	0x65, 0x61, 0x73, 0x6f, 0x6e, 0x22, 0x75, 0x0a, 0x0b, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x53, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x12, 0x12, 0x0a, 0x0e, 0x50, 0x4f, 0x53, 0x54, 0x5f, 0x4e, 0x4f, 0x54,
+	0x5f, 0x46, 0x4f, 0x55, 0x4e, 0x44, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x11, 0x49, 0x4e, 0x49, 0x54,
+	0x49, 0x41, 0x4c, 0x49, 0x5a, 0x49, 0x4e, 0x47, 0x5f, 0x50, 0x4f, 0x53, 0x54, 0x10, 0x01, 0x12,
+	0x18, 0x0a, 0x14, 0x47, 0x45, 0x4e, 0x45, 0x52, 0x41, 0x54, 0x49, 0x4e, 0x47, 0x5f, 0x50, 0x4f,
+	0x53, 0x5f, 0x50, 0x52, 0x4f, 0x4f, 0x46, 0x10, 0x02, 0x12, 0x13, 0x0a, 0x0f, 0x57, 0x49, 0x54,
+	0x49, 0x4e, 0x47, 0x5f, 0x46, 0x4f, 0x52, 0x5f, 0x50, 0x4f, 0x45, 0x54, 0x10, 0x03, 0x12, 0x0c,
+	0x0a, 0x08, 0x53, 0x4d, 0x45, 0x53, 0x48, 0x49, 0x4e, 0x47, 0x10, 0x04, 0x42, 0x34, 0x5a, 0x32,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61,
+	0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f,
+	0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1608,34 +1634,34 @@ func file_spacemesh_v1_smesher_types_proto_rawDescGZIP() []byte {
 	return file_spacemesh_v1_smesher_types_proto_rawDescData
 }
 
-var file_spacemesh_v1_smesher_types_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_spacemesh_v1_smesher_types_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_spacemesh_v1_smesher_types_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_spacemesh_v1_smesher_types_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_spacemesh_v1_smesher_types_proto_goTypes = []interface{}{
 	(PostSetupComputeProvider_ComputeApiClass)(0), // 0: spacemesh.v1.PostSetupComputeProvider.ComputeApiClass
 	(PostSetupStatus_State)(0),                    // 1: spacemesh.v1.PostSetupStatus.State
-	(*IsSmeshingResponse)(nil),                    // 2: spacemesh.v1.IsSmeshingResponse
-	(*StartSmeshingRequest)(nil),                  // 3: spacemesh.v1.StartSmeshingRequest
-	(*StartSmeshingResponse)(nil),                 // 4: spacemesh.v1.StartSmeshingResponse
-	(*StopSmeshingRequest)(nil),                   // 5: spacemesh.v1.StopSmeshingRequest
-	(*StopSmeshingResponse)(nil),                  // 6: spacemesh.v1.StopSmeshingResponse
-	(*SetCoinbaseRequest)(nil),                    // 7: spacemesh.v1.SetCoinbaseRequest
-	(*SetCoinbaseResponse)(nil),                   // 8: spacemesh.v1.SetCoinbaseResponse
-	(*MinGasResponse)(nil),                        // 9: spacemesh.v1.MinGasResponse
-	(*SetMinGasRequest)(nil),                      // 10: spacemesh.v1.SetMinGasRequest
-	(*SetMinGasResponse)(nil),                     // 11: spacemesh.v1.SetMinGasResponse
-	(*SmesherIDResponse)(nil),                     // 12: spacemesh.v1.SmesherIDResponse
-	(*CoinbaseResponse)(nil),                      // 13: spacemesh.v1.CoinbaseResponse
-	(*EstimatedRewardsRequest)(nil),               // 14: spacemesh.v1.EstimatedRewardsRequest
-	(*EstimatedRewardsResponse)(nil),              // 15: spacemesh.v1.EstimatedRewardsResponse
-	(*PostSetupComputeProvidersRequest)(nil),      // 16: spacemesh.v1.PostSetupComputeProvidersRequest
-	(*PostSetupComputeProvidersResponse)(nil),     // 17: spacemesh.v1.PostSetupComputeProvidersResponse
-	(*PostSetupStatusResponse)(nil),               // 18: spacemesh.v1.PostSetupStatusResponse
-	(*PostSetupStatusStreamResponse)(nil),         // 19: spacemesh.v1.PostSetupStatusStreamResponse
-	(*PostConfigResponse)(nil),                    // 20: spacemesh.v1.PostConfigResponse
-	(*PostSetupComputeProvider)(nil),              // 21: spacemesh.v1.PostSetupComputeProvider
-	(*PostSetupOpts)(nil),                         // 22: spacemesh.v1.PostSetupOpts
-	(*PostSetupStatus)(nil),                       // 23: spacemesh.v1.PostSetupStatus
-	(*SmeshingStatusRequest)(nil),                 // 24: spacemesh.v1.SmeshingStatusRequest
+	(SmeshingStatusResponse_EpochStatus)(0),       // 2: spacemesh.v1.SmeshingStatusResponse.EpochStatus
+	(*IsSmeshingResponse)(nil),                    // 3: spacemesh.v1.IsSmeshingResponse
+	(*StartSmeshingRequest)(nil),                  // 4: spacemesh.v1.StartSmeshingRequest
+	(*StartSmeshingResponse)(nil),                 // 5: spacemesh.v1.StartSmeshingResponse
+	(*StopSmeshingRequest)(nil),                   // 6: spacemesh.v1.StopSmeshingRequest
+	(*StopSmeshingResponse)(nil),                  // 7: spacemesh.v1.StopSmeshingResponse
+	(*SetCoinbaseRequest)(nil),                    // 8: spacemesh.v1.SetCoinbaseRequest
+	(*SetCoinbaseResponse)(nil),                   // 9: spacemesh.v1.SetCoinbaseResponse
+	(*MinGasResponse)(nil),                        // 10: spacemesh.v1.MinGasResponse
+	(*SetMinGasRequest)(nil),                      // 11: spacemesh.v1.SetMinGasRequest
+	(*SetMinGasResponse)(nil),                     // 12: spacemesh.v1.SetMinGasResponse
+	(*SmesherIDResponse)(nil),                     // 13: spacemesh.v1.SmesherIDResponse
+	(*CoinbaseResponse)(nil),                      // 14: spacemesh.v1.CoinbaseResponse
+	(*EstimatedRewardsRequest)(nil),               // 15: spacemesh.v1.EstimatedRewardsRequest
+	(*EstimatedRewardsResponse)(nil),              // 16: spacemesh.v1.EstimatedRewardsResponse
+	(*PostSetupComputeProvidersRequest)(nil),      // 17: spacemesh.v1.PostSetupComputeProvidersRequest
+	(*PostSetupComputeProvidersResponse)(nil),     // 18: spacemesh.v1.PostSetupComputeProvidersResponse
+	(*PostSetupStatusResponse)(nil),               // 19: spacemesh.v1.PostSetupStatusResponse
+	(*PostSetupStatusStreamResponse)(nil),         // 20: spacemesh.v1.PostSetupStatusStreamResponse
+	(*PostConfigResponse)(nil),                    // 21: spacemesh.v1.PostConfigResponse
+	(*PostSetupComputeProvider)(nil),              // 22: spacemesh.v1.PostSetupComputeProvider
+	(*PostSetupOpts)(nil),                         // 23: spacemesh.v1.PostSetupOpts
+	(*PostSetupStatus)(nil),                       // 24: spacemesh.v1.PostSetupStatus
 	(*SmeshingStatusResponse)(nil),                // 25: spacemesh.v1.SmeshingStatusResponse
 	(*AccountId)(nil),                             // 26: spacemesh.v1.AccountId
 	(*status.Status)(nil),                         // 27: google.rpc.Status
@@ -1644,7 +1670,7 @@ var file_spacemesh_v1_smesher_types_proto_goTypes = []interface{}{
 }
 var file_spacemesh_v1_smesher_types_proto_depIdxs = []int32{
 	26, // 0: spacemesh.v1.StartSmeshingRequest.coinbase:type_name -> spacemesh.v1.AccountId
-	22, // 1: spacemesh.v1.StartSmeshingRequest.opts:type_name -> spacemesh.v1.PostSetupOpts
+	23, // 1: spacemesh.v1.StartSmeshingRequest.opts:type_name -> spacemesh.v1.PostSetupOpts
 	27, // 2: spacemesh.v1.StartSmeshingResponse.status:type_name -> google.rpc.Status
 	27, // 3: spacemesh.v1.StopSmeshingResponse.status:type_name -> google.rpc.Status
 	26, // 4: spacemesh.v1.SetCoinbaseRequest.id:type_name -> spacemesh.v1.AccountId
@@ -1655,17 +1681,18 @@ var file_spacemesh_v1_smesher_types_proto_depIdxs = []int32{
 	26, // 9: spacemesh.v1.SmesherIDResponse.account_id:type_name -> spacemesh.v1.AccountId
 	26, // 10: spacemesh.v1.CoinbaseResponse.account_id:type_name -> spacemesh.v1.AccountId
 	29, // 11: spacemesh.v1.EstimatedRewardsResponse.amount:type_name -> spacemesh.v1.Amount
-	21, // 12: spacemesh.v1.PostSetupComputeProvidersResponse.providers:type_name -> spacemesh.v1.PostSetupComputeProvider
-	23, // 13: spacemesh.v1.PostSetupStatusResponse.status:type_name -> spacemesh.v1.PostSetupStatus
-	23, // 14: spacemesh.v1.PostSetupStatusStreamResponse.status:type_name -> spacemesh.v1.PostSetupStatus
+	22, // 12: spacemesh.v1.PostSetupComputeProvidersResponse.providers:type_name -> spacemesh.v1.PostSetupComputeProvider
+	24, // 13: spacemesh.v1.PostSetupStatusResponse.status:type_name -> spacemesh.v1.PostSetupStatus
+	24, // 14: spacemesh.v1.PostSetupStatusStreamResponse.status:type_name -> spacemesh.v1.PostSetupStatus
 	0,  // 15: spacemesh.v1.PostSetupComputeProvider.compute_api:type_name -> spacemesh.v1.PostSetupComputeProvider.ComputeApiClass
 	1,  // 16: spacemesh.v1.PostSetupStatus.state:type_name -> spacemesh.v1.PostSetupStatus.State
-	22, // 17: spacemesh.v1.PostSetupStatus.opts:type_name -> spacemesh.v1.PostSetupOpts
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	23, // 17: spacemesh.v1.PostSetupStatus.opts:type_name -> spacemesh.v1.PostSetupOpts
+	2,  // 18: spacemesh.v1.SmeshingStatusResponse.status:type_name -> spacemesh.v1.SmeshingStatusResponse.EpochStatus
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_smesher_types_proto_init() }
@@ -1940,18 +1967,6 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_smesher_types_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SmeshingStatusRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_spacemesh_v1_smesher_types_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SmeshingStatusResponse); i {
 			case 0:
 				return &v.state
@@ -1969,8 +1984,8 @@ func file_spacemesh_v1_smesher_types_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_smesher_types_proto_rawDesc,
-			NumEnums:      2,
-			NumMessages:   24,
+			NumEnums:      3,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
