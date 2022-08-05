@@ -127,21 +127,25 @@ message PostSetupStatus {
     uint64 num_labels_written = 2; // Number of labels (hashes) written to the data files
     PostSetupOpts opts = 3; // setup options previously set by the user
     string error_message = 4; // The error message, if the state is STATE_ERROR
-    string processed = 5; // The processed size, like `176 GB`
-    string post_total_size = 6; // Total size, that should be processed, like `256 GB`
-    uint32 processed_percentage = 7; // The processed percentage, like `50`
+    uint64 processed_bytes = 5; // The processed size, in bytes
+    uint64 post_total_size_bytes = 6; // Total size, that should be processed
 }
 
 message SmeshingStatusResponse {
+    repeated SmeshingStatus epoch = 1;
+}
+
+message SmeshingStatus {
     enum EpochStatus {
-        POST_NOT_FOUND = 0; // No ATX and creation of post not started yet.
-        INITIALIZING_POST = 1; // When node start create post file.
-        GENERATING_POS_PROOF = 2;
-        WITING_FOR_POET = 3;
-        SMESHING = 4;
+        EPOCH_STATUS_UNSPECIFIED = 0;
+        EPOCH_STATUS_POST_NOT_FOUND = 1; // No ATX and creation of post not started yet.
+        EPOCH_STATUS_INITIALIZING = 2; // When node start create post file.
+        EPOCH_STATUS_GENERATING = 3; // Generating Proof-of-Space
+        EPOCH_STATUS_WAITING = 4; // Waiting for PoET challenge
+        EPOCH_STATUS_SMESHING = 5;
     }
     EpochStatus status = 1;
-    uint32 epoch = 2;
-    uint64 estimated = 3;
+    SimpleInt epoch = 2;
+    uint64 estimated_time = 3; // Estimated time to complete, in seconds.
     string reason = 4;
 }
