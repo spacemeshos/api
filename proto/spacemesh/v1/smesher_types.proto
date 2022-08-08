@@ -127,12 +127,12 @@ message PostSetupStatus {
     uint64 num_labels_written = 2; // Number of labels (hashes) written to the data files
     PostSetupOpts opts = 3; // setup options previously set by the user
     string error_message = 4; // The error message, if the state is STATE_ERROR
-    uint64 processed_bytes = 5; // The processed size, in bytes
-    uint64 post_total_size_bytes = 6; // Total size, that should be processed
+    uint64 bytes_processed = 5; // The processed size, in bytes
+    uint64 bytes_total = 6; // Total size, that should be processed
 }
 
 message SmeshingStatusResponse {
-    repeated SmeshingStatus epoch = 1;
+    repeated SmeshingStatus status_of_epoch = 1;
 }
 
 message SmeshingStatus {
