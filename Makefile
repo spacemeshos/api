@@ -22,14 +22,14 @@ HTTPS_GIT := https://github.com/spacemesh/api.git
 # See https://buf.build/docs/inputs#ssh for more details.
 SSH_GIT := ssh://git@github.com/spacemesh/api.git
 # This controls the version of buf to install and use.
-BUF_VERSION := 0.16.0
+BUF_VERSION := 1.7.0
 
 # This controls the version of protoc to install and use.
-PROTOC_VERSION = 3.12.3
+PROTOC_VERSION = 21.5
 
 # Version of go protoc tools
-PROTOC_GEN_GO_VERSION = v1.4.2
-PROTOC_GEN_GRPC_GATEWAY_VERSION = v1.14.6
+PROTOC_GEN_GO_VERSION = v1.5.2
+PROTOC_GEN_GRPC_GATEWAY_VERSION = v2.11.2
 
 # The include flags to pass to protoc.
 PROTOC_INCLUDES := -I ./proto -I ./third_party
@@ -62,6 +62,11 @@ PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative,grpc_api_configur
 
 UNAME_OS := $(shell uname -s)
 UNAME_ARCH := $(shell uname -m)
+
+ifeq ($(UNAME_ARCH),aarch64)
+    UNAME_ARCH := aarch_64
+endif
+
 UNAME_OS_PROTOC := $(shell uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/osx/')
 # Buf will be cached to ~/.cache/buf-example.
 CACHE_BASE := $(HOME)/.cache/$(PROJECT)
@@ -118,7 +123,7 @@ $(GO_MOD):
 PROTOC_GEN_GO := $(CACHE_VERSIONS)/protoc-gen-go/$(PROTOC_GEN_GO_VERSION)
 $(PROTOC_GEN_GO): $(GO_MOD)
 	cd $(PROTOC_GO_BUILD_DIR) && \
-	  go get github.com/golang/protobuf/protoc-gen-go@$(PROTOC_GEN_GO_VERSION)
+	  go install github.com/golang/protobuf/protoc-gen-go
 	@rm -rf $(dir $(PROTOC_GEN_GO))
 	@mkdir -p $(dir $(PROTOC_GEN_GO))
 	@touch $(PROTOC_GEN_GO)
@@ -126,7 +131,7 @@ $(PROTOC_GEN_GO): $(GO_MOD)
 PROTOC_GEN_GRPC_GATEWAY := $(CACHE_VERSIONS)/protoc-gen-grpc-gateway/$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
 $(PROTOC_GEN_GRPC_GATEWAY): $(GO_MOD)
 	cd $(PROTOC_GO_BUILD_DIR) && \
-	  go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
+	  go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 	@rm -rf $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@mkdir -p $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@touch $(PROTOC_GEN_GRPC_GATEWAY)
@@ -174,8 +179,8 @@ ssh: $(BUF)
 # as errors, for which purpose we use grep.
 .PHONY: protoc
 protoc: $(PROTOC)
-	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
-	(protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
+	@protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
+	@(protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
 	  && { echo "one or more warnings detected"; exit 1; } || exit 0
 
 ## LANGUAGE-SPECIFIC BUILDS
@@ -183,13 +188,13 @@ protoc: $(PROTOC)
 # Golang
 .PHONY: golang
 golang: $(PROTOC) | $(PROTOC_GEN_GO)
-	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	@protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
 
 # grpc-gateway
 .PHONY: grpc-gateway
 grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
-	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	@protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
 	  --grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
 
 # Run all builds
