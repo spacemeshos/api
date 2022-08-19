@@ -32,10 +32,10 @@ PROTOC_GEN_GO_VERSION = v1.5.2
 PROTOC_GEN_GRPC_GATEWAY_VERSION = v2.11.2
 
 # The include flags to pass to protoc.
-PROTOC_INCLUDES := -I ./proto -I ./third_party
+PROTOC_INCLUDES := -I ./spacemesh -I ./google
 
 # The files to run protoc on
-PROTOC_INPUTS := $(shell find ./proto -name *.proto)
+PROTOC_INPUTS := $(shell find ./spacemesh -name *.proto)
 
 # The directory to store go builds
 PROTOC_GO_BUILD_DIR := ./release/go
@@ -53,7 +53,7 @@ PROTOC_GO_OPT := --go_opt=paths=source_relative
 PROTOC_GATEWAY_PLUGINS := logtostderr=true:
 
 # Service configuration file
-PROTOC_GATEWAY_CONFIG := ./proto/spacemesh/v1/api_config.yaml
+PROTOC_GATEWAY_CONFIG := ./spacemesh/v1/api_config.yaml
 
 # Options string appended to grpc-gateway build command (optional)
 PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative,grpc_api_configuration=$(PROTOC_GATEWAY_CONFIG)
@@ -62,10 +62,6 @@ PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative,grpc_api_configur
 
 UNAME_OS := $(shell uname -s)
 UNAME_ARCH := $(shell uname -m)
-
-ifeq ($(UNAME_ARCH),aarch64)
-    UNAME_ARCH := aarch_64
-endif
 
 UNAME_OS_PROTOC := $(shell uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/osx/')
 # Buf will be cached to ~/.cache/buf-example.
@@ -108,8 +104,9 @@ $(PROTOC):
 	@rm -f $(CACHE_BIN)/protoc
 	@mkdir -p $(CACHE_TMP)
 	@mkdir -p $(CACHE_BIN)
+	$(eval PROTOC_ARCH = $(if $(filter $(UNAME_ARCH),aarch64),aarch_64,$(UNAME_ARCH)))
 	curl -sSL \
-		"https://github.com/protocolbuffers/protobuf/releases/download/v$(PROTOC_VERSION)/protoc-$(PROTOC_VERSION)-$(UNAME_OS_PROTOC)-$(UNAME_ARCH).zip" \
+		"https://github.com/protocolbuffers/protobuf/releases/download/v$(PROTOC_VERSION)/protoc-$(PROTOC_VERSION)-$(UNAME_OS_PROTOC)-$(PROTOC_ARCH).zip" \
 		-o "$(CACHE_TMP)/protoc.zip"
 	unzip $(CACHE_TMP)/protoc.zip bin/protoc -d $(CACHE)
 	@rm -rf $(dir $(PROTOC))
@@ -148,8 +145,8 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 
 .PHONY: local
 local: $(BUF)
-	buf check lint
-	buf check breaking --against-input '.git#branch=master'
+	buf lint
+	buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
 
@@ -179,8 +176,8 @@ ssh: $(BUF)
 # as errors, for which purpose we use grep.
 .PHONY: protoc
 protoc: $(PROTOC)
-	@protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
-	@(protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
+	@protoc $(PROTOC_INPUTS) -o /dev/null
+	@(protoc $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
 	  && { echo "one or more warnings detected"; exit 1; } || exit 0
 
 ## LANGUAGE-SPECIFIC BUILDS
@@ -188,13 +185,13 @@ protoc: $(PROTOC)
 # Golang
 .PHONY: golang
 golang: $(PROTOC) | $(PROTOC_GEN_GO)
-	@protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	@protoc $(PROTOC_INPUTS) \
 	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
 
 # grpc-gateway
 .PHONY: grpc-gateway
 grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
-	@protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	@protoc $(PROTOC_INPUTS) \
 	  --grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
 
 # Run all builds
