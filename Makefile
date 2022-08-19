@@ -37,9 +37,6 @@ PROTOC_INPUTS := $(shell find ./spacemesh -name *.proto)
 # The directory to store go builds
 PROTOC_GO_BUILD_DIR := ./release/go
 
-# Name of go module corresponding to this path
-GO_MODULE_PATH := github.com/spacemeshos/api/release/go
-
 # Plugins string for go builds (must end in ':')
 PROTOC_GO_PLUGINS := plugins=grpc:
 
@@ -110,12 +107,8 @@ $(PROTOC):
 	@mkdir -p $(dir $(PROTOC))
 	@touch $(PROTOC)
 
-GO_MOD := $(PROTOC_GO_BUILD_DIR)/go.mod
-$(GO_MOD):
-	cd $(PROTOC_GO_BUILD_DIR) && go mod init $(GO_MODULE_PATH)
-
 PROTOC_GEN_GO := $(CACHE_VERSIONS)/protoc-gen-go/$(PROTOC_GEN_GO_VERSION)
-$(PROTOC_GEN_GO): $(GO_MOD)
+$(PROTOC_GEN_GO):
 	cd $(PROTOC_GO_BUILD_DIR) && \
 	  go install github.com/golang/protobuf/protoc-gen-go
 	@rm -rf $(dir $(PROTOC_GEN_GO))
@@ -123,7 +116,7 @@ $(PROTOC_GEN_GO): $(GO_MOD)
 	@touch $(PROTOC_GEN_GO)
 
 PROTOC_GEN_GRPC_GATEWAY := $(CACHE_VERSIONS)/protoc-gen-grpc-gateway/$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
-$(PROTOC_GEN_GRPC_GATEWAY): $(GO_MOD)
+$(PROTOC_GEN_GRPC_GATEWAY):
 	cd $(PROTOC_GO_BUILD_DIR) && \
 	  go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 	@rm -rf $(dir $(PROTOC_GEN_GRPC_GATEWAY))
@@ -143,6 +136,7 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 .PHONY: local
 local: $(BUF)
 	buf lint
+# TODO (mafa): temporary disabled, can be enabled when this is merged to master
 #   buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
