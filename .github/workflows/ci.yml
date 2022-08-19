@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         ref: master
     # Used inside breaking change detection
@@ -19,7 +19,7 @@ jobs:
       run: git checkout master
     # Go back to the HEAD
     - name: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     # Not required in Github actions as the image already has these
     # It's sometimes useful when running locally (e.g., using `act')
     - name: install required packages

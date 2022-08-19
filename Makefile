@@ -31,9 +31,6 @@ PROTOC_VERSION = 21.5
 PROTOC_GEN_GO_VERSION = v1.5.2
 PROTOC_GEN_GRPC_GATEWAY_VERSION = v2.11.2
 
-# The include flags to pass to protoc.
-PROTOC_INCLUDES := -I ./spacemesh -I ./google
-
 # The files to run protoc on
 PROTOC_INPUTS := $(shell find ./spacemesh -name *.proto)
 
@@ -146,7 +143,7 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 .PHONY: local
 local: $(BUF)
 	buf lint
-	buf breaking --against '.git#branch=master'
+#   buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
 
@@ -160,7 +157,7 @@ lint: $(BUF)
 .PHONY: https
 https: $(BUF)
 	buf check lint
-	buf check breaking --against-input "$(HTTPS_GIT)#branch=master"
+	buf check breaking --against "$(HTTPS_GIT)#branch=master"
 
 # ssh is what we run when testing in CI providers that provide ssh public key authentication.
 # This does breaking change detection against our remote HTTPS ssh repository.
@@ -169,7 +166,7 @@ https: $(BUF)
 .PHONY: ssh
 ssh: $(BUF)
 	buf check lint
-	buf check breaking --against-input "$(SSH_GIT)#branch=master"
+	buf check breaking --against "$(SSH_GIT)#branch=master"
 
 # Try to build using protoc. This performs different checks and surfaces
 # different errors than linting alone. We want this to fail on warnings as well
@@ -201,8 +198,8 @@ build: golang grpc-gateway
 # Make sure build is up to date
 .PHONY: check
 check: build
-	git add -N $(PROTOC_GO_BUILD_DIR)
-	git diff --name-only --diff-filter=AM --exit-code $(PROTOC_GO_BUILD_DIR) \
+	@git add -N $(PROTOC_GO_BUILD_DIR)
+	@git diff --name-only --diff-filter=AM --exit-code $(PROTOC_GO_BUILD_DIR) \
 	  || { echo "please update build"; exit 1; }
 
 # clean deletes any files not checked in and the cache for all platforms.
