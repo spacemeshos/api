@@ -22,26 +22,20 @@ HTTPS_GIT := https://github.com/spacemesh/api.git
 # See https://buf.build/docs/inputs#ssh for more details.
 SSH_GIT := ssh://git@github.com/spacemesh/api.git
 # This controls the version of buf to install and use.
-BUF_VERSION := 0.16.0
+BUF_VERSION := 1.7.0
 
 # This controls the version of protoc to install and use.
-PROTOC_VERSION = 3.12.3
+PROTOC_VERSION = 21.5
 
 # Version of go protoc tools
-PROTOC_GEN_GO_VERSION = v1.4.2
-PROTOC_GEN_GRPC_GATEWAY_VERSION = v1.14.6
-
-# The include flags to pass to protoc.
-PROTOC_INCLUDES := -I ./proto -I ./third_party
+PROTOC_GEN_GO_VERSION = v1.5.2
+PROTOC_GEN_GRPC_GATEWAY_VERSION = v2.11.2
 
 # The files to run protoc on
-PROTOC_INPUTS := $(shell find ./proto -name *.proto)
+PROTOC_INPUTS := $(shell find ./spacemesh -name *.proto)
 
 # The directory to store go builds
 PROTOC_GO_BUILD_DIR := ./release/go
-
-# Name of go module corresponding to this path
-GO_MODULE_PATH := github.com/spacemeshos/api/release/go
 
 # Plugins string for go builds (must end in ':')
 PROTOC_GO_PLUGINS := plugins=grpc:
@@ -53,7 +47,7 @@ PROTOC_GO_OPT := --go_opt=paths=source_relative
 PROTOC_GATEWAY_PLUGINS := logtostderr=true:
 
 # Service configuration file
-PROTOC_GATEWAY_CONFIG := ./proto/spacemesh/v1/api_config.yaml
+PROTOC_GATEWAY_CONFIG := ./spacemesh/v1/api_config.yaml
 
 # Options string appended to grpc-gateway build command (optional)
 PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative,grpc_api_configuration=$(PROTOC_GATEWAY_CONFIG)
@@ -62,6 +56,7 @@ PROTOC_GATEWAY_OPT := --grpc-gateway_opt=paths=source_relative,grpc_api_configur
 
 UNAME_OS := $(shell uname -s)
 UNAME_ARCH := $(shell uname -m)
+
 UNAME_OS_PROTOC := $(shell uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/osx/')
 # Buf will be cached to ~/.cache/buf-example.
 CACHE_BASE := $(HOME)/.cache/$(PROJECT)
@@ -103,30 +98,27 @@ $(PROTOC):
 	@rm -f $(CACHE_BIN)/protoc
 	@mkdir -p $(CACHE_TMP)
 	@mkdir -p $(CACHE_BIN)
+	$(eval PROTOC_ARCH = $(if $(filter $(UNAME_ARCH),aarch64),aarch_64,$(UNAME_ARCH)))
 	curl -sSL \
-		"https://github.com/protocolbuffers/protobuf/releases/download/v$(PROTOC_VERSION)/protoc-$(PROTOC_VERSION)-$(UNAME_OS_PROTOC)-$(UNAME_ARCH).zip" \
+		"https://github.com/protocolbuffers/protobuf/releases/download/v$(PROTOC_VERSION)/protoc-$(PROTOC_VERSION)-$(UNAME_OS_PROTOC)-$(PROTOC_ARCH).zip" \
 		-o "$(CACHE_TMP)/protoc.zip"
 	unzip $(CACHE_TMP)/protoc.zip bin/protoc -d $(CACHE)
 	@rm -rf $(dir $(PROTOC))
 	@mkdir -p $(dir $(PROTOC))
 	@touch $(PROTOC)
 
-GO_MOD := $(PROTOC_GO_BUILD_DIR)/go.mod
-$(GO_MOD):
-	cd $(PROTOC_GO_BUILD_DIR) && go mod init $(GO_MODULE_PATH)
-
 PROTOC_GEN_GO := $(CACHE_VERSIONS)/protoc-gen-go/$(PROTOC_GEN_GO_VERSION)
-$(PROTOC_GEN_GO): $(GO_MOD)
+$(PROTOC_GEN_GO):
 	cd $(PROTOC_GO_BUILD_DIR) && \
-	  go get github.com/golang/protobuf/protoc-gen-go@$(PROTOC_GEN_GO_VERSION)
+	  go install github.com/golang/protobuf/protoc-gen-go
 	@rm -rf $(dir $(PROTOC_GEN_GO))
 	@mkdir -p $(dir $(PROTOC_GEN_GO))
 	@touch $(PROTOC_GEN_GO)
 
 PROTOC_GEN_GRPC_GATEWAY := $(CACHE_VERSIONS)/protoc-gen-grpc-gateway/$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
-$(PROTOC_GEN_GRPC_GATEWAY): $(GO_MOD)
+$(PROTOC_GEN_GRPC_GATEWAY):
 	cd $(PROTOC_GO_BUILD_DIR) && \
-	  go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
+	  go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 	@rm -rf $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@mkdir -p $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@touch $(PROTOC_GEN_GRPC_GATEWAY)
@@ -143,8 +135,9 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 
 .PHONY: local
 local: $(BUF)
-	buf check lint
-	buf check breaking --against-input '.git#branch=master'
+	buf lint
+# TODO (mafa): temporary disabled, can be enabled when this is merged to master
+#   buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
 
@@ -158,7 +151,7 @@ lint: $(BUF)
 .PHONY: https
 https: $(BUF)
 	buf check lint
-	buf check breaking --against-input "$(HTTPS_GIT)#branch=master"
+	buf check breaking --against "$(HTTPS_GIT)#branch=master"
 
 # ssh is what we run when testing in CI providers that provide ssh public key authentication.
 # This does breaking change detection against our remote HTTPS ssh repository.
@@ -167,15 +160,15 @@ https: $(BUF)
 .PHONY: ssh
 ssh: $(BUF)
 	buf check lint
-	buf check breaking --against-input "$(SSH_GIT)#branch=master"
+	buf check breaking --against "$(SSH_GIT)#branch=master"
 
 # Try to build using protoc. This performs different checks and surfaces
 # different errors than linting alone. We want this to fail on warnings as well
 # as errors, for which purpose we use grep.
 .PHONY: protoc
 protoc: $(PROTOC)
-	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null
-	(protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
+	@protoc $(PROTOC_INPUTS) -o /dev/null
+	@(protoc $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
 	  && { echo "one or more warnings detected"; exit 1; } || exit 0
 
 ## LANGUAGE-SPECIFIC BUILDS
@@ -183,13 +176,13 @@ protoc: $(PROTOC)
 # Golang
 .PHONY: golang
 golang: $(PROTOC) | $(PROTOC_GEN_GO)
-	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	@protoc $(PROTOC_INPUTS) \
 	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
 
 # grpc-gateway
 .PHONY: grpc-gateway
 grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
-	protoc $(PROTOC_INCLUDES) $(PROTOC_INPUTS) \
+	@protoc $(PROTOC_INPUTS) \
 	  --grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
 
 # Run all builds
@@ -199,8 +192,8 @@ build: golang grpc-gateway
 # Make sure build is up to date
 .PHONY: check
 check: build
-	git add -N $(PROTOC_GO_BUILD_DIR)
-	git diff --name-only --diff-filter=AM --exit-code $(PROTOC_GO_BUILD_DIR) \
+	@git add -N $(PROTOC_GO_BUILD_DIR)
+	@git diff --name-only --diff-filter=AM --exit-code $(PROTOC_GO_BUILD_DIR) \
 	  || { echo "please update build"; exit 1; }
 
 # clean deletes any files not checked in and the cache for all platforms.
