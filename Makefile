@@ -136,8 +136,7 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 .PHONY: local
 local: $(BUF)
 	buf lint
-# TODO (mafa): temporary disabled, can be enabled when this is merged to master
-#   buf breaking --against '.git#branch=master'
+        buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
 
