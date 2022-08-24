@@ -11,7 +11,7 @@ PROJECT := api
 # the remote repository directly.
 #
 # Basic authentication is available, see https://buf.build/docs/inputs#https for more details.
-HTTPS_GIT := https://github.com/spacemesh/api.git
+HTTPS_GIT := https://github.com/spacemeshos/api.git
 # This controls the remote SSH git location to compare against for breaking changes in CI.
 #
 # CI providers will typically have an SSH key installed as part of your setup for both
@@ -20,7 +20,7 @@ HTTPS_GIT := https://github.com/spacemesh/api.git
 # configuration. We demo this with CircleCI.
 #
 # See https://buf.build/docs/inputs#ssh for more details.
-SSH_GIT := ssh://git@github.com/spacemesh/api.git
+SSH_GIT := ssh://git@github.com/spacemeshos/api.git
 # This controls the version of buf to install and use.
 BUF_VERSION := 1.7.0
 
@@ -142,15 +142,15 @@ local: $(BUF)
 
 .PHONY: lint
 lint: $(BUF)
-	buf check lint
+	buf lint
 
 # https is what we run when testing in most CI providers.
 # This does breaking change detection against our remote HTTPS git repository.
 
 .PHONY: https
 https: $(BUF)
-	buf check lint
-	buf check breaking --against "$(HTTPS_GIT)#branch=master"
+	buf lint
+	buf breaking --against "$(HTTPS_GIT)#branch=master"
 
 # ssh is what we run when testing in CI providers that provide ssh public key authentication.
 # This does breaking change detection against our remote HTTPS ssh repository.
@@ -158,8 +158,8 @@ https: $(BUF)
 
 .PHONY: ssh
 ssh: $(BUF)
-	buf check lint
-	buf check breaking --against "$(SSH_GIT)#branch=master"
+	buf lint
+	buf breaking --against "$(SSH_GIT)#branch=master"
 
 # Try to build using protoc. This performs different checks and surfaces
 # different errors than linting alone. We want this to fail on warnings as well
