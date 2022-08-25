@@ -1,3 +1,0 @@
-language: minimal
-install: make deps
-script: make https
