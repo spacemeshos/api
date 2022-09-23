@@ -31,6 +31,10 @@ message SmesherId {
     bytes id = 1;
 }
 
+message GenesisId {
+    bytes id = 1;
+}
+
 // An Activation "transaction" (ATX)
 message Activation {
     ActivationId id = 1;

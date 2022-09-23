@@ -324,14 +324,14 @@ func (x *CurrentEpochResponse) GetEpochnum() *SimpleInt {
 	return nil
 }
 
-type NetIDRequest struct {
+type GenesisIDRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *NetIDRequest) Reset() {
-	*x = NetIDRequest{}
+func (x *GenesisIDRequest) Reset() {
+	*x = GenesisIDRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -339,13 +339,13 @@ func (x *NetIDRequest) Reset() {
 	}
 }
 
-func (x *NetIDRequest) String() string {
+func (x *GenesisIDRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NetIDRequest) ProtoMessage() {}
+func (*GenesisIDRequest) ProtoMessage() {}
 
-func (x *NetIDRequest) ProtoReflect() protoreflect.Message {
+func (x *GenesisIDRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -357,21 +357,21 @@ func (x *NetIDRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NetIDRequest.ProtoReflect.Descriptor instead.
-func (*NetIDRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GenesisIDRequest.ProtoReflect.Descriptor instead.
+func (*GenesisIDRequest) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_mesh_types_proto_rawDescGZIP(), []int{6}
 }
 
-type NetIDResponse struct {
+type GenesisIDResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Netid *SimpleInt `protobuf:"bytes,1,opt,name=netid,proto3" json:"netid,omitempty"`
+	Genesisid *GenesisId `protobuf:"bytes,1,opt,name=genesisid,proto3" json:"genesisid,omitempty"`
 }
 
-func (x *NetIDResponse) Reset() {
-	*x = NetIDResponse{}
+func (x *GenesisIDResponse) Reset() {
+	*x = GenesisIDResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -379,13 +379,13 @@ func (x *NetIDResponse) Reset() {
 	}
 }
 
-func (x *NetIDResponse) String() string {
+func (x *GenesisIDResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NetIDResponse) ProtoMessage() {}
+func (*GenesisIDResponse) ProtoMessage() {}
 
-func (x *NetIDResponse) ProtoReflect() protoreflect.Message {
+func (x *GenesisIDResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -397,14 +397,14 @@ func (x *NetIDResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NetIDResponse.ProtoReflect.Descriptor instead.
-func (*NetIDResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GenesisIDResponse.ProtoReflect.Descriptor instead.
+func (*GenesisIDResponse) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_mesh_types_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *NetIDResponse) GetNetid() *SimpleInt {
+func (x *GenesisIDResponse) GetGenesisid() *GenesisId {
 	if x != nil {
-		return x.Netid
+		return x.Genesisid
 	}
 	return nil
 }
@@ -726,6 +726,7 @@ type AccountMeshData struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Datum:
+	//
 	//	*AccountMeshData_MeshTransaction
 	//	*AccountMeshData_Activation
 	Datum isAccountMeshData_Datum `protobuf_oneof:"datum"`
@@ -1233,12 +1234,13 @@ var file_spacemesh_v1_mesh_types_proto_rawDesc = []byte{
 	0x0a, 0x08, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x6e, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e,
 	0x53, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x49, 0x6e, 0x74, 0x52, 0x08, 0x65, 0x70, 0x6f, 0x63, 0x68,
-	0x6e, 0x75, 0x6d, 0x22, 0x0e, 0x0a, 0x0c, 0x4e, 0x65, 0x74, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x22, 0x3e, 0x0a, 0x0d, 0x4e, 0x65, 0x74, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d, 0x0a, 0x05, 0x6e, 0x65, 0x74, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
-	0x76, 0x31, 0x2e, 0x53, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x49, 0x6e, 0x74, 0x52, 0x05, 0x6e, 0x65,
-	0x74, 0x69, 0x64, 0x22, 0x17, 0x0a, 0x15, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x4e, 0x75, 0x6d, 0x4c,
+	0x6e, 0x75, 0x6d, 0x22, 0x12, 0x0a, 0x10, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x49, 0x44,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x4a, 0x0a, 0x11, 0x47, 0x65, 0x6e, 0x65, 0x73,
+	0x69, 0x73, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x35, 0x0a, 0x09,
+	0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47,
+	0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x49, 0x64, 0x52, 0x09, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69,
+	0x73, 0x69, 0x64, 0x22, 0x17, 0x0a, 0x15, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x4e, 0x75, 0x6d, 0x4c,
 	0x61, 0x79, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x4f, 0x0a, 0x16,
 	0x45, 0x70, 0x6f, 0x63, 0x68, 0x4e, 0x75, 0x6d, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x73, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x35, 0x0a, 0x09, 0x6e, 0x75, 0x6d, 0x6c, 0x61, 0x79,
@@ -1366,8 +1368,8 @@ var file_spacemesh_v1_mesh_types_proto_goTypes = []interface{}{
 	(*CurrentLayerResponse)(nil),             // 4: spacemesh.v1.CurrentLayerResponse
 	(*CurrentEpochRequest)(nil),              // 5: spacemesh.v1.CurrentEpochRequest
 	(*CurrentEpochResponse)(nil),             // 6: spacemesh.v1.CurrentEpochResponse
-	(*NetIDRequest)(nil),                     // 7: spacemesh.v1.NetIDRequest
-	(*NetIDResponse)(nil),                    // 8: spacemesh.v1.NetIDResponse
+	(*GenesisIDRequest)(nil),                 // 7: spacemesh.v1.GenesisIDRequest
+	(*GenesisIDResponse)(nil),                // 8: spacemesh.v1.GenesisIDResponse
 	(*EpochNumLayersRequest)(nil),            // 9: spacemesh.v1.EpochNumLayersRequest
 	(*EpochNumLayersResponse)(nil),           // 10: spacemesh.v1.EpochNumLayersResponse
 	(*LayerDurationRequest)(nil),             // 11: spacemesh.v1.LayerDurationRequest
@@ -1386,22 +1388,23 @@ var file_spacemesh_v1_mesh_types_proto_goTypes = []interface{}{
 	(*LayerStreamResponse)(nil),              // 24: spacemesh.v1.LayerStreamResponse
 	(*SimpleInt)(nil),                        // 25: spacemesh.v1.SimpleInt
 	(*LayerNumber)(nil),                      // 26: spacemesh.v1.LayerNumber
-	(*AccountId)(nil),                        // 27: spacemesh.v1.AccountId
-	(*MeshTransaction)(nil),                  // 28: spacemesh.v1.MeshTransaction
-	(*Activation)(nil),                       // 29: spacemesh.v1.Activation
-	(*Layer)(nil),                            // 30: spacemesh.v1.Layer
+	(*GenesisId)(nil),                        // 27: spacemesh.v1.GenesisId
+	(*AccountId)(nil),                        // 28: spacemesh.v1.AccountId
+	(*MeshTransaction)(nil),                  // 29: spacemesh.v1.MeshTransaction
+	(*Activation)(nil),                       // 30: spacemesh.v1.Activation
+	(*Layer)(nil),                            // 31: spacemesh.v1.Layer
 }
 var file_spacemesh_v1_mesh_types_proto_depIdxs = []int32{
 	25, // 0: spacemesh.v1.GenesisTimeResponse.unixtime:type_name -> spacemesh.v1.SimpleInt
 	26, // 1: spacemesh.v1.CurrentLayerResponse.layernum:type_name -> spacemesh.v1.LayerNumber
 	25, // 2: spacemesh.v1.CurrentEpochResponse.epochnum:type_name -> spacemesh.v1.SimpleInt
-	25, // 3: spacemesh.v1.NetIDResponse.netid:type_name -> spacemesh.v1.SimpleInt
+	27, // 3: spacemesh.v1.GenesisIDResponse.genesisid:type_name -> spacemesh.v1.GenesisId
 	25, // 4: spacemesh.v1.EpochNumLayersResponse.numlayers:type_name -> spacemesh.v1.SimpleInt
 	25, // 5: spacemesh.v1.LayerDurationResponse.duration:type_name -> spacemesh.v1.SimpleInt
 	25, // 6: spacemesh.v1.MaxTransactionsPerSecondResponse.max_txs_per_second:type_name -> spacemesh.v1.SimpleInt
-	27, // 7: spacemesh.v1.AccountMeshDataFilter.account_id:type_name -> spacemesh.v1.AccountId
-	28, // 8: spacemesh.v1.AccountMeshData.mesh_transaction:type_name -> spacemesh.v1.MeshTransaction
-	29, // 9: spacemesh.v1.AccountMeshData.activation:type_name -> spacemesh.v1.Activation
+	28, // 7: spacemesh.v1.AccountMeshDataFilter.account_id:type_name -> spacemesh.v1.AccountId
+	29, // 8: spacemesh.v1.AccountMeshData.mesh_transaction:type_name -> spacemesh.v1.MeshTransaction
+	30, // 9: spacemesh.v1.AccountMeshData.activation:type_name -> spacemesh.v1.Activation
 	15, // 10: spacemesh.v1.AccountMeshDataStreamRequest.filter:type_name -> spacemesh.v1.AccountMeshDataFilter
 	16, // 11: spacemesh.v1.AccountMeshDataStreamResponse.datum:type_name -> spacemesh.v1.AccountMeshData
 	15, // 12: spacemesh.v1.AccountMeshDataQueryRequest.filter:type_name -> spacemesh.v1.AccountMeshDataFilter
@@ -1409,8 +1412,8 @@ var file_spacemesh_v1_mesh_types_proto_depIdxs = []int32{
 	16, // 14: spacemesh.v1.AccountMeshDataQueryResponse.data:type_name -> spacemesh.v1.AccountMeshData
 	26, // 15: spacemesh.v1.LayersQueryRequest.start_layer:type_name -> spacemesh.v1.LayerNumber
 	26, // 16: spacemesh.v1.LayersQueryRequest.end_layer:type_name -> spacemesh.v1.LayerNumber
-	30, // 17: spacemesh.v1.LayersQueryResponse.layer:type_name -> spacemesh.v1.Layer
-	30, // 18: spacemesh.v1.LayerStreamResponse.layer:type_name -> spacemesh.v1.Layer
+	31, // 17: spacemesh.v1.LayersQueryResponse.layer:type_name -> spacemesh.v1.Layer
+	31, // 18: spacemesh.v1.LayerStreamResponse.layer:type_name -> spacemesh.v1.Layer
 	19, // [19:19] is the sub-list for method output_type
 	19, // [19:19] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
@@ -1498,7 +1501,7 @@ func file_spacemesh_v1_mesh_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_mesh_types_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NetIDRequest); i {
+			switch v := v.(*GenesisIDRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1510,7 +1513,7 @@ func file_spacemesh_v1_mesh_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_mesh_types_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NetIDResponse); i {
+			switch v := v.(*GenesisIDResponse); i {
 			case 0:
 				return &v.state
 			case 1:
