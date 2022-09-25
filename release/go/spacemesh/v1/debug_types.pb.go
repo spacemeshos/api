@@ -272,7 +272,6 @@ type Proposal struct {
 	Layer   *LayerNumber `protobuf:"bytes,3,opt,name=layer,proto3" json:"layer,omitempty"`
 	Smesher *SmesherId   `protobuf:"bytes,4,opt,name=smesher,proto3" json:"smesher,omitempty"`
 	// Types that are assignable to EpochData:
-	//
 	//	*Proposal_Reference
 	//	*Proposal_Data
 	EpochData     isProposal_EpochData `protobuf_oneof:"epoch_data"`

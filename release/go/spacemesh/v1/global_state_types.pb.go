@@ -717,7 +717,6 @@ type AccountData struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Datum:
-	//
 	//	*AccountData_Reward
 	//	*AccountData_Receipt
 	//	*AccountData_AccountWrapper
@@ -1268,7 +1267,6 @@ type GlobalStateData struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Datum:
-	//
 	//	*GlobalStateData_Reward
 	//	*GlobalStateData_Receipt
 	//	*GlobalStateData_AccountWrapper
