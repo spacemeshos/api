@@ -133,8 +133,8 @@ func local_request_MeshService_CurrentEpoch_0(ctx context.Context, marshaler run
 
 }
 
-func request_MeshService_NetID_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq NetIDRequest
+func request_MeshService_GenesisID_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GenesisIDRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -145,13 +145,13 @@ func request_MeshService_NetID_0(ctx context.Context, marshaler runtime.Marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.NetID(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GenesisID(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_MeshService_NetID_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq NetIDRequest
+func local_request_MeshService_GenesisID_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GenesisIDRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -162,7 +162,7 @@ func local_request_MeshService_NetID_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.NetID(ctx, &protoReq)
+	msg, err := server.GenesisID(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -418,7 +418,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("POST", pattern_MeshService_NetID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MeshService_GenesisID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -426,12 +426,12 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/NetID", runtime.WithHTTPPathPattern("/v1/mesh/netid"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_MeshService_NetID_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_MeshService_GenesisID_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -439,7 +439,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			return
 		}
 
-		forward_MeshService_NetID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MeshService_GenesisID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -675,25 +675,25 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("POST", pattern_MeshService_NetID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_MeshService_GenesisID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/NetID", runtime.WithHTTPPathPattern("/v1/mesh/netid"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_MeshService_NetID_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_MeshService_GenesisID_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_MeshService_NetID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_MeshService_GenesisID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -817,7 +817,7 @@ var (
 
 	pattern_MeshService_CurrentEpoch_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "currentepoch"}, ""))
 
-	pattern_MeshService_NetID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "netid"}, ""))
+	pattern_MeshService_GenesisID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "genesisid"}, ""))
 
 	pattern_MeshService_EpochNumLayers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "epochnumlayers"}, ""))
 
@@ -837,7 +837,7 @@ var (
 
 	forward_MeshService_CurrentEpoch_0 = runtime.ForwardResponseMessage
 
-	forward_MeshService_NetID_0 = runtime.ForwardResponseMessage
+	forward_MeshService_GenesisID_0 = runtime.ForwardResponseMessage
 
 	forward_MeshService_EpochNumLayers_0 = runtime.ForwardResponseMessage
 

@@ -38,8 +38,8 @@ http:
     - selector: spacemesh.v1.MeshService.CurrentEpoch
       post: "/v1/mesh/currentepoch"
       body: "*"
-    - selector: spacemesh.v1.MeshService.NetID
-      post: "/v1/mesh/netid"
+    - selector: spacemesh.v1.MeshService.GenesisID
+      post: "/v1/mesh/genesisid"
       body: "*"
     - selector: spacemesh.v1.MeshService.EpochNumLayers
       post: "/v1/mesh/epochnumlayers"
