@@ -2,6 +2,9 @@
 
 SHELL := /usr/bin/env bash -o pipefail
 
+# Go binary to use
+GO ?= go
+
 # This controls the location of the cache.
 PROJECT := api
 # This controls the remote HTTPS git location to compare against for breaking changes in CI.
@@ -71,7 +74,7 @@ CACHE_TMP := $(CACHE_BASE)/tmp
 
 # Go tools require that this be set
 ifndef GOPATH
-	export GOPATH=$(shell go env GOPATH)
+	export GOPATH=$(shell ${GO} env GOPATH)
 endif
 
 # Update the $PATH so we can use buf and protoc directly
@@ -110,7 +113,7 @@ $(PROTOC):
 PROTOC_GEN_GO := $(CACHE_VERSIONS)/protoc-gen-go/$(PROTOC_GEN_GO_VERSION)
 $(PROTOC_GEN_GO):
 	cd $(PROTOC_GO_BUILD_DIR) && \
-	  go install github.com/golang/protobuf/protoc-gen-go
+	  ${GO} install github.com/golang/protobuf/protoc-gen-go
 	@rm -rf $(dir $(PROTOC_GEN_GO))
 	@mkdir -p $(dir $(PROTOC_GEN_GO))
 	@touch $(PROTOC_GEN_GO)
@@ -118,7 +121,7 @@ $(PROTOC_GEN_GO):
 PROTOC_GEN_GRPC_GATEWAY := $(CACHE_VERSIONS)/protoc-gen-grpc-gateway/$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
 $(PROTOC_GEN_GRPC_GATEWAY):
 	cd $(PROTOC_GO_BUILD_DIR) && \
-	  go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
+	  ${GO} install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 	@rm -rf $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@mkdir -p $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@touch $(PROTOC_GEN_GRPC_GATEWAY)
