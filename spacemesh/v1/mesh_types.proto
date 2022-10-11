@@ -25,7 +25,7 @@ message CurrentEpochResponse {
 message GenesisIDRequest {}
 
 message GenesisIDResponse {
-    bytes genesisID = 1;
+    bytes genesis_id = 1;
 }
 
 message EpochNumLayersRequest {}
