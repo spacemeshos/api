@@ -1,14 +1,13 @@
 name: CI
 
 env:
-  go-version: "1.18"
+  go-version: "1.19"
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [master]
   pull_request:
+  push:
     branches: [master]
 
 jobs:
