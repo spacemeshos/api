@@ -91,6 +91,8 @@ message PostConfigResponse {
     uint64 labels_per_unit = 2;
     uint32 min_num_units = 3;
     uint32 max_num_units = 4;
+    uint32 k1 = 5;
+    uint32 k2 = 6;
 }
 
 message PostSetupComputeProvider {
