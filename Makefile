@@ -171,7 +171,7 @@ ssh: $(BUF)
 protoc: $(PROTOC)
 	@protoc $(PROTOC_INPUTS) -o /dev/null
 	@(protoc $(PROTOC_INPUTS) -o /dev/null 2>&1) | grep warning \
-	  && { echo "one or more warnings detected"; exit 1; } || exit 0
+		&& { echo "one or more warnings detected"; exit 1; } || exit 0
 
 ## LANGUAGE-SPECIFIC BUILDS
 
@@ -179,13 +179,13 @@ protoc: $(PROTOC)
 .PHONY: golang
 golang: $(PROTOC) | $(PROTOC_GEN_GO)
 	@protoc $(PROTOC_INPUTS) \
-	  --go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
+		--go_out=$(PROTOC_GO_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GO_OPT)
 
 # grpc-gateway
 .PHONY: grpc-gateway
 grpc-gateway: $(PROTOC) | $(PROTOC_GEN_GO) $(PROTOC_GEN_GRPC_GATEWAY)
 	@protoc $(PROTOC_INPUTS) \
-	  --grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
+		--grpc-gateway_out=$(PROTOC_GATEWAY_PLUGINS)$(PROTOC_GO_BUILD_DIR) $(PROTOC_GATEWAY_OPT)
 
 # Run all builds
 .PHONY: build
@@ -196,7 +196,7 @@ build: golang grpc-gateway
 check: build
 	@git add -N $(PROTOC_GO_BUILD_DIR)
 	@git diff --name-only --diff-filter=AM --exit-code $(PROTOC_GO_BUILD_DIR) \
-	  || { echo "please update build"; exit 1; }
+		|| { echo "please update build"; exit 1; }
 
 # clean deletes any files not checked in and the cache for all platforms.
 
