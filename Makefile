@@ -112,16 +112,14 @@ $(PROTOC):
 
 PROTOC_GEN_GO := $(CACHE_VERSIONS)/protoc-gen-go/$(PROTOC_GEN_GO_VERSION)
 $(PROTOC_GEN_GO):
-	cd $(PROTOC_GO_BUILD_DIR) && \
-	  ${GO} install github.com/golang/protobuf/protoc-gen-go
+	${GO} install github.com/golang/protobuf/protoc-gen-go
 	@rm -rf $(dir $(PROTOC_GEN_GO))
 	@mkdir -p $(dir $(PROTOC_GEN_GO))
 	@touch $(PROTOC_GEN_GO)
 
 PROTOC_GEN_GRPC_GATEWAY := $(CACHE_VERSIONS)/protoc-gen-grpc-gateway/$(PROTOC_GEN_GRPC_GATEWAY_VERSION)
 $(PROTOC_GEN_GRPC_GATEWAY):
-	cd $(PROTOC_GO_BUILD_DIR) && \
-	  ${GO} install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
+	${GO} install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 	@rm -rf $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@mkdir -p $(dir $(PROTOC_GEN_GRPC_GATEWAY))
 	@touch $(PROTOC_GEN_GRPC_GATEWAY)
