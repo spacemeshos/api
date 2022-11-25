@@ -18,4 +18,5 @@ message VerifyChallengeRequest {
 
 message VerifyChallengeResponse {
     bytes hash = 1;
+    bytes node_id = 2;
 }
