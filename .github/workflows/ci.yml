@@ -24,7 +24,7 @@ jobs:
       - name: lint and check build
         run: |
           # Runs the buf linter and checks for breaking changes
-          # make https  # Temporary disable check for breaking changes (re-enable after merge)
+          # make https
 
           # Attempts to build using `protoc`. Probably redundant given the next step.
           make protoc
