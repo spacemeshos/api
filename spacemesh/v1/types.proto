@@ -47,13 +47,14 @@ message Transaction {
     bytes id = 1;
     AccountId principal = 2;
     AccountId template = 3;
-    uint32 method = 4; // this is actually limited by uint8, but no type for that.
-    Nonce nonce = 5;
-    LayerLimits limits = 6;
-    uint64 max_gas = 7;
-    uint64 gas_price = 8;
-    uint64 max_spend = 9;
-    bytes raw = 10;
+    uint32 tx_type = 4;
+    uint32 method = 5; // this is actually limited by uint8, but no type for that.
+    Nonce nonce = 6;
+    LayerLimits limits = 7;
+    uint64 max_gas = 8;
+    uint64 gas_price = 9;
+    uint64 max_spend = 10;
+    bytes raw = 11;
 }
 
 message LayerLimits {

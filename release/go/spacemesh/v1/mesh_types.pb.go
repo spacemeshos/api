@@ -726,7 +726,6 @@ type AccountMeshData struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Datum:
-	//
 	//	*AccountMeshData_MeshTransaction
 	//	*AccountMeshData_Activation
 	Datum isAccountMeshData_Datum `protobuf_oneof:"datum"`
