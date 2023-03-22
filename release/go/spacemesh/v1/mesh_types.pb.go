@@ -1208,6 +1208,100 @@ func (x *LayerStreamResponse) GetLayer() *Layer {
 	return nil
 }
 
+type EpochStreamRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Epoch uint32 `protobuf:"varint,1,opt,name=epoch,proto3" json:"epoch,omitempty"`
+}
+
+func (x *EpochStreamRequest) Reset() {
+	*x = EpochStreamRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EpochStreamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EpochStreamRequest) ProtoMessage() {}
+
+func (x *EpochStreamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EpochStreamRequest.ProtoReflect.Descriptor instead.
+func (*EpochStreamRequest) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_mesh_types_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *EpochStreamRequest) GetEpoch() uint32 {
+	if x != nil {
+		return x.Epoch
+	}
+	return 0
+}
+
+type EpochStreamResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ids []*ActivationId `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
+}
+
+func (x *EpochStreamResponse) Reset() {
+	*x = EpochStreamResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EpochStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EpochStreamResponse) ProtoMessage() {}
+
+func (x *EpochStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_mesh_types_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EpochStreamResponse.ProtoReflect.Descriptor instead.
+func (*EpochStreamResponse) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_mesh_types_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *EpochStreamResponse) GetIds() []*ActivationId {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
 var File_spacemesh_v1_mesh_types_proto protoreflect.FileDescriptor
 
 var file_spacemesh_v1_mesh_types_proto_rawDesc = []byte{
@@ -1329,20 +1423,27 @@ var file_spacemesh_v1_mesh_types_proto_rawDesc = []byte{
 	0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x29, 0x0a, 0x05, 0x6c, 0x61, 0x79,
 	0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65,
 	0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x52, 0x05, 0x6c,
-	0x61, 0x79, 0x65, 0x72, 0x2a, 0x8e, 0x01, 0x0a, 0x13, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x4d, 0x65, 0x73, 0x68, 0x44, 0x61, 0x74, 0x61, 0x46, 0x6c, 0x61, 0x67, 0x12, 0x26, 0x0a, 0x22,
-	0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x5f, 0x4d, 0x45, 0x53, 0x48, 0x5f, 0x44, 0x41, 0x54,
-	0x41, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49,
-	0x45, 0x44, 0x10, 0x00, 0x12, 0x27, 0x0a, 0x23, 0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x5f,
-	0x4d, 0x45, 0x53, 0x48, 0x5f, 0x44, 0x41, 0x54, 0x41, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x5f, 0x54,
-	0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x53, 0x10, 0x01, 0x12, 0x26, 0x0a,
+	0x61, 0x79, 0x65, 0x72, 0x22, 0x2a, 0x0a, 0x12, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x53, 0x74, 0x72,
+	0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x70,
+	0x6f, 0x63, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x65, 0x70, 0x6f, 0x63, 0x68,
+	0x22, 0x43, 0x0a, 0x13, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2c, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
+	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64,
+	0x52, 0x03, 0x69, 0x64, 0x73, 0x2a, 0x8e, 0x01, 0x0a, 0x13, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x4d, 0x65, 0x73, 0x68, 0x44, 0x61, 0x74, 0x61, 0x46, 0x6c, 0x61, 0x67, 0x12, 0x26, 0x0a,
 	0x22, 0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x5f, 0x4d, 0x45, 0x53, 0x48, 0x5f, 0x44, 0x41,
-	0x54, 0x41, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x56, 0x41, 0x54, 0x49,
-	0x4f, 0x4e, 0x53, 0x10, 0x02, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73,
-	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x54, 0x41, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46,
+	0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x27, 0x0a, 0x23, 0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54,
+	0x5f, 0x4d, 0x45, 0x53, 0x48, 0x5f, 0x44, 0x41, 0x54, 0x41, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x5f,
+	0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x53, 0x10, 0x01, 0x12, 0x26,
+	0x0a, 0x22, 0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x5f, 0x4d, 0x45, 0x53, 0x48, 0x5f, 0x44,
+	0x41, 0x54, 0x41, 0x5f, 0x46, 0x4c, 0x41, 0x47, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x56, 0x41, 0x54,
+	0x49, 0x4f, 0x4e, 0x53, 0x10, 0x02, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1358,7 +1459,7 @@ func file_spacemesh_v1_mesh_types_proto_rawDescGZIP() []byte {
 }
 
 var file_spacemesh_v1_mesh_types_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_spacemesh_v1_mesh_types_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_spacemesh_v1_mesh_types_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_spacemesh_v1_mesh_types_proto_goTypes = []interface{}{
 	(AccountMeshDataFlag)(0),                 // 0: spacemesh.v1.AccountMeshDataFlag
 	(*GenesisTimeRequest)(nil),               // 1: spacemesh.v1.GenesisTimeRequest
@@ -1385,37 +1486,41 @@ var file_spacemesh_v1_mesh_types_proto_goTypes = []interface{}{
 	(*LayersQueryResponse)(nil),              // 22: spacemesh.v1.LayersQueryResponse
 	(*LayerStreamRequest)(nil),               // 23: spacemesh.v1.LayerStreamRequest
 	(*LayerStreamResponse)(nil),              // 24: spacemesh.v1.LayerStreamResponse
-	(*SimpleInt)(nil),                        // 25: spacemesh.v1.SimpleInt
-	(*LayerNumber)(nil),                      // 26: spacemesh.v1.LayerNumber
-	(*AccountId)(nil),                        // 27: spacemesh.v1.AccountId
-	(*MeshTransaction)(nil),                  // 28: spacemesh.v1.MeshTransaction
-	(*Activation)(nil),                       // 29: spacemesh.v1.Activation
-	(*Layer)(nil),                            // 30: spacemesh.v1.Layer
+	(*EpochStreamRequest)(nil),               // 25: spacemesh.v1.EpochStreamRequest
+	(*EpochStreamResponse)(nil),              // 26: spacemesh.v1.EpochStreamResponse
+	(*SimpleInt)(nil),                        // 27: spacemesh.v1.SimpleInt
+	(*LayerNumber)(nil),                      // 28: spacemesh.v1.LayerNumber
+	(*AccountId)(nil),                        // 29: spacemesh.v1.AccountId
+	(*MeshTransaction)(nil),                  // 30: spacemesh.v1.MeshTransaction
+	(*Activation)(nil),                       // 31: spacemesh.v1.Activation
+	(*Layer)(nil),                            // 32: spacemesh.v1.Layer
+	(*ActivationId)(nil),                     // 33: spacemesh.v1.ActivationId
 }
 var file_spacemesh_v1_mesh_types_proto_depIdxs = []int32{
-	25, // 0: spacemesh.v1.GenesisTimeResponse.unixtime:type_name -> spacemesh.v1.SimpleInt
-	26, // 1: spacemesh.v1.CurrentLayerResponse.layernum:type_name -> spacemesh.v1.LayerNumber
-	25, // 2: spacemesh.v1.CurrentEpochResponse.epochnum:type_name -> spacemesh.v1.SimpleInt
-	25, // 3: spacemesh.v1.EpochNumLayersResponse.numlayers:type_name -> spacemesh.v1.SimpleInt
-	25, // 4: spacemesh.v1.LayerDurationResponse.duration:type_name -> spacemesh.v1.SimpleInt
-	25, // 5: spacemesh.v1.MaxTransactionsPerSecondResponse.max_txs_per_second:type_name -> spacemesh.v1.SimpleInt
-	27, // 6: spacemesh.v1.AccountMeshDataFilter.account_id:type_name -> spacemesh.v1.AccountId
-	28, // 7: spacemesh.v1.AccountMeshData.mesh_transaction:type_name -> spacemesh.v1.MeshTransaction
-	29, // 8: spacemesh.v1.AccountMeshData.activation:type_name -> spacemesh.v1.Activation
+	27, // 0: spacemesh.v1.GenesisTimeResponse.unixtime:type_name -> spacemesh.v1.SimpleInt
+	28, // 1: spacemesh.v1.CurrentLayerResponse.layernum:type_name -> spacemesh.v1.LayerNumber
+	27, // 2: spacemesh.v1.CurrentEpochResponse.epochnum:type_name -> spacemesh.v1.SimpleInt
+	27, // 3: spacemesh.v1.EpochNumLayersResponse.numlayers:type_name -> spacemesh.v1.SimpleInt
+	27, // 4: spacemesh.v1.LayerDurationResponse.duration:type_name -> spacemesh.v1.SimpleInt
+	27, // 5: spacemesh.v1.MaxTransactionsPerSecondResponse.max_txs_per_second:type_name -> spacemesh.v1.SimpleInt
+	29, // 6: spacemesh.v1.AccountMeshDataFilter.account_id:type_name -> spacemesh.v1.AccountId
+	30, // 7: spacemesh.v1.AccountMeshData.mesh_transaction:type_name -> spacemesh.v1.MeshTransaction
+	31, // 8: spacemesh.v1.AccountMeshData.activation:type_name -> spacemesh.v1.Activation
 	15, // 9: spacemesh.v1.AccountMeshDataStreamRequest.filter:type_name -> spacemesh.v1.AccountMeshDataFilter
 	16, // 10: spacemesh.v1.AccountMeshDataStreamResponse.datum:type_name -> spacemesh.v1.AccountMeshData
 	15, // 11: spacemesh.v1.AccountMeshDataQueryRequest.filter:type_name -> spacemesh.v1.AccountMeshDataFilter
-	26, // 12: spacemesh.v1.AccountMeshDataQueryRequest.min_layer:type_name -> spacemesh.v1.LayerNumber
+	28, // 12: spacemesh.v1.AccountMeshDataQueryRequest.min_layer:type_name -> spacemesh.v1.LayerNumber
 	16, // 13: spacemesh.v1.AccountMeshDataQueryResponse.data:type_name -> spacemesh.v1.AccountMeshData
-	26, // 14: spacemesh.v1.LayersQueryRequest.start_layer:type_name -> spacemesh.v1.LayerNumber
-	26, // 15: spacemesh.v1.LayersQueryRequest.end_layer:type_name -> spacemesh.v1.LayerNumber
-	30, // 16: spacemesh.v1.LayersQueryResponse.layer:type_name -> spacemesh.v1.Layer
-	30, // 17: spacemesh.v1.LayerStreamResponse.layer:type_name -> spacemesh.v1.Layer
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	28, // 14: spacemesh.v1.LayersQueryRequest.start_layer:type_name -> spacemesh.v1.LayerNumber
+	28, // 15: spacemesh.v1.LayersQueryRequest.end_layer:type_name -> spacemesh.v1.LayerNumber
+	32, // 16: spacemesh.v1.LayersQueryResponse.layer:type_name -> spacemesh.v1.Layer
+	32, // 17: spacemesh.v1.LayerStreamResponse.layer:type_name -> spacemesh.v1.Layer
+	33, // 18: spacemesh.v1.EpochStreamResponse.ids:type_name -> spacemesh.v1.ActivationId
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_mesh_types_proto_init() }
@@ -1713,6 +1818,30 @@ func file_spacemesh_v1_mesh_types_proto_init() {
 				return nil
 			}
 		}
+		file_spacemesh_v1_mesh_types_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EpochStreamRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_mesh_types_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EpochStreamResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_spacemesh_v1_mesh_types_proto_msgTypes[15].OneofWrappers = []interface{}{
 		(*AccountMeshData_MeshTransaction)(nil),
@@ -1724,7 +1853,7 @@ func file_spacemesh_v1_mesh_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_mesh_types_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
