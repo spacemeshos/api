@@ -105,5 +105,5 @@ message EpochStreamRequest {
 }
 
 message EpochStreamResponse {
-    repeated ActivationId ids = 1;
+    ActivationId id = 1;
 }
