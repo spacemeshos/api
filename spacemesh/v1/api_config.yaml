@@ -4,11 +4,6 @@ config_version: 3
 
 http:
   rules:
-    # GatewayService
-    - selector: spacemesh.v1.GatewayService.VerifyChallenge
-      post: "/v1/gateway/verifychallenge"
-      body: "*"
-
     # DebugService
     - selector: spacemesh.v1.DebugService.Accounts
       post: "/v1/debug/accounts"
