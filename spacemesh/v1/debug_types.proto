@@ -22,6 +22,14 @@ message Eligibility {
     bytes signature = 2; 
 }
 
+message ActiveSetRequest {
+    uint32 epoch = 1;
+}
+
+message ActiveSetResponse {
+    repeated ActivationId ids = 1;
+}
+
 message Proposal {
     bytes id = 1;
     SimpleInt epoch = 2;
