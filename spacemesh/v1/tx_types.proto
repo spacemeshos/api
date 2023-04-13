@@ -84,3 +84,11 @@ message TransactionResult {
     uint32 layer = 7;
     repeated string touched_addresses = 8;
 }
+
+message ParseTransactionRequest {
+    bytes transaction = 1;  // signed binary transaction
+}
+
+message ParseTransactionResponse {
+    Transaction tx = 1;
+}
