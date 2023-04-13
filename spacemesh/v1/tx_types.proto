@@ -87,6 +87,7 @@ message TransactionResult {
 
 message ParseTransactionRequest {
     bytes transaction = 1;  // signed binary transaction
+    bool verify = 2;        // if true signature verification will be executed
 }
 
 message ParseTransactionResponse {
