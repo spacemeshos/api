@@ -1,5 +1,6 @@
 # Spacemesh API
-![](https://github.com/spacemeshos/api/workflows/CI/badge.svg)
+
+![CI Status](https://github.com/spacemeshos/api/workflows/CI/badge.svg)
 
 [Protobuf](https://developers.google.com/protocol-buffers) implementation of the Spacemesh API. This repository contains only API design, not implementation. For implementation work, see [go-spacemesh](https://github.com/spacemeshos/go-spacemesh/tree/develop/api/grpcserver). Note that API implementation may lag design.
 
@@ -28,13 +29,13 @@ Broadly speaking, there are four types of endpoints: simple, command, query, and
 - **Simple** endpoints are used to query a single data element. Some simple endpoints accept a request object (e.g., [`GlobalStateService.Account`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/global_state.proto#L14)), while some which return data that's global to a node accept no request object (e.g., [`NodeService.Version`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/node.proto#L13)).
 - **Command** endpoints are used to send a command to a node. Examples include [`TransactionService.SubmitTransaction`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/tx.proto#L15) and [`SmesherService.StartSmeshing`](https://github.com/spacemeshos/api/blob/ab285df4d52af4663335a4bcccb0b52f1e5003ee/proto/spacemesh/v1/smesher.proto#L16).
 - **Query** endpoints are used to read paginated historical data. A `*Query` endpoint accepts a `*Request` message that typically contains the following:
-    - `filter`: A filter (see Streams, below)
-    - `min_layer`: The first layer to return results from
-    - `max_results`: The maximum number of results to return
-    - `offset`: Page offset
+  - `filter`: A filter (see Streams, below)
+  - `min_layer`: The first layer to return results from
+  - `max_results`: The maximum number of results to return
+  - `offset`: Page offset
 - **Stream** endpoints are used to read realtime data. They do not return historical data. Each time the node creates, or learns of, a piece of data matching the filter and type, or sees an update to a matching piece of data, it sends it over the stream. A `*Stream` endpoint accepts a `*Request` message, containing the following, that functions as a filter:
-    - `*_id`: The ID of the data type to filter on (e.g., "show me all data items that touch this `account_id`")
-    - `flags`: A bit field that allows the client to select which, among multiple types multiplexed on this stream, to receive
+  - `*_id`: The ID of the data type to filter on (e.g., "show me all data items that touch this `account_id`")
+  - `flags`: A bit field that allows the client to select which, among multiple types multiplexed on this stream, to receive
 
 ## Services
 
@@ -90,13 +91,13 @@ Under the hood, it uses a helpful tool called `buf`.
 
 In addition to running `make` commands, you can also manually use the [`buf`](https://buf.build/) tool to compile the API to an [image](https://buf.build/docs/inputs). First, [install `buf`](https://buf.build/docs/installation), then run:
 
-```
+```console
 > buf image build -o /dev/null
 ```
 
 to test the build. To output the image in json format, run:
 
-```
+```console
 > buf image build --exclude-source-info -o -#format=json
 ```
 
@@ -104,13 +105,13 @@ to test the build. To output the image in json format, run:
 
 `buf` also supports [detection of breaking changes](https://buf.build/docs/tour-5). To do this, first create an image from the current state:
 
-```
+```console
 > buf image build -o image.bin
 ```
 
 Make a breaking change, then run against this change:
 
-```
+```console
 > buf check breaking --against-input image.bin
 ```
 
@@ -120,7 +121,7 @@ Make a breaking change, then run against this change:
 
 `buf` runs several [linters](https://buf.build/docs/lint-checkers). It's pretty strict about things such as naming conventions, to prevent downstream issues in the various languages and framework that rely upon the protobuf definition files. You can run the linter like this:
 
-```
+```console
 > buf check lint
 ```
 
@@ -138,7 +139,7 @@ You can use a nifty tool called [`act`](https://github.com/nektos/act) to run th
 
 The `third_party/` directory includes several third-party libraries, which are required by some of the Google extensions used in the API definition files. These have manually been copied in from two sources:
 
-- https://github.com/googleapis/googleapis/tree/master/google (`google.api`, `google.rpc`)
-- https://github.com/protocolbuffers/protobuf/tree/master/src/google/protobuf (`google.protobuf`)
+- <https://github.com/googleapis/googleapis/tree/master/google> (`google.api`, `google.rpc`)
+- <https://github.com/protocolbuffers/protobuf/tree/master/src/google/protobuf> (`google.protobuf`)
 
 These files do not change often and probably do not need to be updated. However, if updates were to be more common, it might make more sense to add a dynamic dependency on these external libraries using a Makefile or `git submodule`.
