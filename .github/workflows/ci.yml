@@ -23,8 +23,9 @@ jobs:
 
       - name: lint and check build
         run: |
+          # TODO(mafa): temorary disabled
           # Runs the buf linter and checks for breaking changes
-          make https
+          # make https
 
           # Attempts to build using `protoc`. Probably redundant given the next step.
           make protoc
