@@ -4,7 +4,6 @@ option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 
 message CheckpointStreamRequest {
   uint32 snapshot_layer = 1;
-  uint32 restore_layer = 2;
 }
 
 message CheckpointStreamResponse {
@@ -13,4 +12,5 @@ message CheckpointStreamResponse {
 
 message RecoverRequest {
   string uri = 1;
+  uint32 restore_layer = 2;
 }
