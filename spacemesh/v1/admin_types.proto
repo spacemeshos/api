@@ -29,7 +29,7 @@ message Event {
   string help = 4;
   // json encoded details of the event.
   // TODO for future consideration, this can be better accomplished with oneof.
-  string details = 5; 
+  string details = 5;
 }
 
 message EventStreamRequest {
