@@ -1,6 +1,7 @@
 syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+import "google/protobuf/timestamp.proto";
 
 message CheckpointStreamRequest {
   uint32 snapshot_layer = 1;
@@ -13,4 +14,25 @@ message CheckpointStreamResponse {
 message RecoverRequest {
   string uri = 1;
   uint32 restore_layer = 2;
+}
+
+message Event {
+  // time when event occured.
+  google.protobuf.Timestamp timestamp = 1;
+  // the reason of the failure may be complex to pinpoint.
+  // for the first version we want to highlight that failure occured and defer user to logs. 
+  bool failure = 2;
+  // short human readable name for the event (Beacon, Init Start, Init Complete, and so on)
+  string type = 3;
+  // what role this event plays in the protocol. 
+  // might be long, should not be displayed by default, or displayed in small text.
+  string help = 4;
+  // json encoded details of the event.
+  // TODO for future consideration, this can be better accomplished with oneof.
+  string details = 5; 
+}
+
+message EventStreamRequest {
+  // if true it will return all persisted events
+  bool history = 1;
 }
