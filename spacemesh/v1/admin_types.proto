@@ -32,7 +32,4 @@ message Event {
   string details = 5;
 }
 
-message EventStreamRequest {
-  // if true it will return all persisted events
-  bool history = 1;
-}
+message EventStreamRequest {}
