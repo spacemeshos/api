@@ -7,6 +7,7 @@
 package v1
 
 import (
+	duration "github.com/golang/protobuf/ptypes/duration"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -180,14 +181,24 @@ type Event struct {
 	// the reason of the failure may be complex to pinpoint.
 	// for the first version we want to highlight that failure occured and defer user to logs.
 	Failure bool `protobuf:"varint,2,opt,name=failure,proto3" json:"failure,omitempty"`
-	// short human readable name for the event (Beacon, Init Start, Init Complete, and so on)
-	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	// what role this event plays in the protocol.
 	// might be long, should not be displayed by default, or displayed in small text.
-	Help string `protobuf:"bytes,4,opt,name=help,proto3" json:"help,omitempty"`
-	// json encoded details of the event.
-	// TODO for future consideration, this can be better accomplished with oneof.
-	Details string `protobuf:"bytes,5,opt,name=details,proto3" json:"details,omitempty"`
+	Help string `protobuf:"bytes,3,opt,name=help,proto3" json:"help,omitempty"`
+	// Types that are assignable to Details:
+	//
+	//	*Event_Beacon
+	//	*Event_InitStart
+	//	*Event_InitComplete
+	//	*Event_InitFailed
+	//	*Event_PostStart
+	//	*Event_PostComplete
+	//	*Event_PostFailed
+	//	*Event_PoetWait
+	//	*Event_PoetWaitChallenge
+	//	*Event_AtxPublished
+	//	*Event_Eligibilities
+	//	*Event_Proposal
+	Details isEvent_Details `protobuf_oneof:"details"`
 }
 
 func (x *Event) Reset() {
@@ -236,13 +247,6 @@ func (x *Event) GetFailure() bool {
 	return false
 }
 
-func (x *Event) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
 func (x *Event) GetHelp() string {
 	if x != nil {
 		return x.Help
@@ -250,11 +254,875 @@ func (x *Event) GetHelp() string {
 	return ""
 }
 
-func (x *Event) GetDetails() string {
-	if x != nil {
-		return x.Details
+func (m *Event) GetDetails() isEvent_Details {
+	if m != nil {
+		return m.Details
 	}
-	return ""
+	return nil
+}
+
+func (x *Event) GetBeacon() *EventBeacon {
+	if x, ok := x.GetDetails().(*Event_Beacon); ok {
+		return x.Beacon
+	}
+	return nil
+}
+
+func (x *Event) GetInitStart() *EventInitStart {
+	if x, ok := x.GetDetails().(*Event_InitStart); ok {
+		return x.InitStart
+	}
+	return nil
+}
+
+func (x *Event) GetInitComplete() *EventInitComplete {
+	if x, ok := x.GetDetails().(*Event_InitComplete); ok {
+		return x.InitComplete
+	}
+	return nil
+}
+
+func (x *Event) GetInitFailed() *EventInitFailed {
+	if x, ok := x.GetDetails().(*Event_InitFailed); ok {
+		return x.InitFailed
+	}
+	return nil
+}
+
+func (x *Event) GetPostStart() *EventPostStart {
+	if x, ok := x.GetDetails().(*Event_PostStart); ok {
+		return x.PostStart
+	}
+	return nil
+}
+
+func (x *Event) GetPostComplete() *EventPostComplete {
+	if x, ok := x.GetDetails().(*Event_PostComplete); ok {
+		return x.PostComplete
+	}
+	return nil
+}
+
+func (x *Event) GetPostFailed() *EventPostFailed {
+	if x, ok := x.GetDetails().(*Event_PostFailed); ok {
+		return x.PostFailed
+	}
+	return nil
+}
+
+func (x *Event) GetPoetWait() *EventPoetWait {
+	if x, ok := x.GetDetails().(*Event_PoetWait); ok {
+		return x.PoetWait
+	}
+	return nil
+}
+
+func (x *Event) GetPoetWaitChallenge() *EventPoetWaitChallenge {
+	if x, ok := x.GetDetails().(*Event_PoetWaitChallenge); ok {
+		return x.PoetWaitChallenge
+	}
+	return nil
+}
+
+func (x *Event) GetAtxPublished() *EventAtxPubished {
+	if x, ok := x.GetDetails().(*Event_AtxPublished); ok {
+		return x.AtxPublished
+	}
+	return nil
+}
+
+func (x *Event) GetEligibilities() *EventEligibilities {
+	if x, ok := x.GetDetails().(*Event_Eligibilities); ok {
+		return x.Eligibilities
+	}
+	return nil
+}
+
+func (x *Event) GetProposal() *EventProposal {
+	if x, ok := x.GetDetails().(*Event_Proposal); ok {
+		return x.Proposal
+	}
+	return nil
+}
+
+type isEvent_Details interface {
+	isEvent_Details()
+}
+
+type Event_Beacon struct {
+	Beacon *EventBeacon `protobuf:"bytes,4,opt,name=beacon,proto3,oneof"`
+}
+
+type Event_InitStart struct {
+	InitStart *EventInitStart `protobuf:"bytes,5,opt,name=init_start,json=initStart,proto3,oneof"`
+}
+
+type Event_InitComplete struct {
+	InitComplete *EventInitComplete `protobuf:"bytes,6,opt,name=init_complete,json=initComplete,proto3,oneof"`
+}
+
+type Event_InitFailed struct {
+	InitFailed *EventInitFailed `protobuf:"bytes,7,opt,name=init_failed,json=initFailed,proto3,oneof"`
+}
+
+type Event_PostStart struct {
+	PostStart *EventPostStart `protobuf:"bytes,8,opt,name=post_start,json=postStart,proto3,oneof"`
+}
+
+type Event_PostComplete struct {
+	PostComplete *EventPostComplete `protobuf:"bytes,9,opt,name=post_complete,json=postComplete,proto3,oneof"`
+}
+
+type Event_PostFailed struct {
+	PostFailed *EventPostFailed `protobuf:"bytes,10,opt,name=post_failed,json=postFailed,proto3,oneof"`
+}
+
+type Event_PoetWait struct {
+	PoetWait *EventPoetWait `protobuf:"bytes,11,opt,name=poet_wait,json=poetWait,proto3,oneof"`
+}
+
+type Event_PoetWaitChallenge struct {
+	PoetWaitChallenge *EventPoetWaitChallenge `protobuf:"bytes,12,opt,name=poet_wait_challenge,json=poetWaitChallenge,proto3,oneof"`
+}
+
+type Event_AtxPublished struct {
+	AtxPublished *EventAtxPubished `protobuf:"bytes,13,opt,name=atx_published,json=atxPublished,proto3,oneof"`
+}
+
+type Event_Eligibilities struct {
+	Eligibilities *EventEligibilities `protobuf:"bytes,14,opt,name=eligibilities,proto3,oneof"`
+}
+
+type Event_Proposal struct {
+	Proposal *EventProposal `protobuf:"bytes,15,opt,name=proposal,proto3,oneof"`
+}
+
+func (*Event_Beacon) isEvent_Details() {}
+
+func (*Event_InitStart) isEvent_Details() {}
+
+func (*Event_InitComplete) isEvent_Details() {}
+
+func (*Event_InitFailed) isEvent_Details() {}
+
+func (*Event_PostStart) isEvent_Details() {}
+
+func (*Event_PostComplete) isEvent_Details() {}
+
+func (*Event_PostFailed) isEvent_Details() {}
+
+func (*Event_PoetWait) isEvent_Details() {}
+
+func (*Event_PoetWaitChallenge) isEvent_Details() {}
+
+func (*Event_AtxPublished) isEvent_Details() {}
+
+func (*Event_Eligibilities) isEvent_Details() {}
+
+func (*Event_Proposal) isEvent_Details() {}
+
+type EventBeacon struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Epoch  uint32 `protobuf:"varint,1,opt,name=epoch,proto3" json:"epoch,omitempty"`
+	Beacon []byte `protobuf:"bytes,2,opt,name=beacon,proto3" json:"beacon,omitempty"`
+}
+
+func (x *EventBeacon) Reset() {
+	*x = EventBeacon{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventBeacon) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventBeacon) ProtoMessage() {}
+
+func (x *EventBeacon) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventBeacon.ProtoReflect.Descriptor instead.
+func (*EventBeacon) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *EventBeacon) GetEpoch() uint32 {
+	if x != nil {
+		return x.Epoch
+	}
+	return 0
+}
+
+func (x *EventBeacon) GetBeacon() []byte {
+	if x != nil {
+		return x.Beacon
+	}
+	return nil
+}
+
+type EventInitStart struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Smesher    []byte `protobuf:"bytes,1,opt,name=smesher,proto3" json:"smesher,omitempty"`
+	Commitment []byte `protobuf:"bytes,2,opt,name=commitment,proto3" json:"commitment,omitempty"`
+}
+
+func (x *EventInitStart) Reset() {
+	*x = EventInitStart{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventInitStart) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventInitStart) ProtoMessage() {}
+
+func (x *EventInitStart) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventInitStart.ProtoReflect.Descriptor instead.
+func (*EventInitStart) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *EventInitStart) GetSmesher() []byte {
+	if x != nil {
+		return x.Smesher
+	}
+	return nil
+}
+
+func (x *EventInitStart) GetCommitment() []byte {
+	if x != nil {
+		return x.Commitment
+	}
+	return nil
+}
+
+type EventInitComplete struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *EventInitComplete) Reset() {
+	*x = EventInitComplete{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventInitComplete) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventInitComplete) ProtoMessage() {}
+
+func (x *EventInitComplete) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventInitComplete.ProtoReflect.Descriptor instead.
+func (*EventInitComplete) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{6}
+}
+
+type EventInitFailed struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *EventInitFailed) Reset() {
+	*x = EventInitFailed{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventInitFailed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventInitFailed) ProtoMessage() {}
+
+func (x *EventInitFailed) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventInitFailed.ProtoReflect.Descriptor instead.
+func (*EventInitFailed) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{7}
+}
+
+type EventPostStart struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Challenge []byte `protobuf:"bytes,1,opt,name=challenge,proto3" json:"challenge,omitempty"`
+}
+
+func (x *EventPostStart) Reset() {
+	*x = EventPostStart{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventPostStart) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventPostStart) ProtoMessage() {}
+
+func (x *EventPostStart) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventPostStart.ProtoReflect.Descriptor instead.
+func (*EventPostStart) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *EventPostStart) GetChallenge() []byte {
+	if x != nil {
+		return x.Challenge
+	}
+	return nil
+}
+
+type EventPostComplete struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Challenge []byte `protobuf:"bytes,1,opt,name=challenge,proto3" json:"challenge,omitempty"`
+}
+
+func (x *EventPostComplete) Reset() {
+	*x = EventPostComplete{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventPostComplete) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventPostComplete) ProtoMessage() {}
+
+func (x *EventPostComplete) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventPostComplete.ProtoReflect.Descriptor instead.
+func (*EventPostComplete) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *EventPostComplete) GetChallenge() []byte {
+	if x != nil {
+		return x.Challenge
+	}
+	return nil
+}
+
+type EventPostFailed struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *EventPostFailed) Reset() {
+	*x = EventPostFailed{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventPostFailed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventPostFailed) ProtoMessage() {}
+
+func (x *EventPostFailed) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventPostFailed.ProtoReflect.Descriptor instead.
+func (*EventPostFailed) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{10}
+}
+
+type EventPoetWait struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Current uint32             `protobuf:"varint,1,opt,name=current,proto3" json:"current,omitempty"`
+	Public  uint32             `protobuf:"varint,2,opt,name=public,proto3" json:"public,omitempty"`
+	Wait    *duration.Duration `protobuf:"bytes,3,opt,name=wait,proto3" json:"wait,omitempty"`
+}
+
+func (x *EventPoetWait) Reset() {
+	*x = EventPoetWait{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventPoetWait) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventPoetWait) ProtoMessage() {}
+
+func (x *EventPoetWait) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventPoetWait.ProtoReflect.Descriptor instead.
+func (*EventPoetWait) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *EventPoetWait) GetCurrent() uint32 {
+	if x != nil {
+		return x.Current
+	}
+	return 0
+}
+
+func (x *EventPoetWait) GetPublic() uint32 {
+	if x != nil {
+		return x.Public
+	}
+	return 0
+}
+
+func (x *EventPoetWait) GetWait() *duration.Duration {
+	if x != nil {
+		return x.Wait
+	}
+	return nil
+}
+
+type EventPoetWaitChallenge struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Publish uint32             `protobuf:"varint,1,opt,name=publish,proto3" json:"publish,omitempty"`
+	Target  uint32             `protobuf:"varint,2,opt,name=target,proto3" json:"target,omitempty"`
+	Wait    *duration.Duration `protobuf:"bytes,3,opt,name=wait,proto3" json:"wait,omitempty"`
+}
+
+func (x *EventPoetWaitChallenge) Reset() {
+	*x = EventPoetWaitChallenge{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventPoetWaitChallenge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventPoetWaitChallenge) ProtoMessage() {}
+
+func (x *EventPoetWaitChallenge) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventPoetWaitChallenge.ProtoReflect.Descriptor instead.
+func (*EventPoetWaitChallenge) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *EventPoetWaitChallenge) GetPublish() uint32 {
+	if x != nil {
+		return x.Publish
+	}
+	return 0
+}
+
+func (x *EventPoetWaitChallenge) GetTarget() uint32 {
+	if x != nil {
+		return x.Target
+	}
+	return 0
+}
+
+func (x *EventPoetWaitChallenge) GetWait() *duration.Duration {
+	if x != nil {
+		return x.Wait
+	}
+	return nil
+}
+
+type EventAtxPubished struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Current uint32             `protobuf:"varint,1,opt,name=current,proto3" json:"current,omitempty"`
+	Target  uint32             `protobuf:"varint,2,opt,name=target,proto3" json:"target,omitempty"`
+	Id      []byte             `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Wait    *duration.Duration `protobuf:"bytes,4,opt,name=wait,proto3" json:"wait,omitempty"`
+}
+
+func (x *EventAtxPubished) Reset() {
+	*x = EventAtxPubished{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventAtxPubished) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventAtxPubished) ProtoMessage() {}
+
+func (x *EventAtxPubished) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventAtxPubished.ProtoReflect.Descriptor instead.
+func (*EventAtxPubished) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *EventAtxPubished) GetCurrent() uint32 {
+	if x != nil {
+		return x.Current
+	}
+	return 0
+}
+
+func (x *EventAtxPubished) GetTarget() uint32 {
+	if x != nil {
+		return x.Target
+	}
+	return 0
+}
+
+func (x *EventAtxPubished) GetId() []byte {
+	if x != nil {
+		return x.Id
+	}
+	return nil
+}
+
+func (x *EventAtxPubished) GetWait() *duration.Duration {
+	if x != nil {
+		return x.Wait
+	}
+	return nil
+}
+
+type EventEligibilities struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Epoch         uint32                 `protobuf:"varint,1,opt,name=epoch,proto3" json:"epoch,omitempty"`
+	Beacon        []byte                 `protobuf:"bytes,2,opt,name=beacon,proto3" json:"beacon,omitempty"`
+	Atx           []byte                 `protobuf:"bytes,3,opt,name=atx,proto3" json:"atx,omitempty"`
+	ActiveSetSize uint32                 `protobuf:"varint,4,opt,name=active_set_size,json=activeSetSize,proto3" json:"active_set_size,omitempty"`
+	Eligibilities []*ProposalEligibility `protobuf:"bytes,5,rep,name=eligibilities,proto3" json:"eligibilities,omitempty"`
+}
+
+func (x *EventEligibilities) Reset() {
+	*x = EventEligibilities{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventEligibilities) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventEligibilities) ProtoMessage() {}
+
+func (x *EventEligibilities) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventEligibilities.ProtoReflect.Descriptor instead.
+func (*EventEligibilities) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *EventEligibilities) GetEpoch() uint32 {
+	if x != nil {
+		return x.Epoch
+	}
+	return 0
+}
+
+func (x *EventEligibilities) GetBeacon() []byte {
+	if x != nil {
+		return x.Beacon
+	}
+	return nil
+}
+
+func (x *EventEligibilities) GetAtx() []byte {
+	if x != nil {
+		return x.Atx
+	}
+	return nil
+}
+
+func (x *EventEligibilities) GetActiveSetSize() uint32 {
+	if x != nil {
+		return x.ActiveSetSize
+	}
+	return 0
+}
+
+func (x *EventEligibilities) GetEligibilities() []*ProposalEligibility {
+	if x != nil {
+		return x.Eligibilities
+	}
+	return nil
+}
+
+type ProposalEligibility struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Layer uint32 `protobuf:"varint,1,opt,name=layer,proto3" json:"layer,omitempty"`
+	Count uint32 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+}
+
+func (x *ProposalEligibility) Reset() {
+	*x = ProposalEligibility{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ProposalEligibility) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProposalEligibility) ProtoMessage() {}
+
+func (x *ProposalEligibility) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProposalEligibility.ProtoReflect.Descriptor instead.
+func (*ProposalEligibility) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ProposalEligibility) GetLayer() uint32 {
+	if x != nil {
+		return x.Layer
+	}
+	return 0
+}
+
+func (x *ProposalEligibility) GetCount() uint32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type EventProposal struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Layer    uint32 `protobuf:"varint,1,opt,name=layer,proto3" json:"layer,omitempty"`
+	Proposal []byte `protobuf:"bytes,2,opt,name=proposal,proto3" json:"proposal,omitempty"`
+}
+
+func (x *EventProposal) Reset() {
+	*x = EventProposal{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventProposal) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventProposal) ProtoMessage() {}
+
+func (x *EventProposal) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventProposal.ProtoReflect.Descriptor instead.
+func (*EventProposal) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *EventProposal) GetLayer() uint32 {
+	if x != nil {
+		return x.Layer
+	}
+	return 0
+}
+
+func (x *EventProposal) GetProposal() []byte {
+	if x != nil {
+		return x.Proposal
+	}
+	return nil
 }
 
 type EventStreamRequest struct {
@@ -266,7 +1134,7 @@ type EventStreamRequest struct {
 func (x *EventStreamRequest) Reset() {
 	*x = EventStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[4]
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -279,7 +1147,7 @@ func (x *EventStreamRequest) String() string {
 func (*EventStreamRequest) ProtoMessage() {}
 
 func (x *EventStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[4]
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +1160,7 @@ func (x *EventStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventStreamRequest.ProtoReflect.Descriptor instead.
 func (*EventStreamRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{4}
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{17}
 }
 
 var File_spacemesh_v1_admin_types_proto protoreflect.FileDescriptor
@@ -302,7 +1170,9 @@ var file_spacemesh_v1_admin_types_proto_rawDesc = []byte{
 	0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x12, 0x0c, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x1a, 0x1f,
 	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f,
-	0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
+	0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
+	0x1e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+	0x2f, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
 	0x40, 0x0a, 0x17, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x53, 0x74, 0x72,
 	0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x25, 0x0a, 0x0e, 0x73, 0x6e,
 	0x61, 0x70, 0x73, 0x68, 0x6f, 0x74, 0x5f, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01,
@@ -314,22 +1184,133 @@ var file_spacemesh_v1_admin_types_proto_rawDesc = []byte{
 	0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x69, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x03, 0x75, 0x72, 0x69, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x73, 0x74, 0x6f, 0x72, 0x65,
 	0x5f, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x72, 0x65,
-	0x73, 0x74, 0x6f, 0x72, 0x65, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x22, 0x9d, 0x01, 0x0a, 0x05, 0x45,
+	0x73, 0x74, 0x6f, 0x72, 0x65, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x22, 0xa1, 0x07, 0x0a, 0x05, 0x45,
 	0x76, 0x65, 0x6e, 0x74, 0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
 	0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74,
 	0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x12, 0x18,
 	0x0a, 0x07, 0x66, 0x61, 0x69, 0x6c, 0x75, 0x72, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52,
-	0x07, 0x66, 0x61, 0x69, 0x6c, 0x75, 0x72, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x04,
-	0x68, 0x65, 0x6c, 0x70, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x68, 0x65, 0x6c, 0x70,
-	0x12, 0x18, 0x0a, 0x07, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x22, 0x14, 0x0a, 0x12, 0x45, 0x76,
-	0x65, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73,
-	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72,
-	0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d,
-	0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x07, 0x66, 0x61, 0x69, 0x6c, 0x75, 0x72, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x65, 0x6c, 0x70,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x68, 0x65, 0x6c, 0x70, 0x12, 0x33, 0x0a, 0x06,
+	0x62, 0x65, 0x61, 0x63, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x73,
+	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e,
+	0x74, 0x42, 0x65, 0x61, 0x63, 0x6f, 0x6e, 0x48, 0x00, 0x52, 0x06, 0x62, 0x65, 0x61, 0x63, 0x6f,
+	0x6e, 0x12, 0x3d, 0x0a, 0x0a, 0x69, 0x6e, 0x69, 0x74, 0x5f, 0x73, 0x74, 0x61, 0x72, 0x74, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x53, 0x74,
+	0x61, 0x72, 0x74, 0x48, 0x00, 0x52, 0x09, 0x69, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74,
+	0x12, 0x46, 0x0a, 0x0d, 0x69, 0x6e, 0x69, 0x74, 0x5f, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74,
+	0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d,
+	0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x69, 0x74,
+	0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x48, 0x00, 0x52, 0x0c, 0x69, 0x6e, 0x69, 0x74,
+	0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x12, 0x40, 0x0a, 0x0b, 0x69, 0x6e, 0x69, 0x74,
+	0x5f, 0x66, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65,
+	0x6e, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x48, 0x00, 0x52, 0x0a,
+	0x69, 0x6e, 0x69, 0x74, 0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x12, 0x3d, 0x0a, 0x0a, 0x70, 0x6f,
+	0x73, 0x74, 0x5f, 0x73, 0x74, 0x61, 0x72, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c,
+	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x48, 0x00, 0x52, 0x09,
+	0x70, 0x6f, 0x73, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x12, 0x46, 0x0a, 0x0d, 0x70, 0x6f, 0x73,
+	0x74, 0x5f, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1f, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74,
+	0x65, 0x48, 0x00, 0x52, 0x0c, 0x70, 0x6f, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74,
+	0x65, 0x12, 0x40, 0x0a, 0x0b, 0x70, 0x6f, 0x73, 0x74, 0x5f, 0x66, 0x61, 0x69, 0x6c, 0x65, 0x64,
+	0x18, 0x0a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
+	0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x46,
+	0x61, 0x69, 0x6c, 0x65, 0x64, 0x48, 0x00, 0x52, 0x0a, 0x70, 0x6f, 0x73, 0x74, 0x46, 0x61, 0x69,
+	0x6c, 0x65, 0x64, 0x12, 0x3a, 0x0a, 0x09, 0x70, 0x6f, 0x65, 0x74, 0x5f, 0x77, 0x61, 0x69, 0x74,
+	0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
+	0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x6f, 0x65, 0x74, 0x57,
+	0x61, 0x69, 0x74, 0x48, 0x00, 0x52, 0x08, 0x70, 0x6f, 0x65, 0x74, 0x57, 0x61, 0x69, 0x74, 0x12,
+	0x56, 0x0a, 0x13, 0x70, 0x6f, 0x65, 0x74, 0x5f, 0x77, 0x61, 0x69, 0x74, 0x5f, 0x63, 0x68, 0x61,
+	0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x73,
+	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e,
+	0x74, 0x50, 0x6f, 0x65, 0x74, 0x57, 0x61, 0x69, 0x74, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e,
+	0x67, 0x65, 0x48, 0x00, 0x52, 0x11, 0x70, 0x6f, 0x65, 0x74, 0x57, 0x61, 0x69, 0x74, 0x43, 0x68,
+	0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x12, 0x45, 0x0a, 0x0d, 0x61, 0x74, 0x78, 0x5f, 0x70,
+	0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e,
+	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x41, 0x74, 0x78, 0x50, 0x75, 0x62, 0x69, 0x73, 0x68, 0x65, 0x64, 0x48, 0x00,
+	0x52, 0x0c, 0x61, 0x74, 0x78, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x65, 0x64, 0x12, 0x48,
+	0x0a, 0x0d, 0x65, 0x6c, 0x69, 0x67, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x18,
+	0x0e, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x45, 0x6c, 0x69, 0x67, 0x69, 0x62,
+	0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x48, 0x00, 0x52, 0x0d, 0x65, 0x6c, 0x69, 0x67, 0x69,
+	0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x12, 0x39, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x70,
+	0x6f, 0x73, 0x61, 0x6c, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50,
+	0x72, 0x6f, 0x70, 0x6f, 0x73, 0x61, 0x6c, 0x48, 0x00, 0x52, 0x08, 0x70, 0x72, 0x6f, 0x70, 0x6f,
+	0x73, 0x61, 0x6c, 0x42, 0x09, 0x0a, 0x07, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x22, 0x3b,
+	0x0a, 0x0b, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x42, 0x65, 0x61, 0x63, 0x6f, 0x6e, 0x12, 0x14, 0x0a,
+	0x05, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x65, 0x70,
+	0x6f, 0x63, 0x68, 0x12, 0x16, 0x0a, 0x06, 0x62, 0x65, 0x61, 0x63, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x06, 0x62, 0x65, 0x61, 0x63, 0x6f, 0x6e, 0x22, 0x4a, 0x0a, 0x0e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x72, 0x74, 0x12, 0x18, 0x0a,
+	0x07, 0x73, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07,
+	0x73, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x6f, 0x6d, 0x6d, 0x69,
+	0x74, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0a, 0x63, 0x6f, 0x6d,
+	0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0x13, 0x0a, 0x11, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x49, 0x6e, 0x69, 0x74, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x22, 0x11, 0x0a, 0x0f,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x22,
+	0x2e, 0x0a, 0x0e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x74, 0x61, 0x72,
+	0x74, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0c, 0x52, 0x09, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x22,
+	0x31, 0x0a, 0x11, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x70,
+	0x6c, 0x65, 0x74, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x09, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e,
+	0x67, 0x65, 0x22, 0x11, 0x0a, 0x0f, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x6f, 0x73, 0x74, 0x46,
+	0x61, 0x69, 0x6c, 0x65, 0x64, 0x22, 0x70, 0x0a, 0x0d, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x6f,
+	0x65, 0x74, 0x57, 0x61, 0x69, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e,
+	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74,
+	0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d,
+	0x52, 0x06, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x12, 0x2d, 0x0a, 0x04, 0x77, 0x61, 0x69, 0x74,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x04, 0x77, 0x61, 0x69, 0x74, 0x22, 0x79, 0x0a, 0x16, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x50, 0x6f, 0x65, 0x74, 0x57, 0x61, 0x69, 0x74, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x07, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x12, 0x16, 0x0a, 0x06, 0x74,
+	0x61, 0x72, 0x67, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x74, 0x61, 0x72,
+	0x67, 0x65, 0x74, 0x12, 0x2d, 0x0a, 0x04, 0x77, 0x61, 0x69, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x04, 0x77, 0x61,
+	0x69, 0x74, 0x22, 0x83, 0x01, 0x0a, 0x10, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x41, 0x74, 0x78, 0x50,
+	0x75, 0x62, 0x69, 0x73, 0x68, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x75, 0x72, 0x72, 0x65,
+	0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e,
+	0x74, 0x12, 0x16, 0x0a, 0x06, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x06, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x69, 0x64, 0x12, 0x2d, 0x0a, 0x04, 0x77, 0x61, 0x69,
+	0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x04, 0x77, 0x61, 0x69, 0x74, 0x22, 0xc5, 0x01, 0x0a, 0x12, 0x45, 0x76, 0x65,
+	0x6e, 0x74, 0x45, 0x6c, 0x69, 0x67, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x12,
+	0x14, 0x0a, 0x05, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05,
+	0x65, 0x70, 0x6f, 0x63, 0x68, 0x12, 0x16, 0x0a, 0x06, 0x62, 0x65, 0x61, 0x63, 0x6f, 0x6e, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x06, 0x62, 0x65, 0x61, 0x63, 0x6f, 0x6e, 0x12, 0x10, 0x0a,
+	0x03, 0x61, 0x74, 0x78, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x03, 0x61, 0x74, 0x78, 0x12,
+	0x26, 0x0a, 0x0f, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x5f, 0x73, 0x65, 0x74, 0x5f, 0x73, 0x69,
+	0x7a, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0d, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65,
+	0x53, 0x65, 0x74, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x47, 0x0a, 0x0d, 0x65, 0x6c, 0x69, 0x67, 0x69,
+	0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21,
+	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72,
+	0x6f, 0x70, 0x6f, 0x73, 0x61, 0x6c, 0x45, 0x6c, 0x69, 0x67, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74,
+	0x79, 0x52, 0x0d, 0x65, 0x6c, 0x69, 0x67, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73,
+	0x22, 0x41, 0x0a, 0x13, 0x50, 0x72, 0x6f, 0x70, 0x6f, 0x73, 0x61, 0x6c, 0x45, 0x6c, 0x69, 0x67,
+	0x69, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x61, 0x79, 0x65, 0x72,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x12, 0x14, 0x0a,
+	0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x22, 0x41, 0x0a, 0x0d, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x70,
+	0x6f, 0x73, 0x61, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0d, 0x52, 0x05, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x72,
+	0x6f, 0x70, 0x6f, 0x73, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x70, 0x72,
+	0x6f, 0x70, 0x6f, 0x73, 0x61, 0x6c, 0x22, 0x14, 0x0a, 0x12, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x42, 0x34, 0x5a, 0x32,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61,
+	0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f,
+	0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -344,22 +1325,52 @@ func file_spacemesh_v1_admin_types_proto_rawDescGZIP() []byte {
 	return file_spacemesh_v1_admin_types_proto_rawDescData
 }
 
-var file_spacemesh_v1_admin_types_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_spacemesh_v1_admin_types_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_spacemesh_v1_admin_types_proto_goTypes = []interface{}{
 	(*CheckpointStreamRequest)(nil),  // 0: spacemesh.v1.CheckpointStreamRequest
 	(*CheckpointStreamResponse)(nil), // 1: spacemesh.v1.CheckpointStreamResponse
 	(*RecoverRequest)(nil),           // 2: spacemesh.v1.RecoverRequest
 	(*Event)(nil),                    // 3: spacemesh.v1.Event
-	(*EventStreamRequest)(nil),       // 4: spacemesh.v1.EventStreamRequest
-	(*timestamppb.Timestamp)(nil),    // 5: google.protobuf.Timestamp
+	(*EventBeacon)(nil),              // 4: spacemesh.v1.EventBeacon
+	(*EventInitStart)(nil),           // 5: spacemesh.v1.EventInitStart
+	(*EventInitComplete)(nil),        // 6: spacemesh.v1.EventInitComplete
+	(*EventInitFailed)(nil),          // 7: spacemesh.v1.EventInitFailed
+	(*EventPostStart)(nil),           // 8: spacemesh.v1.EventPostStart
+	(*EventPostComplete)(nil),        // 9: spacemesh.v1.EventPostComplete
+	(*EventPostFailed)(nil),          // 10: spacemesh.v1.EventPostFailed
+	(*EventPoetWait)(nil),            // 11: spacemesh.v1.EventPoetWait
+	(*EventPoetWaitChallenge)(nil),   // 12: spacemesh.v1.EventPoetWaitChallenge
+	(*EventAtxPubished)(nil),         // 13: spacemesh.v1.EventAtxPubished
+	(*EventEligibilities)(nil),       // 14: spacemesh.v1.EventEligibilities
+	(*ProposalEligibility)(nil),      // 15: spacemesh.v1.ProposalEligibility
+	(*EventProposal)(nil),            // 16: spacemesh.v1.EventProposal
+	(*EventStreamRequest)(nil),       // 17: spacemesh.v1.EventStreamRequest
+	(*timestamppb.Timestamp)(nil),    // 18: google.protobuf.Timestamp
+	(*duration.Duration)(nil),        // 19: google.protobuf.Duration
 }
 var file_spacemesh_v1_admin_types_proto_depIdxs = []int32{
-	5, // 0: spacemesh.v1.Event.timestamp:type_name -> google.protobuf.Timestamp
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	18, // 0: spacemesh.v1.Event.timestamp:type_name -> google.protobuf.Timestamp
+	4,  // 1: spacemesh.v1.Event.beacon:type_name -> spacemesh.v1.EventBeacon
+	5,  // 2: spacemesh.v1.Event.init_start:type_name -> spacemesh.v1.EventInitStart
+	6,  // 3: spacemesh.v1.Event.init_complete:type_name -> spacemesh.v1.EventInitComplete
+	7,  // 4: spacemesh.v1.Event.init_failed:type_name -> spacemesh.v1.EventInitFailed
+	8,  // 5: spacemesh.v1.Event.post_start:type_name -> spacemesh.v1.EventPostStart
+	9,  // 6: spacemesh.v1.Event.post_complete:type_name -> spacemesh.v1.EventPostComplete
+	10, // 7: spacemesh.v1.Event.post_failed:type_name -> spacemesh.v1.EventPostFailed
+	11, // 8: spacemesh.v1.Event.poet_wait:type_name -> spacemesh.v1.EventPoetWait
+	12, // 9: spacemesh.v1.Event.poet_wait_challenge:type_name -> spacemesh.v1.EventPoetWaitChallenge
+	13, // 10: spacemesh.v1.Event.atx_published:type_name -> spacemesh.v1.EventAtxPubished
+	14, // 11: spacemesh.v1.Event.eligibilities:type_name -> spacemesh.v1.EventEligibilities
+	16, // 12: spacemesh.v1.Event.proposal:type_name -> spacemesh.v1.EventProposal
+	19, // 13: spacemesh.v1.EventPoetWait.wait:type_name -> google.protobuf.Duration
+	19, // 14: spacemesh.v1.EventPoetWaitChallenge.wait:type_name -> google.protobuf.Duration
+	19, // 15: spacemesh.v1.EventAtxPubished.wait:type_name -> google.protobuf.Duration
+	15, // 16: spacemesh.v1.EventEligibilities.eligibilities:type_name -> spacemesh.v1.ProposalEligibility
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_admin_types_proto_init() }
@@ -417,6 +1428,162 @@ func file_spacemesh_v1_admin_types_proto_init() {
 			}
 		}
 		file_spacemesh_v1_admin_types_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventBeacon); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventInitStart); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventInitComplete); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventInitFailed); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventPostStart); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventPostComplete); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventPostFailed); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventPoetWait); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventPoetWaitChallenge); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventAtxPubished); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventEligibilities); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProposalEligibility); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventProposal); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EventStreamRequest); i {
 			case 0:
 				return &v.state
@@ -429,13 +1596,27 @@ func file_spacemesh_v1_admin_types_proto_init() {
 			}
 		}
 	}
+	file_spacemesh_v1_admin_types_proto_msgTypes[3].OneofWrappers = []interface{}{
+		(*Event_Beacon)(nil),
+		(*Event_InitStart)(nil),
+		(*Event_InitComplete)(nil),
+		(*Event_InitFailed)(nil),
+		(*Event_PostStart)(nil),
+		(*Event_PostComplete)(nil),
+		(*Event_PostFailed)(nil),
+		(*Event_PoetWait)(nil),
+		(*Event_PoetWaitChallenge)(nil),
+		(*Event_AtxPublished)(nil),
+		(*Event_Eligibilities)(nil),
+		(*Event_Proposal)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_admin_types_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

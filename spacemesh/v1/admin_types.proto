@@ -2,6 +2,7 @@ syntax = "proto3";
 package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 message CheckpointStreamRequest {
   uint32 snapshot_layer = 1;
@@ -22,14 +23,84 @@ message Event {
   // the reason of the failure may be complex to pinpoint.
   // for the first version we want to highlight that failure occured and defer user to logs. 
   bool failure = 2;
-  // short human readable name for the event (Beacon, Init Start, Init Complete, and so on)
-  string type = 3;
   // what role this event plays in the protocol. 
   // might be long, should not be displayed by default, or displayed in small text.
-  string help = 4;
-  // json encoded details of the event.
-  // TODO for future consideration, this can be better accomplished with oneof.
-  string details = 5;
+  string help = 3;
+  oneof details {
+    EventBeacon beacon = 4;
+    EventInitStart init_start = 5;
+    EventInitComplete init_complete =6;
+    EventInitFailed init_failed = 7;
+    EventPostStart post_start = 8;
+    EventPostComplete post_complete = 9;
+    EventPostFailed post_failed = 10;
+    EventPoetWait poet_wait = 11;
+    EventPoetWaitChallenge poet_wait_challenge = 12;
+    EventAtxPubished atx_published = 13;
+    EventEligibilities eligibilities = 14;
+    EventProposal proposal = 15;
+  }
+}
+
+message EventBeacon {
+  uint32 epoch = 1;
+  bytes beacon = 2;
+}
+
+message EventInitStart {
+  bytes smesher = 1;
+  bytes commitment = 2;
+}
+
+message EventInitComplete {}
+
+message EventInitFailed {}
+
+message EventPostStart {
+  bytes challenge = 1;
+}
+
+message EventPostComplete {
+  bytes challenge = 1;
+}
+
+message EventPostFailed {}
+
+message EventPoetWait {
+  uint32 current = 1;
+  uint32 public = 2;
+  google.protobuf.Duration wait = 3;
+}
+
+message EventPoetWaitChallenge {
+  uint32 publish = 1;
+  uint32 target = 2;
+  google.protobuf.Duration wait = 3;
+}
+
+message EventAtxPubished {
+  uint32 current = 1;
+  uint32 target = 2;
+  bytes id = 3;
+  google.protobuf.Duration wait = 4;
+}
+
+message EventEligibilities {
+  uint32 epoch = 1;
+  bytes beacon = 2;
+  bytes atx = 3;
+  uint32 active_set_size = 4;
+  repeated ProposalEligibility eligibilities = 5;
+}
+
+message ProposalEligibility {
+  uint32 layer = 1;
+  uint32 count = 2;
+}
+
+message EventProposal {
+  uint32 layer = 1;
+  bytes proposal = 2;
 }
 
 message EventStreamRequest {}
