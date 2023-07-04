@@ -60,7 +60,7 @@ message EventPostComplete {
 
 message EventPoetWait {
   uint32 current = 1;
-  uint32 public = 2;
+  uint32 publish = 2;
   google.protobuf.Duration wait = 3;
 }
 
