@@ -6,6 +6,7 @@ import "google/protobuf/duration.proto";
 
 message CheckpointStreamRequest {
   uint32 snapshot_layer = 1;
+  uint32 num_atxs = 2;
 }
 
 message CheckpointStreamResponse {
