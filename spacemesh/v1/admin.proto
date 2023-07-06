@@ -12,4 +12,7 @@ service AdminService {
 
   // Recovers from the provided checkpoint data.
   rpc Recover(RecoverRequest) returns (google.protobuf.Empty);
+
+  // Events that are relevant for node operator
+  rpc EventsStream(EventStreamRequest) returns (stream Event);
 }
