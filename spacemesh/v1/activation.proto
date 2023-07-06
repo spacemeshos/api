@@ -11,5 +11,5 @@ service ActivationService {
     rpc Get(GetRequest) returns (GetResponse);
 
     // Highest returns the atx id with the highest tick count.
-    rpc Highest(google.protobuf.Empty) returns (GetResponse);
+    rpc Highest(google.protobuf.Empty) returns (HighestResponse);
 }
