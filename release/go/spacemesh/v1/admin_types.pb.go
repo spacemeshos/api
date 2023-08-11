@@ -1204,6 +1204,132 @@ func (*EventStreamRequest) Descriptor() ([]byte, []int) {
 	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{17}
 }
 
+type ConnectionInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Address  string             `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	Uptime   *duration.Duration `protobuf:"bytes,2,opt,name=uptime,proto3" json:"uptime,omitempty"`
+	Outbound bool               `protobuf:"varint,3,opt,name=outbound,proto3" json:"outbound,omitempty"`
+}
+
+func (x *ConnectionInfo) Reset() {
+	*x = ConnectionInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ConnectionInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConnectionInfo) ProtoMessage() {}
+
+func (x *ConnectionInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConnectionInfo.ProtoReflect.Descriptor instead.
+func (*ConnectionInfo) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ConnectionInfo) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *ConnectionInfo) GetUptime() *duration.Duration {
+	if x != nil {
+		return x.Uptime
+	}
+	return nil
+}
+
+func (x *ConnectionInfo) GetOutbound() bool {
+	if x != nil {
+		return x.Outbound
+	}
+	return false
+}
+
+type PeerInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id          string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Connections []*ConnectionInfo `protobuf:"bytes,2,rep,name=connections,proto3" json:"connections,omitempty"`
+	Tags        []string          `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty"`
+}
+
+func (x *PeerInfo) Reset() {
+	*x = PeerInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_admin_types_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PeerInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PeerInfo) ProtoMessage() {}
+
+func (x *PeerInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_admin_types_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PeerInfo.ProtoReflect.Descriptor instead.
+func (*PeerInfo) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_admin_types_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *PeerInfo) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *PeerInfo) GetConnections() []*ConnectionInfo {
+	if x != nil {
+		return x.Connections
+	}
+	return nil
+}
+
+func (x *PeerInfo) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
 var File_spacemesh_v1_admin_types_proto protoreflect.FileDescriptor
 
 var file_spacemesh_v1_admin_types_proto_rawDesc = []byte{
@@ -1360,10 +1486,25 @@ var file_spacemesh_v1_admin_types_proto_rawDesc = []byte{
 	0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61, 0x6e, 0x63, 0x65, 0x50,
 	0x72, 0x6f, 0x6f, 0x66, 0x52, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x22, 0x14, 0x0a, 0x12, 0x45,
 	0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65,
-	0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x22, 0x79, 0x0a, 0x0e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49,
+	0x6e, 0x66, 0x6f, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x31, 0x0a,
+	0x06, 0x75, 0x70, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
+	0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x06, 0x75, 0x70, 0x74, 0x69, 0x6d, 0x65,
+	0x12, 0x1a, 0x0a, 0x08, 0x6f, 0x75, 0x74, 0x62, 0x6f, 0x75, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x08, 0x6f, 0x75, 0x74, 0x62, 0x6f, 0x75, 0x6e, 0x64, 0x22, 0x6e, 0x0a, 0x08,
+	0x50, 0x65, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x3e, 0x0a, 0x0b, 0x63, 0x6f, 0x6e, 0x6e,
+	0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e,
+	0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0b, 0x63, 0x6f, 0x6e,
+	0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x61, 0x67, 0x73,
+	0x18, 0x04, 0x20, 0x03, 0x28, 0x09, 0x52, 0x04, 0x74, 0x61, 0x67, 0x73, 0x42, 0x34, 0x5a, 0x32,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61,
+	0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f,
+	0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1378,7 +1519,7 @@ func file_spacemesh_v1_admin_types_proto_rawDescGZIP() []byte {
 	return file_spacemesh_v1_admin_types_proto_rawDescData
 }
 
-var file_spacemesh_v1_admin_types_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_spacemesh_v1_admin_types_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_spacemesh_v1_admin_types_proto_goTypes = []interface{}{
 	(*CheckpointStreamRequest)(nil),  // 0: spacemesh.v1.CheckpointStreamRequest
 	(*CheckpointStreamResponse)(nil), // 1: spacemesh.v1.CheckpointStreamResponse
@@ -1398,12 +1539,14 @@ var file_spacemesh_v1_admin_types_proto_goTypes = []interface{}{
 	(*EventProposal)(nil),            // 15: spacemesh.v1.EventProposal
 	(*EventMalfeasance)(nil),         // 16: spacemesh.v1.EventMalfeasance
 	(*EventStreamRequest)(nil),       // 17: spacemesh.v1.EventStreamRequest
-	(*timestamppb.Timestamp)(nil),    // 18: google.protobuf.Timestamp
-	(*duration.Duration)(nil),        // 19: google.protobuf.Duration
-	(*MalfeasanceProof)(nil),         // 20: spacemesh.v1.MalfeasanceProof
+	(*ConnectionInfo)(nil),           // 18: spacemesh.v1.ConnectionInfo
+	(*PeerInfo)(nil),                 // 19: spacemesh.v1.PeerInfo
+	(*timestamppb.Timestamp)(nil),    // 20: google.protobuf.Timestamp
+	(*duration.Duration)(nil),        // 21: google.protobuf.Duration
+	(*MalfeasanceProof)(nil),         // 22: spacemesh.v1.MalfeasanceProof
 }
 var file_spacemesh_v1_admin_types_proto_depIdxs = []int32{
-	18, // 0: spacemesh.v1.Event.timestamp:type_name -> google.protobuf.Timestamp
+	20, // 0: spacemesh.v1.Event.timestamp:type_name -> google.protobuf.Timestamp
 	4,  // 1: spacemesh.v1.Event.beacon:type_name -> spacemesh.v1.EventBeacon
 	5,  // 2: spacemesh.v1.Event.init_start:type_name -> spacemesh.v1.EventInitStart
 	7,  // 3: spacemesh.v1.Event.init_complete:type_name -> spacemesh.v1.EventInitComplete
@@ -1416,16 +1559,18 @@ var file_spacemesh_v1_admin_types_proto_depIdxs = []int32{
 	15, // 10: spacemesh.v1.Event.proposal:type_name -> spacemesh.v1.EventProposal
 	6,  // 11: spacemesh.v1.Event.init_failed:type_name -> spacemesh.v1.EventInitFailed
 	16, // 12: spacemesh.v1.Event.malfeasance:type_name -> spacemesh.v1.EventMalfeasance
-	19, // 13: spacemesh.v1.EventPoetWaitRound.wait:type_name -> google.protobuf.Duration
-	19, // 14: spacemesh.v1.EventPoetWaitProof.wait:type_name -> google.protobuf.Duration
-	19, // 15: spacemesh.v1.EventAtxPubished.wait:type_name -> google.protobuf.Duration
+	21, // 13: spacemesh.v1.EventPoetWaitRound.wait:type_name -> google.protobuf.Duration
+	21, // 14: spacemesh.v1.EventPoetWaitProof.wait:type_name -> google.protobuf.Duration
+	21, // 15: spacemesh.v1.EventAtxPubished.wait:type_name -> google.protobuf.Duration
 	14, // 16: spacemesh.v1.EventEligibilities.eligibilities:type_name -> spacemesh.v1.ProposalEligibility
-	20, // 17: spacemesh.v1.EventMalfeasance.proof:type_name -> spacemesh.v1.MalfeasanceProof
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	22, // 17: spacemesh.v1.EventMalfeasance.proof:type_name -> spacemesh.v1.MalfeasanceProof
+	21, // 18: spacemesh.v1.ConnectionInfo.uptime:type_name -> google.protobuf.Duration
+	18, // 19: spacemesh.v1.PeerInfo.connections:type_name -> spacemesh.v1.ConnectionInfo
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_admin_types_proto_init() }
@@ -1651,6 +1796,30 @@ func file_spacemesh_v1_admin_types_proto_init() {
 				return nil
 			}
 		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ConnectionInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_admin_types_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PeerInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_spacemesh_v1_admin_types_proto_msgTypes[3].OneofWrappers = []interface{}{
 		(*Event_Beacon)(nil),
@@ -1672,7 +1841,7 @@ func file_spacemesh_v1_admin_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_admin_types_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
