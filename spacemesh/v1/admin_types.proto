@@ -3,6 +3,7 @@ package spacemesh.v1;
 option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
+import "spacemesh/v1/types.proto";
 
 message CheckpointStreamRequest {
   uint32 snapshot_layer = 1;
@@ -37,6 +38,7 @@ message Event {
     EventEligibilities eligibilities = 12;
     EventProposal proposal = 13;
     EventInitFailed init_failed = 14;
+    EventMalfeasance malfeasance = 15;
   }
 }
 
@@ -102,6 +104,10 @@ message ProposalEligibility {
 message EventProposal {
   uint32 layer = 1;
   bytes proposal = 2;
+}
+
+message EventMalfeasance {
+    MalfeasanceProof proof = 1;
 }
 
 message EventStreamRequest {}

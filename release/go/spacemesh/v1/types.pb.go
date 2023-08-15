@@ -72,6 +72,58 @@ func (Layer_LayerStatus) EnumDescriptor() ([]byte, []int) {
 	return file_spacemesh_v1_types_proto_rawDescGZIP(), []int{14, 0}
 }
 
+type MalfeasanceProof_MalfeasanceType int32
+
+const (
+	MalfeasanceProof_MALFEASANCE_UNSPECIFIED MalfeasanceProof_MalfeasanceType = 0
+	MalfeasanceProof_MALFEASANCE_ATX         MalfeasanceProof_MalfeasanceType = 1
+	MalfeasanceProof_MALFEASANCE_BALLOT      MalfeasanceProof_MalfeasanceType = 2
+	MalfeasanceProof_MALFEASANCE_HARE        MalfeasanceProof_MalfeasanceType = 3
+)
+
+// Enum value maps for MalfeasanceProof_MalfeasanceType.
+var (
+	MalfeasanceProof_MalfeasanceType_name = map[int32]string{
+		0: "MALFEASANCE_UNSPECIFIED",
+		1: "MALFEASANCE_ATX",
+		2: "MALFEASANCE_BALLOT",
+		3: "MALFEASANCE_HARE",
+	}
+	MalfeasanceProof_MalfeasanceType_value = map[string]int32{
+		"MALFEASANCE_UNSPECIFIED": 0,
+		"MALFEASANCE_ATX":         1,
+		"MALFEASANCE_BALLOT":      2,
+		"MALFEASANCE_HARE":        3,
+	}
+)
+
+func (x MalfeasanceProof_MalfeasanceType) Enum() *MalfeasanceProof_MalfeasanceType {
+	p := new(MalfeasanceProof_MalfeasanceType)
+	*p = x
+	return p
+}
+
+func (x MalfeasanceProof_MalfeasanceType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MalfeasanceProof_MalfeasanceType) Descriptor() protoreflect.EnumDescriptor {
+	return file_spacemesh_v1_types_proto_enumTypes[1].Descriptor()
+}
+
+func (MalfeasanceProof_MalfeasanceType) Type() protoreflect.EnumType {
+	return &file_spacemesh_v1_types_proto_enumTypes[1]
+}
+
+func (x MalfeasanceProof_MalfeasanceType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MalfeasanceProof_MalfeasanceType.Descriptor instead.
+func (MalfeasanceProof_MalfeasanceType) EnumDescriptor() ([]byte, []int) {
+	return file_spacemesh_v1_types_proto_rawDescGZIP(), []int{18, 0}
+}
+
 type SimpleInt struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1179,6 +1231,85 @@ func (x *AppEvent) GetMessage() string {
 	return ""
 }
 
+type MalfeasanceProof struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SmesherId *SmesherId                       `protobuf:"bytes,1,opt,name=smesher_id,json=smesherId,proto3" json:"smesher_id,omitempty"`
+	Layer     *LayerNumber                     `protobuf:"bytes,2,opt,name=layer,proto3" json:"layer,omitempty"`
+	Kind      MalfeasanceProof_MalfeasanceType `protobuf:"varint,3,opt,name=kind,proto3,enum=spacemesh.v1.MalfeasanceProof_MalfeasanceType" json:"kind,omitempty"`
+	DebugInfo string                           `protobuf:"bytes,4,opt,name=debug_info,json=debugInfo,proto3" json:"debug_info,omitempty"`
+	Proof     []byte                           `protobuf:"bytes,5,opt,name=proof,proto3" json:"proof,omitempty"`
+}
+
+func (x *MalfeasanceProof) Reset() {
+	*x = MalfeasanceProof{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_types_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MalfeasanceProof) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MalfeasanceProof) ProtoMessage() {}
+
+func (x *MalfeasanceProof) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_types_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MalfeasanceProof.ProtoReflect.Descriptor instead.
+func (*MalfeasanceProof) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_types_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *MalfeasanceProof) GetSmesherId() *SmesherId {
+	if x != nil {
+		return x.SmesherId
+	}
+	return nil
+}
+
+func (x *MalfeasanceProof) GetLayer() *LayerNumber {
+	if x != nil {
+		return x.Layer
+	}
+	return nil
+}
+
+func (x *MalfeasanceProof) GetKind() MalfeasanceProof_MalfeasanceType {
+	if x != nil {
+		return x.Kind
+	}
+	return MalfeasanceProof_MALFEASANCE_UNSPECIFIED
+}
+
+func (x *MalfeasanceProof) GetDebugInfo() string {
+	if x != nil {
+		return x.DebugInfo
+	}
+	return ""
+}
+
+func (x *MalfeasanceProof) GetProof() []byte {
+	if x != nil {
+		return x.Proof
+	}
+	return nil
+}
+
 var File_spacemesh_v1_types_proto protoreflect.FileDescriptor
 
 var file_spacemesh_v1_types_proto_rawDesc = []byte{
@@ -1328,11 +1459,34 @@ var file_spacemesh_v1_types_proto_rawDesc = []byte{
 	0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
 	0x6f, 0x6e, 0x49, 0x64, 0x52, 0x0d, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
 	0x6e, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x42, 0x34, 0x5a,
-	0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65,
-	0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
-	0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0xe7, 0x02,
+	0x0a, 0x10, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61, 0x6e, 0x63, 0x65, 0x50, 0x72, 0x6f,
+	0x6f, 0x66, 0x12, 0x36, 0x0a, 0x0a, 0x73, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
+	0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x49, 0x64, 0x52,
+	0x09, 0x73, 0x6d, 0x65, 0x73, 0x68, 0x65, 0x72, 0x49, 0x64, 0x12, 0x2f, 0x0a, 0x05, 0x6c, 0x61,
+	0x79, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x4e, 0x75,
+	0x6d, 0x62, 0x65, 0x72, 0x52, 0x05, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x12, 0x42, 0x0a, 0x04, 0x6b,
+	0x69, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x2e, 0x2e, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73,
+	0x61, 0x6e, 0x63, 0x65, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x2e, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61,
+	0x73, 0x61, 0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12,
+	0x1d, 0x0a, 0x0a, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x64, 0x65, 0x62, 0x75, 0x67, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x14,
+	0x0a, 0x05, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x70,
+	0x72, 0x6f, 0x6f, 0x66, 0x22, 0x71, 0x0a, 0x0f, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61,
+	0x6e, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1b, 0x0a, 0x17, 0x4d, 0x41, 0x4c, 0x46, 0x45,
+	0x41, 0x53, 0x41, 0x4e, 0x43, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49,
+	0x45, 0x44, 0x10, 0x00, 0x12, 0x13, 0x0a, 0x0f, 0x4d, 0x41, 0x4c, 0x46, 0x45, 0x41, 0x53, 0x41,
+	0x4e, 0x43, 0x45, 0x5f, 0x41, 0x54, 0x58, 0x10, 0x01, 0x12, 0x16, 0x0a, 0x12, 0x4d, 0x41, 0x4c,
+	0x46, 0x45, 0x41, 0x53, 0x41, 0x4e, 0x43, 0x45, 0x5f, 0x42, 0x41, 0x4c, 0x4c, 0x4f, 0x54, 0x10,
+	0x02, 0x12, 0x14, 0x0a, 0x10, 0x4d, 0x41, 0x4c, 0x46, 0x45, 0x41, 0x53, 0x41, 0x4e, 0x43, 0x45,
+	0x5f, 0x48, 0x41, 0x52, 0x45, 0x10, 0x03, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f,
+	0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f,
+	0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1347,60 +1501,65 @@ func file_spacemesh_v1_types_proto_rawDescGZIP() []byte {
 	return file_spacemesh_v1_types_proto_rawDescData
 }
 
-var file_spacemesh_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_spacemesh_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_spacemesh_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_spacemesh_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_spacemesh_v1_types_proto_goTypes = []interface{}{
-	(Layer_LayerStatus)(0),  // 0: spacemesh.v1.Layer.LayerStatus
-	(*SimpleInt)(nil),       // 1: spacemesh.v1.SimpleInt
-	(*SimpleString)(nil),    // 2: spacemesh.v1.SimpleString
-	(*Amount)(nil),          // 3: spacemesh.v1.Amount
-	(*AccountId)(nil),       // 4: spacemesh.v1.AccountId
-	(*TransactionId)(nil),   // 5: spacemesh.v1.TransactionId
-	(*ActivationId)(nil),    // 6: spacemesh.v1.ActivationId
-	(*SmesherId)(nil),       // 7: spacemesh.v1.SmesherId
-	(*Activation)(nil),      // 8: spacemesh.v1.Activation
-	(*Transaction)(nil),     // 9: spacemesh.v1.Transaction
-	(*LayerLimits)(nil),     // 10: spacemesh.v1.LayerLimits
-	(*Nonce)(nil),           // 11: spacemesh.v1.Nonce
-	(*MeshTransaction)(nil), // 12: spacemesh.v1.MeshTransaction
-	(*Reward)(nil),          // 13: spacemesh.v1.Reward
-	(*Block)(nil),           // 14: spacemesh.v1.Block
-	(*Layer)(nil),           // 15: spacemesh.v1.Layer
-	(*LayerNumber)(nil),     // 16: spacemesh.v1.LayerNumber
-	(*EpochNumber)(nil),     // 17: spacemesh.v1.EpochNumber
-	(*AppEvent)(nil),        // 18: spacemesh.v1.AppEvent
+	(Layer_LayerStatus)(0),                // 0: spacemesh.v1.Layer.LayerStatus
+	(MalfeasanceProof_MalfeasanceType)(0), // 1: spacemesh.v1.MalfeasanceProof.MalfeasanceType
+	(*SimpleInt)(nil),                     // 2: spacemesh.v1.SimpleInt
+	(*SimpleString)(nil),                  // 3: spacemesh.v1.SimpleString
+	(*Amount)(nil),                        // 4: spacemesh.v1.Amount
+	(*AccountId)(nil),                     // 5: spacemesh.v1.AccountId
+	(*TransactionId)(nil),                 // 6: spacemesh.v1.TransactionId
+	(*ActivationId)(nil),                  // 7: spacemesh.v1.ActivationId
+	(*SmesherId)(nil),                     // 8: spacemesh.v1.SmesherId
+	(*Activation)(nil),                    // 9: spacemesh.v1.Activation
+	(*Transaction)(nil),                   // 10: spacemesh.v1.Transaction
+	(*LayerLimits)(nil),                   // 11: spacemesh.v1.LayerLimits
+	(*Nonce)(nil),                         // 12: spacemesh.v1.Nonce
+	(*MeshTransaction)(nil),               // 13: spacemesh.v1.MeshTransaction
+	(*Reward)(nil),                        // 14: spacemesh.v1.Reward
+	(*Block)(nil),                         // 15: spacemesh.v1.Block
+	(*Layer)(nil),                         // 16: spacemesh.v1.Layer
+	(*LayerNumber)(nil),                   // 17: spacemesh.v1.LayerNumber
+	(*EpochNumber)(nil),                   // 18: spacemesh.v1.EpochNumber
+	(*AppEvent)(nil),                      // 19: spacemesh.v1.AppEvent
+	(*MalfeasanceProof)(nil),              // 20: spacemesh.v1.MalfeasanceProof
 }
 var file_spacemesh_v1_types_proto_depIdxs = []int32{
-	6,  // 0: spacemesh.v1.Activation.id:type_name -> spacemesh.v1.ActivationId
-	16, // 1: spacemesh.v1.Activation.layer:type_name -> spacemesh.v1.LayerNumber
-	7,  // 2: spacemesh.v1.Activation.smesher_id:type_name -> spacemesh.v1.SmesherId
-	4,  // 3: spacemesh.v1.Activation.coinbase:type_name -> spacemesh.v1.AccountId
-	6,  // 4: spacemesh.v1.Activation.prev_atx:type_name -> spacemesh.v1.ActivationId
-	4,  // 5: spacemesh.v1.Transaction.principal:type_name -> spacemesh.v1.AccountId
-	4,  // 6: spacemesh.v1.Transaction.template:type_name -> spacemesh.v1.AccountId
-	11, // 7: spacemesh.v1.Transaction.nonce:type_name -> spacemesh.v1.Nonce
-	10, // 8: spacemesh.v1.Transaction.limits:type_name -> spacemesh.v1.LayerLimits
-	9,  // 9: spacemesh.v1.MeshTransaction.transaction:type_name -> spacemesh.v1.Transaction
-	16, // 10: spacemesh.v1.MeshTransaction.layer_id:type_name -> spacemesh.v1.LayerNumber
-	16, // 11: spacemesh.v1.Reward.layer:type_name -> spacemesh.v1.LayerNumber
-	3,  // 12: spacemesh.v1.Reward.total:type_name -> spacemesh.v1.Amount
-	3,  // 13: spacemesh.v1.Reward.layer_reward:type_name -> spacemesh.v1.Amount
-	16, // 14: spacemesh.v1.Reward.layer_computed:type_name -> spacemesh.v1.LayerNumber
-	4,  // 15: spacemesh.v1.Reward.coinbase:type_name -> spacemesh.v1.AccountId
-	7,  // 16: spacemesh.v1.Reward.smesher:type_name -> spacemesh.v1.SmesherId
-	9,  // 17: spacemesh.v1.Block.transactions:type_name -> spacemesh.v1.Transaction
-	6,  // 18: spacemesh.v1.Block.activation_id:type_name -> spacemesh.v1.ActivationId
-	7,  // 19: spacemesh.v1.Block.smesher_id:type_name -> spacemesh.v1.SmesherId
-	16, // 20: spacemesh.v1.Layer.number:type_name -> spacemesh.v1.LayerNumber
+	7,  // 0: spacemesh.v1.Activation.id:type_name -> spacemesh.v1.ActivationId
+	17, // 1: spacemesh.v1.Activation.layer:type_name -> spacemesh.v1.LayerNumber
+	8,  // 2: spacemesh.v1.Activation.smesher_id:type_name -> spacemesh.v1.SmesherId
+	5,  // 3: spacemesh.v1.Activation.coinbase:type_name -> spacemesh.v1.AccountId
+	7,  // 4: spacemesh.v1.Activation.prev_atx:type_name -> spacemesh.v1.ActivationId
+	5,  // 5: spacemesh.v1.Transaction.principal:type_name -> spacemesh.v1.AccountId
+	5,  // 6: spacemesh.v1.Transaction.template:type_name -> spacemesh.v1.AccountId
+	12, // 7: spacemesh.v1.Transaction.nonce:type_name -> spacemesh.v1.Nonce
+	11, // 8: spacemesh.v1.Transaction.limits:type_name -> spacemesh.v1.LayerLimits
+	10, // 9: spacemesh.v1.MeshTransaction.transaction:type_name -> spacemesh.v1.Transaction
+	17, // 10: spacemesh.v1.MeshTransaction.layer_id:type_name -> spacemesh.v1.LayerNumber
+	17, // 11: spacemesh.v1.Reward.layer:type_name -> spacemesh.v1.LayerNumber
+	4,  // 12: spacemesh.v1.Reward.total:type_name -> spacemesh.v1.Amount
+	4,  // 13: spacemesh.v1.Reward.layer_reward:type_name -> spacemesh.v1.Amount
+	17, // 14: spacemesh.v1.Reward.layer_computed:type_name -> spacemesh.v1.LayerNumber
+	5,  // 15: spacemesh.v1.Reward.coinbase:type_name -> spacemesh.v1.AccountId
+	8,  // 16: spacemesh.v1.Reward.smesher:type_name -> spacemesh.v1.SmesherId
+	10, // 17: spacemesh.v1.Block.transactions:type_name -> spacemesh.v1.Transaction
+	7,  // 18: spacemesh.v1.Block.activation_id:type_name -> spacemesh.v1.ActivationId
+	8,  // 19: spacemesh.v1.Block.smesher_id:type_name -> spacemesh.v1.SmesherId
+	17, // 20: spacemesh.v1.Layer.number:type_name -> spacemesh.v1.LayerNumber
 	0,  // 21: spacemesh.v1.Layer.status:type_name -> spacemesh.v1.Layer.LayerStatus
-	14, // 22: spacemesh.v1.Layer.blocks:type_name -> spacemesh.v1.Block
-	8,  // 23: spacemesh.v1.Layer.activations:type_name -> spacemesh.v1.Activation
-	5,  // 24: spacemesh.v1.AppEvent.transaction_id:type_name -> spacemesh.v1.TransactionId
-	25, // [25:25] is the sub-list for method output_type
-	25, // [25:25] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	15, // 22: spacemesh.v1.Layer.blocks:type_name -> spacemesh.v1.Block
+	9,  // 23: spacemesh.v1.Layer.activations:type_name -> spacemesh.v1.Activation
+	6,  // 24: spacemesh.v1.AppEvent.transaction_id:type_name -> spacemesh.v1.TransactionId
+	8,  // 25: spacemesh.v1.MalfeasanceProof.smesher_id:type_name -> spacemesh.v1.SmesherId
+	17, // 26: spacemesh.v1.MalfeasanceProof.layer:type_name -> spacemesh.v1.LayerNumber
+	1,  // 27: spacemesh.v1.MalfeasanceProof.kind:type_name -> spacemesh.v1.MalfeasanceProof.MalfeasanceType
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_types_proto_init() }
@@ -1625,14 +1784,26 @@ func file_spacemesh_v1_types_proto_init() {
 				return nil
 			}
 		}
+		file_spacemesh_v1_types_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MalfeasanceProof); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_types_proto_rawDesc,
-			NumEnums:      1,
-			NumMessages:   18,
+			NumEnums:      2,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
