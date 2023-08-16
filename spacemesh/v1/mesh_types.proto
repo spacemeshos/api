@@ -109,9 +109,8 @@ message EpochStreamResponse {
 }
 
 message MalfeasanceRequest {
-    SmesherId smesher = 1;
-    string smesher_hex = 2;
-    bool include_proof = 3;
+    string smesher_hex = 1;
+    bool include_proof = 2;
 }
 
 message MalfeasanceResponse {
