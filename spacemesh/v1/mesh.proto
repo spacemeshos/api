@@ -49,4 +49,7 @@ service MeshService {
 
     // Epoch activation transactions.
     rpc EpochStream(EpochStreamRequest) returns (stream EpochStreamResponse);
+
+    rpc MalfeasanceQuery(MalfeasanceRequest) returns (MalfeasanceResponse);
+    rpc MalfeasanceStream(MalfeasanceStreamRequest) returns (stream MalfeasanceStreamResponse);
 }
