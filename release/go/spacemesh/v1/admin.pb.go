@@ -33,7 +33,7 @@ var file_spacemesh_v1_admin_proto_rawDesc = []byte{
 	0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x5f, 0x74, 0x79, 0x70,
 	0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xfd, 0x01, 0x0a, 0x0c, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x53,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xc1, 0x02, 0x0a, 0x0c, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x63, 0x0a, 0x10, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x70,
 	0x6f, 0x69, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x25, 0x2e, 0x73, 0x70, 0x61,
 	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x70,
@@ -49,30 +49,37 @@ var file_spacemesh_v1_admin_proto_rawDesc = []byte{
 	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76, 0x65, 0x6e,
 	0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13,
 	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x76,
-	0x65, 0x6e, 0x74, 0x30, 0x01, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73,
-	0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x65, 0x6e, 0x74, 0x30, 0x01, 0x12, 0x42, 0x0a, 0x0e, 0x50, 0x65, 0x65, 0x72, 0x49, 0x6e, 0x66,
+	0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a,
+	0x16, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50,
+	0x65, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x30, 0x01, 0x42, 0x34, 0x5a, 0x32, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x2f,
+	0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_spacemesh_v1_admin_proto_goTypes = []interface{}{
 	(*CheckpointStreamRequest)(nil),  // 0: spacemesh.v1.CheckpointStreamRequest
 	(*RecoverRequest)(nil),           // 1: spacemesh.v1.RecoverRequest
 	(*EventStreamRequest)(nil),       // 2: spacemesh.v1.EventStreamRequest
-	(*CheckpointStreamResponse)(nil), // 3: spacemesh.v1.CheckpointStreamResponse
-	(*empty.Empty)(nil),              // 4: google.protobuf.Empty
+	(*empty.Empty)(nil),              // 3: google.protobuf.Empty
+	(*CheckpointStreamResponse)(nil), // 4: spacemesh.v1.CheckpointStreamResponse
 	(*Event)(nil),                    // 5: spacemesh.v1.Event
+	(*PeerInfo)(nil),                 // 6: spacemesh.v1.PeerInfo
 }
 var file_spacemesh_v1_admin_proto_depIdxs = []int32{
 	0, // 0: spacemesh.v1.AdminService.CheckpointStream:input_type -> spacemesh.v1.CheckpointStreamRequest
 	1, // 1: spacemesh.v1.AdminService.Recover:input_type -> spacemesh.v1.RecoverRequest
 	2, // 2: spacemesh.v1.AdminService.EventsStream:input_type -> spacemesh.v1.EventStreamRequest
-	3, // 3: spacemesh.v1.AdminService.CheckpointStream:output_type -> spacemesh.v1.CheckpointStreamResponse
-	4, // 4: spacemesh.v1.AdminService.Recover:output_type -> google.protobuf.Empty
-	5, // 5: spacemesh.v1.AdminService.EventsStream:output_type -> spacemesh.v1.Event
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	3, // 3: spacemesh.v1.AdminService.PeerInfoStream:input_type -> google.protobuf.Empty
+	4, // 4: spacemesh.v1.AdminService.CheckpointStream:output_type -> spacemesh.v1.CheckpointStreamResponse
+	3, // 5: spacemesh.v1.AdminService.Recover:output_type -> google.protobuf.Empty
+	5, // 6: spacemesh.v1.AdminService.EventsStream:output_type -> spacemesh.v1.Event
+	6, // 7: spacemesh.v1.AdminService.PeerInfoStream:output_type -> spacemesh.v1.PeerInfo
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -121,6 +128,8 @@ type AdminServiceClient interface {
 	Recover(ctx context.Context, in *RecoverRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Events that are relevant for node operator
 	EventsStream(ctx context.Context, in *EventStreamRequest, opts ...grpc.CallOption) (AdminService_EventsStreamClient, error)
+	// PeerInfo returns info for all connected peers.
+	PeerInfoStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (AdminService_PeerInfoStreamClient, error)
 }
 
 type adminServiceClient struct {
@@ -204,6 +213,38 @@ func (x *adminServiceEventsStreamClient) Recv() (*Event, error) {
 	return m, nil
 }
 
+func (c *adminServiceClient) PeerInfoStream(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (AdminService_PeerInfoStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_AdminService_serviceDesc.Streams[2], "/spacemesh.v1.AdminService/PeerInfoStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &adminServicePeerInfoStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AdminService_PeerInfoStreamClient interface {
+	Recv() (*PeerInfo, error)
+	grpc.ClientStream
+}
+
+type adminServicePeerInfoStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *adminServicePeerInfoStreamClient) Recv() (*PeerInfo, error) {
+	m := new(PeerInfo)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // AdminServiceServer is the server API for AdminService service.
 type AdminServiceServer interface {
 	// Returns the checkpoint data.
@@ -212,6 +253,8 @@ type AdminServiceServer interface {
 	Recover(context.Context, *RecoverRequest) (*empty.Empty, error)
 	// Events that are relevant for node operator
 	EventsStream(*EventStreamRequest, AdminService_EventsStreamServer) error
+	// PeerInfo returns info for all connected peers.
+	PeerInfoStream(*empty.Empty, AdminService_PeerInfoStreamServer) error
 }
 
 // UnimplementedAdminServiceServer can be embedded to have forward compatible implementations.
@@ -226,6 +269,9 @@ func (*UnimplementedAdminServiceServer) Recover(context.Context, *RecoverRequest
 }
 func (*UnimplementedAdminServiceServer) EventsStream(*EventStreamRequest, AdminService_EventsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method EventsStream not implemented")
+}
+func (*UnimplementedAdminServiceServer) PeerInfoStream(*empty.Empty, AdminService_PeerInfoStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method PeerInfoStream not implemented")
 }
 
 func RegisterAdminServiceServer(s *grpc.Server, srv AdminServiceServer) {
@@ -292,6 +338,27 @@ func (x *adminServiceEventsStreamServer) Send(m *Event) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _AdminService_PeerInfoStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(empty.Empty)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AdminServiceServer).PeerInfoStream(m, &adminServicePeerInfoStreamServer{stream})
+}
+
+type AdminService_PeerInfoStreamServer interface {
+	Send(*PeerInfo) error
+	grpc.ServerStream
+}
+
+type adminServicePeerInfoStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *adminServicePeerInfoStreamServer) Send(m *PeerInfo) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _AdminService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "spacemesh.v1.AdminService",
 	HandlerType: (*AdminServiceServer)(nil),
@@ -310,6 +377,11 @@ var _AdminService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "EventsStream",
 			Handler:       _AdminService_EventsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "PeerInfoStream",
+			Handler:       _AdminService_PeerInfoStream_Handler,
 			ServerStreams: true,
 		},
 	},
