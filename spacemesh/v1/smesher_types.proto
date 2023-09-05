@@ -140,6 +140,7 @@ message UpdatePoetServersResponse {
 
 message RegossipAtxsRequest {
     uint32 epoch = 1;
+    string id    = 2;
 }
 
 message RegossipAtxsResponse {}
