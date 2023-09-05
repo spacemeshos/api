@@ -142,6 +142,4 @@ message RegossipAtxsRequest {
     uint32 epoch = 1;
 }
 
-message RegossipAtxsResponse {
-    uint32 count = 1;
-}
+message RegossipAtxsResponse {}
