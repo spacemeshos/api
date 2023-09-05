@@ -30,7 +30,7 @@ var file_spacemesh_v1_mesh_proto_rawDesc = []byte{
 	0x65, 0x73, 0x68, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0c, 0x73, 0x70, 0x61, 0x63, 0x65,
 	0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x1a, 0x1d, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
 	0x73, 0x68, 0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x65, 0x73, 0x68, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xf2, 0x08, 0x0a, 0x0b, 0x4d, 0x65, 0x73, 0x68, 0x53,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xb3, 0x0a, 0x0a, 0x0b, 0x4d, 0x65, 0x73, 0x68, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69,
 	0x73, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x20, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
 	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x54, 0x69, 0x6d, 0x65,
@@ -101,11 +101,23 @@ var file_spacemesh_v1_mesh_proto_rawDesc = []byte{
 	0x2e, 0x76, 0x31, 0x2e, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
 	0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x53, 0x74, 0x72, 0x65, 0x61,
-	0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x30, 0x01, 0x42, 0x34, 0x5a, 0x32, 0x67,
-	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d,
-	0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73,
-	0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76,
-	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x30, 0x01, 0x12, 0x57, 0x0a, 0x10, 0x4d,
+	0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61, 0x6e, 0x63, 0x65, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12,
+	0x20, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
+	0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x21, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x66, 0x0a, 0x11, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61,
+	0x6e, 0x63, 0x65, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x26, 0x2e, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73,
+	0x61, 0x6e, 0x63, 0x65, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x27, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x4d, 0x61, 0x6c, 0x66, 0x65, 0x61, 0x73, 0x61, 0x6e, 0x63, 0x65, 0x53, 0x74, 0x72, 0x65,
+	0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x30, 0x01, 0x42, 0x34, 0x5a, 0x32,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61,
+	0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f,
+	0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_spacemesh_v1_mesh_proto_goTypes = []interface{}{
@@ -121,18 +133,22 @@ var file_spacemesh_v1_mesh_proto_goTypes = []interface{}{
 	(*AccountMeshDataStreamRequest)(nil),     // 9: spacemesh.v1.AccountMeshDataStreamRequest
 	(*LayerStreamRequest)(nil),               // 10: spacemesh.v1.LayerStreamRequest
 	(*EpochStreamRequest)(nil),               // 11: spacemesh.v1.EpochStreamRequest
-	(*GenesisTimeResponse)(nil),              // 12: spacemesh.v1.GenesisTimeResponse
-	(*CurrentLayerResponse)(nil),             // 13: spacemesh.v1.CurrentLayerResponse
-	(*CurrentEpochResponse)(nil),             // 14: spacemesh.v1.CurrentEpochResponse
-	(*GenesisIDResponse)(nil),                // 15: spacemesh.v1.GenesisIDResponse
-	(*EpochNumLayersResponse)(nil),           // 16: spacemesh.v1.EpochNumLayersResponse
-	(*LayerDurationResponse)(nil),            // 17: spacemesh.v1.LayerDurationResponse
-	(*MaxTransactionsPerSecondResponse)(nil), // 18: spacemesh.v1.MaxTransactionsPerSecondResponse
-	(*AccountMeshDataQueryResponse)(nil),     // 19: spacemesh.v1.AccountMeshDataQueryResponse
-	(*LayersQueryResponse)(nil),              // 20: spacemesh.v1.LayersQueryResponse
-	(*AccountMeshDataStreamResponse)(nil),    // 21: spacemesh.v1.AccountMeshDataStreamResponse
-	(*LayerStreamResponse)(nil),              // 22: spacemesh.v1.LayerStreamResponse
-	(*EpochStreamResponse)(nil),              // 23: spacemesh.v1.EpochStreamResponse
+	(*MalfeasanceRequest)(nil),               // 12: spacemesh.v1.MalfeasanceRequest
+	(*MalfeasanceStreamRequest)(nil),         // 13: spacemesh.v1.MalfeasanceStreamRequest
+	(*GenesisTimeResponse)(nil),              // 14: spacemesh.v1.GenesisTimeResponse
+	(*CurrentLayerResponse)(nil),             // 15: spacemesh.v1.CurrentLayerResponse
+	(*CurrentEpochResponse)(nil),             // 16: spacemesh.v1.CurrentEpochResponse
+	(*GenesisIDResponse)(nil),                // 17: spacemesh.v1.GenesisIDResponse
+	(*EpochNumLayersResponse)(nil),           // 18: spacemesh.v1.EpochNumLayersResponse
+	(*LayerDurationResponse)(nil),            // 19: spacemesh.v1.LayerDurationResponse
+	(*MaxTransactionsPerSecondResponse)(nil), // 20: spacemesh.v1.MaxTransactionsPerSecondResponse
+	(*AccountMeshDataQueryResponse)(nil),     // 21: spacemesh.v1.AccountMeshDataQueryResponse
+	(*LayersQueryResponse)(nil),              // 22: spacemesh.v1.LayersQueryResponse
+	(*AccountMeshDataStreamResponse)(nil),    // 23: spacemesh.v1.AccountMeshDataStreamResponse
+	(*LayerStreamResponse)(nil),              // 24: spacemesh.v1.LayerStreamResponse
+	(*EpochStreamResponse)(nil),              // 25: spacemesh.v1.EpochStreamResponse
+	(*MalfeasanceResponse)(nil),              // 26: spacemesh.v1.MalfeasanceResponse
+	(*MalfeasanceStreamResponse)(nil),        // 27: spacemesh.v1.MalfeasanceStreamResponse
 }
 var file_spacemesh_v1_mesh_proto_depIdxs = []int32{
 	0,  // 0: spacemesh.v1.MeshService.GenesisTime:input_type -> spacemesh.v1.GenesisTimeRequest
@@ -147,20 +163,24 @@ var file_spacemesh_v1_mesh_proto_depIdxs = []int32{
 	9,  // 9: spacemesh.v1.MeshService.AccountMeshDataStream:input_type -> spacemesh.v1.AccountMeshDataStreamRequest
 	10, // 10: spacemesh.v1.MeshService.LayerStream:input_type -> spacemesh.v1.LayerStreamRequest
 	11, // 11: spacemesh.v1.MeshService.EpochStream:input_type -> spacemesh.v1.EpochStreamRequest
-	12, // 12: spacemesh.v1.MeshService.GenesisTime:output_type -> spacemesh.v1.GenesisTimeResponse
-	13, // 13: spacemesh.v1.MeshService.CurrentLayer:output_type -> spacemesh.v1.CurrentLayerResponse
-	14, // 14: spacemesh.v1.MeshService.CurrentEpoch:output_type -> spacemesh.v1.CurrentEpochResponse
-	15, // 15: spacemesh.v1.MeshService.GenesisID:output_type -> spacemesh.v1.GenesisIDResponse
-	16, // 16: spacemesh.v1.MeshService.EpochNumLayers:output_type -> spacemesh.v1.EpochNumLayersResponse
-	17, // 17: spacemesh.v1.MeshService.LayerDuration:output_type -> spacemesh.v1.LayerDurationResponse
-	18, // 18: spacemesh.v1.MeshService.MaxTransactionsPerSecond:output_type -> spacemesh.v1.MaxTransactionsPerSecondResponse
-	19, // 19: spacemesh.v1.MeshService.AccountMeshDataQuery:output_type -> spacemesh.v1.AccountMeshDataQueryResponse
-	20, // 20: spacemesh.v1.MeshService.LayersQuery:output_type -> spacemesh.v1.LayersQueryResponse
-	21, // 21: spacemesh.v1.MeshService.AccountMeshDataStream:output_type -> spacemesh.v1.AccountMeshDataStreamResponse
-	22, // 22: spacemesh.v1.MeshService.LayerStream:output_type -> spacemesh.v1.LayerStreamResponse
-	23, // 23: spacemesh.v1.MeshService.EpochStream:output_type -> spacemesh.v1.EpochStreamResponse
-	12, // [12:24] is the sub-list for method output_type
-	0,  // [0:12] is the sub-list for method input_type
+	12, // 12: spacemesh.v1.MeshService.MalfeasanceQuery:input_type -> spacemesh.v1.MalfeasanceRequest
+	13, // 13: spacemesh.v1.MeshService.MalfeasanceStream:input_type -> spacemesh.v1.MalfeasanceStreamRequest
+	14, // 14: spacemesh.v1.MeshService.GenesisTime:output_type -> spacemesh.v1.GenesisTimeResponse
+	15, // 15: spacemesh.v1.MeshService.CurrentLayer:output_type -> spacemesh.v1.CurrentLayerResponse
+	16, // 16: spacemesh.v1.MeshService.CurrentEpoch:output_type -> spacemesh.v1.CurrentEpochResponse
+	17, // 17: spacemesh.v1.MeshService.GenesisID:output_type -> spacemesh.v1.GenesisIDResponse
+	18, // 18: spacemesh.v1.MeshService.EpochNumLayers:output_type -> spacemesh.v1.EpochNumLayersResponse
+	19, // 19: spacemesh.v1.MeshService.LayerDuration:output_type -> spacemesh.v1.LayerDurationResponse
+	20, // 20: spacemesh.v1.MeshService.MaxTransactionsPerSecond:output_type -> spacemesh.v1.MaxTransactionsPerSecondResponse
+	21, // 21: spacemesh.v1.MeshService.AccountMeshDataQuery:output_type -> spacemesh.v1.AccountMeshDataQueryResponse
+	22, // 22: spacemesh.v1.MeshService.LayersQuery:output_type -> spacemesh.v1.LayersQueryResponse
+	23, // 23: spacemesh.v1.MeshService.AccountMeshDataStream:output_type -> spacemesh.v1.AccountMeshDataStreamResponse
+	24, // 24: spacemesh.v1.MeshService.LayerStream:output_type -> spacemesh.v1.LayerStreamResponse
+	25, // 25: spacemesh.v1.MeshService.EpochStream:output_type -> spacemesh.v1.EpochStreamResponse
+	26, // 26: spacemesh.v1.MeshService.MalfeasanceQuery:output_type -> spacemesh.v1.MalfeasanceResponse
+	27, // 27: spacemesh.v1.MeshService.MalfeasanceStream:output_type -> spacemesh.v1.MalfeasanceStreamResponse
+	14, // [14:28] is the sub-list for method output_type
+	0,  // [0:14] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -229,6 +249,8 @@ type MeshServiceClient interface {
 	LayerStream(ctx context.Context, in *LayerStreamRequest, opts ...grpc.CallOption) (MeshService_LayerStreamClient, error)
 	// Epoch activation transactions.
 	EpochStream(ctx context.Context, in *EpochStreamRequest, opts ...grpc.CallOption) (MeshService_EpochStreamClient, error)
+	MalfeasanceQuery(ctx context.Context, in *MalfeasanceRequest, opts ...grpc.CallOption) (*MalfeasanceResponse, error)
+	MalfeasanceStream(ctx context.Context, in *MalfeasanceStreamRequest, opts ...grpc.CallOption) (MeshService_MalfeasanceStreamClient, error)
 }
 
 type meshServiceClient struct {
@@ -416,6 +438,47 @@ func (x *meshServiceEpochStreamClient) Recv() (*EpochStreamResponse, error) {
 	return m, nil
 }
 
+func (c *meshServiceClient) MalfeasanceQuery(ctx context.Context, in *MalfeasanceRequest, opts ...grpc.CallOption) (*MalfeasanceResponse, error) {
+	out := new(MalfeasanceResponse)
+	err := c.cc.Invoke(ctx, "/spacemesh.v1.MeshService/MalfeasanceQuery", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *meshServiceClient) MalfeasanceStream(ctx context.Context, in *MalfeasanceStreamRequest, opts ...grpc.CallOption) (MeshService_MalfeasanceStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_MeshService_serviceDesc.Streams[3], "/spacemesh.v1.MeshService/MalfeasanceStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &meshServiceMalfeasanceStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MeshService_MalfeasanceStreamClient interface {
+	Recv() (*MalfeasanceStreamResponse, error)
+	grpc.ClientStream
+}
+
+type meshServiceMalfeasanceStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *meshServiceMalfeasanceStreamClient) Recv() (*MalfeasanceStreamResponse, error) {
+	m := new(MalfeasanceStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // MeshServiceServer is the server API for MeshService service.
 type MeshServiceServer interface {
 	// Network genesis time as unix epoch time
@@ -444,6 +507,8 @@ type MeshServiceServer interface {
 	LayerStream(*LayerStreamRequest, MeshService_LayerStreamServer) error
 	// Epoch activation transactions.
 	EpochStream(*EpochStreamRequest, MeshService_EpochStreamServer) error
+	MalfeasanceQuery(context.Context, *MalfeasanceRequest) (*MalfeasanceResponse, error)
+	MalfeasanceStream(*MalfeasanceStreamRequest, MeshService_MalfeasanceStreamServer) error
 }
 
 // UnimplementedMeshServiceServer can be embedded to have forward compatible implementations.
@@ -485,6 +550,12 @@ func (*UnimplementedMeshServiceServer) LayerStream(*LayerStreamRequest, MeshServ
 }
 func (*UnimplementedMeshServiceServer) EpochStream(*EpochStreamRequest, MeshService_EpochStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method EpochStream not implemented")
+}
+func (*UnimplementedMeshServiceServer) MalfeasanceQuery(context.Context, *MalfeasanceRequest) (*MalfeasanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MalfeasanceQuery not implemented")
+}
+func (*UnimplementedMeshServiceServer) MalfeasanceStream(*MalfeasanceStreamRequest, MeshService_MalfeasanceStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method MalfeasanceStream not implemented")
 }
 
 func RegisterMeshServiceServer(s *grpc.Server, srv MeshServiceServer) {
@@ -716,6 +787,45 @@ func (x *meshServiceEpochStreamServer) Send(m *EpochStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MeshService_MalfeasanceQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MalfeasanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MeshServiceServer).MalfeasanceQuery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/spacemesh.v1.MeshService/MalfeasanceQuery",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MeshServiceServer).MalfeasanceQuery(ctx, req.(*MalfeasanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MeshService_MalfeasanceStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(MalfeasanceStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MeshServiceServer).MalfeasanceStream(m, &meshServiceMalfeasanceStreamServer{stream})
+}
+
+type MeshService_MalfeasanceStreamServer interface {
+	Send(*MalfeasanceStreamResponse) error
+	grpc.ServerStream
+}
+
+type meshServiceMalfeasanceStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *meshServiceMalfeasanceStreamServer) Send(m *MalfeasanceStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _MeshService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "spacemesh.v1.MeshService",
 	HandlerType: (*MeshServiceServer)(nil),
@@ -756,6 +866,10 @@ var _MeshService_serviceDesc = grpc.ServiceDesc{
 			MethodName: "LayersQuery",
 			Handler:    _MeshService_LayersQuery_Handler,
 		},
+		{
+			MethodName: "MalfeasanceQuery",
+			Handler:    _MeshService_MalfeasanceQuery_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -771,6 +885,11 @@ var _MeshService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "EpochStream",
 			Handler:       _MeshService_EpochStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "MalfeasanceStream",
+			Handler:       _MeshService_MalfeasanceStream_Handler,
 			ServerStreams: true,
 		},
 	},
