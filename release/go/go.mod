@@ -1,6 +1,6 @@
 module github.com/spacemeshos/api/release/go
 
-go 1.19
+go 1.20
 
 require (
 	github.com/golang/protobuf v1.5.3
