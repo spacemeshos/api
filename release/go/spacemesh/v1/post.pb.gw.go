@@ -40,7 +40,7 @@ func request_PoSTService_Connect_0(ctx context.Context, marshaler runtime.Marsha
 	}
 	dec := marshaler.NewDecoder(req.Body)
 	handleSend := func() error {
-		var protoReq Request
+		var protoReq ServiceResponse
 		err := dec.Decode(&protoReq)
 		if err == io.EOF {
 			return err

@@ -4,8 +4,8 @@ option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
 
 import "spacemesh/v1/types.proto";
 
-// Request are the messages sent to the post service.
-message Request {
+// NodeRequest is a request sent from the node to the post service.
+message NodeRequest {
   oneof type {
     // StateRequest state = 1;
     // MetadataRequest metadata = 2;
@@ -15,8 +15,8 @@ message Request {
   }
 }
 
-// Response are the messages sent from the post service.
-message Response {
+// ServiceResponse is a response sent from the post service to the node.
+message ServiceResponse {
   oneof type {
     // StateResponse state = 1;
     // MetadataResponse metadata = 2;

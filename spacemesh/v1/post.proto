@@ -8,5 +8,5 @@ import "spacemesh/v1/post_types.proto";
 // node.
 service PoSTService {
   // Connect allows a dedicated PoST node to connect to the spacemesh node.
-  rpc Connect(stream Request) returns (stream Response);
+  rpc Connect(stream ServiceResponse) returns (stream NodeRequest);
 }

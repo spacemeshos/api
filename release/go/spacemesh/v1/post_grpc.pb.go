@@ -48,8 +48,8 @@ func (c *poSTServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption
 }
 
 type PoSTService_ConnectClient interface {
-	Send(*Request) error
-	Recv() (*Response, error)
+	Send(*ServiceResponse) error
+	Recv() (*NodeRequest, error)
 	grpc.ClientStream
 }
 
@@ -57,12 +57,12 @@ type poSTServiceConnectClient struct {
 	grpc.ClientStream
 }
 
-func (x *poSTServiceConnectClient) Send(m *Request) error {
+func (x *poSTServiceConnectClient) Send(m *ServiceResponse) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *poSTServiceConnectClient) Recv() (*Response, error) {
-	m := new(Response)
+func (x *poSTServiceConnectClient) Recv() (*NodeRequest, error) {
+	m := new(NodeRequest)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -101,8 +101,8 @@ func _PoSTService_Connect_Handler(srv interface{}, stream grpc.ServerStream) err
 }
 
 type PoSTService_ConnectServer interface {
-	Send(*Response) error
-	Recv() (*Request, error)
+	Send(*NodeRequest) error
+	Recv() (*ServiceResponse, error)
 	grpc.ServerStream
 }
 
@@ -110,12 +110,12 @@ type poSTServiceConnectServer struct {
 	grpc.ServerStream
 }
 
-func (x *poSTServiceConnectServer) Send(m *Response) error {
+func (x *poSTServiceConnectServer) Send(m *NodeRequest) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *poSTServiceConnectServer) Recv() (*Request, error) {
-	m := new(Request)
+func (x *poSTServiceConnectServer) Recv() (*ServiceResponse, error) {
+	m := new(ServiceResponse)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
