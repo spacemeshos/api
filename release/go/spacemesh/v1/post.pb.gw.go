@@ -31,9 +31,9 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_PoSTService_Connect_0(ctx context.Context, marshaler runtime.Marshaler, client PoSTServiceClient, req *http.Request, pathParams map[string]string) (PoSTService_ConnectClient, runtime.ServerMetadata, error) {
+func request_PoSTService_Register_0(ctx context.Context, marshaler runtime.Marshaler, client PoSTServiceClient, req *http.Request, pathParams map[string]string) (PoSTService_RegisterClient, runtime.ServerMetadata, error) {
 	var metadata runtime.ServerMetadata
-	stream, err := client.Connect(ctx)
+	stream, err := client.Register(ctx)
 	if err != nil {
 		grpclog.Infof("Failed to start streaming: %v", err)
 		return nil, metadata, err
@@ -80,7 +80,7 @@ func request_PoSTService_Connect_0(ctx context.Context, marshaler runtime.Marsha
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterPoSTServiceHandlerFromEndpoint instead.
 func RegisterPoSTServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server PoSTServiceServer) error {
 
-	mux.Handle("POST", pattern_PoSTService_Connect_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_PoSTService_Register_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -128,25 +128,25 @@ func RegisterPoSTServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn
 // "PoSTServiceClient" to call the correct interceptors.
 func RegisterPoSTServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client PoSTServiceClient) error {
 
-	mux.Handle("POST", pattern_PoSTService_Connect_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_PoSTService_Register_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.PoSTService/Connect", runtime.WithHTTPPathPattern("/spacemesh.v1.PoSTService/Connect"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.PoSTService/Register", runtime.WithHTTPPathPattern("/spacemesh.v1.PoSTService/Register"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_PoSTService_Connect_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_PoSTService_Register_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_PoSTService_Connect_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_PoSTService_Register_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -154,9 +154,9 @@ func RegisterPoSTServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_PoSTService_Connect_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.PoSTService", "Connect"}, ""))
+	pattern_PoSTService_Register_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.PoSTService", "Register"}, ""))
 )
 
 var (
-	forward_PoSTService_Connect_0 = runtime.ForwardResponseStream
+	forward_PoSTService_Register_0 = runtime.ForwardResponseStream
 )

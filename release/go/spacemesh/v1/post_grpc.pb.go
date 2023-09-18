@@ -19,15 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PoSTService_Connect_FullMethodName = "/spacemesh.v1.PoSTService/Connect"
+	PoSTService_Register_FullMethodName = "/spacemesh.v1.PoSTService/Register"
 )
 
 // PoSTServiceClient is the client API for PoSTService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PoSTServiceClient interface {
-	// Connect allows a dedicated PoST node to connect to the spacemesh node.
-	Connect(ctx context.Context, opts ...grpc.CallOption) (PoSTService_ConnectClient, error)
+	// Register allows a dedicated PoST node to connect to the spacemesh node.
+	Register(ctx context.Context, opts ...grpc.CallOption) (PoSTService_RegisterClient, error)
 }
 
 type poSTServiceClient struct {
@@ -38,30 +38,30 @@ func NewPoSTServiceClient(cc grpc.ClientConnInterface) PoSTServiceClient {
 	return &poSTServiceClient{cc}
 }
 
-func (c *poSTServiceClient) Connect(ctx context.Context, opts ...grpc.CallOption) (PoSTService_ConnectClient, error) {
-	stream, err := c.cc.NewStream(ctx, &PoSTService_ServiceDesc.Streams[0], PoSTService_Connect_FullMethodName, opts...)
+func (c *poSTServiceClient) Register(ctx context.Context, opts ...grpc.CallOption) (PoSTService_RegisterClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PoSTService_ServiceDesc.Streams[0], PoSTService_Register_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &poSTServiceConnectClient{stream}
+	x := &poSTServiceRegisterClient{stream}
 	return x, nil
 }
 
-type PoSTService_ConnectClient interface {
+type PoSTService_RegisterClient interface {
 	Send(*ServiceResponse) error
 	Recv() (*NodeRequest, error)
 	grpc.ClientStream
 }
 
-type poSTServiceConnectClient struct {
+type poSTServiceRegisterClient struct {
 	grpc.ClientStream
 }
 
-func (x *poSTServiceConnectClient) Send(m *ServiceResponse) error {
+func (x *poSTServiceRegisterClient) Send(m *ServiceResponse) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *poSTServiceConnectClient) Recv() (*NodeRequest, error) {
+func (x *poSTServiceRegisterClient) Recv() (*NodeRequest, error) {
 	m := new(NodeRequest)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -73,16 +73,16 @@ func (x *poSTServiceConnectClient) Recv() (*NodeRequest, error) {
 // All implementations should embed UnimplementedPoSTServiceServer
 // for forward compatibility
 type PoSTServiceServer interface {
-	// Connect allows a dedicated PoST node to connect to the spacemesh node.
-	Connect(PoSTService_ConnectServer) error
+	// Register allows a dedicated PoST node to connect to the spacemesh node.
+	Register(PoSTService_RegisterServer) error
 }
 
 // UnimplementedPoSTServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedPoSTServiceServer struct {
 }
 
-func (UnimplementedPoSTServiceServer) Connect(PoSTService_ConnectServer) error {
-	return status.Errorf(codes.Unimplemented, "method Connect not implemented")
+func (UnimplementedPoSTServiceServer) Register(PoSTService_RegisterServer) error {
+	return status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 
 // UnsafePoSTServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -96,25 +96,25 @@ func RegisterPoSTServiceServer(s grpc.ServiceRegistrar, srv PoSTServiceServer) {
 	s.RegisterService(&PoSTService_ServiceDesc, srv)
 }
 
-func _PoSTService_Connect_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(PoSTServiceServer).Connect(&poSTServiceConnectServer{stream})
+func _PoSTService_Register_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PoSTServiceServer).Register(&poSTServiceRegisterServer{stream})
 }
 
-type PoSTService_ConnectServer interface {
+type PoSTService_RegisterServer interface {
 	Send(*NodeRequest) error
 	Recv() (*ServiceResponse, error)
 	grpc.ServerStream
 }
 
-type poSTServiceConnectServer struct {
+type poSTServiceRegisterServer struct {
 	grpc.ServerStream
 }
 
-func (x *poSTServiceConnectServer) Send(m *NodeRequest) error {
+func (x *poSTServiceRegisterServer) Send(m *NodeRequest) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *poSTServiceConnectServer) Recv() (*ServiceResponse, error) {
+func (x *poSTServiceRegisterServer) Recv() (*ServiceResponse, error) {
 	m := new(ServiceResponse)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -131,8 +131,8 @@ var PoSTService_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "Connect",
-			Handler:       _PoSTService_Connect_Handler,
+			StreamName:    "Register",
+			Handler:       _PoSTService_Register_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
