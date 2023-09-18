@@ -1,0 +1,55 @@
+syntax = "proto3";
+package spacemesh.v1;
+option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+
+import "spacemesh/v1/types.proto";
+
+// Request are the messages sent to the post service.
+message Request {
+  oneof type {
+    // StateRequest state = 1;
+    // MetadataRequest metadata = 2;
+    // InitRequest init = 3;
+    // ResizeRequest resize = 4;
+    GenProofRequest gen_proof = 5;
+  }
+}
+
+// Response are the messages sent from the post service.
+message Response {
+  oneof type {
+    // StateResponse state = 1;
+    // MetadataResponse metadata = 2;
+    // InitResponse init = 3;
+    // ResizeResponse resize = 4;
+    GenProofResponse gen_proof = 5;
+  }
+}
+
+message GenProofRequest { bytes challenge = 1; }
+
+message Proof {
+  uint32 nonce = 1;
+  bytes indices = 2;
+  uint64 pow = 3;
+}
+
+message ProofMetadata {
+  bytes challenge = 1;
+  SmesherId node_id = 2;
+  ActivationId commitment_atx_id = 3;
+  uint32 num_units = 4;
+  uint64 labels_per_unit = 5;
+}
+
+enum GenProofStatus {
+  GEN_PROOF_STATUS_UNSPECIFIED = 0;
+  GEN_PROOF_STATUS_OK = 1;
+  GEN_PROOF_STATUS_ERROR = 2;
+}
+
+message GenProofResponse {
+  GenProofStatus status = 1;
+  Proof proof = 2;
+  ProofMetadata metadata = 3;
+}

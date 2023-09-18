@@ -1,0 +1,12 @@
+syntax = "proto3";
+package spacemesh.v1;
+option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+
+import "spacemesh/v1/post_types.proto";
+
+// PoSTService is used by dedicated PoST nodes to interact with the spacemesh
+// node.
+service PoSTService {
+  // Connect allows a dedicated PoST node to connect to the spacemesh node.
+  rpc Connect(stream Request) returns (stream Response);
+}
