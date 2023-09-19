@@ -31,7 +31,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_PoSTService_Register_0(ctx context.Context, marshaler runtime.Marshaler, client PoSTServiceClient, req *http.Request, pathParams map[string]string) (PoSTService_RegisterClient, runtime.ServerMetadata, error) {
+func request_PostService_Register_0(ctx context.Context, marshaler runtime.Marshaler, client PostServiceClient, req *http.Request, pathParams map[string]string) (PostService_RegisterClient, runtime.ServerMetadata, error) {
 	var metadata runtime.ServerMetadata
 	stream, err := client.Register(ctx)
 	if err != nil {
@@ -74,13 +74,13 @@ func request_PoSTService_Register_0(ctx context.Context, marshaler runtime.Marsh
 	return stream, metadata, nil
 }
 
-// RegisterPoSTServiceHandlerServer registers the http handlers for service PoSTService to "mux".
-// UnaryRPC     :call PoSTServiceServer directly.
+// RegisterPostServiceHandlerServer registers the http handlers for service PostService to "mux".
+// UnaryRPC     :call PostServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterPoSTServiceHandlerFromEndpoint instead.
-func RegisterPoSTServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server PoSTServiceServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterPostServiceHandlerFromEndpoint instead.
+func RegisterPostServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server PostServiceServer) error {
 
-	mux.Handle("POST", pattern_PoSTService_Register_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_PostService_Register_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -90,9 +90,9 @@ func RegisterPoSTServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	return nil
 }
 
-// RegisterPoSTServiceHandlerFromEndpoint is same as RegisterPoSTServiceHandler but
+// RegisterPostServiceHandlerFromEndpoint is same as RegisterPostServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterPoSTServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterPostServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
@@ -112,41 +112,41 @@ func RegisterPoSTServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.Se
 		}()
 	}()
 
-	return RegisterPoSTServiceHandler(ctx, mux, conn)
+	return RegisterPostServiceHandler(ctx, mux, conn)
 }
 
-// RegisterPoSTServiceHandler registers the http handlers for service PoSTService to "mux".
+// RegisterPostServiceHandler registers the http handlers for service PostService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterPoSTServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterPoSTServiceHandlerClient(ctx, mux, NewPoSTServiceClient(conn))
+func RegisterPostServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterPostServiceHandlerClient(ctx, mux, NewPostServiceClient(conn))
 }
 
-// RegisterPoSTServiceHandlerClient registers the http handlers for service PoSTService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "PoSTServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "PoSTServiceClient"
+// RegisterPostServiceHandlerClient registers the http handlers for service PostService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "PostServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "PostServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "PoSTServiceClient" to call the correct interceptors.
-func RegisterPoSTServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client PoSTServiceClient) error {
+// "PostServiceClient" to call the correct interceptors.
+func RegisterPostServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client PostServiceClient) error {
 
-	mux.Handle("POST", pattern_PoSTService_Register_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_PostService_Register_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.PoSTService/Register", runtime.WithHTTPPathPattern("/spacemesh.v1.PoSTService/Register"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.PostService/Register", runtime.WithHTTPPathPattern("/spacemesh.v1.PostService/Register"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_PoSTService_Register_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_PostService_Register_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_PoSTService_Register_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_PostService_Register_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -154,9 +154,9 @@ func RegisterPoSTServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_PoSTService_Register_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.PoSTService", "Register"}, ""))
+	pattern_PostService_Register_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.PostService", "Register"}, ""))
 )
 
 var (
-	forward_PoSTService_Register_0 = runtime.ForwardResponseStream
+	forward_PostService_Register_0 = runtime.ForwardResponseStream
 )

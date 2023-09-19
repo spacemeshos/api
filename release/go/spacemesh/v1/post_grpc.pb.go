@@ -19,49 +19,49 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PoSTService_Register_FullMethodName = "/spacemesh.v1.PoSTService/Register"
+	PostService_Register_FullMethodName = "/spacemesh.v1.PostService/Register"
 )
 
-// PoSTServiceClient is the client API for PoSTService service.
+// PostServiceClient is the client API for PostService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PoSTServiceClient interface {
+type PostServiceClient interface {
 	// Register allows a dedicated PoST node to connect to the spacemesh node.
-	Register(ctx context.Context, opts ...grpc.CallOption) (PoSTService_RegisterClient, error)
+	Register(ctx context.Context, opts ...grpc.CallOption) (PostService_RegisterClient, error)
 }
 
-type poSTServiceClient struct {
+type postServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPoSTServiceClient(cc grpc.ClientConnInterface) PoSTServiceClient {
-	return &poSTServiceClient{cc}
+func NewPostServiceClient(cc grpc.ClientConnInterface) PostServiceClient {
+	return &postServiceClient{cc}
 }
 
-func (c *poSTServiceClient) Register(ctx context.Context, opts ...grpc.CallOption) (PoSTService_RegisterClient, error) {
-	stream, err := c.cc.NewStream(ctx, &PoSTService_ServiceDesc.Streams[0], PoSTService_Register_FullMethodName, opts...)
+func (c *postServiceClient) Register(ctx context.Context, opts ...grpc.CallOption) (PostService_RegisterClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PostService_ServiceDesc.Streams[0], PostService_Register_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &poSTServiceRegisterClient{stream}
+	x := &postServiceRegisterClient{stream}
 	return x, nil
 }
 
-type PoSTService_RegisterClient interface {
+type PostService_RegisterClient interface {
 	Send(*ServiceResponse) error
 	Recv() (*NodeRequest, error)
 	grpc.ClientStream
 }
 
-type poSTServiceRegisterClient struct {
+type postServiceRegisterClient struct {
 	grpc.ClientStream
 }
 
-func (x *poSTServiceRegisterClient) Send(m *ServiceResponse) error {
+func (x *postServiceRegisterClient) Send(m *ServiceResponse) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *poSTServiceRegisterClient) Recv() (*NodeRequest, error) {
+func (x *postServiceRegisterClient) Recv() (*NodeRequest, error) {
 	m := new(NodeRequest)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -69,52 +69,52 @@ func (x *poSTServiceRegisterClient) Recv() (*NodeRequest, error) {
 	return m, nil
 }
 
-// PoSTServiceServer is the server API for PoSTService service.
-// All implementations should embed UnimplementedPoSTServiceServer
+// PostServiceServer is the server API for PostService service.
+// All implementations should embed UnimplementedPostServiceServer
 // for forward compatibility
-type PoSTServiceServer interface {
+type PostServiceServer interface {
 	// Register allows a dedicated PoST node to connect to the spacemesh node.
-	Register(PoSTService_RegisterServer) error
+	Register(PostService_RegisterServer) error
 }
 
-// UnimplementedPoSTServiceServer should be embedded to have forward compatible implementations.
-type UnimplementedPoSTServiceServer struct {
+// UnimplementedPostServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedPostServiceServer struct {
 }
 
-func (UnimplementedPoSTServiceServer) Register(PoSTService_RegisterServer) error {
+func (UnimplementedPostServiceServer) Register(PostService_RegisterServer) error {
 	return status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 
-// UnsafePoSTServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PoSTServiceServer will
+// UnsafePostServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PostServiceServer will
 // result in compilation errors.
-type UnsafePoSTServiceServer interface {
-	mustEmbedUnimplementedPoSTServiceServer()
+type UnsafePostServiceServer interface {
+	mustEmbedUnimplementedPostServiceServer()
 }
 
-func RegisterPoSTServiceServer(s grpc.ServiceRegistrar, srv PoSTServiceServer) {
-	s.RegisterService(&PoSTService_ServiceDesc, srv)
+func RegisterPostServiceServer(s grpc.ServiceRegistrar, srv PostServiceServer) {
+	s.RegisterService(&PostService_ServiceDesc, srv)
 }
 
-func _PoSTService_Register_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(PoSTServiceServer).Register(&poSTServiceRegisterServer{stream})
+func _PostService_Register_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PostServiceServer).Register(&postServiceRegisterServer{stream})
 }
 
-type PoSTService_RegisterServer interface {
+type PostService_RegisterServer interface {
 	Send(*NodeRequest) error
 	Recv() (*ServiceResponse, error)
 	grpc.ServerStream
 }
 
-type poSTServiceRegisterServer struct {
+type postServiceRegisterServer struct {
 	grpc.ServerStream
 }
 
-func (x *poSTServiceRegisterServer) Send(m *NodeRequest) error {
+func (x *postServiceRegisterServer) Send(m *NodeRequest) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *poSTServiceRegisterServer) Recv() (*ServiceResponse, error) {
+func (x *postServiceRegisterServer) Recv() (*ServiceResponse, error) {
 	m := new(ServiceResponse)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -122,17 +122,17 @@ func (x *poSTServiceRegisterServer) Recv() (*ServiceResponse, error) {
 	return m, nil
 }
 
-// PoSTService_ServiceDesc is the grpc.ServiceDesc for PoSTService service.
+// PostService_ServiceDesc is the grpc.ServiceDesc for PostService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PoSTService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v1.PoSTService",
-	HandlerType: (*PoSTServiceServer)(nil),
+var PostService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "spacemesh.v1.PostService",
+	HandlerType: (*PostServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Register",
-			Handler:       _PoSTService_Register_Handler,
+			Handler:       _PostService_Register_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
