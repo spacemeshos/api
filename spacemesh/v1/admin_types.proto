@@ -40,6 +40,8 @@ message Event {
     EventProposal proposal = 13;
     EventInitFailed init_failed = 14;
     EventMalfeasance malfeasance = 15;
+    EventPostServiceStarted post_service_started = 16;
+    EventPostServiceStopped post_service_stopped = 17;
   }
 }
 
@@ -60,6 +62,10 @@ message EventInitFailed {
 }
 
 message EventInitComplete {}
+
+message EventPostServiceStarted {}
+
+message EventPostServiceStopped {}
 
 message EventPostStart {
   bytes challenge = 1;
