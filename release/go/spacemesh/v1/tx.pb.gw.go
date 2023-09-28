@@ -2,11 +2,11 @@
 // source: spacemesh/v1/tx.proto
 
 /*
-Package v1 is a reverse proxy.
+Package spacemeshv1 is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package v1
+package spacemeshv1
 
 import (
 	"context"
@@ -65,6 +65,40 @@ func local_request_TransactionService_SubmitTransaction_0(ctx context.Context, m
 
 }
 
+func request_TransactionService_ParseTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ParseTransactionRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.ParseTransaction(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_TransactionService_ParseTransaction_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ParseTransactionRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.ParseTransaction(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 func request_TransactionService_TransactionsState_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq TransactionsStateRequest
 	var metadata runtime.ServerMetadata
@@ -99,6 +133,56 @@ func local_request_TransactionService_TransactionsState_0(ctx context.Context, m
 
 }
 
+func request_TransactionService_TransactionsStateStream_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (TransactionService_TransactionsStateStreamClient, runtime.ServerMetadata, error) {
+	var protoReq TransactionsStateStreamRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.TransactionsStateStream(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
+func request_TransactionService_StreamResults_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (TransactionService_StreamResultsClient, runtime.ServerMetadata, error) {
+	var protoReq TransactionResultsRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.StreamResults(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterTransactionServiceHandlerServer registers the http handlers for service TransactionService to "mux".
 // UnaryRPC     :call TransactionServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -113,7 +197,7 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/v1/transaction/submittransaction"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/SubmitTransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -130,6 +214,31 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 
 	})
 
+	mux.Handle("POST", pattern_TransactionService_ParseTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/ParseTransaction"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_TransactionService_ParseTransaction_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_TransactionService_ParseTransaction_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("POST", pattern_TransactionService_TransactionsState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -138,7 +247,7 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.TransactionService/TransactionsState", runtime.WithHTTPPathPattern("/v1/transaction/transactionsstate"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.TransactionService/TransactionsState", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/TransactionsState"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -155,13 +264,27 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 
 	})
 
+	mux.Handle("POST", pattern_TransactionService_TransactionsStateStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("POST", pattern_TransactionService_StreamResults_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	return nil
 }
 
 // RegisterTransactionServiceHandlerFromEndpoint is same as RegisterTransactionServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterTransactionServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.Dial(endpoint, opts...)
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
 	}
@@ -202,7 +325,7 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/v1/transaction/submittransaction"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/SubmitTransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -218,13 +341,35 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 
 	})
 
+	mux.Handle("POST", pattern_TransactionService_ParseTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/ParseTransaction"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_TransactionService_ParseTransaction_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_TransactionService_ParseTransaction_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("POST", pattern_TransactionService_TransactionsState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/TransactionsState", runtime.WithHTTPPathPattern("/v1/transaction/transactionsstate"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/TransactionsState", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/TransactionsState"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -240,17 +385,73 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 
 	})
 
+	mux.Handle("POST", pattern_TransactionService_TransactionsStateStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/TransactionsStateStream", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/TransactionsStateStream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_TransactionService_TransactionsStateStream_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_TransactionService_TransactionsStateStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_TransactionService_StreamResults_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/StreamResults", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/StreamResults"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_TransactionService_StreamResults_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_TransactionService_StreamResults_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
 var (
-	pattern_TransactionService_SubmitTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "transaction", "submittransaction"}, ""))
+	pattern_TransactionService_SubmitTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.TransactionService", "SubmitTransaction"}, ""))
 
-	pattern_TransactionService_TransactionsState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "transaction", "transactionsstate"}, ""))
+	pattern_TransactionService_ParseTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.TransactionService", "ParseTransaction"}, ""))
+
+	pattern_TransactionService_TransactionsState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.TransactionService", "TransactionsState"}, ""))
+
+	pattern_TransactionService_TransactionsStateStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.TransactionService", "TransactionsStateStream"}, ""))
+
+	pattern_TransactionService_StreamResults_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.TransactionService", "StreamResults"}, ""))
 )
 
 var (
 	forward_TransactionService_SubmitTransaction_0 = runtime.ForwardResponseMessage
 
+	forward_TransactionService_ParseTransaction_0 = runtime.ForwardResponseMessage
+
 	forward_TransactionService_TransactionsState_0 = runtime.ForwardResponseMessage
+
+	forward_TransactionService_TransactionsStateStream_0 = runtime.ForwardResponseStream
+
+	forward_TransactionService_StreamResults_0 = runtime.ForwardResponseStream
 )

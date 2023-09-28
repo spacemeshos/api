@@ -2,11 +2,11 @@
 // source: spacemesh/v1/mesh.proto
 
 /*
-Package v1 is a reverse proxy.
+Package spacemeshv1 is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package v1
+package spacemeshv1
 
 import (
 	"context"
@@ -337,6 +337,140 @@ func local_request_MeshService_LayersQuery_0(ctx context.Context, marshaler runt
 
 }
 
+func request_MeshService_AccountMeshDataStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_AccountMeshDataStreamClient, runtime.ServerMetadata, error) {
+	var protoReq AccountMeshDataStreamRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.AccountMeshDataStream(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
+func request_MeshService_LayerStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_LayerStreamClient, runtime.ServerMetadata, error) {
+	var protoReq LayerStreamRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.LayerStream(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
+func request_MeshService_EpochStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_EpochStreamClient, runtime.ServerMetadata, error) {
+	var protoReq EpochStreamRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.EpochStream(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
+func request_MeshService_MalfeasanceQuery_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq MalfeasanceRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.MalfeasanceQuery(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_MeshService_MalfeasanceQuery_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq MalfeasanceRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.MalfeasanceQuery(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_MeshService_MalfeasanceStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_MalfeasanceStreamClient, runtime.ServerMetadata, error) {
+	var protoReq MalfeasanceStreamRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.MalfeasanceStream(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterMeshServiceHandlerServer registers the http handlers for service MeshService to "mux".
 // UnaryRPC     :call MeshServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -351,7 +485,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/v1/mesh/genesistime"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/GenesisTime"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -376,7 +510,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/v1/mesh/currentlayer"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/CurrentLayer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -401,7 +535,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/v1/mesh/currentepoch"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/CurrentEpoch"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -426,7 +560,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/GenesisID"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -451,7 +585,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/v1/mesh/epochnumlayers"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/EpochNumLayers"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -476,7 +610,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/v1/mesh/layerduration"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/LayerDuration"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -501,7 +635,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/v1/mesh/maxtransactionspersecond"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MaxTransactionsPerSecond"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -526,7 +660,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/v1/mesh/accountmeshdataquery"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/AccountMeshDataQuery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -551,7 +685,7 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/v1/mesh/layersquery"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/LayersQuery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -568,13 +702,66 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+	mux.Handle("POST", pattern_MeshService_AccountMeshDataStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("POST", pattern_MeshService_LayerStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("POST", pattern_MeshService_EpochStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("POST", pattern_MeshService_MalfeasanceQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceQuery"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_MeshService_MalfeasanceQuery_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MeshService_MalfeasanceQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_MeshService_MalfeasanceStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	return nil
 }
 
 // RegisterMeshServiceHandlerFromEndpoint is same as RegisterMeshServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterMeshServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.Dial(endpoint, opts...)
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
 	}
@@ -615,7 +802,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/v1/mesh/genesistime"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/GenesisTime"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -637,7 +824,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/v1/mesh/currentlayer"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/CurrentLayer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -659,7 +846,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/v1/mesh/currentepoch"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/CurrentEpoch"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -681,7 +868,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/GenesisID"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -703,7 +890,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/v1/mesh/epochnumlayers"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/EpochNumLayers"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -725,7 +912,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/v1/mesh/layerduration"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/LayerDuration"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -747,7 +934,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/v1/mesh/maxtransactionspersecond"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MaxTransactionsPerSecond"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -769,7 +956,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/v1/mesh/accountmeshdataquery"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/AccountMeshDataQuery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -791,7 +978,7 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/v1/mesh/layersquery"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/LayersQuery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -807,27 +994,147 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+	mux.Handle("POST", pattern_MeshService_AccountMeshDataStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/AccountMeshDataStream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MeshService_AccountMeshDataStream_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MeshService_AccountMeshDataStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_MeshService_LayerStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/LayerStream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MeshService_LayerStream_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MeshService_LayerStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_MeshService_EpochStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/EpochStream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MeshService_EpochStream_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MeshService_EpochStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_MeshService_MalfeasanceQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceQuery"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MeshService_MalfeasanceQuery_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MeshService_MalfeasanceQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_MeshService_MalfeasanceStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceStream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_MeshService_MalfeasanceStream_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_MeshService_MalfeasanceStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
 var (
-	pattern_MeshService_GenesisTime_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "genesistime"}, ""))
+	pattern_MeshService_GenesisTime_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "GenesisTime"}, ""))
 
-	pattern_MeshService_CurrentLayer_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "currentlayer"}, ""))
+	pattern_MeshService_CurrentLayer_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "CurrentLayer"}, ""))
 
-	pattern_MeshService_CurrentEpoch_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "currentepoch"}, ""))
+	pattern_MeshService_CurrentEpoch_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "CurrentEpoch"}, ""))
 
-	pattern_MeshService_GenesisID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "genesisid"}, ""))
+	pattern_MeshService_GenesisID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "GenesisID"}, ""))
 
-	pattern_MeshService_EpochNumLayers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "epochnumlayers"}, ""))
+	pattern_MeshService_EpochNumLayers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "EpochNumLayers"}, ""))
 
-	pattern_MeshService_LayerDuration_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "layerduration"}, ""))
+	pattern_MeshService_LayerDuration_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "LayerDuration"}, ""))
 
-	pattern_MeshService_MaxTransactionsPerSecond_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "maxtransactionspersecond"}, ""))
+	pattern_MeshService_MaxTransactionsPerSecond_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "MaxTransactionsPerSecond"}, ""))
 
-	pattern_MeshService_AccountMeshDataQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "accountmeshdataquery"}, ""))
+	pattern_MeshService_AccountMeshDataQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "AccountMeshDataQuery"}, ""))
 
-	pattern_MeshService_LayersQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "layersquery"}, ""))
+	pattern_MeshService_LayersQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "LayersQuery"}, ""))
+
+	pattern_MeshService_AccountMeshDataStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "AccountMeshDataStream"}, ""))
+
+	pattern_MeshService_LayerStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "LayerStream"}, ""))
+
+	pattern_MeshService_EpochStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "EpochStream"}, ""))
+
+	pattern_MeshService_MalfeasanceQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "MalfeasanceQuery"}, ""))
+
+	pattern_MeshService_MalfeasanceStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "MalfeasanceStream"}, ""))
 )
 
 var (
@@ -848,4 +1155,14 @@ var (
 	forward_MeshService_AccountMeshDataQuery_0 = runtime.ForwardResponseMessage
 
 	forward_MeshService_LayersQuery_0 = runtime.ForwardResponseMessage
+
+	forward_MeshService_AccountMeshDataStream_0 = runtime.ForwardResponseStream
+
+	forward_MeshService_LayerStream_0 = runtime.ForwardResponseStream
+
+	forward_MeshService_EpochStream_0 = runtime.ForwardResponseStream
+
+	forward_MeshService_MalfeasanceQuery_0 = runtime.ForwardResponseMessage
+
+	forward_MeshService_MalfeasanceStream_0 = runtime.ForwardResponseStream
 )
