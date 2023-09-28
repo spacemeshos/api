@@ -20,4 +20,3 @@ plugins:
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
-      - grpc_api_configuration=./spacemesh/v1/api_config.yaml

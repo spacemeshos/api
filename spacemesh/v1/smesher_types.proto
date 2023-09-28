@@ -1,8 +1,9 @@
 syntax = "proto3";
-package spacemesh.v1;
-option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+
 import "spacemesh/v1/types.proto";
 import "google/rpc/status.proto";
+
+package spacemesh.v1;
 
 message IsSmeshingResponse {
     bool is_smeshing = 1;
