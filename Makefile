@@ -85,9 +85,8 @@ install: install-buf install-protoc
 # local is what we run when testing locally.
 # This does breaking change detection against our local git repository.
 
-.PHONY: local
+.PHONY: breaking
 local: $(BUF)
-	buf lint
 	buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
@@ -99,18 +98,16 @@ lint: $(BUF)
 # https is what we run when testing in most CI providers.
 # This does breaking change detection against our remote HTTPS git repository.
 
-.PHONY: https
+.PHONY: breaking-https
 https: $(BUF)
-	buf lint
 	buf breaking --against "$(HTTPS_GIT)#branch=master"
 
 # ssh is what we run when testing in CI providers that provide ssh public key authentication.
 # This does breaking change detection against our remote HTTPS ssh repository.
 # This is especially useful for private repositories.
 
-.PHONY: ssh
+.PHONY: breaking-ssh
 ssh: $(BUF)
-	buf lint
 	buf breaking --against "$(SSH_GIT)#branch=master"
 
 # Run all builds

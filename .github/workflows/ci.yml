@@ -22,7 +22,10 @@ jobs:
         run: make install
       - name: lint and check build
         run: |
-          # Runs the buf linter and checks for breaking changes
+          # Runs the buf linter
+          make lint
+
+          # Checks for breaking changes against master
           make https
 
           # Create an actual build, then diff it to make sure build is up to date
