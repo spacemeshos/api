@@ -18,8 +18,6 @@ jobs:
         with:
           check-latest: true
           go-version-file: "release/go/go.mod"
-      - name: install tools
-        run: make install
       - name: lint and check build
         run: |
           # Runs the buf linter
