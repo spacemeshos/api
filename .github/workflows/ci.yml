@@ -26,7 +26,7 @@ jobs:
           make lint
 
           # Checks for breaking changes against master
-          make https
+          make breaking-https
 
           # Create an actual build, then diff it to make sure build is up to date
           make check

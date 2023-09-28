@@ -79,9 +79,9 @@ This repository currently contains builds for two targets: golang and grpc-gatew
 
 The repository includes a [`Makefile`](Makefile) that makes it easy to run most regular tasks:
 
-- `make install` installs the required dependencies, including `buf` (see below)
 - `make lint` runs the linter (see below)
-- `make local` runs the linter and checks for breaking changes (see below)
+- `make local` checks for breaking changes against local `master` (see below)
+- `make breaking` checks for breaking changes against github repository (see below)
 - `make build` builds the API for all targets
 - `make check` ensures that the build is up to date with respect to the proto source files
 
@@ -112,7 +112,7 @@ to test the build. To output the image in json format, run:
 Make a breaking change, then run against this change:
 
 ```console
-> buf check breaking --against-input image.bin
+> buf breaking --against-input image.bin
 ```
 
 `buf` will report all breaking changes.
