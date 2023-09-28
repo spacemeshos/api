@@ -54,22 +54,23 @@ endif
 # messing up with global environment.
 export GOBIN := $(BIN_DIR)
 
-install-buf:
+BUF := $(BIN_DIR)/buf_$(BUF_VERSION)
+$(BUF):
 	@mkdir -p $(BIN_DIR)
-	curl -sSL "https://github.com/bufbuild/buf/releases/download/v$(BUF_VERSION)/buf-$(UNAME_OS)-$(UNAME_ARCH)" -o $(BIN_DIR)/buf
-	@chmod +x $(BIN_DIR)/buf
-.PHONY: install-buf
+	@rm -f $(BIN_DIR)/buf_*
+	@curl -sSL "https://github.com/bufbuild/buf/releases/download/v$(BUF_VERSION)/buf-$(UNAME_OS)-$(UNAME_ARCH)" -o $@
+	@chmod +x $@
+	@ln -sf $@ $(BIN_DIR)/buf
 
-install-protoc: protoc-plugins
+PROTOC := $(BIN_DIR)/protoc_$(PROTOC_VERSION)
+$(PROTOC): protoc-plugins
 	@mkdir -p $(BIN_DIR)
-ifeq ($(OS),Windows_NT)
-	@mkdir -p $(TMP_PROTOC)
-endif
-	curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-${PROTOC_BUILD}.zip -o $(TMP_PROTOC)/protoc.zip
-	@unzip $(TMP_PROTOC)/protoc.zip -d $(TMP_PROTOC)
-	@cp -f $(TMP_PROTOC)/bin/protoc $(BIN_DIR)/protoc
-	@chmod +x $(BIN_DIR)/protoc
-.PHONY: install-protoc
+	@curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-${PROTOC_BUILD}.zip -o protoc.zip
+	@rm -f $(BIN_DIR)/protoc_*
+	@unzip -p protoc.zip bin/protoc > $@
+	@rm protoc.zip
+	@chmod +x $@
+	@ln -sf $@ $(BIN_DIR)/protoc
 
 # Download protoc plugins
 protoc-plugins:
@@ -80,26 +81,26 @@ protoc-plugins:
 .PHONY: protoc-plugins
 
 .PHONY: install
-install: install-buf install-protoc
+install: $(BUF) $(PROTOC)
 
 # local is what we run when testing locally.
 # This does breaking change detection against our local git repository.
 
 .PHONY: breaking
-local: $(BUF)
+local:
 	buf breaking --against '.git#branch=master'
 
 # Linter only. This does not do breaking change detection.
 
 .PHONY: lint
-lint: $(BUF)
+lint:
 	buf lint
 
 # https is what we run when testing in most CI providers.
 # This does breaking change detection against our remote HTTPS git repository.
 
 .PHONY: breaking-https
-https: $(BUF)
+https:
 	buf breaking --against "$(HTTPS_GIT)#branch=master"
 
 # ssh is what we run when testing in CI providers that provide ssh public key authentication.
