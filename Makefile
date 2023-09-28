@@ -123,4 +123,4 @@ build:
 check:
 	@git diff --quiet || (echo "\033[0;31mWorking directory not clean!\033[0m" && git --no-pager diff && exit 1)
 	@make build
-	@git diff --name-only --diff-filter=AM --exit-code . || { echo "\nPlease rerun 'make generate' and commit changes.\n"; exit 1; }
+	@git diff --name-only --diff-filter=AM --exit-code . || { echo "\nPlease rerun 'make build' and commit changes.\n"; exit 1; }
