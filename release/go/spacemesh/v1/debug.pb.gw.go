@@ -198,7 +198,7 @@ func RegisterDebugServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.DebugService/Accounts", runtime.WithHTTPPathPattern("/spacemesh.v1.DebugService/Accounts"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.DebugService/Accounts", runtime.WithHTTPPathPattern("/v1/debug/accounts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -316,7 +316,7 @@ func RegisterDebugServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.DebugService/Accounts", runtime.WithHTTPPathPattern("/spacemesh.v1.DebugService/Accounts"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.DebugService/Accounts", runtime.WithHTTPPathPattern("/v1/debug/accounts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -382,7 +382,7 @@ func RegisterDebugServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 var (
 	pattern_DebugService_NetworkInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.DebugService", "NetworkInfo"}, ""))
 
-	pattern_DebugService_Accounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.DebugService", "Accounts"}, ""))
+	pattern_DebugService_Accounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "debug", "accounts"}, ""))
 
 	pattern_DebugService_ActiveSet_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.DebugService", "ActiveSet"}, ""))
 

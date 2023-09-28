@@ -281,7 +281,7 @@ func RegisterGlobalStateServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/GlobalStateHash", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/GlobalStateHash"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/GlobalStateHash", runtime.WithHTTPPathPattern("/v1/globalstate/globalstatehash"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -306,7 +306,7 @@ func RegisterGlobalStateServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/Account", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/Account"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/Account", runtime.WithHTTPPathPattern("/v1/globalstate/account"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -331,7 +331,7 @@ func RegisterGlobalStateServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/AccountDataQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/AccountDataQuery"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/AccountDataQuery", runtime.WithHTTPPathPattern("/v1/globalstate/accountdataquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -356,7 +356,7 @@ func RegisterGlobalStateServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/SmesherDataQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/SmesherDataQuery"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/SmesherDataQuery", runtime.WithHTTPPathPattern("/v1/globalstate/smesherdataquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -448,7 +448,7 @@ func RegisterGlobalStateServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/GlobalStateHash", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/GlobalStateHash"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/GlobalStateHash", runtime.WithHTTPPathPattern("/v1/globalstate/globalstatehash"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -470,7 +470,7 @@ func RegisterGlobalStateServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/Account", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/Account"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/Account", runtime.WithHTTPPathPattern("/v1/globalstate/account"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -492,7 +492,7 @@ func RegisterGlobalStateServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/AccountDataQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/AccountDataQuery"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/AccountDataQuery", runtime.WithHTTPPathPattern("/v1/globalstate/accountdataquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -514,7 +514,7 @@ func RegisterGlobalStateServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/SmesherDataQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.GlobalStateService/SmesherDataQuery"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.GlobalStateService/SmesherDataQuery", runtime.WithHTTPPathPattern("/v1/globalstate/smesherdataquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -622,13 +622,13 @@ func RegisterGlobalStateServiceHandlerClient(ctx context.Context, mux *runtime.S
 }
 
 var (
-	pattern_GlobalStateService_GlobalStateHash_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.GlobalStateService", "GlobalStateHash"}, ""))
+	pattern_GlobalStateService_GlobalStateHash_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "globalstate", "globalstatehash"}, ""))
 
-	pattern_GlobalStateService_Account_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.GlobalStateService", "Account"}, ""))
+	pattern_GlobalStateService_Account_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "globalstate", "account"}, ""))
 
-	pattern_GlobalStateService_AccountDataQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.GlobalStateService", "AccountDataQuery"}, ""))
+	pattern_GlobalStateService_AccountDataQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "globalstate", "accountdataquery"}, ""))
 
-	pattern_GlobalStateService_SmesherDataQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.GlobalStateService", "SmesherDataQuery"}, ""))
+	pattern_GlobalStateService_SmesherDataQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "globalstate", "smesherdataquery"}, ""))
 
 	pattern_GlobalStateService_AccountDataStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.GlobalStateService", "AccountDataStream"}, ""))
 
