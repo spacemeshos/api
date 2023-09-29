@@ -18,14 +18,13 @@ jobs:
         with:
           check-latest: true
           go-version-file: "release/go/go.mod"
-
       - name: lint and check build
         run: |
-          # Runs the buf linter and checks for breaking changes
-          make https
+          # Runs the buf linter
+          make lint
 
-          # Attempts to build using `protoc`. Probably redundant given the next step.
-          make protoc
+          # Checks for breaking changes against master
+          make breaking
 
           # Create an actual build, then diff it to make sure build is up to date
           make check

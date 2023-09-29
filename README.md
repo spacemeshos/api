@@ -73,15 +73,15 @@ We use standard [semantic versioning](https://semver.org/). Please regularly cut
 This repository currently contains builds for two targets: golang and grpc-gateway. **Every time a protobuf definition file is changed, you must update the build** and include the updated build files with your PR in order to keep everything in sync. You can check this at any time by running `make check`, and it's also enforced by CI (see below for more information).
 
 - golang builds live in [`release/go`](/release/go). You may use this repository directly as a go module with an import statement such as `import "github.com/spacemeshos/api/release/go/spacemesh/v1"`.
-- grpc-gateway builds are configured in [`proto/spacemesh/v1/api_config.yaml`](/proto/spacemesh/v1/api_config.yaml) and live alongside the golang builds in [`release/go/spacemesh/v1`](/release/go/spacemesh/v1) (they have a `.gw.go` extension).
+- grpc-gateway builds live alongside the golang builds in [`release/go/spacemesh/v1`](/release/go/spacemesh/v1) (they have a `.gw.go` extension).
 
 ### Makefile
 
 The repository includes a [`Makefile`](Makefile) that makes it easy to run most regular tasks:
 
-- `make deps` installs the required dependencies, including `buf` (see below)
 - `make lint` runs the linter (see below)
-- `make local` runs the linter and checks for breaking changes (see below)
+- `make local` checks for breaking changes against local `master` (see below)
+- `make breaking` checks for breaking changes against github repository (see below)
 - `make build` builds the API for all targets
 - `make check` ensures that the build is up to date with respect to the proto source files
 
@@ -112,7 +112,7 @@ to test the build. To output the image in json format, run:
 Make a breaking change, then run against this change:
 
 ```console
-> buf check breaking --against-input image.bin
+> buf breaking --against-input image.bin
 ```
 
 `buf` will report all breaking changes.
@@ -122,7 +122,7 @@ Make a breaking change, then run against this change:
 `buf` runs several [linters](https://buf.build/docs/lint-checkers). It's pretty strict about things such as naming conventions, to prevent downstream issues in the various languages and framework that rely upon the protobuf definition files. You can run the linter like this:
 
 ```console
-> buf check lint
+> buf lint
 ```
 
 If there are no issues, this command should have exit code 0 and no output.
@@ -134,12 +134,3 @@ For more information on linting, see the [style guide](https://buf.build/docs/st
 This repository has a continuous integration (CI) [workflow](.github/workflows/ci.yml) built on GitHub Actions. In addition to linting and breaking changes detection, it also runs the `protoc` compiler, since that tends to surface a slightly different set of warnings and errors than `buf`.
 
 You can use a nifty tool called [`act`](https://github.com/nektos/act) to run the CI workflow locally, although it [doesn't always play nice](https://github.com/nektos/act/issues/322) with our workflow configuration.
-
-### Third party files
-
-The `third_party/` directory includes several third-party libraries, which are required by some of the Google extensions used in the API definition files. These have manually been copied in from two sources:
-
-- <https://github.com/googleapis/googleapis/tree/master/google> (`google.api`, `google.rpc`)
-- <https://github.com/protocolbuffers/protobuf/tree/master/src/google/protobuf> (`google.protobuf`)
-
-These files do not change often and probably do not need to be updated. However, if updates were to be more common, it might make more sense to add a dynamic dependency on these external libraries using a Makefile or `git submodule`.

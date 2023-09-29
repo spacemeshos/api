@@ -1,9 +1,10 @@
 syntax = "proto3";
-package spacemesh.v1;
-option go_package = "github.com/spacemeshos/api/release/go/spacemesh/v1";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "spacemesh/v1/types.proto";
+
+package spacemesh.v1;
 
 message CheckpointStreamRequest {
   uint32 snapshot_layer = 1;
