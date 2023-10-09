@@ -7,22 +7,20 @@ package spacemesh.v1;
 // NodeRequest is a request sent from the node to the post service.
 message NodeRequest {
   oneof kind {
-    // StateRequest state = 1;
-    // MetadataRequest metadata = 2;
+    MetadataRequest metadata = 1;
+    GenProofRequest gen_proof = 2;
     // InitRequest init = 3;
     // ResizeRequest resize = 4;
-    GenProofRequest gen_proof = 5;
   }
 }
 
 // ServiceResponse is a response sent from the post service to the node.
 message ServiceResponse {
   oneof kind {
-    // StateResponse state = 1;
-    // MetadataResponse metadata = 2;
+    MetadataResponse metadata = 1;
+    GenProofResponse gen_proof = 2;
     // InitResponse init = 3;
     // ResizeResponse resize = 4;
-    GenProofResponse gen_proof = 5;
   }
 }
 
@@ -34,12 +32,18 @@ message Proof {
   uint64 pow = 3;
 }
 
-message ProofMetadata {
-  bytes challenge = 1;
-  SmesherId node_id = 2;
-  ActivationId commitment_atx_id = 3;
+message Metadata {
+  bytes node_id = 1;
+  bytes commitment_atx_id = 2;
+  uint64 nonce = 3;
+  
   uint32 num_units = 4;
   uint64 labels_per_unit = 5;
+}
+
+message ProofMetadata {
+  bytes challenge = 1;
+  Metadata meta = 2;
 }
 
 enum GenProofStatus {
@@ -52,4 +56,10 @@ message GenProofResponse {
   GenProofStatus status = 1;
   Proof proof = 2;
   ProofMetadata metadata = 3;
+}
+
+message MetadataRequest {}
+
+message MetadataResponse {
+  Metadata meta = 1;
 }
