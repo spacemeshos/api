@@ -26,7 +26,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PostServiceClient interface {
-	// Register allows a dedicated PoST node to connect to the spacemesh node.
+	// Register is a bi-directional stream that allows a dedicated PoST node to connect to the spacemesh node.
+	// The node will send NodeRequets to PoST and the service will respond with ServiceResponses.
 	Register(ctx context.Context, opts ...grpc.CallOption) (PostService_RegisterClient, error)
 }
 
@@ -73,7 +74,8 @@ func (x *postServiceRegisterClient) Recv() (*NodeRequest, error) {
 // All implementations should embed UnimplementedPostServiceServer
 // for forward compatibility
 type PostServiceServer interface {
-	// Register allows a dedicated PoST node to connect to the spacemesh node.
+	// Register is a bi-directional stream that allows a dedicated PoST node to connect to the spacemesh node.
+	// The node will send NodeRequets to PoST and the service will respond with ServiceResponses.
 	Register(PostService_RegisterServer) error
 }
 
