@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package post.v1;
+
+message PostServiceStatusRequest {}
+
+message PostServiceStatusResponse {
+  enum Status {
+    _UNUSED = 0;
+    IDLE = 1;
+    PROVING = 2;
+  }
+  Status status = 1;
+}
+
+service PostServiceOperator {
+  rpc Status(PostServiceStatusRequest) returns (PostServiceStatusResponse);
+}
