@@ -106,8 +106,4 @@ service SmesherService {
             body: "*"
         };
     }
-
-    // UpdatePoetServers updates poet servers
-    // All existing PoET servers will be substituted with this new list
-    rpc UpdatePoetServers(UpdatePoetServersRequest) returns (UpdatePoetServersResponse);
 }
