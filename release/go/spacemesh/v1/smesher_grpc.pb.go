@@ -33,7 +33,6 @@ const (
 	SmesherService_PostSetupStatusStream_FullMethodName = "/spacemesh.v1.SmesherService/PostSetupStatusStream"
 	SmesherService_PostSetupProviders_FullMethodName    = "/spacemesh.v1.SmesherService/PostSetupProviders"
 	SmesherService_PostConfig_FullMethodName            = "/spacemesh.v1.SmesherService/PostConfig"
-	SmesherService_UpdatePoetServers_FullMethodName     = "/spacemesh.v1.SmesherService/UpdatePoetServers"
 )
 
 // SmesherServiceClient is the client API for SmesherService service.
@@ -72,9 +71,6 @@ type SmesherServiceClient interface {
 	PostSetupProviders(ctx context.Context, in *PostSetupProvidersRequest, opts ...grpc.CallOption) (*PostSetupProvidersResponse, error)
 	// Returns the Post protocol config
 	PostConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*PostConfigResponse, error)
-	// UpdatePoetServers updates poet servers
-	// All existing PoET servers will be substituted with this new list
-	UpdatePoetServers(ctx context.Context, in *UpdatePoetServersRequest, opts ...grpc.CallOption) (*UpdatePoetServersResponse, error)
 }
 
 type smesherServiceClient struct {
@@ -225,15 +221,6 @@ func (c *smesherServiceClient) PostConfig(ctx context.Context, in *emptypb.Empty
 	return out, nil
 }
 
-func (c *smesherServiceClient) UpdatePoetServers(ctx context.Context, in *UpdatePoetServersRequest, opts ...grpc.CallOption) (*UpdatePoetServersResponse, error) {
-	out := new(UpdatePoetServersResponse)
-	err := c.cc.Invoke(ctx, SmesherService_UpdatePoetServers_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // SmesherServiceServer is the server API for SmesherService service.
 // All implementations should embed UnimplementedSmesherServiceServer
 // for forward compatibility
@@ -270,9 +257,6 @@ type SmesherServiceServer interface {
 	PostSetupProviders(context.Context, *PostSetupProvidersRequest) (*PostSetupProvidersResponse, error)
 	// Returns the Post protocol config
 	PostConfig(context.Context, *emptypb.Empty) (*PostConfigResponse, error)
-	// UpdatePoetServers updates poet servers
-	// All existing PoET servers will be substituted with this new list
-	UpdatePoetServers(context.Context, *UpdatePoetServersRequest) (*UpdatePoetServersResponse, error)
 }
 
 // UnimplementedSmesherServiceServer should be embedded to have forward compatible implementations.
@@ -317,9 +301,6 @@ func (UnimplementedSmesherServiceServer) PostSetupProviders(context.Context, *Po
 }
 func (UnimplementedSmesherServiceServer) PostConfig(context.Context, *emptypb.Empty) (*PostConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostConfig not implemented")
-}
-func (UnimplementedSmesherServiceServer) UpdatePoetServers(context.Context, *UpdatePoetServersRequest) (*UpdatePoetServersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePoetServers not implemented")
 }
 
 // UnsafeSmesherServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -570,24 +551,6 @@ func _SmesherService_PostConfig_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SmesherService_UpdatePoetServers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePoetServersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmesherServiceServer).UpdatePoetServers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SmesherService_UpdatePoetServers_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmesherServiceServer).UpdatePoetServers(ctx, req.(*UpdatePoetServersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // SmesherService_ServiceDesc is the grpc.ServiceDesc for SmesherService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -642,10 +605,6 @@ var SmesherService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostConfig",
 			Handler:    _SmesherService_PostConfig_Handler,
-		},
-		{
-			MethodName: "UpdatePoetServers",
-			Handler:    _SmesherService_UpdatePoetServers_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
