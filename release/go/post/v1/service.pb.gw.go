@@ -31,8 +31,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_PostServiceOperator_Status_0(ctx context.Context, marshaler runtime.Marshaler, client PostServiceOperatorClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostServiceStatusRequest
+func request_OperatorService_Status_0(ctx context.Context, marshaler runtime.Marshaler, client OperatorServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq OperatorStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -48,8 +48,8 @@ func request_PostServiceOperator_Status_0(ctx context.Context, marshaler runtime
 
 }
 
-func local_request_PostServiceOperator_Status_0(ctx context.Context, marshaler runtime.Marshaler, server PostServiceOperatorServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostServiceStatusRequest
+func local_request_OperatorService_Status_0(ctx context.Context, marshaler runtime.Marshaler, server OperatorServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq OperatorStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -65,13 +65,13 @@ func local_request_PostServiceOperator_Status_0(ctx context.Context, marshaler r
 
 }
 
-// RegisterPostServiceOperatorHandlerServer registers the http handlers for service PostServiceOperator to "mux".
-// UnaryRPC     :call PostServiceOperatorServer directly.
+// RegisterOperatorServiceHandlerServer registers the http handlers for service OperatorService to "mux".
+// UnaryRPC     :call OperatorServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterPostServiceOperatorHandlerFromEndpoint instead.
-func RegisterPostServiceOperatorHandlerServer(ctx context.Context, mux *runtime.ServeMux, server PostServiceOperatorServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOperatorServiceHandlerFromEndpoint instead.
+func RegisterOperatorServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OperatorServiceServer) error {
 
-	mux.Handle("POST", pattern_PostServiceOperator_Status_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_OperatorService_Status_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -79,12 +79,12 @@ func RegisterPostServiceOperatorHandlerServer(ctx context.Context, mux *runtime.
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/post.v1.PostServiceOperator/Status", runtime.WithHTTPPathPattern("/post.v1.PostServiceOperator/Status"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/post.v1.OperatorService/Status", runtime.WithHTTPPathPattern("/post.v1.OperatorService/Status"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_PostServiceOperator_Status_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_OperatorService_Status_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -92,16 +92,16 @@ func RegisterPostServiceOperatorHandlerServer(ctx context.Context, mux *runtime.
 			return
 		}
 
-		forward_PostServiceOperator_Status_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OperatorService_Status_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterPostServiceOperatorHandlerFromEndpoint is same as RegisterPostServiceOperatorHandler but
+// RegisterOperatorServiceHandlerFromEndpoint is same as RegisterOperatorServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterPostServiceOperatorHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterOperatorServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
@@ -121,41 +121,41 @@ func RegisterPostServiceOperatorHandlerFromEndpoint(ctx context.Context, mux *ru
 		}()
 	}()
 
-	return RegisterPostServiceOperatorHandler(ctx, mux, conn)
+	return RegisterOperatorServiceHandler(ctx, mux, conn)
 }
 
-// RegisterPostServiceOperatorHandler registers the http handlers for service PostServiceOperator to "mux".
+// RegisterOperatorServiceHandler registers the http handlers for service OperatorService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterPostServiceOperatorHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterPostServiceOperatorHandlerClient(ctx, mux, NewPostServiceOperatorClient(conn))
+func RegisterOperatorServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterOperatorServiceHandlerClient(ctx, mux, NewOperatorServiceClient(conn))
 }
 
-// RegisterPostServiceOperatorHandlerClient registers the http handlers for service PostServiceOperator
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "PostServiceOperatorClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "PostServiceOperatorClient"
+// RegisterOperatorServiceHandlerClient registers the http handlers for service OperatorService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OperatorServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OperatorServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "PostServiceOperatorClient" to call the correct interceptors.
-func RegisterPostServiceOperatorHandlerClient(ctx context.Context, mux *runtime.ServeMux, client PostServiceOperatorClient) error {
+// "OperatorServiceClient" to call the correct interceptors.
+func RegisterOperatorServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OperatorServiceClient) error {
 
-	mux.Handle("POST", pattern_PostServiceOperator_Status_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_OperatorService_Status_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/post.v1.PostServiceOperator/Status", runtime.WithHTTPPathPattern("/post.v1.PostServiceOperator/Status"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/post.v1.OperatorService/Status", runtime.WithHTTPPathPattern("/post.v1.OperatorService/Status"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_PostServiceOperator_Status_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_OperatorService_Status_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_PostServiceOperator_Status_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OperatorService_Status_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -163,9 +163,9 @@ func RegisterPostServiceOperatorHandlerClient(ctx context.Context, mux *runtime.
 }
 
 var (
-	pattern_PostServiceOperator_Status_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"post.v1.PostServiceOperator", "Status"}, ""))
+	pattern_OperatorService_Status_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"post.v1.OperatorService", "Status"}, ""))
 )
 
 var (
-	forward_PostServiceOperator_Status_0 = runtime.ForwardResponseMessage
+	forward_OperatorService_Status_0 = runtime.ForwardResponseMessage
 )

@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package post.v1;
 
-message PostServiceStatusRequest {}
+message OperatorStatusRequest {}
 
-message PostServiceStatusResponse {
+message OperatorStatusResponse {
   enum Status {
     _UNUSED = 0;
     IDLE = 1;
@@ -13,6 +13,6 @@ message PostServiceStatusResponse {
   Status status = 1;
 }
 
-service PostServiceOperator {
-  rpc Status(PostServiceStatusRequest) returns (PostServiceStatusResponse);
+service OperatorService {
+  rpc Status(OperatorStatusRequest) returns (OperatorStatusResponse);
 }

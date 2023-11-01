@@ -19,87 +19,87 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PostServiceOperator_Status_FullMethodName = "/post.v1.PostServiceOperator/Status"
+	OperatorService_Status_FullMethodName = "/post.v1.OperatorService/Status"
 )
 
-// PostServiceOperatorClient is the client API for PostServiceOperator service.
+// OperatorServiceClient is the client API for OperatorService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PostServiceOperatorClient interface {
-	Status(ctx context.Context, in *PostServiceStatusRequest, opts ...grpc.CallOption) (*PostServiceStatusResponse, error)
+type OperatorServiceClient interface {
+	Status(ctx context.Context, in *OperatorStatusRequest, opts ...grpc.CallOption) (*OperatorStatusResponse, error)
 }
 
-type postServiceOperatorClient struct {
+type operatorServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPostServiceOperatorClient(cc grpc.ClientConnInterface) PostServiceOperatorClient {
-	return &postServiceOperatorClient{cc}
+func NewOperatorServiceClient(cc grpc.ClientConnInterface) OperatorServiceClient {
+	return &operatorServiceClient{cc}
 }
 
-func (c *postServiceOperatorClient) Status(ctx context.Context, in *PostServiceStatusRequest, opts ...grpc.CallOption) (*PostServiceStatusResponse, error) {
-	out := new(PostServiceStatusResponse)
-	err := c.cc.Invoke(ctx, PostServiceOperator_Status_FullMethodName, in, out, opts...)
+func (c *operatorServiceClient) Status(ctx context.Context, in *OperatorStatusRequest, opts ...grpc.CallOption) (*OperatorStatusResponse, error) {
+	out := new(OperatorStatusResponse)
+	err := c.cc.Invoke(ctx, OperatorService_Status_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PostServiceOperatorServer is the server API for PostServiceOperator service.
-// All implementations should embed UnimplementedPostServiceOperatorServer
+// OperatorServiceServer is the server API for OperatorService service.
+// All implementations should embed UnimplementedOperatorServiceServer
 // for forward compatibility
-type PostServiceOperatorServer interface {
-	Status(context.Context, *PostServiceStatusRequest) (*PostServiceStatusResponse, error)
+type OperatorServiceServer interface {
+	Status(context.Context, *OperatorStatusRequest) (*OperatorStatusResponse, error)
 }
 
-// UnimplementedPostServiceOperatorServer should be embedded to have forward compatible implementations.
-type UnimplementedPostServiceOperatorServer struct {
+// UnimplementedOperatorServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedOperatorServiceServer struct {
 }
 
-func (UnimplementedPostServiceOperatorServer) Status(context.Context, *PostServiceStatusRequest) (*PostServiceStatusResponse, error) {
+func (UnimplementedOperatorServiceServer) Status(context.Context, *OperatorStatusRequest) (*OperatorStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
 }
 
-// UnsafePostServiceOperatorServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PostServiceOperatorServer will
+// UnsafeOperatorServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OperatorServiceServer will
 // result in compilation errors.
-type UnsafePostServiceOperatorServer interface {
-	mustEmbedUnimplementedPostServiceOperatorServer()
+type UnsafeOperatorServiceServer interface {
+	mustEmbedUnimplementedOperatorServiceServer()
 }
 
-func RegisterPostServiceOperatorServer(s grpc.ServiceRegistrar, srv PostServiceOperatorServer) {
-	s.RegisterService(&PostServiceOperator_ServiceDesc, srv)
+func RegisterOperatorServiceServer(s grpc.ServiceRegistrar, srv OperatorServiceServer) {
+	s.RegisterService(&OperatorService_ServiceDesc, srv)
 }
 
-func _PostServiceOperator_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostServiceStatusRequest)
+func _OperatorService_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OperatorStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PostServiceOperatorServer).Status(ctx, in)
+		return srv.(OperatorServiceServer).Status(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PostServiceOperator_Status_FullMethodName,
+		FullMethod: OperatorService_Status_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostServiceOperatorServer).Status(ctx, req.(*PostServiceStatusRequest))
+		return srv.(OperatorServiceServer).Status(ctx, req.(*OperatorStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PostServiceOperator_ServiceDesc is the grpc.ServiceDesc for PostServiceOperator service.
+// OperatorService_ServiceDesc is the grpc.ServiceDesc for OperatorService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PostServiceOperator_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "post.v1.PostServiceOperator",
-	HandlerType: (*PostServiceOperatorServer)(nil),
+var OperatorService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "post.v1.OperatorService",
+	HandlerType: (*OperatorServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Status",
-			Handler:    _PostServiceOperator_Status_Handler,
+			Handler:    _OperatorService_Status_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
