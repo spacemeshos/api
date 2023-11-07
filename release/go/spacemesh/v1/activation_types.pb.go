@@ -169,6 +169,717 @@ func (x *HighestResponse) GetAtx() *Activation {
 	return nil
 }
 
+type ActivationStreamResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	V1 *ActivationV1 `protobuf:"bytes,1,opt,name=v1,proto3" json:"v1,omitempty"`
+}
+
+func (x *ActivationStreamResponse) Reset() {
+	*x = ActivationStreamResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ActivationStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivationStreamResponse) ProtoMessage() {}
+
+func (x *ActivationStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivationStreamResponse.ProtoReflect.Descriptor instead.
+func (*ActivationStreamResponse) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ActivationStreamResponse) GetV1() *ActivationV1 {
+	if x != nil {
+		return x.V1
+	}
+	return nil
+}
+
+type ActivationV1 struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id             []byte        `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	NodeId         []byte        `protobuf:"bytes,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	Signature      []byte        `protobuf:"bytes,3,opt,name=signature,proto3" json:"signature,omitempty"`
+	PublishEpoch   uint32        `protobuf:"varint,4,opt,name=publish_epoch,json=publishEpoch,proto3" json:"publish_epoch,omitempty"`
+	Sequence       uint64        `protobuf:"varint,5,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	PrevAtx        []byte        `protobuf:"bytes,6,opt,name=prev_atx,json=prevAtx,proto3" json:"prev_atx,omitempty"`
+	PositioningAtx []byte        `protobuf:"bytes,7,opt,name=positioning_atx,json=positioningAtx,proto3" json:"positioning_atx,omitempty"`
+	CommittmentAtx []byte        `protobuf:"bytes,8,opt,name=committment_atx,json=committmentAtx,proto3" json:"committment_atx,omitempty"`
+	InitialPost    *Post         `protobuf:"bytes,9,opt,name=initial_post,json=initialPost,proto3" json:"initial_post,omitempty"`
+	Coinbase       string        `protobuf:"bytes,10,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
+	Units          uint32        `protobuf:"varint,11,opt,name=units,proto3" json:"units,omitempty"`
+	BaseTick       uint32        `protobuf:"varint,12,opt,name=base_tick,json=baseTick,proto3" json:"base_tick,omitempty"`
+	Ticks          uint32        `protobuf:"varint,13,opt,name=ticks,proto3" json:"ticks,omitempty"`
+	PoetProof      *PoetProof    `protobuf:"bytes,14,opt,name=poet_proof,json=poetProof,proto3" json:"poet_proof,omitempty"`
+	Post           *Post         `protobuf:"bytes,15,opt,name=post,proto3" json:"post,omitempty"`
+	VrfPostIndex   *VRFPostIndex `protobuf:"bytes,16,opt,name=vrf_post_index,json=vrfPostIndex,proto3" json:"vrf_post_index,omitempty"`
+}
+
+func (x *ActivationV1) Reset() {
+	*x = ActivationV1{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ActivationV1) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivationV1) ProtoMessage() {}
+
+func (x *ActivationV1) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivationV1.ProtoReflect.Descriptor instead.
+func (*ActivationV1) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ActivationV1) GetId() []byte {
+	if x != nil {
+		return x.Id
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetNodeId() []byte {
+	if x != nil {
+		return x.NodeId
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetSignature() []byte {
+	if x != nil {
+		return x.Signature
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetPublishEpoch() uint32 {
+	if x != nil {
+		return x.PublishEpoch
+	}
+	return 0
+}
+
+func (x *ActivationV1) GetSequence() uint64 {
+	if x != nil {
+		return x.Sequence
+	}
+	return 0
+}
+
+func (x *ActivationV1) GetPrevAtx() []byte {
+	if x != nil {
+		return x.PrevAtx
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetPositioningAtx() []byte {
+	if x != nil {
+		return x.PositioningAtx
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetCommittmentAtx() []byte {
+	if x != nil {
+		return x.CommittmentAtx
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetInitialPost() *Post {
+	if x != nil {
+		return x.InitialPost
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetCoinbase() string {
+	if x != nil {
+		return x.Coinbase
+	}
+	return ""
+}
+
+func (x *ActivationV1) GetUnits() uint32 {
+	if x != nil {
+		return x.Units
+	}
+	return 0
+}
+
+func (x *ActivationV1) GetBaseTick() uint32 {
+	if x != nil {
+		return x.BaseTick
+	}
+	return 0
+}
+
+func (x *ActivationV1) GetTicks() uint32 {
+	if x != nil {
+		return x.Ticks
+	}
+	return 0
+}
+
+func (x *ActivationV1) GetPoetProof() *PoetProof {
+	if x != nil {
+		return x.PoetProof
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetPost() *Post {
+	if x != nil {
+		return x.Post
+	}
+	return nil
+}
+
+func (x *ActivationV1) GetVrfPostIndex() *VRFPostIndex {
+	if x != nil {
+		return x.VrfPostIndex
+	}
+	return nil
+}
+
+type VRFPostIndex struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Nonce uint64 `protobuf:"varint,1,opt,name=nonce,proto3" json:"nonce,omitempty"`
+}
+
+func (x *VRFPostIndex) Reset() {
+	*x = VRFPostIndex{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *VRFPostIndex) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VRFPostIndex) ProtoMessage() {}
+
+func (x *VRFPostIndex) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VRFPostIndex.ProtoReflect.Descriptor instead.
+func (*VRFPostIndex) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *VRFPostIndex) GetNonce() uint64 {
+	if x != nil {
+		return x.Nonce
+	}
+	return 0
+}
+
+type PoetProof struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ProofNodes [][]byte `protobuf:"bytes,1,rep,name=proof_nodes,json=proofNodes,proto3" json:"proof_nodes,omitempty"`
+	Leaf       uint64   `protobuf:"varint,2,opt,name=leaf,proto3" json:"leaf,omitempty"`
+}
+
+func (x *PoetProof) Reset() {
+	*x = PoetProof{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PoetProof) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PoetProof) ProtoMessage() {}
+
+func (x *PoetProof) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PoetProof.ProtoReflect.Descriptor instead.
+func (*PoetProof) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *PoetProof) GetProofNodes() [][]byte {
+	if x != nil {
+		return x.ProofNodes
+	}
+	return nil
+}
+
+func (x *PoetProof) GetLeaf() uint64 {
+	if x != nil {
+		return x.Leaf
+	}
+	return 0
+}
+
+type PostMeta struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Challenge []byte `protobuf:"bytes,1,opt,name=challenge,proto3" json:"challenge,omitempty"`
+	Labels    uint64 `protobuf:"varint,2,opt,name=labels,proto3" json:"labels,omitempty"`
+}
+
+func (x *PostMeta) Reset() {
+	*x = PostMeta{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PostMeta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PostMeta) ProtoMessage() {}
+
+func (x *PostMeta) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PostMeta.ProtoReflect.Descriptor instead.
+func (*PostMeta) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *PostMeta) GetChallenge() []byte {
+	if x != nil {
+		return x.Challenge
+	}
+	return nil
+}
+
+func (x *PostMeta) GetLabels() uint64 {
+	if x != nil {
+		return x.Labels
+	}
+	return 0
+}
+
+type Post struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Nonce   uint32 `protobuf:"varint,1,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	Indices []byte `protobuf:"bytes,2,opt,name=indices,proto3" json:"indices,omitempty"`
+	Pow     uint64 `protobuf:"varint,3,opt,name=pow,proto3" json:"pow,omitempty"`
+}
+
+func (x *Post) Reset() {
+	*x = Post{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Post) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Post) ProtoMessage() {}
+
+func (x *Post) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Post.ProtoReflect.Descriptor instead.
+func (*Post) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Post) GetNonce() uint32 {
+	if x != nil {
+		return x.Nonce
+	}
+	return 0
+}
+
+func (x *Post) GetIndices() []byte {
+	if x != nil {
+		return x.Indices
+	}
+	return nil
+}
+
+func (x *Post) GetPow() uint64 {
+	if x != nil {
+		return x.Pow
+	}
+	return 0
+}
+
+type ActivationStreamRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Epochs *EpochFilter  `protobuf:"bytes,1,opt,name=epochs,proto3" json:"epochs,omitempty"`
+	Id     *IDFilter     `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	NodeId *NodeIDFilter `protobuf:"bytes,3,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	// CoinbaseFilter is not supported by database index and will result in sequential scan.
+	// Apply EpochFilter together with CoinbaseFilter for better performance.
+	Coinbase *CoinbaseFilter `protobuf:"bytes,4,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
+	Watch    bool            `protobuf:"varint,5,opt,name=watch,proto3" json:"watch,omitempty"`
+}
+
+func (x *ActivationStreamRequest) Reset() {
+	*x = ActivationStreamRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ActivationStreamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivationStreamRequest) ProtoMessage() {}
+
+func (x *ActivationStreamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivationStreamRequest.ProtoReflect.Descriptor instead.
+func (*ActivationStreamRequest) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ActivationStreamRequest) GetEpochs() *EpochFilter {
+	if x != nil {
+		return x.Epochs
+	}
+	return nil
+}
+
+func (x *ActivationStreamRequest) GetId() *IDFilter {
+	if x != nil {
+		return x.Id
+	}
+	return nil
+}
+
+func (x *ActivationStreamRequest) GetNodeId() *NodeIDFilter {
+	if x != nil {
+		return x.NodeId
+	}
+	return nil
+}
+
+func (x *ActivationStreamRequest) GetCoinbase() *CoinbaseFilter {
+	if x != nil {
+		return x.Coinbase
+	}
+	return nil
+}
+
+func (x *ActivationStreamRequest) GetWatch() bool {
+	if x != nil {
+		return x.Watch
+	}
+	return false
+}
+
+type EpochFilter struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	StartEpoch uint32 `protobuf:"varint,1,opt,name=start_epoch,json=startEpoch,proto3" json:"start_epoch,omitempty"`
+	EndEpoch   uint32 `protobuf:"varint,2,opt,name=end_epoch,json=endEpoch,proto3" json:"end_epoch,omitempty"`
+}
+
+func (x *EpochFilter) Reset() {
+	*x = EpochFilter{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EpochFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EpochFilter) ProtoMessage() {}
+
+func (x *EpochFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EpochFilter.ProtoReflect.Descriptor instead.
+func (*EpochFilter) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *EpochFilter) GetStartEpoch() uint32 {
+	if x != nil {
+		return x.StartEpoch
+	}
+	return 0
+}
+
+func (x *EpochFilter) GetEndEpoch() uint32 {
+	if x != nil {
+		return x.EndEpoch
+	}
+	return 0
+}
+
+type IDFilter struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id []byte `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *IDFilter) Reset() {
+	*x = IDFilter{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IDFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IDFilter) ProtoMessage() {}
+
+func (x *IDFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IDFilter.ProtoReflect.Descriptor instead.
+func (*IDFilter) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *IDFilter) GetId() []byte {
+	if x != nil {
+		return x.Id
+	}
+	return nil
+}
+
+type NodeIDFilter struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NodeId []byte `protobuf:"bytes,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+}
+
+func (x *NodeIDFilter) Reset() {
+	*x = NodeIDFilter{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NodeIDFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NodeIDFilter) ProtoMessage() {}
+
+func (x *NodeIDFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NodeIDFilter.ProtoReflect.Descriptor instead.
+func (*NodeIDFilter) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *NodeIDFilter) GetNodeId() []byte {
+	if x != nil {
+		return x.NodeId
+	}
+	return nil
+}
+
+type CoinbaseFilter struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Coinbase string `protobuf:"bytes,1,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
+}
+
+func (x *CoinbaseFilter) Reset() {
+	*x = CoinbaseFilter{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_activation_types_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CoinbaseFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoinbaseFilter) ProtoMessage() {}
+
+func (x *CoinbaseFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_activation_types_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoinbaseFilter.ProtoReflect.Descriptor instead.
+func (*CoinbaseFilter) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_activation_types_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CoinbaseFilter) GetCoinbase() string {
+	if x != nil {
+		return x.Coinbase
+	}
+	return ""
+}
+
 var File_spacemesh_v1_activation_types_proto protoreflect.FileDescriptor
 
 var file_spacemesh_v1_activation_types_proto_rawDesc = []byte{
@@ -191,19 +902,103 @@ var file_spacemesh_v1_activation_types_proto_rawDesc = []byte{
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x03, 0x61, 0x74, 0x78, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
 	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x03,
-	0x61, 0x74, 0x78, 0x42, 0xb9, 0x01, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x42, 0x14, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
-	0x5a, 0x3e, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61,
-	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c,
-	0x65, 0x61, 0x73, 0x65, 0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x2f, 0x76, 0x31, 0x3b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x76, 0x31,
-	0xa2, 0x02, 0x03, 0x53, 0x58, 0x58, 0xaa, 0x02, 0x0c, 0x53, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
-	0x73, 0x68, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0c, 0x53, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x18, 0x53, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
-	0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea,
-	0x02, 0x0d, 0x53, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x74, 0x78, 0x22, 0x46, 0x0a, 0x18, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x2a, 0x0a, 0x02, 0x76, 0x31, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x73, 0x70,
+	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x76,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x56, 0x31, 0x52, 0x02, 0x76, 0x31, 0x22, 0xc1, 0x04, 0x0a, 0x0c,
+	0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x56, 0x31, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x69, 0x64, 0x12, 0x17, 0x0a, 0x07,
+	0x6e, 0x6f, 0x64, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x06, 0x6e,
+	0x6f, 0x64, 0x65, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75,
+	0x72, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74,
+	0x75, 0x72, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x5f, 0x65,
+	0x70, 0x6f, 0x63, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x70, 0x75, 0x62, 0x6c,
+	0x69, 0x73, 0x68, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x12, 0x1a, 0x0a, 0x08, 0x73, 0x65, 0x71, 0x75,
+	0x65, 0x6e, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x73, 0x65, 0x71, 0x75,
+	0x65, 0x6e, 0x63, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x72, 0x65, 0x76, 0x5f, 0x61, 0x74, 0x78,
+	0x18, 0x06, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x70, 0x72, 0x65, 0x76, 0x41, 0x74, 0x78, 0x12,
+	0x27, 0x0a, 0x0f, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x69, 0x6e, 0x67, 0x5f, 0x61,
+	0x74, 0x78, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0e, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x69, 0x6e, 0x67, 0x41, 0x74, 0x78, 0x12, 0x27, 0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x6d,
+	0x69, 0x74, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x61, 0x74, 0x78, 0x18, 0x08, 0x20, 0x01, 0x28,
+	0x0c, 0x52, 0x0e, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x41, 0x74,
+	0x78, 0x12, 0x35, 0x0a, 0x0c, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x5f, 0x70, 0x6f, 0x73,
+	0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d,
+	0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x0b, 0x69, 0x6e, 0x69,
+	0x74, 0x69, 0x61, 0x6c, 0x50, 0x6f, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6f, 0x69, 0x6e,
+	0x62, 0x61, 0x73, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6f, 0x69, 0x6e,
+	0x62, 0x61, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x75, 0x6e, 0x69, 0x74, 0x73, 0x18, 0x0b, 0x20,
+	0x01, 0x28, 0x0d, 0x52, 0x05, 0x75, 0x6e, 0x69, 0x74, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x62, 0x61,
+	0x73, 0x65, 0x5f, 0x74, 0x69, 0x63, 0x6b, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x62,
+	0x61, 0x73, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x63, 0x6b, 0x73,
+	0x18, 0x0d, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x74, 0x69, 0x63, 0x6b, 0x73, 0x12, 0x36, 0x0a,
+	0x0a, 0x70, 0x6f, 0x65, 0x74, 0x5f, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x18, 0x0e, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x50, 0x6f, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x09, 0x70, 0x6f, 0x65, 0x74,
+	0x50, 0x72, 0x6f, 0x6f, 0x66, 0x12, 0x26, 0x0a, 0x04, 0x70, 0x6f, 0x73, 0x74, 0x18, 0x0f, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
+	0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x04, 0x70, 0x6f, 0x73, 0x74, 0x12, 0x40, 0x0a,
+	0x0e, 0x76, 0x72, 0x66, 0x5f, 0x70, 0x6f, 0x73, 0x74, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18,
+	0x10, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x52, 0x46, 0x50, 0x6f, 0x73, 0x74, 0x49, 0x6e, 0x64, 0x65,
+	0x78, 0x52, 0x0c, 0x76, 0x72, 0x66, 0x50, 0x6f, 0x73, 0x74, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x22,
+	0x24, 0x0a, 0x0c, 0x56, 0x52, 0x46, 0x50, 0x6f, 0x73, 0x74, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x12,
+	0x14, 0x0a, 0x05, 0x6e, 0x6f, 0x6e, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05,
+	0x6e, 0x6f, 0x6e, 0x63, 0x65, 0x22, 0x40, 0x0a, 0x09, 0x50, 0x6f, 0x65, 0x74, 0x50, 0x72, 0x6f,
+	0x6f, 0x66, 0x12, 0x1f, 0x0a, 0x0b, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x5f, 0x6e, 0x6f, 0x64, 0x65,
+	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0c, 0x52, 0x0a, 0x70, 0x72, 0x6f, 0x6f, 0x66, 0x4e, 0x6f,
+	0x64, 0x65, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x6c, 0x65, 0x61, 0x66, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x04, 0x6c, 0x65, 0x61, 0x66, 0x22, 0x40, 0x0a, 0x08, 0x50, 0x6f, 0x73, 0x74, 0x4d,
+	0x65, 0x74, 0x61, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x09, 0x63, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67,
+	0x65, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x06, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x22, 0x48, 0x0a, 0x04, 0x50, 0x6f, 0x73,
+	0x74, 0x12, 0x14, 0x0a, 0x05, 0x6e, 0x6f, 0x6e, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d,
+	0x52, 0x05, 0x6e, 0x6f, 0x6e, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x69, 0x6e, 0x64, 0x69, 0x63,
+	0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x69, 0x6e, 0x64, 0x69, 0x63, 0x65,
+	0x73, 0x12, 0x10, 0x0a, 0x03, 0x70, 0x6f, 0x77, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x03,
+	0x70, 0x6f, 0x77, 0x22, 0xf9, 0x01, 0x0a, 0x17, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x31, 0x0a, 0x06, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x19, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x45,
+	0x70, 0x6f, 0x63, 0x68, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x52, 0x06, 0x65, 0x70, 0x6f, 0x63,
+	0x68, 0x73, 0x12, 0x26, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16,
+	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x44,
+	0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x52, 0x02, 0x69, 0x64, 0x12, 0x33, 0x0a, 0x07, 0x6e, 0x6f,
+	0x64, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x73, 0x70,
+	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x49,
+	0x44, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x52, 0x06, 0x6e, 0x6f, 0x64, 0x65, 0x49, 0x64, 0x12,
+	0x38, 0x0a, 0x08, 0x63, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1c, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x52,
+	0x08, 0x63, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x77, 0x61, 0x74,
+	0x63, 0x68, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x77, 0x61, 0x74, 0x63, 0x68, 0x22,
+	0x4b, 0x0a, 0x0b, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x12, 0x1f,
+	0x0a, 0x0b, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0d, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x72, 0x74, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x12,
+	0x1b, 0x0a, 0x09, 0x65, 0x6e, 0x64, 0x5f, 0x65, 0x70, 0x6f, 0x63, 0x68, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x08, 0x65, 0x6e, 0x64, 0x45, 0x70, 0x6f, 0x63, 0x68, 0x22, 0x1a, 0x0a, 0x08,
+	0x49, 0x44, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x69, 0x64, 0x22, 0x27, 0x0a, 0x0c, 0x4e, 0x6f, 0x64, 0x65,
+	0x49, 0x44, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x12, 0x17, 0x0a, 0x07, 0x6e, 0x6f, 0x64, 0x65,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x06, 0x6e, 0x6f, 0x64, 0x65, 0x49,
+	0x64, 0x22, 0x2c, 0x0a, 0x0e, 0x43, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x46, 0x69, 0x6c,
+	0x74, 0x65, 0x72, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6f, 0x69, 0x6e, 0x62, 0x61, 0x73, 0x65, 0x42,
+	0xb9, 0x01, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x42, 0x14, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x54, 0x79, 0x70, 0x65, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x3e, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
+	0x73, 0x68, 0x6f, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65,
+	0x2f, 0x67, 0x6f, 0x2f, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x31,
+	0x3b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x53,
+	0x58, 0x58, 0xaa, 0x02, 0x0c, 0x53, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x56,
+	0x31, 0xca, 0x02, 0x0c, 0x53, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x5c, 0x56, 0x31,
+	0xe2, 0x02, 0x18, 0x53, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x5c, 0x56, 0x31, 0x5c,
+	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0d, 0x53, 0x70,
+	0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -218,23 +1013,43 @@ func file_spacemesh_v1_activation_types_proto_rawDescGZIP() []byte {
 	return file_spacemesh_v1_activation_types_proto_rawDescData
 }
 
-var file_spacemesh_v1_activation_types_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_spacemesh_v1_activation_types_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_spacemesh_v1_activation_types_proto_goTypes = []interface{}{
-	(*GetRequest)(nil),       // 0: spacemesh.v1.GetRequest
-	(*GetResponse)(nil),      // 1: spacemesh.v1.GetResponse
-	(*HighestResponse)(nil),  // 2: spacemesh.v1.HighestResponse
-	(*Activation)(nil),       // 3: spacemesh.v1.Activation
-	(*MalfeasanceProof)(nil), // 4: spacemesh.v1.MalfeasanceProof
+	(*GetRequest)(nil),               // 0: spacemesh.v1.GetRequest
+	(*GetResponse)(nil),              // 1: spacemesh.v1.GetResponse
+	(*HighestResponse)(nil),          // 2: spacemesh.v1.HighestResponse
+	(*ActivationStreamResponse)(nil), // 3: spacemesh.v1.ActivationStreamResponse
+	(*ActivationV1)(nil),             // 4: spacemesh.v1.ActivationV1
+	(*VRFPostIndex)(nil),             // 5: spacemesh.v1.VRFPostIndex
+	(*PoetProof)(nil),                // 6: spacemesh.v1.PoetProof
+	(*PostMeta)(nil),                 // 7: spacemesh.v1.PostMeta
+	(*Post)(nil),                     // 8: spacemesh.v1.Post
+	(*ActivationStreamRequest)(nil),  // 9: spacemesh.v1.ActivationStreamRequest
+	(*EpochFilter)(nil),              // 10: spacemesh.v1.EpochFilter
+	(*IDFilter)(nil),                 // 11: spacemesh.v1.IDFilter
+	(*NodeIDFilter)(nil),             // 12: spacemesh.v1.NodeIDFilter
+	(*CoinbaseFilter)(nil),           // 13: spacemesh.v1.CoinbaseFilter
+	(*Activation)(nil),               // 14: spacemesh.v1.Activation
+	(*MalfeasanceProof)(nil),         // 15: spacemesh.v1.MalfeasanceProof
 }
 var file_spacemesh_v1_activation_types_proto_depIdxs = []int32{
-	3, // 0: spacemesh.v1.GetResponse.atx:type_name -> spacemesh.v1.Activation
-	4, // 1: spacemesh.v1.GetResponse.malfeasance_proof:type_name -> spacemesh.v1.MalfeasanceProof
-	3, // 2: spacemesh.v1.HighestResponse.atx:type_name -> spacemesh.v1.Activation
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	14, // 0: spacemesh.v1.GetResponse.atx:type_name -> spacemesh.v1.Activation
+	15, // 1: spacemesh.v1.GetResponse.malfeasance_proof:type_name -> spacemesh.v1.MalfeasanceProof
+	14, // 2: spacemesh.v1.HighestResponse.atx:type_name -> spacemesh.v1.Activation
+	4,  // 3: spacemesh.v1.ActivationStreamResponse.v1:type_name -> spacemesh.v1.ActivationV1
+	8,  // 4: spacemesh.v1.ActivationV1.initial_post:type_name -> spacemesh.v1.Post
+	6,  // 5: spacemesh.v1.ActivationV1.poet_proof:type_name -> spacemesh.v1.PoetProof
+	8,  // 6: spacemesh.v1.ActivationV1.post:type_name -> spacemesh.v1.Post
+	5,  // 7: spacemesh.v1.ActivationV1.vrf_post_index:type_name -> spacemesh.v1.VRFPostIndex
+	10, // 8: spacemesh.v1.ActivationStreamRequest.epochs:type_name -> spacemesh.v1.EpochFilter
+	11, // 9: spacemesh.v1.ActivationStreamRequest.id:type_name -> spacemesh.v1.IDFilter
+	12, // 10: spacemesh.v1.ActivationStreamRequest.node_id:type_name -> spacemesh.v1.NodeIDFilter
+	13, // 11: spacemesh.v1.ActivationStreamRequest.coinbase:type_name -> spacemesh.v1.CoinbaseFilter
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_activation_types_proto_init() }
@@ -280,6 +1095,138 @@ func file_spacemesh_v1_activation_types_proto_init() {
 				return nil
 			}
 		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ActivationStreamResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ActivationV1); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VRFPostIndex); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PoetProof); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PostMeta); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Post); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ActivationStreamRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EpochFilter); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IDFilter); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*NodeIDFilter); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_activation_types_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CoinbaseFilter); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -287,7 +1234,7 @@ func file_spacemesh_v1_activation_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_activation_types_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

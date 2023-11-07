@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	ActivationService_Get_FullMethodName     = "/spacemesh.v1.ActivationService/Get"
 	ActivationService_Highest_FullMethodName = "/spacemesh.v1.ActivationService/Highest"
+	ActivationService_Stream_FullMethodName  = "/spacemesh.v1.ActivationService/Stream"
 )
 
 // ActivationServiceClient is the client API for ActivationService service.
@@ -32,6 +33,7 @@ type ActivationServiceClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
 	// Highest returns the atx id with the highest tick count.
 	Highest(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HighestResponse, error)
+	Stream(ctx context.Context, in *ActivationStreamRequest, opts ...grpc.CallOption) (ActivationService_StreamClient, error)
 }
 
 type activationServiceClient struct {
@@ -60,6 +62,38 @@ func (c *activationServiceClient) Highest(ctx context.Context, in *emptypb.Empty
 	return out, nil
 }
 
+func (c *activationServiceClient) Stream(ctx context.Context, in *ActivationStreamRequest, opts ...grpc.CallOption) (ActivationService_StreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ActivationService_ServiceDesc.Streams[0], ActivationService_Stream_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &activationServiceStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ActivationService_StreamClient interface {
+	Recv() (*ActivationStreamResponse, error)
+	grpc.ClientStream
+}
+
+type activationServiceStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *activationServiceStreamClient) Recv() (*ActivationStreamResponse, error) {
+	m := new(ActivationStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ActivationServiceServer is the server API for ActivationService service.
 // All implementations should embed UnimplementedActivationServiceServer
 // for forward compatibility
@@ -68,6 +102,7 @@ type ActivationServiceServer interface {
 	Get(context.Context, *GetRequest) (*GetResponse, error)
 	// Highest returns the atx id with the highest tick count.
 	Highest(context.Context, *emptypb.Empty) (*HighestResponse, error)
+	Stream(*ActivationStreamRequest, ActivationService_StreamServer) error
 }
 
 // UnimplementedActivationServiceServer should be embedded to have forward compatible implementations.
@@ -79,6 +114,9 @@ func (UnimplementedActivationServiceServer) Get(context.Context, *GetRequest) (*
 }
 func (UnimplementedActivationServiceServer) Highest(context.Context, *emptypb.Empty) (*HighestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Highest not implemented")
+}
+func (UnimplementedActivationServiceServer) Stream(*ActivationStreamRequest, ActivationService_StreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
 
 // UnsafeActivationServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -128,6 +166,27 @@ func _ActivationService_Highest_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ActivationService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ActivationStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ActivationServiceServer).Stream(m, &activationServiceStreamServer{stream})
+}
+
+type ActivationService_StreamServer interface {
+	Send(*ActivationStreamResponse) error
+	grpc.ServerStream
+}
+
+type activationServiceStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *activationServiceStreamServer) Send(m *ActivationStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // ActivationService_ServiceDesc is the grpc.ServiceDesc for ActivationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -144,6 +203,12 @@ var ActivationService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ActivationService_Highest_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Stream",
+			Handler:       _ActivationService_Stream_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "spacemesh/v1/activation.proto",
 }
