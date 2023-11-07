@@ -62,28 +62,12 @@ message Post {
 }
 
 message ActivationStreamRequest {
-    EpochFilter epochs = 1;
-    IDFilter id = 2;
-    NodeIDFilter node_id = 3;
-    // CoinbaseFilter is not supported by database index and will result in sequential scan.
-    // Apply EpochFilter together with CoinbaseFilter for better performance.
-    CoinbaseFilter coinbase = 4;
-    bool watch = 5;
-}
-
-message EpochFilter {
     uint32 start_epoch = 1;
     uint32 end_epoch = 2;
-}
-
-message IDFilter {
-    bytes id = 1;
-}
-
-message NodeIDFilter {
-    bytes node_id = 1;
-}
-
-message CoinbaseFilter {
-    string coinbase = 1;
+    bytes id = 3;
+    bytes node_id = 4;
+    // CoinbaseFilter is not supported by database index and will result in sequential scan.
+    // Apply EpochFilter together with CoinbaseFilter for better performance.
+    string coinbase = 5;
+    bool watch = 6;
 }
