@@ -24,7 +24,8 @@ message ActivationV1 {
     uint32 ticks = 13;
     PoetProof poet_proof = 14;
     Post post = 15;
-    VRFPostIndex vrf_post_index = 16;
+    PostMeta post_meta = 16;
+    VRFPostIndex vrf_post_index = 17;
 }
 
 message ActivationHeader {
