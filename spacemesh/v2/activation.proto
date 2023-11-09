@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package spacemesh.v2;
+
+message Activation {
+    oneof versioned {
+        ActivationV1 v1 = 1;
+    }
+}
+
+message ActivationV1 {
+    bytes id = 1;
+    bytes node_id = 2;
+    bytes signature = 3;
+    uint32 publish_epoch = 4;
+    uint64 sequence = 5;
+    bytes prev_atx = 6;
+    bytes positioning_atx = 7;
+    bytes committment_atx = 8;
+    Post initial_post = 9;
+    string coinbase = 10;
+    uint32 units = 11;
+    uint32 base_height = 12;
+    uint32 ticks = 13;
+    PoetProof poet_proof = 14;
+    Post post = 15;
+    VRFPostIndex vrf_post_index = 16;
+}
+
+message ActivationHeader {
+    oneof versioned {
+        ActivationHeaderV1 v1 = 1;
+    }
+}
+
+message ActivationHeaderV1 {
+    bytes id = 1;
+    bytes node_id = 2;
+    uint32 publish_epoch = 3;
+    string coinbase = 4;
+    uint32 units = 5;
+    uint32 base_height = 6;
+    uint32 ticks = 7;
+}
+
+message VRFPostIndex {
+    uint64 nonce = 1;
+}
+
+message PoetProof {
+    repeated bytes proof_nodes = 1;
+    uint64 leaf = 2;
+}
+
+message PostMeta {
+    bytes challenge = 1;
+    uint64 labels = 2;
+}
+
+message Post {
+    uint32 nonce = 1;
+    bytes indices = 2;
+    uint64 pow = 3;
+}
+
+message ActivationStreamRequest {
+    uint32 start_epoch = 1;
+    uint32 end_epoch = 2;
+    bytes id = 3;
+    bytes node_id = 4;
+    // CoinbaseFilter is not supported by database index and will result in sequential scan.
+    // Apply EpochFilter together with CoinbaseFilter for better performance.
+    string coinbase = 5;
+    bool watch = 6;
+}
+
+
+service ActivationStreamService {
+    rpc Stream(ActivationStreamRequest) returns (stream Activation);
+    rpc StreamHeaders(ActivationStreamRequest) returns (stream ActivationHeader);
+}
+
+message ActivationRequest {
+    uint32 start_epoch = 1;
+    uint32 end_epoch = 2;
+    bytes id = 3;
+    bytes node_id = 4;
+    // CoinbaseFilter is not supported by database index and will result in sequential scan.
+    // Apply EpochFilter together with CoinbaseFilter for better performance.
+    string coinbase = 5;
+    uint64 offset = 6;
+    uint64 limit = 7;
+}
+
+message ActivationList {
+    repeated Activation activations = 1;
+}
+
+message ActivationHeaderList {
+    repeated ActivationHeader headers = 1;
+}
+
+service ActivationService {
+    rpc List(ActivationRequest) returns (ActivationList);
+    rpc ListHeaders(ActivationRequest) returns (ActivationHeaderList);
+}   
