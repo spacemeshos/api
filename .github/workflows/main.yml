@@ -1,9 +1,11 @@
 name: Generate Java code from Protobuf
 
 on:
-  push:
-    branches:
-      - main  # 可以根据你的分支名称进行调整
+  workflow_dispatch:  # 手动触发执行
+    inputs:
+      execute:
+        description: 'Execute the workflow'
+        default: 'true'
 
 jobs:
   build:
