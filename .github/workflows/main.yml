@@ -13,12 +13,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  # 设置为 Node.js 16
+        node-version: '20'  # 设置为 Node.js 16
         
     - name: Setup JDK
       uses: actions/setup-java@v2
