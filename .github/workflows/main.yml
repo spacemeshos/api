@@ -1,0 +1,43 @@
+name: Generate Java code from Protobuf
+
+on:
+  push:
+    branches:
+      - main  # 可以根据你的分支名称进行调整
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'  # 可以根据你的需求选择 Java 版本
+
+    - name: Compile Protobuf to Java
+      run: |
+        # 进入到你的 proto 文件夹
+        cd spacemesh/v1
+        
+        # 使用 protobuf 编译器生成 Java 代码
+        protoc --java_out=. *.proto
+        # 请将 your_proto_file.proto 替换为你实际的 .proto 文件名
+        
+    - name: Commit generated code
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+        git add .
+        git commit -m "Add generated Java code from Protobuf" || echo "No changes to commit"
+        
+    - name: Push changes
+      if: success()  # 只有在上一步成功时才会执行
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
