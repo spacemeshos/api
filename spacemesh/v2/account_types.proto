@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "spacemesh/v2/types.proto";
+
+package spacemesh.v2;
+
+message GetRequest {
+  AccountId address = 1;
+}
+
+message GetResponse {
+  Account account = 1;
+}
+
+message Account {
+  AccountId account_id = 1; // account public address
+  AccountState state_current = 2; // current state
+  AccountState state_projected = 3; // projected state (includes pending txs)
+}
+
+message AccountState {
+  uint64 counter = 1; // aka nonce
+  Amount balance = 2; // known account balance
+}

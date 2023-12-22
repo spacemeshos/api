@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "spacemesh/v2/account_types.proto";
+
+package spacemesh.v2;
+
+service AccountService {
+  // Get a single activation transaction
+  rpc Get(GetRequest) returns (GetResponse);
+}

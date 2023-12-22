@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package spacemesh.v2;
+// A non-negative coin amount, in smidge
+message Amount {
+  uint64 value = 1;
+}
+
+message AccountId {
+  string address = 1;
+}
+
+message TransactionId {
+  bytes id = 1;
+}
+
+// An immutable Spacemesh transaction.
+// do not include mutable data such as tx state or result.
+message Transaction {
+  bytes id = 1;
+  AccountId principal = 2;
+  AccountId template = 3;
+  uint32 method = 4; // this is actually limited by uint8, but no type for that.
+  Nonce nonce = 5;
+  LayerLimits limits = 6;
+  uint64 max_gas = 7;
+  uint64 gas_price = 8;
+  uint64 max_spend = 9;
+  bytes raw = 10;
+}
+
+message LayerLimits {
+  uint32 min = 1;
+  uint32 max = 2;
+}
+
+message Nonce {
+  uint64 counter = 1;
+  uint32 bitfield = 2; // this is actually limited by uint8, but no type for that.
+}
+
+message LayerNumber {
+  uint32 number = 1;
+}
