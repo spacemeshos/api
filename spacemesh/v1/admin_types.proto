@@ -117,19 +117,19 @@ message EventProposal {
 }
 
 message EventMalfeasance {
-    MalfeasanceProof proof = 1;
+  MalfeasanceProof proof = 1;
 }
 
 message EventStreamRequest {}
 
 message ConnectionInfo {
-    string address = 1;
-  	google.protobuf.Duration uptime = 2;
-    bool outbound = 3;
+  string address = 1;
+  google.protobuf.Duration uptime = 2;
+  bool outbound = 3;
 }
 
 message PeerInfo {
-    string id = 1;
-    repeated ConnectionInfo connections = 2;
-    repeated string tags = 4;
+  string id = 1;
+  repeated ConnectionInfo connections = 2;
+  repeated string tags = 4;
 }
