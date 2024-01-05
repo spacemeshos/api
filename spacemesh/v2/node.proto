@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package spacemesh.v2;
+
+message NodeStatusRequest {}
+
+message NodeStatusResponse {
+  uint64 connected_peers = 1; // number of connected neighbors
+  bool   is_synced = 2; // true when meshed is synced
+  uint32 synced_layer = 3; // the last layer node has synced
+  uint32 top_layer = 4; // top layer is the tip
+  uint32 verified_layer = 5; // the last layer node has verified
+}
+
+service NodeService {
+  rpc Status(NodeStatusRequest) returns (NodeStatusResponse);
+}

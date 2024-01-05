@@ -1,11 +1,28 @@
 syntax = "proto3";
 
-import "google/api/annotations.proto";
-import "spacemesh/v2/account_types.proto";
-
 package spacemesh.v2;
 
+message Account {
+  oneof versioned {
+    AccountV1 v1 = 1;
+  }
+}
+
+message AccountV1 {
+  string account_id = 1; // account public address
+  AccountState state_current = 2; // current state
+  AccountState state_projected = 3; // projected state (includes pending txs)
+}
+
+message AccountState {
+  uint64 counter = 1; // aka nonce
+  uint64 balance = 2; // known account balance
+}
+
+message AccountRequest {
+  string address = 1;
+};
+
 service AccountService {
-  // Get a single activation transaction
-  rpc Get(GetRequest) returns (GetResponse);
+  rpc Get(AccountRequest) returns (Account);
 }

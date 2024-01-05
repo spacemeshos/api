@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "spacemesh/v2/tx.proto";
+
+package spacemesh.v2;
+
+message Block {
+  oneof versioned {
+    BlockV1 v1 = 1;
+  }
+}
+
+message BlockV1 {
+  bytes id = 1; // block hash
+  repeated Transaction transactions = 2; // block transactions
+  bytes activation_id = 3; // the smesher's activation that this block refers to
+  bytes smesher_id = 4; // the id of the smesher who submitted this block
+}
+
+message BlockRequest {
+  bytes id = 1; // block hash
+}
+
+service BlockService {
+  rpc Get(BlockRequest) returns (Block);
+}

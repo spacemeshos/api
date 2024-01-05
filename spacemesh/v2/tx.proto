@@ -1,14 +1,34 @@
 syntax = "proto3";
 
-import "google/api/annotations.proto";
-import "spacemesh/v2/tx_types.proto";
-
 package spacemesh.v2;
 
-service TransactionService {
-  // Get a single activation transaction
-  rpc Get(GetRequest) returns (GetResponse);
+message Transaction {
+  oneof versioned {
+    TransactionV1 v1 = 1;
+  }
+}
 
-  // Get gas estimation for given tx type
-  rpc GasEstimation(GasEstimationRequest) returns (GasEstimationResponse);
+// An immutable Spacemesh transaction.
+// do not include mutable data such as tx state or result.
+message TransactionV1 {
+  bytes id = 1;
+  string principal = 2;
+  string template = 3;
+  uint32 method = 4; // this is actually limited by uint8, but no type for that.
+  Nonce nonce = 5;
+  LayerLimits limits = 6;
+  uint64 max_gas = 7;
+  uint64 gas_price = 8;
+  uint64 max_spend = 9;
+  bytes raw = 10;
+}
+
+message Nonce {
+  uint64 counter = 1;
+  uint32 bitfield = 2; // this is actually limited by uint8, but no type for that.
+}
+
+message LayerLimits {
+  uint32 min = 1;
+  uint32 max = 2;
 }

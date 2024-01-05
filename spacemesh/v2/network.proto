@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package spacemesh.v2;
+
+message NetworkInfoRequest {}
+
+message NetworkInfoResponse {
+  uint64 genesis_time = 1; // network genesis time as unix epoch time
+  uint32 epoch_num_layers = 2; // number of layers per epoch
+  uint64 layer_duration = 3; // layer duration, in seconds
+  uint64 max_transactions_per_second = 4;
+  string hrp = 5;
+  uint32 first_genesis = 6;
+  uint32 effective_genesis = 7;
+  uint32 epoch_size = 8;
+}
+
+service NetworkService {
+  rpc Info(NetworkInfoRequest) returns (NetworkInfoResponse);
+}

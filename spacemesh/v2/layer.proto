@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+import "spacemesh/v2/block.proto";
+
+package spacemesh.v2;
+
+message Layer {
+  oneof versioned {
+    BlockV1 v1 = 1;
+  }
+}
+
+message LayerV1 {
+  uint32 number = 1; // layer number - not hash - layer content may change
+  enum LayerStatus {
+    LAYER_STATUS_UNSPECIFIED = 0; // not yet approved or confirmed
+    LAYER_STATUS_APPROVED = 1; // approved by hare
+    LAYER_STATUS_CONFIRMED = 2; // confirmed by tortoise
+    LAYER_STATUS_APPLIED = 3; // applied in state
+  }
+  LayerStatus status = 2;
+  bytes hash = 3; // computer layer hash - do we need this?
+  repeated Block blocks = 4; // layer's blocks
+  bytes root_state_hash = 5; // when available - the root state hash of global state in this layer
+}
+
+message LayerRequest {
+  uint32 layer_number = 1;
+  bool include_transactions = 2;
+};
+
+
+service LayerService {
+  rpc Get(LayerRequest) returns (Layer);
+}
