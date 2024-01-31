@@ -69,10 +69,12 @@ message EventPostServiceStopped {}
 
 message EventPostStart {
   bytes challenge = 1;
+  bytes smesher = 2;
 }
 
 message EventPostComplete {
   bytes challenge = 1;
+  bytes smesher = 2;
 }
 
 message EventPoetWaitRound {
