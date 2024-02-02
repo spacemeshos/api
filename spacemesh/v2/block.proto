@@ -12,7 +12,7 @@ message Block {
 
 message BlockV1 {
   bytes id = 1; // block hash
-  repeated Transaction transactions = 2; // block transactions
+  repeated Transaction transactions = 2; // block transactions, in canonical order
   bytes activation_id = 3; // the smesher's activation that this block refers to
   bytes smesher_id = 4; // the id of the smesher who submitted this block
 }
