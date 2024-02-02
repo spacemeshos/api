@@ -21,7 +21,7 @@ message LayerV1 {
   LayerStatus status = 2;
   bytes hash = 3; // computer layer hash - do we need this?
   repeated Block blocks = 4; // layer's blocks
-  bytes root_state_hash = 5; // when available - the root state hash of global state in this layer
+  bytes root_state_hash = 5; // the root state hash of global state in this layer. if unset block was not applied optimistically.
 }
 
 message LayerRequest {
