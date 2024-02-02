@@ -16,7 +16,7 @@ message AccountV1 {
 
 message AccountState {
   uint64 counter = 1; // aka nonce
-  uint64 balance = 2; // known account balance
+  uint64 balance = 2; // account balance in smidge
 }
 
 message AccountRequest {
