@@ -10,7 +10,7 @@ message Reward {
 
 message RewardV1 {
   uint32 layer = 1; // layer award was paid in
-  uint64 total = 2; // total reward paid (sum of tx fee and layer reward)
+  uint64 total = 2; // total reward paid in smidge (sum of tx fee and layer reward)
   uint64 layer_reward = 3; // tx_fee = total - layer_reward
   uint32 layer_computed = 4; // layer number of the layer when reward was computed
   string coinbase = 5; // account awarded this reward

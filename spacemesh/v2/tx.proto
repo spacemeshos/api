@@ -14,13 +14,13 @@ message Transaction {
 // do not include mutable data such as tx state or result.
 message TransactionV1 {
   bytes id = 1;
-  string principal = 2;
-  string template = 3;
+  string principal = 2; // principal account address
+  string template = 3; // template account address
   uint32 method = 4; // this is actually limited by uint8, but no type for that.
   Nonce nonce = 5;
   LayerLimits limits = 6;
-  uint64 max_gas = 7;
-  uint64 gas_price = 8;
+  uint64 max_gas = 7; // max gas units consumed by tx
+  uint64 gas_price = 8; // fee per unit gas, in smidge
   uint64 max_spend = 9;
   bytes raw = 10;
 }
@@ -62,8 +62,8 @@ message TransactionResult {
   Transaction tx = 1;
   Status status = 2;
   string message = 3;
-  uint64 gas_consumed = 4;
-  uint64 fee = 5;
+  uint64 gas_consumed = 4; // in units of gas
+  uint64 fee = 5; // in smidge
   bytes block = 6;
   uint32 layer = 7;
   repeated string touched_addresses = 8;
