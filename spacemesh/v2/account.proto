@@ -17,10 +17,11 @@ message AccountV1 {
 message AccountState {
   uint64 counter = 1; // aka nonce
   uint64 balance = 2; // account balance in smidge
+  uint32 layer = 3; // account balance as of layer X
 }
 
 message AccountRequest {
-  string address = 1;
+  string address = 1; // bech32 format including HRP
 };
 
 service AccountService {

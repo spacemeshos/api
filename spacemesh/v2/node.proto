@@ -6,7 +6,13 @@ message NodeStatusRequest {}
 
 message NodeStatusResponse {
   uint64 connected_peers = 1; // number of connected neighbors
-  bool   is_synced = 2; // true when meshed is synced
+  enum SyncStatus {
+    SYNC_STATUS_UNSPECIFIED = 0;
+    SYNC_STATUS_OFFLINE = 1;
+    SYNC_STATUS_SYNCING = 2;
+    SYNC_STATUS_SYNCED = 3;
+  }
+  SyncStatus status = 2;
   uint32 synced_layer = 3; // the last layer node has synced
   uint32 verified_layer = 4; // the last layer node has verified
   uint32 head_layer = 5; // head layer is the tip
