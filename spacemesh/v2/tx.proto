@@ -27,7 +27,6 @@ message TransactionV1 {
 
 message Nonce {
   uint64 counter = 1;
-  uint32 bitfield = 2; // this is actually limited by uint8, but no type for that.
 }
 
 message LayerLimits {
