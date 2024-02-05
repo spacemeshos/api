@@ -97,6 +97,11 @@ message ParseTransactionRequest {
   bool verify = 2;        // if true signature verification will be executed
 }
 
+message ParseTransactionResponse {
+  google.rpc.Status status = 1;
+  Transaction tx = 2;
+}
+
 message SubmitTransactionRequest {
   bytes  transaction = 1;  // signed binary transaction
 }
@@ -108,6 +113,6 @@ message SubmitTransactionResponse {
 
 service TransactionService {
   rpc Get(TransactionRequest) returns (TransactionResponse);
-  rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionRequest);
+  rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
   rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
 }
