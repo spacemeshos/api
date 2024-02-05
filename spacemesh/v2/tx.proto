@@ -108,7 +108,7 @@ message SubmitTransactionRequest {
 
 message SubmitTransactionResponse {
   google.rpc.Status status = 1;
-  TransactionState tx_state = 2;
+  bytes tx_id = 2;
 }
 
 service TransactionService {
