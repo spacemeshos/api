@@ -18,8 +18,8 @@ message RewardV1 {
 
 message RewardRequest {
   string coinbase = 1;
-  uint64 offset = 2;
-  uint64 limit = 3;
+  uint64 offset = 2; // adjusts the starting point for data
+  uint64 limit = 3; // specifies max number of items to fetch
 }
 
 message RewardList {

@@ -10,9 +10,9 @@ message NetworkInfoResponse {
   uint32 layer_duration = 3; // layer duration, in seconds
   bytes genesis_id = 4;
   string hrp = 5;
-  uint32 first_genesis = 7;
-  uint32 effective_genesis = 8;
-  uint32 epoch_size = 9;
+  uint32 first_genesis = 7; // first effective genesis layer
+  uint32 effective_genesis = 8; // last layer of genesis
+  uint32 epoch_size = 9; // number of layers per epoch
 }
 
 service NetworkService {
