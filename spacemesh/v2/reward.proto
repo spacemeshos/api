@@ -16,8 +16,14 @@ message RewardV1 {
   string smesher = 6;  // id of smesher who earned this reward
 }
 
-message RewardRequest {
+message RewardByCoinbaseRequest {
   string coinbase = 1;
+  uint64 offset = 2; // adjusts the starting point for data
+  uint64 limit = 3; // specifies max number of items to fetch
+}
+
+message RewardBySmesherRequest {
+  string smesher = 1;
   uint64 offset = 2; // adjusts the starting point for data
   uint64 limit = 3; // specifies max number of items to fetch
 }
@@ -27,5 +33,6 @@ message RewardList {
 }
 
 service RewardService {
-  rpc List(RewardRequest) returns (RewardList);
+  rpc ListByCoinbase(RewardByCoinbaseRequest) returns (RewardList);
+  rpc ListBySmesher(RewardBySmesherRequest) returns (RewardList);
 }
