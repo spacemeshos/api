@@ -103,7 +103,7 @@ message ParseTransactionResponse {
 }
 
 message SubmitTransactionRequest {
-  bytes  transaction = 1;  // signed binary transaction
+  bytes transaction = 1;  // signed binary transaction
 }
 
 message SubmitTransactionResponse {
@@ -111,8 +111,18 @@ message SubmitTransactionResponse {
   bytes tx_id = 2;
 }
 
+message EstimateGasRequest {
+  bytes transaction = 1;  // signed binary transaction
+}
+
+message EstimateGasResponse {
+  google.rpc.Status status = 1;
+  uint64 recommended_max_gas = 2;
+}
+
 service TransactionService {
   rpc Get(TransactionRequest) returns (TransactionResponse);
   rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
   rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
+  rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
 }
