@@ -79,6 +79,15 @@ message ActivationList {
     repeated Activation activations = 1;
 }
 
+message ActivationsCountRequest {
+    uint32 epoch = 1;
+}
+
+message ActivationsCountResponse {
+    uint32 count = 1;
+}
+
 service ActivationService {
     rpc List(ActivationRequest) returns (ActivationList);
+    rpc ActivationsCount(ActivationsCountRequest) returns (ActivationsCountResponse);
 }   

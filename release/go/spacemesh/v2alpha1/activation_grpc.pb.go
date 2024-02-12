@@ -134,7 +134,8 @@ var ActivationStreamService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ActivationService_List_FullMethodName = "/spacemesh.v2alpha1.ActivationService/List"
+	ActivationService_List_FullMethodName             = "/spacemesh.v2alpha1.ActivationService/List"
+	ActivationService_ActivationsCount_FullMethodName = "/spacemesh.v2alpha1.ActivationService/ActivationsCount"
 )
 
 // ActivationServiceClient is the client API for ActivationService service.
@@ -142,6 +143,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActivationServiceClient interface {
 	List(ctx context.Context, in *ActivationRequest, opts ...grpc.CallOption) (*ActivationList, error)
+	ActivationsCount(ctx context.Context, in *ActivationsCountRequest, opts ...grpc.CallOption) (*ActivationsCountResponse, error)
 }
 
 type activationServiceClient struct {
@@ -161,11 +163,21 @@ func (c *activationServiceClient) List(ctx context.Context, in *ActivationReques
 	return out, nil
 }
 
+func (c *activationServiceClient) ActivationsCount(ctx context.Context, in *ActivationsCountRequest, opts ...grpc.CallOption) (*ActivationsCountResponse, error) {
+	out := new(ActivationsCountResponse)
+	err := c.cc.Invoke(ctx, ActivationService_ActivationsCount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ActivationServiceServer is the server API for ActivationService service.
 // All implementations should embed UnimplementedActivationServiceServer
 // for forward compatibility
 type ActivationServiceServer interface {
 	List(context.Context, *ActivationRequest) (*ActivationList, error)
+	ActivationsCount(context.Context, *ActivationsCountRequest) (*ActivationsCountResponse, error)
 }
 
 // UnimplementedActivationServiceServer should be embedded to have forward compatible implementations.
@@ -174,6 +186,9 @@ type UnimplementedActivationServiceServer struct {
 
 func (UnimplementedActivationServiceServer) List(context.Context, *ActivationRequest) (*ActivationList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedActivationServiceServer) ActivationsCount(context.Context, *ActivationsCountRequest) (*ActivationsCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ActivationsCount not implemented")
 }
 
 // UnsafeActivationServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -205,6 +220,24 @@ func _ActivationService_List_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ActivationService_ActivationsCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ActivationsCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActivationServiceServer).ActivationsCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ActivationService_ActivationsCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActivationServiceServer).ActivationsCount(ctx, req.(*ActivationsCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ActivationService_ServiceDesc is the grpc.ServiceDesc for ActivationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -215,6 +248,10 @@ var ActivationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _ActivationService_List_Handler,
+		},
+		{
+			MethodName: "ActivationsCount",
+			Handler:    _ActivationService_ActivationsCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
