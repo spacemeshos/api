@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package spacemesh.v2;
+package spacemesh.v2alpha1;
 
 message Activation {
     oneof versioned {
@@ -26,22 +26,6 @@ message ActivationV1 {
     Post post = 15;
     PostMeta post_meta = 16;
     VRFPostIndex vrf_post_index = 17;
-}
-
-message ActivationHeader {
-    oneof versioned {
-        ActivationHeaderV1 v1 = 1;
-    }
-}
-
-message ActivationHeaderV1 {
-    bytes id = 1;
-    bytes node_id = 2;
-    uint32 publish_epoch = 3;
-    string coinbase = 4;
-    uint32 units = 5;
-    uint32 base_height = 6;
-    uint32 ticks = 7;
 }
 
 message VRFPostIndex {
@@ -75,10 +59,8 @@ message ActivationStreamRequest {
     bool watch = 6;
 }
 
-
 service ActivationStreamService {
     rpc Stream(ActivationStreamRequest) returns (stream Activation);
-    rpc StreamHeaders(ActivationStreamRequest) returns (stream ActivationHeader);
 }
 
 message ActivationRequest {
@@ -97,11 +79,6 @@ message ActivationList {
     repeated Activation activations = 1;
 }
 
-message ActivationHeaderList {
-    repeated ActivationHeader headers = 1;
-}
-
 service ActivationService {
     rpc List(ActivationRequest) returns (ActivationList);
-    rpc ListHeaders(ActivationRequest) returns (ActivationHeaderList);
 }   
