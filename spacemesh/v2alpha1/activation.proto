@@ -14,7 +14,7 @@ message ActivationV1 {
   bytes signature = 3;
   uint32 publish_epoch = 4;
   uint64 sequence = 5;
-  bytes prev_atx = 6;
+  bytes previous_atx = 6;
   bytes positioning_atx = 7;
   bytes committment_atx = 8;
   Post initial_post = 9;
