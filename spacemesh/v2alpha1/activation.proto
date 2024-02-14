@@ -22,7 +22,7 @@ message ActivationV1 {
   uint32 units = 11;
   uint32 base_height = 12;
   uint32 ticks = 13;
-  PoetProof poet_proof = 14;
+  PoetMembershipProof membership = 14;
   Post post = 15;
   PostMeta post_meta = 16;
   VRFPostIndex vrf_post_index = 17;
@@ -32,14 +32,14 @@ message VRFPostIndex {
   uint64 nonce = 1;
 }
 
-message PoetProof {
+message PoetMembershipProof {
   repeated bytes proof_nodes = 1;
   uint64 leaf = 2;
 }
 
 message PostMeta {
   bytes challenge = 1;
-  uint64 labels = 2;
+  uint64 labels_per_unit = 2;
 }
 
 message Post {
@@ -49,13 +49,11 @@ message Post {
 }
 
 message ActivationStreamRequest {
-  uint32 start_epoch = 1;
+  uint32 start_epoch = 1; // Apply EpochFilter together with CoinbaseFilter for better performance.
   uint32 end_epoch = 2;
   bytes id = 3;
   bytes node_id = 4;
-  // CoinbaseFilter is not supported by database index and will result in sequential scan.
-  // Apply EpochFilter together with CoinbaseFilter for better performance.
-  string coinbase = 5;
+  string coinbase = 5; // CoinbaseFilter is not supported by database index and will result in sequential scan.
   bool watch = 6;
 }
 
@@ -64,13 +62,11 @@ service ActivationStreamService {
 }
 
 message ActivationRequest {
-  uint32 start_epoch = 1;
+  uint32 start_epoch = 1; // Apply EpochFilter together with CoinbaseFilter for better performance.
   uint32 end_epoch = 2;
   bytes id = 3;
   bytes node_id = 4;
-  // CoinbaseFilter is not supported by database index and will result in sequential scan.
-  // Apply EpochFilter together with CoinbaseFilter for better performance.
-  string coinbase = 5;
+  string coinbase = 5; // CoinbaseFilter is not supported by database index and will result in sequential scan.
   uint64 offset = 6;
   uint64 limit = 7;
 }
