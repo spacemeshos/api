@@ -10,6 +10,28 @@ message Transaction {
   }
 }
 
+message ContentsSend {
+  string destination = 1; // recipient account
+  uint64 amount = 2; // amount in smidge
+}
+
+message ContentsSingleSigSpawn {
+  string pubkey = 1;
+}
+
+message ContentsMultiSigSpawn {
+  uint32 required = 1; // number of required signatures
+  repeated string pubkey = 2;
+}
+
+message TransactionContents {
+  oneof contents {
+    ContentsSend send = 1;
+    ContentsSingleSigSpawn single_sig_spawn = 2;
+    ContentsMultiSigSpawn multi_sig_spawn = 3;
+  }
+}
+
 // An immutable Spacemesh transaction.
 // do not include mutable data such as tx state or result.
 message TransactionV1 {
@@ -23,6 +45,17 @@ message TransactionV1 {
   uint64 gas_price = 8; // fee per unit gas, in smidge
   uint64 max_spend = 9;
   bytes raw = 10;
+  enum TransactionType {
+    TRANSACTION_TYPE_UNSPECIFIED = 0;
+    TRANSACTION_TYPE_SINGLE_SIG_SEND = 1;
+    TRANSACTION_TYPE_SINGLE_SIG_SPAWN = 2;
+    TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN = 3;
+    TRANSACTION_TYPE_MULTI_SIG_SEND = 4;
+    TRANSACTION_TYPE_MULTI_SIG_SPAWN = 5;
+    TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN = 6;
+  }
+  TransactionType type = 11;
+  TransactionContents contents = 12; // parsed transaction contents
 }
 
 message Nonce {
