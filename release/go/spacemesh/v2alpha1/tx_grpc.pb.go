@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: spacemesh/v2/tx.proto
+// source: spacemesh/v2alpha1/tx.proto
 
-package spacemeshv2
+package spacemeshv2alpha1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TransactionStreamService_Stream_FullMethodName = "/spacemesh.v2.TransactionStreamService/Stream"
+	TransactionStreamService_Stream_FullMethodName = "/spacemesh.v2alpha1.TransactionStreamService/Stream"
 )
 
 // TransactionStreamServiceClient is the client API for TransactionStreamService service.
@@ -120,7 +120,7 @@ func (x *transactionStreamServiceStreamServer) Send(m *Transaction) error {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TransactionStreamService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2.TransactionStreamService",
+	ServiceName: "spacemesh.v2alpha1.TransactionStreamService",
 	HandlerType: (*TransactionStreamServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
@@ -130,14 +130,14 @@ var TransactionStreamService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "spacemesh/v2/tx.proto",
+	Metadata: "spacemesh/v2alpha1/tx.proto",
 }
 
 const (
-	TransactionService_Get_FullMethodName               = "/spacemesh.v2.TransactionService/Get"
-	TransactionService_ParseTransaction_FullMethodName  = "/spacemesh.v2.TransactionService/ParseTransaction"
-	TransactionService_SubmitTransaction_FullMethodName = "/spacemesh.v2.TransactionService/SubmitTransaction"
-	TransactionService_EstimateGas_FullMethodName       = "/spacemesh.v2.TransactionService/EstimateGas"
+	TransactionService_Get_FullMethodName               = "/spacemesh.v2alpha1.TransactionService/Get"
+	TransactionService_ParseTransaction_FullMethodName  = "/spacemesh.v2alpha1.TransactionService/ParseTransaction"
+	TransactionService_SubmitTransaction_FullMethodName = "/spacemesh.v2alpha1.TransactionService/SubmitTransaction"
+	TransactionService_EstimateGas_FullMethodName       = "/spacemesh.v2alpha1.TransactionService/EstimateGas"
 )
 
 // TransactionServiceClient is the client API for TransactionService service.
@@ -308,7 +308,7 @@ func _TransactionService_EstimateGas_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TransactionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2.TransactionService",
+	ServiceName: "spacemesh.v2alpha1.TransactionService",
 	HandlerType: (*TransactionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -329,5 +329,5 @@ var TransactionService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "spacemesh/v2/tx.proto",
+	Metadata: "spacemesh/v2alpha1/tx.proto",
 }

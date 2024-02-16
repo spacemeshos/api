@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: spacemesh/v2/network.proto
+// source: spacemesh/v2alpha1/network.proto
 
-package spacemeshv2
+package spacemeshv2alpha1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	NetworkService_Info_FullMethodName = "/spacemesh.v2.NetworkService/Info"
+	NetworkService_Info_FullMethodName = "/spacemesh.v2alpha1.NetworkService/Info"
 )
 
 // NetworkServiceClient is the client API for NetworkService service.
@@ -94,7 +94,7 @@ func _NetworkService_Info_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var NetworkService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2.NetworkService",
+	ServiceName: "spacemesh.v2alpha1.NetworkService",
 	HandlerType: (*NetworkServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -103,5 +103,5 @@ var NetworkService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "spacemesh/v2/network.proto",
+	Metadata: "spacemesh/v2alpha1/network.proto",
 }

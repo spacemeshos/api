@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package spacemesh.v2;
+package spacemesh.v2alpha1;
 
 message Account {
   oneof versioned {

@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: spacemesh/v2/reward.proto
+// source: spacemesh/v2alpha1/reward.proto
 
-package spacemeshv2
+package spacemeshv2alpha1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	RewardService_List_FullMethodName = "/spacemesh.v2.RewardService/List"
+	RewardService_List_FullMethodName = "/spacemesh.v2alpha1.RewardService/List"
 )
 
 // RewardServiceClient is the client API for RewardService service.
@@ -94,7 +94,7 @@ func _RewardService_List_Handler(srv interface{}, ctx context.Context, dec func(
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RewardService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2.RewardService",
+	ServiceName: "spacemesh.v2alpha1.RewardService",
 	HandlerType: (*RewardServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -103,5 +103,5 @@ var RewardService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "spacemesh/v2/reward.proto",
+	Metadata: "spacemesh/v2alpha1/reward.proto",
 }

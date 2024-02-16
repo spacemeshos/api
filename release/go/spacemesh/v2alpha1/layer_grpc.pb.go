@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: spacemesh/v2/layer.proto
+// source: spacemesh/v2alpha1/layer.proto
 
-package spacemeshv2
+package spacemeshv2alpha1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	LayerService_Get_FullMethodName = "/spacemesh.v2.LayerService/Get"
+	LayerService_Get_FullMethodName = "/spacemesh.v2alpha1.LayerService/Get"
 )
 
 // LayerServiceClient is the client API for LayerService service.
@@ -94,7 +94,7 @@ func _LayerService_Get_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LayerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2.LayerService",
+	ServiceName: "spacemesh.v2alpha1.LayerService",
 	HandlerType: (*LayerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -103,5 +103,5 @@ var LayerService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "spacemesh/v2/layer.proto",
+	Metadata: "spacemesh/v2alpha1/layer.proto",
 }

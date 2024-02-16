@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: spacemesh/v2/account.proto
+// source: spacemesh/v2alpha1/account.proto
 
-package spacemeshv2
+package spacemeshv2alpha1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	AccountService_Get_FullMethodName = "/spacemesh.v2.AccountService/Get"
+	AccountService_Get_FullMethodName = "/spacemesh.v2alpha1.AccountService/Get"
 )
 
 // AccountServiceClient is the client API for AccountService service.
@@ -94,7 +94,7 @@ func _AccountService_Get_Handler(srv interface{}, ctx context.Context, dec func(
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AccountService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2.AccountService",
+	ServiceName: "spacemesh.v2alpha1.AccountService",
 	HandlerType: (*AccountServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -103,5 +103,5 @@ var AccountService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "spacemesh/v2/account.proto",
+	Metadata: "spacemesh/v2alpha1/account.proto",
 }

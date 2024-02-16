@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: spacemesh/v2/node.proto
+// source: spacemesh/v2alpha1/node.proto
 
-package spacemeshv2
+package spacemeshv2alpha1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	NodeService_Status_FullMethodName = "/spacemesh.v2.NodeService/Status"
+	NodeService_Status_FullMethodName = "/spacemesh.v2alpha1.NodeService/Status"
 )
 
 // NodeServiceClient is the client API for NodeService service.
@@ -94,7 +94,7 @@ func _NodeService_Status_Handler(srv interface{}, ctx context.Context, dec func(
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var NodeService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2.NodeService",
+	ServiceName: "spacemesh.v2alpha1.NodeService",
 	HandlerType: (*NodeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -103,5 +103,5 @@ var NodeService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "spacemesh/v2/node.proto",
+	Metadata: "spacemesh/v2alpha1/node.proto",
 }
