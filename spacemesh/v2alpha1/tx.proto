@@ -40,11 +40,10 @@ message TransactionV1 {
   string template = 3; // template account address
   uint32 method = 4; // this is actually limited by uint8, but no type for that.
   Nonce nonce = 5;
-  LayerLimits limits = 6;
-  uint64 max_gas = 7; // max gas units consumed by tx
-  uint64 gas_price = 8; // fee per unit gas, in smidge
-  uint64 max_spend = 9;
-  bytes raw = 10;
+  uint64 max_gas = 6; // max gas units consumed by tx
+  uint64 gas_price = 7; // fee per unit gas, in smidge
+  uint64 max_spend = 8;
+  bytes raw = 9;
   enum TransactionType {
     TRANSACTION_TYPE_UNSPECIFIED = 0;
     TRANSACTION_TYPE_SINGLE_SIG_SEND = 1;
@@ -54,17 +53,12 @@ message TransactionV1 {
     TRANSACTION_TYPE_MULTI_SIG_SPAWN = 5;
     TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN = 6;
   }
-  TransactionType type = 11;
-  TransactionContents contents = 12; // parsed transaction contents
+  TransactionType type = 10;
+  TransactionContents contents = 11; // parsed transaction contents
 }
 
 message Nonce {
   uint64 counter = 1;
-}
-
-message LayerLimits {
-  uint32 min = 1;
-  uint32 max = 2;
 }
 
 // TransactionState is the "journey" of a tx from mempool to block inclusion to
