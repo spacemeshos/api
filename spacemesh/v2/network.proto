@@ -12,7 +12,7 @@ message NetworkInfoResponse {
   string hrp = 5;
   uint32 first_genesis = 7; // first effective genesis layer
   uint32 effective_genesis_layer = 8; // effective genesis layer, i.e., first layer after genesis initialization period
-  uint32 epoch_size = 9; // number of layers per epoch
+  uint32 layers_per_epoch = 9; // number of layers per epoch
 }
 
 service NetworkService {
