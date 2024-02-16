@@ -11,7 +11,7 @@ message NetworkInfoResponse {
   bytes genesis_id = 4;
   string hrp = 5;
   uint32 first_genesis = 7; // first effective genesis layer
-  uint32 effective_genesis = 8; // last layer of genesis
+  uint32 effective_genesis_layer = 8; // effective genesis layer, i.e., first layer after genesis initialization period
   uint32 epoch_size = 9; // number of layers per epoch
 }
 
