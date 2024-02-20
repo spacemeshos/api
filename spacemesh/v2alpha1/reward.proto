@@ -17,13 +17,14 @@ message RewardV1 {
 }
 
 message RewardRequest {
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
   oneof filter_by {
-    string coinbase = 1;
-    bytes smesher = 2;
+    string coinbase = 3;
+    bytes smesher = 4;
   }
-  uint32 layer = 3;
-  uint64 offset = 4; // adjusts the starting point for data
-  uint64 limit = 5; // specifies max number of items to fetch
+  uint64 offset = 5; // adjusts the starting point for data
+  uint64 limit = 6; // specifies max number of items to fetch
 }
 
 message RewardList {
