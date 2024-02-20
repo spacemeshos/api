@@ -34,3 +34,17 @@ message RewardList {
 service RewardService {
   rpc List(RewardRequest) returns (RewardList);
 }
+
+message RewardStreamRequest {
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
+  oneof filter_by {
+    string coinbase = 3;
+    bytes smesher = 4;
+  }
+  bool watch = 5;
+}
+
+service RewardStreamService {
+  rpc Stream(RewardStreamRequest) returns (stream Reward);
+}

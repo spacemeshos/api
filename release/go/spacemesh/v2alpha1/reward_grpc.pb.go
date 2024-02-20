@@ -105,3 +105,118 @@ var RewardService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "spacemesh/v2alpha1/reward.proto",
 }
+
+const (
+	RewardStreamService_Stream_FullMethodName = "/spacemesh.v2alpha1.RewardStreamService/Stream"
+)
+
+// RewardStreamServiceClient is the client API for RewardStreamService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type RewardStreamServiceClient interface {
+	Stream(ctx context.Context, in *RewardStreamRequest, opts ...grpc.CallOption) (RewardStreamService_StreamClient, error)
+}
+
+type rewardStreamServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRewardStreamServiceClient(cc grpc.ClientConnInterface) RewardStreamServiceClient {
+	return &rewardStreamServiceClient{cc}
+}
+
+func (c *rewardStreamServiceClient) Stream(ctx context.Context, in *RewardStreamRequest, opts ...grpc.CallOption) (RewardStreamService_StreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &RewardStreamService_ServiceDesc.Streams[0], RewardStreamService_Stream_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &rewardStreamServiceStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type RewardStreamService_StreamClient interface {
+	Recv() (*Reward, error)
+	grpc.ClientStream
+}
+
+type rewardStreamServiceStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *rewardStreamServiceStreamClient) Recv() (*Reward, error) {
+	m := new(Reward)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// RewardStreamServiceServer is the server API for RewardStreamService service.
+// All implementations should embed UnimplementedRewardStreamServiceServer
+// for forward compatibility
+type RewardStreamServiceServer interface {
+	Stream(*RewardStreamRequest, RewardStreamService_StreamServer) error
+}
+
+// UnimplementedRewardStreamServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedRewardStreamServiceServer struct {
+}
+
+func (UnimplementedRewardStreamServiceServer) Stream(*RewardStreamRequest, RewardStreamService_StreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
+}
+
+// UnsafeRewardStreamServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RewardStreamServiceServer will
+// result in compilation errors.
+type UnsafeRewardStreamServiceServer interface {
+	mustEmbedUnimplementedRewardStreamServiceServer()
+}
+
+func RegisterRewardStreamServiceServer(s grpc.ServiceRegistrar, srv RewardStreamServiceServer) {
+	s.RegisterService(&RewardStreamService_ServiceDesc, srv)
+}
+
+func _RewardStreamService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(RewardStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(RewardStreamServiceServer).Stream(m, &rewardStreamServiceStreamServer{stream})
+}
+
+type RewardStreamService_StreamServer interface {
+	Send(*Reward) error
+	grpc.ServerStream
+}
+
+type rewardStreamServiceStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *rewardStreamServiceStreamServer) Send(m *Reward) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+// RewardStreamService_ServiceDesc is the grpc.ServiceDesc for RewardStreamService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var RewardStreamService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "spacemesh.v2alpha1.RewardStreamService",
+	HandlerType: (*RewardStreamServiceServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Stream",
+			Handler:       _RewardStreamService_Stream_Handler,
+			ServerStreams: true,
+		},
+	},
+	Metadata: "spacemesh/v2alpha1/reward.proto",
+}
