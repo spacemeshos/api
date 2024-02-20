@@ -17,7 +17,7 @@ message NodeStatusResponse {
   uint32 verified_layer = 4; // last layer node has verified
   uint32 head_layer = 5; // current chain head; the last layer the node has gossiped or seen
   uint32 current_layer = 6; // current layer, based on clock time
-  uint32 head_block = 7;
+  uint32 head_block_id = 7;
 }
 
 service NodeService {
