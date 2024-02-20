@@ -21,8 +21,9 @@ message RewardRequest {
     string coinbase = 1;
     bytes smesher = 2;
   }
-  uint64 offset = 3; // adjusts the starting point for data
-  uint64 limit = 4; // specifies max number of items to fetch
+  uint32 layer = 3;
+  uint64 offset = 4; // adjusts the starting point for data
+  uint64 limit = 5; // specifies max number of items to fetch
 }
 
 message RewardList {
