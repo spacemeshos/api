@@ -4,6 +4,12 @@ import "spacemesh/v1/types.proto";
 
 package spacemesh.v1;
 
+/*
+ *
+ * PostService types
+ *
+ */
+
 // NodeRequest is a request sent from the node to the post service.
 message NodeRequest {
   oneof kind {
@@ -62,4 +68,29 @@ message MetadataRequest {}
 
 message MetadataResponse {
   Metadata meta = 1;
+}
+
+/*
+ *
+ * PostInfoService types
+ *
+ */
+
+message ServiceStatesRequest{
+
+}
+
+message ServiceState {
+  bytes node_id = 1;
+  enum Status {
+    _UNUSED = 0;
+    READY_PROOFING = 1;  // set at the beginning of the epoch,
+                         // returned until node has received a proof from the post service (also during proof generation)
+    PROOF_RECEIVED = 2;  // returned by the node after it has received a proof the end of the epoch
+  }
+  Status status = 2;
+}
+
+message ServiceStatesResponse{
+  repeated ServiceState states = 1;
 }

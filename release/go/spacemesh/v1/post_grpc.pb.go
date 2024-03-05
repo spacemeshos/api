@@ -141,3 +141,93 @@ var PostService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Metadata: "spacemesh/v1/post.proto",
 }
+
+const (
+	PostInfoService_ServiceStates_FullMethodName = "/spacemesh.v1.PostInfoService/ServiceStates"
+)
+
+// PostInfoServiceClient is the client API for PostInfoService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PostInfoServiceClient interface {
+	// GetInfo returns information about the state of the PoST service.
+	ServiceStates(ctx context.Context, in *ServiceStatesRequest, opts ...grpc.CallOption) (*ServiceStatesResponse, error)
+}
+
+type postInfoServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPostInfoServiceClient(cc grpc.ClientConnInterface) PostInfoServiceClient {
+	return &postInfoServiceClient{cc}
+}
+
+func (c *postInfoServiceClient) ServiceStates(ctx context.Context, in *ServiceStatesRequest, opts ...grpc.CallOption) (*ServiceStatesResponse, error) {
+	out := new(ServiceStatesResponse)
+	err := c.cc.Invoke(ctx, PostInfoService_ServiceStates_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PostInfoServiceServer is the server API for PostInfoService service.
+// All implementations should embed UnimplementedPostInfoServiceServer
+// for forward compatibility
+type PostInfoServiceServer interface {
+	// GetInfo returns information about the state of the PoST service.
+	ServiceStates(context.Context, *ServiceStatesRequest) (*ServiceStatesResponse, error)
+}
+
+// UnimplementedPostInfoServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedPostInfoServiceServer struct {
+}
+
+func (UnimplementedPostInfoServiceServer) ServiceStates(context.Context, *ServiceStatesRequest) (*ServiceStatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ServiceStates not implemented")
+}
+
+// UnsafePostInfoServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PostInfoServiceServer will
+// result in compilation errors.
+type UnsafePostInfoServiceServer interface {
+	mustEmbedUnimplementedPostInfoServiceServer()
+}
+
+func RegisterPostInfoServiceServer(s grpc.ServiceRegistrar, srv PostInfoServiceServer) {
+	s.RegisterService(&PostInfoService_ServiceDesc, srv)
+}
+
+func _PostInfoService_ServiceStates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ServiceStatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PostInfoServiceServer).ServiceStates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PostInfoService_ServiceStates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PostInfoServiceServer).ServiceStates(ctx, req.(*ServiceStatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PostInfoService_ServiceDesc is the grpc.ServiceDesc for PostInfoService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PostInfoService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "spacemesh.v1.PostInfoService",
+	HandlerType: (*PostInfoServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ServiceStates",
+			Handler:    _PostInfoService_ServiceStates_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "spacemesh/v1/post.proto",
+}

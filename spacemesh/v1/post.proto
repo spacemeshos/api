@@ -11,3 +11,9 @@ service PostService {
   // The node will send NodeRequets to PoST and the service will respond with ServiceResponses.
   rpc Register(stream ServiceResponse) returns (stream NodeRequest);
 }
+
+// PostInfoService can be used to query information about the states of PoST services.
+service PostInfoService {
+  // GetInfo returns information about the state of the PoST service.
+  rpc ServiceStates(ServiceStatesRequest) returns (ServiceStatesResponse);
+}
