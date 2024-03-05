@@ -34,3 +34,5 @@ lint:
 breaking:
   use:
     - WIRE_JSON
+  ignore:
+    - ./spacemesh/v2alpha1

@@ -76,7 +76,7 @@ message ActivationList {
 }
 
 message ActivationsCountRequest {
-  uint32 epoch = 1;
+  optional uint32 epoch = 1;
 }
 
 message ActivationsCountResponse {
