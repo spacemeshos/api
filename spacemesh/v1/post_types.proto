@@ -80,12 +80,14 @@ message PostStatesRequest {}
 
 message PostState {
   enum State {
-    IDLE = 0;     // post-service is not needed
-    PROVING = 1;  // ID is proving, post-service is needed
+    _UNUSED = 0;  // not used
+    IDLE = 1;     // post-service is not needed
+    PROVING = 2;  // ID is proving, post-service is needed
   }
 
   bytes id = 1;     // public key of the identity (aka Node ID)
   State state = 2;
+  string name = 3;
 }
 
 message PostStatesResponse {
