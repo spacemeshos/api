@@ -69,6 +69,55 @@ func (GenProofStatus) EnumDescriptor() ([]byte, []int) {
 	return file_spacemesh_v1_post_types_proto_rawDescGZIP(), []int{0}
 }
 
+type PostState_State int32
+
+const (
+	PostState__UNUSED PostState_State = 0 // not used
+	PostState_IDLE    PostState_State = 1 // post-service is not needed
+	PostState_PROVING PostState_State = 2 // ID is proving, post-service is needed
+)
+
+// Enum value maps for PostState_State.
+var (
+	PostState_State_name = map[int32]string{
+		0: "_UNUSED",
+		1: "IDLE",
+		2: "PROVING",
+	}
+	PostState_State_value = map[string]int32{
+		"_UNUSED": 0,
+		"IDLE":    1,
+		"PROVING": 2,
+	}
+)
+
+func (x PostState_State) Enum() *PostState_State {
+	p := new(PostState_State)
+	*p = x
+	return p
+}
+
+func (x PostState_State) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PostState_State) Descriptor() protoreflect.EnumDescriptor {
+	return file_spacemesh_v1_post_types_proto_enumTypes[1].Descriptor()
+}
+
+func (PostState_State) Type() protoreflect.EnumType {
+	return &file_spacemesh_v1_post_types_proto_enumTypes[1]
+}
+
+func (x PostState_State) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PostState_State.Descriptor instead.
+func (PostState_State) EnumDescriptor() ([]byte, []int) {
+	return file_spacemesh_v1_post_types_proto_rawDescGZIP(), []int{10, 0}
+}
+
 // NodeRequest is a request sent from the node to the post service.
 type NodeRequest struct {
 	state         protoimpl.MessageState
@@ -625,6 +674,154 @@ func (x *MetadataResponse) GetMeta() *Metadata {
 	return nil
 }
 
+type PostStatesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *PostStatesRequest) Reset() {
+	*x = PostStatesRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_post_types_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PostStatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PostStatesRequest) ProtoMessage() {}
+
+func (x *PostStatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_post_types_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PostStatesRequest.ProtoReflect.Descriptor instead.
+func (*PostStatesRequest) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_post_types_proto_rawDescGZIP(), []int{9}
+}
+
+type PostState struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id    []byte          `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // public key of the identity (aka Node ID)
+	State PostState_State `protobuf:"varint,2,opt,name=state,proto3,enum=spacemesh.v1.PostState_State" json:"state,omitempty"`
+	Name  string          `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+}
+
+func (x *PostState) Reset() {
+	*x = PostState{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_post_types_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PostState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PostState) ProtoMessage() {}
+
+func (x *PostState) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_post_types_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PostState.ProtoReflect.Descriptor instead.
+func (*PostState) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_post_types_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PostState) GetId() []byte {
+	if x != nil {
+		return x.Id
+	}
+	return nil
+}
+
+func (x *PostState) GetState() PostState_State {
+	if x != nil {
+		return x.State
+	}
+	return PostState__UNUSED
+}
+
+func (x *PostState) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type PostStatesResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	States []*PostState `protobuf:"bytes,1,rep,name=states,proto3" json:"states,omitempty"`
+}
+
+func (x *PostStatesResponse) Reset() {
+	*x = PostStatesResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v1_post_types_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PostStatesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PostStatesResponse) ProtoMessage() {}
+
+func (x *PostStatesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v1_post_types_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PostStatesResponse.ProtoReflect.Descriptor instead.
+func (*PostStatesResponse) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v1_post_types_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *PostStatesResponse) GetStates() []*PostState {
+	if x != nil {
+		return x.States
+	}
+	return nil
+}
+
 var File_spacemesh_v1_post_types_proto protoreflect.FileDescriptor
 
 var file_spacemesh_v1_post_types_proto_rawDesc = []byte{
@@ -692,7 +889,22 @@ var file_spacemesh_v1_post_types_proto_rawDesc = []byte{
 	0x64, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x04,
 	0x6d, 0x65, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x73, 0x70, 0x61,
 	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
-	0x74, 0x61, 0x52, 0x04, 0x6d, 0x65, 0x74, 0x61, 0x2a, 0x67, 0x0a, 0x0e, 0x47, 0x65, 0x6e, 0x50,
+	0x74, 0x61, 0x52, 0x04, 0x6d, 0x65, 0x74, 0x61, 0x22, 0x13, 0x0a, 0x11, 0x50, 0x6f, 0x73, 0x74,
+	0x53, 0x74, 0x61, 0x74, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x91, 0x01,
+	0x0a, 0x09, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x69, 0x64, 0x12, 0x33, 0x0a, 0x05, 0x73,
+	0x74, 0x61, 0x74, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1d, 0x2e, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x74,
+	0x61, 0x74, 0x65, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65,
+	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x22, 0x2b, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x0b, 0x0a,
+	0x07, 0x5f, 0x55, 0x4e, 0x55, 0x53, 0x45, 0x44, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x49, 0x44,
+	0x4c, 0x45, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x52, 0x4f, 0x56, 0x49, 0x4e, 0x47, 0x10,
+	0x02, 0x22, 0x45, 0x0a, 0x12, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2f, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x65,
+	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d,
+	0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x74, 0x61, 0x74, 0x65,
+	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x65, 0x73, 0x2a, 0x67, 0x0a, 0x0e, 0x47, 0x65, 0x6e, 0x50,
 	0x72, 0x6f, 0x6f, 0x66, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x20, 0x0a, 0x1c, 0x47, 0x45,
 	0x4e, 0x5f, 0x50, 0x52, 0x4f, 0x4f, 0x46, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x55,
 	0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x17, 0x0a, 0x13,
@@ -725,35 +937,41 @@ func file_spacemesh_v1_post_types_proto_rawDescGZIP() []byte {
 	return file_spacemesh_v1_post_types_proto_rawDescData
 }
 
-var file_spacemesh_v1_post_types_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_spacemesh_v1_post_types_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_spacemesh_v1_post_types_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_spacemesh_v1_post_types_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_spacemesh_v1_post_types_proto_goTypes = []interface{}{
-	(GenProofStatus)(0),      // 0: spacemesh.v1.GenProofStatus
-	(*NodeRequest)(nil),      // 1: spacemesh.v1.NodeRequest
-	(*ServiceResponse)(nil),  // 2: spacemesh.v1.ServiceResponse
-	(*GenProofRequest)(nil),  // 3: spacemesh.v1.GenProofRequest
-	(*Proof)(nil),            // 4: spacemesh.v1.Proof
-	(*Metadata)(nil),         // 5: spacemesh.v1.Metadata
-	(*ProofMetadata)(nil),    // 6: spacemesh.v1.ProofMetadata
-	(*GenProofResponse)(nil), // 7: spacemesh.v1.GenProofResponse
-	(*MetadataRequest)(nil),  // 8: spacemesh.v1.MetadataRequest
-	(*MetadataResponse)(nil), // 9: spacemesh.v1.MetadataResponse
+	(GenProofStatus)(0),        // 0: spacemesh.v1.GenProofStatus
+	(PostState_State)(0),       // 1: spacemesh.v1.PostState.State
+	(*NodeRequest)(nil),        // 2: spacemesh.v1.NodeRequest
+	(*ServiceResponse)(nil),    // 3: spacemesh.v1.ServiceResponse
+	(*GenProofRequest)(nil),    // 4: spacemesh.v1.GenProofRequest
+	(*Proof)(nil),              // 5: spacemesh.v1.Proof
+	(*Metadata)(nil),           // 6: spacemesh.v1.Metadata
+	(*ProofMetadata)(nil),      // 7: spacemesh.v1.ProofMetadata
+	(*GenProofResponse)(nil),   // 8: spacemesh.v1.GenProofResponse
+	(*MetadataRequest)(nil),    // 9: spacemesh.v1.MetadataRequest
+	(*MetadataResponse)(nil),   // 10: spacemesh.v1.MetadataResponse
+	(*PostStatesRequest)(nil),  // 11: spacemesh.v1.PostStatesRequest
+	(*PostState)(nil),          // 12: spacemesh.v1.PostState
+	(*PostStatesResponse)(nil), // 13: spacemesh.v1.PostStatesResponse
 }
 var file_spacemesh_v1_post_types_proto_depIdxs = []int32{
-	8, // 0: spacemesh.v1.NodeRequest.metadata:type_name -> spacemesh.v1.MetadataRequest
-	3, // 1: spacemesh.v1.NodeRequest.gen_proof:type_name -> spacemesh.v1.GenProofRequest
-	9, // 2: spacemesh.v1.ServiceResponse.metadata:type_name -> spacemesh.v1.MetadataResponse
-	7, // 3: spacemesh.v1.ServiceResponse.gen_proof:type_name -> spacemesh.v1.GenProofResponse
-	5, // 4: spacemesh.v1.ProofMetadata.meta:type_name -> spacemesh.v1.Metadata
-	0, // 5: spacemesh.v1.GenProofResponse.status:type_name -> spacemesh.v1.GenProofStatus
-	4, // 6: spacemesh.v1.GenProofResponse.proof:type_name -> spacemesh.v1.Proof
-	6, // 7: spacemesh.v1.GenProofResponse.metadata:type_name -> spacemesh.v1.ProofMetadata
-	5, // 8: spacemesh.v1.MetadataResponse.meta:type_name -> spacemesh.v1.Metadata
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	9,  // 0: spacemesh.v1.NodeRequest.metadata:type_name -> spacemesh.v1.MetadataRequest
+	4,  // 1: spacemesh.v1.NodeRequest.gen_proof:type_name -> spacemesh.v1.GenProofRequest
+	10, // 2: spacemesh.v1.ServiceResponse.metadata:type_name -> spacemesh.v1.MetadataResponse
+	8,  // 3: spacemesh.v1.ServiceResponse.gen_proof:type_name -> spacemesh.v1.GenProofResponse
+	6,  // 4: spacemesh.v1.ProofMetadata.meta:type_name -> spacemesh.v1.Metadata
+	0,  // 5: spacemesh.v1.GenProofResponse.status:type_name -> spacemesh.v1.GenProofStatus
+	5,  // 6: spacemesh.v1.GenProofResponse.proof:type_name -> spacemesh.v1.Proof
+	7,  // 7: spacemesh.v1.GenProofResponse.metadata:type_name -> spacemesh.v1.ProofMetadata
+	6,  // 8: spacemesh.v1.MetadataResponse.meta:type_name -> spacemesh.v1.Metadata
+	1,  // 9: spacemesh.v1.PostState.state:type_name -> spacemesh.v1.PostState.State
+	12, // 10: spacemesh.v1.PostStatesResponse.states:type_name -> spacemesh.v1.PostState
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v1_post_types_proto_init() }
@@ -871,6 +1089,42 @@ func file_spacemesh_v1_post_types_proto_init() {
 				return nil
 			}
 		}
+		file_spacemesh_v1_post_types_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PostStatesRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_post_types_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PostState); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v1_post_types_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PostStatesResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_spacemesh_v1_post_types_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*NodeRequest_Metadata)(nil),
@@ -886,8 +1140,8 @@ func file_spacemesh_v1_post_types_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v1_post_types_proto_rawDesc,
-			NumEnums:      1,
-			NumMessages:   9,
+			NumEnums:      2,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
