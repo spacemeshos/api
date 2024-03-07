@@ -143,15 +143,15 @@ var PostService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PostInfoService_ServiceStates_FullMethodName = "/spacemesh.v1.PostInfoService/ServiceStates"
+	PostInfoService_PostStates_FullMethodName = "/spacemesh.v1.PostInfoService/PostStates"
 )
 
 // PostInfoServiceClient is the client API for PostInfoService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PostInfoServiceClient interface {
-	// GetInfo returns information about the state of the PoST service.
-	ServiceStates(ctx context.Context, in *ServiceStatesRequest, opts ...grpc.CallOption) (*ServiceStatesResponse, error)
+	// PostStates returns information about the state of the PoST for all known IDs.
+	PostStates(ctx context.Context, in *PostStatesRequest, opts ...grpc.CallOption) (*PostStatesResponse, error)
 }
 
 type postInfoServiceClient struct {
@@ -162,9 +162,9 @@ func NewPostInfoServiceClient(cc grpc.ClientConnInterface) PostInfoServiceClient
 	return &postInfoServiceClient{cc}
 }
 
-func (c *postInfoServiceClient) ServiceStates(ctx context.Context, in *ServiceStatesRequest, opts ...grpc.CallOption) (*ServiceStatesResponse, error) {
-	out := new(ServiceStatesResponse)
-	err := c.cc.Invoke(ctx, PostInfoService_ServiceStates_FullMethodName, in, out, opts...)
+func (c *postInfoServiceClient) PostStates(ctx context.Context, in *PostStatesRequest, opts ...grpc.CallOption) (*PostStatesResponse, error) {
+	out := new(PostStatesResponse)
+	err := c.cc.Invoke(ctx, PostInfoService_PostStates_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -175,16 +175,16 @@ func (c *postInfoServiceClient) ServiceStates(ctx context.Context, in *ServiceSt
 // All implementations should embed UnimplementedPostInfoServiceServer
 // for forward compatibility
 type PostInfoServiceServer interface {
-	// GetInfo returns information about the state of the PoST service.
-	ServiceStates(context.Context, *ServiceStatesRequest) (*ServiceStatesResponse, error)
+	// PostStates returns information about the state of the PoST for all known IDs.
+	PostStates(context.Context, *PostStatesRequest) (*PostStatesResponse, error)
 }
 
 // UnimplementedPostInfoServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedPostInfoServiceServer struct {
 }
 
-func (UnimplementedPostInfoServiceServer) ServiceStates(context.Context, *ServiceStatesRequest) (*ServiceStatesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ServiceStates not implemented")
+func (UnimplementedPostInfoServiceServer) PostStates(context.Context, *PostStatesRequest) (*PostStatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostStates not implemented")
 }
 
 // UnsafePostInfoServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -198,20 +198,20 @@ func RegisterPostInfoServiceServer(s grpc.ServiceRegistrar, srv PostInfoServiceS
 	s.RegisterService(&PostInfoService_ServiceDesc, srv)
 }
 
-func _PostInfoService_ServiceStates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ServiceStatesRequest)
+func _PostInfoService_PostStates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostStatesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PostInfoServiceServer).ServiceStates(ctx, in)
+		return srv.(PostInfoServiceServer).PostStates(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PostInfoService_ServiceStates_FullMethodName,
+		FullMethod: PostInfoService_PostStates_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostInfoServiceServer).ServiceStates(ctx, req.(*ServiceStatesRequest))
+		return srv.(PostInfoServiceServer).PostStates(ctx, req.(*PostStatesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -224,8 +224,8 @@ var PostInfoService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PostInfoServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ServiceStates",
-			Handler:    _PostInfoService_ServiceStates_Handler,
+			MethodName: "PostStates",
+			Handler:    _PostInfoService_PostStates_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

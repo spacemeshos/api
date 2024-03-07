@@ -76,21 +76,18 @@ message MetadataResponse {
  *
  */
 
-message ServiceStatesRequest{
+message PostStatesRequest {}
 
-}
-
-message ServiceState {
-  bytes node_id = 1;
-  enum Status {
-    _UNUSED = 0;
-    READY_PROOFING = 1;  // set at the beginning of the epoch,
-                         // returned until node has received a proof from the post service (also during proof generation)
-    PROOF_RECEIVED = 2;  // returned by the node after it has received a proof the end of the epoch
+message PostState {
+  enum State {
+    IDLE = 0;     // post-service is not needed
+    PROVING = 1;  // ID is proving, post-service is needed
   }
-  Status status = 2;
+
+  bytes id = 1;     // public key of the identity (aka Node ID)
+  State state = 2;
 }
 
-message ServiceStatesResponse{
-  repeated ServiceState states = 1;
+message PostStatesResponse {
+  repeated PostState states = 1;
 }

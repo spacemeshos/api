@@ -14,6 +14,6 @@ service PostService {
 
 // PostInfoService can be used to query information about the states of PoST services.
 service PostInfoService {
-  // GetInfo returns information about the state of the PoST service.
-  rpc ServiceStates(ServiceStatesRequest) returns (ServiceStatesResponse);
+  // PostStates returns information about the state of the PoST for all known IDs.
+  rpc PostStates(PostStatesRequest) returns (PostStatesResponse);
 }
