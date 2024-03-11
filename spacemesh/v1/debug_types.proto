@@ -73,7 +73,3 @@ message ChangeLogLevelRequest {
     string module = 1;
     string level = 2;
 }
-
-message ChangeLogLevelResponse {
-    google.rpc.Status status = 1;
-}

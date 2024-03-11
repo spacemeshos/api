@@ -41,7 +41,7 @@ type DebugServiceClient interface {
 	ActiveSet(ctx context.Context, in *ActiveSetRequest, opts ...grpc.CallOption) (*ActiveSetResponse, error)
 	// ProposalsStream streams all proposals that are confirmed by hare.
 	ProposalsStream(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (DebugService_ProposalsStreamClient, error)
-	ChangeLogLevel(ctx context.Context, in *ChangeLogLevelRequest, opts ...grpc.CallOption) (*ChangeLogLevelResponse, error)
+	ChangeLogLevel(ctx context.Context, in *ChangeLogLevelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type debugServiceClient struct {
@@ -111,8 +111,8 @@ func (x *debugServiceProposalsStreamClient) Recv() (*Proposal, error) {
 	return m, nil
 }
 
-func (c *debugServiceClient) ChangeLogLevel(ctx context.Context, in *ChangeLogLevelRequest, opts ...grpc.CallOption) (*ChangeLogLevelResponse, error) {
-	out := new(ChangeLogLevelResponse)
+func (c *debugServiceClient) ChangeLogLevel(ctx context.Context, in *ChangeLogLevelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, DebugService_ChangeLogLevel_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -134,7 +134,7 @@ type DebugServiceServer interface {
 	ActiveSet(context.Context, *ActiveSetRequest) (*ActiveSetResponse, error)
 	// ProposalsStream streams all proposals that are confirmed by hare.
 	ProposalsStream(*emptypb.Empty, DebugService_ProposalsStreamServer) error
-	ChangeLogLevel(context.Context, *ChangeLogLevelRequest) (*ChangeLogLevelResponse, error)
+	ChangeLogLevel(context.Context, *ChangeLogLevelRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedDebugServiceServer should be embedded to have forward compatible implementations.
@@ -153,7 +153,7 @@ func (UnimplementedDebugServiceServer) ActiveSet(context.Context, *ActiveSetRequ
 func (UnimplementedDebugServiceServer) ProposalsStream(*emptypb.Empty, DebugService_ProposalsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method ProposalsStream not implemented")
 }
-func (UnimplementedDebugServiceServer) ChangeLogLevel(context.Context, *ChangeLogLevelRequest) (*ChangeLogLevelResponse, error) {
+func (UnimplementedDebugServiceServer) ChangeLogLevel(context.Context, *ChangeLogLevelRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeLogLevel not implemented")
 }
 
