@@ -70,6 +70,6 @@ message Proposal {
 }
 
 message ChangeLogLevelRequest {
-    string module = 1;
+    string module = 1; // '*' will match all registered modules
     string level = 2;
 }
