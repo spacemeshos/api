@@ -29,4 +29,6 @@ service DebugService {
 
     // ProposalsStream streams all proposals that are confirmed by hare.
     rpc ProposalsStream(google.protobuf.Empty) returns (stream Proposal);
+
+    rpc ChangeLogLevel(ChangeLogLevelRequest) returns (ChangeLogLevelResponse);
 }
