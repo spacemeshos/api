@@ -692,7 +692,7 @@ type ChangeLogLevelRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Module string `protobuf:"bytes,1,opt,name=module,proto3" json:"module,omitempty"`
+	Module string `protobuf:"bytes,1,opt,name=module,proto3" json:"module,omitempty"` // '*' will match all registered modules
 	Level  string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 }
 
