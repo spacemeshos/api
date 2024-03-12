@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "spacemesh/v1/global_state_types.proto";
 import "spacemesh/v1/types.proto";
+import "google/rpc/status.proto";
 
 package spacemesh.v1;
 
@@ -66,4 +67,9 @@ message Proposal {
         Included = 1;
     }
     Status status = 9;
+}
+
+message ChangeLogLevelRequest {
+    string module = 1; // '*' will match all registered modules
+    string level = 2;
 }

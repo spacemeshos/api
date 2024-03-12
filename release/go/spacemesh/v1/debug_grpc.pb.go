@@ -24,6 +24,7 @@ const (
 	DebugService_Accounts_FullMethodName        = "/spacemesh.v1.DebugService/Accounts"
 	DebugService_ActiveSet_FullMethodName       = "/spacemesh.v1.DebugService/ActiveSet"
 	DebugService_ProposalsStream_FullMethodName = "/spacemesh.v1.DebugService/ProposalsStream"
+	DebugService_ChangeLogLevel_FullMethodName  = "/spacemesh.v1.DebugService/ChangeLogLevel"
 )
 
 // DebugServiceClient is the client API for DebugService service.
@@ -40,6 +41,7 @@ type DebugServiceClient interface {
 	ActiveSet(ctx context.Context, in *ActiveSetRequest, opts ...grpc.CallOption) (*ActiveSetResponse, error)
 	// ProposalsStream streams all proposals that are confirmed by hare.
 	ProposalsStream(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (DebugService_ProposalsStreamClient, error)
+	ChangeLogLevel(ctx context.Context, in *ChangeLogLevelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type debugServiceClient struct {
@@ -109,6 +111,15 @@ func (x *debugServiceProposalsStreamClient) Recv() (*Proposal, error) {
 	return m, nil
 }
 
+func (c *debugServiceClient) ChangeLogLevel(ctx context.Context, in *ChangeLogLevelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, DebugService_ChangeLogLevel_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DebugServiceServer is the server API for DebugService service.
 // All implementations should embed UnimplementedDebugServiceServer
 // for forward compatibility
@@ -123,6 +134,7 @@ type DebugServiceServer interface {
 	ActiveSet(context.Context, *ActiveSetRequest) (*ActiveSetResponse, error)
 	// ProposalsStream streams all proposals that are confirmed by hare.
 	ProposalsStream(*emptypb.Empty, DebugService_ProposalsStreamServer) error
+	ChangeLogLevel(context.Context, *ChangeLogLevelRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedDebugServiceServer should be embedded to have forward compatible implementations.
@@ -140,6 +152,9 @@ func (UnimplementedDebugServiceServer) ActiveSet(context.Context, *ActiveSetRequ
 }
 func (UnimplementedDebugServiceServer) ProposalsStream(*emptypb.Empty, DebugService_ProposalsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method ProposalsStream not implemented")
+}
+func (UnimplementedDebugServiceServer) ChangeLogLevel(context.Context, *ChangeLogLevelRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeLogLevel not implemented")
 }
 
 // UnsafeDebugServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -228,6 +243,24 @@ func (x *debugServiceProposalsStreamServer) Send(m *Proposal) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _DebugService_ChangeLogLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeLogLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DebugServiceServer).ChangeLogLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DebugService_ChangeLogLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DebugServiceServer).ChangeLogLevel(ctx, req.(*ChangeLogLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DebugService_ServiceDesc is the grpc.ServiceDesc for DebugService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -246,6 +279,10 @@ var DebugService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ActiveSet",
 			Handler:    _DebugService_ActiveSet_Handler,
+		},
+		{
+			MethodName: "ChangeLogLevel",
+			Handler:    _DebugService_ChangeLogLevel_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
