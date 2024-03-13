@@ -61,7 +61,9 @@ message EventInitFailed {
   string error = 3;
 }
 
-message EventInitComplete {}
+message EventInitComplete {
+  bytes smesher = 1;
+}
 
 message EventPostServiceStarted {}
 
@@ -82,6 +84,7 @@ message EventPoetWaitRound {
   uint32 publish = 2;
   google.protobuf.Duration wait = 3;
   google.protobuf.Timestamp until = 4;
+  bytes smesher = 5;
 }
 
 message EventPoetWaitProof {
@@ -89,6 +92,7 @@ message EventPoetWaitProof {
   uint32 target = 2;
   google.protobuf.Duration wait = 3;
   google.protobuf.Timestamp until = 4;
+  bytes smesher = 5;
 }
 
 message EventAtxPubished {
@@ -97,6 +101,7 @@ message EventAtxPubished {
   bytes id = 3;
   google.protobuf.Duration wait = 4;
   google.protobuf.Timestamp until = 5;
+  bytes smesher = 6;
 }
 
 message EventEligibilities {
@@ -105,6 +110,7 @@ message EventEligibilities {
   bytes atx = 3;
   uint32 active_set_size = 4;
   repeated ProposalEligibility eligibilities = 5;
+  bytes smesher = 6;
 }
 
 message ProposalEligibility {
@@ -116,6 +122,7 @@ message ProposalEligibility {
 message EventProposal {
   uint32 layer = 1;
   bytes proposal = 2;
+  bytes smesher = 3;
 }
 
 message EventMalfeasance {
