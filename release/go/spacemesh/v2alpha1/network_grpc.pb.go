@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -26,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NetworkServiceClient interface {
-	Info(ctx context.Context, in *NetworkInfoRequest, opts ...grpc.CallOption) (*NetworkInfoResponse, error)
+	Info(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*NetworkInfoResponse, error)
 }
 
 type networkServiceClient struct {
@@ -37,7 +38,7 @@ func NewNetworkServiceClient(cc grpc.ClientConnInterface) NetworkServiceClient {
 	return &networkServiceClient{cc}
 }
 
-func (c *networkServiceClient) Info(ctx context.Context, in *NetworkInfoRequest, opts ...grpc.CallOption) (*NetworkInfoResponse, error) {
+func (c *networkServiceClient) Info(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*NetworkInfoResponse, error) {
 	out := new(NetworkInfoResponse)
 	err := c.cc.Invoke(ctx, NetworkService_Info_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -50,14 +51,14 @@ func (c *networkServiceClient) Info(ctx context.Context, in *NetworkInfoRequest,
 // All implementations should embed UnimplementedNetworkServiceServer
 // for forward compatibility
 type NetworkServiceServer interface {
-	Info(context.Context, *NetworkInfoRequest) (*NetworkInfoResponse, error)
+	Info(context.Context, *emptypb.Empty) (*NetworkInfoResponse, error)
 }
 
 // UnimplementedNetworkServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedNetworkServiceServer struct {
 }
 
-func (UnimplementedNetworkServiceServer) Info(context.Context, *NetworkInfoRequest) (*NetworkInfoResponse, error) {
+func (UnimplementedNetworkServiceServer) Info(context.Context, *emptypb.Empty) (*NetworkInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Info not implemented")
 }
 
@@ -73,7 +74,7 @@ func RegisterNetworkServiceServer(s grpc.ServiceRegistrar, srv NetworkServiceSer
 }
 
 func _NetworkService_Info_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NetworkInfoRequest)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -85,7 +86,7 @@ func _NetworkService_Info_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: NetworkService_Info_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NetworkServiceServer).Info(ctx, req.(*NetworkInfoRequest))
+		return srv.(NetworkServiceServer).Info(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -1,12 +1,11 @@
 syntax = "proto3";
 
-package spacemesh.v2alpha1;
+import "google/protobuf/empty.proto";
 
-message NetworkInfoRequest {}
+package spacemesh.v2alpha1;
 
 message NetworkInfoResponse {
   uint64 genesis_time = 1; // network genesis time as unix epoch time
-  uint32 epoch_num_layers = 2; // number of layers per epoch
   uint32 layer_duration = 3; // layer duration, in seconds
   bytes genesis_id = 4;
   string hrp = 5;
@@ -15,5 +14,5 @@ message NetworkInfoResponse {
 }
 
 service NetworkService {
-  rpc Info(NetworkInfoRequest) returns (NetworkInfoResponse);
+  rpc Info(google.protobuf.Empty) returns (NetworkInfoResponse);
 }
