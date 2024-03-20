@@ -27,8 +27,8 @@ type NetworkInfoResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GenesisTime           *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=genesis_time,json=genesisTime,proto3" json:"genesis_time,omitempty"`       // network genesis time as unix epoch time
-	LayerDuration         *durationpb.Duration   `protobuf:"bytes,3,opt,name=layer_duration,json=layerDuration,proto3" json:"layer_duration,omitempty"` // layer duration, in seconds
+	GenesisTime           *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=genesis_time,json=genesisTime,proto3" json:"genesis_time,omitempty"`       // genesis time of the network, represented as a timestamp
+	LayerDuration         *durationpb.Duration   `protobuf:"bytes,3,opt,name=layer_duration,json=layerDuration,proto3" json:"layer_duration,omitempty"` // duration of each layer in the network, specified as a duration
 	GenesisId             []byte                 `protobuf:"bytes,4,opt,name=genesis_id,json=genesisId,proto3" json:"genesis_id,omitempty"`
 	Hrp                   string                 `protobuf:"bytes,5,opt,name=hrp,proto3" json:"hrp,omitempty"`
 	EffectiveGenesisLayer uint32                 `protobuf:"varint,6,opt,name=effective_genesis_layer,json=effectiveGenesisLayer,proto3" json:"effective_genesis_layer,omitempty"` // effective genesis layer, i.e., first layer after genesis initialization period
