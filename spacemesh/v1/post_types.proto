@@ -82,7 +82,8 @@ message PostState {
   enum State {
     _UNUSED = 0;  // not used
     IDLE = 1;     // post-service is not needed
-    PROVING = 2;  // ID is proving, post-service is needed
+    PROVING = 2;  // ID is proving, post-service is needed and present
+    PENDING = 3;  // ID is proving, post-service is needed but not present
   }
 
   bytes id = 1;     // public key of the identity (aka Node ID)
