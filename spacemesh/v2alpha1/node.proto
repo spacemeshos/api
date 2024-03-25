@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
-
 package spacemesh.v2alpha1;
 
 message NodeStatusResponse {
@@ -20,6 +18,8 @@ message NodeStatusResponse {
   bytes head_block_id = 7;
 }
 
+message NodeStatusRequest {}
+
 service NodeService {
-  rpc Status(google.protobuf.Empty) returns (NodeStatusResponse);
+  rpc Status(NodeStatusRequest) returns (NodeStatusResponse);
 }
