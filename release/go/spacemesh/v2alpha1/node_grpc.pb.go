@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -27,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NodeServiceClient interface {
-	Status(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*NodeStatusResponse, error)
+	Status(ctx context.Context, in *NodeStatusRequest, opts ...grpc.CallOption) (*NodeStatusResponse, error)
 }
 
 type nodeServiceClient struct {
@@ -38,7 +37,7 @@ func NewNodeServiceClient(cc grpc.ClientConnInterface) NodeServiceClient {
 	return &nodeServiceClient{cc}
 }
 
-func (c *nodeServiceClient) Status(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*NodeStatusResponse, error) {
+func (c *nodeServiceClient) Status(ctx context.Context, in *NodeStatusRequest, opts ...grpc.CallOption) (*NodeStatusResponse, error) {
 	out := new(NodeStatusResponse)
 	err := c.cc.Invoke(ctx, NodeService_Status_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -51,14 +50,14 @@ func (c *nodeServiceClient) Status(ctx context.Context, in *emptypb.Empty, opts 
 // All implementations should embed UnimplementedNodeServiceServer
 // for forward compatibility
 type NodeServiceServer interface {
-	Status(context.Context, *emptypb.Empty) (*NodeStatusResponse, error)
+	Status(context.Context, *NodeStatusRequest) (*NodeStatusResponse, error)
 }
 
 // UnimplementedNodeServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedNodeServiceServer struct {
 }
 
-func (UnimplementedNodeServiceServer) Status(context.Context, *emptypb.Empty) (*NodeStatusResponse, error) {
+func (UnimplementedNodeServiceServer) Status(context.Context, *NodeStatusRequest) (*NodeStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
 }
 
@@ -74,7 +73,7 @@ func RegisterNodeServiceServer(s grpc.ServiceRegistrar, srv NodeServiceServer) {
 }
 
 func _NodeService_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(NodeStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -86,7 +85,7 @@ func _NodeService_Status_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: NodeService_Status_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NodeServiceServer).Status(ctx, req.(*emptypb.Empty))
+		return srv.(NodeServiceServer).Status(ctx, req.(*NodeStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

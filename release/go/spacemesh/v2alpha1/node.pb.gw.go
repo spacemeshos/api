@@ -21,7 +21,6 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // Suppress "imported and not used" errors
@@ -33,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 func request_NodeService_Status_0(ctx context.Context, marshaler runtime.Marshaler, client NodeServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq NodeStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -50,7 +49,7 @@ func request_NodeService_Status_0(ctx context.Context, marshaler runtime.Marshal
 }
 
 func local_request_NodeService_Status_0(ctx context.Context, marshaler runtime.Marshaler, server NodeServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+	var protoReq NodeStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
