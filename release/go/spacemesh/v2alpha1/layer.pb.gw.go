@@ -31,7 +31,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_LayerService_Get_0(ctx context.Context, marshaler runtime.Marshaler, client LayerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_LayerService_List_0(ctx context.Context, marshaler runtime.Marshaler, client LayerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq LayerRequest
 	var metadata runtime.ServerMetadata
 
@@ -43,12 +43,12 @@ func request_LayerService_Get_0(ctx context.Context, marshaler runtime.Marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.Get(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.List(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_LayerService_Get_0(ctx context.Context, marshaler runtime.Marshaler, server LayerServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_LayerService_List_0(ctx context.Context, marshaler runtime.Marshaler, server LayerServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq LayerRequest
 	var metadata runtime.ServerMetadata
 
@@ -60,8 +60,33 @@ func local_request_LayerService_Get_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.Get(ctx, &protoReq)
+	msg, err := server.List(ctx, &protoReq)
 	return msg, metadata, err
+
+}
+
+func request_LayerStreamService_Stream_0(ctx context.Context, marshaler runtime.Marshaler, client LayerStreamServiceClient, req *http.Request, pathParams map[string]string) (LayerStreamService_StreamClient, runtime.ServerMetadata, error) {
+	var protoReq LayerStreamRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.Stream(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -71,7 +96,7 @@ func local_request_LayerService_Get_0(ctx context.Context, marshaler runtime.Mar
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterLayerServiceHandlerFromEndpoint instead.
 func RegisterLayerServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server LayerServiceServer) error {
 
-	mux.Handle("POST", pattern_LayerService_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_LayerService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -79,12 +104,12 @@ func RegisterLayerServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.LayerService/Get", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.LayerService/Get"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.LayerService/List", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.LayerService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_LayerService_Get_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_LayerService_List_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -92,8 +117,24 @@ func RegisterLayerServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 			return
 		}
 
-		forward_LayerService_Get_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_LayerService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	return nil
+}
+
+// RegisterLayerStreamServiceHandlerServer registers the http handlers for service LayerStreamService to "mux".
+// UnaryRPC     :call LayerStreamServiceServer directly.
+// StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterLayerStreamServiceHandlerFromEndpoint instead.
+func RegisterLayerStreamServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server LayerStreamServiceServer) error {
+
+	mux.Handle("POST", pattern_LayerStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -137,25 +178,25 @@ func RegisterLayerServiceHandler(ctx context.Context, mux *runtime.ServeMux, con
 // "LayerServiceClient" to call the correct interceptors.
 func RegisterLayerServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client LayerServiceClient) error {
 
-	mux.Handle("POST", pattern_LayerService_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_LayerService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.LayerService/Get", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.LayerService/Get"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.LayerService/List", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.LayerService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_LayerService_Get_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_LayerService_List_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_LayerService_Get_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_LayerService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -163,9 +204,80 @@ func RegisterLayerServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 }
 
 var (
-	pattern_LayerService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2alpha1.LayerService", "Get"}, ""))
+	pattern_LayerService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2alpha1.LayerService", "List"}, ""))
 )
 
 var (
-	forward_LayerService_Get_0 = runtime.ForwardResponseMessage
+	forward_LayerService_List_0 = runtime.ForwardResponseMessage
+)
+
+// RegisterLayerStreamServiceHandlerFromEndpoint is same as RegisterLayerStreamServiceHandler but
+// automatically dials to "endpoint" and closes the connection when "ctx" gets done.
+func RegisterLayerStreamServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+			return
+		}
+		go func() {
+			<-ctx.Done()
+			if cerr := conn.Close(); cerr != nil {
+				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+			}
+		}()
+	}()
+
+	return RegisterLayerStreamServiceHandler(ctx, mux, conn)
+}
+
+// RegisterLayerStreamServiceHandler registers the http handlers for service LayerStreamService to "mux".
+// The handlers forward requests to the grpc endpoint over "conn".
+func RegisterLayerStreamServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterLayerStreamServiceHandlerClient(ctx, mux, NewLayerStreamServiceClient(conn))
+}
+
+// RegisterLayerStreamServiceHandlerClient registers the http handlers for service LayerStreamService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "LayerStreamServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "LayerStreamServiceClient"
+// doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
+// "LayerStreamServiceClient" to call the correct interceptors.
+func RegisterLayerStreamServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client LayerStreamServiceClient) error {
+
+	mux.Handle("POST", pattern_LayerStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.LayerStreamService/Stream", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.LayerStreamService/Stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_LayerStreamService_Stream_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LayerStreamService_Stream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
+	return nil
+}
+
+var (
+	pattern_LayerStreamService_Stream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2alpha1.LayerStreamService", "Stream"}, ""))
+)
+
+var (
+	forward_LayerStreamService_Stream_0 = runtime.ForwardResponseStream
 )

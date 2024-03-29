@@ -12,5 +12,4 @@ message Block {
 
 message BlockV1 {
   bytes id = 1; // block hash
-  repeated Transaction transactions = 2; // block transactions, in canonical order
 }
