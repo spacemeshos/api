@@ -131,10 +131,30 @@ message EventMalfeasance {
 
 message EventStreamRequest {}
 
+message PeerConnectionStats {
+  uint64 success_count = 1;
+  uint64 failure_count = 2;
+  optional google.protobuf.Duration latency = 3;
+  uint64 bytes_sent = 4;
+  uint64 bytes_received = 5;
+}
+
 message ConnectionInfo {
   string address = 1;
   google.protobuf.Duration uptime = 2;
   bool outbound = 3;
+  enum Kind {
+    Uknown = 0;
+    Inbound = 1;
+    Outbound = 2;
+    HPInbound = 3;
+    HPOutbound = 4;
+    RelayInbound = 5;
+    RelayOutbound = 6;
+  }
+  Kind kind = 4;
+  optional PeerConnectionStats client_stats = 5;
+  optional PeerConnectionStats server_stats = 6;
 }
 
 message PeerInfo {
