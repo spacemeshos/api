@@ -13,8 +13,9 @@ message Layer {
 message LayerV1 {
   uint32 number = 1; // layer number - not hash - layer content may change
   enum LayerStatus {
-    LAYER_STATUS_APPLIED = 0; // applied by hare
-    LAYER_STATUS_VERIFIED = 1; // verified by tortoise
+    LAYER_STATUS_UNSPECIFIED = 0;
+    LAYER_STATUS_APPLIED = 1; // applied by hare
+    LAYER_STATUS_VERIFIED = 2; // verified by tortoise
   }
   LayerStatus status = 2;
   bytes consensus_hash = 3;
