@@ -18,7 +18,7 @@ message LayerV1 {
     LAYER_STATUS_VERIFIED = 2; // verified by tortoise
   }
   LayerStatus status = 2;
-  bytes consensus_hash = 3;
+  string consensus_hash = 3;
   bytes state_hash = 4; // fingerprint of the computed state at the layer
   bytes cumulative_state_hash = 5; // cumulative fingerprint that uniquely identifies state since genesis
   Block blocks = 6; // layer's blocks
