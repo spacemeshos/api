@@ -190,7 +190,7 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/ParseTransaction"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/v1/transaction/parsetransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -315,7 +315,7 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v1.TransactionService/ParseTransaction"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/v1/transaction/parsetransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -403,7 +403,7 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 var (
 	pattern_TransactionService_SubmitTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "transaction", "submittransaction"}, ""))
 
-	pattern_TransactionService_ParseTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.TransactionService", "ParseTransaction"}, ""))
+	pattern_TransactionService_ParseTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "transaction", "parsetransaction"}, ""))
 
 	pattern_TransactionService_TransactionsState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "transaction", "transactionsstate"}, ""))
 
