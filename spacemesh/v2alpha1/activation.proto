@@ -16,8 +16,8 @@ message ActivationV1 {
   bytes previous_atx = 5;
   bytes positioning_atx = 6;
   string coinbase = 7;
-  uint32 weight = 8;
-  uint32 height = 9;
+  uint64 weight = 8;
+  uint64 height = 9;
 }
 
 message ActivationStreamRequest {
