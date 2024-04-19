@@ -21,7 +21,7 @@ message LayerV1 {
   string consensus_hash = 3;
   bytes state_hash = 4; // fingerprint of the computed state at the layer
   bytes cumulative_state_hash = 5; // cumulative fingerprint that uniquely identifies state since genesis
-  Block blocks = 6; // layer's blocks
+  Block block = 6; // layer's block
 }
 
 message LayerRequest {
