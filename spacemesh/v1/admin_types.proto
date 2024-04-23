@@ -131,14 +131,6 @@ message EventMalfeasance {
 
 message EventStreamRequest {}
 
-message PeerConnectionStats {
-  uint64 success_count = 1;
-  uint64 failure_count = 2;
-  optional google.protobuf.Duration latency = 3;
-  uint64 bytes_sent = 4;
-  uint64 bytes_received = 5;
-}
-
 message ConnectionInfo {
   string address = 1;
   google.protobuf.Duration uptime = 2;
@@ -153,12 +145,20 @@ message ConnectionInfo {
     RelayOutbound = 6;
   }
   Kind kind = 4;
-  optional PeerConnectionStats client_stats = 5;
-  optional PeerConnectionStats server_stats = 6;
+}
+
+message PeerDataStats {
+  uint64 success_count = 1;
+  uint64 failure_count = 2;
+  optional google.protobuf.Duration latency = 3;
+  uint64 bytes_sent = 4;
+  uint64 bytes_received = 5;
 }
 
 message PeerInfo {
   string id = 1;
   repeated ConnectionInfo connections = 2;
+  optional PeerDataStats client_stats = 5;
+  optional PeerDataStats server_stats = 6;
   repeated string tags = 4;
 }
