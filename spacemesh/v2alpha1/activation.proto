@@ -14,10 +14,9 @@ message ActivationV1 {
   bytes signature = 3;
   uint32 publish_epoch = 4;
   bytes previous_atx = 5;
-  bytes positioning_atx = 6;
-  string coinbase = 7;
-  uint64 weight = 8;
-  uint64 height = 9;
+  string coinbase = 6;
+  uint64 weight = 7;
+  uint64 height = 8;
 }
 
 message ActivationStreamRequest {
