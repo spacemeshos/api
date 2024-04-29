@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+import "spacemesh/v2alpha1/block.proto";
+
+package spacemesh.v2alpha1;
+
+message Layer {
+  oneof versioned {
+    LayerV1 v1 = 1;
+  }
+}
+
+message LayerV1 {
+  uint32 number = 1; // layer number - not hash - layer content may change
+  enum LayerStatus {
+    LAYER_STATUS_UNSPECIFIED = 0;
+    LAYER_STATUS_APPLIED = 1; // applied by hare
+    LAYER_STATUS_VERIFIED = 2; // verified by tortoise
+  }
+  LayerStatus status = 2;
+  string consensus_hash = 3;
+  bytes state_hash = 4; // fingerprint of the computed state at the layer
+  bytes cumulative_state_hash = 5; // cumulative fingerprint that uniquely identifies state since genesis
+  Block block = 6; // layer's block
+}
+
+message LayerRequest {
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
+  uint64 offset = 3; // adjusts the starting point for data
+  uint64 limit = 4; // specifies max number of items to fetch
+};
+
+message LayerList {
+  repeated Layer layers = 1;
+}
+
+service LayerService {
+  rpc List(LayerRequest) returns (LayerList);
+}
+
+message LayerStreamRequest {
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
+  bool watch = 3;
+};
+
+service LayerStreamService {
+  rpc Stream(LayerStreamRequest) returns (stream Layer);
+}
