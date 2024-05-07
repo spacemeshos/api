@@ -52,7 +52,7 @@ func request_TransactionStreamService_Stream_0(ctx context.Context, marshaler ru
 
 }
 
-func request_TransactionService_Get_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_TransactionService_List_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq TransactionRequest
 	var metadata runtime.ServerMetadata
 
@@ -60,12 +60,12 @@ func request_TransactionService_Get_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.Get(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.List(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_TransactionService_Get_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_TransactionService_List_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq TransactionRequest
 	var metadata runtime.ServerMetadata
 
@@ -73,7 +73,7 @@ func local_request_TransactionService_Get_0(ctx context.Context, marshaler runti
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.Get(ctx, &protoReq)
+	msg, err := server.List(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -178,7 +178,7 @@ func RegisterTransactionStreamServiceHandlerServer(ctx context.Context, mux *run
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterTransactionServiceHandlerFromEndpoint instead.
 func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server TransactionServiceServer) error {
 
-	mux.Handle("POST", pattern_TransactionService_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TransactionService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -186,12 +186,12 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.TransactionService/Get", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.TransactionService/Get"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.TransactionService/List", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.TransactionService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TransactionService_Get_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_TransactionService_List_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -199,7 +199,7 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 			return
 		}
 
-		forward_TransactionService_Get_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TransactionService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -390,25 +390,25 @@ func RegisterTransactionServiceHandler(ctx context.Context, mux *runtime.ServeMu
 // "TransactionServiceClient" to call the correct interceptors.
 func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client TransactionServiceClient) error {
 
-	mux.Handle("POST", pattern_TransactionService_Get_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TransactionService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.TransactionService/Get", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.TransactionService/Get"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.TransactionService/List", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.TransactionService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TransactionService_Get_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_TransactionService_List_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TransactionService_Get_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TransactionService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -482,7 +482,7 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 }
 
 var (
-	pattern_TransactionService_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2alpha1.TransactionService", "Get"}, ""))
+	pattern_TransactionService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2alpha1.TransactionService", "List"}, ""))
 
 	pattern_TransactionService_ParseTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2alpha1.TransactionService", "ParseTransaction"}, ""))
 
@@ -492,7 +492,7 @@ var (
 )
 
 var (
-	forward_TransactionService_Get_0 = runtime.ForwardResponseMessage
+	forward_TransactionService_List_0 = runtime.ForwardResponseMessage
 
 	forward_TransactionService_ParseTransaction_0 = runtime.ForwardResponseMessage
 

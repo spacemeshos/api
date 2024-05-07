@@ -98,7 +98,7 @@ message TransactionResult {
 message TransactionStreamRequest {
   uint32 start_layer = 1;
   uint32 end_layer = 2;
-  bytes id = 3;
+  repeated bytes id = 3;
   string address = 4;
   bool watch = 5;
 }
@@ -108,15 +108,24 @@ service TransactionStreamService {
 }
 
 message TransactionRequest {
-  bytes id = 1;
-  bool include_state = 2;
-  bool include_result = 3;
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
+  repeated bytes id = 3;
+  string address = 4;
+  uint64 offset = 5; // adjusts the starting point for data
+  uint64 limit = 6; // specifies max number of items to fetch
+  bool include_state = 7;
+  bool include_result = 8;
 }
 
 message TransactionResponse {
   Transaction tx = 1;
   TransactionState tx_state = 2;
   TransactionResult tx_result = 3;
+}
+
+message TransactionList {
+  repeated TransactionResponse transactions = 1;
 }
 
 message ParseTransactionRequest {
@@ -148,7 +157,7 @@ message EstimateGasResponse {
 }
 
 service TransactionService {
-  rpc Get(TransactionRequest) returns (TransactionResponse);
+  rpc List(TransactionRequest) returns (TransactionList);
   rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
   rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
   rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
