@@ -98,7 +98,7 @@ message TransactionResult {
 message TransactionStreamRequest {
   uint32 start_layer = 1;
   uint32 end_layer = 2;
-  repeated bytes id = 3;
+  repeated bytes txid = 3;
   string address = 4;
   bool watch = 5;
 }
