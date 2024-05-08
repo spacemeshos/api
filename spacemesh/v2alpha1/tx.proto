@@ -63,7 +63,7 @@ message Nonce {
 
 // TransactionState is the "journey" of a tx from mempool to block inclusion to
 // mesh to STF processing. To know whether or not the tx actually succeeded,
-// and its side effects, check the Receipt in the GlobalStateService.
+// and its side effects, check TransactionResult.
 message TransactionState {
   bytes id = 1;
   enum TransactionState {
@@ -80,9 +80,10 @@ message TransactionState {
 
 message TransactionResult {
   enum Status {
-    SUCCESS = 0;
-    FAILURE = 1;
-    INVALID = 2;
+    TRANSACTION_STATUS_UNSPECIFIED = 0;
+    TRANSACTION_STATUS_SUCCESS = 1;
+    TRANSACTION_STATUS_FAILURE = 2;
+    TRANSACTION_STATUS_INVALID = 3;
   }
 
   Transaction tx = 1;
@@ -96,11 +97,11 @@ message TransactionResult {
 }
 
 message TransactionStreamRequest {
-  uint32 start_layer = 1;
-  uint32 end_layer = 2;
-  repeated bytes txid = 3;
-  string address = 4;
-  bool watch = 5;
+  uint32 start_layer = 1; // Starting layer for transaction streaming.
+  uint32 end_layer = 2; // Ending layer for transaction streaming.
+  repeated bytes txid = 3; // Filter: specific transaction IDs.
+  string address = 4; // Filter: address involved in transaction.
+  bool watch = 5; // Continue watching for new transactions.
 }
 
 service TransactionStreamService {
@@ -108,14 +109,14 @@ service TransactionStreamService {
 }
 
 message TransactionRequest {
-  uint32 start_layer = 1;
-  uint32 end_layer = 2;
-  repeated bytes txid = 3;
-  string address = 4;
-  uint64 offset = 5; // adjusts the starting point for data
-  uint64 limit = 6; // specifies max number of items to fetch
-  bool include_state = 7;
-  bool include_result = 8;
+  optional uint32 start_layer = 1; // Starting layer for transactions.
+  optional uint32 end_layer = 2; // Ending layer for transactions.
+  repeated bytes txid = 3; // Filter: specific transaction IDs to filter.
+  optional string address = 4; // Filter: address involved in transaction.
+  uint64 offset = 5; // Adjusts the starting point for data retrieval.
+  uint64 limit = 6; // Specifies maximum number of items to fetch.
+  bool include_state = 7; // Whether to include transaction state in response.
+  bool include_result = 8; // Whether to include result of transactions in response.
 }
 
 message TransactionResponse {
