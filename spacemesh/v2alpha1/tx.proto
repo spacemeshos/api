@@ -110,7 +110,7 @@ service TransactionStreamService {
 message TransactionRequest {
   uint32 start_layer = 1;
   uint32 end_layer = 2;
-  repeated bytes id = 3;
+  repeated bytes txid = 3;
   string address = 4;
   uint64 offset = 5; // adjusts the starting point for data
   uint64 limit = 6; // specifies max number of items to fetch
