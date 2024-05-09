@@ -97,8 +97,8 @@ message TransactionResult {
 }
 
 message TransactionStreamRequest {
-  uint32 start_layer = 1; // Starting layer for transaction streaming.
-  uint32 end_layer = 2; // Ending layer for transaction streaming.
+  uint32 start_layer = 1; // Required: starting layer for transaction streaming.
+  optional uint32 end_layer = 2; // Ending layer for transaction streaming.
   repeated bytes txid = 3; // Filter: specific transaction IDs.
   string address = 4; // Filter: address involved in transaction.
   bool watch = 5; // Continue watching for new transactions.
