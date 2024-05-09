@@ -63,19 +63,15 @@ message Nonce {
 
 // TransactionState is the "journey" of a tx from mempool to block inclusion to
 // mesh to STF processing. To know whether or not the tx actually succeeded,
-// and its side effects, check TransactionResult.
-message TransactionState {
-  bytes id = 1;
-  enum TransactionState {
-    TRANSACTION_STATE_UNSPECIFIED = 0; // default state
-    TRANSACTION_STATE_REJECTED = 1; // rejected from mempool due to, e.g., invalid syntax
-    TRANSACTION_STATE_INSUFFICIENT_FUNDS = 2; // rejected from mempool by funds check
-    TRANSACTION_STATE_CONFLICTING = 3; // rejected from mempool due to conflicting counter
-    TRANSACTION_STATE_MEMPOOL = 4; // in mempool but not on the mesh yet
-    TRANSACTION_STATE_MESH = 5; // submitted to the mesh
-    TRANSACTION_STATE_PROCESSED = 6; // processed by STF; check Receipt for success or failure
-  }
-  TransactionState state = 2;
+// and its side effects, check tx_state.
+enum TransactionState {
+  TRANSACTION_STATE_UNSPECIFIED = 0; // default state
+  TRANSACTION_STATE_REJECTED = 1; // rejected from mempool due to, e.g., invalid syntax
+  TRANSACTION_STATE_INSUFFICIENT_FUNDS = 2; // rejected from mempool by funds check
+  TRANSACTION_STATE_CONFLICTING = 3; // rejected from mempool due to conflicting counter
+  TRANSACTION_STATE_MEMPOOL = 4; // in mempool but not on the mesh yet
+  TRANSACTION_STATE_MESH = 5; // submitted to the mesh
+  TRANSACTION_STATE_PROCESSED = 6; // processed by STF; check Receipt for success or failure
 }
 
 message TransactionResult {
@@ -85,15 +81,13 @@ message TransactionResult {
     TRANSACTION_STATUS_FAILURE = 2;
     TRANSACTION_STATUS_INVALID = 3;
   }
-
-  Transaction tx = 1;
-  Status status = 2;
-  string message = 3;
-  uint64 gas_consumed = 4; // in units of gas
-  uint64 fee = 5; // in smidge
-  bytes block = 6;
-  uint32 layer = 7;
-  repeated string touched_addresses = 8;
+  Status status = 1;
+  string message = 2;
+  uint64 gas_consumed = 3; // in units of gas
+  uint64 fee = 4; // in smidge
+  bytes block = 5;
+  uint32 layer = 6;
+  repeated string touched_addresses = 7;
 }
 
 message TransactionStreamRequest {
@@ -121,8 +115,8 @@ message TransactionRequest {
 
 message TransactionResponse {
   Transaction tx = 1;
-  TransactionState tx_state = 2;
-  TransactionResult tx_result = 3;
+  TransactionResult tx_result = 2;
+  TransactionState tx_state = 3;
 }
 
 message TransactionList {
