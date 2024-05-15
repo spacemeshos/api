@@ -99,7 +99,7 @@ message TransactionStreamRequest {
 }
 
 service TransactionStreamService {
-  rpc Stream(TransactionStreamRequest) returns (stream Transaction);
+  rpc Stream(TransactionStreamRequest) returns (stream TransactionResponse);
 }
 
 message TransactionRequest {

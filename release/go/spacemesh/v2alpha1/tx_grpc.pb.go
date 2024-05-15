@@ -53,7 +53,7 @@ func (c *transactionStreamServiceClient) Stream(ctx context.Context, in *Transac
 }
 
 type TransactionStreamService_StreamClient interface {
-	Recv() (*Transaction, error)
+	Recv() (*TransactionResponse, error)
 	grpc.ClientStream
 }
 
@@ -61,8 +61,8 @@ type transactionStreamServiceStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *transactionStreamServiceStreamClient) Recv() (*Transaction, error) {
-	m := new(Transaction)
+func (x *transactionStreamServiceStreamClient) Recv() (*TransactionResponse, error) {
+	m := new(TransactionResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ func _TransactionStreamService_Stream_Handler(srv interface{}, stream grpc.Serve
 }
 
 type TransactionStreamService_StreamServer interface {
-	Send(*Transaction) error
+	Send(*TransactionResponse) error
 	grpc.ServerStream
 }
 
@@ -112,7 +112,7 @@ type transactionStreamServiceStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *transactionStreamServiceStreamServer) Send(m *Transaction) error {
+func (x *transactionStreamServiceStreamServer) Send(m *TransactionResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
