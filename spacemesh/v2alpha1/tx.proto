@@ -60,3 +60,100 @@ message TransactionV1 {
 message Nonce {
   uint64 counter = 1;
 }
+
+// TransactionState is the "journey" of a tx from mempool to block inclusion to
+// mesh to STF processing. To know whether or not the tx actually succeeded,
+// and its side effects, check tx_state.
+enum TransactionState {
+  TRANSACTION_STATE_UNSPECIFIED = 0; // default state
+  TRANSACTION_STATE_REJECTED = 1; // rejected from mempool due to, e.g., invalid syntax
+  TRANSACTION_STATE_INSUFFICIENT_FUNDS = 2; // rejected from mempool by funds check
+  TRANSACTION_STATE_CONFLICTING = 3; // rejected from mempool due to conflicting counter
+  TRANSACTION_STATE_MEMPOOL = 4; // in mempool but not on the mesh yet
+  TRANSACTION_STATE_MESH = 5; // submitted to the mesh
+  TRANSACTION_STATE_PROCESSED = 6; // processed by STF; check Receipt for success or failure
+}
+
+message TransactionResult {
+  enum Status {
+    TRANSACTION_STATUS_UNSPECIFIED = 0;
+    TRANSACTION_STATUS_SUCCESS = 1;
+    TRANSACTION_STATUS_FAILURE = 2;
+    TRANSACTION_STATUS_INVALID = 3;
+  }
+  Status status = 1;
+  string message = 2;
+  uint64 gas_consumed = 3; // in units of gas
+  uint64 fee = 4; // in smidge
+  bytes block = 5;
+  uint32 layer = 6;
+  repeated string touched_addresses = 7;
+}
+
+message TransactionStreamRequest {
+  uint32 start_layer = 1; // Required: starting layer for transaction streaming.
+  optional uint32 end_layer = 2; // Ending layer for transaction streaming.
+  repeated bytes txid = 3; // Filter: specific transaction IDs.
+  optional string principal = 4; // Filter by principal address
+  bool watch = 5; // Continue watching for new transactions.
+}
+
+service TransactionStreamService {
+  rpc Stream(TransactionStreamRequest) returns (stream TransactionResponse);
+}
+
+message TransactionRequest {
+  optional uint32 start_layer = 1; // Starting layer for transactions.
+  optional uint32 end_layer = 2; // Ending layer for transactions.
+  repeated bytes txid = 3; // Filter: specific transaction IDs to filter.
+  optional string principal = 4; // Filter by principal address
+  uint64 offset = 5; // Adjusts the starting point for data retrieval.
+  uint64 limit = 6; // Specifies maximum number of items to fetch.
+  bool include_state = 7; // Whether to include transaction state in response.
+  bool include_result = 8; // Whether to include result of transactions in response.
+}
+
+message TransactionResponse {
+  Transaction tx = 1;
+  TransactionResult tx_result = 2;
+  TransactionState tx_state = 3;
+}
+
+message TransactionList {
+  repeated TransactionResponse transactions = 1;
+}
+
+message ParseTransactionRequest {
+  bytes transaction = 1;  // signed binary transaction
+  bool verify = 2;        // if true signature verification will be executed
+}
+
+message ParseTransactionResponse {
+  google.rpc.Status status = 1;
+  Transaction tx = 2;
+}
+
+message SubmitTransactionRequest {
+  bytes transaction = 1;  // signed binary transaction
+}
+
+message SubmitTransactionResponse {
+  google.rpc.Status status = 1;
+  bytes tx_id = 2;
+}
+
+message EstimateGasRequest {
+  bytes transaction = 1;  // signed binary transaction
+}
+
+message EstimateGasResponse {
+  google.rpc.Status status = 1;
+  uint64 recommended_max_gas = 2;
+}
+
+service TransactionService {
+  rpc List(TransactionRequest) returns (TransactionList);
+  rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
+  rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
+  rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
+}
