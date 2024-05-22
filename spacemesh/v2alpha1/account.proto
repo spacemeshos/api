@@ -21,7 +21,9 @@ message AccountState {
 }
 
 message AccountRequest {
-  repeated string address = 1; // bech32 format including HRP
+  repeated string address = 1;
+  uint64 offset = 5; // adjusts the starting point for data
+  uint64 limit = 6; // specifies max number of items to fetch// bech32 format including HRP
 };
 
 message AccountList {
