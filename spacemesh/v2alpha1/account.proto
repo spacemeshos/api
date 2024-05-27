@@ -3,7 +3,7 @@ syntax = "proto3";
 package spacemesh.v2alpha1;
 
 message Account {
-  string account_id = 1; // account public address
+  string address = 1; // account public address
   AccountState state_current = 2; // current state
   AccountState state_projected = 3; // projected state (includes pending txs)
 }
@@ -15,7 +15,7 @@ message AccountState {
 }
 
 message AccountRequest {
-  repeated string account_id = 1;
+  repeated string addresses = 1;
   uint64 offset = 5; // adjusts the starting point for data
   uint64 limit = 6; // specifies max number of items to fetch// bech32 format including HRP
 };
