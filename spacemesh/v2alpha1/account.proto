@@ -15,7 +15,7 @@ message AccountState {
 }
 
 message AccountRequest {
-  repeated string address = 1;
+  repeated string account_id = 1;
   uint64 offset = 5; // adjusts the starting point for data
   uint64 limit = 6; // specifies max number of items to fetch// bech32 format including HRP
 };
