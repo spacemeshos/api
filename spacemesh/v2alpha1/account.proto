@@ -4,8 +4,8 @@ package spacemesh.v2alpha1;
 
 message Account {
   string address = 1; // account public address
-  AccountState state_current = 2; // current state
-  AccountState state_projected = 3; // projected state (includes pending txs)
+  AccountState current = 2; // current state
+  AccountState projected = 3; // projected state (includes pending txs)
 }
 
 message AccountState {
