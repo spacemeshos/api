@@ -3,12 +3,6 @@ syntax = "proto3";
 package spacemesh.v2alpha1;
 
 message Activation {
-  oneof versioned {
-    ActivationV1 v1 = 1;
-  }
-}
-
-message ActivationV1 {
   bytes id = 1;
   bytes smesher_id = 2;
   bytes signature = 3;

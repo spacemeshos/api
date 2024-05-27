@@ -3,12 +3,6 @@ syntax = "proto3";
 package spacemesh.v2alpha1;
 
 message Reward {
-  oneof versioned {
-    RewardV1 v1 = 1;
-  }
-}
-
-message RewardV1 {
   uint32 layer = 1; // layer award was paid in
   uint64 total = 2; // total reward paid in smidge (sum of tx fee and layer reward)
   uint64 layer_reward = 3; // tx_fee = total - layer_reward
