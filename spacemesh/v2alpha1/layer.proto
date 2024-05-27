@@ -5,12 +5,6 @@ import "spacemesh/v2alpha1/block.proto";
 package spacemesh.v2alpha1;
 
 message Layer {
-  oneof versioned {
-    LayerV1 v1 = 1;
-  }
-}
-
-message LayerV1 {
   uint32 number = 1; // layer number - not hash - layer content may change
   enum LayerStatus {
     LAYER_STATUS_UNSPECIFIED = 0;
