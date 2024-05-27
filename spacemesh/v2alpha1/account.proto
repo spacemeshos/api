@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package spacemesh.v2alpha1;
+
+message Account {
+  string address = 1; // account public address
+  AccountState current = 2; // current state
+  AccountState projected = 3; // projected state (includes pending txs)
+}
+
+message AccountState {
+  uint64 counter = 1; // aka nonce
+  uint64 balance = 2; // account balance in smidge
+  uint32 layer = 3; // account balance as of layer X
+}
+
+message AccountRequest {
+  repeated string addresses = 1;
+  uint64 offset = 5; // adjusts the starting point for data
+  uint64 limit = 6; // specifies max number of items to fetch// bech32 format including HRP
+};
+
+message AccountList {
+  repeated Account accounts = 1;
+}
+
+service AccountService {
+  rpc List(AccountRequest) returns (AccountList);
+}
