@@ -3,12 +3,6 @@ syntax = "proto3";
 package spacemesh.v2alpha1;
 
 message Account {
-  oneof versioned {
-    AccountV1 v1 = 1;
-  }
-}
-
-message AccountV1 {
   string account_id = 1; // account public address
   AccountState state_current = 2; // current state
   AccountState state_projected = 3; // projected state (includes pending txs)
