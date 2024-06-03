@@ -43,7 +43,7 @@ message LayerStreamRequest {
 };
 
 service LayerStreamService {
-  option (google.api.api_visibility).restriction = "V2";
+  option (google.api.api_visibility).restriction = "INTERNAL";
 
   rpc Stream(LayerStreamRequest) returns (stream Layer);
 }

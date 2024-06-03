@@ -25,7 +25,7 @@ message ActivationStreamRequest {
 }
 
 service ActivationStreamService {
-  option (google.api.api_visibility).restriction = "V2";
+  option (google.api.api_visibility).restriction = "INTERNAL";
 
   rpc Stream(ActivationStreamRequest) returns (stream Activation);
 }

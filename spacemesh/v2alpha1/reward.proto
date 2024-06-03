@@ -44,7 +44,7 @@ message RewardStreamRequest {
 }
 
 service RewardStreamService {
-  option (google.api.api_visibility).restriction = "V2";
+  option (google.api.api_visibility).restriction = "INTERNAL";
 
   rpc Stream(RewardStreamRequest) returns (stream Reward);
 }

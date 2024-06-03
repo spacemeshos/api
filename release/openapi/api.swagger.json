@@ -111,47 +111,6 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.ActivationStreamService/Stream": {
-      "post": {
-        "tags": [
-          "ActivationStreamService"
-        ],
-        "operationId": "ActivationStreamService_Stream",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1ActivationStreamRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "title": "Stream result of spacemeshv2alpha1Activation",
-              "properties": {
-                "error": {
-                  "$ref": "#/definitions/googlerpcStatus"
-                },
-                "result": {
-                  "$ref": "#/definitions/spacemeshv2alpha1Activation"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
     "/spacemesh.v2alpha1.LayerService/List": {
       "post": {
         "tags": [
@@ -173,47 +132,6 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v2alpha1LayerList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.LayerStreamService/Stream": {
-      "post": {
-        "tags": [
-          "LayerStreamService"
-        ],
-        "operationId": "LayerStreamService_Stream",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1LayerStreamRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "title": "Stream result of spacemeshv2alpha1Layer",
-              "properties": {
-                "error": {
-                  "$ref": "#/definitions/googlerpcStatus"
-                },
-                "result": {
-                  "$ref": "#/definitions/spacemeshv2alpha1Layer"
-                }
-              }
             }
           },
           "default": {
@@ -310,47 +228,6 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v2alpha1RewardList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.RewardStreamService/Stream": {
-      "post": {
-        "tags": [
-          "RewardStreamService"
-        ],
-        "operationId": "RewardStreamService_Stream",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1RewardStreamRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "title": "Stream result of spacemeshv2alpha1Reward",
-              "properties": {
-                "error": {
-                  "$ref": "#/definitions/googlerpcStatus"
-                },
-                "result": {
-                  "$ref": "#/definitions/spacemeshv2alpha1Reward"
-                }
-              }
             }
           },
           "default": {
@@ -479,47 +356,6 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/spacemeshv2alpha1SubmitTransactionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.TransactionStreamService/Stream": {
-      "post": {
-        "tags": [
-          "TransactionStreamService"
-        ],
-        "operationId": "TransactionStreamService_Stream",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1TransactionStreamRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "title": "Stream result of v2alpha1TransactionResponse",
-              "properties": {
-                "error": {
-                  "$ref": "#/definitions/googlerpcStatus"
-                },
-                "result": {
-                  "$ref": "#/definitions/v2alpha1TransactionResponse"
-                }
-              }
             }
           },
           "default": {
@@ -733,22 +569,6 @@
         "LAYER_STATUS_APPLIED",
         "LAYER_STATUS_VERIFIED"
       ]
-    },
-    "spacemeshv2alpha1LayerStreamRequest": {
-      "type": "object",
-      "properties": {
-        "endLayer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "watch": {
-          "type": "boolean"
-        }
-      }
     },
     "spacemeshv2alpha1NetworkInfoResponse": {
       "type": "object",
@@ -1034,35 +854,6 @@
         }
       }
     },
-    "v2alpha1ActivationStreamRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
-          "type": "string"
-        },
-        "endEpoch": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "id": {
-          "type": "string",
-          "format": "byte"
-        },
-        "nodeId": {
-          "type": "string",
-          "format": "byte"
-        },
-        "startEpoch": {
-          "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "watch": {
-          "type": "boolean"
-        }
-      }
-    },
     "v2alpha1ActivationsCountRequest": {
       "type": "object",
       "properties": {
@@ -1257,29 +1048,6 @@
         }
       }
     },
-    "v2alpha1RewardStreamRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "type": "string"
-        },
-        "endLayer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "smesher": {
-          "type": "string",
-          "format": "byte"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "watch": {
-          "type": "boolean"
-        }
-      }
-    },
     "v2alpha1TransactionContents": {
       "type": "object",
       "properties": {
@@ -1364,37 +1132,6 @@
           "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
         }
       }
-    },
-    "v2alpha1TransactionStreamRequest": {
-      "type": "object",
-      "properties": {
-        "endLayer": {
-          "description": "Ending layer for transaction streaming.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "principal": {
-          "type": "string",
-          "title": "Filter by principal address"
-        },
-        "startLayer": {
-          "description": "Required: starting layer for transaction streaming.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "txid": {
-          "description": "Filter: specific transaction IDs.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "watch": {
-          "description": "Continue watching for new transactions.",
-          "type": "boolean"
-        }
-      }
     }
   },
   "tags": [
@@ -1402,22 +1139,13 @@
       "name": "AccountService"
     },
     {
-      "name": "ActivationStreamService"
-    },
-    {
       "name": "ActivationService"
-    },
-    {
-      "name": "TransactionStreamService"
     },
     {
       "name": "TransactionService"
     },
     {
       "name": "LayerService"
-    },
-    {
-      "name": "LayerStreamService"
     },
     {
       "name": "NetworkService"
@@ -1427,9 +1155,6 @@
     },
     {
       "name": "RewardService"
-    },
-    {
-      "name": "RewardStreamService"
     }
   ]
 }

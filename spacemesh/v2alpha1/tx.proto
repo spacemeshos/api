@@ -94,7 +94,7 @@ message TransactionStreamRequest {
 }
 
 service TransactionStreamService {
-  option (google.api.api_visibility).restriction = "V2";
+  option (google.api.api_visibility).restriction = "INTERNAL";
 
   rpc Stream(TransactionStreamRequest) returns (stream TransactionResponse);
 }
