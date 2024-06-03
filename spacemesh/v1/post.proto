@@ -1,12 +1,15 @@
 syntax = "proto3";
 
 import "spacemesh/v1/post_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
 // PostService is used by dedicated PoST nodes to interact with the spacemesh
 // node.
 service PostService {
+  option (google.api.api_visibility).restriction = "V1";
+
   // Register is a bi-directional stream that allows a dedicated PoST node to connect to the spacemesh node.
   // The node will send NodeRequets to PoST and the service will respond with ServiceResponses.
   rpc Register(stream ServiceResponse) returns (stream NodeRequest);
@@ -14,6 +17,8 @@ service PostService {
 
 // PostInfoService can be used to query information about the states of PoST services.
 service PostInfoService {
+  option (google.api.api_visibility).restriction = "V1";
+
   // PostStates returns information about the state of the PoST for all known IDs.
   rpc PostStates(PostStatesRequest) returns (PostStatesResponse);
 }

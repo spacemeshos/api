@@ -3,11 +3,14 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "spacemesh/v1/node_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
 // Readonly basic node data
 service NodeService {
+    option (google.api.api_visibility).restriction = "V1";
+
     // A simple test endpoint
     rpc Echo(EchoRequest) returns (EchoResponse) {
         option (google.api.http) = {

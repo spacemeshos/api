@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+package spacemesh.v2alpha1;
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Spacemesh API";
+    version: "v2alpha1";
+    contact: {
+      name: "Spacemesh";
+      url: "https://spacemesh.io/";
+    };
+  };
+};

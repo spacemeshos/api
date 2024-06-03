@@ -2,11 +2,13 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "spacemesh/v1/admin_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
 // AdminService offers the set of administrative RPCs.
 service AdminService {
+  option (google.api.api_visibility).restriction = "V1";
 
   // Returns the checkpoint data.
   rpc CheckpointStream(CheckpointStreamRequest) returns (stream CheckpointStreamResponse);

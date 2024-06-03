@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "spacemesh/v2alpha1/block.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v2alpha1;
 
@@ -30,6 +31,8 @@ message LayerList {
 }
 
 service LayerService {
+  option (google.api.api_visibility).restriction = "V2";
+
   rpc List(LayerRequest) returns (LayerList);
 }
 
@@ -40,5 +43,7 @@ message LayerStreamRequest {
 };
 
 service LayerStreamService {
+  option (google.api.api_visibility).restriction = "V2";
+
   rpc Stream(LayerStreamRequest) returns (stream Layer);
 }

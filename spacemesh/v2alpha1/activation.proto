@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/api/visibility.proto";
+
 package spacemesh.v2alpha1;
 
 message Activation {
@@ -23,6 +25,8 @@ message ActivationStreamRequest {
 }
 
 service ActivationStreamService {
+  option (google.api.api_visibility).restriction = "V2";
+
   rpc Stream(ActivationStreamRequest) returns (stream Activation);
 }
 
@@ -49,6 +53,8 @@ message ActivationsCountResponse {
 }
 
 service ActivationService {
+  option (google.api.api_visibility).restriction = "V2";
+
   rpc List(ActivationRequest) returns (ActivationList);
   rpc ActivationsCount(ActivationsCountRequest) returns (ActivationsCountResponse);
 }

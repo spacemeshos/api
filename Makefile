@@ -25,6 +25,7 @@ BUF_VERSION := 1.30.0
 GRPC_JSON_PROXY_VERSION := v2.19.1
 PROTOC_GO_VERSION := v1.33.0
 PROTOC_GEN_GO_VERSION := v1.3.0
+GO_SWAGGER_VERSION := v0.31.0
 
 # Everything below this line is meant to be static, i.e. only adjust the above variables. ###
 
@@ -54,7 +55,7 @@ endif
 export GOBIN := $(BIN_DIR)
 
 BUF := $(BIN_DIR)/buf_$(BUF_VERSION)
-$(BUF): protoc-plugins
+$(BUF): protoc-plugins deps
 	@mkdir -p $(BIN_DIR)
 	@rm -f $(BIN_DIR)/buf_*
 	@curl -sSL "https://github.com/bufbuild/buf/releases/download/v$(BUF_VERSION)/buf-$(UNAME_OS)-$(UNAME_ARCH)" -o $@
@@ -66,7 +67,13 @@ protoc-plugins:
 	@go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@$(GRPC_JSON_PROXY_VERSION)
 	@go install google.golang.org/protobuf/cmd/protoc-gen-go@$(PROTOC_GO_VERSION)
 	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@$(PROTOC_GEN_GO_VERSION)
+	@go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@$(GRPC_JSON_PROXY_VERSION)
 .PHONY: protoc-plugins
+
+# Download go deps
+.PHONY: deps
+deps:
+	@go install github.com/go-swagger/go-swagger/cmd/swagger@$(GO_SWAGGER_VERSION)
 
 # local is what we run when testing locally.
 # This does breaking change detection against our local git repository.
@@ -92,6 +99,7 @@ breaking: $(BUF)
 .PHONY: build
 build: $(BUF)
 	buf generate
+	swagger flatten --with-flatten=remove-unused release/openapi/api.swagger.json -o release/openapi/api.swagger.json
 
 # Make sure build is up to date
 .PHONY: check

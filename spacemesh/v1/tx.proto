@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "spacemesh/v1/tx_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
@@ -10,6 +11,8 @@ package spacemesh.v1;
 // mesh to STF processing. This service is separate from the Mesh and
 // GlobalState services because txs move across both.
 service TransactionService {
+    option (google.api.api_visibility).restriction = "V1";
+
     // Submit a new tx to the node for processing. The response
     // TransactionState message contains both the txid of the new tx, as well
     // as whether or not it was admitted into the mempool.
