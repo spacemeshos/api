@@ -2,11 +2,14 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "spacemesh/v1/mesh_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
 // Readonly API for basic mesh info
 service MeshService {
+    option (google.api.api_visibility).restriction = "V1";
+
     // Network genesis time as unix epoch time
     rpc GenesisTime(GenesisTimeRequest) returns (GenesisTimeResponse) {
         option (google.api.http) = {

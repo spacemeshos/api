@@ -3,10 +3,13 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "spacemesh/v1/smesher_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
 service SmesherService {
+    option (google.api.api_visibility).restriction = "V1";
+
     // Returns true iff node is currently smeshing
     rpc IsSmeshing (google.protobuf.Empty) returns (IsSmeshingResponse) {
         option (google.api.http) = {

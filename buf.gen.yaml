@@ -20,3 +20,11 @@ plugins:
     opt:
       - paths=source_relative
       - generate_unbound_methods=true
+  - name: openapiv2
+    out: release/openapi
+    strategy: all
+    opt:
+      - generate_unbound_methods=true
+      - allow_merge
+      - visibility_restriction_selectors=V2
+      - merge_file_name=api

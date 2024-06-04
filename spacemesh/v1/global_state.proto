@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "spacemesh/v1/global_state_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
@@ -9,6 +10,8 @@ package spacemesh.v1;
 // Global state data is data which is not explicitly stored in the mesh.
 // Global state is modified only by the state transition function.
 service GlobalStateService {
+    option (google.api.api_visibility).restriction = "V1";
+
     // Latest computed global state - layer and its root hash
     rpc GlobalStateHash(GlobalStateHashRequest) returns (GlobalStateHashResponse) {
         option (google.api.http) = {

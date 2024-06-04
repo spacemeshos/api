@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/api/visibility.proto";
+
 package spacemesh.v2alpha1;
 
 message NodeStatusResponse {
@@ -20,5 +22,7 @@ message NodeStatusResponse {
 message NodeStatusRequest {}
 
 service NodeService {
+  option (google.api.api_visibility).restriction = "V2";
+
   rpc Status(NodeStatusRequest) returns (NodeStatusResponse);
 }

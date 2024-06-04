@@ -3,6 +3,7 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "spacemesh/v1/debug_types.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v1;
 
@@ -10,6 +11,7 @@ package spacemesh.v1;
 // NOTE: The endpoints in this service are experimental and subject to change without notice.
 // They should not be used in production.
 service DebugService {
+    option (google.api.api_visibility).restriction = "V1";
 
     // NetworkInfo returns p2p network information. Mostly required for integration with deployment 
     // and testing tooling.

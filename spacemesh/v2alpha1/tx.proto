@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/rpc/status.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v2alpha1;
 
@@ -93,6 +94,8 @@ message TransactionStreamRequest {
 }
 
 service TransactionStreamService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
   rpc Stream(TransactionStreamRequest) returns (stream TransactionResponse);
 }
 
@@ -146,6 +149,8 @@ message EstimateGasResponse {
 }
 
 service TransactionService {
+  option (google.api.api_visibility).restriction = "V2";
+
   rpc List(TransactionRequest) returns (TransactionList);
   rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
   rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
