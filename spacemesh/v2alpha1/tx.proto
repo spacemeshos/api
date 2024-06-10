@@ -113,7 +113,7 @@ message TransactionRequest {
 message TransactionResponse {
   Transaction tx = 1;
   TransactionResult tx_result = 2;
-  TransactionState tx_state = 3;
+  optional TransactionState tx_state = 3;
 }
 
 message TransactionList {
