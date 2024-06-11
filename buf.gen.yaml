@@ -5,6 +5,7 @@ managed:
     default: github.com/spacemeshos/api/release/go
     except:
       - buf.build/googleapis/googleapis
+      - buf.build/grpc-ecosystem/grpc-gateway
 plugins:
   - name: go
     out: release/go
