@@ -1077,6 +1077,10 @@
     "v2alpha1TransactionRequest": {
       "type": "object",
       "properties": {
+        "address": {
+          "type": "string",
+          "title": "Filter by address (principal or recipient)"
+        },
         "endLayer": {
           "description": "Ending layer for transactions.",
           "type": "integer",
@@ -1099,10 +1103,6 @@
           "description": "Adjusts the starting point for data retrieval.",
           "type": "string",
           "format": "uint64"
-        },
-        "principal": {
-          "type": "string",
-          "title": "Filter by principal address"
         },
         "startLayer": {
           "description": "Starting layer for transactions.",
