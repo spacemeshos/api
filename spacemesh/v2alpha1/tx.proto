@@ -103,8 +103,7 @@ message TransactionRequest {
   optional uint32 start_layer = 1; // Starting layer for transactions.
   optional uint32 end_layer = 2; // Ending layer for transactions.
   repeated bytes txid = 3; // Filter: specific transaction IDs to filter.
-  optional string principal = 4; // Filter by principal address
-  optional string receiver = 5; // Filter by receiver address
+  optional string address = 4; // Filter by address (principal or recipient)
   uint64 offset = 6; // Adjusts the starting point for data retrieval.
   uint64 limit = 7; // Specifies maximum number of items to fetch.
   bool include_state = 8; // Whether to include transaction state in response.
