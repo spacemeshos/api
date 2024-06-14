@@ -5,7 +5,7 @@ on:
     branches:
       - swagger-ui
     paths:
-      - 'api/release/openapi/swagger/**'
+      - 'release/openapi/swagger/**'
 
 jobs:
   build-deploy:
