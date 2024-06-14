@@ -1,2 +1,4 @@
 .idea
 bin/
+release/openapi/swagger/node_modules
+release/openapi/swagger/dist
