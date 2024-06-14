@@ -30,7 +30,6 @@ jobs:
         name: swagger-ui-build
         path: release/openapi/swagger/dist
 
-    - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
       with:
         args: --acl public-read --follow-symlinks --delete
