@@ -30,9 +30,6 @@ jobs:
         name: swagger-ui-build
         path: release/openapi/swagger/dist
 
-  deploy:
-    runs-on: ubuntu-22.04
-    steps:
     - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
       with:
