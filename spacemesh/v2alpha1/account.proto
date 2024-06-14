@@ -24,6 +24,7 @@ message AccountRequest {
 
 message AccountList {
   repeated Account accounts = 1;
+  uint64 total = 2; // Total number of accounts in the requested range.
 }
 
 service AccountService {
