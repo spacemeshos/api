@@ -24,7 +24,7 @@ message Event {
   // time when event occured.
   google.protobuf.Timestamp timestamp = 1;
   // the reason of the failure may be complex to pinpoint.
-  // for the first version we want to highlight that failure occured and defer user to logs. 
+  // for the first version we want to highlight that failure occured and defer user to logs.
   bool failure = 2;
   string help = 3;
   oneof details {
@@ -135,10 +135,32 @@ message ConnectionInfo {
   string address = 1;
   google.protobuf.Duration uptime = 2;
   bool outbound = 3;
+  enum Kind {
+    Uknown = 0;
+    Inbound = 1;
+    Outbound = 2;
+    HPInbound = 3;
+    HPOutbound = 4;
+    RelayInbound = 5;
+    RelayOutbound = 6;
+  }
+  Kind kind = 4;
+}
+
+message PeerRequestStats {
+  uint64 success_count = 1;
+  uint64 failure_count = 2;
+  optional google.protobuf.Duration latency = 3;
 }
 
 message PeerInfo {
   string id = 1;
   repeated ConnectionInfo connections = 2;
   repeated string tags = 4;
+  optional PeerRequestStats client_stats = 5;
+  optional PeerRequestStats server_stats = 6;
+  uint64 bytes_sent = 7;
+  uint64 bytes_received = 8;
+  repeated uint64 send_rate = 9;
+  repeated uint64 recv_rate = 10;
 }
