@@ -1,0 +1,1160 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Spacemesh API",
+    "contact": {
+      "name": "Spacemesh",
+      "url": "https://spacemesh.io/"
+    },
+    "version": "v2alpha1"
+  },
+  "paths": {
+    "/spacemesh.v2alpha1.AccountService/List": {
+      "post": {
+        "tags": [
+          "AccountService"
+        ],
+        "operationId": "AccountService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1AccountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1AccountList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.ActivationService/ActivationsCount": {
+      "post": {
+        "tags": [
+          "ActivationService"
+        ],
+        "operationId": "ActivationService_ActivationsCount",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1ActivationsCountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1ActivationsCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.ActivationService/List": {
+      "post": {
+        "tags": [
+          "ActivationService"
+        ],
+        "operationId": "ActivationService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1ActivationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1ActivationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.LayerService/List": {
+      "post": {
+        "tags": [
+          "LayerService"
+        ],
+        "operationId": "LayerService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1LayerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1LayerList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.NetworkService/Info": {
+      "post": {
+        "tags": [
+          "NetworkService"
+        ],
+        "operationId": "NetworkService_Info",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1NetworkInfoRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1NetworkInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.NodeService/Status": {
+      "post": {
+        "tags": [
+          "NodeService"
+        ],
+        "operationId": "NodeService_Status",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1NodeStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1NodeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.RewardService/List": {
+      "post": {
+        "tags": [
+          "RewardService"
+        ],
+        "operationId": "RewardService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1RewardRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1RewardList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.TransactionService/EstimateGas": {
+      "post": {
+        "tags": [
+          "TransactionService"
+        ],
+        "operationId": "TransactionService_EstimateGas",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1EstimateGasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1EstimateGasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.TransactionService/List": {
+      "post": {
+        "tags": [
+          "TransactionService"
+        ],
+        "operationId": "TransactionService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1TransactionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1TransactionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.TransactionService/ParseTransaction": {
+      "post": {
+        "tags": [
+          "TransactionService"
+        ],
+        "operationId": "TransactionService_ParseTransaction",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1ParseTransactionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1ParseTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.TransactionService/SubmitTransaction": {
+      "post": {
+        "tags": [
+          "TransactionService"
+        ],
+        "operationId": "TransactionService_SubmitTransaction",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1SubmitTransactionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1SubmitTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NodeStatusResponseSyncStatus": {
+      "type": "string",
+      "default": "SYNC_STATUS_UNSPECIFIED",
+      "enum": [
+        "SYNC_STATUS_UNSPECIFIED",
+        "SYNC_STATUS_OFFLINE",
+        "SYNC_STATUS_SYNCING",
+        "SYNC_STATUS_SYNCED"
+      ]
+    },
+    "TransactionTransactionType": {
+      "type": "string",
+      "default": "TRANSACTION_TYPE_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_TYPE_UNSPECIFIED",
+        "TRANSACTION_TYPE_SINGLE_SIG_SEND",
+        "TRANSACTION_TYPE_SINGLE_SIG_SPAWN",
+        "TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SEND",
+        "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN"
+      ]
+    },
+    "googlerpcStatus": {
+      "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The status code, which should be an enum value of\n[google.rpc.Code][google.rpc.Code].",
+          "type": "integer",
+          "format": "int32"
+        },
+        "details": {
+          "description": "A list of messages that carry the error details.  There is a common set of\nmessage types for APIs to use.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        },
+        "message": {
+          "description": "A developer-facing error message, which should be in English. Any\nuser-facing error message should be localized and sent in the\n[google.rpc.Status.details][google.rpc.Status.details] field, or localized\nby the client.",
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com. As of May 2023, there are no widely used type server\nimplementations and no plans to implement one.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "spacemeshv2alpha1Account": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "title": "account public address"
+        },
+        "current": {
+          "title": "current state",
+          "$ref": "#/definitions/spacemeshv2alpha1AccountState"
+        },
+        "projected": {
+          "title": "projected state (includes pending txs)",
+          "$ref": "#/definitions/spacemeshv2alpha1AccountState"
+        }
+      }
+    },
+    "spacemeshv2alpha1AccountRequest": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch// bech32 format including HRP"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        }
+      }
+    },
+    "spacemeshv2alpha1AccountState": {
+      "type": "object",
+      "properties": {
+        "balance": {
+          "type": "string",
+          "format": "uint64",
+          "title": "account balance in smidge"
+        },
+        "counter": {
+          "type": "string",
+          "format": "uint64",
+          "title": "aka nonce"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "account balance as of layer X"
+        }
+      }
+    },
+    "spacemeshv2alpha1Activation": {
+      "type": "object",
+      "properties": {
+        "coinbase": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "id": {
+          "type": "string",
+          "format": "byte"
+        },
+        "previousAtx": {
+          "type": "string",
+          "format": "byte"
+        },
+        "publishEpoch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "signature": {
+          "type": "string",
+          "format": "byte"
+        },
+        "smesherId": {
+          "type": "string",
+          "format": "byte"
+        },
+        "weight": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "spacemeshv2alpha1Block": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "byte",
+          "title": "block hash"
+        }
+      }
+    },
+    "spacemeshv2alpha1Layer": {
+      "type": "object",
+      "properties": {
+        "block": {
+          "title": "layer's block",
+          "$ref": "#/definitions/spacemeshv2alpha1Block"
+        },
+        "consensusHash": {
+          "type": "string"
+        },
+        "cumulativeStateHash": {
+          "type": "string",
+          "format": "byte",
+          "title": "cumulative fingerprint that uniquely identifies state since genesis"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int64",
+          "title": "layer number - not hash - layer content may change"
+        },
+        "stateHash": {
+          "type": "string",
+          "format": "byte",
+          "title": "fingerprint of the computed state at the layer"
+        },
+        "status": {
+          "$ref": "#/definitions/spacemeshv2alpha1LayerLayerStatus"
+        }
+      }
+    },
+    "spacemeshv2alpha1LayerLayerStatus": {
+      "type": "string",
+      "title": "- LAYER_STATUS_APPLIED: applied by hare\n - LAYER_STATUS_VERIFIED: verified by tortoise",
+      "default": "LAYER_STATUS_UNSPECIFIED",
+      "enum": [
+        "LAYER_STATUS_UNSPECIFIED",
+        "LAYER_STATUS_APPLIED",
+        "LAYER_STATUS_VERIFIED"
+      ]
+    },
+    "spacemeshv2alpha1NetworkInfoResponse": {
+      "type": "object",
+      "properties": {
+        "effectiveGenesisLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "effective genesis layer, i.e., first layer after genesis initialization period"
+        },
+        "genesisId": {
+          "type": "string",
+          "format": "byte"
+        },
+        "genesisTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "genesis time of the network, represented as a timestamp"
+        },
+        "hrp": {
+          "type": "string"
+        },
+        "layerDuration": {
+          "type": "string",
+          "title": "duration of each layer in the network, specified as a duration"
+        },
+        "layersPerEpoch": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of layers per epoch"
+        }
+      }
+    },
+    "spacemeshv2alpha1Nonce": {
+      "type": "object",
+      "properties": {
+        "counter": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "spacemeshv2alpha1ParseTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string",
+          "format": "byte",
+          "title": "signed binary transaction"
+        },
+        "verify": {
+          "type": "boolean",
+          "title": "if true signature verification will be executed"
+        }
+      }
+    },
+    "spacemeshv2alpha1ParseTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/googlerpcStatus"
+        },
+        "tx": {
+          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+        }
+      }
+    },
+    "spacemeshv2alpha1Reward": {
+      "type": "object",
+      "properties": {
+        "coinbase": {
+          "type": "string",
+          "title": "account awarded this reward"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "layer award was paid in"
+        },
+        "layerReward": {
+          "type": "string",
+          "format": "uint64",
+          "title": "tx_fee = total - layer_reward"
+        },
+        "smesher": {
+          "type": "string",
+          "format": "byte",
+          "title": "id of smesher who earned this reward"
+        },
+        "total": {
+          "type": "string",
+          "format": "uint64",
+          "title": "total reward paid in smidge (sum of tx fee and layer reward)"
+        }
+      }
+    },
+    "spacemeshv2alpha1SubmitTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string",
+          "format": "byte",
+          "title": "signed binary transaction"
+        }
+      }
+    },
+    "spacemeshv2alpha1SubmitTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/googlerpcStatus"
+        },
+        "txId": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "spacemeshv2alpha1Transaction": {
+      "description": "An immutable Spacemesh transaction.\ndo not include mutable data such as tx state or result.",
+      "type": "object",
+      "properties": {
+        "contents": {
+          "title": "parsed transaction contents",
+          "$ref": "#/definitions/v2alpha1TransactionContents"
+        },
+        "gasPrice": {
+          "type": "string",
+          "format": "uint64",
+          "title": "fee per unit gas, in smidge"
+        },
+        "id": {
+          "type": "string",
+          "format": "byte"
+        },
+        "maxGas": {
+          "type": "string",
+          "format": "uint64",
+          "title": "max gas units consumed by tx"
+        },
+        "maxSpend": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "method": {
+          "description": "this is actually limited by uint8, but no type for that.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "nonce": {
+          "$ref": "#/definitions/spacemeshv2alpha1Nonce"
+        },
+        "principal": {
+          "type": "string",
+          "title": "principal account address"
+        },
+        "raw": {
+          "type": "string",
+          "format": "byte"
+        },
+        "template": {
+          "type": "string",
+          "title": "template account address"
+        },
+        "type": {
+          "$ref": "#/definitions/TransactionTransactionType"
+        }
+      }
+    },
+    "spacemeshv2alpha1TransactionResult": {
+      "type": "object",
+      "properties": {
+        "block": {
+          "type": "string",
+          "format": "byte"
+        },
+        "fee": {
+          "type": "string",
+          "format": "uint64",
+          "title": "in smidge"
+        },
+        "gasConsumed": {
+          "type": "string",
+          "format": "uint64",
+          "title": "in units of gas"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionResultStatus"
+        },
+        "touchedAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "spacemeshv2alpha1TransactionResultStatus": {
+      "type": "string",
+      "default": "TRANSACTION_STATUS_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_STATUS_UNSPECIFIED",
+        "TRANSACTION_STATUS_SUCCESS",
+        "TRANSACTION_STATUS_FAILURE",
+        "TRANSACTION_STATUS_INVALID"
+      ]
+    },
+    "spacemeshv2alpha1TransactionState": {
+      "description": "TransactionState is the \"journey\" of a tx from mempool to block inclusion to\nmesh to STF processing. To know whether or not the tx actually succeeded,\nand its side effects, check tx_state.\n\n - TRANSACTION_STATE_UNSPECIFIED: default state\n - TRANSACTION_STATE_REJECTED: rejected from mempool due to, e.g., invalid syntax\n - TRANSACTION_STATE_INSUFFICIENT_FUNDS: rejected from mempool by funds check\n - TRANSACTION_STATE_CONFLICTING: rejected from mempool due to conflicting counter\n - TRANSACTION_STATE_MEMPOOL: in mempool but not on the mesh yet\n - TRANSACTION_STATE_MESH: submitted to the mesh\n - TRANSACTION_STATE_PROCESSED: processed by STF; check Receipt for success or failure",
+      "type": "string",
+      "default": "TRANSACTION_STATE_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_STATE_UNSPECIFIED",
+        "TRANSACTION_STATE_REJECTED",
+        "TRANSACTION_STATE_INSUFFICIENT_FUNDS",
+        "TRANSACTION_STATE_CONFLICTING",
+        "TRANSACTION_STATE_MEMPOOL",
+        "TRANSACTION_STATE_MESH",
+        "TRANSACTION_STATE_PROCESSED"
+      ]
+    },
+    "v2alpha1AccountList": {
+      "type": "object",
+      "properties": {
+        "accounts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Account"
+          }
+        }
+      }
+    },
+    "v2alpha1ActivationList": {
+      "type": "object",
+      "properties": {
+        "activations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Activation"
+          }
+        }
+      }
+    },
+    "v2alpha1ActivationRequest": {
+      "type": "object",
+      "properties": {
+        "coinbase": {
+          "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
+          "type": "string"
+        },
+        "endEpoch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string",
+          "format": "byte"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "nodeId": {
+          "type": "string",
+          "format": "byte"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "startEpoch": {
+          "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v2alpha1ActivationsCountRequest": {
+      "type": "object",
+      "properties": {
+        "epoch": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v2alpha1ActivationsCountResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v2alpha1ContentsMultiSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of required signatures"
+        }
+      }
+    },
+    "v2alpha1ContentsSend": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "amount in smidge"
+        },
+        "destination": {
+          "type": "string",
+          "title": "recipient account"
+        }
+      }
+    },
+    "v2alpha1ContentsSingleSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1EstimateGasRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string",
+          "format": "byte",
+          "title": "signed binary transaction"
+        }
+      }
+    },
+    "v2alpha1EstimateGasResponse": {
+      "type": "object",
+      "properties": {
+        "recommendedMaxGas": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "status": {
+          "$ref": "#/definitions/googlerpcStatus"
+        }
+      }
+    },
+    "v2alpha1LayerList": {
+      "type": "object",
+      "properties": {
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Layer"
+          }
+        }
+      }
+    },
+    "v2alpha1LayerRequest": {
+      "type": "object",
+      "properties": {
+        "endLayer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "startLayer": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v2alpha1NetworkInfoRequest": {
+      "type": "object"
+    },
+    "v2alpha1NodeStatusRequest": {
+      "type": "object"
+    },
+    "v2alpha1NodeStatusResponse": {
+      "type": "object",
+      "properties": {
+        "appliedLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "last layer node has applied to the state"
+        },
+        "connectedPeers": {
+          "type": "string",
+          "format": "uint64",
+          "title": "number of connected neighbors"
+        },
+        "currentLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "current layer, based on clock time"
+        },
+        "latestLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "latest layer node has seen from blocks"
+        },
+        "processedLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "last layer whose votes have been processed"
+        },
+        "status": {
+          "$ref": "#/definitions/NodeStatusResponseSyncStatus"
+        }
+      }
+    },
+    "v2alpha1RewardList": {
+      "type": "object",
+      "properties": {
+        "rewards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Reward"
+          }
+        }
+      }
+    },
+    "v2alpha1RewardRequest": {
+      "type": "object",
+      "properties": {
+        "coinbase": {
+          "type": "string"
+        },
+        "endLayer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "smesher": {
+          "type": "string",
+          "format": "byte"
+        },
+        "startLayer": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v2alpha1TransactionContents": {
+      "type": "object",
+      "properties": {
+        "multiSigSpawn": {
+          "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
+        },
+        "send": {
+          "$ref": "#/definitions/v2alpha1ContentsSend"
+        },
+        "singleSigSpawn": {
+          "$ref": "#/definitions/v2alpha1ContentsSingleSigSpawn"
+        }
+      }
+    },
+    "v2alpha1TransactionList": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1TransactionResponse"
+          }
+        }
+      }
+    },
+    "v2alpha1TransactionRequest": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "title": "Filter by address (principal or recipient)"
+        },
+        "endLayer": {
+          "description": "Ending layer for transactions.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "includeResult": {
+          "description": "Whether to include result of transactions in response.",
+          "type": "boolean"
+        },
+        "includeState": {
+          "description": "Whether to include transaction state in response.",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "Specifies maximum number of items to fetch.",
+          "type": "string",
+          "format": "uint64"
+        },
+        "offset": {
+          "description": "Adjusts the starting point for data retrieval.",
+          "type": "string",
+          "format": "uint64"
+        },
+        "startLayer": {
+          "description": "Starting layer for transactions.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "txid": {
+          "description": "Filter: specific transaction IDs to filter.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "v2alpha1TransactionResponse": {
+      "type": "object",
+      "properties": {
+        "tx": {
+          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+        },
+        "txResult": {
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionResult"
+        },
+        "txState": {
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AccountService"
+    },
+    {
+      "name": "ActivationService"
+    },
+    {
+      "name": "TransactionService"
+    },
+    {
+      "name": "LayerService"
+    },
+    {
+      "name": "NetworkService"
+    },
+    {
+      "name": "NodeService"
+    },
+    {
+      "name": "RewardService"
+    }
+  ]
+}

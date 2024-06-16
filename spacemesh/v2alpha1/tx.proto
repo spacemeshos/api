@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/rpc/status.proto";
+import "google/api/visibility.proto";
 
 package spacemesh.v2alpha1;
 
@@ -93,6 +94,8 @@ message TransactionStreamRequest {
 }
 
 service TransactionStreamService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
   rpc Stream(TransactionStreamRequest) returns (stream TransactionResponse);
 }
 
@@ -100,17 +103,17 @@ message TransactionRequest {
   optional uint32 start_layer = 1; // Starting layer for transactions.
   optional uint32 end_layer = 2; // Ending layer for transactions.
   repeated bytes txid = 3; // Filter: specific transaction IDs to filter.
-  optional string principal = 4; // Filter by principal address
-  uint64 offset = 5; // Adjusts the starting point for data retrieval.
-  uint64 limit = 6; // Specifies maximum number of items to fetch.
-  bool include_state = 7; // Whether to include transaction state in response.
-  bool include_result = 8; // Whether to include result of transactions in response.
+  optional string address = 4; // Filter by address (principal or recipient)
+  uint64 offset = 6; // Adjusts the starting point for data retrieval.
+  uint64 limit = 7; // Specifies maximum number of items to fetch.
+  bool include_state = 8; // Whether to include transaction state in response.
+  bool include_result = 9; // Whether to include result of transactions in response.
 }
 
 message TransactionResponse {
   Transaction tx = 1;
   TransactionResult tx_result = 2;
-  TransactionState tx_state = 3;
+  optional TransactionState tx_state = 3;
 }
 
 message TransactionList {
@@ -146,6 +149,8 @@ message EstimateGasResponse {
 }
 
 service TransactionService {
+  option (google.api.api_visibility).restriction = "V2";
+
   rpc List(TransactionRequest) returns (TransactionList);
   rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
   rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
