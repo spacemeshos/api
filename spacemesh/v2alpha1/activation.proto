@@ -42,7 +42,7 @@ message ActivationRequest {
 
 message ActivationList {
   repeated Activation activations = 1;
-  uint64 total = 2; // Total number of activations in the requested range.
+  uint32 total = 2; // Total number of activations in the requested range.
 }
 
 message ActivationsCountRequest {

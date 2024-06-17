@@ -118,7 +118,7 @@ message TransactionResponse {
 
 message TransactionList {
   repeated TransactionResponse transactions = 1;
-  uint64 total = 2; // Total number of transactions in the requested range.
+  uint32 total = 2; // Total number of transactions in the requested range.
 }
 
 message ParseTransactionRequest {
