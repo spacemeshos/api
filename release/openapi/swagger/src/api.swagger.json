@@ -808,8 +808,8 @@
         },
         "total": {
           "description": "Total number of accounts in the requested range.",
-          "type": "string",
-          "format": "uint64"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -825,8 +825,8 @@
         },
         "total": {
           "description": "Total number of activations in the requested range.",
-          "type": "string",
-          "format": "uint64"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -954,8 +954,8 @@
         },
         "total": {
           "description": "Total number of layers in the requested range.",
-          "type": "string",
-          "format": "uint64"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -1033,8 +1033,8 @@
         },
         "total": {
           "description": "Total number of rewards in the requested range.",
-          "type": "string",
-          "format": "uint64"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -1087,8 +1087,8 @@
       "properties": {
         "total": {
           "description": "Total number of transactions in the requested range.",
-          "type": "string",
-          "format": "uint64"
+          "type": "integer",
+          "format": "int64"
         },
         "transactions": {
           "type": "array",
