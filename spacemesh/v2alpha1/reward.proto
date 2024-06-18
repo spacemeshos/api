@@ -25,6 +25,7 @@ message RewardRequest {
 
 message RewardList {
   repeated Reward rewards = 1;
+  uint32 total = 2; // Total number of rewards in the requested range.
 }
 
 service RewardService {

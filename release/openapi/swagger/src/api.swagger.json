@@ -805,6 +805,11 @@
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Account"
           }
+        },
+        "total": {
+          "description": "Total number of accounts in the requested range.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -817,6 +822,11 @@
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Activation"
           }
+        },
+        "total": {
+          "description": "Total number of activations in the requested range.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -941,6 +951,11 @@
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Layer"
           }
+        },
+        "total": {
+          "description": "Total number of layers in the requested range.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -1015,6 +1030,11 @@
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Reward"
           }
+        },
+        "total": {
+          "description": "Total number of rewards in the requested range.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -1065,6 +1085,11 @@
     "v2alpha1TransactionList": {
       "type": "object",
       "properties": {
+        "total": {
+          "description": "Total number of transactions in the requested range.",
+          "type": "integer",
+          "format": "int64"
+        },
         "transactions": {
           "type": "array",
           "items": {
