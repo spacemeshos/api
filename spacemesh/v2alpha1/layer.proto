@@ -28,6 +28,7 @@ message LayerRequest {
 
 message LayerList {
   repeated Layer layers = 1;
+  uint32 total = 2; // Total number of layers in the requested range.
 }
 
 service LayerService {
