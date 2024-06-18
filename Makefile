@@ -99,7 +99,7 @@ breaking: $(BUF)
 .PHONY: build
 build: $(BUF)
 	buf generate
-	swagger flatten --with-flatten=remove-unused release/openapi/api.swagger.json -o release/openapi/api.swagger.json
+	swagger flatten --with-flatten=remove-unused release/openapi/swagger/src/api.swagger.json -o release/openapi/swagger/src/api.swagger.json
 
 # Make sure build is up to date
 .PHONY: check

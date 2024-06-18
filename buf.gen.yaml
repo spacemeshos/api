@@ -22,7 +22,7 @@ plugins:
       - paths=source_relative
       - generate_unbound_methods=true
   - name: openapiv2
-    out: release/openapi
+    out: release/openapi/swagger/src
     strategy: all
     opt:
       - generate_unbound_methods=true
