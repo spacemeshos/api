@@ -22,7 +22,7 @@ message RewardRequest {
   }
   uint64 offset = 5; // adjusts the starting point for data
   uint64 limit = 6; // specifies max number of items to fetch
-  optional SortOrder sort_order = 7; // specifies the sort order by layer (default is ASC)
+  SortOrder sort_order = 7; // specifies the sort order by layer (default is ASC)
 }
 
 message RewardList {

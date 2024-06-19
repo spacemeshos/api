@@ -109,7 +109,7 @@ message TransactionRequest {
   uint64 limit = 7; // Specifies maximum number of items to fetch.
   bool include_state = 8; // Whether to include transaction state in response.
   bool include_result = 9; // Whether to include result of transactions in response.
-  optional SortOrder sort_order = 10; // specifies the sort order by layer (default is ASC)
+  SortOrder sort_order = 10; // specifies the sort order by layer (default is ASC)
 }
 
 message TransactionResponse {
