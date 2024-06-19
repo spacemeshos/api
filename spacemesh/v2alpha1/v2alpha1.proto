@@ -12,5 +12,13 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
       name: "Spacemesh";
       url: "https://spacemesh.io/";
     };
+    license: {
+      name: "MIT License";
+      url: "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE";
+    };
   };
+  schemes: HTTPS;
+  consumes: "application/json";
+  produces: "application/json";
+  host: "https://testnet-api.spacemesh.network";
 };
