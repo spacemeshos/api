@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/api/visibility.proto";
+import "spacemesh/v2alpha1/v2alpha1.proto";
 
 package spacemesh.v2alpha1;
 
@@ -18,8 +19,9 @@ message AccountState {
 
 message AccountRequest {
   repeated string addresses = 1;
-  uint64 offset = 5; // adjusts the starting point for data
-  uint64 limit = 6; // specifies max number of items to fetch// bech32 format including HRP
+  uint64 offset = 2; // adjusts the starting point for data
+  uint64 limit = 3; // specifies max number of items to fetch// bech32 format including HRP
+  optional SortOrder sort_order = 4; // specifies the sort order by updated layer (default is ASC)
 };
 
 message AccountList {
