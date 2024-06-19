@@ -20,5 +20,5 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   schemes: HTTPS;
   consumes: "application/json";
   produces: "application/json";
-  host: "https://testnet-api.spacemesh.network";
+  host: "testnet-api.spacemesh.network";
 };
