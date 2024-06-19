@@ -21,7 +21,7 @@
     },
     "version": "v2alpha1"
   },
-  "host": "https://testnet-api.spacemesh.network",
+  "host": "testnet-api.spacemesh.network",
   "paths": {
     "/spacemesh.v2alpha1.AccountService/List": {
       "post": {
