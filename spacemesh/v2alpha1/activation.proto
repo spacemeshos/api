@@ -13,7 +13,7 @@ message Activation {
   string coinbase = 6;
   uint64 weight = 7;
   uint64 height = 8;
-  uint32 num_units = 9; // number of PoST data commitment units
+  uint32 num_units = 9; // number of effective PoST data commitment units
 }
 
 message ActivationStreamRequest {

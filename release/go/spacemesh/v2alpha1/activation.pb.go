@@ -34,7 +34,7 @@ type Activation struct {
 	Coinbase     string `protobuf:"bytes,6,opt,name=coinbase,proto3" json:"coinbase,omitempty"`
 	Weight       uint64 `protobuf:"varint,7,opt,name=weight,proto3" json:"weight,omitempty"`
 	Height       uint64 `protobuf:"varint,8,opt,name=height,proto3" json:"height,omitempty"`
-	NumUnits     uint32 `protobuf:"varint,9,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"` // number of PoST data commitment units
+	NumUnits     uint32 `protobuf:"varint,9,opt,name=num_units,json=numUnits,proto3" json:"num_units,omitempty"` // number of effective PoST data commitment units
 }
 
 func (x *Activation) Reset() {

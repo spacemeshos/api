@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "spacemesh/v2alpha1/block.proto";
 import "google/api/visibility.proto";
+import "spacemesh/v2alpha1/v2alpha1.proto";
 
 package spacemesh.v2alpha1;
 
@@ -24,6 +25,7 @@ message LayerRequest {
   uint32 end_layer = 2;
   uint64 offset = 3; // adjusts the starting point for data
   uint64 limit = 4; // specifies max number of items to fetch
+  SortOrder sort_order = 5; // specifies the sort order (default is ASC)
 };
 
 message LayerList {

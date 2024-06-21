@@ -5,9 +5,6 @@
   "produces": [
     "application/json"
   ],
-  "schemes": [
-    "https"
-  ],
   "swagger": "2.0",
   "info": {
     "title": "Spacemesh API",
@@ -15,13 +12,8 @@
       "name": "Spacemesh",
       "url": "https://spacemesh.io/"
     },
-    "license": {
-      "name": "MIT License",
-      "url": "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE"
-    },
     "version": "v2alpha1"
   },
-  "host": "testnet-api.spacemesh.network",
   "paths": {
     "/spacemesh.v2alpha1.AccountService/List": {
       "post": {
@@ -509,7 +501,7 @@
         "numUnits": {
           "type": "integer",
           "format": "int64",
-          "title": "number of PoST data commitment units"
+          "title": "number of effective PoST data commitment units"
         },
         "previousAtx": {
           "type": "string",
@@ -995,6 +987,10 @@
           "format": "uint64",
           "title": "adjusts the starting point for data"
         },
+        "sortOrder": {
+          "title": "specifies the sort order (default is ASC)",
+          "$ref": "#/definitions/v2alpha1SortOrder"
+        },
         "startLayer": {
           "type": "integer",
           "format": "int64"
@@ -1081,11 +1077,23 @@
           "type": "string",
           "format": "byte"
         },
+        "sortOrder": {
+          "title": "specifies the sort order by layer (default is ASC)",
+          "$ref": "#/definitions/v2alpha1SortOrder"
+        },
         "startLayer": {
           "type": "integer",
           "format": "int64"
         }
       }
+    },
+    "v2alpha1SortOrder": {
+      "type": "string",
+      "default": "ASC",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
     },
     "v2alpha1TransactionContents": {
       "type": "object",
@@ -1147,6 +1155,10 @@
           "description": "Adjusts the starting point for data retrieval.",
           "type": "string",
           "format": "uint64"
+        },
+        "sortOrder": {
+          "title": "specifies the sort order by layer (default is ASC)",
+          "$ref": "#/definitions/v2alpha1SortOrder"
         },
         "startLayer": {
           "description": "Starting layer for transactions.",
