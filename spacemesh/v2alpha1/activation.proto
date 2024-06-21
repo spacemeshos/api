@@ -13,6 +13,7 @@ message Activation {
   string coinbase = 6;
   uint64 weight = 7;
   uint64 height = 8;
+  uint32 num_units = 9; // number of PoST data commitment units
 }
 
 message ActivationStreamRequest {
@@ -33,8 +34,8 @@ service ActivationStreamService {
 message ActivationRequest {
   uint32 start_epoch = 1; // Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.
   uint32 end_epoch = 2;
-  bytes id = 3;
-  bytes node_id = 4;
+  repeated bytes id = 3;
+  repeated bytes smesher_id = 4;
   string coinbase = 5; // `coinbase` filter is not supported by database index and will result in sequential scan.
   uint64 offset = 6;
   uint64 limit = 7;
