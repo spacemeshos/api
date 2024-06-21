@@ -503,17 +503,9 @@
           "format": "int64",
           "title": "number of effective PoST data commitment units"
         },
-        "previousAtx": {
-          "type": "string",
-          "format": "byte"
-        },
         "publishEpoch": {
           "type": "integer",
           "format": "int64"
-        },
-        "signature": {
-          "type": "string",
-          "format": "byte"
         },
         "smesherId": {
           "type": "string",
