@@ -506,6 +506,11 @@
           "type": "string",
           "format": "byte"
         },
+        "numUnits": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of PoST data commitment units"
+        },
         "previousAtx": {
           "type": "string",
           "format": "byte"
@@ -850,20 +855,26 @@
           "format": "int64"
         },
         "id": {
-          "type": "string",
-          "format": "byte"
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         },
         "limit": {
           "type": "string",
           "format": "uint64"
         },
-        "nodeId": {
-          "type": "string",
-          "format": "byte"
-        },
         "offset": {
           "type": "string",
           "format": "uint64"
+        },
+        "smesherId": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         },
         "startEpoch": {
           "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
