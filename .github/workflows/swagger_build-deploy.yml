@@ -3,7 +3,7 @@ name: Build and Push Swagger-UI to R2 mainnet-api-docs.spacemesh.network
 on:
   push:
     branches:
-      - fix-sync-with-go-sm
+      - master
     paths:
       - 'release/openapi/swagger/src/**'
 
