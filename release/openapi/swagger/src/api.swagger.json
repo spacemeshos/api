@@ -389,7 +389,6 @@
     },
     "TransactionTransactionType": {
       "type": "string",
-      "title": "- TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN: deprecated\n - TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN: deprecated",
       "default": "TRANSACTION_TYPE_UNSPECIFIED",
       "enum": [
         "TRANSACTION_TYPE_UNSPECIFIED",
