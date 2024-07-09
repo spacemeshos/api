@@ -501,11 +501,11 @@ type ContentsVaultSpawn struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Owner               string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
+	Owner               string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"` // owner account
 	TotalAmount         uint64 `protobuf:"varint,2,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
 	InitialUnlockAmount uint64 `protobuf:"varint,3,opt,name=initial_unlock_amount,json=initialUnlockAmount,proto3" json:"initial_unlock_amount,omitempty"`
-	VestingStart        uint32 `protobuf:"varint,4,opt,name=vesting_start,json=vestingStart,proto3" json:"vesting_start,omitempty"`
-	VestingEnd          uint32 `protobuf:"varint,5,opt,name=vesting_end,json=vestingEnd,proto3" json:"vesting_end,omitempty"`
+	VestingStart        uint32 `protobuf:"varint,4,opt,name=vesting_start,json=vestingStart,proto3" json:"vesting_start,omitempty"` // as layer number
+	VestingEnd          uint32 `protobuf:"varint,5,opt,name=vesting_end,json=vestingEnd,proto3" json:"vesting_end,omitempty"`       // as layer number
 }
 
 func (x *ContentsVaultSpawn) Reset() {

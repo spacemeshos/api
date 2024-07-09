@@ -49,11 +49,11 @@ message ContentsMultiSigSpawn {
 }
 
 message ContentsVaultSpawn {
-  string owner = 1;
+  string owner = 1; // owner account
   uint64 total_amount = 2;
   uint64 initial_unlock_amount = 3;
-  uint32 vesting_start = 4;
-  uint32 vesting_end = 5;
+  uint32 vesting_start = 4; // as layer number
+  uint32 vesting_end = 5; // as layer number
 }
 
 message ContentsDrainVault {

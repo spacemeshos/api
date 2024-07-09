@@ -947,7 +947,8 @@
           "format": "uint64"
         },
         "owner": {
-          "type": "string"
+          "type": "string",
+          "title": "owner account"
         },
         "totalAmount": {
           "type": "string",
@@ -955,11 +956,13 @@
         },
         "vestingEnd": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "as layer number"
         },
         "vestingStart": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "as layer number"
         }
       }
     },
