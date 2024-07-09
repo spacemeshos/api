@@ -92,10 +92,13 @@ const (
 	Transaction_TRANSACTION_TYPE_UNSPECIFIED          Transaction_TransactionType = 0
 	Transaction_TRANSACTION_TYPE_SINGLE_SIG_SEND      Transaction_TransactionType = 1
 	Transaction_TRANSACTION_TYPE_SINGLE_SIG_SPAWN     Transaction_TransactionType = 2
-	Transaction_TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN Transaction_TransactionType = 3
+	Transaction_TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN Transaction_TransactionType = 3 // deprecated
 	Transaction_TRANSACTION_TYPE_MULTI_SIG_SEND       Transaction_TransactionType = 4
 	Transaction_TRANSACTION_TYPE_MULTI_SIG_SPAWN      Transaction_TransactionType = 5
-	Transaction_TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN  Transaction_TransactionType = 6
+	Transaction_TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN  Transaction_TransactionType = 6 // deprecated
+	Transaction_TRANSACTION_TYPE_VESTING_SPAWN        Transaction_TransactionType = 7
+	Transaction_TRANSACTION_TYPE_VAULT_SPAWN          Transaction_TransactionType = 8
+	Transaction_TRANSACTION_TYPE_DRAIN_VAULT          Transaction_TransactionType = 9
 )
 
 // Enum value maps for Transaction_TransactionType.
@@ -108,6 +111,9 @@ var (
 		4: "TRANSACTION_TYPE_MULTI_SIG_SEND",
 		5: "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
 		6: "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
+		7: "TRANSACTION_TYPE_VESTING_SPAWN",
+		8: "TRANSACTION_TYPE_VAULT_SPAWN",
+		9: "TRANSACTION_TYPE_DRAIN_VAULT",
 	}
 	Transaction_TransactionType_value = map[string]int32{
 		"TRANSACTION_TYPE_UNSPECIFIED":          0,
@@ -117,6 +123,9 @@ var (
 		"TRANSACTION_TYPE_MULTI_SIG_SEND":       4,
 		"TRANSACTION_TYPE_MULTI_SIG_SPAWN":      5,
 		"TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN":  6,
+		"TRANSACTION_TYPE_VESTING_SPAWN":        7,
+		"TRANSACTION_TYPE_VAULT_SPAWN":          8,
+		"TRANSACTION_TYPE_DRAIN_VAULT":          9,
 	}
 )
 
@@ -196,7 +205,7 @@ func (x TransactionResult_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TransactionResult_Status.Descriptor instead.
 func (TransactionResult_Status) EnumDescriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{6, 0}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{8, 0}
 }
 
 // An immutable Spacemesh transaction.
@@ -485,6 +494,148 @@ func (x *ContentsMultiSigSpawn) GetPubkey() []string {
 	return nil
 }
 
+type ContentsVaultSpawn struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Owner               string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
+	TotalAmount         uint64 `protobuf:"varint,2,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	InitialUnlockAmount uint64 `protobuf:"varint,3,opt,name=initial_unlock_amount,json=initialUnlockAmount,proto3" json:"initial_unlock_amount,omitempty"`
+	VestingStart        uint32 `protobuf:"varint,4,opt,name=vesting_start,json=vestingStart,proto3" json:"vesting_start,omitempty"`
+	VestingEnd          uint32 `protobuf:"varint,5,opt,name=vesting_end,json=vestingEnd,proto3" json:"vesting_end,omitempty"`
+}
+
+func (x *ContentsVaultSpawn) Reset() {
+	*x = ContentsVaultSpawn{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ContentsVaultSpawn) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ContentsVaultSpawn) ProtoMessage() {}
+
+func (x *ContentsVaultSpawn) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ContentsVaultSpawn.ProtoReflect.Descriptor instead.
+func (*ContentsVaultSpawn) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ContentsVaultSpawn) GetOwner() string {
+	if x != nil {
+		return x.Owner
+	}
+	return ""
+}
+
+func (x *ContentsVaultSpawn) GetTotalAmount() uint64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *ContentsVaultSpawn) GetInitialUnlockAmount() uint64 {
+	if x != nil {
+		return x.InitialUnlockAmount
+	}
+	return 0
+}
+
+func (x *ContentsVaultSpawn) GetVestingStart() uint32 {
+	if x != nil {
+		return x.VestingStart
+	}
+	return 0
+}
+
+func (x *ContentsVaultSpawn) GetVestingEnd() uint32 {
+	if x != nil {
+		return x.VestingEnd
+	}
+	return 0
+}
+
+type ContentsDrainVault struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Vault       string `protobuf:"bytes,1,opt,name=vault,proto3" json:"vault,omitempty"`
+	Destination string `protobuf:"bytes,2,opt,name=destination,proto3" json:"destination,omitempty"`
+	Amount      uint64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+}
+
+func (x *ContentsDrainVault) Reset() {
+	*x = ContentsDrainVault{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ContentsDrainVault) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ContentsDrainVault) ProtoMessage() {}
+
+func (x *ContentsDrainVault) ProtoReflect() protoreflect.Message {
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ContentsDrainVault.ProtoReflect.Descriptor instead.
+func (*ContentsDrainVault) Descriptor() ([]byte, []int) {
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ContentsDrainVault) GetVault() string {
+	if x != nil {
+		return x.Vault
+	}
+	return ""
+}
+
+func (x *ContentsDrainVault) GetDestination() string {
+	if x != nil {
+		return x.Destination
+	}
+	return ""
+}
+
+func (x *ContentsDrainVault) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
 type TransactionContents struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -495,13 +646,16 @@ type TransactionContents struct {
 	//	*TransactionContents_Send
 	//	*TransactionContents_SingleSigSpawn
 	//	*TransactionContents_MultiSigSpawn
+	//	*TransactionContents_VestingSpawn
+	//	*TransactionContents_VaultSpawn
+	//	*TransactionContents_DrainVault
 	Contents isTransactionContents_Contents `protobuf_oneof:"contents"`
 }
 
 func (x *TransactionContents) Reset() {
 	*x = TransactionContents{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[4]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -514,7 +668,7 @@ func (x *TransactionContents) String() string {
 func (*TransactionContents) ProtoMessage() {}
 
 func (x *TransactionContents) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[4]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -527,7 +681,7 @@ func (x *TransactionContents) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionContents.ProtoReflect.Descriptor instead.
 func (*TransactionContents) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{4}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{6}
 }
 
 func (m *TransactionContents) GetContents() isTransactionContents_Contents {
@@ -558,6 +712,27 @@ func (x *TransactionContents) GetMultiSigSpawn() *ContentsMultiSigSpawn {
 	return nil
 }
 
+func (x *TransactionContents) GetVestingSpawn() *ContentsMultiSigSpawn {
+	if x, ok := x.GetContents().(*TransactionContents_VestingSpawn); ok {
+		return x.VestingSpawn
+	}
+	return nil
+}
+
+func (x *TransactionContents) GetVaultSpawn() *ContentsVaultSpawn {
+	if x, ok := x.GetContents().(*TransactionContents_VaultSpawn); ok {
+		return x.VaultSpawn
+	}
+	return nil
+}
+
+func (x *TransactionContents) GetDrainVault() *ContentsDrainVault {
+	if x, ok := x.GetContents().(*TransactionContents_DrainVault); ok {
+		return x.DrainVault
+	}
+	return nil
+}
+
 type isTransactionContents_Contents interface {
 	isTransactionContents_Contents()
 }
@@ -574,11 +749,29 @@ type TransactionContents_MultiSigSpawn struct {
 	MultiSigSpawn *ContentsMultiSigSpawn `protobuf:"bytes,3,opt,name=multi_sig_spawn,json=multiSigSpawn,proto3,oneof"`
 }
 
+type TransactionContents_VestingSpawn struct {
+	VestingSpawn *ContentsMultiSigSpawn `protobuf:"bytes,4,opt,name=vesting_spawn,json=vestingSpawn,proto3,oneof"`
+}
+
+type TransactionContents_VaultSpawn struct {
+	VaultSpawn *ContentsVaultSpawn `protobuf:"bytes,5,opt,name=vault_spawn,json=vaultSpawn,proto3,oneof"`
+}
+
+type TransactionContents_DrainVault struct {
+	DrainVault *ContentsDrainVault `protobuf:"bytes,6,opt,name=drain_vault,json=drainVault,proto3,oneof"`
+}
+
 func (*TransactionContents_Send) isTransactionContents_Contents() {}
 
 func (*TransactionContents_SingleSigSpawn) isTransactionContents_Contents() {}
 
 func (*TransactionContents_MultiSigSpawn) isTransactionContents_Contents() {}
+
+func (*TransactionContents_VestingSpawn) isTransactionContents_Contents() {}
+
+func (*TransactionContents_VaultSpawn) isTransactionContents_Contents() {}
+
+func (*TransactionContents_DrainVault) isTransactionContents_Contents() {}
 
 type Nonce struct {
 	state         protoimpl.MessageState
@@ -591,7 +784,7 @@ type Nonce struct {
 func (x *Nonce) Reset() {
 	*x = Nonce{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[5]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -604,7 +797,7 @@ func (x *Nonce) String() string {
 func (*Nonce) ProtoMessage() {}
 
 func (x *Nonce) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[5]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -617,7 +810,7 @@ func (x *Nonce) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Nonce.ProtoReflect.Descriptor instead.
 func (*Nonce) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{5}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Nonce) GetCounter() uint64 {
@@ -644,7 +837,7 @@ type TransactionResult struct {
 func (x *TransactionResult) Reset() {
 	*x = TransactionResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[6]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -657,7 +850,7 @@ func (x *TransactionResult) String() string {
 func (*TransactionResult) ProtoMessage() {}
 
 func (x *TransactionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[6]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -670,7 +863,7 @@ func (x *TransactionResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionResult.ProtoReflect.Descriptor instead.
 func (*TransactionResult) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{6}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *TransactionResult) GetStatus() TransactionResult_Status {
@@ -737,7 +930,7 @@ type TransactionStreamRequest struct {
 func (x *TransactionStreamRequest) Reset() {
 	*x = TransactionStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[7]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -750,7 +943,7 @@ func (x *TransactionStreamRequest) String() string {
 func (*TransactionStreamRequest) ProtoMessage() {}
 
 func (x *TransactionStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[7]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -763,7 +956,7 @@ func (x *TransactionStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionStreamRequest.ProtoReflect.Descriptor instead.
 func (*TransactionStreamRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{7}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *TransactionStreamRequest) GetStartLayer() uint32 {
@@ -820,7 +1013,7 @@ type TransactionRequest struct {
 func (x *TransactionRequest) Reset() {
 	*x = TransactionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[8]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -833,7 +1026,7 @@ func (x *TransactionRequest) String() string {
 func (*TransactionRequest) ProtoMessage() {}
 
 func (x *TransactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[8]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -846,7 +1039,7 @@ func (x *TransactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionRequest.ProtoReflect.Descriptor instead.
 func (*TransactionRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{8}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *TransactionRequest) GetStartLayer() uint32 {
@@ -925,7 +1118,7 @@ type TransactionResponse struct {
 func (x *TransactionResponse) Reset() {
 	*x = TransactionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[9]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -938,7 +1131,7 @@ func (x *TransactionResponse) String() string {
 func (*TransactionResponse) ProtoMessage() {}
 
 func (x *TransactionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[9]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -951,7 +1144,7 @@ func (x *TransactionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionResponse.ProtoReflect.Descriptor instead.
 func (*TransactionResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{9}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TransactionResponse) GetTx() *Transaction {
@@ -986,7 +1179,7 @@ type TransactionList struct {
 func (x *TransactionList) Reset() {
 	*x = TransactionList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[10]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -999,7 +1192,7 @@ func (x *TransactionList) String() string {
 func (*TransactionList) ProtoMessage() {}
 
 func (x *TransactionList) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[10]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1012,7 +1205,7 @@ func (x *TransactionList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionList.ProtoReflect.Descriptor instead.
 func (*TransactionList) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{10}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *TransactionList) GetTransactions() []*TransactionResponse {
@@ -1034,7 +1227,7 @@ type ParseTransactionRequest struct {
 func (x *ParseTransactionRequest) Reset() {
 	*x = ParseTransactionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[11]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1047,7 +1240,7 @@ func (x *ParseTransactionRequest) String() string {
 func (*ParseTransactionRequest) ProtoMessage() {}
 
 func (x *ParseTransactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[11]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1060,7 +1253,7 @@ func (x *ParseTransactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseTransactionRequest.ProtoReflect.Descriptor instead.
 func (*ParseTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{11}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ParseTransactionRequest) GetTransaction() []byte {
@@ -1089,7 +1282,7 @@ type ParseTransactionResponse struct {
 func (x *ParseTransactionResponse) Reset() {
 	*x = ParseTransactionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[12]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1102,7 +1295,7 @@ func (x *ParseTransactionResponse) String() string {
 func (*ParseTransactionResponse) ProtoMessage() {}
 
 func (x *ParseTransactionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[12]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1115,7 +1308,7 @@ func (x *ParseTransactionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseTransactionResponse.ProtoReflect.Descriptor instead.
 func (*ParseTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{12}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ParseTransactionResponse) GetStatus() *status.Status {
@@ -1143,7 +1336,7 @@ type SubmitTransactionRequest struct {
 func (x *SubmitTransactionRequest) Reset() {
 	*x = SubmitTransactionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[13]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1156,7 +1349,7 @@ func (x *SubmitTransactionRequest) String() string {
 func (*SubmitTransactionRequest) ProtoMessage() {}
 
 func (x *SubmitTransactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[13]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1169,7 +1362,7 @@ func (x *SubmitTransactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTransactionRequest.ProtoReflect.Descriptor instead.
 func (*SubmitTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{13}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SubmitTransactionRequest) GetTransaction() []byte {
@@ -1191,7 +1384,7 @@ type SubmitTransactionResponse struct {
 func (x *SubmitTransactionResponse) Reset() {
 	*x = SubmitTransactionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[14]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1204,7 +1397,7 @@ func (x *SubmitTransactionResponse) String() string {
 func (*SubmitTransactionResponse) ProtoMessage() {}
 
 func (x *SubmitTransactionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[14]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1217,7 +1410,7 @@ func (x *SubmitTransactionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTransactionResponse.ProtoReflect.Descriptor instead.
 func (*SubmitTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{14}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SubmitTransactionResponse) GetStatus() *status.Status {
@@ -1245,7 +1438,7 @@ type EstimateGasRequest struct {
 func (x *EstimateGasRequest) Reset() {
 	*x = EstimateGasRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[15]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1258,7 +1451,7 @@ func (x *EstimateGasRequest) String() string {
 func (*EstimateGasRequest) ProtoMessage() {}
 
 func (x *EstimateGasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[15]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1271,7 +1464,7 @@ func (x *EstimateGasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EstimateGasRequest.ProtoReflect.Descriptor instead.
 func (*EstimateGasRequest) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{15}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *EstimateGasRequest) GetTransaction() []byte {
@@ -1293,7 +1486,7 @@ type EstimateGasResponse struct {
 func (x *EstimateGasResponse) Reset() {
 	*x = EstimateGasResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[16]
+		mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1306,7 +1499,7 @@ func (x *EstimateGasResponse) String() string {
 func (*EstimateGasResponse) ProtoMessage() {}
 
 func (x *EstimateGasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[16]
+	mi := &file_spacemesh_v2alpha1_tx_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1319,7 +1512,7 @@ func (x *EstimateGasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EstimateGasResponse.ProtoReflect.Descriptor instead.
 func (*EstimateGasResponse) Descriptor() ([]byte, []int) {
-	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{16}
+	return file_spacemesh_v2alpha1_tx_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *EstimateGasResponse) GetStatus() *status.Status {
@@ -1347,7 +1540,7 @@ var file_spacemesh_v2alpha1_tx_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x69, 0x73, 0x69, 0x62, 0x69, 0x6c, 0x69, 0x74,
 	0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x21, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
 	0x73, 0x68, 0x2f, 0x76, 0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2f, 0x76, 0x32, 0x61, 0x6c,
-	0x70, 0x68, 0x61, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb2, 0x05, 0x0a, 0x0b, 0x54,
+	0x70, 0x68, 0x61, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x9a, 0x06, 0x0a, 0x0b, 0x54,
 	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72,
 	0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70,
@@ -1372,7 +1565,7 @@ var file_spacemesh_v2alpha1_tx_proto_rawDesc = []byte{
 	0x6e, 0x74, 0x73, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x73, 0x70, 0x61, 0x63,
 	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x54,
 	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
-	0x74, 0x73, 0x52, 0x08, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x22, 0xa0, 0x02, 0x0a,
+	0x74, 0x73, 0x52, 0x08, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x88, 0x03, 0x0a,
 	0x0f, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65,
 	0x12, 0x20, 0x0a, 0x1c, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f,
 	0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
@@ -1390,36 +1583,76 @@ var file_spacemesh_v2alpha1_tx_proto_rawDesc = []byte{
 	0x59, 0x50, 0x45, 0x5f, 0x4d, 0x55, 0x4c, 0x54, 0x49, 0x5f, 0x53, 0x49, 0x47, 0x5f, 0x53, 0x50,
 	0x41, 0x57, 0x4e, 0x10, 0x05, 0x12, 0x28, 0x0a, 0x24, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43,
 	0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x4d, 0x55, 0x4c, 0x54, 0x49, 0x5f,
-	0x53, 0x49, 0x47, 0x5f, 0x53, 0x45, 0x4c, 0x46, 0x53, 0x50, 0x41, 0x57, 0x4e, 0x10, 0x06, 0x22,
-	0x48, 0x0a, 0x0c, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x65, 0x6e, 0x64, 0x12,
-	0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x30, 0x0a, 0x16, 0x43, 0x6f, 0x6e,
-	0x74, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x53, 0x69, 0x67, 0x53, 0x70,
-	0x61, 0x77, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x22, 0x4b, 0x0a, 0x15, 0x43,
-	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x53, 0x69, 0x67, 0x53,
-	0x70, 0x61, 0x77, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64,
-	0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09,
-	0x52, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79, 0x22, 0x86, 0x02, 0x0a, 0x13, 0x54, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73,
-	0x12, 0x36, 0x0a, 0x04, 0x73, 0x65, 0x6e, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20,
-	0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x32, 0x61, 0x6c, 0x70,
-	0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x65, 0x6e, 0x64,
-	0x48, 0x00, 0x52, 0x04, 0x73, 0x65, 0x6e, 0x64, 0x12, 0x56, 0x0a, 0x10, 0x73, 0x69, 0x6e, 0x67,
-	0x6c, 0x65, 0x5f, 0x73, 0x69, 0x67, 0x5f, 0x73, 0x70, 0x61, 0x77, 0x6e, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76,
-	0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73,
-	0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x48, 0x00,
-	0x52, 0x0e, 0x73, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e,
-	0x12, 0x53, 0x0a, 0x0f, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x5f, 0x73, 0x69, 0x67, 0x5f, 0x73, 0x70,
-	0x61, 0x77, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43,
-	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x53, 0x69, 0x67, 0x53,
-	0x70, 0x61, 0x77, 0x6e, 0x48, 0x00, 0x52, 0x0d, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x53, 0x69, 0x67,
-	0x53, 0x70, 0x61, 0x77, 0x6e, 0x42, 0x0a, 0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x53, 0x49, 0x47, 0x5f, 0x53, 0x45, 0x4c, 0x46, 0x53, 0x50, 0x41, 0x57, 0x4e, 0x10, 0x06, 0x12,
+	0x22, 0x0a, 0x1e, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x54,
+	0x59, 0x50, 0x45, 0x5f, 0x56, 0x45, 0x53, 0x54, 0x49, 0x4e, 0x47, 0x5f, 0x53, 0x50, 0x41, 0x57,
+	0x4e, 0x10, 0x07, 0x12, 0x20, 0x0a, 0x1c, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43, 0x54, 0x49,
+	0x4f, 0x4e, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x56, 0x41, 0x55, 0x4c, 0x54, 0x5f, 0x53, 0x50,
+	0x41, 0x57, 0x4e, 0x10, 0x08, 0x12, 0x20, 0x0a, 0x1c, 0x54, 0x52, 0x41, 0x4e, 0x53, 0x41, 0x43,
+	0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x44, 0x52, 0x41, 0x49, 0x4e, 0x5f,
+	0x56, 0x41, 0x55, 0x4c, 0x54, 0x10, 0x09, 0x22, 0x48, 0x0a, 0x0c, 0x43, 0x6f, 0x6e, 0x74, 0x65,
+	0x6e, 0x74, 0x73, 0x53, 0x65, 0x6e, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x74, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65,
+	0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f,
+	0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e,
+	0x74, 0x22, 0x30, 0x0a, 0x16, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x69, 0x6e,
+	0x67, 0x6c, 0x65, 0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x70,
+	0x75, 0x62, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x75, 0x62,
+	0x6b, 0x65, 0x79, 0x22, 0x4b, 0x0a, 0x15, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x4d,
+	0x75, 0x6c, 0x74, 0x69, 0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x12, 0x1a, 0x0a, 0x08,
+	0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08,
+	0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x6b,
+	0x65, 0x79, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x70, 0x75, 0x62, 0x6b, 0x65, 0x79,
+	0x22, 0xc7, 0x01, 0x0a, 0x12, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x56, 0x61, 0x75,
+	0x6c, 0x74, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x21, 0x0a,
+	0x0c, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x12, 0x32, 0x0a, 0x15, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x5f, 0x75, 0x6e, 0x6c, 0x6f,
+	0x63, 0x6b, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x13, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x55, 0x6e, 0x6c, 0x6f, 0x63, 0x6b, 0x41, 0x6d,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x5f,
+	0x73, 0x74, 0x61, 0x72, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x76, 0x65, 0x73,
+	0x74, 0x69, 0x6e, 0x67, 0x53, 0x74, 0x61, 0x72, 0x74, 0x12, 0x1f, 0x0a, 0x0b, 0x76, 0x65, 0x73,
+	0x74, 0x69, 0x6e, 0x67, 0x5f, 0x65, 0x6e, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a,
+	0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x45, 0x6e, 0x64, 0x22, 0x64, 0x0a, 0x12, 0x43, 0x6f,
+	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x44, 0x72, 0x61, 0x69, 0x6e, 0x56, 0x61, 0x75, 0x6c, 0x74,
+	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73,
+	0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x22, 0xee, 0x03, 0x0a, 0x13, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x36, 0x0a, 0x04, 0x73, 0x65, 0x6e, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65,
+	0x73, 0x68, 0x2e, 0x76, 0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x73, 0x53, 0x65, 0x6e, 0x64, 0x48, 0x00, 0x52, 0x04, 0x73, 0x65, 0x6e, 0x64,
+	0x12, 0x56, 0x0a, 0x10, 0x73, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x5f, 0x73, 0x69, 0x67, 0x5f, 0x73,
+	0x70, 0x61, 0x77, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e,
+	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x53, 0x69,
+	0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x48, 0x00, 0x52, 0x0e, 0x73, 0x69, 0x6e, 0x67, 0x6c, 0x65,
+	0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x12, 0x53, 0x0a, 0x0f, 0x6d, 0x75, 0x6c, 0x74,
+	0x69, 0x5f, 0x73, 0x69, 0x67, 0x5f, 0x73, 0x70, 0x61, 0x77, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x29, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x32,
+	0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x4d,
+	0x75, 0x6c, 0x74, 0x69, 0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x48, 0x00, 0x52, 0x0d,
+	0x6d, 0x75, 0x6c, 0x74, 0x69, 0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x12, 0x50, 0x0a,
+	0x0d, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x73, 0x70, 0x61, 0x77, 0x6e, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
+	0x2e, 0x76, 0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x73, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x53, 0x69, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x48,
+	0x00, 0x52, 0x0c, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x12,
+	0x49, 0x0a, 0x0b, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x5f, 0x73, 0x70, 0x61, 0x77, 0x6e, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68,
+	0x2e, 0x76, 0x32, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x73, 0x56, 0x61, 0x75, 0x6c, 0x74, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x48, 0x00, 0x52, 0x0a,
+	0x76, 0x61, 0x75, 0x6c, 0x74, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x12, 0x49, 0x0a, 0x0b, 0x64, 0x72,
+	0x61, 0x69, 0x6e, 0x5f, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x26, 0x2e, 0x73, 0x70, 0x61, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x32, 0x61, 0x6c,
+	0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x44, 0x72, 0x61,
+	0x69, 0x6e, 0x56, 0x61, 0x75, 0x6c, 0x74, 0x48, 0x00, 0x52, 0x0a, 0x64, 0x72, 0x61, 0x69, 0x6e,
+	0x56, 0x61, 0x75, 0x6c, 0x74, 0x42, 0x0a, 0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
 	0x73, 0x22, 0x21, 0x0a, 0x05, 0x4e, 0x6f, 0x6e, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x63, 0x6f, 0x75,
 	0x6e, 0x74, 0x65, 0x72, 0x22, 0x90, 0x03, 0x0a, 0x11, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
@@ -1619,7 +1852,7 @@ func file_spacemesh_v2alpha1_tx_proto_rawDescGZIP() []byte {
 }
 
 var file_spacemesh_v2alpha1_tx_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_spacemesh_v2alpha1_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_spacemesh_v2alpha1_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_spacemesh_v2alpha1_tx_proto_goTypes = []interface{}{
 	(TransactionState)(0),             // 0: spacemesh.v2alpha1.TransactionState
 	(Transaction_TransactionType)(0),  // 1: spacemesh.v2alpha1.Transaction.TransactionType
@@ -1628,54 +1861,59 @@ var file_spacemesh_v2alpha1_tx_proto_goTypes = []interface{}{
 	(*ContentsSend)(nil),              // 4: spacemesh.v2alpha1.ContentsSend
 	(*ContentsSingleSigSpawn)(nil),    // 5: spacemesh.v2alpha1.ContentsSingleSigSpawn
 	(*ContentsMultiSigSpawn)(nil),     // 6: spacemesh.v2alpha1.ContentsMultiSigSpawn
-	(*TransactionContents)(nil),       // 7: spacemesh.v2alpha1.TransactionContents
-	(*Nonce)(nil),                     // 8: spacemesh.v2alpha1.Nonce
-	(*TransactionResult)(nil),         // 9: spacemesh.v2alpha1.TransactionResult
-	(*TransactionStreamRequest)(nil),  // 10: spacemesh.v2alpha1.TransactionStreamRequest
-	(*TransactionRequest)(nil),        // 11: spacemesh.v2alpha1.TransactionRequest
-	(*TransactionResponse)(nil),       // 12: spacemesh.v2alpha1.TransactionResponse
-	(*TransactionList)(nil),           // 13: spacemesh.v2alpha1.TransactionList
-	(*ParseTransactionRequest)(nil),   // 14: spacemesh.v2alpha1.ParseTransactionRequest
-	(*ParseTransactionResponse)(nil),  // 15: spacemesh.v2alpha1.ParseTransactionResponse
-	(*SubmitTransactionRequest)(nil),  // 16: spacemesh.v2alpha1.SubmitTransactionRequest
-	(*SubmitTransactionResponse)(nil), // 17: spacemesh.v2alpha1.SubmitTransactionResponse
-	(*EstimateGasRequest)(nil),        // 18: spacemesh.v2alpha1.EstimateGasRequest
-	(*EstimateGasResponse)(nil),       // 19: spacemesh.v2alpha1.EstimateGasResponse
-	(SortOrder)(0),                    // 20: spacemesh.v2alpha1.SortOrder
-	(*status.Status)(nil),             // 21: google.rpc.Status
+	(*ContentsVaultSpawn)(nil),        // 7: spacemesh.v2alpha1.ContentsVaultSpawn
+	(*ContentsDrainVault)(nil),        // 8: spacemesh.v2alpha1.ContentsDrainVault
+	(*TransactionContents)(nil),       // 9: spacemesh.v2alpha1.TransactionContents
+	(*Nonce)(nil),                     // 10: spacemesh.v2alpha1.Nonce
+	(*TransactionResult)(nil),         // 11: spacemesh.v2alpha1.TransactionResult
+	(*TransactionStreamRequest)(nil),  // 12: spacemesh.v2alpha1.TransactionStreamRequest
+	(*TransactionRequest)(nil),        // 13: spacemesh.v2alpha1.TransactionRequest
+	(*TransactionResponse)(nil),       // 14: spacemesh.v2alpha1.TransactionResponse
+	(*TransactionList)(nil),           // 15: spacemesh.v2alpha1.TransactionList
+	(*ParseTransactionRequest)(nil),   // 16: spacemesh.v2alpha1.ParseTransactionRequest
+	(*ParseTransactionResponse)(nil),  // 17: spacemesh.v2alpha1.ParseTransactionResponse
+	(*SubmitTransactionRequest)(nil),  // 18: spacemesh.v2alpha1.SubmitTransactionRequest
+	(*SubmitTransactionResponse)(nil), // 19: spacemesh.v2alpha1.SubmitTransactionResponse
+	(*EstimateGasRequest)(nil),        // 20: spacemesh.v2alpha1.EstimateGasRequest
+	(*EstimateGasResponse)(nil),       // 21: spacemesh.v2alpha1.EstimateGasResponse
+	(SortOrder)(0),                    // 22: spacemesh.v2alpha1.SortOrder
+	(*status.Status)(nil),             // 23: google.rpc.Status
 }
 var file_spacemesh_v2alpha1_tx_proto_depIdxs = []int32{
-	8,  // 0: spacemesh.v2alpha1.Transaction.nonce:type_name -> spacemesh.v2alpha1.Nonce
+	10, // 0: spacemesh.v2alpha1.Transaction.nonce:type_name -> spacemesh.v2alpha1.Nonce
 	1,  // 1: spacemesh.v2alpha1.Transaction.type:type_name -> spacemesh.v2alpha1.Transaction.TransactionType
-	7,  // 2: spacemesh.v2alpha1.Transaction.contents:type_name -> spacemesh.v2alpha1.TransactionContents
+	9,  // 2: spacemesh.v2alpha1.Transaction.contents:type_name -> spacemesh.v2alpha1.TransactionContents
 	4,  // 3: spacemesh.v2alpha1.TransactionContents.send:type_name -> spacemesh.v2alpha1.ContentsSend
 	5,  // 4: spacemesh.v2alpha1.TransactionContents.single_sig_spawn:type_name -> spacemesh.v2alpha1.ContentsSingleSigSpawn
 	6,  // 5: spacemesh.v2alpha1.TransactionContents.multi_sig_spawn:type_name -> spacemesh.v2alpha1.ContentsMultiSigSpawn
-	2,  // 6: spacemesh.v2alpha1.TransactionResult.status:type_name -> spacemesh.v2alpha1.TransactionResult.Status
-	20, // 7: spacemesh.v2alpha1.TransactionRequest.sort_order:type_name -> spacemesh.v2alpha1.SortOrder
-	3,  // 8: spacemesh.v2alpha1.TransactionResponse.tx:type_name -> spacemesh.v2alpha1.Transaction
-	9,  // 9: spacemesh.v2alpha1.TransactionResponse.tx_result:type_name -> spacemesh.v2alpha1.TransactionResult
-	0,  // 10: spacemesh.v2alpha1.TransactionResponse.tx_state:type_name -> spacemesh.v2alpha1.TransactionState
-	12, // 11: spacemesh.v2alpha1.TransactionList.transactions:type_name -> spacemesh.v2alpha1.TransactionResponse
-	21, // 12: spacemesh.v2alpha1.ParseTransactionResponse.status:type_name -> google.rpc.Status
-	3,  // 13: spacemesh.v2alpha1.ParseTransactionResponse.tx:type_name -> spacemesh.v2alpha1.Transaction
-	21, // 14: spacemesh.v2alpha1.SubmitTransactionResponse.status:type_name -> google.rpc.Status
-	21, // 15: spacemesh.v2alpha1.EstimateGasResponse.status:type_name -> google.rpc.Status
-	10, // 16: spacemesh.v2alpha1.TransactionStreamService.Stream:input_type -> spacemesh.v2alpha1.TransactionStreamRequest
-	11, // 17: spacemesh.v2alpha1.TransactionService.List:input_type -> spacemesh.v2alpha1.TransactionRequest
-	14, // 18: spacemesh.v2alpha1.TransactionService.ParseTransaction:input_type -> spacemesh.v2alpha1.ParseTransactionRequest
-	16, // 19: spacemesh.v2alpha1.TransactionService.SubmitTransaction:input_type -> spacemesh.v2alpha1.SubmitTransactionRequest
-	18, // 20: spacemesh.v2alpha1.TransactionService.EstimateGas:input_type -> spacemesh.v2alpha1.EstimateGasRequest
-	12, // 21: spacemesh.v2alpha1.TransactionStreamService.Stream:output_type -> spacemesh.v2alpha1.TransactionResponse
-	13, // 22: spacemesh.v2alpha1.TransactionService.List:output_type -> spacemesh.v2alpha1.TransactionList
-	15, // 23: spacemesh.v2alpha1.TransactionService.ParseTransaction:output_type -> spacemesh.v2alpha1.ParseTransactionResponse
-	17, // 24: spacemesh.v2alpha1.TransactionService.SubmitTransaction:output_type -> spacemesh.v2alpha1.SubmitTransactionResponse
-	19, // 25: spacemesh.v2alpha1.TransactionService.EstimateGas:output_type -> spacemesh.v2alpha1.EstimateGasResponse
-	21, // [21:26] is the sub-list for method output_type
-	16, // [16:21] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	6,  // 6: spacemesh.v2alpha1.TransactionContents.vesting_spawn:type_name -> spacemesh.v2alpha1.ContentsMultiSigSpawn
+	7,  // 7: spacemesh.v2alpha1.TransactionContents.vault_spawn:type_name -> spacemesh.v2alpha1.ContentsVaultSpawn
+	8,  // 8: spacemesh.v2alpha1.TransactionContents.drain_vault:type_name -> spacemesh.v2alpha1.ContentsDrainVault
+	2,  // 9: spacemesh.v2alpha1.TransactionResult.status:type_name -> spacemesh.v2alpha1.TransactionResult.Status
+	22, // 10: spacemesh.v2alpha1.TransactionRequest.sort_order:type_name -> spacemesh.v2alpha1.SortOrder
+	3,  // 11: spacemesh.v2alpha1.TransactionResponse.tx:type_name -> spacemesh.v2alpha1.Transaction
+	11, // 12: spacemesh.v2alpha1.TransactionResponse.tx_result:type_name -> spacemesh.v2alpha1.TransactionResult
+	0,  // 13: spacemesh.v2alpha1.TransactionResponse.tx_state:type_name -> spacemesh.v2alpha1.TransactionState
+	14, // 14: spacemesh.v2alpha1.TransactionList.transactions:type_name -> spacemesh.v2alpha1.TransactionResponse
+	23, // 15: spacemesh.v2alpha1.ParseTransactionResponse.status:type_name -> google.rpc.Status
+	3,  // 16: spacemesh.v2alpha1.ParseTransactionResponse.tx:type_name -> spacemesh.v2alpha1.Transaction
+	23, // 17: spacemesh.v2alpha1.SubmitTransactionResponse.status:type_name -> google.rpc.Status
+	23, // 18: spacemesh.v2alpha1.EstimateGasResponse.status:type_name -> google.rpc.Status
+	12, // 19: spacemesh.v2alpha1.TransactionStreamService.Stream:input_type -> spacemesh.v2alpha1.TransactionStreamRequest
+	13, // 20: spacemesh.v2alpha1.TransactionService.List:input_type -> spacemesh.v2alpha1.TransactionRequest
+	16, // 21: spacemesh.v2alpha1.TransactionService.ParseTransaction:input_type -> spacemesh.v2alpha1.ParseTransactionRequest
+	18, // 22: spacemesh.v2alpha1.TransactionService.SubmitTransaction:input_type -> spacemesh.v2alpha1.SubmitTransactionRequest
+	20, // 23: spacemesh.v2alpha1.TransactionService.EstimateGas:input_type -> spacemesh.v2alpha1.EstimateGasRequest
+	14, // 24: spacemesh.v2alpha1.TransactionStreamService.Stream:output_type -> spacemesh.v2alpha1.TransactionResponse
+	15, // 25: spacemesh.v2alpha1.TransactionService.List:output_type -> spacemesh.v2alpha1.TransactionList
+	17, // 26: spacemesh.v2alpha1.TransactionService.ParseTransaction:output_type -> spacemesh.v2alpha1.ParseTransactionResponse
+	19, // 27: spacemesh.v2alpha1.TransactionService.SubmitTransaction:output_type -> spacemesh.v2alpha1.SubmitTransactionResponse
+	21, // 28: spacemesh.v2alpha1.TransactionService.EstimateGas:output_type -> spacemesh.v2alpha1.EstimateGasResponse
+	24, // [24:29] is the sub-list for method output_type
+	19, // [19:24] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_spacemesh_v2alpha1_tx_proto_init() }
@@ -1734,7 +1972,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionContents); i {
+			switch v := v.(*ContentsVaultSpawn); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1746,7 +1984,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Nonce); i {
+			switch v := v.(*ContentsDrainVault); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1758,7 +1996,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionResult); i {
+			switch v := v.(*TransactionContents); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1770,7 +2008,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionStreamRequest); i {
+			switch v := v.(*Nonce); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1782,7 +2020,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionRequest); i {
+			switch v := v.(*TransactionResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1794,7 +2032,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionResponse); i {
+			switch v := v.(*TransactionStreamRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1806,7 +2044,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TransactionList); i {
+			switch v := v.(*TransactionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1818,7 +2056,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ParseTransactionRequest); i {
+			switch v := v.(*TransactionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1830,7 +2068,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ParseTransactionResponse); i {
+			switch v := v.(*TransactionList); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1842,7 +2080,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SubmitTransactionRequest); i {
+			switch v := v.(*ParseTransactionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1854,7 +2092,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SubmitTransactionResponse); i {
+			switch v := v.(*ParseTransactionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1866,7 +2104,7 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EstimateGasRequest); i {
+			switch v := v.(*SubmitTransactionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1878,6 +2116,30 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 		file_spacemesh_v2alpha1_tx_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SubmitTransactionResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v2alpha1_tx_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EstimateGasRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_spacemesh_v2alpha1_tx_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EstimateGasResponse); i {
 			case 0:
 				return &v.state
@@ -1890,21 +2152,24 @@ func file_spacemesh_v2alpha1_tx_proto_init() {
 			}
 		}
 	}
-	file_spacemesh_v2alpha1_tx_proto_msgTypes[4].OneofWrappers = []interface{}{
+	file_spacemesh_v2alpha1_tx_proto_msgTypes[6].OneofWrappers = []interface{}{
 		(*TransactionContents_Send)(nil),
 		(*TransactionContents_SingleSigSpawn)(nil),
 		(*TransactionContents_MultiSigSpawn)(nil),
+		(*TransactionContents_VestingSpawn)(nil),
+		(*TransactionContents_VaultSpawn)(nil),
+		(*TransactionContents_DrainVault)(nil),
 	}
-	file_spacemesh_v2alpha1_tx_proto_msgTypes[7].OneofWrappers = []interface{}{}
-	file_spacemesh_v2alpha1_tx_proto_msgTypes[8].OneofWrappers = []interface{}{}
 	file_spacemesh_v2alpha1_tx_proto_msgTypes[9].OneofWrappers = []interface{}{}
+	file_spacemesh_v2alpha1_tx_proto_msgTypes[10].OneofWrappers = []interface{}{}
+	file_spacemesh_v2alpha1_tx_proto_msgTypes[11].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_spacemesh_v2alpha1_tx_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

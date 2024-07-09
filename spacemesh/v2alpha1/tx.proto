@@ -22,10 +22,13 @@ message Transaction {
     TRANSACTION_TYPE_UNSPECIFIED = 0;
     TRANSACTION_TYPE_SINGLE_SIG_SEND = 1;
     TRANSACTION_TYPE_SINGLE_SIG_SPAWN = 2;
-    TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN = 3;
+    TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN = 3; // deprecated
     TRANSACTION_TYPE_MULTI_SIG_SEND = 4;
     TRANSACTION_TYPE_MULTI_SIG_SPAWN = 5;
-    TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN = 6;
+    TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN = 6; // deprecated
+    TRANSACTION_TYPE_VESTING_SPAWN = 7;
+    TRANSACTION_TYPE_VAULT_SPAWN = 8;
+    TRANSACTION_TYPE_DRAIN_VAULT = 9;
   }
   TransactionType type = 10;
   TransactionContents contents = 11; // parsed transaction contents
@@ -45,11 +48,28 @@ message ContentsMultiSigSpawn {
   repeated string pubkey = 2;
 }
 
+message ContentsVaultSpawn {
+  string owner = 1;
+  uint64 total_amount = 2;
+  uint64 initial_unlock_amount = 3;
+  uint32 vesting_start = 4;
+  uint32 vesting_end = 5;
+}
+
+message ContentsDrainVault {
+  string vault = 1;
+  string destination = 2;
+  uint64 amount = 3;
+}
+
 message TransactionContents {
   oneof contents {
     ContentsSend send = 1;
     ContentsSingleSigSpawn single_sig_spawn = 2;
     ContentsMultiSigSpawn multi_sig_spawn = 3;
+    ContentsMultiSigSpawn vesting_spawn = 4;
+    ContentsVaultSpawn vault_spawn = 5;
+    ContentsDrainVault drain_vault = 6;
   }
 }
 
