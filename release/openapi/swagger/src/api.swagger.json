@@ -397,7 +397,10 @@
         "TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN",
         "TRANSACTION_TYPE_MULTI_SIG_SEND",
         "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
-        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN"
+        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_VESTING_SPAWN",
+        "TRANSACTION_TYPE_VAULT_SPAWN",
+        "TRANSACTION_TYPE_DRAIN_VAULT"
       ]
     },
     "googlerpcStatus": {
@@ -883,6 +886,21 @@
         }
       }
     },
+    "v2alpha1ContentsDrainVault": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "vault": {
+          "type": "string"
+        }
+      }
+    },
     "v2alpha1ContentsMultiSigSpawn": {
       "type": "object",
       "properties": {
@@ -918,6 +936,33 @@
       "properties": {
         "pubkey": {
           "type": "string"
+        }
+      }
+    },
+    "v2alpha1ContentsVaultSpawn": {
+      "type": "object",
+      "properties": {
+        "initialUnlockAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "owner": {
+          "type": "string",
+          "title": "owner account"
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "vestingEnd": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
+        },
+        "vestingStart": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
         }
       }
     },
@@ -1078,6 +1123,9 @@
     "v2alpha1TransactionContents": {
       "type": "object",
       "properties": {
+        "drainVault": {
+          "$ref": "#/definitions/v2alpha1ContentsDrainVault"
+        },
         "multiSigSpawn": {
           "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
         },
@@ -1086,6 +1134,12 @@
         },
         "singleSigSpawn": {
           "$ref": "#/definitions/v2alpha1ContentsSingleSigSpawn"
+        },
+        "vaultSpawn": {
+          "$ref": "#/definitions/v2alpha1ContentsVaultSpawn"
+        },
+        "vestingSpawn": {
+          "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
         }
       }
     },
