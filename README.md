@@ -79,6 +79,7 @@ This repository currently contains builds for two targets: golang and grpc-gatew
 
 The repository includes a [`Makefile`](Makefile) that makes it easy to run most regular tasks:
 
+- `make install` installs all used protoc-plugins
 - `make lint` runs the linter (see below)
 - `make local` checks for breaking changes against local `master` (see below)
 - `make breaking` checks for breaking changes against github repository (see below)

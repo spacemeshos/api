@@ -10,7 +10,7 @@ package spacemesh.v1;
 service SmesherService {
     option (google.api.api_visibility).restriction = "V1";
 
-    // Returns true iff node is currently smeshing
+    // Returns true if node is currently smeshing
     rpc IsSmeshing (google.protobuf.Empty) returns (IsSmeshingResponse) {
         option (google.api.http) = {
             post: "/v1/smesher/issmeshing"
@@ -114,6 +114,14 @@ service SmesherService {
     rpc PostConfig (google.protobuf.Empty) returns (PostConfigResponse) {
         option (google.api.http) = {
             post: "/v1/smesher/postconfig"
+            body: "*"
+        };
+    }
+
+    // Returns set of known and configured poet services. In case of mismatch, returns also warning.
+    rpc PoetServices (PoetServicesRequest) returns (PoetServicesResponse){
+        option (google.api.http) = {
+            post: "/v1/smesher/poetservices"
             body: "*"
         };
     }
