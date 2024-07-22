@@ -151,6 +151,38 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.MalfeasanceService/List": {
+      "post": {
+        "tags": [
+          "MalfeasanceService"
+        ],
+        "operationId": "MalfeasanceService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1MalfeasanceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.NetworkService/Info": {
       "post": {
         "tags": [
@@ -577,6 +609,68 @@
         "LAYER_STATUS_APPLIED",
         "LAYER_STATUS_VERIFIED"
       ]
+    },
+    "spacemeshv2alpha1MalfeasanceProof": {
+      "type": "object",
+      "properties": {
+        "debugInfo": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProofMalfeasanceType"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "proof": {
+          "type": "string",
+          "format": "byte"
+        },
+        "smesher": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "spacemeshv2alpha1MalfeasanceProofMalfeasanceType": {
+      "type": "string",
+      "default": "MALFEASANCE_UNSPECIFIED",
+      "enum": [
+        "MALFEASANCE_UNSPECIFIED",
+        "MALFEASANCE_ATX",
+        "MALFEASANCE_BALLOT",
+        "MALFEASANCE_HARE",
+        "MALFEASANCE_POST_INDEX",
+        "MALFEASANCE_INCORRECT_PREV_ATX",
+        "MALFEASANCE_DOUBLE_MARRY"
+      ]
+    },
+    "spacemeshv2alpha1MalfeasanceRequest": {
+      "type": "object",
+      "properties": {
+        "includeProof": {
+          "type": "boolean",
+          "title": "whether to include proof"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "smesherId": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
     },
     "spacemeshv2alpha1NetworkInfoResponse": {
       "type": "object",
@@ -1031,6 +1125,18 @@
         }
       }
     },
+    "v2alpha1MalfeasanceList": {
+      "type": "object",
+      "properties": {
+        "malfeasances": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
+          }
+        }
+      }
+    },
     "v2alpha1NetworkInfoRequest": {
       "type": "object"
     },
@@ -1235,6 +1341,9 @@
     },
     {
       "name": "LayerService"
+    },
+    {
+      "name": "MalfeasanceService"
     },
     {
       "name": "NetworkService"

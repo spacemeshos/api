@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+import "google/api/visibility.proto";
+
+package spacemesh.v2alpha1;
+
+message MalfeasanceProof {
+    bytes smesher = 1;
+    uint32 layer = 2;
+    enum MalfeasanceType {
+        MALFEASANCE_UNSPECIFIED = 0;
+        MALFEASANCE_ATX = 1;
+        MALFEASANCE_BALLOT = 2;
+        MALFEASANCE_HARE = 3;
+        MALFEASANCE_POST_INDEX = 4;
+        MALFEASANCE_INCORRECT_PREV_ATX = 5;
+        MALFEASANCE_DOUBLE_MARRY = 6;
+    }
+    MalfeasanceType kind = 3;
+    string debug_info = 4;
+    bytes proof = 5;
+}
+
+message MalfeasanceRequest {
+    repeated bytes smesher_id = 1;
+    bool include_proof = 2; // whether to include proof
+    uint64 offset = 3; // adjusts the starting point for data
+    uint64 limit = 4; // specifies max number of items to fetch
+}
+
+message MalfeasanceList {
+    repeated MalfeasanceProof malfeasances = 1;
+}
+
+service MalfeasanceService {
+    option (google.api.api_visibility).restriction = "V2";
+
+    rpc List(MalfeasanceRequest) returns (MalfeasanceList);
+}
+
+message MalfeasanceStreamRequest {
+    bool include_proof = 1; // whether to include proof
+}
+
+service MalfeasanceStreamService {
+    option (google.api.api_visibility).restriction = "INTERNAL";
+
+    rpc Stream(MalfeasanceStreamRequest) returns (stream MalfeasanceProof);
+}
