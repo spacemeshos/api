@@ -665,6 +665,7 @@
         },
         "smesherId": {
           "type": "array",
+          "title": "list of smesher ids to fetch",
           "items": {
             "type": "string",
             "format": "byte"

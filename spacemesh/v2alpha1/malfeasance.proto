@@ -22,7 +22,7 @@ message MalfeasanceProof {
 }
 
 message MalfeasanceRequest {
-    repeated bytes smesher_id = 1;
+    repeated bytes smesher_id = 1; // list of smesher ids to fetch
     bool include_proof = 2; // whether to include proof
     uint64 offset = 3; // adjusts the starting point for data
     uint64 limit = 4; // specifies max number of items to fetch
@@ -39,7 +39,9 @@ service MalfeasanceService {
 }
 
 message MalfeasanceStreamRequest {
-    bool include_proof = 1; // whether to include proof
+    repeated bytes smesher_id = 1; // list of smesher ids to watch
+    bool include_proof = 2; // whether to include proof
+    bool watch = 3;
 }
 
 service MalfeasanceStreamService {
