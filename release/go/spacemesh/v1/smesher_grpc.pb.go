@@ -34,7 +34,6 @@ const (
 	SmesherService_PostSetupStatusStream_FullMethodName = "/spacemesh.v1.SmesherService/PostSetupStatusStream"
 	SmesherService_PostSetupProviders_FullMethodName    = "/spacemesh.v1.SmesherService/PostSetupProviders"
 	SmesherService_PostConfig_FullMethodName            = "/spacemesh.v1.SmesherService/PostConfig"
-	SmesherService_PoetServices_FullMethodName          = "/spacemesh.v1.SmesherService/PoetServices"
 )
 
 // SmesherServiceClient is the client API for SmesherService service.
@@ -76,8 +75,6 @@ type SmesherServiceClient interface {
 	PostSetupProviders(ctx context.Context, in *PostSetupProvidersRequest, opts ...grpc.CallOption) (*PostSetupProvidersResponse, error)
 	// Returns the Post protocol config
 	PostConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*PostConfigResponse, error)
-	// Returns set of known and configured poet services. In case of mismatch, returns also warning.
-	PoetServices(ctx context.Context, in *PoetServicesRequest, opts ...grpc.CallOption) (*PoetServicesResponse, error)
 }
 
 type smesherServiceClient struct {
@@ -238,15 +235,6 @@ func (c *smesherServiceClient) PostConfig(ctx context.Context, in *emptypb.Empty
 	return out, nil
 }
 
-func (c *smesherServiceClient) PoetServices(ctx context.Context, in *PoetServicesRequest, opts ...grpc.CallOption) (*PoetServicesResponse, error) {
-	out := new(PoetServicesResponse)
-	err := c.cc.Invoke(ctx, SmesherService_PoetServices_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // SmesherServiceServer is the server API for SmesherService service.
 // All implementations should embed UnimplementedSmesherServiceServer
 // for forward compatibility
@@ -286,8 +274,6 @@ type SmesherServiceServer interface {
 	PostSetupProviders(context.Context, *PostSetupProvidersRequest) (*PostSetupProvidersResponse, error)
 	// Returns the Post protocol config
 	PostConfig(context.Context, *emptypb.Empty) (*PostConfigResponse, error)
-	// Returns set of known and configured poet services. In case of mismatch, returns also warning.
-	PoetServices(context.Context, *PoetServicesRequest) (*PoetServicesResponse, error)
 }
 
 // UnimplementedSmesherServiceServer should be embedded to have forward compatible implementations.
@@ -335,9 +321,6 @@ func (UnimplementedSmesherServiceServer) PostSetupProviders(context.Context, *Po
 }
 func (UnimplementedSmesherServiceServer) PostConfig(context.Context, *emptypb.Empty) (*PostConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostConfig not implemented")
-}
-func (UnimplementedSmesherServiceServer) PoetServices(context.Context, *PoetServicesRequest) (*PoetServicesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PoetServices not implemented")
 }
 
 // UnsafeSmesherServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -606,24 +589,6 @@ func _SmesherService_PostConfig_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SmesherService_PoetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PoetServicesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SmesherServiceServer).PoetServices(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SmesherService_PoetServices_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmesherServiceServer).PoetServices(ctx, req.(*PoetServicesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // SmesherService_ServiceDesc is the grpc.ServiceDesc for SmesherService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -682,10 +647,6 @@ var SmesherService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostConfig",
 			Handler:    _SmesherService_PostConfig_Handler,
-		},
-		{
-			MethodName: "PoetServices",
-			Handler:    _SmesherService_PoetServices_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

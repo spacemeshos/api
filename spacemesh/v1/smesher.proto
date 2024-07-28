@@ -117,12 +117,4 @@ service SmesherService {
             body: "*"
         };
     }
-
-    // Returns set of known and configured poet services. In case of mismatch, returns also warning.
-    rpc PoetServices (PoetServicesRequest) returns (PoetServicesResponse){
-        option (google.api.http) = {
-            post: "/v1/smesher/poetservices"
-            body: "*"
-        };
-    }
 }
