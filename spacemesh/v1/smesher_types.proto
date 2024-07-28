@@ -134,13 +134,3 @@ message PostSetupStatus {
     uint64 num_labels_written = 2;  // Number of labels (hashes) written to the data files
     PostSetupOpts opts = 3;         // setup options previously set by the user
 }
-
-message PoetServicesRequest {
-    SmesherId id = 1;
-}
-
-message PoetServicesResponse {
-    string warning = 1;
-    repeated string known_poets = 2;
-    repeated string configured_poets = 3;
-}
