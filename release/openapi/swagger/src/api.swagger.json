@@ -430,9 +430,60 @@
           }
         }
       }
+    },
+    "/v2/smeshingidentities/poetservices": {
+      "post": {
+        "tags": [
+          "SmeshingIdentitiesService"
+        ],
+        "summary": "Returns set of configured poet addresses and poets addresses from registrations, if given,\nand warning in case, if there are registrations with poets, which are not in configured poets set.",
+        "operationId": "SmeshingIdentitiesService_PoetServices",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PoetServicesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PoetServicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "IdentityPoetInfo": {
+      "type": "object",
+      "properties": {
+        "poetRoundEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "registrationStatus": {
+          "$ref": "#/definitions/PoetInfoRegistrationStatus"
+        },
+        "url": {
+          "type": "string"
+        },
+        "warning": {
+          "type": "string"
+        }
+      }
+    },
     "MalfeasanceProofMalfeasanceDomain": {
       "type": "string",
       "title": "- DOMAIN_UNSPECIFIED: for legacy proofs",
@@ -450,6 +501,32 @@
         "SYNC_STATUS_SYNCING",
         "SYNC_STATUS_SYNCED"
       ]
+    },
+    "PoetInfoRegistrationStatus": {
+      "type": "string",
+      "default": "STATUS_UNSPECIFIED",
+      "enum": [
+        "STATUS_UNSPECIFIED",
+        "STATUS_SUCCESS_REG",
+        "STATUS_FAILED_REG",
+        "STATUS_RESIDUAL_REG",
+        "STATUS_NO_REG"
+      ]
+    },
+    "PoetServicesResponseIdentity": {
+      "type": "object",
+      "properties": {
+        "poetInfos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/IdentityPoetInfo"
+          }
+        },
+        "smesherIdHex": {
+          "type": "string"
+        }
+      }
     },
     "TransactionTransactionType": {
       "type": "string",
@@ -1222,6 +1299,26 @@
         }
       }
     },
+    "v2alpha1PoetServicesRequest": {
+      "type": "object",
+      "properties": {
+        "smesherIdHex": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1PoetServicesResponse": {
+      "type": "object",
+      "properties": {
+        "identities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PoetServicesResponseIdentity"
+          }
+        }
+      }
+    },
     "v2alpha1RewardList": {
       "type": "object",
       "properties": {
@@ -1405,6 +1502,9 @@
     },
     {
       "name": "NodeService"
+    },
+    {
+      "name": "SmeshingIdentitiesService"
     },
     {
       "name": "RewardService"

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+import "google/api/visibility.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+package spacemesh.v2alpha1;
+
+message PoetServicesRequest {
+  string smesher_id_hex = 1;
+}
+
+
+message PoetServicesResponse {
+  message Identity {
+    enum Status {
+      STATUS_UNSPECIFIED = 0;
+      STATUS_IS_SYNCING = 1;
+      STATUS_CREATING_INITIAL_POST = 2;
+      STATUS_SUBMITTING_CHALLENGE = 3;
+      STATUS_CREATING_POST_PROOF = 4;
+    }
+
+    message PoetInfo {
+      enum RegistrationStatus {
+        STATUS_UNSPECIFIED = 0;
+        STATUS_SUCCESS_REG = 1;
+        STATUS_FAILED_REG = 2;
+        STATUS_RESIDUAL_REG = 3;
+        STATUS_NO_REG = 4;
+      }
+
+      string url = 1;
+      google.protobuf.Timestamp poet_round_end = 2;
+      RegistrationStatus registration_status = 3;
+      string warning = 4;
+    }
+
+    string smesher_id_hex = 1;
+    repeated PoetInfo poet_infos = 2;
+  }
+    repeated Identity identities = 3;
+}
+
+service SmeshingIdentitiesService {
+  option (google.api.api_visibility).restriction = "V2";
+
+  // Returns set of configured poet addresses and poets addresses from registrations, if given,
+  // and warning in case, if there are registrations with poets, which are not in configured poets set.
+  rpc PoetServices (PoetServicesRequest) returns (PoetServicesResponse){
+    option (google.api.http) = {
+      post: "/v2/smeshingidentities/poetservices"
+      body: "*"
+    };
+  }
+}
