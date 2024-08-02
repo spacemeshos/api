@@ -20,5 +20,5 @@ message PostConfigRequest {}
 service PostService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc Info(PostConfigRequest) returns (PostConfigResponse);
+  rpc Config(PostConfigRequest) returns (PostConfigResponse);
 }

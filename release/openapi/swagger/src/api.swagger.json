@@ -215,12 +215,12 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.PostService/Info": {
+    "/spacemesh.v2alpha1.PostService/Config": {
       "post": {
         "tags": [
           "PostService"
         ],
-        "operationId": "PostService_Info",
+        "operationId": "PostService_Config",
         "parameters": [
           {
             "name": "body",
