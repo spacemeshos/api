@@ -215,6 +215,38 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.PostService/Info": {
+      "post": {
+        "tags": [
+          "PostService"
+        ],
+        "operationId": "PostService_Info",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PostConfigRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1PostConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.RewardService/List": {
       "post": {
         "tags": [
@@ -643,6 +675,35 @@
         }
       }
     },
+    "spacemeshv2alpha1PostConfigResponse": {
+      "type": "object",
+      "properties": {
+        "bitsPerLabel": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "k1": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "k2": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "labelsPerUnit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "maxNumUnits": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minNumUnits": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "spacemeshv2alpha1Reward": {
       "type": "object",
       "properties": {
@@ -1066,6 +1127,9 @@
         }
       }
     },
+    "v2alpha1PostConfigRequest": {
+      "type": "object"
+    },
     "v2alpha1RewardList": {
       "type": "object",
       "properties": {
@@ -1237,6 +1301,9 @@
     },
     {
       "name": "NodeService"
+    },
+    {
+      "name": "PostService"
     },
     {
       "name": "RewardService"
