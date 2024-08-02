@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "google/api/visibility.proto";
+
+package spacemesh.v2alpha1;
+
+message PostConfigResponse {
+  uint32 bits_per_label = 1;
+  uint64 labels_per_unit = 2;
+  uint32 min_num_units = 3;
+  uint32 max_num_units = 4;
+  uint32 k1 = 5;
+  uint32 k2 = 6;
+}
+
+message PostConfigRequest {}
+
+service PostService {
+  option (google.api.api_visibility).restriction = "V2";
+
+  rpc Config(PostConfigRequest) returns (PostConfigResponse);
+}
