@@ -581,10 +581,6 @@
     "spacemeshv2alpha1NetworkInfoResponse": {
       "type": "object",
       "properties": {
-        "bitsPerLabel": {
-          "type": "integer",
-          "format": "int64"
-        },
         "effectiveGenesisLayer": {
           "type": "integer",
           "format": "int64",
