@@ -598,6 +598,10 @@
         "hrp": {
           "type": "string"
         },
+        "labelsPerUnit": {
+          "type": "string",
+          "format": "uint64"
+        },
         "layerDuration": {
           "type": "string",
           "title": "duration of each layer in the network, specified as a duration"

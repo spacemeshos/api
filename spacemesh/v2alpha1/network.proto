@@ -13,6 +13,7 @@ message NetworkInfoResponse {
   string hrp = 5;
   uint32 effective_genesis_layer = 6; // effective genesis layer, i.e., first layer after genesis initialization period
   uint32 layers_per_epoch = 7; // number of layers per epoch
+  uint64 labels_per_unit = 8;
 }
 
 message NetworkInfoRequest {}
