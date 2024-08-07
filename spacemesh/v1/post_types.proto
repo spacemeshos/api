@@ -15,6 +15,7 @@ message NodeRequest {
   oneof kind {
     MetadataRequest metadata = 1;
     GenProofRequest gen_proof = 2;
+    InterruptProofRequest interrupt = 3;
     // InitRequest init = 3;
     // ResizeRequest resize = 4;
   }
@@ -25,6 +26,7 @@ message ServiceResponse {
   oneof kind {
     MetadataResponse metadata = 1;
     GenProofResponse gen_proof = 2;
+    InterruptProofResponse interrupt = 3;
     // InitResponse init = 3;
     // ResizeResponse resize = 4;
   }
@@ -93,3 +95,7 @@ message PostState {
 message PostStatesResponse {
   repeated PostState states = 1;
 }
+
+message InterruptProofRequest {}
+
+message InterruptProofResponse {}
