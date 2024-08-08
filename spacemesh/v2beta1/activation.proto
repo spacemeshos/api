@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+import "google/api/visibility.proto";
+import "spacemesh/v2alpha1/activation.proto";
+
+package spacemesh.v2beta1;
+
+service ActivationStreamService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
+  rpc Stream(spacemesh.v2alpha1.ActivationStreamRequest) returns (stream spacemesh.v2alpha1.Activation);
+}
+
+service ActivationService {
+  option (google.api.api_visibility).restriction = "V2";
+
+  rpc List(spacemesh.v2alpha1.ActivationRequest) returns (spacemesh.v2alpha1.ActivationList);
+  rpc ActivationsCount(spacemesh.v2alpha1.ActivationsCountRequest) returns (spacemesh.v2alpha1.ActivationsCountResponse);
+}

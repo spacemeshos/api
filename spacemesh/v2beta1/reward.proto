@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "google/api/visibility.proto";
+import "spacemesh/v2alpha1/reward.proto";
+
+package spacemesh.v2beta1;
+
+service RewardService {
+  option (google.api.api_visibility).restriction = "V2";
+
+  rpc List(spacemesh.v2alpha1.RewardRequest) returns (spacemesh.v2alpha1.RewardList);
+}
+
+service RewardStreamService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
+  rpc Stream(spacemesh.v2alpha1.RewardStreamRequest) returns (stream spacemesh.v2alpha1.Reward);
+}

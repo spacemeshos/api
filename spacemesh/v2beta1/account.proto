@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "google/api/visibility.proto";
+import "spacemesh/v2alpha1/account.proto";
+
+package spacemesh.v2beta1;
+
+service AccountService {
+  option (google.api.api_visibility).restriction = "V2";
+
+  rpc List(spacemesh.v2alpha1.AccountRequest) returns (spacemesh.v2alpha1.AccountList);
+}

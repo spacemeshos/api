@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "google/api/visibility.proto";
+import "spacemesh/v2alpha1/tx.proto";
+
+package spacemesh.v2beta1;
+
+service TransactionStreamService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
+  rpc Stream(spacemesh.v2alpha1.TransactionStreamRequest) returns (stream spacemesh.v2alpha1.TransactionResponse);
+}
+
+service TransactionService {
+  option (google.api.api_visibility).restriction = "V2";
+
+  rpc List(spacemesh.v2alpha1.TransactionRequest) returns (spacemesh.v2alpha1.TransactionList);
+  rpc ParseTransaction(spacemesh.v2alpha1.ParseTransactionRequest) returns (spacemesh.v2alpha1.ParseTransactionResponse);
+  rpc SubmitTransaction(spacemesh.v2alpha1.SubmitTransactionRequest) returns (spacemesh.v2alpha1.SubmitTransactionResponse);
+  rpc EstimateGas(spacemesh.v2alpha1.EstimateGasRequest) returns (spacemesh.v2alpha1.EstimateGasResponse);
+}
