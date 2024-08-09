@@ -15,7 +15,6 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
-	"github.com/spacemeshos/api/release/go/spacemesh/v2alpha1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
@@ -33,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 func request_TransactionStreamService_Stream_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionStreamServiceClient, req *http.Request, pathParams map[string]string) (TransactionStreamService_StreamClient, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.TransactionStreamRequest
+	var protoReq TransactionStreamRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -54,7 +53,7 @@ func request_TransactionStreamService_Stream_0(ctx context.Context, marshaler ru
 }
 
 func request_TransactionService_List_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.TransactionRequest
+	var protoReq TransactionRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -67,7 +66,7 @@ func request_TransactionService_List_0(ctx context.Context, marshaler runtime.Ma
 }
 
 func local_request_TransactionService_List_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.TransactionRequest
+	var protoReq TransactionRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -80,7 +79,7 @@ func local_request_TransactionService_List_0(ctx context.Context, marshaler runt
 }
 
 func request_TransactionService_ParseTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.ParseTransactionRequest
+	var protoReq ParseTransactionRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -93,7 +92,7 @@ func request_TransactionService_ParseTransaction_0(ctx context.Context, marshale
 }
 
 func local_request_TransactionService_ParseTransaction_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.ParseTransactionRequest
+	var protoReq ParseTransactionRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -106,7 +105,7 @@ func local_request_TransactionService_ParseTransaction_0(ctx context.Context, ma
 }
 
 func request_TransactionService_SubmitTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.SubmitTransactionRequest
+	var protoReq SubmitTransactionRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -119,7 +118,7 @@ func request_TransactionService_SubmitTransaction_0(ctx context.Context, marshal
 }
 
 func local_request_TransactionService_SubmitTransaction_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.SubmitTransactionRequest
+	var protoReq SubmitTransactionRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -132,7 +131,7 @@ func local_request_TransactionService_SubmitTransaction_0(ctx context.Context, m
 }
 
 func request_TransactionService_EstimateGas_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.EstimateGasRequest
+	var protoReq EstimateGasRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -145,7 +144,7 @@ func request_TransactionService_EstimateGas_0(ctx context.Context, marshaler run
 }
 
 func local_request_TransactionService_EstimateGas_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.EstimateGasRequest
+	var protoReq EstimateGasRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {

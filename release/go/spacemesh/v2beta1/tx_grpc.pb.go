@@ -8,7 +8,6 @@ package spacemeshv2beta1
 
 import (
 	context "context"
-	v2alpha1 "github.com/spacemeshos/api/release/go/spacemesh/v2alpha1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -27,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TransactionStreamServiceClient interface {
-	Stream(ctx context.Context, in *v2alpha1.TransactionStreamRequest, opts ...grpc.CallOption) (TransactionStreamService_StreamClient, error)
+	Stream(ctx context.Context, in *TransactionStreamRequest, opts ...grpc.CallOption) (TransactionStreamService_StreamClient, error)
 }
 
 type transactionStreamServiceClient struct {
@@ -38,7 +37,7 @@ func NewTransactionStreamServiceClient(cc grpc.ClientConnInterface) TransactionS
 	return &transactionStreamServiceClient{cc}
 }
 
-func (c *transactionStreamServiceClient) Stream(ctx context.Context, in *v2alpha1.TransactionStreamRequest, opts ...grpc.CallOption) (TransactionStreamService_StreamClient, error) {
+func (c *transactionStreamServiceClient) Stream(ctx context.Context, in *TransactionStreamRequest, opts ...grpc.CallOption) (TransactionStreamService_StreamClient, error) {
 	stream, err := c.cc.NewStream(ctx, &TransactionStreamService_ServiceDesc.Streams[0], TransactionStreamService_Stream_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -54,7 +53,7 @@ func (c *transactionStreamServiceClient) Stream(ctx context.Context, in *v2alpha
 }
 
 type TransactionStreamService_StreamClient interface {
-	Recv() (*v2alpha1.TransactionResponse, error)
+	Recv() (*TransactionResponse, error)
 	grpc.ClientStream
 }
 
@@ -62,8 +61,8 @@ type transactionStreamServiceStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *transactionStreamServiceStreamClient) Recv() (*v2alpha1.TransactionResponse, error) {
-	m := new(v2alpha1.TransactionResponse)
+func (x *transactionStreamServiceStreamClient) Recv() (*TransactionResponse, error) {
+	m := new(TransactionResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -74,14 +73,14 @@ func (x *transactionStreamServiceStreamClient) Recv() (*v2alpha1.TransactionResp
 // All implementations should embed UnimplementedTransactionStreamServiceServer
 // for forward compatibility
 type TransactionStreamServiceServer interface {
-	Stream(*v2alpha1.TransactionStreamRequest, TransactionStreamService_StreamServer) error
+	Stream(*TransactionStreamRequest, TransactionStreamService_StreamServer) error
 }
 
 // UnimplementedTransactionStreamServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedTransactionStreamServiceServer struct {
 }
 
-func (UnimplementedTransactionStreamServiceServer) Stream(*v2alpha1.TransactionStreamRequest, TransactionStreamService_StreamServer) error {
+func (UnimplementedTransactionStreamServiceServer) Stream(*TransactionStreamRequest, TransactionStreamService_StreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
 
@@ -97,7 +96,7 @@ func RegisterTransactionStreamServiceServer(s grpc.ServiceRegistrar, srv Transac
 }
 
 func _TransactionStreamService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(v2alpha1.TransactionStreamRequest)
+	m := new(TransactionStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -105,7 +104,7 @@ func _TransactionStreamService_Stream_Handler(srv interface{}, stream grpc.Serve
 }
 
 type TransactionStreamService_StreamServer interface {
-	Send(*v2alpha1.TransactionResponse) error
+	Send(*TransactionResponse) error
 	grpc.ServerStream
 }
 
@@ -113,7 +112,7 @@ type transactionStreamServiceStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *transactionStreamServiceStreamServer) Send(m *v2alpha1.TransactionResponse) error {
+func (x *transactionStreamServiceStreamServer) Send(m *TransactionResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -145,10 +144,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TransactionServiceClient interface {
-	List(ctx context.Context, in *v2alpha1.TransactionRequest, opts ...grpc.CallOption) (*v2alpha1.TransactionList, error)
-	ParseTransaction(ctx context.Context, in *v2alpha1.ParseTransactionRequest, opts ...grpc.CallOption) (*v2alpha1.ParseTransactionResponse, error)
-	SubmitTransaction(ctx context.Context, in *v2alpha1.SubmitTransactionRequest, opts ...grpc.CallOption) (*v2alpha1.SubmitTransactionResponse, error)
-	EstimateGas(ctx context.Context, in *v2alpha1.EstimateGasRequest, opts ...grpc.CallOption) (*v2alpha1.EstimateGasResponse, error)
+	List(ctx context.Context, in *TransactionRequest, opts ...grpc.CallOption) (*TransactionList, error)
+	ParseTransaction(ctx context.Context, in *ParseTransactionRequest, opts ...grpc.CallOption) (*ParseTransactionResponse, error)
+	SubmitTransaction(ctx context.Context, in *SubmitTransactionRequest, opts ...grpc.CallOption) (*SubmitTransactionResponse, error)
+	EstimateGas(ctx context.Context, in *EstimateGasRequest, opts ...grpc.CallOption) (*EstimateGasResponse, error)
 }
 
 type transactionServiceClient struct {
@@ -159,8 +158,8 @@ func NewTransactionServiceClient(cc grpc.ClientConnInterface) TransactionService
 	return &transactionServiceClient{cc}
 }
 
-func (c *transactionServiceClient) List(ctx context.Context, in *v2alpha1.TransactionRequest, opts ...grpc.CallOption) (*v2alpha1.TransactionList, error) {
-	out := new(v2alpha1.TransactionList)
+func (c *transactionServiceClient) List(ctx context.Context, in *TransactionRequest, opts ...grpc.CallOption) (*TransactionList, error) {
+	out := new(TransactionList)
 	err := c.cc.Invoke(ctx, TransactionService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -168,8 +167,8 @@ func (c *transactionServiceClient) List(ctx context.Context, in *v2alpha1.Transa
 	return out, nil
 }
 
-func (c *transactionServiceClient) ParseTransaction(ctx context.Context, in *v2alpha1.ParseTransactionRequest, opts ...grpc.CallOption) (*v2alpha1.ParseTransactionResponse, error) {
-	out := new(v2alpha1.ParseTransactionResponse)
+func (c *transactionServiceClient) ParseTransaction(ctx context.Context, in *ParseTransactionRequest, opts ...grpc.CallOption) (*ParseTransactionResponse, error) {
+	out := new(ParseTransactionResponse)
 	err := c.cc.Invoke(ctx, TransactionService_ParseTransaction_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -177,8 +176,8 @@ func (c *transactionServiceClient) ParseTransaction(ctx context.Context, in *v2a
 	return out, nil
 }
 
-func (c *transactionServiceClient) SubmitTransaction(ctx context.Context, in *v2alpha1.SubmitTransactionRequest, opts ...grpc.CallOption) (*v2alpha1.SubmitTransactionResponse, error) {
-	out := new(v2alpha1.SubmitTransactionResponse)
+func (c *transactionServiceClient) SubmitTransaction(ctx context.Context, in *SubmitTransactionRequest, opts ...grpc.CallOption) (*SubmitTransactionResponse, error) {
+	out := new(SubmitTransactionResponse)
 	err := c.cc.Invoke(ctx, TransactionService_SubmitTransaction_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -186,8 +185,8 @@ func (c *transactionServiceClient) SubmitTransaction(ctx context.Context, in *v2
 	return out, nil
 }
 
-func (c *transactionServiceClient) EstimateGas(ctx context.Context, in *v2alpha1.EstimateGasRequest, opts ...grpc.CallOption) (*v2alpha1.EstimateGasResponse, error) {
-	out := new(v2alpha1.EstimateGasResponse)
+func (c *transactionServiceClient) EstimateGas(ctx context.Context, in *EstimateGasRequest, opts ...grpc.CallOption) (*EstimateGasResponse, error) {
+	out := new(EstimateGasResponse)
 	err := c.cc.Invoke(ctx, TransactionService_EstimateGas_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -199,26 +198,26 @@ func (c *transactionServiceClient) EstimateGas(ctx context.Context, in *v2alpha1
 // All implementations should embed UnimplementedTransactionServiceServer
 // for forward compatibility
 type TransactionServiceServer interface {
-	List(context.Context, *v2alpha1.TransactionRequest) (*v2alpha1.TransactionList, error)
-	ParseTransaction(context.Context, *v2alpha1.ParseTransactionRequest) (*v2alpha1.ParseTransactionResponse, error)
-	SubmitTransaction(context.Context, *v2alpha1.SubmitTransactionRequest) (*v2alpha1.SubmitTransactionResponse, error)
-	EstimateGas(context.Context, *v2alpha1.EstimateGasRequest) (*v2alpha1.EstimateGasResponse, error)
+	List(context.Context, *TransactionRequest) (*TransactionList, error)
+	ParseTransaction(context.Context, *ParseTransactionRequest) (*ParseTransactionResponse, error)
+	SubmitTransaction(context.Context, *SubmitTransactionRequest) (*SubmitTransactionResponse, error)
+	EstimateGas(context.Context, *EstimateGasRequest) (*EstimateGasResponse, error)
 }
 
 // UnimplementedTransactionServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedTransactionServiceServer struct {
 }
 
-func (UnimplementedTransactionServiceServer) List(context.Context, *v2alpha1.TransactionRequest) (*v2alpha1.TransactionList, error) {
+func (UnimplementedTransactionServiceServer) List(context.Context, *TransactionRequest) (*TransactionList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedTransactionServiceServer) ParseTransaction(context.Context, *v2alpha1.ParseTransactionRequest) (*v2alpha1.ParseTransactionResponse, error) {
+func (UnimplementedTransactionServiceServer) ParseTransaction(context.Context, *ParseTransactionRequest) (*ParseTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ParseTransaction not implemented")
 }
-func (UnimplementedTransactionServiceServer) SubmitTransaction(context.Context, *v2alpha1.SubmitTransactionRequest) (*v2alpha1.SubmitTransactionResponse, error) {
+func (UnimplementedTransactionServiceServer) SubmitTransaction(context.Context, *SubmitTransactionRequest) (*SubmitTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitTransaction not implemented")
 }
-func (UnimplementedTransactionServiceServer) EstimateGas(context.Context, *v2alpha1.EstimateGasRequest) (*v2alpha1.EstimateGasResponse, error) {
+func (UnimplementedTransactionServiceServer) EstimateGas(context.Context, *EstimateGasRequest) (*EstimateGasResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EstimateGas not implemented")
 }
 
@@ -234,7 +233,7 @@ func RegisterTransactionServiceServer(s grpc.ServiceRegistrar, srv TransactionSe
 }
 
 func _TransactionService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.TransactionRequest)
+	in := new(TransactionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -246,13 +245,13 @@ func _TransactionService_List_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: TransactionService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransactionServiceServer).List(ctx, req.(*v2alpha1.TransactionRequest))
+		return srv.(TransactionServiceServer).List(ctx, req.(*TransactionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _TransactionService_ParseTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.ParseTransactionRequest)
+	in := new(ParseTransactionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -264,13 +263,13 @@ func _TransactionService_ParseTransaction_Handler(srv interface{}, ctx context.C
 		FullMethod: TransactionService_ParseTransaction_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransactionServiceServer).ParseTransaction(ctx, req.(*v2alpha1.ParseTransactionRequest))
+		return srv.(TransactionServiceServer).ParseTransaction(ctx, req.(*ParseTransactionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _TransactionService_SubmitTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.SubmitTransactionRequest)
+	in := new(SubmitTransactionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -282,13 +281,13 @@ func _TransactionService_SubmitTransaction_Handler(srv interface{}, ctx context.
 		FullMethod: TransactionService_SubmitTransaction_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransactionServiceServer).SubmitTransaction(ctx, req.(*v2alpha1.SubmitTransactionRequest))
+		return srv.(TransactionServiceServer).SubmitTransaction(ctx, req.(*SubmitTransactionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _TransactionService_EstimateGas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.EstimateGasRequest)
+	in := new(EstimateGasRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -300,7 +299,7 @@ func _TransactionService_EstimateGas_Handler(srv interface{}, ctx context.Contex
 		FullMethod: TransactionService_EstimateGas_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransactionServiceServer).EstimateGas(ctx, req.(*v2alpha1.EstimateGasRequest))
+		return srv.(TransactionServiceServer).EstimateGas(ctx, req.(*EstimateGasRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

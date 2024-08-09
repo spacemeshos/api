@@ -8,7 +8,6 @@ package spacemeshv2beta1
 
 import (
 	context "context"
-	v2alpha1 "github.com/spacemeshos/api/release/go/spacemesh/v2alpha1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -27,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RewardServiceClient interface {
-	List(ctx context.Context, in *v2alpha1.RewardRequest, opts ...grpc.CallOption) (*v2alpha1.RewardList, error)
+	List(ctx context.Context, in *RewardRequest, opts ...grpc.CallOption) (*RewardList, error)
 }
 
 type rewardServiceClient struct {
@@ -38,8 +37,8 @@ func NewRewardServiceClient(cc grpc.ClientConnInterface) RewardServiceClient {
 	return &rewardServiceClient{cc}
 }
 
-func (c *rewardServiceClient) List(ctx context.Context, in *v2alpha1.RewardRequest, opts ...grpc.CallOption) (*v2alpha1.RewardList, error) {
-	out := new(v2alpha1.RewardList)
+func (c *rewardServiceClient) List(ctx context.Context, in *RewardRequest, opts ...grpc.CallOption) (*RewardList, error) {
+	out := new(RewardList)
 	err := c.cc.Invoke(ctx, RewardService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -51,14 +50,14 @@ func (c *rewardServiceClient) List(ctx context.Context, in *v2alpha1.RewardReque
 // All implementations should embed UnimplementedRewardServiceServer
 // for forward compatibility
 type RewardServiceServer interface {
-	List(context.Context, *v2alpha1.RewardRequest) (*v2alpha1.RewardList, error)
+	List(context.Context, *RewardRequest) (*RewardList, error)
 }
 
 // UnimplementedRewardServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedRewardServiceServer struct {
 }
 
-func (UnimplementedRewardServiceServer) List(context.Context, *v2alpha1.RewardRequest) (*v2alpha1.RewardList, error) {
+func (UnimplementedRewardServiceServer) List(context.Context, *RewardRequest) (*RewardList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 
@@ -74,7 +73,7 @@ func RegisterRewardServiceServer(s grpc.ServiceRegistrar, srv RewardServiceServe
 }
 
 func _RewardService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.RewardRequest)
+	in := new(RewardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -86,7 +85,7 @@ func _RewardService_List_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: RewardService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RewardServiceServer).List(ctx, req.(*v2alpha1.RewardRequest))
+		return srv.(RewardServiceServer).List(ctx, req.(*RewardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -115,7 +114,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RewardStreamServiceClient interface {
-	Stream(ctx context.Context, in *v2alpha1.RewardStreamRequest, opts ...grpc.CallOption) (RewardStreamService_StreamClient, error)
+	Stream(ctx context.Context, in *RewardStreamRequest, opts ...grpc.CallOption) (RewardStreamService_StreamClient, error)
 }
 
 type rewardStreamServiceClient struct {
@@ -126,7 +125,7 @@ func NewRewardStreamServiceClient(cc grpc.ClientConnInterface) RewardStreamServi
 	return &rewardStreamServiceClient{cc}
 }
 
-func (c *rewardStreamServiceClient) Stream(ctx context.Context, in *v2alpha1.RewardStreamRequest, opts ...grpc.CallOption) (RewardStreamService_StreamClient, error) {
+func (c *rewardStreamServiceClient) Stream(ctx context.Context, in *RewardStreamRequest, opts ...grpc.CallOption) (RewardStreamService_StreamClient, error) {
 	stream, err := c.cc.NewStream(ctx, &RewardStreamService_ServiceDesc.Streams[0], RewardStreamService_Stream_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -142,7 +141,7 @@ func (c *rewardStreamServiceClient) Stream(ctx context.Context, in *v2alpha1.Rew
 }
 
 type RewardStreamService_StreamClient interface {
-	Recv() (*v2alpha1.Reward, error)
+	Recv() (*Reward, error)
 	grpc.ClientStream
 }
 
@@ -150,8 +149,8 @@ type rewardStreamServiceStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *rewardStreamServiceStreamClient) Recv() (*v2alpha1.Reward, error) {
-	m := new(v2alpha1.Reward)
+func (x *rewardStreamServiceStreamClient) Recv() (*Reward, error) {
+	m := new(Reward)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -162,14 +161,14 @@ func (x *rewardStreamServiceStreamClient) Recv() (*v2alpha1.Reward, error) {
 // All implementations should embed UnimplementedRewardStreamServiceServer
 // for forward compatibility
 type RewardStreamServiceServer interface {
-	Stream(*v2alpha1.RewardStreamRequest, RewardStreamService_StreamServer) error
+	Stream(*RewardStreamRequest, RewardStreamService_StreamServer) error
 }
 
 // UnimplementedRewardStreamServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedRewardStreamServiceServer struct {
 }
 
-func (UnimplementedRewardStreamServiceServer) Stream(*v2alpha1.RewardStreamRequest, RewardStreamService_StreamServer) error {
+func (UnimplementedRewardStreamServiceServer) Stream(*RewardStreamRequest, RewardStreamService_StreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
 
@@ -185,7 +184,7 @@ func RegisterRewardStreamServiceServer(s grpc.ServiceRegistrar, srv RewardStream
 }
 
 func _RewardStreamService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(v2alpha1.RewardStreamRequest)
+	m := new(RewardStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -193,7 +192,7 @@ func _RewardStreamService_Stream_Handler(srv interface{}, stream grpc.ServerStre
 }
 
 type RewardStreamService_StreamServer interface {
-	Send(*v2alpha1.Reward) error
+	Send(*Reward) error
 	grpc.ServerStream
 }
 
@@ -201,7 +200,7 @@ type rewardStreamServiceStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *rewardStreamServiceStreamServer) Send(m *v2alpha1.Reward) error {
+func (x *rewardStreamServiceStreamServer) Send(m *Reward) error {
 	return x.ServerStream.SendMsg(m)
 }
 

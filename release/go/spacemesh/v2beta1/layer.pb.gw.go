@@ -15,7 +15,6 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
-	"github.com/spacemeshos/api/release/go/spacemesh/v2alpha1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
@@ -33,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 func request_LayerService_List_0(ctx context.Context, marshaler runtime.Marshaler, client LayerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.LayerRequest
+	var protoReq LayerRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -46,7 +45,7 @@ func request_LayerService_List_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 func local_request_LayerService_List_0(ctx context.Context, marshaler runtime.Marshaler, server LayerServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.LayerRequest
+	var protoReq LayerRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -59,7 +58,7 @@ func local_request_LayerService_List_0(ctx context.Context, marshaler runtime.Ma
 }
 
 func request_LayerStreamService_Stream_0(ctx context.Context, marshaler runtime.Marshaler, client LayerStreamServiceClient, req *http.Request, pathParams map[string]string) (LayerStreamService_StreamClient, runtime.ServerMetadata, error) {
-	var protoReq spacemeshv2alpha1.LayerStreamRequest
+	var protoReq LayerStreamRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {

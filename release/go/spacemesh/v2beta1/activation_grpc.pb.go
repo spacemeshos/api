@@ -8,7 +8,6 @@ package spacemeshv2beta1
 
 import (
 	context "context"
-	v2alpha1 "github.com/spacemeshos/api/release/go/spacemesh/v2alpha1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -27,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActivationStreamServiceClient interface {
-	Stream(ctx context.Context, in *v2alpha1.ActivationStreamRequest, opts ...grpc.CallOption) (ActivationStreamService_StreamClient, error)
+	Stream(ctx context.Context, in *ActivationStreamRequest, opts ...grpc.CallOption) (ActivationStreamService_StreamClient, error)
 }
 
 type activationStreamServiceClient struct {
@@ -38,7 +37,7 @@ func NewActivationStreamServiceClient(cc grpc.ClientConnInterface) ActivationStr
 	return &activationStreamServiceClient{cc}
 }
 
-func (c *activationStreamServiceClient) Stream(ctx context.Context, in *v2alpha1.ActivationStreamRequest, opts ...grpc.CallOption) (ActivationStreamService_StreamClient, error) {
+func (c *activationStreamServiceClient) Stream(ctx context.Context, in *ActivationStreamRequest, opts ...grpc.CallOption) (ActivationStreamService_StreamClient, error) {
 	stream, err := c.cc.NewStream(ctx, &ActivationStreamService_ServiceDesc.Streams[0], ActivationStreamService_Stream_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -54,7 +53,7 @@ func (c *activationStreamServiceClient) Stream(ctx context.Context, in *v2alpha1
 }
 
 type ActivationStreamService_StreamClient interface {
-	Recv() (*v2alpha1.Activation, error)
+	Recv() (*Activation, error)
 	grpc.ClientStream
 }
 
@@ -62,8 +61,8 @@ type activationStreamServiceStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *activationStreamServiceStreamClient) Recv() (*v2alpha1.Activation, error) {
-	m := new(v2alpha1.Activation)
+func (x *activationStreamServiceStreamClient) Recv() (*Activation, error) {
+	m := new(Activation)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -74,14 +73,14 @@ func (x *activationStreamServiceStreamClient) Recv() (*v2alpha1.Activation, erro
 // All implementations should embed UnimplementedActivationStreamServiceServer
 // for forward compatibility
 type ActivationStreamServiceServer interface {
-	Stream(*v2alpha1.ActivationStreamRequest, ActivationStreamService_StreamServer) error
+	Stream(*ActivationStreamRequest, ActivationStreamService_StreamServer) error
 }
 
 // UnimplementedActivationStreamServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedActivationStreamServiceServer struct {
 }
 
-func (UnimplementedActivationStreamServiceServer) Stream(*v2alpha1.ActivationStreamRequest, ActivationStreamService_StreamServer) error {
+func (UnimplementedActivationStreamServiceServer) Stream(*ActivationStreamRequest, ActivationStreamService_StreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
 
@@ -97,7 +96,7 @@ func RegisterActivationStreamServiceServer(s grpc.ServiceRegistrar, srv Activati
 }
 
 func _ActivationStreamService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(v2alpha1.ActivationStreamRequest)
+	m := new(ActivationStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -105,7 +104,7 @@ func _ActivationStreamService_Stream_Handler(srv interface{}, stream grpc.Server
 }
 
 type ActivationStreamService_StreamServer interface {
-	Send(*v2alpha1.Activation) error
+	Send(*Activation) error
 	grpc.ServerStream
 }
 
@@ -113,7 +112,7 @@ type activationStreamServiceStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *activationStreamServiceStreamServer) Send(m *v2alpha1.Activation) error {
+func (x *activationStreamServiceStreamServer) Send(m *Activation) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -143,8 +142,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActivationServiceClient interface {
-	List(ctx context.Context, in *v2alpha1.ActivationRequest, opts ...grpc.CallOption) (*v2alpha1.ActivationList, error)
-	ActivationsCount(ctx context.Context, in *v2alpha1.ActivationsCountRequest, opts ...grpc.CallOption) (*v2alpha1.ActivationsCountResponse, error)
+	List(ctx context.Context, in *ActivationRequest, opts ...grpc.CallOption) (*ActivationList, error)
+	ActivationsCount(ctx context.Context, in *ActivationsCountRequest, opts ...grpc.CallOption) (*ActivationsCountResponse, error)
 }
 
 type activationServiceClient struct {
@@ -155,8 +154,8 @@ func NewActivationServiceClient(cc grpc.ClientConnInterface) ActivationServiceCl
 	return &activationServiceClient{cc}
 }
 
-func (c *activationServiceClient) List(ctx context.Context, in *v2alpha1.ActivationRequest, opts ...grpc.CallOption) (*v2alpha1.ActivationList, error) {
-	out := new(v2alpha1.ActivationList)
+func (c *activationServiceClient) List(ctx context.Context, in *ActivationRequest, opts ...grpc.CallOption) (*ActivationList, error) {
+	out := new(ActivationList)
 	err := c.cc.Invoke(ctx, ActivationService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -164,8 +163,8 @@ func (c *activationServiceClient) List(ctx context.Context, in *v2alpha1.Activat
 	return out, nil
 }
 
-func (c *activationServiceClient) ActivationsCount(ctx context.Context, in *v2alpha1.ActivationsCountRequest, opts ...grpc.CallOption) (*v2alpha1.ActivationsCountResponse, error) {
-	out := new(v2alpha1.ActivationsCountResponse)
+func (c *activationServiceClient) ActivationsCount(ctx context.Context, in *ActivationsCountRequest, opts ...grpc.CallOption) (*ActivationsCountResponse, error) {
+	out := new(ActivationsCountResponse)
 	err := c.cc.Invoke(ctx, ActivationService_ActivationsCount_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -177,18 +176,18 @@ func (c *activationServiceClient) ActivationsCount(ctx context.Context, in *v2al
 // All implementations should embed UnimplementedActivationServiceServer
 // for forward compatibility
 type ActivationServiceServer interface {
-	List(context.Context, *v2alpha1.ActivationRequest) (*v2alpha1.ActivationList, error)
-	ActivationsCount(context.Context, *v2alpha1.ActivationsCountRequest) (*v2alpha1.ActivationsCountResponse, error)
+	List(context.Context, *ActivationRequest) (*ActivationList, error)
+	ActivationsCount(context.Context, *ActivationsCountRequest) (*ActivationsCountResponse, error)
 }
 
 // UnimplementedActivationServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedActivationServiceServer struct {
 }
 
-func (UnimplementedActivationServiceServer) List(context.Context, *v2alpha1.ActivationRequest) (*v2alpha1.ActivationList, error) {
+func (UnimplementedActivationServiceServer) List(context.Context, *ActivationRequest) (*ActivationList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedActivationServiceServer) ActivationsCount(context.Context, *v2alpha1.ActivationsCountRequest) (*v2alpha1.ActivationsCountResponse, error) {
+func (UnimplementedActivationServiceServer) ActivationsCount(context.Context, *ActivationsCountRequest) (*ActivationsCountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ActivationsCount not implemented")
 }
 
@@ -204,7 +203,7 @@ func RegisterActivationServiceServer(s grpc.ServiceRegistrar, srv ActivationServ
 }
 
 func _ActivationService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.ActivationRequest)
+	in := new(ActivationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -216,13 +215,13 @@ func _ActivationService_List_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: ActivationService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivationServiceServer).List(ctx, req.(*v2alpha1.ActivationRequest))
+		return srv.(ActivationServiceServer).List(ctx, req.(*ActivationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ActivationService_ActivationsCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.ActivationsCountRequest)
+	in := new(ActivationsCountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -234,7 +233,7 @@ func _ActivationService_ActivationsCount_Handler(srv interface{}, ctx context.Co
 		FullMethod: ActivationService_ActivationsCount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivationServiceServer).ActivationsCount(ctx, req.(*v2alpha1.ActivationsCountRequest))
+		return srv.(ActivationServiceServer).ActivationsCount(ctx, req.(*ActivationsCountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

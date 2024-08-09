@@ -5,8 +5,18 @@ import "spacemesh/v2alpha1/account.proto";
 
 package spacemesh.v2beta1;
 
+message AccountRequest {
+  repeated string addresses = 1;
+  uint64 offset = 2; // adjusts the starting point for data
+  uint64 limit = 3; // specifies max number of items to fetch// bech32 format including HRP
+};
+
+message AccountList {
+  repeated spacemesh.v2alpha1.Account accounts = 1;
+}
+
 service AccountService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc List(spacemesh.v2alpha1.AccountRequest) returns (spacemesh.v2alpha1.AccountList);
+  rpc List(AccountRequest) returns (AccountList);
 }

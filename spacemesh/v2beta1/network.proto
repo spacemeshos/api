@@ -1,12 +1,26 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 import "google/api/visibility.proto";
 import "spacemesh/v2alpha1/network.proto";
 
 package spacemesh.v2beta1;
 
+message NetworkInfoResponse {
+  google.protobuf.Timestamp genesis_time = 1; // genesis time of the network, represented as a timestamp
+  google.protobuf.Duration layer_duration = 3; // duration of each layer in the network, specified as a duration
+  bytes genesis_id = 4;
+  string hrp = 5;
+  uint32 effective_genesis_layer = 6; // effective genesis layer, i.e., first layer after genesis initialization period
+  uint32 layers_per_epoch = 7; // number of layers per epoch
+  uint64 labels_per_unit = 8;
+}
+
+message NetworkInfoRequest {}
+
 service NetworkService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc Info(spacemesh.v2alpha1.NetworkInfoRequest) returns (spacemesh.v2alpha1.NetworkInfoResponse);
+  rpc Info(NetworkInfoRequest) returns (NetworkInfoResponse);
 }

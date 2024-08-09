@@ -5,15 +5,56 @@ import "spacemesh/v2alpha1/activation.proto";
 
 package spacemesh.v2beta1;
 
+message ActivationStreamRequest {
+  uint32 start_epoch = 1; // Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.
+  uint32 end_epoch = 2;
+  repeated bytes id = 3;
+  repeated bytes smesher_id = 4;
+  string coinbase = 5; // `coinbase` filter is not supported by database index and will result in sequential scan.
+  bool watch = 6;
+}
+
+message Activation {
+  bytes id = 1;
+  bytes smesher_id = 2;
+  uint32 publish_epoch = 3;
+  string coinbase = 4;
+  uint64 weight = 5;
+  uint64 height = 6;
+  uint32 num_units = 7; // number of effective PoST data commitment units
+}
+
 service ActivationStreamService {
   option (google.api.api_visibility).restriction = "INTERNAL";
 
-  rpc Stream(spacemesh.v2alpha1.ActivationStreamRequest) returns (stream spacemesh.v2alpha1.Activation);
+  rpc Stream(ActivationStreamRequest) returns (stream Activation);
+}
+
+message ActivationRequest {
+  uint32 start_epoch = 1; // Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.
+  uint32 end_epoch = 2;
+  repeated bytes id = 3;
+  repeated bytes smesher_id = 4;
+  string coinbase = 5; // `coinbase` filter is not supported by database index and will result in sequential scan.
+  uint64 offset = 6;
+  uint64 limit = 7;
+}
+
+message ActivationList {
+  repeated spacemesh.v2alpha1.Activation activations = 1;
+}
+
+message ActivationsCountRequest {
+  optional uint32 epoch = 1;
+}
+
+message ActivationsCountResponse {
+  uint32 count = 1;
 }
 
 service ActivationService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc List(spacemesh.v2alpha1.ActivationRequest) returns (spacemesh.v2alpha1.ActivationList);
-  rpc ActivationsCount(spacemesh.v2alpha1.ActivationsCountRequest) returns (spacemesh.v2alpha1.ActivationsCountResponse);
+  rpc List(ActivationRequest) returns (ActivationList);
+  rpc ActivationsCount(ActivationsCountRequest) returns (ActivationsCountResponse);
 }

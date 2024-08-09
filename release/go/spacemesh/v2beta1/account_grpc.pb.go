@@ -8,7 +8,6 @@ package spacemeshv2beta1
 
 import (
 	context "context"
-	v2alpha1 "github.com/spacemeshos/api/release/go/spacemesh/v2alpha1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -27,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountServiceClient interface {
-	List(ctx context.Context, in *v2alpha1.AccountRequest, opts ...grpc.CallOption) (*v2alpha1.AccountList, error)
+	List(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountList, error)
 }
 
 type accountServiceClient struct {
@@ -38,8 +37,8 @@ func NewAccountServiceClient(cc grpc.ClientConnInterface) AccountServiceClient {
 	return &accountServiceClient{cc}
 }
 
-func (c *accountServiceClient) List(ctx context.Context, in *v2alpha1.AccountRequest, opts ...grpc.CallOption) (*v2alpha1.AccountList, error) {
-	out := new(v2alpha1.AccountList)
+func (c *accountServiceClient) List(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountList, error) {
+	out := new(AccountList)
 	err := c.cc.Invoke(ctx, AccountService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -51,14 +50,14 @@ func (c *accountServiceClient) List(ctx context.Context, in *v2alpha1.AccountReq
 // All implementations should embed UnimplementedAccountServiceServer
 // for forward compatibility
 type AccountServiceServer interface {
-	List(context.Context, *v2alpha1.AccountRequest) (*v2alpha1.AccountList, error)
+	List(context.Context, *AccountRequest) (*AccountList, error)
 }
 
 // UnimplementedAccountServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedAccountServiceServer struct {
 }
 
-func (UnimplementedAccountServiceServer) List(context.Context, *v2alpha1.AccountRequest) (*v2alpha1.AccountList, error) {
+func (UnimplementedAccountServiceServer) List(context.Context, *AccountRequest) (*AccountList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 
@@ -74,7 +73,7 @@ func RegisterAccountServiceServer(s grpc.ServiceRegistrar, srv AccountServiceSer
 }
 
 func _AccountService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.AccountRequest)
+	in := new(AccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -86,7 +85,7 @@ func _AccountService_List_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: AccountService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).List(ctx, req.(*v2alpha1.AccountRequest))
+		return srv.(AccountServiceServer).List(ctx, req.(*AccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

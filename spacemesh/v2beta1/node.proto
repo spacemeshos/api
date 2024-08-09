@@ -5,8 +5,25 @@ import "spacemesh/v2alpha1/node.proto";
 
 package spacemesh.v2beta1;
 
+message NodeStatusResponse {
+  uint64 connected_peers = 1; // number of connected neighbors
+  enum SyncStatus {
+    SYNC_STATUS_UNSPECIFIED = 0;
+    SYNC_STATUS_OFFLINE = 1;
+    SYNC_STATUS_SYNCING = 2;
+    SYNC_STATUS_SYNCED = 3;
+  }
+  SyncStatus status = 2;
+  uint32 latest_layer = 3; // latest layer node has seen from blocks
+  uint32 applied_layer = 4; // last layer node has applied to the state
+  uint32 processed_layer = 5; // last layer whose votes have been processed
+  uint32 current_layer = 6; // current layer, based on clock time
+}
+
+message NodeStatusRequest {}
+
 service NodeService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc Status(spacemesh.v2alpha1.NodeStatusRequest) returns (spacemesh.v2alpha1.NodeStatusResponse);
+  rpc Status(NodeStatusRequest) returns (NodeStatusResponse);
 }

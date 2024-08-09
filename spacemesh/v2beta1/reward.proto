@@ -2,17 +2,53 @@ syntax = "proto3";
 
 import "google/api/visibility.proto";
 import "spacemesh/v2alpha1/reward.proto";
+import "spacemesh/v2alpha1/v2alpha1.proto";
 
 package spacemesh.v2beta1;
+
+message Reward {
+  uint32 layer = 1; // layer award was paid in
+  uint64 total = 2; // total reward paid in smidge (sum of tx fee and layer reward)
+  uint64 layer_reward = 3; // tx_fee = total - layer_reward
+  string coinbase = 5; // account awarded this reward
+  bytes smesher = 6;  // id of smesher who earned this reward
+}
+
+message RewardRequest {
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
+  oneof filter_by {
+    string coinbase = 3;
+    bytes smesher = 4;
+  }
+  uint64 offset = 5; // adjusts the starting point for data
+  uint64 limit = 6; // specifies max number of items to fetch
+  spacemesh.v2alpha1.SortOrder sort_order = 7; // specifies the sort order by layer (default is ASC)
+}
+
+message RewardList {
+  repeated Reward rewards = 1;
+}
 
 service RewardService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc List(spacemesh.v2alpha1.RewardRequest) returns (spacemesh.v2alpha1.RewardList);
+  rpc List(RewardRequest) returns (RewardList);
 }
+
+message RewardStreamRequest {
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
+  oneof filter_by {
+    string coinbase = 3;
+    bytes smesher = 4;
+  }
+  bool watch = 5;
+}
+
 
 service RewardStreamService {
   option (google.api.api_visibility).restriction = "INTERNAL";
 
-  rpc Stream(spacemesh.v2alpha1.RewardStreamRequest) returns (stream spacemesh.v2alpha1.Reward);
+  rpc Stream(RewardStreamRequest) returns (stream Reward);
 }

@@ -1,21 +1,82 @@
 syntax = "proto3";
 
+import "google/rpc/status.proto";
 import "google/api/visibility.proto";
 import "spacemesh/v2alpha1/tx.proto";
+import "spacemesh/v2alpha1/v2alpha1.proto";
 
 package spacemesh.v2beta1;
+
+message TransactionStreamRequest {
+  uint32 start_layer = 1; // Required: starting layer for transaction streaming.
+  optional uint32 end_layer = 2; // Ending layer for transaction streaming.
+  repeated bytes txid = 3; // Filter: specific transaction IDs.
+  optional string principal = 4; // Filter by principal address
+  bool watch = 5; // Continue watching for new transactions.
+}
+
 
 service TransactionStreamService {
   option (google.api.api_visibility).restriction = "INTERNAL";
 
-  rpc Stream(spacemesh.v2alpha1.TransactionStreamRequest) returns (stream spacemesh.v2alpha1.TransactionResponse);
+  rpc Stream(TransactionStreamRequest) returns (stream TransactionResponse);
+}
+
+message TransactionRequest {
+  optional uint32 start_layer = 1; // Starting layer for transactions.
+  optional uint32 end_layer = 2; // Ending layer for transactions.
+  repeated bytes txid = 3; // Filter: specific transaction IDs to filter.
+  optional string address = 4; // Filter by address (principal or recipient)
+  uint64 offset = 6; // Adjusts the starting point for data retrieval.
+  uint64 limit = 7; // Specifies maximum number of items to fetch.
+  bool include_state = 8; // Whether to include transaction state in response.
+  bool include_result = 9; // Whether to include result of transactions in response.
+  spacemesh.v2alpha1.SortOrder sort_order = 10; // specifies the sort order by layer (default is ASC)
+}
+
+message TransactionResponse {
+  spacemesh.v2alpha1.Transaction tx = 1;
+  spacemesh.v2alpha1.TransactionResult tx_result = 2;
+  optional spacemesh.v2alpha1.TransactionState tx_state = 3;
+}
+
+message TransactionList {
+  repeated TransactionResponse transactions = 1;
+}
+
+message ParseTransactionRequest {
+  bytes transaction = 1;  // signed binary transaction
+  bool verify = 2;        // if true signature verification will be executed
+}
+
+message ParseTransactionResponse {
+  google.rpc.Status status = 1;
+  spacemesh.v2alpha1.Transaction tx = 2;
+}
+
+message SubmitTransactionRequest {
+  bytes transaction = 1;  // signed binary transaction
+}
+
+message SubmitTransactionResponse {
+  google.rpc.Status status = 1;
+  bytes tx_id = 2;
+}
+
+message EstimateGasRequest {
+  bytes transaction = 1;  // signed binary transaction
+}
+
+message EstimateGasResponse {
+  google.rpc.Status status = 1;
+  uint64 recommended_max_gas = 2;
 }
 
 service TransactionService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc List(spacemesh.v2alpha1.TransactionRequest) returns (spacemesh.v2alpha1.TransactionList);
-  rpc ParseTransaction(spacemesh.v2alpha1.ParseTransactionRequest) returns (spacemesh.v2alpha1.ParseTransactionResponse);
-  rpc SubmitTransaction(spacemesh.v2alpha1.SubmitTransactionRequest) returns (spacemesh.v2alpha1.SubmitTransactionResponse);
-  rpc EstimateGas(spacemesh.v2alpha1.EstimateGasRequest) returns (spacemesh.v2alpha1.EstimateGasResponse);
+  rpc List(TransactionRequest) returns (TransactionList);
+  rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
+  rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
+  rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
 }

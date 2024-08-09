@@ -8,7 +8,6 @@ package spacemeshv2beta1
 
 import (
 	context "context"
-	v2alpha1 "github.com/spacemeshos/api/release/go/spacemesh/v2alpha1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -27,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LayerServiceClient interface {
-	List(ctx context.Context, in *v2alpha1.LayerRequest, opts ...grpc.CallOption) (*v2alpha1.LayerList, error)
+	List(ctx context.Context, in *LayerRequest, opts ...grpc.CallOption) (*LayerList, error)
 }
 
 type layerServiceClient struct {
@@ -38,8 +37,8 @@ func NewLayerServiceClient(cc grpc.ClientConnInterface) LayerServiceClient {
 	return &layerServiceClient{cc}
 }
 
-func (c *layerServiceClient) List(ctx context.Context, in *v2alpha1.LayerRequest, opts ...grpc.CallOption) (*v2alpha1.LayerList, error) {
-	out := new(v2alpha1.LayerList)
+func (c *layerServiceClient) List(ctx context.Context, in *LayerRequest, opts ...grpc.CallOption) (*LayerList, error) {
+	out := new(LayerList)
 	err := c.cc.Invoke(ctx, LayerService_List_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -51,14 +50,14 @@ func (c *layerServiceClient) List(ctx context.Context, in *v2alpha1.LayerRequest
 // All implementations should embed UnimplementedLayerServiceServer
 // for forward compatibility
 type LayerServiceServer interface {
-	List(context.Context, *v2alpha1.LayerRequest) (*v2alpha1.LayerList, error)
+	List(context.Context, *LayerRequest) (*LayerList, error)
 }
 
 // UnimplementedLayerServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedLayerServiceServer struct {
 }
 
-func (UnimplementedLayerServiceServer) List(context.Context, *v2alpha1.LayerRequest) (*v2alpha1.LayerList, error) {
+func (UnimplementedLayerServiceServer) List(context.Context, *LayerRequest) (*LayerList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 
@@ -74,7 +73,7 @@ func RegisterLayerServiceServer(s grpc.ServiceRegistrar, srv LayerServiceServer)
 }
 
 func _LayerService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v2alpha1.LayerRequest)
+	in := new(LayerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -86,7 +85,7 @@ func _LayerService_List_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: LayerService_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LayerServiceServer).List(ctx, req.(*v2alpha1.LayerRequest))
+		return srv.(LayerServiceServer).List(ctx, req.(*LayerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -115,7 +114,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LayerStreamServiceClient interface {
-	Stream(ctx context.Context, in *v2alpha1.LayerStreamRequest, opts ...grpc.CallOption) (LayerStreamService_StreamClient, error)
+	Stream(ctx context.Context, in *LayerStreamRequest, opts ...grpc.CallOption) (LayerStreamService_StreamClient, error)
 }
 
 type layerStreamServiceClient struct {
@@ -126,7 +125,7 @@ func NewLayerStreamServiceClient(cc grpc.ClientConnInterface) LayerStreamService
 	return &layerStreamServiceClient{cc}
 }
 
-func (c *layerStreamServiceClient) Stream(ctx context.Context, in *v2alpha1.LayerStreamRequest, opts ...grpc.CallOption) (LayerStreamService_StreamClient, error) {
+func (c *layerStreamServiceClient) Stream(ctx context.Context, in *LayerStreamRequest, opts ...grpc.CallOption) (LayerStreamService_StreamClient, error) {
 	stream, err := c.cc.NewStream(ctx, &LayerStreamService_ServiceDesc.Streams[0], LayerStreamService_Stream_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -142,7 +141,7 @@ func (c *layerStreamServiceClient) Stream(ctx context.Context, in *v2alpha1.Laye
 }
 
 type LayerStreamService_StreamClient interface {
-	Recv() (*v2alpha1.Layer, error)
+	Recv() (*Layer, error)
 	grpc.ClientStream
 }
 
@@ -150,8 +149,8 @@ type layerStreamServiceStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *layerStreamServiceStreamClient) Recv() (*v2alpha1.Layer, error) {
-	m := new(v2alpha1.Layer)
+func (x *layerStreamServiceStreamClient) Recv() (*Layer, error) {
+	m := new(Layer)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -162,14 +161,14 @@ func (x *layerStreamServiceStreamClient) Recv() (*v2alpha1.Layer, error) {
 // All implementations should embed UnimplementedLayerStreamServiceServer
 // for forward compatibility
 type LayerStreamServiceServer interface {
-	Stream(*v2alpha1.LayerStreamRequest, LayerStreamService_StreamServer) error
+	Stream(*LayerStreamRequest, LayerStreamService_StreamServer) error
 }
 
 // UnimplementedLayerStreamServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedLayerStreamServiceServer struct {
 }
 
-func (UnimplementedLayerStreamServiceServer) Stream(*v2alpha1.LayerStreamRequest, LayerStreamService_StreamServer) error {
+func (UnimplementedLayerStreamServiceServer) Stream(*LayerStreamRequest, LayerStreamService_StreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
 
@@ -185,7 +184,7 @@ func RegisterLayerStreamServiceServer(s grpc.ServiceRegistrar, srv LayerStreamSe
 }
 
 func _LayerStreamService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(v2alpha1.LayerStreamRequest)
+	m := new(LayerStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -193,7 +192,7 @@ func _LayerStreamService_Stream_Handler(srv interface{}, stream grpc.ServerStrea
 }
 
 type LayerStreamService_StreamServer interface {
-	Send(*v2alpha1.Layer) error
+	Send(*Layer) error
 	grpc.ServerStream
 }
 
@@ -201,7 +200,7 @@ type layerStreamServiceStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *layerStreamServiceStreamServer) Send(m *v2alpha1.Layer) error {
+func (x *layerStreamServiceStreamServer) Send(m *Layer) error {
 	return x.ServerStream.SendMsg(m)
 }
 
