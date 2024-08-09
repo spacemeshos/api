@@ -37,9 +37,13 @@ message Activation {
     LayerNumber layer = 2; // the layer that this activation is part of
     SmesherId smesher_id = 3; // id of smesher who created the ATX
     AccountId coinbase = 4; // coinbase account id
-    ActivationId prev_atx = 5; // previous ATX pointed to
+    // previous ATX pointed to
+    // deprecated to support ATX V2 and merging of ATXs: use previous_atxs instead
+    // a merged ATX might reference multiple previous ATXs
+    ActivationId prev_atx = 5 [deprecated = true];
     uint32 num_units = 6; // number of PoST data commitment units
     uint64 sequence = 7;
+    repeated ActivationId previous_atxs = 8; // previous ATXs
 }
 
 // An immutable Spacemesh transaction.
