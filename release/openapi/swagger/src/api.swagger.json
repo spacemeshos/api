@@ -450,7 +450,7 @@
           "format": "date-time"
         },
         "registrationStatus": {
-          "$ref": "#/definitions/PoetInfoRegistrationStatus"
+          "$ref": "#/definitions/v2alpha1RegistrationStatus"
         },
         "url": {
           "type": "string"
@@ -478,17 +478,6 @@
         "SYNC_STATUS_SYNCED"
       ]
     },
-    "PoetInfoRegistrationStatus": {
-      "type": "string",
-      "default": "STATUS_UNSPECIFIED",
-      "enum": [
-        "STATUS_UNSPECIFIED",
-        "STATUS_SUCCESS_REG",
-        "STATUS_FAILED_REG",
-        "STATUS_RESIDUAL_REG",
-        "STATUS_NO_REG"
-      ]
-    },
     "PoetServicesResponseIdentity": {
       "type": "object",
       "properties": {
@@ -501,6 +490,9 @@
         },
         "smesherIdHex": {
           "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/v2alpha1IdentityStatus"
         }
       }
     },
@@ -1161,6 +1153,18 @@
         }
       }
     },
+    "v2alpha1IdentityStatus": {
+      "type": "string",
+      "default": "STATUS_UNSPECIFIED",
+      "enum": [
+        "STATUS_UNSPECIFIED",
+        "STATUS_IS_SYNCING",
+        "STATUS_WAIT_FOR_POET_ROUND_START",
+        "STATUS_WAIT_FOR_POET_ROUND_END",
+        "STATUS_FETCHING_PROOFS",
+        "STATUS_POST_PROVING"
+      ]
+    },
     "v2alpha1LayerList": {
       "type": "object",
       "properties": {
@@ -1252,12 +1256,7 @@
       }
     },
     "v2alpha1PoetServicesRequest": {
-      "type": "object",
-      "properties": {
-        "smesherIdHex": {
-          "type": "string"
-        }
-      }
+      "type": "object"
     },
     "v2alpha1PoetServicesResponse": {
       "type": "object",
@@ -1270,6 +1269,17 @@
           }
         }
       }
+    },
+    "v2alpha1RegistrationStatus": {
+      "type": "string",
+      "default": "STATUS_UNKNOWN",
+      "enum": [
+        "STATUS_UNKNOWN",
+        "STATUS_SUCCESS_REG",
+        "STATUS_FAILED_REG",
+        "STATUS_RESIDUAL_REG",
+        "STATUS_NO_REG"
+      ]
     },
     "v2alpha1RewardList": {
       "type": "object",
