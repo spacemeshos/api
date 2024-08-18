@@ -6,30 +6,29 @@ import "google/protobuf/timestamp.proto";
 
 package spacemesh.v2alpha1;
 
-message PoetServicesRequest {
-  string smesher_id_hex = 1;
+message PoetServicesRequest {}
+
+enum IdentityStatus {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_IS_SYNCING = 1;
+  STATUS_WAIT_FOR_POET_ROUND_START = 2;
+  STATUS_WAIT_FOR_POET_ROUND_END = 3;
+  STATUS_FETCHING_PROOFS = 4;
+  STATUS_POST_PROVING = 5;
 }
 
 
+enum RegistrationStatus {
+  STATUS_UNKNOWN = 0;
+  STATUS_SUCCESS_REG = 1;
+  STATUS_FAILED_REG = 2;
+  STATUS_RESIDUAL_REG = 3;
+  STATUS_NO_REG = 4;
+}
+
 message PoetServicesResponse {
   message Identity {
-    enum Status {
-      STATUS_UNSPECIFIED = 0;
-      STATUS_IS_SYNCING = 1;
-      STATUS_CREATING_INITIAL_POST = 2;
-      STATUS_SUBMITTING_CHALLENGE = 3;
-      STATUS_CREATING_POST_PROOF = 4;
-    }
-
     message PoetInfo {
-      enum RegistrationStatus {
-        STATUS_UNSPECIFIED = 0;
-        STATUS_SUCCESS_REG = 1;
-        STATUS_FAILED_REG = 2;
-        STATUS_RESIDUAL_REG = 3;
-        STATUS_NO_REG = 4;
-      }
-
       string url = 1;
       google.protobuf.Timestamp poet_round_end = 2;
       RegistrationStatus registration_status = 3;
@@ -37,7 +36,8 @@ message PoetServicesResponse {
     }
 
     string smesher_id_hex = 1;
-    repeated PoetInfo poet_infos = 2;
+    IdentityStatus status = 2;
+    repeated PoetInfo poet_infos = 3;
   }
     repeated Identity identities = 3;
 }
