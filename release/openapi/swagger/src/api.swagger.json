@@ -279,6 +279,39 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices": {
+      "post": {
+        "tags": [
+          "SmeshingIdentitiesService"
+        ],
+        "summary": "Returns set of configured poet addresses and poets addresses from registrations, if given,\nand warning in case, if there are registrations with poets, which are not in configured poets set.",
+        "operationId": "SmeshingIdentitiesService_PoetServices",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PoetServicesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PoetServicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.TransactionService/EstimateGas": {
       "post": {
         "tags": [
@@ -406,39 +439,6 @@
           }
         }
       }
-    },
-    "/v2/smeshingidentities/poetservices": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "summary": "Returns set of configured poet addresses and poets addresses from registrations, if given,\nand warning in case, if there are registrations with poets, which are not in configured poets set.",
-        "operationId": "SmeshingIdentitiesService_PoetServices",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1PoetServicesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1PoetServicesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -488,8 +488,9 @@
             "$ref": "#/definitions/IdentityPoetInfo"
           }
         },
-        "smesherIdHex": {
-          "type": "string"
+        "smesherId": {
+          "type": "string",
+          "format": "byte"
         },
         "status": {
           "$ref": "#/definitions/v2alpha1IdentityStatus"
@@ -1155,14 +1156,14 @@
     },
     "v2alpha1IdentityStatus": {
       "type": "string",
-      "default": "STATUS_UNSPECIFIED",
+      "default": "UNSPECIFIED",
       "enum": [
-        "STATUS_UNSPECIFIED",
-        "STATUS_IS_SYNCING",
-        "STATUS_WAIT_FOR_POET_ROUND_START",
-        "STATUS_WAIT_FOR_POET_ROUND_END",
-        "STATUS_FETCHING_PROOFS",
-        "STATUS_POST_PROVING"
+        "UNSPECIFIED",
+        "IS_SYNCING",
+        "WAIT_FOR_POET_ROUND_START",
+        "WAIT_FOR_POET_ROUND_END",
+        "FETCHING_PROOFS",
+        "POST_PROVING"
       ]
     },
     "v2alpha1LayerList": {
@@ -1272,13 +1273,13 @@
     },
     "v2alpha1RegistrationStatus": {
       "type": "string",
-      "default": "STATUS_UNKNOWN",
+      "default": "UNKNOWN",
       "enum": [
-        "STATUS_UNKNOWN",
-        "STATUS_SUCCESS_REG",
-        "STATUS_FAILED_REG",
-        "STATUS_RESIDUAL_REG",
-        "STATUS_NO_REG"
+        "UNKNOWN",
+        "SUCCESS_REG",
+        "FAILED_REG",
+        "RESIDUAL_REG",
+        "NO_REG"
       ]
     },
     "v2alpha1RewardList": {
