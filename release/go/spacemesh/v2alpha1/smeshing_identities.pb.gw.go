@@ -71,7 +71,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices", runtime.WithHTTPPathPattern("/v2/smeshingidentities/poetservices"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -135,7 +135,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices", runtime.WithHTTPPathPattern("/v2/smeshingidentities/poetservices"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices", runtime.WithHTTPPathPattern("/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -155,7 +155,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 }
 
 var (
-	pattern_SmeshingIdentitiesService_PoetServices_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v2", "smeshingidentities", "poetservices"}, ""))
+	pattern_SmeshingIdentitiesService_PoetServices_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2alpha1.SmeshingIdentitiesService", "PoetServices"}, ""))
 )
 
 var (

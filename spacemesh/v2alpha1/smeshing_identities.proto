@@ -9,21 +9,21 @@ package spacemesh.v2alpha1;
 message PoetServicesRequest {}
 
 enum IdentityStatus {
-  STATUS_UNSPECIFIED = 0;
-  STATUS_IS_SYNCING = 1;
-  STATUS_WAIT_FOR_POET_ROUND_START = 2;
-  STATUS_WAIT_FOR_POET_ROUND_END = 3;
-  STATUS_FETCHING_PROOFS = 4;
-  STATUS_POST_PROVING = 5;
+  UNSPECIFIED = 0;
+  IS_SYNCING = 1;
+  WAIT_FOR_POET_ROUND_START = 2;
+  WAIT_FOR_POET_ROUND_END = 3;
+  FETCHING_PROOFS = 4;
+  POST_PROVING = 5;
 }
 
 
 enum RegistrationStatus {
-  STATUS_UNKNOWN = 0;
-  STATUS_SUCCESS_REG = 1;
-  STATUS_FAILED_REG = 2;
-  STATUS_RESIDUAL_REG = 3;
-  STATUS_NO_REG = 4;
+  UNKNOWN = 0;
+  SUCCESS_REG = 1;
+  FAILED_REG = 2;
+  RESIDUAL_REG = 3;
+  NO_REG = 4;
 }
 
 message PoetServicesResponse {
@@ -35,7 +35,7 @@ message PoetServicesResponse {
       string warning = 4;
     }
 
-    string smesher_id_hex = 1;
+    bytes smesher_id = 1;
     IdentityStatus status = 2;
     repeated PoetInfo poet_infos = 3;
   }
@@ -47,10 +47,5 @@ service SmeshingIdentitiesService {
 
   // Returns set of configured poet addresses and poets addresses from registrations, if given,
   // and warning in case, if there are registrations with poets, which are not in configured poets set.
-  rpc PoetServices (PoetServicesRequest) returns (PoetServicesResponse){
-    option (google.api.http) = {
-      post: "/v2/smeshingidentities/poetservices"
-      body: "*"
-    };
-  }
+  rpc PoetServices (PoetServicesRequest) returns (PoetServicesResponse){}
 }
