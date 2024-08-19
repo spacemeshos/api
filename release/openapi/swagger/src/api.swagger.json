@@ -1457,10 +1457,10 @@
       "name": "NodeService"
     },
     {
-      "name": "SmeshingIdentitiesService"
+      "name": "RewardService"
     },
     {
-      "name": "RewardService"
+      "name": "SmeshingIdentitiesService"
     }
   ]
 }
