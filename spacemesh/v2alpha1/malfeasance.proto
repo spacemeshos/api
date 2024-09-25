@@ -6,26 +6,30 @@ package spacemesh.v2alpha1;
 
 message MalfeasanceProof {
     bytes smesher = 1;
-    uint32 layer = 2;
-    enum MalfeasanceType {
-        MALFEASANCE_UNSPECIFIED = 0;
-        MALFEASANCE_ATX = 1;
-        MALFEASANCE_BALLOT = 2;
-        MALFEASANCE_HARE = 3;
-        MALFEASANCE_POST_INDEX = 4;
-        MALFEASANCE_INCORRECT_PREV_ATX = 5;
-        MALFEASANCE_DOUBLE_MARRY = 6;
+
+    enum MalfeasanceDomain {
+        DOMAIN_UNSPECIFIED = 0; // for legacy proofs
     }
-    MalfeasanceType kind = 3;
-    string debug_info = 4;
-    bytes proof = 5;
+    MalfeasanceDomain domain = 2;
+
+    // type of the malfeasance proof, depends on domain
+    //
+    // for legacy proofs the types are
+    //   1 - Double publish of ATX
+    //   2 - Multiple ballots for a layer by same smesher
+    //   3 - Hare Equivocation (currently unused)
+    //   4 - ATX with invalid PoST proof publised
+    //   5 - ATX referencing an invalid previous ATX published
+    uint32 type = 3;
+
+    // Properties of the Malfeasance proof, different for every type of proof
+    map<string, string> properties = 4;
 }
 
 message MalfeasanceRequest {
     repeated bytes smesher_id = 1; // list of smesher ids to fetch
-    bool include_proof = 2; // whether to include proof
-    uint64 offset = 3; // adjusts the starting point for data
-    uint64 limit = 4; // specifies max number of items to fetch
+    uint64 offset = 2; // adjusts the starting point for data
+    uint64 limit = 3; // specifies max number of items to fetch
 }
 
 message MalfeasanceList {
@@ -40,8 +44,7 @@ service MalfeasanceService {
 
 message MalfeasanceStreamRequest {
     repeated bytes smesher_id = 1; // list of smesher ids to watch
-    bool include_proof = 2; // whether to include proof
-    bool watch = 3;
+    bool watch = 2;
 }
 
 service MalfeasanceStreamService {
