@@ -658,7 +658,7 @@
         },
         "smesherId": {
           "type": "array",
-          "title": "list of smesher ids to fetch",
+          "title": "list of smesher ids to fetch (can be empty for all)",
           "items": {
             "type": "string",
             "format": "byte"
@@ -1122,7 +1122,7 @@
     "v2alpha1MalfeasanceList": {
       "type": "object",
       "properties": {
-        "malfeasances": {
+        "proofs": {
           "type": "array",
           "items": {
             "type": "object",

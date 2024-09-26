@@ -27,13 +27,13 @@ message MalfeasanceProof {
 }
 
 message MalfeasanceRequest {
-    repeated bytes smesher_id = 1; // list of smesher ids to fetch
+    repeated bytes smesher_id = 1; // list of smesher ids to fetch (can be empty for all)
     uint64 offset = 2; // adjusts the starting point for data
     uint64 limit = 3; // specifies max number of items to fetch
 }
 
 message MalfeasanceList {
-    repeated MalfeasanceProof malfeasances = 1;
+    repeated MalfeasanceProof proofs = 1;
 }
 
 service MalfeasanceService {
