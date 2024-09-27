@@ -151,6 +151,38 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.MalfeasanceService/List": {
+      "post": {
+        "tags": [
+          "MalfeasanceService"
+        ],
+        "operationId": "MalfeasanceService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1MalfeasanceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.NetworkService/Info": {
       "post": {
         "tags": [
@@ -377,6 +409,14 @@
     }
   },
   "definitions": {
+    "MalfeasanceProofMalfeasanceDomain": {
+      "type": "string",
+      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs",
+      "default": "DOMAIN_UNSPECIFIED",
+      "enum": [
+        "DOMAIN_UNSPECIFIED"
+      ]
+    },
     "NodeStatusResponseSyncStatus": {
       "type": "string",
       "default": "SYNC_STATUS_UNSPECIFIED",
@@ -577,6 +617,54 @@
         "LAYER_STATUS_APPLIED",
         "LAYER_STATUS_VERIFIED"
       ]
+    },
+    "spacemeshv2alpha1MalfeasanceProof": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "$ref": "#/definitions/MalfeasanceProofMalfeasanceDomain"
+        },
+        "properties": {
+          "type": "object",
+          "title": "Properties of the Malfeasance proof, different for every type of proof",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "smesher": {
+          "type": "string",
+          "format": "byte"
+        },
+        "type": {
+          "description": "for legacy proofs the types are\n  1 - Double publish of ATX\n  2 - Multiple ballots for a layer by same smesher\n  3 - Hare Equivocation (currently unused)\n  4 - ATX with invalid PoST proof publised\n  5 - ATX referencing an invalid previous ATX published",
+          "type": "integer",
+          "format": "int64",
+          "title": "type of the malfeasance proof, depends on domain"
+        }
+      }
+    },
+    "spacemeshv2alpha1MalfeasanceRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "smesherId": {
+          "type": "array",
+          "title": "list of smesher ids to fetch (can be empty for all)",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
     },
     "spacemeshv2alpha1NetworkInfoResponse": {
       "type": "object",
@@ -1031,6 +1119,18 @@
         }
       }
     },
+    "v2alpha1MalfeasanceList": {
+      "type": "object",
+      "properties": {
+        "proofs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
+          }
+        }
+      }
+    },
     "v2alpha1NetworkInfoRequest": {
       "type": "object"
     },
@@ -1235,6 +1335,9 @@
     },
     {
       "name": "LayerService"
+    },
+    {
+      "name": "MalfeasanceService"
     },
     {
       "name": "NetworkService"
