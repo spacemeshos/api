@@ -491,6 +491,10 @@
         "projected": {
           "title": "projected state (includes pending txs)",
           "$ref": "#/definitions/spacemeshv2alpha1AccountState"
+        },
+        "template": {
+          "type": "string",
+          "title": "account template address"
         }
       }
     },

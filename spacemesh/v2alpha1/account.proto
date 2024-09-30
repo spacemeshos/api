@@ -9,6 +9,7 @@ message Account {
   string address = 1; // account public address
   AccountState current = 2; // current state
   AccountState projected = 3; // projected state (includes pending txs)
+  string template = 4; // account template address
 }
 
 message AccountState {
