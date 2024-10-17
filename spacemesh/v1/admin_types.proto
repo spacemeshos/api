@@ -42,6 +42,11 @@ message Event {
     EventMalfeasance malfeasance = 15;
     EventPostServiceStarted post_service_started = 16;
     EventPostServiceStopped post_service_stopped = 17;
+    EventWaitingForPoETRegistrationWindow waiting_for_poet_registration_window = 18;
+    EventProofDownloadedFromPoet proof_downloaded_from_poet = 19;
+    EventRegisteredInPoet registered_in_poet = 20;
+    EventBestProofSelected best_proof_selected = 21;
+    EventWaitingForPoETRoundEnd waiting_for_poet_round_end = 22;
   }
 }
 
@@ -79,7 +84,9 @@ message EventPostComplete {
   bytes smesher = 2;
 }
 
+// Deprecated. Will be removed soon. Use WaitingForPoETRegistrationWindow instead.
 message EventPoetWaitRound {
+  option deprecated = true;
   uint32 current = 1;
   uint32 publish = 2;
   google.protobuf.Duration wait = 3;
@@ -87,12 +94,28 @@ message EventPoetWaitRound {
   bytes smesher = 5;
 }
 
+message EventWaitingForPoETRegistrationWindow {
+  uint32 current = 1;
+  uint32 publish = 2;
+  google.protobuf.Timestamp round_end = 3;
+  bytes smesher = 4;
+}
+
+// Deprecated. Will be removed soon. Use EventWaitingForPoETRoundEnd instead.
 message EventPoetWaitProof {
+  option deprecated = true;
   uint32 publish = 1;
   uint32 target = 2;
   google.protobuf.Duration wait = 3;
   google.protobuf.Timestamp until = 4;
   bytes smesher = 5;
+}
+
+message EventWaitingForPoETRoundEnd {
+  uint32 publish = 1;
+  uint32 target = 2;
+  google.protobuf.Timestamp round_end = 3;
+  bytes smesher = 4;
 }
 
 message EventAtxPubished {
@@ -130,6 +153,26 @@ message EventMalfeasance {
 }
 
 message EventStreamRequest {}
+
+message EventRegisteredInPoet {
+  string url = 1;
+  bytes smesher = 2;
+  string round_id = 3;
+}
+
+// ticks is proof leaves / tickSize
+message EventProofDownloadedFromPoet {
+  string url = 1;
+  string round_id = 2;
+  uint64 ticks = 3;
+}
+
+message EventBestProofSelected {
+  string url = 1;
+  string round_id = 2;
+  uint64 ticks = 3;
+  bytes smesher = 4;
+}
 
 message ConnectionInfo {
   string address = 1;
