@@ -6,21 +6,21 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   info: {
-    title: "Spacemesh API";
-    version: "v2alpha1";
+    title: "Spacemesh API",
+    version: "v2alpha1",
     contact: {
-      name: "Spacemesh";
-      url: "https://spacemesh.io/";
-    };
+      name: "Spacemesh",
+      url: "https://spacemesh.io/",
+    },
     license: {
-      name: "MIT License";
-      url: "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE";
-    };
-  };
-  schemes: HTTPS;
-  consumes: "application/json";
-  produces: "application/json";
-  host: "testnet-api.spacemesh.network";
+      name: "MIT License",
+      url: "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE",
+    },
+  },
+  schemes: HTTPS,
+  consumes: "application/json",
+  produces: "application/json",
+  host: "testnet-api.spacemesh.network",
 };
 
 enum SortOrder {
