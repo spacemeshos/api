@@ -60,7 +60,6 @@ message IdentityStateEpoch {
 
 message IdentityState {
   IdentityStatus state = 1;
-  string state_name = 2;
   google.protobuf.Timestamp time = 3;
 }
 

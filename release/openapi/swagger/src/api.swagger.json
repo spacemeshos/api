@@ -1146,9 +1146,6 @@
         "state": {
           "$ref": "#/definitions/v2alpha1IdentityStatus"
         },
-        "stateName": {
-          "type": "string"
-        },
         "time": {
           "type": "string",
           "format": "date-time"
