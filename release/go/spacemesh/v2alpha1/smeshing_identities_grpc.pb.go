@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SmeshingIdentitiesService_PoetServices_FullMethodName = "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetServices"
+	SmeshingIdentitiesService_States_FullMethodName = "/spacemesh.v2alpha1.SmeshingIdentitiesService/States"
 )
 
 // SmeshingIdentitiesServiceClient is the client API for SmeshingIdentitiesService service.
@@ -28,7 +28,7 @@ const (
 type SmeshingIdentitiesServiceClient interface {
 	// Returns set of configured poet addresses and poets addresses from registrations, if given,
 	// and warning in case, if there are registrations with poets, which are not in configured poets set.
-	PoetServices(ctx context.Context, in *PoetServicesRequest, opts ...grpc.CallOption) (*PoetServicesResponse, error)
+	States(ctx context.Context, in *IdentityStatesRequest, opts ...grpc.CallOption) (*IdentityStatesResponse, error)
 }
 
 type smeshingIdentitiesServiceClient struct {
@@ -39,9 +39,9 @@ func NewSmeshingIdentitiesServiceClient(cc grpc.ClientConnInterface) SmeshingIde
 	return &smeshingIdentitiesServiceClient{cc}
 }
 
-func (c *smeshingIdentitiesServiceClient) PoetServices(ctx context.Context, in *PoetServicesRequest, opts ...grpc.CallOption) (*PoetServicesResponse, error) {
-	out := new(PoetServicesResponse)
-	err := c.cc.Invoke(ctx, SmeshingIdentitiesService_PoetServices_FullMethodName, in, out, opts...)
+func (c *smeshingIdentitiesServiceClient) States(ctx context.Context, in *IdentityStatesRequest, opts ...grpc.CallOption) (*IdentityStatesResponse, error) {
+	out := new(IdentityStatesResponse)
+	err := c.cc.Invoke(ctx, SmeshingIdentitiesService_States_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -54,15 +54,15 @@ func (c *smeshingIdentitiesServiceClient) PoetServices(ctx context.Context, in *
 type SmeshingIdentitiesServiceServer interface {
 	// Returns set of configured poet addresses and poets addresses from registrations, if given,
 	// and warning in case, if there are registrations with poets, which are not in configured poets set.
-	PoetServices(context.Context, *PoetServicesRequest) (*PoetServicesResponse, error)
+	States(context.Context, *IdentityStatesRequest) (*IdentityStatesResponse, error)
 }
 
 // UnimplementedSmeshingIdentitiesServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedSmeshingIdentitiesServiceServer struct {
 }
 
-func (UnimplementedSmeshingIdentitiesServiceServer) PoetServices(context.Context, *PoetServicesRequest) (*PoetServicesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PoetServices not implemented")
+func (UnimplementedSmeshingIdentitiesServiceServer) States(context.Context, *IdentityStatesRequest) (*IdentityStatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method States not implemented")
 }
 
 // UnsafeSmeshingIdentitiesServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -76,20 +76,20 @@ func RegisterSmeshingIdentitiesServiceServer(s grpc.ServiceRegistrar, srv Smeshi
 	s.RegisterService(&SmeshingIdentitiesService_ServiceDesc, srv)
 }
 
-func _SmeshingIdentitiesService_PoetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PoetServicesRequest)
+func _SmeshingIdentitiesService_States_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdentityStatesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SmeshingIdentitiesServiceServer).PoetServices(ctx, in)
+		return srv.(SmeshingIdentitiesServiceServer).States(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SmeshingIdentitiesService_PoetServices_FullMethodName,
+		FullMethod: SmeshingIdentitiesService_States_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SmeshingIdentitiesServiceServer).PoetServices(ctx, req.(*PoetServicesRequest))
+		return srv.(SmeshingIdentitiesServiceServer).States(ctx, req.(*IdentityStatesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -102,8 +102,8 @@ var SmeshingIdentitiesService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*SmeshingIdentitiesServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PoetServices",
-			Handler:    _SmeshingIdentitiesService_PoetServices_Handler,
+			MethodName: "States",
+			Handler:    _SmeshingIdentitiesService_States_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

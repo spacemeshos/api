@@ -6,39 +6,70 @@ import "google/protobuf/timestamp.proto";
 
 package spacemesh.v2alpha1;
 
-message PoetServicesRequest {}
+message IdentityStatesRequest {}
 
 enum IdentityStatus {
   UNSPECIFIED = 0;
-  IS_SYNCING = 1;
-  WAIT_FOR_POET_ROUND_START = 2;
-  WAIT_FOR_POET_ROUND_END = 3;
-  FETCHING_PROOFS = 4;
-  POST_PROVING = 5;
+  ERROR = 1;
+
+  WAIT_FOR_ATX_SYNCING = 2;
+  GENERATING_INITIAL_POST_PROOF = 3;
+  INITIAL_POST_PROOF_READY = 4;
+  INITIAL_POST_PROOF_FAILED = 5;
+
+  WAITING_FOR_POET_REGISTRATION_WINDOW = 6;
+  POET_CHALLENGE_READY = 7;
+  POET_REGISTERED = 8;
+  WAIT_FOR_POET_ROUND_END = 9;
+  POET_PROOF_RECEIVED = 10;
+  POET_PROOF_FAILED = 11;
+
+  GENERATING_POST_PROOF = 12;
+  POST_PROOF_READY = 13;
+  POST_PROOF_FAILED = 14;
+
+  ATX_READY = 15;
+  ATX_BROADCASTED = 16;
 }
 
 
-enum RegistrationStatus {
-  UNKNOWN = 0;
-  SUCCESS_REG = 1;
-  FAILED_REG = 2;
-  RESIDUAL_REG = 3;
-  NO_REG = 4;
+//enum RegistrationStatus {
+//  UNKNOWN = 0;
+//  SUCCESS_REG = 1;
+//  FAILED_REG = 2;
+//  RESIDUAL_REG = 3;
+//  NO_REG = 4;
+//}
+
+//type IdentityStateInfo struct {
+//	Date string
+//}
+//
+//type IdentityInfo struct {
+//	States map[IdentityState]IdentityStateInfo
+//}
+//
+//type IdentityStateStorage struct {
+//	mu     sync.RWMutex
+//	states map[types.NodeID]*IdentityInfo
+//}
+message IdentityStateEpoch {
+  uint32 epoch = 1;
+  repeated IdentityState states = 2;
 }
 
-message PoetServicesResponse {
-  message Identity {
-    message PoetInfo {
-      string url = 1;
-      google.protobuf.Timestamp poet_round_end = 2;
-      RegistrationStatus registration_status = 3;
-      string warning = 4;
-    }
+message IdentityState {
+  string state = 1;
+  google.protobuf.Timestamp time = 2;
+}
 
-    bytes smesher_id = 1;
-    IdentityStatus status = 2;
-    repeated PoetInfo poet_infos = 3;
-  }
+message Identity {
+  bytes smesher_id = 1;
+  repeated IdentityStateEpoch epochs = 2;
+  repeated IdentityState other_states = 3;
+}
+
+message IdentityStatesResponse {
     repeated Identity identities = 3;
 }
 
@@ -47,5 +78,5 @@ service SmeshingIdentitiesService {
 
   // Returns set of configured poet addresses and poets addresses from registrations, if given,
   // and warning in case, if there are registrations with poets, which are not in configured poets set.
-  rpc PoetServices (PoetServicesRequest) returns (PoetServicesResponse){}
+  rpc States (IdentityStatesRequest) returns (IdentityStatesResponse){}
 }
