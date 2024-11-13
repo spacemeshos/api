@@ -58,7 +58,8 @@ message IdentityStateEpoch {
 
 message IdentityState {
   IdentityStatus state = 1;
-  google.protobuf.Timestamp time = 3;
+  google.protobuf.Timestamp time = 2;
+  string message = 3;
 }
 
 message Identity {

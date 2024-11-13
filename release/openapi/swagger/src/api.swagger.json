@@ -1143,6 +1143,9 @@
     "v2alpha1IdentityState": {
       "type": "object",
       "properties": {
+        "message": {
+          "type": "string"
+        },
         "state": {
           "$ref": "#/definitions/v2alpha1IdentityStatus"
         },
