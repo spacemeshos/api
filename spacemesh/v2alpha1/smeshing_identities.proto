@@ -67,7 +67,7 @@ message IdentityState {
 message Identity {
   bytes smesher_id = 1;
   repeated IdentityStateEpoch epochs = 2;
-  repeated IdentityState other_states = 3;
+  repeated IdentityState states = 3;
 }
 
 message IdentityStatesResponse {

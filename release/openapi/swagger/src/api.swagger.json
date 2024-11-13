@@ -1127,16 +1127,16 @@
             "$ref": "#/definitions/v2alpha1IdentityStateEpoch"
           }
         },
-        "otherStates": {
+        "smesherId": {
+          "type": "string",
+          "format": "byte"
+        },
+        "states": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v2alpha1IdentityState"
           }
-        },
-        "smesherId": {
-          "type": "string",
-          "format": "byte"
         }
       }
     },
