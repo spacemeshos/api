@@ -1190,7 +1190,6 @@
       "default": "UNSPECIFIED",
       "enum": [
         "UNSPECIFIED",
-        "ERROR",
         "WAIT_FOR_ATX_SYNCING",
         "WAITING_FOR_POET_REGISTRATION_WINDOW",
         "POET_CHALLENGE_READY",
