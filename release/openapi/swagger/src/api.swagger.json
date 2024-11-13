@@ -887,7 +887,7 @@
       ]
     },
     "spacemeshv2alpha1TransactionState": {
-      "description": "TransactionState is the \"journey\" of a tx from mempool to block inclusion to\nmesh to STF processing. To know whether or not the tx actually succeeded,\nand its side effects, check tx_state.\n\n - TRANSACTION_STATE_UNSPECIFIED: default state\n - TRANSACTION_STATE_REJECTED: rejected from mempool due to, e.g., invalid syntax\n - TRANSACTION_STATE_INSUFFICIENT_FUNDS: rejected from mempool by funds check\n - TRANSACTION_STATE_CONFLICTING: rejected from mempool due to conflicting counter\n - TRANSACTION_STATE_MEMPOOL: in mempool but not on the mesh yet\n - TRANSACTION_STATE_MESH: submitted to the mesh\n - TRANSACTION_STATE_PROCESSED: processed by STF; check Receipt for success or failure",
+      "description": "TransactionState is the \"journey\" of a tx from mempool to block inclusion to\nmesh to STF processing. To know whether or not the tx actually succeeded,\nand its side effects, check tx_state.\n\n - TRANSACTION_STATE_UNSPECIFIED: default state\n - TRANSACTION_STATE_REJECTED: rejected from mempool due to, e.g., invalid syntax\n - TRANSACTION_STATE_INSUFFICIENT_FUNDS: rejected from mempool by funds check\n - TRANSACTION_STATE_CONFLICTING: rejected from mempool due to conflicting counter\n - TRANSACTION_STATE_MEMPOOL: in mempool but not on the mesh yet\n - TRANSACTION_STATE_MESH: submitted to the mesh\n - TRANSACTION_STATE_PROCESSED: processed by STF; check Receipt for success or failure\n - TRANSACTION_STATE_INEFFECTUAL: removed from mempool and will be forgotten and never executed",
       "type": "string",
       "default": "TRANSACTION_STATE_UNSPECIFIED",
       "enum": [
@@ -897,7 +897,8 @@
         "TRANSACTION_STATE_CONFLICTING",
         "TRANSACTION_STATE_MEMPOOL",
         "TRANSACTION_STATE_MESH",
-        "TRANSACTION_STATE_PROCESSED"
+        "TRANSACTION_STATE_PROCESSED",
+        "TRANSACTION_STATE_INEFFECTUAL"
       ]
     },
     "v2alpha1AccountList": {

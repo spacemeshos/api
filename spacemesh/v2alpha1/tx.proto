@@ -88,6 +88,7 @@ enum TransactionState {
   TRANSACTION_STATE_MEMPOOL = 4; // in mempool but not on the mesh yet
   TRANSACTION_STATE_MESH = 5; // submitted to the mesh
   TRANSACTION_STATE_PROCESSED = 6; // processed by STF; check Receipt for success or failure
+  TRANSACTION_STATE_INEFFECTUAL = 7; // removed from mempool and will be forgotten and never executed
 }
 
 message TransactionResult {
