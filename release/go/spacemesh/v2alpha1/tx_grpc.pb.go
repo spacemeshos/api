@@ -144,22 +144,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TransactionServiceClient interface {
-	// List
+	// List of transactions
 	//
 	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of transactions based on the provided request parameters.
 	List(ctx context.Context, in *TransactionRequest, opts ...grpc.CallOption) (*TransactionList, error)
-	// ParseTransaction
+	// Parse transaction
 	//
 	// ParseTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to parse a signed binary transaction and optionally verify its signature.
 	ParseTransaction(ctx context.Context, in *ParseTransactionRequest, opts ...grpc.CallOption) (*ParseTransactionResponse, error)
-	// SubmitTransaction
+	// Submit transaction
 	//
 	// SubmitTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to submit a signed binary transaction to the network.
 	SubmitTransaction(ctx context.Context, in *SubmitTransactionRequest, opts ...grpc.CallOption) (*SubmitTransactionResponse, error)
-	// EstimateGas
+	// Estimate gas for transaction
 	//
 	// EstimateGas is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to estimate the recommended maximum gas for a signed binary transaction.
@@ -214,22 +214,22 @@ func (c *transactionServiceClient) EstimateGas(ctx context.Context, in *Estimate
 // All implementations should embed UnimplementedTransactionServiceServer
 // for forward compatibility
 type TransactionServiceServer interface {
-	// List
+	// List of transactions
 	//
 	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of transactions based on the provided request parameters.
 	List(context.Context, *TransactionRequest) (*TransactionList, error)
-	// ParseTransaction
+	// Parse transaction
 	//
 	// ParseTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to parse a signed binary transaction and optionally verify its signature.
 	ParseTransaction(context.Context, *ParseTransactionRequest) (*ParseTransactionResponse, error)
-	// SubmitTransaction
+	// Submit transaction
 	//
 	// SubmitTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to submit a signed binary transaction to the network.
 	SubmitTransaction(context.Context, *SubmitTransactionRequest) (*SubmitTransactionResponse, error)
-	// EstimateGas
+	// Estimate gas for transaction
 	//
 	// EstimateGas is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to estimate the recommended maximum gas for a signed binary transaction.

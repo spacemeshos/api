@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountServiceClient interface {
-	// List
+	// List of accounts
 	//
 	// List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of accounts based on the provided request parameters.
@@ -54,7 +54,7 @@ func (c *accountServiceClient) List(ctx context.Context, in *AccountRequest, opt
 // All implementations should embed UnimplementedAccountServiceServer
 // for forward compatibility
 type AccountServiceServer interface {
-	// List
+	// List of accounts
 	//
 	// List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of accounts based on the provided request parameters.

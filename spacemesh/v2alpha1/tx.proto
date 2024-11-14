@@ -174,25 +174,25 @@ message EstimateGasResponse {
 service TransactionService {
   option (google.api.api_visibility).restriction = "V2";
 
-  // List
+  // List of transactions
   //
   // List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve a list of transactions based on the provided request parameters.
   rpc List(TransactionRequest) returns (TransactionList);
 
-  // ParseTransaction
+  // Parse transaction
   //
   // ParseTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to parse a signed binary transaction and optionally verify its signature.
   rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
 
-  // SubmitTransaction
+  // Submit transaction
   //
   // SubmitTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to submit a signed binary transaction to the network.
   rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
 
-  // EstimateGas
+  // Estimate gas for transaction
   //
   // EstimateGas is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to estimate the recommended maximum gas for a signed binary transaction.

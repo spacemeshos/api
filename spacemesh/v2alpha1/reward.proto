@@ -32,7 +32,7 @@ message RewardList {
 service RewardService {
   option (google.api.api_visibility).restriction = "V2";
 
-  // List
+  // List of rewards
   //
   // List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve a list of rewards based on the provided request parameters.

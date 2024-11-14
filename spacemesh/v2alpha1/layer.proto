@@ -35,7 +35,7 @@ message LayerList {
 service LayerService {
   option (google.api.api_visibility).restriction = "V2";
 
-  // List
+  // List of layers
   //
   // List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve a list of layers based on the provided request parameters.

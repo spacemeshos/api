@@ -29,7 +29,7 @@
         "tags": [
           "AccountService"
         ],
-        "summary": "List",
+        "summary": "List of accounts",
         "operationId": "AccountService_List",
         "parameters": [
           {
@@ -63,7 +63,7 @@
         "tags": [
           "ActivationService"
         ],
-        "summary": "ActivationsCount",
+        "summary": "Count of activations",
         "operationId": "ActivationService_ActivationsCount",
         "parameters": [
           {
@@ -97,7 +97,7 @@
         "tags": [
           "ActivationService"
         ],
-        "summary": "List",
+        "summary": "List of activations",
         "operationId": "ActivationService_List",
         "parameters": [
           {
@@ -131,7 +131,7 @@
         "tags": [
           "LayerService"
         ],
-        "summary": "List",
+        "summary": "List of layers",
         "operationId": "LayerService_List",
         "parameters": [
           {
@@ -165,7 +165,7 @@
         "tags": [
           "MalfeasanceService"
         ],
-        "summary": "List",
+        "summary": "List of malfeasance proofs",
         "operationId": "MalfeasanceService_List",
         "parameters": [
           {
@@ -199,7 +199,7 @@
         "tags": [
           "NetworkService"
         ],
-        "summary": "Info",
+        "summary": "Network information",
         "operationId": "NetworkService_Info",
         "parameters": [
           {
@@ -233,7 +233,7 @@
         "tags": [
           "NodeService"
         ],
-        "summary": "Status",
+        "summary": "Node status",
         "operationId": "NodeService_Status",
         "parameters": [
           {
@@ -267,7 +267,7 @@
         "tags": [
           "RewardService"
         ],
-        "summary": "List",
+        "summary": "List of rewards",
         "operationId": "RewardService_List",
         "parameters": [
           {
@@ -301,7 +301,7 @@
         "tags": [
           "TransactionService"
         ],
-        "summary": "EstimateGas",
+        "summary": "Estimate gas for transaction",
         "operationId": "TransactionService_EstimateGas",
         "parameters": [
           {
@@ -335,7 +335,7 @@
         "tags": [
           "TransactionService"
         ],
-        "summary": "List",
+        "summary": "List of transactions",
         "operationId": "TransactionService_List",
         "parameters": [
           {
@@ -369,7 +369,7 @@
         "tags": [
           "TransactionService"
         ],
-        "summary": "ParseTransaction",
+        "summary": "Parse transaction",
         "operationId": "TransactionService_ParseTransaction",
         "parameters": [
           {
@@ -403,7 +403,7 @@
         "tags": [
           "TransactionService"
         ],
-        "summary": "SubmitTransaction",
+        "summary": "Submit transaction",
         "operationId": "TransactionService_SubmitTransaction",
         "parameters": [
           {

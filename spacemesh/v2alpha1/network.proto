@@ -21,7 +21,7 @@ message NetworkInfoRequest {}
 service NetworkService {
   option (google.api.api_visibility).restriction = "V2";
 
-  // Info
+  // Network information
   //
   // Info is a method that returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve network information.

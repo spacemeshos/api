@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LayerServiceClient interface {
-	// List
+	// List of layers
 	//
 	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of layers based on the provided request parameters.
@@ -54,7 +54,7 @@ func (c *layerServiceClient) List(ctx context.Context, in *LayerRequest, opts ..
 // All implementations should embed UnimplementedLayerServiceServer
 // for forward compatibility
 type LayerServiceServer interface {
-	// List
+	// List of layers
 	//
 	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of layers based on the provided request parameters.

@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RewardServiceClient interface {
-	// List
+	// List of rewards
 	//
 	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of rewards based on the provided request parameters.
@@ -54,7 +54,7 @@ func (c *rewardServiceClient) List(ctx context.Context, in *RewardRequest, opts 
 // All implementations should embed UnimplementedRewardServiceServer
 // for forward compatibility
 type RewardServiceServer interface {
-	// List
+	// List of rewards
 	//
 	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve a list of rewards based on the provided request parameters.

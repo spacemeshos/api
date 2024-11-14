@@ -24,7 +24,7 @@ message NodeStatusRequest {}
 service NodeService {
   option (google.api.api_visibility).restriction = "V2";
 
-  // Status
+  // Node status
   //
   // Status is a method that returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve node status information.

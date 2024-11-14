@@ -54,13 +54,13 @@ message ActivationsCountResponse {
 service ActivationService {
   option (google.api.api_visibility).restriction = "V2";
 
-  // List
+  // List of activations
   //
   // List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve a list of activations based on the provided request parameters.
   rpc List(ActivationRequest) returns (ActivationList);
 
-  // ActivationsCount
+  // Count of activations
   //
   // ActivationsCount is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve the count of activations for a specified epoch.
