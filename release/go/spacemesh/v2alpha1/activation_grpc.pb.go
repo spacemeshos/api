@@ -142,7 +142,15 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActivationServiceClient interface {
+	// List
+	//
+	// List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve a list of activations based on the provided request parameters.
 	List(ctx context.Context, in *ActivationRequest, opts ...grpc.CallOption) (*ActivationList, error)
+	// ActivationsCount
+	//
+	// ActivationsCount is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve the count of activations for a specified epoch.
 	ActivationsCount(ctx context.Context, in *ActivationsCountRequest, opts ...grpc.CallOption) (*ActivationsCountResponse, error)
 }
 
@@ -176,7 +184,15 @@ func (c *activationServiceClient) ActivationsCount(ctx context.Context, in *Acti
 // All implementations should embed UnimplementedActivationServiceServer
 // for forward compatibility
 type ActivationServiceServer interface {
+	// List
+	//
+	// List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve a list of activations based on the provided request parameters.
 	List(context.Context, *ActivationRequest) (*ActivationList, error)
+	// ActivationsCount
+	//
+	// ActivationsCount is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve the count of activations for a specified epoch.
 	ActivationsCount(context.Context, *ActivationsCountRequest) (*ActivationsCountResponse, error)
 }
 

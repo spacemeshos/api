@@ -160,9 +160,9 @@ type AccountRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Addresses []string `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
-	Offset    uint64   `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"` // adjusts the starting point for data
-	Limit     uint64   `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`   // specifies max number of items to fetch// bech32 format including HRP
+	Addresses []string `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"` // list of account addresses
+	Offset    uint64   `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`      // adjusts the starting point for data
+	Limit     uint64   `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`        // specifies max number of items to fetch// bech32 format including HRP
 }
 
 func (x *AccountRequest) Reset() {
@@ -223,7 +223,7 @@ type AccountList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts []*Account `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	Accounts []*Account `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"` // list of accounts
 }
 
 func (x *AccountList) Reset() {

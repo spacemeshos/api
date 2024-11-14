@@ -830,13 +830,13 @@ type TransactionResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status           TransactionResult_Status `protobuf:"varint,1,opt,name=status,proto3,enum=spacemesh.v2alpha1.TransactionResult_Status" json:"status,omitempty"`
+	Status           TransactionResult_Status `protobuf:"varint,1,opt,name=status,proto3,enum=spacemesh.v2alpha1.TransactionResult_Status" json:"status,omitempty"` // status of the transaction
 	Message          string                   `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	GasConsumed      uint64                   `protobuf:"varint,3,opt,name=gas_consumed,json=gasConsumed,proto3" json:"gas_consumed,omitempty"` // in units of gas
-	Fee              uint64                   `protobuf:"varint,4,opt,name=fee,proto3" json:"fee,omitempty"`                                    // in smidge
-	Block            []byte                   `protobuf:"bytes,5,opt,name=block,proto3" json:"block,omitempty"`
-	Layer            uint32                   `protobuf:"varint,6,opt,name=layer,proto3" json:"layer,omitempty"`
-	TouchedAddresses []string                 `protobuf:"bytes,7,rep,name=touched_addresses,json=touchedAddresses,proto3" json:"touched_addresses,omitempty"`
+	GasConsumed      uint64                   `protobuf:"varint,3,opt,name=gas_consumed,json=gasConsumed,proto3" json:"gas_consumed,omitempty"`               // in units of gas
+	Fee              uint64                   `protobuf:"varint,4,opt,name=fee,proto3" json:"fee,omitempty"`                                                  // in smidge
+	Block            []byte                   `protobuf:"bytes,5,opt,name=block,proto3" json:"block,omitempty"`                                               // block hash
+	Layer            uint32                   `protobuf:"varint,6,opt,name=layer,proto3" json:"layer,omitempty"`                                              // layer number
+	TouchedAddresses []string                 `protobuf:"bytes,7,rep,name=touched_addresses,json=touchedAddresses,proto3" json:"touched_addresses,omitempty"` // addresses touched by the tx
 }
 
 func (x *TransactionResult) Reset() {
@@ -1115,9 +1115,9 @@ type TransactionResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Tx       *Transaction       `protobuf:"bytes,1,opt,name=tx,proto3" json:"tx,omitempty"`
-	TxResult *TransactionResult `protobuf:"bytes,2,opt,name=tx_result,json=txResult,proto3" json:"tx_result,omitempty"`
-	TxState  *TransactionState  `protobuf:"varint,3,opt,name=tx_state,json=txState,proto3,enum=spacemesh.v2alpha1.TransactionState,oneof" json:"tx_state,omitempty"`
+	Tx       *Transaction       `protobuf:"bytes,1,opt,name=tx,proto3" json:"tx,omitempty"`                                                                          // transaction
+	TxResult *TransactionResult `protobuf:"bytes,2,opt,name=tx_result,json=txResult,proto3" json:"tx_result,omitempty"`                                              // optional transaction result
+	TxState  *TransactionState  `protobuf:"varint,3,opt,name=tx_state,json=txState,proto3,enum=spacemesh.v2alpha1.TransactionState,oneof" json:"tx_state,omitempty"` // optional transaction state
 }
 
 func (x *TransactionResponse) Reset() {
@@ -1178,7 +1178,7 @@ type TransactionList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Transactions []*TransactionResponse `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	Transactions []*TransactionResponse `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"` // list of transactions
 }
 
 func (x *TransactionList) Reset() {
@@ -1281,7 +1281,7 @@ type ParseTransactionResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	Status *status.Status `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	Tx     *Transaction   `protobuf:"bytes,2,opt,name=tx,proto3" json:"tx,omitempty"`
+	Tx     *Transaction   `protobuf:"bytes,2,opt,name=tx,proto3" json:"tx,omitempty"` // parsed transaction
 }
 
 func (x *ParseTransactionResponse) Reset() {
@@ -1383,7 +1383,7 @@ type SubmitTransactionResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	Status *status.Status `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	TxId   []byte         `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
+	TxId   []byte         `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"` // transaction ID
 }
 
 func (x *SubmitTransactionResponse) Reset() {
@@ -1485,7 +1485,7 @@ type EstimateGasResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	Status            *status.Status `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	RecommendedMaxGas uint64         `protobuf:"varint,2,opt,name=recommended_max_gas,json=recommendedMaxGas,proto3" json:"recommended_max_gas,omitempty"`
+	RecommendedMaxGas uint64         `protobuf:"varint,2,opt,name=recommended_max_gas,json=recommendedMaxGas,proto3" json:"recommended_max_gas,omitempty"` // recommended max gas
 }
 
 func (x *EstimateGasResponse) Reset() {

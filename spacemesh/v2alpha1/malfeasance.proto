@@ -33,12 +33,16 @@ message MalfeasanceRequest {
 }
 
 message MalfeasanceList {
-    repeated MalfeasanceProof proofs = 1;
+    repeated MalfeasanceProof proofs = 1; // list of malfeasance proofs
 }
 
 service MalfeasanceService {
     option (google.api.api_visibility).restriction = "V2";
 
+    // List
+    //
+    // List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+    // This method is used to retrieve a list of malfeasance proofs based on the provided request parameters.
     rpc List(MalfeasanceRequest) returns (MalfeasanceList);
 }
 

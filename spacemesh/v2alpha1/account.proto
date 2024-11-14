@@ -19,17 +19,21 @@ message AccountState {
 }
 
 message AccountRequest {
-  repeated string addresses = 1;
+  repeated string addresses = 1; // list of account addresses
   uint64 offset = 2; // adjusts the starting point for data
   uint64 limit = 3; // specifies max number of items to fetch// bech32 format including HRP
 };
 
 message AccountList {
-  repeated Account accounts = 1;
+  repeated Account accounts = 1; // list of accounts
 }
 
 service AccountService {
   option (google.api.api_visibility).restriction = "V2";
 
+  // List
+  //
+  // List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve a list of accounts based on the provided request parameters.
   rpc List(AccountRequest) returns (AccountList);
 }

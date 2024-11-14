@@ -26,6 +26,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NetworkServiceClient interface {
+	// Info
+	//
+	// Info is a method that returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve network information.
 	Info(ctx context.Context, in *NetworkInfoRequest, opts ...grpc.CallOption) (*NetworkInfoResponse, error)
 }
 
@@ -50,6 +54,10 @@ func (c *networkServiceClient) Info(ctx context.Context, in *NetworkInfoRequest,
 // All implementations should embed UnimplementedNetworkServiceServer
 // for forward compatibility
 type NetworkServiceServer interface {
+	// Info
+	//
+	// Info is a method that returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve network information.
 	Info(context.Context, *NetworkInfoRequest) (*NetworkInfoResponse, error)
 }
 

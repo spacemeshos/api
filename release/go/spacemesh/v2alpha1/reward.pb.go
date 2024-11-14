@@ -105,8 +105,8 @@ type RewardRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StartLayer uint32 `protobuf:"varint,1,opt,name=start_layer,json=startLayer,proto3" json:"start_layer,omitempty"`
-	EndLayer   uint32 `protobuf:"varint,2,opt,name=end_layer,json=endLayer,proto3" json:"end_layer,omitempty"`
+	StartLayer uint32 `protobuf:"varint,1,opt,name=start_layer,json=startLayer,proto3" json:"start_layer,omitempty"` // starting layer for the query
+	EndLayer   uint32 `protobuf:"varint,2,opt,name=end_layer,json=endLayer,proto3" json:"end_layer,omitempty"`       // ending layer for the query
 	// Types that are assignable to FilterBy:
 	//
 	//	*RewardRequest_Coinbase
@@ -210,11 +210,11 @@ type isRewardRequest_FilterBy interface {
 }
 
 type RewardRequest_Coinbase struct {
-	Coinbase string `protobuf:"bytes,3,opt,name=coinbase,proto3,oneof"`
+	Coinbase string `protobuf:"bytes,3,opt,name=coinbase,proto3,oneof"` // filter by coinbase
 }
 
 type RewardRequest_Smesher struct {
-	Smesher []byte `protobuf:"bytes,4,opt,name=smesher,proto3,oneof"`
+	Smesher []byte `protobuf:"bytes,4,opt,name=smesher,proto3,oneof"` // filter by smesher
 }
 
 func (*RewardRequest_Coinbase) isRewardRequest_FilterBy() {}
@@ -226,7 +226,7 @@ type RewardList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Rewards []*Reward `protobuf:"bytes,1,rep,name=rewards,proto3" json:"rewards,omitempty"`
+	Rewards []*Reward `protobuf:"bytes,1,rep,name=rewards,proto3" json:"rewards,omitempty"` // list of rewards
 }
 
 func (x *RewardList) Reset() {

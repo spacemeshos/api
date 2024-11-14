@@ -29,3 +29,4 @@ plugins:
       - allow_merge
       - visibility_restriction_selectors=V2
       - merge_file_name=api
+      - use_go_templates=true

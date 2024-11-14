@@ -26,6 +26,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NodeServiceClient interface {
+	// Status
+	//
+	// Status is a method that returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve node status information.
 	Status(ctx context.Context, in *NodeStatusRequest, opts ...grpc.CallOption) (*NodeStatusResponse, error)
 }
 
@@ -50,6 +54,10 @@ func (c *nodeServiceClient) Status(ctx context.Context, in *NodeStatusRequest, o
 // All implementations should embed UnimplementedNodeServiceServer
 // for forward compatibility
 type NodeServiceServer interface {
+	// Status
+	//
+	// Status is a method that returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve node status information.
 	Status(context.Context, *NodeStatusRequest) (*NodeStatusResponse, error)
 }
 
