@@ -8,7 +8,7 @@ package spacemesh.v2alpha1;
 
 message IdentityStatesRequest {}
 
-enum IdentityStatus {
+enum IdentityState {
   UNSPECIFIED = 0;
 
   WAIT_FOR_ATX_SYNCING = 1;
@@ -30,42 +30,16 @@ enum IdentityStatus {
   ATX_BROADCASTED = 14;
 }
 
-
-//enum RegistrationStatus {
-//  UNKNOWN = 0;
-//  SUCCESS_REG = 1;
-//  FAILED_REG = 2;
-//  RESIDUAL_REG = 3;
-//  NO_REG = 4;
-//}
-
-//type IdentityStateInfo struct {
-//	Date string
-//}
-//
-//type IdentityInfo struct {
-//	States map[IdentityState]IdentityStateInfo
-//}
-//
-//type IdentityStateStorage struct {
-//	mu     sync.RWMutex
-//	states map[types.NodeID]*IdentityInfo
-//}
-message IdentityStateEpoch {
-  uint32 epoch = 1;
-  repeated IdentityState states = 2;
-}
-
-message IdentityState {
-  IdentityStatus state = 1;
-  google.protobuf.Timestamp time = 2;
+message IdentityStateInfo {
+  IdentityState state = 1;
+  uint32 publish_epoch = 2;
   string message = 3;
+  google.protobuf.Timestamp time = 4;
 }
 
 message Identity {
   bytes smesher_id = 1;
-  repeated IdentityStateEpoch epochs = 2;
-  repeated IdentityState states = 3;
+  repeated IdentityStateInfo history = 2;
 }
 
 message IdentityStatesResponse {

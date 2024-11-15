@@ -1120,75 +1120,20 @@
     "v2alpha1Identity": {
       "type": "object",
       "properties": {
-        "epochs": {
+        "history": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v2alpha1IdentityStateEpoch"
+            "$ref": "#/definitions/v2alpha1IdentityStateInfo"
           }
         },
         "smesherId": {
           "type": "string",
           "format": "byte"
-        },
-        "states": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1IdentityState"
-          }
         }
       }
     },
     "v2alpha1IdentityState": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        },
-        "state": {
-          "$ref": "#/definitions/v2alpha1IdentityStatus"
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "v2alpha1IdentityStateEpoch": {
-      "description": "type IdentityInfo struct {\n\tStates map[IdentityState]IdentityStateInfo\n}\n\ntype IdentityStateStorage struct {\n\tmu     sync.RWMutex\n\tstates map[types.NodeID]*IdentityInfo\n}",
-      "type": "object",
-      "title": "type IdentityStateInfo struct {\n\tDate string\n}",
-      "properties": {
-        "epoch": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "states": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1IdentityState"
-          }
-        }
-      }
-    },
-    "v2alpha1IdentityStatesRequest": {
-      "type": "object"
-    },
-    "v2alpha1IdentityStatesResponse": {
-      "type": "object",
-      "properties": {
-        "identities": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1Identity"
-          }
-        }
-      }
-    },
-    "v2alpha1IdentityStatus": {
       "type": "string",
       "default": "UNSPECIFIED",
       "enum": [
@@ -1208,6 +1153,40 @@
         "ATX_READY",
         "ATX_BROADCASTED"
       ]
+    },
+    "v2alpha1IdentityStateInfo": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "publishEpoch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "state": {
+          "$ref": "#/definitions/v2alpha1IdentityState"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v2alpha1IdentityStatesRequest": {
+      "type": "object"
+    },
+    "v2alpha1IdentityStatesResponse": {
+      "type": "object",
+      "properties": {
+        "identities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1Identity"
+          }
+        }
+      }
     },
     "v2alpha1LayerList": {
       "type": "object",
