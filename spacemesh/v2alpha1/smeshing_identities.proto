@@ -11,7 +11,7 @@ message IdentityStatesRequest {}
 enum IdentityState {
   UNSPECIFIED = 0;
 
-  WAIT_FOR_ATX_SYNCING = 1;
+  WAIT_FOR_ATX_SYNCED = 1;
 
   WAITING_FOR_POET_REGISTRATION_WINDOW = 2;
   POET_CHALLENGE_READY = 3;
