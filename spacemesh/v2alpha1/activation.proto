@@ -30,30 +30,39 @@ service ActivationStreamService {
 }
 
 message ActivationRequest {
-  uint32 start_epoch = 1; // Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.
-  uint32 end_epoch = 2;
-  repeated bytes id = 3;
-  repeated bytes smesher_id = 4;
+  uint32 start_epoch = 1; // starting epoch for the query
+  uint32 end_epoch = 2; // ending epoch for the query
+  repeated bytes id = 3; // list of activation IDs
+  repeated bytes smesher_id = 4; // list of smesher IDs
   string coinbase = 5; // `coinbase` filter is not supported by database index and will result in sequential scan.
-  uint64 offset = 6;
-  uint64 limit = 7;
+  uint64 offset = 6; // adjusts the starting point for data
+  uint64 limit = 7; // specifies max number of items to fetch
 }
 
 message ActivationList {
-  repeated Activation activations = 1;
+  repeated Activation activations = 1; // list of activations
 }
 
 message ActivationsCountRequest {
-  optional uint32 epoch = 1;
+  optional uint32 epoch = 1; // epoch number
 }
 
 message ActivationsCountResponse {
-  uint32 count = 1;
+  uint32 count = 1; // number of activations for the specified epoch
 }
 
 service ActivationService {
   option (google.api.api_visibility).restriction = "V2";
 
+  // List of activations
+  //
+  // List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve a list of activations based on the provided request parameters.
   rpc List(ActivationRequest) returns (ActivationList);
+
+  // Count of activations
+  //
+  // ActivationsCount is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve the count of activations for a specified epoch.
   rpc ActivationsCount(ActivationsCountRequest) returns (ActivationsCountResponse);
 }

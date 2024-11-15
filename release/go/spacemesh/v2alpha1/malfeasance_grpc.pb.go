@@ -26,6 +26,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MalfeasanceServiceClient interface {
+	// List of malfeasance proofs
+	//
+	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve a list of malfeasance proofs based on the provided request parameters.
 	List(ctx context.Context, in *MalfeasanceRequest, opts ...grpc.CallOption) (*MalfeasanceList, error)
 }
 
@@ -50,6 +54,10 @@ func (c *malfeasanceServiceClient) List(ctx context.Context, in *MalfeasanceRequ
 // All implementations should embed UnimplementedMalfeasanceServiceServer
 // for forward compatibility
 type MalfeasanceServiceServer interface {
+	// List of malfeasance proofs
+	//
+	// List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve a list of malfeasance proofs based on the provided request parameters.
 	List(context.Context, *MalfeasanceRequest) (*MalfeasanceList, error)
 }
 

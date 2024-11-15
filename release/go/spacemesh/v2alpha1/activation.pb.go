@@ -208,13 +208,13 @@ type ActivationRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StartEpoch uint32   `protobuf:"varint,1,opt,name=start_epoch,json=startEpoch,proto3" json:"start_epoch,omitempty"` // Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.
-	EndEpoch   uint32   `protobuf:"varint,2,opt,name=end_epoch,json=endEpoch,proto3" json:"end_epoch,omitempty"`
-	Id         [][]byte `protobuf:"bytes,3,rep,name=id,proto3" json:"id,omitempty"`
-	SmesherId  [][]byte `protobuf:"bytes,4,rep,name=smesher_id,json=smesherId,proto3" json:"smesher_id,omitempty"`
-	Coinbase   string   `protobuf:"bytes,5,opt,name=coinbase,proto3" json:"coinbase,omitempty"` // `coinbase` filter is not supported by database index and will result in sequential scan.
-	Offset     uint64   `protobuf:"varint,6,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit      uint64   `protobuf:"varint,7,opt,name=limit,proto3" json:"limit,omitempty"`
+	StartEpoch uint32   `protobuf:"varint,1,opt,name=start_epoch,json=startEpoch,proto3" json:"start_epoch,omitempty"` // starting epoch for the query
+	EndEpoch   uint32   `protobuf:"varint,2,opt,name=end_epoch,json=endEpoch,proto3" json:"end_epoch,omitempty"`       // ending epoch for the query
+	Id         [][]byte `protobuf:"bytes,3,rep,name=id,proto3" json:"id,omitempty"`                                    // list of activation IDs
+	SmesherId  [][]byte `protobuf:"bytes,4,rep,name=smesher_id,json=smesherId,proto3" json:"smesher_id,omitempty"`     // list of smesher IDs
+	Coinbase   string   `protobuf:"bytes,5,opt,name=coinbase,proto3" json:"coinbase,omitempty"`                        // `coinbase` filter is not supported by database index and will result in sequential scan.
+	Offset     uint64   `protobuf:"varint,6,opt,name=offset,proto3" json:"offset,omitempty"`                           // adjusts the starting point for data
+	Limit      uint64   `protobuf:"varint,7,opt,name=limit,proto3" json:"limit,omitempty"`                             // specifies max number of items to fetch
 }
 
 func (x *ActivationRequest) Reset() {
@@ -303,7 +303,7 @@ type ActivationList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Activations []*Activation `protobuf:"bytes,1,rep,name=activations,proto3" json:"activations,omitempty"`
+	Activations []*Activation `protobuf:"bytes,1,rep,name=activations,proto3" json:"activations,omitempty"` // list of activations
 }
 
 func (x *ActivationList) Reset() {
@@ -350,7 +350,7 @@ type ActivationsCountRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Epoch *uint32 `protobuf:"varint,1,opt,name=epoch,proto3,oneof" json:"epoch,omitempty"`
+	Epoch *uint32 `protobuf:"varint,1,opt,name=epoch,proto3,oneof" json:"epoch,omitempty"` // epoch number
 }
 
 func (x *ActivationsCountRequest) Reset() {
@@ -397,7 +397,7 @@ type ActivationsCountResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Count uint32 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Count uint32 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"` // number of activations for the specified epoch
 }
 
 func (x *ActivationsCountResponse) Reset() {

@@ -12,7 +12,7 @@ message NodeStatusResponse {
     SYNC_STATUS_SYNCING = 2;
     SYNC_STATUS_SYNCED = 3;
   }
-  SyncStatus status = 2;
+  SyncStatus status = 2; // node sync status
   uint32 latest_layer = 3; // latest layer node has seen from blocks
   uint32 applied_layer = 4; // last layer node has applied to the state
   uint32 processed_layer = 5; // last layer whose votes have been processed
@@ -24,5 +24,9 @@ message NodeStatusRequest {}
 service NodeService {
   option (google.api.api_visibility).restriction = "V2";
 
+  // Node status
+  //
+  // Status is a method that returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve node status information.
   rpc Status(NodeStatusRequest) returns (NodeStatusResponse);
 }

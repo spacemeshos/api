@@ -34,7 +34,7 @@ type NetworkInfoResponse struct {
 	Hrp                   string                 `protobuf:"bytes,5,opt,name=hrp,proto3" json:"hrp,omitempty"`
 	EffectiveGenesisLayer uint32                 `protobuf:"varint,6,opt,name=effective_genesis_layer,json=effectiveGenesisLayer,proto3" json:"effective_genesis_layer,omitempty"` // effective genesis layer, i.e., first layer after genesis initialization period
 	LayersPerEpoch        uint32                 `protobuf:"varint,7,opt,name=layers_per_epoch,json=layersPerEpoch,proto3" json:"layers_per_epoch,omitempty"`                      // number of layers per epoch
-	LabelsPerUnit         uint64                 `protobuf:"varint,8,opt,name=labels_per_unit,json=labelsPerUnit,proto3" json:"labels_per_unit,omitempty"`
+	LabelsPerUnit         uint64                 `protobuf:"varint,8,opt,name=labels_per_unit,json=labelsPerUnit,proto3" json:"labels_per_unit,omitempty"`                         // number of labels per unit
 }
 
 func (x *NetworkInfoResponse) Reset() {

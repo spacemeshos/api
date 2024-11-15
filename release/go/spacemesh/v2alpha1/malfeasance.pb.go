@@ -213,7 +213,7 @@ type MalfeasanceList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Proofs []*MalfeasanceProof `protobuf:"bytes,1,rep,name=proofs,proto3" json:"proofs,omitempty"`
+	Proofs []*MalfeasanceProof `protobuf:"bytes,1,rep,name=proofs,proto3" json:"proofs,omitempty"` // list of malfeasance proofs
 }
 
 func (x *MalfeasanceList) Reset() {

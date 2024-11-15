@@ -78,12 +78,12 @@ type NodeStatusResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ConnectedPeers uint64                        `protobuf:"varint,1,opt,name=connected_peers,json=connectedPeers,proto3" json:"connected_peers,omitempty"` // number of connected neighbors
-	Status         NodeStatusResponse_SyncStatus `protobuf:"varint,2,opt,name=status,proto3,enum=spacemesh.v2alpha1.NodeStatusResponse_SyncStatus" json:"status,omitempty"`
-	LatestLayer    uint32                        `protobuf:"varint,3,opt,name=latest_layer,json=latestLayer,proto3" json:"latest_layer,omitempty"`          // latest layer node has seen from blocks
-	AppliedLayer   uint32                        `protobuf:"varint,4,opt,name=applied_layer,json=appliedLayer,proto3" json:"applied_layer,omitempty"`       // last layer node has applied to the state
-	ProcessedLayer uint32                        `protobuf:"varint,5,opt,name=processed_layer,json=processedLayer,proto3" json:"processed_layer,omitempty"` // last layer whose votes have been processed
-	CurrentLayer   uint32                        `protobuf:"varint,6,opt,name=current_layer,json=currentLayer,proto3" json:"current_layer,omitempty"`       // current layer, based on clock time
+	ConnectedPeers uint64                        `protobuf:"varint,1,opt,name=connected_peers,json=connectedPeers,proto3" json:"connected_peers,omitempty"`                 // number of connected neighbors
+	Status         NodeStatusResponse_SyncStatus `protobuf:"varint,2,opt,name=status,proto3,enum=spacemesh.v2alpha1.NodeStatusResponse_SyncStatus" json:"status,omitempty"` // node sync status
+	LatestLayer    uint32                        `protobuf:"varint,3,opt,name=latest_layer,json=latestLayer,proto3" json:"latest_layer,omitempty"`                          // latest layer node has seen from blocks
+	AppliedLayer   uint32                        `protobuf:"varint,4,opt,name=applied_layer,json=appliedLayer,proto3" json:"applied_layer,omitempty"`                       // last layer node has applied to the state
+	ProcessedLayer uint32                        `protobuf:"varint,5,opt,name=processed_layer,json=processedLayer,proto3" json:"processed_layer,omitempty"`                 // last layer whose votes have been processed
+	CurrentLayer   uint32                        `protobuf:"varint,6,opt,name=current_layer,json=currentLayer,proto3" json:"current_layer,omitempty"`                       // current layer, based on clock time
 }
 
 func (x *NodeStatusResponse) Reset() {

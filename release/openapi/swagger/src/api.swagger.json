@@ -25,9 +25,11 @@
   "paths": {
     "/spacemesh.v2alpha1.AccountService/List": {
       "post": {
+        "description": "List is a method that takes an \"AccountRequest\" body and returns an \"AccountList\".\nThis method is used to retrieve a list of accounts based on the provided request parameters.",
         "tags": [
           "AccountService"
         ],
+        "summary": "List of accounts",
         "operationId": "AccountService_List",
         "parameters": [
           {
@@ -57,9 +59,11 @@
     },
     "/spacemesh.v2alpha1.ActivationService/ActivationsCount": {
       "post": {
+        "description": "ActivationsCount is a method that takes an \"ActivationsCountRequest\" body and returns an \"ActivationsCountResponse\".\nThis method is used to retrieve the count of activations for a specified epoch.",
         "tags": [
           "ActivationService"
         ],
+        "summary": "Count of activations",
         "operationId": "ActivationService_ActivationsCount",
         "parameters": [
           {
@@ -89,9 +93,11 @@
     },
     "/spacemesh.v2alpha1.ActivationService/List": {
       "post": {
+        "description": "List is a method that takes an \"ActivationRequest\" body and returns an \"ActivationList\".\nThis method is used to retrieve a list of activations based on the provided request parameters.",
         "tags": [
           "ActivationService"
         ],
+        "summary": "List of activations",
         "operationId": "ActivationService_List",
         "parameters": [
           {
@@ -121,9 +127,11 @@
     },
     "/spacemesh.v2alpha1.LayerService/List": {
       "post": {
+        "description": "List is a method that takes a \"LayerRequest\" body and returns an \"LayerList\".\nThis method is used to retrieve a list of layers based on the provided request parameters.",
         "tags": [
           "LayerService"
         ],
+        "summary": "List of layers",
         "operationId": "LayerService_List",
         "parameters": [
           {
@@ -153,9 +161,11 @@
     },
     "/spacemesh.v2alpha1.MalfeasanceService/List": {
       "post": {
+        "description": "List is a method that takes a \"MalfeasanceRequest\" body and returns an \"MalfeasanceList\".\nThis method is used to retrieve a list of malfeasance proofs based on the provided request parameters.",
         "tags": [
           "MalfeasanceService"
         ],
+        "summary": "List of malfeasance proofs",
         "operationId": "MalfeasanceService_List",
         "parameters": [
           {
@@ -185,9 +195,11 @@
     },
     "/spacemesh.v2alpha1.NetworkService/Info": {
       "post": {
+        "description": "Info is a method that returns an \"NetworkInfoResponse\".\nThis method is used to retrieve network information.",
         "tags": [
           "NetworkService"
         ],
+        "summary": "Network information",
         "operationId": "NetworkService_Info",
         "parameters": [
           {
@@ -217,9 +229,11 @@
     },
     "/spacemesh.v2alpha1.NodeService/Status": {
       "post": {
+        "description": "Status is a method that returns an \"NodeStatusResponse\".\nThis method is used to retrieve node status information.",
         "tags": [
           "NodeService"
         ],
+        "summary": "Node status",
         "operationId": "NodeService_Status",
         "parameters": [
           {
@@ -249,9 +263,11 @@
     },
     "/spacemesh.v2alpha1.RewardService/List": {
       "post": {
+        "description": "List is a method that takes a \"RewardRequest\" body and returns an \"RewardList\".\nThis method is used to retrieve a list of rewards based on the provided request parameters.",
         "tags": [
           "RewardService"
         ],
+        "summary": "List of rewards",
         "operationId": "RewardService_List",
         "parameters": [
           {
@@ -281,9 +297,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/EstimateGas": {
       "post": {
+        "description": "EstimateGas is a method that takes a \"EstimateGasRequest\" body and returns an \"EstimateGasResponse\".\nThis method is used to estimate the recommended maximum gas for a signed binary transaction.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Estimate gas for transaction",
         "operationId": "TransactionService_EstimateGas",
         "parameters": [
           {
@@ -313,9 +331,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/List": {
       "post": {
+        "description": "List is a method that takes a \"TransactionRequest\" body and returns an \"TransactionList\".\nThis method is used to retrieve a list of transactions based on the provided request parameters.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "List of transactions",
         "operationId": "TransactionService_List",
         "parameters": [
           {
@@ -345,9 +365,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/ParseTransaction": {
       "post": {
+        "description": "ParseTransaction is a method that takes a \"ParseTransactionRequest\" body and returns an \"ParseTransactionResponse\".\nThis method is used to parse a signed binary transaction and optionally verify its signature.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Parse transaction",
         "operationId": "TransactionService_ParseTransaction",
         "parameters": [
           {
@@ -377,9 +399,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/SubmitTransaction": {
       "post": {
+        "description": "SubmitTransaction is a method that takes a \"SubmitTransactionRequest\" body and returns an \"SubmitTransactionResponse\".\nThis method is used to submit a signed binary transaction to the network.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Submit transaction",
         "operationId": "TransactionService_SubmitTransaction",
         "parameters": [
           {
@@ -503,6 +527,7 @@
       "properties": {
         "addresses": {
           "type": "array",
+          "title": "list of account addresses",
           "items": {
             "type": "string"
           }
@@ -692,7 +717,8 @@
         },
         "labelsPerUnit": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of labels per unit"
         },
         "layerDuration": {
           "type": "string",
@@ -735,6 +761,7 @@
           "$ref": "#/definitions/googlerpcStatus"
         },
         "tx": {
+          "title": "parsed transaction",
           "$ref": "#/definitions/spacemeshv2alpha1Transaction"
         }
       }
@@ -786,7 +813,8 @@
         },
         "txId": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "transaction ID"
         }
       }
     },
@@ -846,7 +874,8 @@
       "properties": {
         "block": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "block hash"
         },
         "fee": {
           "type": "string",
@@ -860,16 +889,19 @@
         },
         "layer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "layer number"
         },
         "message": {
           "type": "string"
         },
         "status": {
+          "title": "status of the transaction",
           "$ref": "#/definitions/spacemeshv2alpha1TransactionResultStatus"
         },
         "touchedAddresses": {
           "type": "array",
+          "title": "addresses touched by the tx",
           "items": {
             "type": "string"
           }
@@ -906,6 +938,7 @@
       "properties": {
         "accounts": {
           "type": "array",
+          "title": "list of accounts",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Account"
@@ -918,6 +951,7 @@
       "properties": {
         "activations": {
           "type": "array",
+          "title": "list of activations",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Activation"
@@ -934,10 +968,12 @@
         },
         "endEpoch": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "ending epoch for the query"
         },
         "id": {
           "type": "array",
+          "title": "list of activation IDs",
           "items": {
             "type": "string",
             "format": "byte"
@@ -945,23 +981,26 @@
         },
         "limit": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
         },
         "offset": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
         },
         "smesherId": {
           "type": "array",
+          "title": "list of smesher IDs",
           "items": {
             "type": "string",
             "format": "byte"
           }
         },
         "startEpoch": {
-          "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "starting epoch for the query"
         }
       }
     },
@@ -970,7 +1009,8 @@
       "properties": {
         "epoch": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "epoch number"
         }
       }
     },
@@ -979,7 +1019,8 @@
       "properties": {
         "count": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "number of activations for the specified epoch"
         }
       }
     },
@@ -1078,7 +1119,8 @@
       "properties": {
         "recommendedMaxGas": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "recommended max gas"
         },
         "status": {
           "$ref": "#/definitions/googlerpcStatus"
@@ -1090,6 +1132,7 @@
       "properties": {
         "layers": {
           "type": "array",
+          "title": "list of layers",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Layer"
@@ -1102,7 +1145,8 @@
       "properties": {
         "endLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "ending layer for the query"
         },
         "limit": {
           "type": "string",
@@ -1120,7 +1164,8 @@
         },
         "startLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "starting layer for the query"
         }
       }
     },
@@ -1129,6 +1174,7 @@
       "properties": {
         "proofs": {
           "type": "array",
+          "title": "list of malfeasance proofs",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
@@ -1171,6 +1217,7 @@
           "title": "last layer whose votes have been processed"
         },
         "status": {
+          "title": "node sync status",
           "$ref": "#/definitions/NodeStatusResponseSyncStatus"
         }
       }
@@ -1180,6 +1227,7 @@
       "properties": {
         "rewards": {
           "type": "array",
+          "title": "list of rewards",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Reward"
@@ -1191,11 +1239,13 @@
       "type": "object",
       "properties": {
         "coinbase": {
-          "type": "string"
+          "type": "string",
+          "title": "filter by coinbase"
         },
         "endLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "ending layer for the query"
         },
         "limit": {
           "type": "string",
@@ -1209,7 +1259,8 @@
         },
         "smesher": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "filter by smesher"
         },
         "sortOrder": {
           "title": "specifies the sort order by layer (default is ASC)",
@@ -1217,7 +1268,8 @@
         },
         "startLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "starting layer for the query"
         }
       }
     },
@@ -1257,6 +1309,7 @@
       "properties": {
         "transactions": {
           "type": "array",
+          "title": "list of transactions",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v2alpha1TransactionResponse"
@@ -1317,12 +1370,15 @@
       "type": "object",
       "properties": {
         "tx": {
+          "title": "transaction",
           "$ref": "#/definitions/spacemeshv2alpha1Transaction"
         },
         "txResult": {
+          "title": "optional transaction result",
           "$ref": "#/definitions/spacemeshv2alpha1TransactionResult"
         },
         "txState": {
+          "title": "optional transaction state",
           "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
         }
       }
