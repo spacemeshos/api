@@ -32,7 +32,7 @@ enum IdentityState {
 
 message IdentityStateInfo {
   IdentityState state = 1;
-  uint32 publish_epoch = 2;
+  optional uint32 publish_epoch = 2;
   string message = 3;
   google.protobuf.Timestamp time = 4;
 }
