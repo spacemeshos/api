@@ -40,7 +40,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SmesherServiceClient interface {
-	// Returns true if node is currently smeshing
+	// Returns true iff node is currently smeshing
 	IsSmeshing(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*IsSmeshingResponse, error)
 	// Starts smeshing, after completing the post setup.
 	// Changing of the post setup options (e.g., number of units), after initial setup, is supported.
@@ -239,7 +239,7 @@ func (c *smesherServiceClient) PostConfig(ctx context.Context, in *emptypb.Empty
 // All implementations should embed UnimplementedSmesherServiceServer
 // for forward compatibility
 type SmesherServiceServer interface {
-	// Returns true if node is currently smeshing
+	// Returns true iff node is currently smeshing
 	IsSmeshing(context.Context, *emptypb.Empty) (*IsSmeshingResponse, error)
 	// Starts smeshing, after completing the post setup.
 	// Changing of the post setup options (e.g., number of units), after initial setup, is supported.

@@ -46,7 +46,5 @@ message IdentityStatesResponse {
 service SmeshingIdentitiesService {
   option (google.api.api_visibility).restriction = "V2";
 
-  // Returns set of configured poet addresses and poets addresses from registrations, if given,
-  // and warning in case, if there are registrations with poets, which are not in configured poets set.
   rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {}
 }

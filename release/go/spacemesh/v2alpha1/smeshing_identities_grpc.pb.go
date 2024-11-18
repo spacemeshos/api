@@ -26,8 +26,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SmeshingIdentitiesServiceClient interface {
-	// Returns set of configured poet addresses and poets addresses from registrations, if given,
-	// and warning in case, if there are registrations with poets, which are not in configured poets set.
 	States(ctx context.Context, in *IdentityStatesRequest, opts ...grpc.CallOption) (*IdentityStatesResponse, error)
 }
 
@@ -52,8 +50,6 @@ func (c *smeshingIdentitiesServiceClient) States(ctx context.Context, in *Identi
 // All implementations should embed UnimplementedSmeshingIdentitiesServiceServer
 // for forward compatibility
 type SmeshingIdentitiesServiceServer interface {
-	// Returns set of configured poet addresses and poets addresses from registrations, if given,
-	// and warning in case, if there are registrations with poets, which are not in configured poets set.
 	States(context.Context, *IdentityStatesRequest) (*IdentityStatesResponse, error)
 }
 
