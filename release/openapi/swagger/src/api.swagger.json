@@ -1125,10 +1125,6 @@
             "type": "object",
             "$ref": "#/definitions/v2alpha1IdentityStateInfo"
           }
-        },
-        "smesherId": {
-          "type": "string",
-          "format": "byte"
         }
       }
     },
@@ -1176,9 +1172,8 @@
       "type": "object",
       "properties": {
         "identities": {
-          "type": "array",
-          "items": {
-            "type": "object",
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/v2alpha1Identity"
           }
         }

@@ -35,12 +35,11 @@ message IdentityStateInfo {
 }
 
 message Identity {
-  bytes smesher_id = 1;
-  repeated IdentityStateInfo history = 2;
+  repeated IdentityStateInfo history = 1;
 }
 
 message IdentityStatesResponse {
-  repeated Identity identities = 3;
+  map<string, Identity> identities = 1;
 }
 
 service SmeshingIdentitiesService {
