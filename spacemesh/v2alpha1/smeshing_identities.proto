@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-import "google/api/visibility.proto";
-import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
-
 package spacemesh.v2alpha1;
+
+import "google/api/annotations.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/timestamp.proto";
 
 message IdentityStatesRequest {}
 
@@ -12,22 +12,19 @@ enum IdentityState {
   UNSPECIFIED = 0;
 
   WAIT_FOR_ATX_SYNCED = 1;
+  RETRYING = 2;
 
-  WAITING_FOR_POET_REGISTRATION_WINDOW = 2;
-  POET_CHALLENGE_READY = 3;
-  POET_REGISTERED = 4;
-  POET_REGISTRATION_FAILED = 5;
+  WAITING_FOR_POET_REGISTRATION_WINDOW = 3;
+  POET_CHALLENGE_READY = 4;
+  POET_REGISTERED = 5;
   WAIT_FOR_POET_ROUND_END = 6;
   POET_PROOF_RECEIVED = 7;
-  POET_PROOF_FAILED = 8;
 
-  GENERATING_POST_PROOF = 9;
-  POST_PROOF_READY = 10;
-  POST_PROOF_FAILED = 11;
+  GENERATING_POST_PROOF = 8;
+  POST_PROOF_READY = 9;
 
-  ATX_EXPIRED = 12;
-  ATX_READY = 13;
-  ATX_BROADCASTED = 14;
+  ATX_READY = 10;
+  ATX_BROADCASTED = 11;
 }
 
 message IdentityStateInfo {
@@ -43,7 +40,7 @@ message Identity {
 }
 
 message IdentityStatesResponse {
-    repeated Identity identities = 3;
+  repeated Identity identities = 3;
 }
 
 service SmeshingIdentitiesService {
@@ -51,5 +48,5 @@ service SmeshingIdentitiesService {
 
   // Returns set of configured poet addresses and poets addresses from registrations, if given,
   // and warning in case, if there are registrations with poets, which are not in configured poets set.
-  rpc States (IdentityStatesRequest) returns (IdentityStatesResponse){}
+  rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {}
 }

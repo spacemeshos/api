@@ -1139,17 +1139,14 @@
       "enum": [
         "UNSPECIFIED",
         "WAIT_FOR_ATX_SYNCED",
+        "RETRYING",
         "WAITING_FOR_POET_REGISTRATION_WINDOW",
         "POET_CHALLENGE_READY",
         "POET_REGISTERED",
-        "POET_REGISTRATION_FAILED",
         "WAIT_FOR_POET_ROUND_END",
         "POET_PROOF_RECEIVED",
-        "POET_PROOF_FAILED",
         "GENERATING_POST_PROOF",
         "POST_PROOF_READY",
-        "POST_PROOF_FAILED",
-        "ATX_EXPIRED",
         "ATX_READY",
         "ATX_BROADCASTED"
       ]
