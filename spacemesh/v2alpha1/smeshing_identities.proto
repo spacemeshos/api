@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package spacemesh.v2alpha1;
+
+import "google/api/annotations.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/timestamp.proto";
+
+message IdentityStatesRequest {}
+
+enum IdentityState {
+  UNSPECIFIED = 0;
+
+  WAIT_FOR_ATX_SYNCED = 1;
+  RETRYING = 2;
+
+  WAITING_FOR_POET_REGISTRATION_WINDOW = 3;
+  POET_CHALLENGE_READY = 4;
+  POET_REGISTERED = 5;
+  WAIT_FOR_POET_ROUND_END = 6;
+  POET_PROOF_RECEIVED = 7;
+
+  GENERATING_POST_PROOF = 8;
+  POST_PROOF_READY = 9;
+
+  ATX_READY = 10;
+  ATX_BROADCASTED = 11;
+}
+
+message IdentityStateInfo {
+  IdentityState state = 1;
+  optional uint32 publish_epoch = 2;
+  string message = 3;
+  google.protobuf.Timestamp time = 4;
+}
+
+message Identity {
+  repeated IdentityStateInfo history = 1;
+}
+
+message IdentityStatesResponse {
+  map<string, Identity> identities = 1;
+}
+
+service SmeshingIdentitiesService {
+  option (google.api.api_visibility).restriction = "V2";
+
+  rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {}
+}

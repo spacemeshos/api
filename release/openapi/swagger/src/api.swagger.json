@@ -295,6 +295,38 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.SmeshingIdentitiesService/States": {
+      "post": {
+        "tags": [
+          "SmeshingIdentitiesService"
+        ],
+        "operationId": "SmeshingIdentitiesService_States",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1IdentityStatesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1IdentityStatesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.TransactionService/EstimateGas": {
       "post": {
         "description": "EstimateGas is a method that takes a \"EstimateGasRequest\" body and returns an \"EstimateGasResponse\".\nThis method is used to estimate the recommended maximum gas for a signed binary transaction.",
@@ -1127,6 +1159,69 @@
         }
       }
     },
+    "v2alpha1Identity": {
+      "type": "object",
+      "properties": {
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1IdentityStateInfo"
+          }
+        }
+      }
+    },
+    "v2alpha1IdentityState": {
+      "type": "string",
+      "default": "UNSPECIFIED",
+      "enum": [
+        "UNSPECIFIED",
+        "WAIT_FOR_ATX_SYNCED",
+        "RETRYING",
+        "WAITING_FOR_POET_REGISTRATION_WINDOW",
+        "POET_CHALLENGE_READY",
+        "POET_REGISTERED",
+        "WAIT_FOR_POET_ROUND_END",
+        "POET_PROOF_RECEIVED",
+        "GENERATING_POST_PROOF",
+        "POST_PROOF_READY",
+        "ATX_READY",
+        "ATX_BROADCASTED"
+      ]
+    },
+    "v2alpha1IdentityStateInfo": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "publishEpoch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "state": {
+          "$ref": "#/definitions/v2alpha1IdentityState"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v2alpha1IdentityStatesRequest": {
+      "type": "object"
+    },
+    "v2alpha1IdentityStatesResponse": {
+      "type": "object",
+      "properties": {
+        "identities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v2alpha1Identity"
+          }
+        }
+      }
+    },
     "v2alpha1LayerList": {
       "type": "object",
       "properties": {
@@ -1408,6 +1503,9 @@
     },
     {
       "name": "RewardService"
+    },
+    {
+      "name": "SmeshingIdentitiesService"
     }
   ]
 }
