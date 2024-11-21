@@ -5,6 +5,7 @@ package spacemesh.v2alpha1;
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 message IdentityStatesRequest {}
 
@@ -42,8 +43,16 @@ message IdentityStatesResponse {
   map<string, Identity> identities = 1;
 }
 
+message PoetInfoRequest {}
+message PoetInfoResponse {
+  google.protobuf.Duration phase_shift = 4;
+  google.protobuf.Duration cycle_gap = 5;
+}
+
 service SmeshingIdentitiesService {
   option (google.api.api_visibility).restriction = "V2";
 
   rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {}
+
+  rpc PoetInfo(PoetInfoRequest) returns (PoetInfoResponse) {}
 }
