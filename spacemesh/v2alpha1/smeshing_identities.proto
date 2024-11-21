@@ -43,10 +43,16 @@ message IdentityStatesResponse {
   map<string, Identity> identities = 1;
 }
 
+// PoetInfo rpc
 message PoetInfoRequest {}
+
+message PoetInfo {
+  google.protobuf.Duration phase_shift = 1;
+  google.protobuf.Duration cycle_gap = 2;
+}
+
 message PoetInfoResponse {
-  google.protobuf.Duration phase_shift = 4;
-  google.protobuf.Duration cycle_gap = 5;
+  map<string, PoetInfo> poets = 1;
 }
 
 service SmeshingIdentitiesService {

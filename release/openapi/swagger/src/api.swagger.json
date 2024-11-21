@@ -830,6 +830,17 @@
         }
       }
     },
+    "spacemeshv2alpha1PoetInfo": {
+      "type": "object",
+      "properties": {
+        "cycleGap": {
+          "type": "string"
+        },
+        "phaseShift": {
+          "type": "string"
+        }
+      }
+    },
     "spacemeshv2alpha1Reward": {
       "type": "object",
       "properties": {
@@ -1350,16 +1361,17 @@
       }
     },
     "v2alpha1PoetInfoRequest": {
-      "type": "object"
+      "type": "object",
+      "title": "PoetInfo rpc"
     },
     "v2alpha1PoetInfoResponse": {
       "type": "object",
       "properties": {
-        "cycleGap": {
-          "type": "string"
-        },
-        "phaseShift": {
-          "type": "string"
+        "poets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/spacemeshv2alpha1PoetInfo"
+          }
         }
       }
     },
