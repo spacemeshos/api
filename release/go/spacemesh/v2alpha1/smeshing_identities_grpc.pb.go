@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SmeshingIdentitiesService_States_FullMethodName = "/spacemesh.v2alpha1.SmeshingIdentitiesService/States"
+	SmeshingIdentitiesService_States_FullMethodName   = "/spacemesh.v2alpha1.SmeshingIdentitiesService/States"
+	SmeshingIdentitiesService_PoetInfo_FullMethodName = "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo"
 )
 
 // SmeshingIdentitiesServiceClient is the client API for SmeshingIdentitiesService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SmeshingIdentitiesServiceClient interface {
 	States(ctx context.Context, in *IdentityStatesRequest, opts ...grpc.CallOption) (*IdentityStatesResponse, error)
+	PoetInfo(ctx context.Context, in *PoetInfoRequest, opts ...grpc.CallOption) (*PoetInfoResponse, error)
 }
 
 type smeshingIdentitiesServiceClient struct {
@@ -46,11 +48,21 @@ func (c *smeshingIdentitiesServiceClient) States(ctx context.Context, in *Identi
 	return out, nil
 }
 
+func (c *smeshingIdentitiesServiceClient) PoetInfo(ctx context.Context, in *PoetInfoRequest, opts ...grpc.CallOption) (*PoetInfoResponse, error) {
+	out := new(PoetInfoResponse)
+	err := c.cc.Invoke(ctx, SmeshingIdentitiesService_PoetInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SmeshingIdentitiesServiceServer is the server API for SmeshingIdentitiesService service.
 // All implementations should embed UnimplementedSmeshingIdentitiesServiceServer
 // for forward compatibility
 type SmeshingIdentitiesServiceServer interface {
 	States(context.Context, *IdentityStatesRequest) (*IdentityStatesResponse, error)
+	PoetInfo(context.Context, *PoetInfoRequest) (*PoetInfoResponse, error)
 }
 
 // UnimplementedSmeshingIdentitiesServiceServer should be embedded to have forward compatible implementations.
@@ -59,6 +71,9 @@ type UnimplementedSmeshingIdentitiesServiceServer struct {
 
 func (UnimplementedSmeshingIdentitiesServiceServer) States(context.Context, *IdentityStatesRequest) (*IdentityStatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method States not implemented")
+}
+func (UnimplementedSmeshingIdentitiesServiceServer) PoetInfo(context.Context, *PoetInfoRequest) (*PoetInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PoetInfo not implemented")
 }
 
 // UnsafeSmeshingIdentitiesServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -90,6 +105,24 @@ func _SmeshingIdentitiesService_States_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SmeshingIdentitiesService_PoetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PoetInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SmeshingIdentitiesServiceServer).PoetInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SmeshingIdentitiesService_PoetInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SmeshingIdentitiesServiceServer).PoetInfo(ctx, req.(*PoetInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SmeshingIdentitiesService_ServiceDesc is the grpc.ServiceDesc for SmeshingIdentitiesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -100,6 +133,10 @@ var SmeshingIdentitiesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "States",
 			Handler:    _SmeshingIdentitiesService_States_Handler,
+		},
+		{
+			MethodName: "PoetInfo",
+			Handler:    _SmeshingIdentitiesService_PoetInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

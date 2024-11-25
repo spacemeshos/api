@@ -295,6 +295,38 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo": {
+      "post": {
+        "tags": [
+          "SmeshingIdentitiesService"
+        ],
+        "operationId": "SmeshingIdentitiesService_PoetInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PoetInfoRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1PoetInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.SmeshingIdentitiesService/States": {
       "post": {
         "tags": [
@@ -795,6 +827,17 @@
         "tx": {
           "title": "parsed transaction",
           "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+        }
+      }
+    },
+    "spacemeshv2alpha1PoetInfo": {
+      "type": "object",
+      "properties": {
+        "cycleGap": {
+          "type": "string"
+        },
+        "phaseShift": {
+          "type": "string"
         }
       }
     },
@@ -1314,6 +1357,21 @@
         "status": {
           "title": "node sync status",
           "$ref": "#/definitions/NodeStatusResponseSyncStatus"
+        }
+      }
+    },
+    "v2alpha1PoetInfoRequest": {
+      "type": "object",
+      "title": "PoetInfo rpc"
+    },
+    "v2alpha1PoetInfoResponse": {
+      "type": "object",
+      "properties": {
+        "poets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/spacemeshv2alpha1PoetInfo"
+          }
         }
       }
     },
