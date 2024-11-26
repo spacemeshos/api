@@ -4,8 +4,8 @@ package spacemesh.v2alpha1;
 
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
 
 message IdentityStatesRequest {}
 
@@ -26,6 +26,8 @@ enum IdentityState {
 
   ATX_READY = 10;
   ATX_BROADCASTED = 11;
+
+  PROPOSAL_PUBLISHED = 12;
 }
 
 message IdentityStateInfo {
@@ -55,10 +57,45 @@ message PoetInfoResponse {
   map<string, PoetInfo> poets = 1;
 }
 
+// Proposals and eligibilities
+message Eligibilities {
+  repeated ProposalEligibility eligibilities = 5;
+}
+
+message ProposalEligibility {
+  uint32 layer = 1;
+  uint32 count = 2;
+}
+
+message EligibilitiesRequest {}
+
+message EligibilitiesResponse {
+  map<string, Eligibilities> eligibilities = 1;
+}
+
+message ProposalsRequest {}
+
+message Proposal {
+  uint32 layer = 1;
+  bytes proposal = 2;
+}
+
+message Proposals {
+  repeated Proposal proposals = 1;
+}
+
+message ProposalsResponse {
+  map<string, Proposals> proposals = 1;
+}
+
 service SmeshingIdentitiesService {
   option (google.api.api_visibility).restriction = "V2";
 
   rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {}
 
   rpc PoetInfo(PoetInfoRequest) returns (PoetInfoResponse) {}
+
+  rpc Eligibilities(EligibilitiesRequest) returns (EligibilitiesResponse) {}
+
+  rpc Proposals(ProposalsRequest) returns (ProposalsResponse) {}
 }

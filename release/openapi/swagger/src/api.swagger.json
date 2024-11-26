@@ -295,6 +295,38 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.SmeshingIdentitiesService/Eligibilities": {
+      "post": {
+        "tags": [
+          "SmeshingIdentitiesService"
+        ],
+        "operationId": "SmeshingIdentitiesService_Eligibilities",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1EligibilitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1EligibilitiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo": {
       "post": {
         "tags": [
@@ -316,6 +348,38 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v2alpha1PoetInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.SmeshingIdentitiesService/Proposals": {
+      "post": {
+        "tags": [
+          "SmeshingIdentitiesService"
+        ],
+        "operationId": "SmeshingIdentitiesService_Proposals",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1ProposalsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1ProposalsResponse"
             }
           },
           "default": {
@@ -671,6 +735,19 @@
         }
       }
     },
+    "spacemeshv2alpha1Eligibilities": {
+      "type": "object",
+      "title": "Proposals and eligibilities",
+      "properties": {
+        "eligibilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1ProposalEligibility"
+          }
+        }
+      }
+    },
     "spacemeshv2alpha1Layer": {
       "type": "object",
       "properties": {
@@ -838,6 +915,44 @@
         },
         "phaseShift": {
           "type": "string"
+        }
+      }
+    },
+    "spacemeshv2alpha1Proposal": {
+      "type": "object",
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "proposal": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "spacemeshv2alpha1ProposalEligibility": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "spacemeshv2alpha1Proposals": {
+      "type": "object",
+      "properties": {
+        "proposals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Proposal"
+          }
         }
       }
     },
@@ -1179,6 +1294,20 @@
         }
       }
     },
+    "v2alpha1EligibilitiesRequest": {
+      "type": "object"
+    },
+    "v2alpha1EligibilitiesResponse": {
+      "type": "object",
+      "properties": {
+        "eligibilities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/spacemeshv2alpha1Eligibilities"
+          }
+        }
+      }
+    },
     "v2alpha1EstimateGasRequest": {
       "type": "object",
       "properties": {
@@ -1229,7 +1358,8 @@
         "GENERATING_POST_PROOF",
         "POST_PROOF_READY",
         "ATX_READY",
-        "ATX_BROADCASTED"
+        "ATX_BROADCASTED",
+        "PROPOSAL_PUBLISHED"
       ]
     },
     "v2alpha1IdentityStateInfo": {
@@ -1371,6 +1501,20 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/spacemeshv2alpha1PoetInfo"
+          }
+        }
+      }
+    },
+    "v2alpha1ProposalsRequest": {
+      "type": "object"
+    },
+    "v2alpha1ProposalsResponse": {
+      "type": "object",
+      "properties": {
+        "proposals": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/spacemeshv2alpha1Proposals"
           }
         }
       }
