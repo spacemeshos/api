@@ -81,7 +81,7 @@ message Proposal {
 }
 
 message Proposals {
-  repeated string proposals = 1;
+  repeated Proposal proposals = 1;
 }
 
 message ProposalsResponse {

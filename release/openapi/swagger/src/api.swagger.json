@@ -918,6 +918,19 @@
         }
       }
     },
+    "spacemeshv2alpha1Proposal": {
+      "type": "object",
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "proposal": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "spacemeshv2alpha1ProposalEligibility": {
       "type": "object",
       "properties": {
@@ -937,7 +950,8 @@
         "proposals": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Proposal"
           }
         }
       }
