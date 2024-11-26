@@ -59,10 +59,6 @@ message PoetInfoResponse {
 
 // Proposals and eligibilities
 message Eligibilities {
-  uint32 epoch = 1;
-  bytes beacon = 2;
-  bytes atx = 3;
-  uint32 active_set_size = 4;
   repeated ProposalEligibility eligibilities = 5;
 }
 
@@ -72,6 +68,7 @@ message ProposalEligibility {
 }
 
 message EligibilitiesRequest {}
+
 message EligibilitiesResponse {
   map<string, Eligibilities> eligibilities = 1;
 }

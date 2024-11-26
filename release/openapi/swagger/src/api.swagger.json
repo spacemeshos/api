@@ -739,28 +739,12 @@
       "type": "object",
       "title": "Proposals and eligibilities",
       "properties": {
-        "activeSetSize": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "atx": {
-          "type": "string",
-          "format": "byte"
-        },
-        "beacon": {
-          "type": "string",
-          "format": "byte"
-        },
         "eligibilities": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1ProposalEligibility"
           }
-        },
-        "epoch": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
