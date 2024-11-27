@@ -1303,6 +1303,17 @@
         "eligibilities": {
           "type": "object",
           "additionalProperties": {
+            "$ref": "#/definitions/v2alpha1EpochEligibilities"
+          }
+        }
+      }
+    },
+    "v2alpha1EpochEligibilities": {
+      "type": "object",
+      "properties": {
+        "epochs": {
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/spacemeshv2alpha1Eligibilities"
           }
         }

@@ -67,10 +67,14 @@ message ProposalEligibility {
   uint32 count = 2;
 }
 
+message EpochEligibilities {
+  map<uint32, Eligibilities> epochs = 1;
+}
+
 message EligibilitiesRequest {}
 
 message EligibilitiesResponse {
-  map<string, Eligibilities> eligibilities = 1;
+  map<string, EpochEligibilities> eligibilities = 1;
 }
 
 message ProposalsRequest {}
