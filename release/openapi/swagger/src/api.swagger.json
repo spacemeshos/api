@@ -907,17 +907,6 @@
         }
       }
     },
-    "spacemeshv2alpha1PoetInfo": {
-      "type": "object",
-      "properties": {
-        "cycleGap": {
-          "type": "string"
-        },
-        "phaseShift": {
-          "type": "string"
-        }
-      }
-    },
     "spacemeshv2alpha1Proposal": {
       "type": "object",
       "properties": {
@@ -1214,6 +1203,18 @@
         }
       }
     },
+    "v2alpha1AtxBroadcastedState": {
+      "type": "object",
+      "properties": {
+        "atxId": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "v2alpha1AtxReadyState": {
+      "type": "object"
+    },
     "v2alpha1ContentsDrainVault": {
       "type": "object",
       "properties": {
@@ -1342,6 +1343,9 @@
         }
       }
     },
+    "v2alpha1GeneratingPostProofState": {
+      "type": "object"
+    },
     "v2alpha1Identity": {
       "type": "object",
       "properties": {
@@ -1376,12 +1380,36 @@
     "v2alpha1IdentityStateInfo": {
       "type": "object",
       "properties": {
-        "message": {
-          "type": "string"
+        "atxBroadcasted": {
+          "$ref": "#/definitions/v2alpha1AtxBroadcastedState"
+        },
+        "atxReady": {
+          "$ref": "#/definitions/v2alpha1AtxReadyState"
+        },
+        "generatingPostProof": {
+          "$ref": "#/definitions/v2alpha1GeneratingPostProofState"
+        },
+        "poetChallengeReady": {
+          "$ref": "#/definitions/v2alpha1PoetChallengeReadyState"
+        },
+        "poetProofReceived": {
+          "$ref": "#/definitions/v2alpha1PoetProofReceivedState"
+        },
+        "poetRegistered": {
+          "$ref": "#/definitions/v2alpha1PoetRegisteredState"
+        },
+        "postProofReady": {
+          "$ref": "#/definitions/v2alpha1PostProofReadyState"
+        },
+        "proposalPublished": {
+          "$ref": "#/definitions/v2alpha1ProposalPublishedState"
         },
         "publishEpoch": {
           "type": "integer",
           "format": "int64"
+        },
+        "retrying": {
+          "$ref": "#/definitions/v2alpha1RetryingState"
         },
         "state": {
           "$ref": "#/definitions/v2alpha1IdentityState"
@@ -1389,6 +1417,15 @@
         "time": {
           "type": "string",
           "format": "date-time"
+        },
+        "waitForAtxSynced": {
+          "$ref": "#/definitions/v2alpha1WaitForAtxSyncedState"
+        },
+        "waitForPoetRoundEnd": {
+          "$ref": "#/definitions/v2alpha1WaitForPoetRoundEndState"
+        },
+        "waitingForPoetRegistrationWindow": {
+          "$ref": "#/definitions/v2alpha1WaitingForPoetRegistrationWindowState"
         }
       }
     },
@@ -1501,6 +1538,39 @@
         }
       }
     },
+    "v2alpha1PoETRegistration": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "challengeHash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "roundEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "roundId": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1PoetChallengeReadyState": {
+      "type": "object"
+    },
+    "v2alpha1PoetConfig": {
+      "type": "object",
+      "properties": {
+        "cycleGap": {
+          "type": "string"
+        },
+        "phaseShift": {
+          "type": "string"
+        }
+      }
+    },
     "v2alpha1PoetInfoRequest": {
       "type": "object",
       "title": "PoetInfo rpc"
@@ -1508,11 +1578,50 @@
     "v2alpha1PoetInfoResponse": {
       "type": "object",
       "properties": {
+        "config": {
+          "$ref": "#/definitions/v2alpha1PoetConfig"
+        },
         "poets": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2alpha1PoetInfo"
+          "type": "array",
+          "items": {
+            "type": "string"
           }
+        }
+      }
+    },
+    "v2alpha1PoetProofReceivedState": {
+      "type": "object",
+      "properties": {
+        "poetUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1PoetRegisteredState": {
+      "type": "object",
+      "properties": {
+        "registrations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1PoETRegistration"
+          }
+        }
+      }
+    },
+    "v2alpha1PostProofReadyState": {
+      "type": "object"
+    },
+    "v2alpha1ProposalPublishedState": {
+      "type": "object",
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "proposal": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },
@@ -1527,6 +1636,14 @@
           "additionalProperties": {
             "$ref": "#/definitions/spacemeshv2alpha1Proposals"
           }
+        }
+      }
+    },
+    "v2alpha1RetryingState": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -1690,6 +1807,25 @@
           "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
         }
       }
+    },
+    "v2alpha1WaitForAtxSyncedState": {
+      "type": "object"
+    },
+    "v2alpha1WaitForPoetRoundEndState": {
+      "type": "object",
+      "properties": {
+        "publishEpochEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "roundEnd": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v2alpha1WaitingForPoetRegistrationWindowState": {
+      "type": "object"
     }
   },
   "tags": [
