@@ -1812,7 +1812,17 @@
       "type": "object"
     },
     "v2alpha1WaitForPoetRoundEndState": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "publishEpochEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "roundEnd": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "v2alpha1WaitingForPoetRegistrationWindowState": {
       "type": "object"

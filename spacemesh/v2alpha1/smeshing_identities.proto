@@ -48,7 +48,10 @@ message PoetRegisteredState {
   repeated PoETRegistration registrations = 1;
 }
 
-message WaitForPoetRoundEndState {}
+message WaitForPoetRoundEndState {
+  google.protobuf.Timestamp round_end = 1;
+  google.protobuf.Timestamp publish_epoch_end = 2;
+}
 message PoetProofReceivedState {
   string poet_url = 1;
 }
