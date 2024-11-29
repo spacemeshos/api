@@ -907,17 +907,6 @@
         }
       }
     },
-    "spacemeshv2alpha1PoetInfo": {
-      "type": "object",
-      "properties": {
-        "cycleGap": {
-          "type": "string"
-        },
-        "phaseShift": {
-          "type": "string"
-        }
-      }
-    },
     "spacemeshv2alpha1Proposal": {
       "type": "object",
       "properties": {
@@ -1319,6 +1308,14 @@
         }
       }
     },
+    "v2alpha1ErrorInfo": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "v2alpha1EstimateGasRequest": {
       "type": "object",
       "properties": {
@@ -1376,7 +1373,10 @@
     "v2alpha1IdentityStateInfo": {
       "type": "object",
       "properties": {
-        "message": {
+        "error": {
+          "$ref": "#/definitions/v2alpha1ErrorInfo"
+        },
+        "poetUrl": {
           "type": "string"
         },
         "publishEpoch": {
@@ -1385,6 +1385,9 @@
         },
         "state": {
           "$ref": "#/definitions/v2alpha1IdentityState"
+        },
+        "submittedRegistrations": {
+          "$ref": "#/definitions/v2alpha1SubmittedRegistrations"
         },
         "time": {
           "type": "string",
@@ -1501,6 +1504,36 @@
         }
       }
     },
+    "v2alpha1PoETRegistration": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "challengeHash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "roundEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "roundId": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1PoetConfig": {
+      "type": "object",
+      "properties": {
+        "cycleGap": {
+          "type": "string"
+        },
+        "phaseShift": {
+          "type": "string"
+        }
+      }
+    },
     "v2alpha1PoetInfoRequest": {
       "type": "object",
       "title": "PoetInfo rpc"
@@ -1508,10 +1541,13 @@
     "v2alpha1PoetInfoResponse": {
       "type": "object",
       "properties": {
+        "config": {
+          "$ref": "#/definitions/v2alpha1PoetConfig"
+        },
         "poets": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2alpha1PoetInfo"
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -1588,6 +1624,18 @@
         "ASC",
         "DESC"
       ]
+    },
+    "v2alpha1SubmittedRegistrations": {
+      "type": "object",
+      "properties": {
+        "registrations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2alpha1PoETRegistration"
+          }
+        }
+      }
     },
     "v2alpha1TransactionContents": {
       "type": "object",

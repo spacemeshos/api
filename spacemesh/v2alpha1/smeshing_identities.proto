@@ -30,11 +30,30 @@ enum IdentityState {
   PROPOSAL_PUBLISHED = 12;
 }
 
+message ErrorInfo {
+  string message = 1;
+}
+
+message PoETRegistration {
+  bytes challenge_hash = 1;
+  string address = 2;
+  string round_id = 3;
+  google.protobuf.Timestamp round_end = 4;
+}
+
+message SubmittedRegistrations {
+  repeated PoETRegistration registrations = 1;
+}
+
 message IdentityStateInfo {
   IdentityState state = 1;
   optional uint32 publish_epoch = 2;
-  string message = 3;
-  google.protobuf.Timestamp time = 4;
+  google.protobuf.Timestamp time = 3;
+  oneof metadata {
+    ErrorInfo error = 4;
+    string poet_url = 5;
+    SubmittedRegistrations submitted_registrations = 6;
+  }
 }
 
 message Identity {
@@ -48,13 +67,14 @@ message IdentityStatesResponse {
 // PoetInfo rpc
 message PoetInfoRequest {}
 
-message PoetInfo {
+message PoetConfig {
   google.protobuf.Duration phase_shift = 1;
   google.protobuf.Duration cycle_gap = 2;
 }
 
 message PoetInfoResponse {
-  map<string, PoetInfo> poets = 1;
+  repeated string poets = 1;
+  PoetConfig config = 2;
 }
 
 // Proposals and eligibilities
