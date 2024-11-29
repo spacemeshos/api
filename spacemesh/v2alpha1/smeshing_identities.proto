@@ -53,6 +53,7 @@ message IdentityStateInfo {
     ErrorInfo error = 4;
     string poet_url = 5;
     SubmittedRegistrations submitted_registrations = 6;
+    string message = 7;
   }
 }
 

@@ -1376,6 +1376,9 @@
         "error": {
           "$ref": "#/definitions/v2alpha1ErrorInfo"
         },
+        "message": {
+          "type": "string"
+        },
         "poetUrl": {
           "type": "string"
         },
