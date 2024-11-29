@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/api/visibility.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 message IdentityStatesRequest {}
 
@@ -30,9 +31,12 @@ enum IdentityState {
   PROPOSAL_PUBLISHED = 12;
 }
 
-message ErrorInfo {
+message RetryingState {
   string message = 1;
 }
+message WaitForAtxSyncedState {}
+message WaitingForPoetRegistrationWindowState {}
+message PoetChallengeReadyState {}
 
 message PoETRegistration {
   bytes challenge_hash = 1;
@@ -40,9 +44,23 @@ message PoETRegistration {
   string round_id = 3;
   google.protobuf.Timestamp round_end = 4;
 }
-
-message SubmittedRegistrations {
+message PoetRegisteredState {
   repeated PoETRegistration registrations = 1;
+}
+
+message WaitForPoetRoundEndState {}
+message PoetProofReceivedState {
+  string poet_url = 1;
+}
+message GeneratingPostProofState {}
+message PostProofReadyState {}
+message AtxReadyState {}
+message AtxBroadcastedState {
+  bytes atx_id = 1;
+}
+message ProposalPublishedState {
+  bytes proposal = 1;
+  uint32 layer = 2;
 }
 
 message IdentityStateInfo {
@@ -50,10 +68,18 @@ message IdentityStateInfo {
   optional uint32 publish_epoch = 2;
   google.protobuf.Timestamp time = 3;
   oneof metadata {
-    ErrorInfo error = 4;
-    string poet_url = 5;
-    SubmittedRegistrations submitted_registrations = 6;
-    string message = 7;
+    RetryingState retrying = 4;
+    WaitForAtxSyncedState wait_for_atx_synced = 5;
+    WaitingForPoetRegistrationWindowState waiting_for_poet_registration_window = 6;
+    PoetChallengeReadyState poet_challenge_ready = 7;
+    PoetRegisteredState poet_registered = 8;
+    WaitForPoetRoundEndState wait_for_poet_round_end = 9;
+    PoetProofReceivedState poet_proof_received = 10;
+    GeneratingPostProofState generating_post_proof = 11;
+    PostProofReadyState post_proof_ready = 12;
+    AtxReadyState atx_ready = 13;
+    AtxBroadcastedState atx_broadcasted = 14;
+    ProposalPublishedState proposal_published = 15;
   }
 }
 
