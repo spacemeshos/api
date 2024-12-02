@@ -1301,7 +1301,7 @@
     "v2alpha1EligibilitiesResponse": {
       "type": "object",
       "properties": {
-        "eligibilities": {
+        "identities": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/v2alpha1EpochEligibilities"

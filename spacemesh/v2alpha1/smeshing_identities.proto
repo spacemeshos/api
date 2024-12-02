@@ -124,7 +124,7 @@ message EpochEligibilities {
 message EligibilitiesRequest {}
 
 message EligibilitiesResponse {
-  map<string, EpochEligibilities> eligibilities = 1;
+  map<string, EpochEligibilities> identities = 1;
 }
 
 message ProposalsRequest {}
