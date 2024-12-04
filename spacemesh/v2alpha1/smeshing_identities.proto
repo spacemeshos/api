@@ -28,7 +28,8 @@ enum IdentityState {
   ATX_READY = 10;
   ATX_BROADCASTED = 11;
 
-  PROPOSAL_PUBLISHED = 12;
+  PROPOSAL_PUBLISH_FAILED = 12;
+  PROPOSAL_PUBLISHED = 13;
 }
 
 message RetryingState {
@@ -61,6 +62,11 @@ message AtxReadyState {}
 message AtxBroadcastedState {
   bytes atx_id = 1;
 }
+message ProposalPublishFailedState {
+  string message = 1;
+  bytes proposal = 2;
+  uint32 layer = 3;
+}
 message ProposalPublishedState {
   bytes proposal = 1;
   uint32 layer = 2;
@@ -82,7 +88,8 @@ message IdentityStateInfo {
     PostProofReadyState post_proof_ready = 12;
     AtxReadyState atx_ready = 13;
     AtxBroadcastedState atx_broadcasted = 14;
-    ProposalPublishedState proposal_published = 15;
+    ProposalPublishFailedState proposal_publish_failed = 15;
+    ProposalPublishedState proposal_published = 16;
   }
 }
 
