@@ -1374,6 +1374,7 @@
         "POST_PROOF_READY",
         "ATX_READY",
         "ATX_BROADCASTED",
+        "PROPOSAL_PUBLISH_FAILED",
         "PROPOSAL_PUBLISHED"
       ]
     },
@@ -1400,6 +1401,9 @@
         },
         "postProofReady": {
           "$ref": "#/definitions/v2alpha1PostProofReadyState"
+        },
+        "proposalPublishFailed": {
+          "$ref": "#/definitions/v2alpha1ProposalPublishFailedState"
         },
         "proposalPublished": {
           "$ref": "#/definitions/v2alpha1ProposalPublishedState"
@@ -1611,6 +1615,22 @@
     },
     "v2alpha1PostProofReadyState": {
       "type": "object"
+    },
+    "v2alpha1ProposalPublishFailedState": {
+      "type": "object",
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "type": "string"
+        },
+        "proposal": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
     },
     "v2alpha1ProposalPublishedState": {
       "type": "object",
