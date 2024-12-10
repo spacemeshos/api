@@ -464,7 +464,8 @@
         "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
         "TRANSACTION_TYPE_VESTING_SPAWN",
         "TRANSACTION_TYPE_VAULT_SPAWN",
-        "TRANSACTION_TYPE_DRAIN_VAULT"
+        "TRANSACTION_TYPE_DRAIN_VAULT",
+        "TRANSACTION_TYPE_DEPLOY"
       ]
     },
     "googlerpcStatus": {
@@ -1024,6 +1025,15 @@
         }
       }
     },
+    "v2alpha1ContentsDeploy": {
+      "type": "object",
+      "properties": {
+        "template": {
+          "type": "string",
+          "title": "deployed template address"
+        }
+      }
+    },
     "v2alpha1ContentsDrainVault": {
       "type": "object",
       "properties": {
@@ -1284,6 +1294,9 @@
     "v2alpha1TransactionContents": {
       "type": "object",
       "properties": {
+        "deploy": {
+          "$ref": "#/definitions/v2alpha1ContentsDeploy"
+        },
         "drainVault": {
           "$ref": "#/definitions/v2alpha1ContentsDrainVault"
         },

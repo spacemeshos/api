@@ -29,6 +29,7 @@ message Transaction {
     TRANSACTION_TYPE_VESTING_SPAWN = 7;
     TRANSACTION_TYPE_VAULT_SPAWN = 8;
     TRANSACTION_TYPE_DRAIN_VAULT = 9;
+    TRANSACTION_TYPE_DEPLOY = 10;
   }
   TransactionType type = 10;
   TransactionContents contents = 11; // parsed transaction contents
@@ -62,6 +63,10 @@ message ContentsDrainVault {
   uint64 amount = 3;
 }
 
+message ContentsDeploy {
+  string template = 1; // deployed template address
+}
+
 message TransactionContents {
   oneof contents {
     ContentsSend send = 1;
@@ -70,6 +75,7 @@ message TransactionContents {
     ContentsMultiSigSpawn vesting_spawn = 4;
     ContentsVaultSpawn vault_spawn = 5;
     ContentsDrainVault drain_vault = 6;
+    ContentsDeploy deploy = 7;
   }
 }
 
