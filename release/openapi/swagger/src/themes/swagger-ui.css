@@ -10325,8 +10325,8 @@ html {
 
 .swagger-ui .opblock-control-arrow {
     background: none;
-    border: none;
-    text-align: center
+    border: 1px;
+    text-align: center;
 }
 
 .swagger-ui .curl-command .copy-to-clipboard {
