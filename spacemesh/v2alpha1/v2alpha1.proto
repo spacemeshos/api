@@ -7,16 +7,21 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   info: {
     title: "Spacemesh API",
+    description: "Welcome to the Spacemesh API documentation. You can find out more about Spacemesh at https://spacemesh.io and dive deeper into the protocol by visiting the docs at https://docs.spacemesh.io. Feel free to ask about or discuss anything related to the Spacemesh API in our [Discord server](https://discord.com/invite/yVhQ7rC)."
     version: "v2alpha1",
     contact: {
-      name: "Spacemesh",
-      url: "https://spacemesh.io/",
+      email: "info@spacemesh.io",
     },
     license: {
       name: "MIT License",
       url: "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE",
     },
+    terms_of_service: "https://spacemesh.io/terms/",
   },
+  external_docs: {
+    description: "Join our Discord",
+    url: "https://discord.com/invite/yVhQ7rC",
+  }
   schemes: HTTPS,
   consumes: "application/json",
   produces: "application/json",

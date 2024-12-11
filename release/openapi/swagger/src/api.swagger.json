@@ -9,17 +9,13 @@
     "https"
   ],
   "swagger": "2.0",
-  "externalDocs": {
-    "description": "Join our Discord",
-    "url": "https://discord.com/invite/yVhQ7rC"
-  },
   "info": {
-    "title": "Spacemesh API",
     "description": "Welcome to the Spacemesh API documentation. You can find out more about Spacemesh at https://spacemesh.io and dive deeper into the protocol by visiting the docs at https://docs.spacemesh.io. Feel free to ask about or discuss anything related to the Spacemesh API in our [Discord server](https://discord.com/invite/yVhQ7rC).",
+    "title": "Spacemesh API",
+    "termsOfService": "https://spacemesh.io/terms/",
     "contact": {
       "email": "info@spacemesh.io"
     },
-    "termsOfService": "https://spacemesh.io/terms/",
     "license": {
       "name": "MIT License",
       "url": "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE"
@@ -1414,5 +1410,9 @@
     {
       "name": "RewardService"
     }
-  ]
+  ],
+  "externalDocs": {
+    "description": "Join our Discord",
+    "url": "https://discord.com/invite/yVhQ7rC"
+  }
 }
