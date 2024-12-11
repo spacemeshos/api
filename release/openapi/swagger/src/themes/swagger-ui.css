@@ -1,5 +1,16 @@
+:root {
+    background-color: #1a1a1a;
+    --bg-color: #242526;
+    --text-color: rgb(188, 182, 173);
+    --heading-color: #3391ff;
+}
+
+html {
+    background-color: #242526;
+}
+
 .swagger-ui {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif
         /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 }
@@ -7,7 +18,7 @@
 .swagger-ui html {
     line-height: 1.15;
     -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
+    -webkit-text-size-adjust: 100%;
 }
 
 .swagger-ui body {
@@ -9257,7 +9268,7 @@
 }
 
 .swagger-ui .opblock-tag {
-    color: #3b4151;
+    color: var(--heading-color);
     font-family: sans-serif;
     font-size: 24px;
     margin: 0 0 5px
@@ -9301,7 +9312,7 @@
 }
 
 .swagger-ui .parameter__type {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: monospace;
     font-size: 12px;
     font-weight: 600;
@@ -9405,7 +9416,7 @@
 
 .swagger-ui .opblock .opblock-section-header {
     align-items: center;
-    background: hsla(0, 0%, 100%, .8);
+    background: var(--bg-color);
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
     display: flex;
     min-height: 50px;
@@ -9414,7 +9425,7 @@
 
 .swagger-ui .opblock .opblock-section-header>label {
     align-items: center;
-    color: #3b4151;
+    color: var(--text-color);
     display: flex;
     font-family: sans-serif;
     font-size: 12px;
@@ -9427,7 +9438,7 @@
 }
 
 .swagger-ui .opblock .opblock-section-header h4 {
-    color: #3b4151;
+    color: var(--text-color);
     flex: 1;
     font-family: sans-serif;
     font-size: 14px;
@@ -9457,7 +9468,7 @@
 .swagger-ui .opblock .opblock-summary-path,
 .swagger-ui .opblock .opblock-summary-path__deprecated {
     align-items: center;
-    color: #3b4151;
+    color: var(--heading-color);
     display: flex;
     font-family: monospace;
     font-size: 16px;
@@ -9494,7 +9505,7 @@
 }
 
 .swagger-ui .opblock .opblock-summary-description {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 13px;
     word-break: break-word
@@ -9745,11 +9756,12 @@
 
 .swagger-ui .tab li button.tablinks {
     background: none;
-    border: 0;
-    color: inherit;
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     font-family: inherit;
     font-weight: inherit;
-    padding: 0
 }
 
 .swagger-ui .opblock-description-wrapper,
@@ -9774,7 +9786,7 @@
 .swagger-ui .opblock-description-wrapper p,
 .swagger-ui .opblock-external-docs-wrapper p,
 .swagger-ui .opblock-title_normal p {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 14px;
     margin: 0
@@ -9830,7 +9842,7 @@
 }
 
 .swagger-ui .response-col_status {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 14px
 }
@@ -9930,7 +9942,7 @@
 }
 
 .swagger-ui .scheme-container {
-    background: #fff;
+    background: #242525;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
     margin: 0 0 20px;
     padding: 30px 0
@@ -9951,7 +9963,7 @@
 }
 
 .swagger-ui .scheme-container .schemes>.schemes-server-container>label {
-    color: #3b4151;
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
@@ -10094,7 +10106,6 @@
 
 .swagger-ui a.nostyle,
 .swagger-ui a.nostyle:visited {
-    color: inherit;
     cursor: pointer;
     text-decoration: inherit
 }
@@ -10149,10 +10160,10 @@
 
 .swagger-ui .btn {
     background: transparent;
-    border: 2px solid gray;
+    border: 2px solid rgb(108, 108, 108);
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 700;
@@ -10338,7 +10349,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: #f7f7f7 url("data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\"><path d=\"M13.418 7.859a.695.695 0 0 1 .978 0 .68.68 0 0 1 0 .969l-3.908 3.83a.697.697 0 0 1-.979 0l-3.908-3.83a.68.68 0 0 1 0-.969.695.695 0 0 1 .978 0L10 11z\"/></svg>") right 10px center no-repeat;
+    background: rgb(246, 236, 220) url("data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\"><path d=\"M13.418 7.859a.695.695 0 0 1 .978 0 .68.68 0 0 1 0 .969l-3.908 3.83a.697.697 0 0 1-.979 0l-3.908-3.83a.68.68 0 0 1 0-.969.695.695 0 0 1 .978 0L10 11z\"/></svg>") right 10px center no-repeat;
     background-size: 20px;
     border: 2px solid #41444e;
     border-radius: 4px;
@@ -10380,7 +10391,7 @@
 }
 
 .swagger-ui label {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 12px;
     font-weight: 700;
@@ -10631,7 +10642,7 @@
 }
 
 .swagger-ui .model {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: monospace;
     font-size: 12px;
     font-weight: 300;
@@ -10713,7 +10724,7 @@
 }
 
 .swagger-ui .model .property.primitive {
-    color: #6b6b6b
+    color: var(--text-color);
 }
 
 .swagger-ui .model .external-docs,
@@ -10758,7 +10769,7 @@
 .swagger-ui section.models {
     border: 1px solid rgba(59, 65, 81, .3);
     border-radius: 4px;
-    margin: 30px 0
+    margin: 30px 0;
 }
 
 .swagger-ui section.models .pointer {
@@ -10776,7 +10787,7 @@
 
 .swagger-ui section.models h4 {
     align-items: center;
-    color: #606060;
+    color: var(--text-color);
     cursor: pointer;
     display: flex;
     font-family: sans-serif;
@@ -10799,10 +10810,11 @@
 }
 
 .swagger-ui section.models h5 {
-    color: #707070;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 16px;
     margin: 0 0 10px
+    
 }
 
 .swagger-ui section.models .model-jump-to-path {
@@ -10858,7 +10870,7 @@
 }
 
 .swagger-ui .model-title {
-    color: #505050;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 16px
 }
@@ -10999,7 +11011,7 @@
 .swagger-ui table thead tr td,
 .swagger-ui table thead tr th {
     border-bottom: 1px solid rgba(59, 65, 81, .2);
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 12px;
     font-weight: 700;
@@ -11027,7 +11039,7 @@
 }
 
 .swagger-ui .parameter__name {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -11258,7 +11270,7 @@
 }
 
 .swagger-ui .info .base-url {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: monospace;
     font-size: 12px;
     font-weight: 300 !important;
@@ -11267,10 +11279,10 @@
 }
 
 .swagger-ui .info .title {
-    color: #3b4151;
+    color: var(--text-color);
     font-family: sans-serif;
     font-size: 36px;
-    margin: 0
+    margin: 0;
 }
 
 .swagger-ui .info .title small {
