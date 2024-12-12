@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const outputPath = path.resolve(__dirname, 'dist');
 module.exports = {
-    //target: web,// REMOTE AFTER FINALIZING DESIGN
     mode: 'development',
     entry: {
         // tell webpack where our code is
