@@ -91,6 +91,40 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.ActivationService/Highest": {
+      "post": {
+        "description": "Highest is a method that takes an \"HighestRequest\" body and returns an \"HighestResponse\".\nThis method is used to retrieve the activation with the highest tick count.",
+        "tags": [
+          "ActivationService"
+        ],
+        "summary": "Highest",
+        "operationId": "ActivationService_Highest",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1HighestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1HighestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.ActivationService/List": {
       "post": {
         "description": "List is a method that takes an \"ActivationRequest\" body and returns an \"ActivationList\".\nThis method is used to retrieve a list of activations based on the provided request parameters.",
@@ -604,6 +638,14 @@
           "type": "string",
           "format": "byte",
           "title": "block hash"
+        }
+      }
+    },
+    "spacemeshv2alpha1HighestResponse": {
+      "type": "object",
+      "properties": {
+        "activation": {
+          "$ref": "#/definitions/spacemeshv2alpha1Activation"
         }
       }
     },
@@ -1126,6 +1168,9 @@
           "$ref": "#/definitions/googlerpcStatus"
         }
       }
+    },
+    "v2alpha1HighestRequest": {
+      "type": "object"
     },
     "v2alpha1LayerList": {
       "type": "object",
