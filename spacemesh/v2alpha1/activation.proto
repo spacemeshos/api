@@ -51,6 +51,13 @@ message ActivationsCountResponse {
   uint32 count = 1; // number of activations for the specified epoch
 }
 
+message HighestRequest {
+}
+
+message HighestResponse {
+  Activation activation = 1;
+}
+
 service ActivationService {
   option (google.api.api_visibility).restriction = "V2";
 
@@ -65,4 +72,10 @@ service ActivationService {
   // ActivationsCount is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
   // This method is used to retrieve the count of activations for a specified epoch.
   rpc ActivationsCount(ActivationsCountRequest) returns (ActivationsCountResponse);
+
+  // Highest
+  //
+  // Highest is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve the activation with the highest tick count.
+  rpc Highest(HighestRequest) returns (HighestResponse);
 }
