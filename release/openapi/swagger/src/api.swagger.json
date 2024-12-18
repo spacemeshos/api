@@ -469,10 +469,13 @@
   "definitions": {
     "MalfeasanceProofMalfeasanceDomain": {
       "type": "string",
-      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs",
+      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs\n - DOMAIN_ACTIVATION: ATX related proofs\n - DOMAIN_BALLOT: Ballot related proofs\n - DOMAIN_HARE: Hare related proofs",
       "default": "DOMAIN_UNSPECIFIED",
       "enum": [
-        "DOMAIN_UNSPECIFIED"
+        "DOMAIN_UNSPECIFIED",
+        "DOMAIN_ACTIVATION",
+        "DOMAIN_BALLOT",
+        "DOMAIN_HARE"
       ]
     },
     "NodeStatusResponseSyncStatus": {
@@ -707,7 +710,7 @@
           "format": "byte"
         },
         "type": {
-          "description": "for legacy proofs the types are\n  1 - Double publish of ATX\n  2 - Multiple ballots for a layer by same smesher\n  3 - Hare Equivocation (currently unused)\n  4 - ATX with invalid PoST proof publised\n  5 - ATX referencing an invalid previous ATX published",
+          "description": "for legacy proofs the types are\n  1 - Double publish of ATX\n  2 - Multiple ballots for a layer by same smesher\n  3 - Hare Equivocation (currently unused)\n  4 - ATX with invalid PoST proof published\n  5 - ATX referencing an invalid previous ATX published",
           "type": "integer",
           "format": "int64",
           "title": "type of the malfeasance proof, depends on domain"
