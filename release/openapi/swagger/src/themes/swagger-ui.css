@@ -5,6 +5,10 @@
     --heading-color: rgb(188, 182, 173);
 }
 
+.swagger-ui a {
+    color: rgb(188, 182, 173);
+}
+
 html {
     background-color: #242526;
 }
