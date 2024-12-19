@@ -1,5 +1,5 @@
 const SwaggerUI = require('swagger-ui');
-require('swagger-ui/dist/swagger-ui.css');
+import './themes/swagger-ui.css';
 const spec = require('./api.swagger.json');
 SwaggerUI({
     spec,
