@@ -1309,6 +1309,22 @@
         }
       }
     },
+    "v2alpha1Eligible": {
+      "type": "object",
+      "properties": {
+        "epoch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
     "v2alpha1EpochEligibilities": {
       "type": "object",
       "properties": {
@@ -1375,7 +1391,8 @@
         "ATX_READY",
         "ATX_BROADCASTED",
         "PROPOSAL_PUBLISH_FAILED",
-        "PROPOSAL_PUBLISHED"
+        "PROPOSAL_PUBLISHED",
+        "ELIGIBLE"
       ]
     },
     "v2alpha1IdentityStateInfo": {
@@ -1386,6 +1403,9 @@
         },
         "atxReady": {
           "$ref": "#/definitions/v2alpha1AtxReadyState"
+        },
+        "eligible": {
+          "$ref": "#/definitions/v2alpha1Eligible"
         },
         "generatingPostProof": {
           "$ref": "#/definitions/v2alpha1GeneratingPostProofState"
