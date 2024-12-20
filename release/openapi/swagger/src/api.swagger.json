@@ -748,6 +748,19 @@
         }
       }
     },
+    "spacemeshv2alpha1Eligibility": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "spacemeshv2alpha1Layer": {
       "type": "object",
       "properties": {
@@ -1319,8 +1332,8 @@
         "layers": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Eligibility"
           }
         }
       }

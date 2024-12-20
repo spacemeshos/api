@@ -73,9 +73,14 @@ message ProposalPublishedState {
   bytes proposal = 1;
   uint32 layer = 2;
 }
+
+message Eligibility {
+  uint32 layer = 1;
+  uint32 count = 2;
+}
 message Eligible {
   uint32 epoch = 1;
-  repeated uint32 layers = 2;
+  repeated Eligibility layers = 2;
 }
 
 message IdentityStateInfo {
