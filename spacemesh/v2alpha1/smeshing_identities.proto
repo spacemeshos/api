@@ -30,6 +30,8 @@ enum IdentityState {
 
   PROPOSAL_PUBLISH_FAILED = 12;
   PROPOSAL_PUBLISHED = 13;
+
+  ELIGIBLE = 14;
 }
 
 message RetryingState {
@@ -72,6 +74,14 @@ message ProposalPublishedState {
   uint32 layer = 2;
 }
 
+message Eligibility {
+  uint32 layer = 1;
+  uint32 count = 2;
+}
+message Eligible {
+  repeated Eligibility layers = 2;
+}
+
 message IdentityStateInfo {
   IdentityState state = 1;
   optional uint32 publish_epoch = 2;
@@ -90,6 +100,7 @@ message IdentityStateInfo {
     AtxBroadcastedState atx_broadcasted = 14;
     ProposalPublishFailedState proposal_publish_failed = 15;
     ProposalPublishedState proposal_published = 16;
+    Eligible eligible = 17;
   }
 }
 
