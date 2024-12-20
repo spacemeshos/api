@@ -1399,6 +1399,7 @@
         "POST_PROOF_READY",
         "ATX_READY",
         "ATX_BROADCASTED",
+        "PROPOSAL_BUILD_FAILED",
         "PROPOSAL_PUBLISH_FAILED",
         "PROPOSAL_PUBLISHED",
         "ELIGIBLE"
@@ -1430,6 +1431,9 @@
         },
         "postProofReady": {
           "$ref": "#/definitions/v2alpha1PostProofReadyState"
+        },
+        "proposalBuildFailed": {
+          "$ref": "#/definitions/v2alpha1ProposalBuildFailedState"
         },
         "proposalPublishFailed": {
           "$ref": "#/definitions/v2alpha1ProposalPublishFailedState"
@@ -1644,6 +1648,18 @@
     },
     "v2alpha1PostProofReadyState": {
       "type": "object"
+    },
+    "v2alpha1ProposalBuildFailedState": {
+      "type": "object",
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
     },
     "v2alpha1ProposalPublishFailedState": {
       "type": "object",
