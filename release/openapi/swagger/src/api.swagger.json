@@ -1325,10 +1325,6 @@
     "v2alpha1Eligible": {
       "type": "object",
       "properties": {
-        "epoch": {
-          "type": "integer",
-          "format": "int64"
-        },
         "layers": {
           "type": "array",
           "items": {

@@ -79,7 +79,6 @@ message Eligibility {
   uint32 count = 2;
 }
 message Eligible {
-  uint32 epoch = 1;
   repeated Eligibility layers = 2;
 }
 
