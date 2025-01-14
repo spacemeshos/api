@@ -1467,7 +1467,26 @@
       }
     },
     "v2alpha1IdentityStatesRequest": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "states": {
+          "type": "array",
+          "title": "list of identity states to filter by",
+          "items": {
+            "$ref": "#/definitions/v2alpha1IdentityState"
+          }
+        }
+      }
     },
     "v2alpha1IdentityStatesResponse": {
       "type": "object",

@@ -8,8 +8,6 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
-message IdentityStatesRequest {}
-
 enum IdentityState {
   UNSPECIFIED = 0;
 
@@ -113,6 +111,12 @@ message IdentityStateInfo {
 
 message Identity {
   repeated IdentityStateInfo history = 1;
+}
+
+message IdentityStatesRequest {
+  repeated IdentityState states = 1; // list of identity states to filter by
+  uint64 offset = 2; // adjusts the starting point for data
+  uint64 limit = 3; // specifies max number of items to fetch
 }
 
 message IdentityStatesResponse {
