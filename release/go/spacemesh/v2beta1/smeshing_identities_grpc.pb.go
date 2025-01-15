@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: spacemesh/v2beta1/smeshing_identities.proto
 
-package spacemeshv2alpha1
+package spacemeshv2beta1
 
 import (
 	context "context"
@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SmeshingIdentitiesService_States_FullMethodName        = "/spacemesh.v2alpha1.SmeshingIdentitiesService/States"
-	SmeshingIdentitiesService_PoetInfo_FullMethodName      = "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo"
-	SmeshingIdentitiesService_Eligibilities_FullMethodName = "/spacemesh.v2alpha1.SmeshingIdentitiesService/Eligibilities"
-	SmeshingIdentitiesService_Proposals_FullMethodName     = "/spacemesh.v2alpha1.SmeshingIdentitiesService/Proposals"
+	SmeshingIdentitiesService_States_FullMethodName        = "/spacemesh.v2beta1.SmeshingIdentitiesService/States"
+	SmeshingIdentitiesService_PoetInfo_FullMethodName      = "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"
+	SmeshingIdentitiesService_Eligibilities_FullMethodName = "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"
+	SmeshingIdentitiesService_Proposals_FullMethodName     = "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"
 )
 
 // SmeshingIdentitiesServiceClient is the client API for SmeshingIdentitiesService service.
@@ -193,7 +193,7 @@ func _SmeshingIdentitiesService_Proposals_Handler(srv interface{}, ctx context.C
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SmeshingIdentitiesService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2alpha1.SmeshingIdentitiesService",
+	ServiceName: "spacemesh.v2beta1.SmeshingIdentitiesService",
 	HandlerType: (*SmeshingIdentitiesServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

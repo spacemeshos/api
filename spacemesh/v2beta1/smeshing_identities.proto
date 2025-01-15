@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package spacemesh.v2alpha1;
+package spacemesh.v2beta1;
 
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";

@@ -2,11 +2,11 @@
 // source: spacemesh/v2beta1/smeshing_identities.proto
 
 /*
-Package spacemeshv2alpha1 is a reverse proxy.
+Package spacemeshv2beta1 is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package spacemeshv2alpha1
+package spacemeshv2beta1
 
 import (
 	"context"
@@ -135,7 +135,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -160,7 +160,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -185,7 +185,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -210,7 +210,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -274,7 +274,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -296,7 +296,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -318,7 +318,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -340,7 +340,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2alpha1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
