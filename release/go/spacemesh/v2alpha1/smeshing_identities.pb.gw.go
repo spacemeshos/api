@@ -31,11 +31,18 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
+var (
+	filter_SmeshingIdentitiesService_States_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_SmeshingIdentitiesService_States_0(ctx context.Context, marshaler runtime.Marshaler, client SmeshingIdentitiesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq IdentityStatesRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SmeshingIdentitiesService_States_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -48,7 +55,10 @@ func local_request_SmeshingIdentitiesService_States_0(ctx context.Context, marsh
 	var protoReq IdentityStatesRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SmeshingIdentitiesService_States_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -61,10 +71,6 @@ func request_SmeshingIdentitiesService_PoetInfo_0(ctx context.Context, marshaler
 	var protoReq PoetInfoRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
 	msg, err := client.PoetInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -73,10 +79,6 @@ func request_SmeshingIdentitiesService_PoetInfo_0(ctx context.Context, marshaler
 func local_request_SmeshingIdentitiesService_PoetInfo_0(ctx context.Context, marshaler runtime.Marshaler, server SmeshingIdentitiesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq PoetInfoRequest
 	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 
 	msg, err := server.PoetInfo(ctx, &protoReq)
 	return msg, metadata, err
@@ -87,10 +89,6 @@ func request_SmeshingIdentitiesService_Eligibilities_0(ctx context.Context, mars
 	var protoReq EligibilitiesRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
 	msg, err := client.Eligibilities(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -99,10 +97,6 @@ func request_SmeshingIdentitiesService_Eligibilities_0(ctx context.Context, mars
 func local_request_SmeshingIdentitiesService_Eligibilities_0(ctx context.Context, marshaler runtime.Marshaler, server SmeshingIdentitiesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq EligibilitiesRequest
 	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 
 	msg, err := server.Eligibilities(ctx, &protoReq)
 	return msg, metadata, err
@@ -113,10 +107,6 @@ func request_SmeshingIdentitiesService_Proposals_0(ctx context.Context, marshale
 	var protoReq ProposalsRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
 	msg, err := client.Proposals(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -125,10 +115,6 @@ func request_SmeshingIdentitiesService_Proposals_0(ctx context.Context, marshale
 func local_request_SmeshingIdentitiesService_Proposals_0(ctx context.Context, marshaler runtime.Marshaler, server SmeshingIdentitiesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ProposalsRequest
 	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 
 	msg, err := server.Proposals(ctx, &protoReq)
 	return msg, metadata, err
@@ -141,7 +127,7 @@ func local_request_SmeshingIdentitiesService_Proposals_0(ctx context.Context, ma
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterSmeshingIdentitiesServiceHandlerFromEndpoint instead.
 func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server SmeshingIdentitiesServiceServer) error {
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -166,7 +152,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 
 	})
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -191,7 +177,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 
 	})
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -216,7 +202,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 
 	})
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -282,7 +268,7 @@ func RegisterSmeshingIdentitiesServiceHandler(ctx context.Context, mux *runtime.
 // "SmeshingIdentitiesServiceClient" to call the correct interceptors.
 func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client SmeshingIdentitiesServiceClient) error {
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -304,7 +290,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 
 	})
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -326,7 +312,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 
 	})
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -348,7 +334,7 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 
 	})
 
-	mux.Handle("POST", pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
