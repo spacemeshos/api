@@ -9,6 +9,9 @@ message MalfeasanceProof {
 
     enum MalfeasanceDomain {
         DOMAIN_UNSPECIFIED = 0; // for legacy proofs
+        DOMAIN_ACTIVATION = 1;  // ATX related proofs
+        DOMAIN_BALLOT = 2;      // Ballot related proofs
+        DOMAIN_HARE = 3;        // Hare related proofs
     }
     MalfeasanceDomain domain = 2;
 
@@ -18,7 +21,7 @@ message MalfeasanceProof {
     //   1 - Double publish of ATX
     //   2 - Multiple ballots for a layer by same smesher
     //   3 - Hare Equivocation (currently unused)
-    //   4 - ATX with invalid PoST proof publised
+    //   4 - ATX with invalid PoST proof published
     //   5 - ATX referencing an invalid previous ATX published
     uint32 type = 3;
 

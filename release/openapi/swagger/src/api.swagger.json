@@ -91,6 +91,40 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.ActivationService/Highest": {
+      "post": {
+        "description": "Highest is a method that takes an \"HighestRequest\" body and returns an \"HighestResponse\".\nThis method is used to retrieve the activation with the highest tick count.",
+        "tags": [
+          "ActivationService"
+        ],
+        "summary": "Highest",
+        "operationId": "ActivationService_Highest",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1HighestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1HighestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.ActivationService/List": {
       "post": {
         "description": "List is a method that takes an \"ActivationRequest\" body and returns an \"ActivationList\".\nThis method is used to retrieve a list of activations based on the provided request parameters.",
@@ -295,134 +329,6 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/Eligibilities": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_Eligibilities",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1EligibilitiesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1EligibilitiesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_PoetInfo",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1PoetInfoRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1PoetInfoResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/Proposals": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_Proposals",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1ProposalsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1ProposalsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/States": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_States",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1IdentityStatesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1IdentityStatesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
     "/spacemesh.v2alpha1.TransactionService/EstimateGas": {
       "post": {
         "description": "EstimateGas is a method that takes a \"EstimateGasRequest\" body and returns an \"EstimateGasResponse\".\nThis method is used to estimate the recommended maximum gas for a signed binary transaction.",
@@ -563,10 +469,13 @@
   "definitions": {
     "MalfeasanceProofMalfeasanceDomain": {
       "type": "string",
-      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs",
+      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs\n - DOMAIN_ACTIVATION: ATX related proofs\n - DOMAIN_BALLOT: Ballot related proofs\n - DOMAIN_HARE: Hare related proofs",
       "default": "DOMAIN_UNSPECIFIED",
       "enum": [
-        "DOMAIN_UNSPECIFIED"
+        "DOMAIN_UNSPECIFIED",
+        "DOMAIN_ACTIVATION",
+        "DOMAIN_BALLOT",
+        "DOMAIN_HARE"
       ]
     },
     "NodeStatusResponseSyncStatus": {
@@ -735,29 +644,11 @@
         }
       }
     },
-    "spacemeshv2alpha1Eligibilities": {
-      "type": "object",
-      "title": "Proposals and eligibilities",
-      "properties": {
-        "eligibilities": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1ProposalEligibility"
-          }
-        }
-      }
-    },
-    "spacemeshv2alpha1Eligibility": {
+    "spacemeshv2alpha1HighestResponse": {
       "type": "object",
       "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "layer": {
-          "type": "integer",
-          "format": "int64"
+        "activation": {
+          "$ref": "#/definitions/spacemeshv2alpha1Activation"
         }
       }
     },
@@ -819,7 +710,7 @@
           "format": "byte"
         },
         "type": {
-          "description": "for legacy proofs the types are\n  1 - Double publish of ATX\n  2 - Multiple ballots for a layer by same smesher\n  3 - Hare Equivocation (currently unused)\n  4 - ATX with invalid PoST proof publised\n  5 - ATX referencing an invalid previous ATX published",
+          "description": "for legacy proofs the types are\n  1 - Double publish of ATX\n  2 - Multiple ballots for a layer by same smesher\n  3 - Hare Equivocation (currently unused)\n  4 - ATX with invalid PoST proof published\n  5 - ATX referencing an invalid previous ATX published",
           "type": "integer",
           "format": "int64",
           "title": "type of the malfeasance proof, depends on domain"
@@ -917,44 +808,6 @@
         "tx": {
           "title": "parsed transaction",
           "$ref": "#/definitions/spacemeshv2alpha1Transaction"
-        }
-      }
-    },
-    "spacemeshv2alpha1Proposal": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "proposal": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "spacemeshv2alpha1ProposalEligibility": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "spacemeshv2alpha1Proposals": {
-      "type": "object",
-      "properties": {
-        "proposals": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Proposal"
-          }
         }
       }
     },
@@ -1216,18 +1069,6 @@
         }
       }
     },
-    "v2alpha1AtxBroadcastedState": {
-      "type": "object",
-      "properties": {
-        "atxId": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "v2alpha1AtxReadyState": {
-      "type": "object"
-    },
     "v2alpha1ContentsDrainVault": {
       "type": "object",
       "properties": {
@@ -1308,43 +1149,6 @@
         }
       }
     },
-    "v2alpha1EligibilitiesRequest": {
-      "type": "object"
-    },
-    "v2alpha1EligibilitiesResponse": {
-      "type": "object",
-      "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2alpha1EpochEligibilities"
-          }
-        }
-      }
-    },
-    "v2alpha1Eligible": {
-      "type": "object",
-      "properties": {
-        "layers": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Eligibility"
-          }
-        }
-      }
-    },
-    "v2alpha1EpochEligibilities": {
-      "type": "object",
-      "properties": {
-        "epochs": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2alpha1Eligibilities"
-          }
-        }
-      }
-    },
     "v2alpha1EstimateGasRequest": {
       "type": "object",
       "properties": {
@@ -1368,136 +1172,8 @@
         }
       }
     },
-    "v2alpha1GeneratingPostProofState": {
+    "v2alpha1HighestRequest": {
       "type": "object"
-    },
-    "v2alpha1Identity": {
-      "type": "object",
-      "properties": {
-        "history": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1IdentityStateInfo"
-          }
-        }
-      }
-    },
-    "v2alpha1IdentityState": {
-      "type": "string",
-      "default": "UNSPECIFIED",
-      "enum": [
-        "UNSPECIFIED",
-        "WAIT_FOR_ATX_SYNCED",
-        "RETRYING",
-        "WAITING_FOR_POET_REGISTRATION_WINDOW",
-        "POET_CHALLENGE_READY",
-        "POET_REGISTERED",
-        "WAIT_FOR_POET_ROUND_END",
-        "POET_PROOF_RECEIVED",
-        "GENERATING_POST_PROOF",
-        "POST_PROOF_READY",
-        "ATX_READY",
-        "ATX_BROADCASTED",
-        "PROPOSAL_BUILD_FAILED",
-        "PROPOSAL_PUBLISH_FAILED",
-        "PROPOSAL_PUBLISHED",
-        "ELIGIBLE"
-      ]
-    },
-    "v2alpha1IdentityStateInfo": {
-      "type": "object",
-      "properties": {
-        "atxBroadcasted": {
-          "$ref": "#/definitions/v2alpha1AtxBroadcastedState"
-        },
-        "atxReady": {
-          "$ref": "#/definitions/v2alpha1AtxReadyState"
-        },
-        "eligible": {
-          "$ref": "#/definitions/v2alpha1Eligible"
-        },
-        "generatingPostProof": {
-          "$ref": "#/definitions/v2alpha1GeneratingPostProofState"
-        },
-        "poetChallengeReady": {
-          "$ref": "#/definitions/v2alpha1PoetChallengeReadyState"
-        },
-        "poetProofReceived": {
-          "$ref": "#/definitions/v2alpha1PoetProofReceivedState"
-        },
-        "poetRegistered": {
-          "$ref": "#/definitions/v2alpha1PoetRegisteredState"
-        },
-        "postProofReady": {
-          "$ref": "#/definitions/v2alpha1PostProofReadyState"
-        },
-        "proposalBuildFailed": {
-          "$ref": "#/definitions/v2alpha1ProposalBuildFailedState"
-        },
-        "proposalPublishFailed": {
-          "$ref": "#/definitions/v2alpha1ProposalPublishFailedState"
-        },
-        "proposalPublished": {
-          "$ref": "#/definitions/v2alpha1ProposalPublishedState"
-        },
-        "publishEpoch": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "retrying": {
-          "$ref": "#/definitions/v2alpha1RetryingState"
-        },
-        "state": {
-          "$ref": "#/definitions/v2alpha1IdentityState"
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "waitForAtxSynced": {
-          "$ref": "#/definitions/v2alpha1WaitForAtxSyncedState"
-        },
-        "waitForPoetRoundEnd": {
-          "$ref": "#/definitions/v2alpha1WaitForPoetRoundEndState"
-        },
-        "waitingForPoetRegistrationWindow": {
-          "$ref": "#/definitions/v2alpha1WaitingForPoetRegistrationWindowState"
-        }
-      }
-    },
-    "v2alpha1IdentityStatesRequest": {
-      "type": "object",
-      "properties": {
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "states": {
-          "type": "array",
-          "title": "list of identity states to filter by",
-          "items": {
-            "$ref": "#/definitions/v2alpha1IdentityState"
-          }
-        }
-      }
-    },
-    "v2alpha1IdentityStatesResponse": {
-      "type": "object",
-      "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2alpha1Identity"
-          }
-        }
-      }
     },
     "v2alpha1LayerList": {
       "type": "object",
@@ -1591,143 +1267,6 @@
         "status": {
           "title": "node sync status",
           "$ref": "#/definitions/NodeStatusResponseSyncStatus"
-        }
-      }
-    },
-    "v2alpha1PoETRegistration": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string"
-        },
-        "challengeHash": {
-          "type": "string",
-          "format": "byte"
-        },
-        "roundEnd": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "roundId": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1PoetChallengeReadyState": {
-      "type": "object"
-    },
-    "v2alpha1PoetConfig": {
-      "type": "object",
-      "properties": {
-        "cycleGap": {
-          "type": "string"
-        },
-        "phaseShift": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1PoetInfoRequest": {
-      "type": "object",
-      "title": "PoetInfo rpc"
-    },
-    "v2alpha1PoetInfoResponse": {
-      "type": "object",
-      "properties": {
-        "config": {
-          "$ref": "#/definitions/v2alpha1PoetConfig"
-        },
-        "poets": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "v2alpha1PoetProofReceivedState": {
-      "type": "object",
-      "properties": {
-        "poetUrl": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1PoetRegisteredState": {
-      "type": "object",
-      "properties": {
-        "registrations": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1PoETRegistration"
-          }
-        }
-      }
-    },
-    "v2alpha1PostProofReadyState": {
-      "type": "object"
-    },
-    "v2alpha1ProposalBuildFailedState": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1ProposalPublishFailedState": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "message": {
-          "type": "string"
-        },
-        "proposal": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "v2alpha1ProposalPublishedState": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "proposal": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "v2alpha1ProposalsRequest": {
-      "type": "object"
-    },
-    "v2alpha1ProposalsResponse": {
-      "type": "object",
-      "properties": {
-        "proposals": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2alpha1Proposals"
-          }
-        }
-      }
-    },
-    "v2alpha1RetryingState": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
         }
       }
     },
@@ -1891,25 +1430,6 @@
           "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
         }
       }
-    },
-    "v2alpha1WaitForAtxSyncedState": {
-      "type": "object"
-    },
-    "v2alpha1WaitForPoetRoundEndState": {
-      "type": "object",
-      "properties": {
-        "publishEpochEnd": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "roundEnd": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "v2alpha1WaitingForPoetRegistrationWindowState": {
-      "type": "object"
     }
   },
   "tags": [
@@ -1936,9 +1456,6 @@
     },
     {
       "name": "RewardService"
-    },
-    {
-      "name": "SmeshingIdentitiesService"
     }
   ]
 }
