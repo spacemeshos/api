@@ -25,9 +25,11 @@
   "paths": {
     "/spacemesh.v2alpha1.AccountService/List": {
       "post": {
+        "description": "List is a method that takes an \"AccountRequest\" body and returns an \"AccountList\".\nThis method is used to retrieve a list of accounts based on the provided request parameters.",
         "tags": [
           "AccountService"
         ],
+        "summary": "List of accounts",
         "operationId": "AccountService_List",
         "parameters": [
           {
@@ -57,9 +59,11 @@
     },
     "/spacemesh.v2alpha1.ActivationService/ActivationsCount": {
       "post": {
+        "description": "ActivationsCount is a method that takes an \"ActivationsCountRequest\" body and returns an \"ActivationsCountResponse\".\nThis method is used to retrieve the count of activations for a specified epoch.",
         "tags": [
           "ActivationService"
         ],
+        "summary": "Count of activations",
         "operationId": "ActivationService_ActivationsCount",
         "parameters": [
           {
@@ -87,11 +91,47 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.ActivationService/List": {
+    "/spacemesh.v2alpha1.ActivationService/Highest": {
       "post": {
+        "description": "Highest is a method that takes an \"HighestRequest\" body and returns an \"HighestResponse\".\nThis method is used to retrieve the activation with the highest tick count.",
         "tags": [
           "ActivationService"
         ],
+        "summary": "Highest",
+        "operationId": "ActivationService_Highest",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v2alpha1HighestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1HighestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2alpha1.ActivationService/List": {
+      "post": {
+        "description": "List is a method that takes an \"ActivationRequest\" body and returns an \"ActivationList\".\nThis method is used to retrieve a list of activations based on the provided request parameters.",
+        "tags": [
+          "ActivationService"
+        ],
+        "summary": "List of activations",
         "operationId": "ActivationService_List",
         "parameters": [
           {
@@ -121,9 +161,11 @@
     },
     "/spacemesh.v2alpha1.LayerService/List": {
       "post": {
+        "description": "List is a method that takes a \"LayerRequest\" body and returns an \"LayerList\".\nThis method is used to retrieve a list of layers based on the provided request parameters.",
         "tags": [
           "LayerService"
         ],
+        "summary": "List of layers",
         "operationId": "LayerService_List",
         "parameters": [
           {
@@ -151,11 +193,47 @@
         }
       }
     },
+    "/spacemesh.v2alpha1.MalfeasanceService/List": {
+      "post": {
+        "description": "List is a method that takes a \"MalfeasanceRequest\" body and returns an \"MalfeasanceList\".\nThis method is used to retrieve a list of malfeasance proofs based on the provided request parameters.",
+        "tags": [
+          "MalfeasanceService"
+        ],
+        "summary": "List of malfeasance proofs",
+        "operationId": "MalfeasanceService_List",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2alpha1MalfeasanceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2alpha1.NetworkService/Info": {
       "post": {
+        "description": "Info is a method that returns an \"NetworkInfoResponse\".\nThis method is used to retrieve network information.",
         "tags": [
           "NetworkService"
         ],
+        "summary": "Network information",
         "operationId": "NetworkService_Info",
         "parameters": [
           {
@@ -185,9 +263,11 @@
     },
     "/spacemesh.v2alpha1.NodeService/Status": {
       "post": {
+        "description": "Status is a method that returns an \"NodeStatusResponse\".\nThis method is used to retrieve node status information.",
         "tags": [
           "NodeService"
         ],
+        "summary": "Node status",
         "operationId": "NodeService_Status",
         "parameters": [
           {
@@ -217,9 +297,11 @@
     },
     "/spacemesh.v2alpha1.RewardService/List": {
       "post": {
+        "description": "List is a method that takes a \"RewardRequest\" body and returns an \"RewardList\".\nThis method is used to retrieve a list of rewards based on the provided request parameters.",
         "tags": [
           "RewardService"
         ],
+        "summary": "List of rewards",
         "operationId": "RewardService_List",
         "parameters": [
           {
@@ -249,9 +331,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/EstimateGas": {
       "post": {
+        "description": "EstimateGas is a method that takes a \"EstimateGasRequest\" body and returns an \"EstimateGasResponse\".\nThis method is used to estimate the recommended maximum gas for a signed binary transaction.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Estimate gas for transaction",
         "operationId": "TransactionService_EstimateGas",
         "parameters": [
           {
@@ -281,9 +365,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/List": {
       "post": {
+        "description": "List is a method that takes a \"TransactionRequest\" body and returns an \"TransactionList\".\nThis method is used to retrieve a list of transactions based on the provided request parameters.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "List of transactions",
         "operationId": "TransactionService_List",
         "parameters": [
           {
@@ -313,9 +399,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/ParseTransaction": {
       "post": {
+        "description": "ParseTransaction is a method that takes a \"ParseTransactionRequest\" body and returns an \"ParseTransactionResponse\".\nThis method is used to parse a signed binary transaction and optionally verify its signature.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Parse transaction",
         "operationId": "TransactionService_ParseTransaction",
         "parameters": [
           {
@@ -345,9 +433,11 @@
     },
     "/spacemesh.v2alpha1.TransactionService/SubmitTransaction": {
       "post": {
+        "description": "SubmitTransaction is a method that takes a \"SubmitTransactionRequest\" body and returns an \"SubmitTransactionResponse\".\nThis method is used to submit a signed binary transaction to the network.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Submit transaction",
         "operationId": "TransactionService_SubmitTransaction",
         "parameters": [
           {
@@ -376,19 +466,34 @@
       }
     },
     "/spacemesh.v2beta1.AccountService/List": {
-      "post": {
+      "get": {
         "tags": [
           "AccountService"
         ],
         "operationId": "AccountService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1AccountRequest"
-            }
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "name": "addresses",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch// bech32 format including HRP",
+            "name": "limit",
+            "in": "query"
           }
         ],
         "responses": {
@@ -408,19 +513,17 @@
       }
     },
     "/spacemesh.v2beta1.ActivationService/ActivationsCount": {
-      "post": {
+      "get": {
         "tags": [
           "ActivationService"
         ],
         "operationId": "ActivationService_ActivationsCount",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1ActivationsCountRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "name": "epoch",
+            "in": "query"
           }
         ],
         "responses": {
@@ -440,19 +543,62 @@
       }
     },
     "/spacemesh.v2beta1.ActivationService/List": {
-      "post": {
+      "get": {
         "tags": [
           "ActivationService"
         ],
         "operationId": "ActivationService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1ActivationRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
+            "name": "startEpoch",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "endEpoch",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "name": "smesherId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
+            "name": "coinbase",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "name": "limit",
+            "in": "query"
           }
         ],
         "responses": {
@@ -472,19 +618,48 @@
       }
     },
     "/spacemesh.v2beta1.LayerService/List": {
-      "post": {
+      "get": {
         "tags": [
           "LayerService"
         ],
         "operationId": "LayerService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1LayerRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "name": "startLayer",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "endLayer",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "specifies the sort order (default is ASC)",
+            "name": "sortOrder",
+            "in": "query"
           }
         ],
         "responses": {
@@ -504,21 +679,11 @@
       }
     },
     "/spacemesh.v2beta1.NetworkService/Info": {
-      "post": {
+      "get": {
         "tags": [
           "NetworkService"
         ],
         "operationId": "NetworkService_Info",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1NetworkInfoRequest"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -536,21 +701,11 @@
       }
     },
     "/spacemesh.v2beta1.NodeService/Status": {
-      "post": {
+      "get": {
         "tags": [
           "NodeService"
         ],
         "operationId": "NodeService_Status",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1NodeStatusRequest"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -568,19 +723,59 @@
       }
     },
     "/spacemesh.v2beta1.RewardService/List": {
-      "post": {
+      "get": {
         "tags": [
           "RewardService"
         ],
         "operationId": "RewardService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1RewardRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "name": "startLayer",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "endLayer",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "coinbase",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "byte",
+            "name": "smesher",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "specifies the sort order by layer (default is ASC)",
+            "name": "sortOrder",
+            "in": "query"
           }
         ],
         "responses": {
@@ -632,19 +827,79 @@
       }
     },
     "/spacemesh.v2beta1.TransactionService/List": {
-      "post": {
+      "get": {
         "tags": [
           "TransactionService"
         ],
         "operationId": "TransactionService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1TransactionRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "Starting layer for transactions.",
+            "name": "startLayer",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "Ending layer for transactions.",
+            "name": "endLayer",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "description": "Filter: specific transaction IDs to filter.",
+            "name": "txid",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "Filter by address (principal or recipient)",
+            "name": "address",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "Adjusts the starting point for data retrieval.",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "Specifies maximum number of items to fetch.",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "Whether to include transaction state in response.",
+            "name": "includeState",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "Whether to include result of transactions in response.",
+            "name": "includeResult",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "specifies the sort order by layer (default is ASC)",
+            "name": "sortOrder",
+            "in": "query"
           }
         ],
         "responses": {
@@ -729,6 +984,17 @@
     }
   },
   "definitions": {
+    "MalfeasanceProofMalfeasanceDomain": {
+      "type": "string",
+      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs\n - DOMAIN_ACTIVATION: ATX related proofs\n - DOMAIN_BALLOT: Ballot related proofs\n - DOMAIN_HARE: Hare related proofs",
+      "default": "DOMAIN_UNSPECIFIED",
+      "enum": [
+        "DOMAIN_UNSPECIFIED",
+        "DOMAIN_ACTIVATION",
+        "DOMAIN_BALLOT",
+        "DOMAIN_HARE"
+      ]
+    },
     "TransactionTransactionType": {
       "type": "string",
       "default": "TRANSACTION_TYPE_UNSPECIFIED",
@@ -769,11 +1035,11 @@
       }
     },
     "protobufAny": {
-      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }",
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\nExample 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\nExample 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }",
       "type": "object",
       "properties": {
         "@type": {
-          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com. As of May 2023, there are no widely used type server\nimplementations and no plans to implement one.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics.",
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics.",
           "type": "string"
         }
       },
@@ -793,6 +1059,10 @@
         "projected": {
           "title": "projected state (includes pending txs)",
           "$ref": "#/definitions/spacemeshv2alpha1AccountState"
+        },
+        "template": {
+          "type": "string",
+          "title": "account template address"
         }
       }
     },
@@ -801,6 +1071,7 @@
       "properties": {
         "accounts": {
           "type": "array",
+          "title": "list of accounts",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Account"
@@ -813,6 +1084,7 @@
       "properties": {
         "addresses": {
           "type": "array",
+          "title": "list of account addresses",
           "items": {
             "type": "string"
           }
@@ -887,6 +1159,7 @@
       "properties": {
         "activations": {
           "type": "array",
+          "title": "list of activations",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Activation"
@@ -903,10 +1176,12 @@
         },
         "endEpoch": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "ending epoch for the query"
         },
         "id": {
           "type": "array",
+          "title": "list of activation IDs",
           "items": {
             "type": "string",
             "format": "byte"
@@ -914,23 +1189,26 @@
         },
         "limit": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
         },
         "offset": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
         },
         "smesherId": {
           "type": "array",
+          "title": "list of smesher IDs",
           "items": {
             "type": "string",
             "format": "byte"
           }
         },
         "startEpoch": {
-          "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "starting epoch for the query"
         }
       }
     },
@@ -939,7 +1217,8 @@
       "properties": {
         "epoch": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "epoch number"
         }
       }
     },
@@ -948,7 +1227,8 @@
       "properties": {
         "count": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "number of activations for the specified epoch"
         }
       }
     },
@@ -977,10 +1257,19 @@
       "properties": {
         "recommendedMaxGas": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "recommended max gas"
         },
         "status": {
           "$ref": "#/definitions/googlerpcStatus"
+        }
+      }
+    },
+    "spacemeshv2alpha1HighestResponse": {
+      "type": "object",
+      "properties": {
+        "activation": {
+          "$ref": "#/definitions/spacemeshv2alpha1Activation"
         }
       }
     },
@@ -1029,6 +1318,7 @@
       "properties": {
         "layers": {
           "type": "array",
+          "title": "list of layers",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Layer"
@@ -1041,7 +1331,8 @@
       "properties": {
         "endLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "ending layer for the query"
         },
         "limit": {
           "type": "string",
@@ -1059,7 +1350,56 @@
         },
         "startLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "starting layer for the query"
+        }
+      }
+    },
+    "spacemeshv2alpha1MalfeasanceProof": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "$ref": "#/definitions/MalfeasanceProofMalfeasanceDomain"
+        },
+        "properties": {
+          "type": "object",
+          "title": "Properties of the Malfeasance proof, different for every type of proof",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "smesher": {
+          "type": "string",
+          "format": "byte"
+        },
+        "type": {
+          "description": "for legacy proofs the types are\n  1 - Double publish of ATX\n  2 - Multiple ballots for a layer by same smesher\n  3 - Hare Equivocation (currently unused)\n  4 - ATX with invalid PoST proof published\n  5 - ATX referencing an invalid previous ATX published",
+          "type": "integer",
+          "format": "int64",
+          "title": "type of the malfeasance proof, depends on domain"
+        }
+      }
+    },
+    "spacemeshv2alpha1MalfeasanceRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "smesherId": {
+          "type": "array",
+          "title": "list of smesher ids to fetch (can be empty for all)",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       }
     },
@@ -1088,7 +1428,8 @@
         },
         "labelsPerUnit": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of labels per unit"
         },
         "layerDuration": {
           "type": "string",
@@ -1133,6 +1474,7 @@
           "title": "last layer whose votes have been processed"
         },
         "status": {
+          "title": "node sync status",
           "$ref": "#/definitions/spacemeshv2alpha1NodeStatusResponseSyncStatus"
         }
       }
@@ -1177,6 +1519,7 @@
           "$ref": "#/definitions/googlerpcStatus"
         },
         "tx": {
+          "title": "parsed transaction",
           "$ref": "#/definitions/spacemeshv2alpha1Transaction"
         }
       }
@@ -1215,6 +1558,7 @@
       "properties": {
         "rewards": {
           "type": "array",
+          "title": "list of rewards",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Reward"
@@ -1226,11 +1570,13 @@
       "type": "object",
       "properties": {
         "coinbase": {
-          "type": "string"
+          "type": "string",
+          "title": "filter by coinbase"
         },
         "endLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "ending layer for the query"
         },
         "limit": {
           "type": "string",
@@ -1244,7 +1590,8 @@
         },
         "smesher": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "filter by smesher"
         },
         "sortOrder": {
           "title": "specifies the sort order by layer (default is ASC)",
@@ -1252,7 +1599,8 @@
         },
         "startLayer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "starting layer for the query"
         }
       }
     },
@@ -1274,7 +1622,8 @@
         },
         "txId": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "transaction ID"
         }
       }
     },
@@ -1334,6 +1683,7 @@
       "properties": {
         "transactions": {
           "type": "array",
+          "title": "list of transactions",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1TransactionResponse"
@@ -1394,12 +1744,15 @@
       "type": "object",
       "properties": {
         "tx": {
+          "title": "transaction",
           "$ref": "#/definitions/spacemeshv2alpha1Transaction"
         },
         "txResult": {
+          "title": "optional transaction result",
           "$ref": "#/definitions/spacemeshv2alpha1TransactionResult"
         },
         "txState": {
+          "title": "optional transaction state",
           "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
         }
       }
@@ -1409,7 +1762,8 @@
       "properties": {
         "block": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "block hash"
         },
         "fee": {
           "type": "string",
@@ -1423,16 +1777,19 @@
         },
         "layer": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "layer number"
         },
         "message": {
           "type": "string"
         },
         "status": {
+          "title": "status of the transaction",
           "$ref": "#/definitions/spacemeshv2alpha1TransactionResultStatus"
         },
         "touchedAddresses": {
           "type": "array",
+          "title": "addresses touched by the tx",
           "items": {
             "type": "string"
           }
@@ -1450,7 +1807,7 @@
       ]
     },
     "spacemeshv2alpha1TransactionState": {
-      "description": "TransactionState is the \"journey\" of a tx from mempool to block inclusion to\nmesh to STF processing. To know whether or not the tx actually succeeded,\nand its side effects, check tx_state.\n\n - TRANSACTION_STATE_UNSPECIFIED: default state\n - TRANSACTION_STATE_REJECTED: rejected from mempool due to, e.g., invalid syntax\n - TRANSACTION_STATE_INSUFFICIENT_FUNDS: rejected from mempool by funds check\n - TRANSACTION_STATE_CONFLICTING: rejected from mempool due to conflicting counter\n - TRANSACTION_STATE_MEMPOOL: in mempool but not on the mesh yet\n - TRANSACTION_STATE_MESH: submitted to the mesh\n - TRANSACTION_STATE_PROCESSED: processed by STF; check Receipt for success or failure",
+      "description": "TransactionState is the \"journey\" of a tx from mempool to block inclusion to\nmesh to STF processing. To know whether or not the tx actually succeeded,\nand its side effects, check tx_state.\n\n - TRANSACTION_STATE_UNSPECIFIED: default state\n - TRANSACTION_STATE_REJECTED: rejected from mempool due to, e.g., invalid syntax\n - TRANSACTION_STATE_INSUFFICIENT_FUNDS: rejected from mempool by funds check\n - TRANSACTION_STATE_CONFLICTING: rejected from mempool due to conflicting counter\n - TRANSACTION_STATE_MEMPOOL: in mempool but not on the mesh yet\n - TRANSACTION_STATE_MESH: submitted to the mesh\n - TRANSACTION_STATE_PROCESSED: processed by STF; check Receipt for success or failure\n - TRANSACTION_STATE_INEFFECTUAL: removed from mempool and will be forgotten and never executed",
       "type": "string",
       "default": "TRANSACTION_STATE_UNSPECIFIED",
       "enum": [
@@ -1460,7 +1817,8 @@
         "TRANSACTION_STATE_CONFLICTING",
         "TRANSACTION_STATE_MEMPOOL",
         "TRANSACTION_STATE_MESH",
-        "TRANSACTION_STATE_PROCESSED"
+        "TRANSACTION_STATE_PROCESSED",
+        "TRANSACTION_STATE_INEFFECTUAL"
       ]
     },
     "spacemeshv2beta1AccountList": {
@@ -1475,27 +1833,6 @@
         }
       }
     },
-    "spacemeshv2beta1AccountRequest": {
-      "type": "object",
-      "properties": {
-        "addresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch// bech32 format including HRP"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        }
-      }
-    },
     "spacemeshv2beta1ActivationList": {
       "type": "object",
       "properties": {
@@ -1505,55 +1842,6 @@
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1Activation"
           }
-        }
-      }
-    },
-    "spacemeshv2beta1ActivationRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
-          "type": "string"
-        },
-        "endEpoch": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "id": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "smesherId": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "startEpoch": {
-          "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "spacemeshv2beta1ActivationsCountRequest": {
-      "type": "object",
-      "properties": {
-        "epoch": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -1640,36 +1928,6 @@
         }
       }
     },
-    "spacemeshv2beta1LayerRequest": {
-      "type": "object",
-      "properties": {
-        "endLayer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "spacemeshv2beta1NetworkInfoRequest": {
-      "type": "object"
-    },
     "spacemeshv2beta1NetworkInfoResponse": {
       "type": "object",
       "properties": {
@@ -1704,9 +1962,6 @@
           "title": "number of layers per epoch"
         }
       }
-    },
-    "spacemeshv2beta1NodeStatusRequest": {
-      "type": "object"
     },
     "spacemeshv2beta1NodeStatusResponse": {
       "type": "object",
@@ -1817,40 +2072,6 @@
         }
       }
     },
-    "spacemeshv2beta1RewardRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "type": "string"
-        },
-        "endLayer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "smesher": {
-          "type": "string",
-          "format": "byte"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
     "spacemeshv2beta1SubmitTransactionRequest": {
       "type": "object",
       "properties": {
@@ -1881,55 +2102,6 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2beta1TransactionResponse"
-          }
-        }
-      }
-    },
-    "spacemeshv2beta1TransactionRequest": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string",
-          "title": "Filter by address (principal or recipient)"
-        },
-        "endLayer": {
-          "description": "Ending layer for transactions.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "includeResult": {
-          "description": "Whether to include result of transactions in response.",
-          "type": "boolean"
-        },
-        "includeState": {
-          "description": "Whether to include transaction state in response.",
-          "type": "boolean"
-        },
-        "limit": {
-          "description": "Specifies maximum number of items to fetch.",
-          "type": "string",
-          "format": "uint64"
-        },
-        "offset": {
-          "description": "Adjusts the starting point for data retrieval.",
-          "type": "string",
-          "format": "uint64"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
-        },
-        "startLayer": {
-          "description": "Starting layer for transactions.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "txid": {
-          "description": "Filter: specific transaction IDs to filter.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
           }
         }
       }
@@ -2028,6 +2200,22 @@
         }
       }
     },
+    "v2alpha1HighestRequest": {
+      "type": "object"
+    },
+    "v2alpha1MalfeasanceList": {
+      "type": "object",
+      "properties": {
+        "proofs": {
+          "type": "array",
+          "title": "list of malfeasance proofs",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
+          }
+        }
+      }
+    },
     "v2alpha1SortOrder": {
       "type": "string",
       "default": "ASC",
@@ -2072,6 +2260,9 @@
     },
     {
       "name": "LayerService"
+    },
+    {
+      "name": "MalfeasanceService"
     },
     {
       "name": "NetworkService"

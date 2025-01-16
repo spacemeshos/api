@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/api/visibility.proto";
 import "spacemesh/v2alpha1/reward.proto";
 import "spacemesh/v2alpha1/v2alpha1.proto";
@@ -33,7 +34,11 @@ message RewardList {
 service RewardService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc List(RewardRequest) returns (RewardList);
+  rpc List(RewardRequest) returns (RewardList) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.RewardService/List"
+    };
+  };
 }
 
 message RewardStreamRequest {

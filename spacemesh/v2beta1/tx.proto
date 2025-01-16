@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/rpc/status.proto";
 import "google/api/visibility.proto";
 import "spacemesh/v2alpha1/tx.proto";
@@ -75,7 +76,11 @@ message EstimateGasResponse {
 service TransactionService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc List(TransactionRequest) returns (TransactionList);
+  rpc List(TransactionRequest) returns (TransactionList) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.TransactionService/List"
+    };
+  };
   rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
   rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
   rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);

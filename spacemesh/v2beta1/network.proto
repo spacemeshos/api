@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "google/api/visibility.proto";
@@ -22,5 +23,9 @@ message NetworkInfoRequest {}
 service NetworkService {
   option (google.api.api_visibility).restriction = "V2";
 
-  rpc Info(NetworkInfoRequest) returns (NetworkInfoResponse);
+  rpc Info(NetworkInfoRequest) returns (NetworkInfoResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.NetworkService/Info"
+    };
+  }
 }
