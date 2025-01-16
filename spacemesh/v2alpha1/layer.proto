@@ -21,20 +21,24 @@ message Layer {
 }
 
 message LayerRequest {
-  uint32 start_layer = 1;
-  uint32 end_layer = 2;
+  uint32 start_layer = 1; // starting layer for the query
+  uint32 end_layer = 2; // ending layer for the query
   uint64 offset = 3; // adjusts the starting point for data
   uint64 limit = 4; // specifies max number of items to fetch
   SortOrder sort_order = 5; // specifies the sort order (default is ASC)
 };
 
 message LayerList {
-  repeated Layer layers = 1;
+  repeated Layer layers = 1; // list of layers
 }
 
 service LayerService {
   option (google.api.api_visibility).restriction = "V2";
 
+  // List of layers
+  //
+  // List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve a list of layers based on the provided request parameters.
   rpc List(LayerRequest) returns (LayerList);
 }
 

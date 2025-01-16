@@ -162,8 +162,8 @@ type LayerRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StartLayer uint32    `protobuf:"varint,1,opt,name=start_layer,json=startLayer,proto3" json:"start_layer,omitempty"`
-	EndLayer   uint32    `protobuf:"varint,2,opt,name=end_layer,json=endLayer,proto3" json:"end_layer,omitempty"`
+	StartLayer uint32    `protobuf:"varint,1,opt,name=start_layer,json=startLayer,proto3" json:"start_layer,omitempty"`                                // starting layer for the query
+	EndLayer   uint32    `protobuf:"varint,2,opt,name=end_layer,json=endLayer,proto3" json:"end_layer,omitempty"`                                      // ending layer for the query
 	Offset     uint64    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`                                                          // adjusts the starting point for data
 	Limit      uint64    `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`                                                            // specifies max number of items to fetch
 	SortOrder  SortOrder `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3,enum=spacemesh.v2alpha1.SortOrder" json:"sort_order,omitempty"` // specifies the sort order (default is ASC)
@@ -241,7 +241,7 @@ type LayerList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Layers []*Layer `protobuf:"bytes,1,rep,name=layers,proto3" json:"layers,omitempty"`
+	Layers []*Layer `protobuf:"bytes,1,rep,name=layers,proto3" json:"layers,omitempty"` // list of layers
 }
 
 func (x *LayerList) Reset() {
