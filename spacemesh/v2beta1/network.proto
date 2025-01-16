@@ -15,7 +15,7 @@ message NetworkInfoResponse {
   string hrp = 5;
   uint32 effective_genesis_layer = 6; // effective genesis layer, i.e., first layer after genesis initialization period
   uint32 layers_per_epoch = 7; // number of layers per epoch
-  uint64 labels_per_unit = 8;
+  uint64 labels_per_unit = 8; // number of labels per unit
 }
 
 message NetworkInfoRequest {}
@@ -23,6 +23,10 @@ message NetworkInfoRequest {}
 service NetworkService {
   option (google.api.api_visibility).restriction = "V2";
 
+  // Network information
+  //
+  // Info is a method that returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve network information.
   rpc Info(NetworkInfoRequest) returns (NetworkInfoResponse) {
     option (google.api.http) = {
       get: "/spacemesh.v2beta1.NetworkService/Info"

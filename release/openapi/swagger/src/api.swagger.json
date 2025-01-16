@@ -105,7 +105,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1HighestRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1HighestRequest"
             }
           }
         ],
@@ -467,9 +467,11 @@
     },
     "/spacemesh.v2beta1.AccountService/List": {
       "get": {
+        "description": "List is a method that takes an \"AccountRequest\" body and returns an \"AccountList\".\nThis method is used to retrieve a list of accounts based on the provided request parameters.",
         "tags": [
           "AccountService"
         ],
+        "summary": "List of accounts",
         "operationId": "AccountService_List",
         "parameters": [
           {
@@ -478,6 +480,7 @@
               "type": "string"
             },
             "collectionFormat": "multi",
+            "description": "list of account addresses",
             "name": "addresses",
             "in": "query"
           },
@@ -514,14 +517,17 @@
     },
     "/spacemesh.v2beta1.ActivationService/ActivationsCount": {
       "get": {
+        "description": "ActivationsCount is a method that takes an \"ActivationsCountRequest\" body and returns an \"ActivationsCountResponse\".\nThis method is used to retrieve the count of activations for a specified epoch.",
         "tags": [
           "ActivationService"
         ],
+        "summary": "Count of activations",
         "operationId": "ActivationService_ActivationsCount",
         "parameters": [
           {
             "type": "integer",
             "format": "int64",
+            "description": "epoch number",
             "name": "epoch",
             "in": "query"
           }
@@ -542,23 +548,50 @@
         }
       }
     },
-    "/spacemesh.v2beta1.ActivationService/List": {
+    "/spacemesh.v2beta1.ActivationService/Highest": {
       "get": {
+        "description": "Highest is a method that takes an \"HighestRequest\" body and returns an \"HighestResponse\".\nThis method is used to retrieve the activation with the highest tick count.",
         "tags": [
           "ActivationService"
         ],
+        "summary": "Highest",
+        "operationId": "ActivationService_Highest",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spacemeshv2beta1HighestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2beta1.ActivationService/List": {
+      "get": {
+        "description": "List is a method that takes an \"ActivationRequest\" body and returns an \"ActivationList\".\nThis method is used to retrieve a list of activations based on the provided request parameters.",
+        "tags": [
+          "ActivationService"
+        ],
+        "summary": "List of activations",
         "operationId": "ActivationService_List",
         "parameters": [
           {
             "type": "integer",
             "format": "int64",
-            "description": "Apply `start_epoch/end_epoch` filters together with `coinbase` filter for better performance.",
+            "description": "starting epoch for the query",
             "name": "startEpoch",
             "in": "query"
           },
           {
             "type": "integer",
             "format": "int64",
+            "description": "ending epoch for the query",
             "name": "endEpoch",
             "in": "query"
           },
@@ -569,6 +602,7 @@
               "format": "byte"
             },
             "collectionFormat": "multi",
+            "description": "list of activation IDs",
             "name": "id",
             "in": "query"
           },
@@ -579,6 +613,7 @@
               "format": "byte"
             },
             "collectionFormat": "multi",
+            "description": "list of smesher IDs",
             "name": "smesherId",
             "in": "query"
           },
@@ -591,12 +626,14 @@
           {
             "type": "string",
             "format": "uint64",
+            "description": "adjusts the starting point for data",
             "name": "offset",
             "in": "query"
           },
           {
             "type": "string",
             "format": "uint64",
+            "description": "specifies max number of items to fetch",
             "name": "limit",
             "in": "query"
           }
@@ -619,20 +656,24 @@
     },
     "/spacemesh.v2beta1.LayerService/List": {
       "get": {
+        "description": "List is a method that takes a \"LayerRequest\" body and returns an \"LayerList\".\nThis method is used to retrieve a list of layers based on the provided request parameters.",
         "tags": [
           "LayerService"
         ],
+        "summary": "List of layers",
         "operationId": "LayerService_List",
         "parameters": [
           {
             "type": "integer",
             "format": "int64",
+            "description": "starting layer for the query",
             "name": "startLayer",
             "in": "query"
           },
           {
             "type": "integer",
             "format": "int64",
+            "description": "ending layer for the query",
             "name": "endLayer",
             "in": "query"
           },
@@ -680,9 +721,11 @@
     },
     "/spacemesh.v2beta1.NetworkService/Info": {
       "get": {
+        "description": "Info is a method that returns an \"NetworkInfoResponse\".\nThis method is used to retrieve network information.",
         "tags": [
           "NetworkService"
         ],
+        "summary": "Network information",
         "operationId": "NetworkService_Info",
         "responses": {
           "200": {
@@ -702,9 +745,11 @@
     },
     "/spacemesh.v2beta1.NodeService/Status": {
       "get": {
+        "description": "Status is a method that returns an \"NodeStatusResponse\".\nThis method is used to retrieve node status information.",
         "tags": [
           "NodeService"
         ],
+        "summary": "Node status",
         "operationId": "NodeService_Status",
         "responses": {
           "200": {
@@ -724,31 +769,37 @@
     },
     "/spacemesh.v2beta1.RewardService/List": {
       "get": {
+        "description": "List is a method that takes a \"RewardRequest\" body and returns an \"RewardList\".\nThis method is used to retrieve a list of rewards based on the provided request parameters.",
         "tags": [
           "RewardService"
         ],
+        "summary": "List of rewards",
         "operationId": "RewardService_List",
         "parameters": [
           {
             "type": "integer",
             "format": "int64",
+            "description": "starting layer for the query",
             "name": "startLayer",
             "in": "query"
           },
           {
             "type": "integer",
             "format": "int64",
+            "description": "ending layer for the query",
             "name": "endLayer",
             "in": "query"
           },
           {
             "type": "string",
+            "description": "filter by coinbase",
             "name": "coinbase",
             "in": "query"
           },
           {
             "type": "string",
             "format": "byte",
+            "description": "filter by smesher",
             "name": "smesher",
             "in": "query"
           },
@@ -796,9 +847,11 @@
     },
     "/spacemesh.v2beta1.TransactionService/EstimateGas": {
       "post": {
+        "description": "EstimateGas is a method that takes a \"EstimateGasRequest\" body and returns an \"EstimateGasResponse\".\nThis method is used to estimate the recommended maximum gas for a signed binary transaction.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Estimate gas for transaction",
         "operationId": "TransactionService_EstimateGas",
         "parameters": [
           {
@@ -828,9 +881,11 @@
     },
     "/spacemesh.v2beta1.TransactionService/List": {
       "get": {
+        "description": "List is a method that takes a \"TransactionRequest\" body and returns an \"TransactionList\".\nThis method is used to retrieve a list of transactions based on the provided request parameters.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "List of transactions",
         "operationId": "TransactionService_List",
         "parameters": [
           {
@@ -920,9 +975,11 @@
     },
     "/spacemesh.v2beta1.TransactionService/ParseTransaction": {
       "post": {
+        "description": "ParseTransaction is a method that takes a \"ParseTransactionRequest\" body and returns an \"ParseTransactionResponse\".\nThis method is used to parse a signed binary transaction and optionally verify its signature.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Parse transaction",
         "operationId": "TransactionService_ParseTransaction",
         "parameters": [
           {
@@ -952,9 +1009,11 @@
     },
     "/spacemesh.v2beta1.TransactionService/SubmitTransaction": {
       "post": {
+        "description": "SubmitTransaction is a method that takes a \"SubmitTransactionRequest\" body and returns an \"SubmitTransactionResponse\".\nThis method is used to submit a signed binary transaction to the network.",
         "tags": [
           "TransactionService"
         ],
+        "summary": "Submit transaction",
         "operationId": "TransactionService_SubmitTransaction",
         "parameters": [
           {
@@ -993,22 +1052,6 @@
         "DOMAIN_ACTIVATION",
         "DOMAIN_BALLOT",
         "DOMAIN_HARE"
-      ]
-    },
-    "TransactionTransactionType": {
-      "type": "string",
-      "default": "TRANSACTION_TYPE_UNSPECIFIED",
-      "enum": [
-        "TRANSACTION_TYPE_UNSPECIFIED",
-        "TRANSACTION_TYPE_SINGLE_SIG_SEND",
-        "TRANSACTION_TYPE_SINGLE_SIG_SPAWN",
-        "TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN",
-        "TRANSACTION_TYPE_MULTI_SIG_SEND",
-        "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
-        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
-        "TRANSACTION_TYPE_VESTING_SPAWN",
-        "TRANSACTION_TYPE_VAULT_SPAWN",
-        "TRANSACTION_TYPE_DRAIN_VAULT"
       ]
     },
     "googlerpcStatus": {
@@ -1242,6 +1285,86 @@
         }
       }
     },
+    "spacemeshv2alpha1ContentsDrainVault": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "vault": {
+          "type": "string"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsMultiSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of required signatures"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsSend": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "amount in smidge"
+        },
+        "destination": {
+          "type": "string",
+          "title": "recipient account"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsSingleSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "string"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsVaultSpawn": {
+      "type": "object",
+      "properties": {
+        "initialUnlockAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "owner": {
+          "type": "string",
+          "title": "owner account"
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "vestingEnd": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
+        },
+        "vestingStart": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
+        }
+      }
+    },
     "spacemeshv2alpha1EstimateGasRequest": {
       "type": "object",
       "properties": {
@@ -1264,6 +1387,9 @@
           "$ref": "#/definitions/googlerpcStatus"
         }
       }
+    },
+    "spacemeshv2alpha1HighestRequest": {
+      "type": "object"
     },
     "spacemeshv2alpha1HighestResponse": {
       "type": "object",
@@ -1346,7 +1472,7 @@
         },
         "sortOrder": {
           "title": "specifies the sort order (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
+          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
         },
         "startLayer": {
           "type": "integer",
@@ -1595,7 +1721,7 @@
         },
         "sortOrder": {
           "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
+          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
         },
         "startLayer": {
           "type": "integer",
@@ -1603,6 +1729,14 @@
           "title": "starting layer for the query"
         }
       }
+    },
+    "spacemeshv2alpha1SortOrder": {
+      "type": "string",
+      "default": "ASC",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
     },
     "spacemeshv2alpha1SubmitTransactionRequest": {
       "type": "object",
@@ -1633,7 +1767,7 @@
       "properties": {
         "contents": {
           "title": "parsed transaction contents",
-          "$ref": "#/definitions/v2alpha1TransactionContents"
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionContents"
         },
         "gasPrice": {
           "type": "string",
@@ -1674,7 +1808,30 @@
           "title": "template account address"
         },
         "type": {
-          "$ref": "#/definitions/TransactionTransactionType"
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionTransactionType"
+        }
+      }
+    },
+    "spacemeshv2alpha1TransactionContents": {
+      "type": "object",
+      "properties": {
+        "drainVault": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsDrainVault"
+        },
+        "multiSigSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsMultiSigSpawn"
+        },
+        "send": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsSend"
+        },
+        "singleSigSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsSingleSigSpawn"
+        },
+        "vaultSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsVaultSpawn"
+        },
+        "vestingSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsMultiSigSpawn"
         }
       }
     },
@@ -1723,7 +1880,7 @@
         },
         "sortOrder": {
           "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
+          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
         },
         "startLayer": {
           "description": "Starting layer for transactions.",
@@ -1821,15 +1978,106 @@
         "TRANSACTION_STATE_INEFFECTUAL"
       ]
     },
+    "spacemeshv2alpha1TransactionTransactionType": {
+      "type": "string",
+      "default": "TRANSACTION_TYPE_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_TYPE_UNSPECIFIED",
+        "TRANSACTION_TYPE_SINGLE_SIG_SEND",
+        "TRANSACTION_TYPE_SINGLE_SIG_SPAWN",
+        "TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SEND",
+        "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_VESTING_SPAWN",
+        "TRANSACTION_TYPE_VAULT_SPAWN",
+        "TRANSACTION_TYPE_DRAIN_VAULT"
+      ]
+    },
+    "spacemeshv2beta1Account": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "title": "account public address"
+        },
+        "current": {
+          "title": "current state",
+          "$ref": "#/definitions/spacemeshv2beta1AccountState"
+        },
+        "projected": {
+          "title": "projected state (includes pending txs)",
+          "$ref": "#/definitions/spacemeshv2beta1AccountState"
+        },
+        "template": {
+          "type": "string",
+          "title": "account template address"
+        }
+      }
+    },
     "spacemeshv2beta1AccountList": {
       "type": "object",
       "properties": {
         "accounts": {
           "type": "array",
+          "title": "list of accounts",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Account"
+            "$ref": "#/definitions/spacemeshv2beta1Account"
           }
+        }
+      }
+    },
+    "spacemeshv2beta1AccountState": {
+      "type": "object",
+      "properties": {
+        "balance": {
+          "type": "string",
+          "format": "uint64",
+          "title": "account balance in smidge"
+        },
+        "counter": {
+          "type": "string",
+          "format": "uint64",
+          "title": "aka nonce"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "account balance as of layer X"
+        }
+      }
+    },
+    "spacemeshv2beta1Activation": {
+      "type": "object",
+      "properties": {
+        "coinbase": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "id": {
+          "type": "string",
+          "format": "byte"
+        },
+        "numUnits": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of effective PoST data commitment units"
+        },
+        "publishEpoch": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "smesherId": {
+          "type": "string",
+          "format": "byte"
+        },
+        "weight": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -1838,9 +2086,10 @@
       "properties": {
         "activations": {
           "type": "array",
+          "title": "list of activations",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Activation"
+            "$ref": "#/definitions/spacemeshv2beta1Activation"
           }
         }
       }
@@ -1850,7 +2099,98 @@
       "properties": {
         "count": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "number of activations for the specified epoch"
+        }
+      }
+    },
+    "spacemeshv2beta1Block": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "byte",
+          "title": "block hash"
+        }
+      }
+    },
+    "spacemeshv2beta1ContentsDrainVault": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "vault": {
+          "type": "string"
+        }
+      }
+    },
+    "spacemeshv2beta1ContentsMultiSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of required signatures"
+        }
+      }
+    },
+    "spacemeshv2beta1ContentsSend": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "amount in smidge"
+        },
+        "destination": {
+          "type": "string",
+          "title": "recipient account"
+        }
+      }
+    },
+    "spacemeshv2beta1ContentsSingleSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "string"
+        }
+      }
+    },
+    "spacemeshv2beta1ContentsVaultSpawn": {
+      "type": "object",
+      "properties": {
+        "initialUnlockAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "owner": {
+          "type": "string",
+          "title": "owner account"
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "vestingEnd": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
+        },
+        "vestingStart": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
         }
       }
     },
@@ -1869,10 +2209,19 @@
       "properties": {
         "recommendedMaxGas": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "recommended max gas"
         },
         "status": {
           "$ref": "#/definitions/googlerpcStatus"
+        }
+      }
+    },
+    "spacemeshv2beta1HighestResponse": {
+      "type": "object",
+      "properties": {
+        "activation": {
+          "$ref": "#/definitions/spacemeshv2beta1Activation"
         }
       }
     },
@@ -1881,7 +2230,7 @@
       "properties": {
         "block": {
           "title": "layer's block",
-          "$ref": "#/definitions/spacemeshv2alpha1Block"
+          "$ref": "#/definitions/spacemeshv2beta1Block"
         },
         "consensusHash": {
           "type": "string"
@@ -1921,6 +2270,7 @@
       "properties": {
         "layers": {
           "type": "array",
+          "title": "list of layers",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2beta1Layer"
@@ -1950,7 +2300,8 @@
         },
         "labelsPerUnit": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of labels per unit"
         },
         "layerDuration": {
           "type": "string",
@@ -1992,6 +2343,7 @@
           "title": "last layer whose votes have been processed"
         },
         "status": {
+          "title": "node sync status",
           "$ref": "#/definitions/spacemeshv2beta1NodeStatusResponseSyncStatus"
         }
       }
@@ -2005,6 +2357,15 @@
         "SYNC_STATUS_SYNCING",
         "SYNC_STATUS_SYNCED"
       ]
+    },
+    "spacemeshv2beta1Nonce": {
+      "type": "object",
+      "properties": {
+        "counter": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
     },
     "spacemeshv2beta1ParseTransactionRequest": {
       "type": "object",
@@ -2027,7 +2388,8 @@
           "$ref": "#/definitions/googlerpcStatus"
         },
         "tx": {
-          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+          "title": "parsed transaction",
+          "$ref": "#/definitions/spacemeshv2beta1Transaction"
         }
       }
     },
@@ -2065,6 +2427,7 @@
       "properties": {
         "rewards": {
           "type": "array",
+          "title": "list of rewards",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2beta1Reward"
@@ -2090,7 +2453,82 @@
         },
         "txId": {
           "type": "string",
+          "format": "byte",
+          "title": "transaction ID"
+        }
+      }
+    },
+    "spacemeshv2beta1Transaction": {
+      "description": "An immutable Spacemesh transaction.\ndo not include mutable data such as tx state or result.",
+      "type": "object",
+      "properties": {
+        "contents": {
+          "title": "parsed transaction contents",
+          "$ref": "#/definitions/spacemeshv2beta1TransactionContents"
+        },
+        "gasPrice": {
+          "type": "string",
+          "format": "uint64",
+          "title": "fee per unit gas, in smidge"
+        },
+        "id": {
+          "type": "string",
           "format": "byte"
+        },
+        "maxGas": {
+          "type": "string",
+          "format": "uint64",
+          "title": "max gas units consumed by tx"
+        },
+        "maxSpend": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "method": {
+          "description": "this is actually limited by uint8, but no type for that.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "nonce": {
+          "$ref": "#/definitions/spacemeshv2beta1Nonce"
+        },
+        "principal": {
+          "type": "string",
+          "title": "principal account address"
+        },
+        "raw": {
+          "type": "string",
+          "format": "byte"
+        },
+        "template": {
+          "type": "string",
+          "title": "template account address"
+        },
+        "type": {
+          "$ref": "#/definitions/spacemeshv2beta1TransactionTransactionType"
+        }
+      }
+    },
+    "spacemeshv2beta1TransactionContents": {
+      "type": "object",
+      "properties": {
+        "drainVault": {
+          "$ref": "#/definitions/spacemeshv2beta1ContentsDrainVault"
+        },
+        "multiSigSpawn": {
+          "$ref": "#/definitions/spacemeshv2beta1ContentsMultiSigSpawn"
+        },
+        "send": {
+          "$ref": "#/definitions/spacemeshv2beta1ContentsSend"
+        },
+        "singleSigSpawn": {
+          "$ref": "#/definitions/spacemeshv2beta1ContentsSingleSigSpawn"
+        },
+        "vaultSpawn": {
+          "$ref": "#/definitions/spacemeshv2beta1ContentsVaultSpawn"
+        },
+        "vestingSpawn": {
+          "$ref": "#/definitions/spacemeshv2beta1ContentsMultiSigSpawn"
         }
       }
     },
@@ -2099,6 +2537,7 @@
       "properties": {
         "transactions": {
           "type": "array",
+          "title": "list of transactions",
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2beta1TransactionResponse"
@@ -2110,98 +2549,98 @@
       "type": "object",
       "properties": {
         "tx": {
-          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+          "title": "transaction",
+          "$ref": "#/definitions/spacemeshv2beta1Transaction"
         },
         "txResult": {
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionResult"
+          "title": "optional transaction result",
+          "$ref": "#/definitions/spacemeshv2beta1TransactionResult"
         },
         "txState": {
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
+          "title": "optional transaction state",
+          "$ref": "#/definitions/spacemeshv2beta1TransactionState"
         }
       }
     },
-    "v2alpha1ContentsDrainVault": {
+    "spacemeshv2beta1TransactionResult": {
       "type": "object",
       "properties": {
-        "amount": {
+        "block": {
           "type": "string",
-          "format": "uint64"
+          "format": "byte",
+          "title": "block hash"
         },
-        "destination": {
+        "fee": {
+          "type": "string",
+          "format": "uint64",
+          "title": "in smidge"
+        },
+        "gasConsumed": {
+          "type": "string",
+          "format": "uint64",
+          "title": "in units of gas"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "layer number"
+        },
+        "message": {
           "type": "string"
         },
-        "vault": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1ContentsMultiSigSpawn": {
-      "type": "object",
-      "properties": {
-        "pubkey": {
+        "status": {
+          "title": "status of the transaction",
+          "$ref": "#/definitions/spacemeshv2beta1TransactionResultStatus"
+        },
+        "touchedAddresses": {
           "type": "array",
+          "title": "addresses touched by the tx",
           "items": {
             "type": "string"
           }
-        },
-        "required": {
-          "type": "integer",
-          "format": "int64",
-          "title": "number of required signatures"
         }
       }
     },
-    "v2alpha1ContentsSend": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "string",
-          "format": "uint64",
-          "title": "amount in smidge"
-        },
-        "destination": {
-          "type": "string",
-          "title": "recipient account"
-        }
-      }
+    "spacemeshv2beta1TransactionResultStatus": {
+      "type": "string",
+      "default": "TRANSACTION_STATUS_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_STATUS_UNSPECIFIED",
+        "TRANSACTION_STATUS_SUCCESS",
+        "TRANSACTION_STATUS_FAILURE",
+        "TRANSACTION_STATUS_INVALID"
+      ]
     },
-    "v2alpha1ContentsSingleSigSpawn": {
-      "type": "object",
-      "properties": {
-        "pubkey": {
-          "type": "string"
-        }
-      }
+    "spacemeshv2beta1TransactionState": {
+      "description": "TransactionState is the \"journey\" of a tx from mempool to block inclusion to\nmesh to STF processing. To know whether or not the tx actually succeeded,\nand its side effects, check tx_state.\n\n - TRANSACTION_STATE_UNSPECIFIED: default state\n - TRANSACTION_STATE_REJECTED: rejected from mempool due to, e.g., invalid syntax\n - TRANSACTION_STATE_INSUFFICIENT_FUNDS: rejected from mempool by funds check\n - TRANSACTION_STATE_CONFLICTING: rejected from mempool due to conflicting counter\n - TRANSACTION_STATE_MEMPOOL: in mempool but not on the mesh yet\n - TRANSACTION_STATE_MESH: submitted to the mesh\n - TRANSACTION_STATE_PROCESSED: processed by STF; check Receipt for success or failure\n - TRANSACTION_STATE_INEFFECTUAL: removed from mempool and will be forgotten and never executed",
+      "type": "string",
+      "default": "TRANSACTION_STATE_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_STATE_UNSPECIFIED",
+        "TRANSACTION_STATE_REJECTED",
+        "TRANSACTION_STATE_INSUFFICIENT_FUNDS",
+        "TRANSACTION_STATE_CONFLICTING",
+        "TRANSACTION_STATE_MEMPOOL",
+        "TRANSACTION_STATE_MESH",
+        "TRANSACTION_STATE_PROCESSED",
+        "TRANSACTION_STATE_INEFFECTUAL"
+      ]
     },
-    "v2alpha1ContentsVaultSpawn": {
-      "type": "object",
-      "properties": {
-        "initialUnlockAmount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "owner": {
-          "type": "string",
-          "title": "owner account"
-        },
-        "totalAmount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "vestingEnd": {
-          "type": "integer",
-          "format": "int64",
-          "title": "as layer number"
-        },
-        "vestingStart": {
-          "type": "integer",
-          "format": "int64",
-          "title": "as layer number"
-        }
-      }
-    },
-    "v2alpha1HighestRequest": {
-      "type": "object"
+    "spacemeshv2beta1TransactionTransactionType": {
+      "type": "string",
+      "default": "TRANSACTION_TYPE_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_TYPE_UNSPECIFIED",
+        "TRANSACTION_TYPE_SINGLE_SIG_SEND",
+        "TRANSACTION_TYPE_SINGLE_SIG_SPAWN",
+        "TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SEND",
+        "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_VESTING_SPAWN",
+        "TRANSACTION_TYPE_VAULT_SPAWN",
+        "TRANSACTION_TYPE_DRAIN_VAULT"
+      ]
     },
     "v2alpha1MalfeasanceList": {
       "type": "object",
@@ -2213,37 +2652,6 @@
             "type": "object",
             "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
           }
-        }
-      }
-    },
-    "v2alpha1SortOrder": {
-      "type": "string",
-      "default": "ASC",
-      "enum": [
-        "ASC",
-        "DESC"
-      ]
-    },
-    "v2alpha1TransactionContents": {
-      "type": "object",
-      "properties": {
-        "drainVault": {
-          "$ref": "#/definitions/v2alpha1ContentsDrainVault"
-        },
-        "multiSigSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
-        },
-        "send": {
-          "$ref": "#/definitions/v2alpha1ContentsSend"
-        },
-        "singleSigSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsSingleSigSpawn"
-        },
-        "vaultSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsVaultSpawn"
-        },
-        "vestingSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
         }
       }
     }

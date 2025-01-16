@@ -124,6 +124,24 @@ func local_request_ActivationService_ActivationsCount_0(ctx context.Context, mar
 
 }
 
+func request_ActivationService_Highest_0(ctx context.Context, marshaler runtime.Marshaler, client ActivationServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq HighestRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := client.Highest(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_ActivationService_Highest_0(ctx context.Context, marshaler runtime.Marshaler, server ActivationServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq HighestRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := server.Highest(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 // RegisterActivationStreamServiceHandlerServer registers the http handlers for service ActivationStreamService to "mux".
 // UnaryRPC     :call ActivationStreamServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -193,6 +211,31 @@ func RegisterActivationServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		}
 
 		forward_ActivationService_ActivationsCount_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_ActivationService_Highest_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/Highest", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/Highest"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_ActivationService_Highest_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_ActivationService_Highest_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -352,6 +395,28 @@ func RegisterActivationServiceHandlerClient(ctx context.Context, mux *runtime.Se
 
 	})
 
+	mux.Handle("GET", pattern_ActivationService_Highest_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/Highest", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/Highest"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_ActivationService_Highest_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_ActivationService_Highest_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -359,10 +424,14 @@ var (
 	pattern_ActivationService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "List"}, ""))
 
 	pattern_ActivationService_ActivationsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "ActivationsCount"}, ""))
+
+	pattern_ActivationService_Highest_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "Highest"}, ""))
 )
 
 var (
 	forward_ActivationService_List_0 = runtime.ForwardResponseMessage
 
 	forward_ActivationService_ActivationsCount_0 = runtime.ForwardResponseMessage
+
+	forward_ActivationService_Highest_0 = runtime.ForwardResponseMessage
 )

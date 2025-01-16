@@ -136,14 +136,28 @@ var ActivationStreamService_ServiceDesc = grpc.ServiceDesc{
 const (
 	ActivationService_List_FullMethodName             = "/spacemesh.v2beta1.ActivationService/List"
 	ActivationService_ActivationsCount_FullMethodName = "/spacemesh.v2beta1.ActivationService/ActivationsCount"
+	ActivationService_Highest_FullMethodName          = "/spacemesh.v2beta1.ActivationService/Highest"
 )
 
 // ActivationServiceClient is the client API for ActivationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActivationServiceClient interface {
+	// List of activations
+	//
+	// List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve a list of activations based on the provided request parameters.
 	List(ctx context.Context, in *ActivationRequest, opts ...grpc.CallOption) (*ActivationList, error)
+	// Count of activations
+	//
+	// ActivationsCount is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve the count of activations for a specified epoch.
 	ActivationsCount(ctx context.Context, in *ActivationsCountRequest, opts ...grpc.CallOption) (*ActivationsCountResponse, error)
+	// Highest
+	//
+	// Highest is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve the activation with the highest tick count.
+	Highest(ctx context.Context, in *HighestRequest, opts ...grpc.CallOption) (*HighestResponse, error)
 }
 
 type activationServiceClient struct {
@@ -172,12 +186,34 @@ func (c *activationServiceClient) ActivationsCount(ctx context.Context, in *Acti
 	return out, nil
 }
 
+func (c *activationServiceClient) Highest(ctx context.Context, in *HighestRequest, opts ...grpc.CallOption) (*HighestResponse, error) {
+	out := new(HighestResponse)
+	err := c.cc.Invoke(ctx, ActivationService_Highest_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ActivationServiceServer is the server API for ActivationService service.
 // All implementations should embed UnimplementedActivationServiceServer
 // for forward compatibility
 type ActivationServiceServer interface {
+	// List of activations
+	//
+	// List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve a list of activations based on the provided request parameters.
 	List(context.Context, *ActivationRequest) (*ActivationList, error)
+	// Count of activations
+	//
+	// ActivationsCount is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve the count of activations for a specified epoch.
 	ActivationsCount(context.Context, *ActivationsCountRequest) (*ActivationsCountResponse, error)
+	// Highest
+	//
+	// Highest is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+	// This method is used to retrieve the activation with the highest tick count.
+	Highest(context.Context, *HighestRequest) (*HighestResponse, error)
 }
 
 // UnimplementedActivationServiceServer should be embedded to have forward compatible implementations.
@@ -189,6 +225,9 @@ func (UnimplementedActivationServiceServer) List(context.Context, *ActivationReq
 }
 func (UnimplementedActivationServiceServer) ActivationsCount(context.Context, *ActivationsCountRequest) (*ActivationsCountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ActivationsCount not implemented")
+}
+func (UnimplementedActivationServiceServer) Highest(context.Context, *HighestRequest) (*HighestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Highest not implemented")
 }
 
 // UnsafeActivationServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -238,6 +277,24 @@ func _ActivationService_ActivationsCount_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ActivationService_Highest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HighestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActivationServiceServer).Highest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ActivationService_Highest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActivationServiceServer).Highest(ctx, req.(*HighestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ActivationService_ServiceDesc is the grpc.ServiceDesc for ActivationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -252,6 +309,10 @@ var ActivationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ActivationsCount",
 			Handler:    _ActivationService_ActivationsCount_Handler,
+		},
+		{
+			MethodName: "Highest",
+			Handler:    _ActivationService_Highest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
