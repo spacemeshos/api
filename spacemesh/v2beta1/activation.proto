@@ -61,7 +61,7 @@ message HighestResponse {
 }
 
 service ActivationService {
-  option (google.api.api_visibility).restriction = "V2";
+  option (google.api.api_visibility).restriction = "v2beta1";
 
   // List of activations
   //

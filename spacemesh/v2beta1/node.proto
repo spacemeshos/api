@@ -24,7 +24,7 @@ message NodeStatusResponse {
 message NodeStatusRequest {}
 
 service NodeService {
-  option (google.api.api_visibility).restriction = "V2";
+  option (google.api.api_visibility).restriction = "v2beta1";
 
   // Node status
   //
