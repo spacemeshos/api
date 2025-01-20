@@ -103,7 +103,7 @@ build: $(BUF)
 	sed -i'.bak' 's/"version": "version not set"/"version": "v2alpha1"/' release/openapi/swagger/src/api.swagger.json && rm -f release/openapi/swagger/src/api.swagger.json.bak
 	swagger flatten --with-flatten=remove-unused release/openapi/swagger/src/api.swagger.json -o release/openapi/swagger/src/api.swagger.json
 
-	sed -i'.bak' 's/"version": "version not set"/"version": "v2alpha1"/' release/openapi/swagger/src/api_v2beta1.swagger.json && rm -f release/openapi/swagger/src/api_v2beta1.swagger.json.bak
+	sed -i'.bak' 's/"version": "version not set"/"version": "v2beta1"/' release/openapi/swagger/src/api_v2beta1.swagger.json && rm -f release/openapi/swagger/src/api_v2beta1.swagger.json.bak
 	swagger flatten --with-flatten=remove-unused release/openapi/swagger/src/api_v2beta1.swagger.json -o release/openapi/swagger/src/api_v2beta1.swagger.json
 
 # Make sure build is up to date
