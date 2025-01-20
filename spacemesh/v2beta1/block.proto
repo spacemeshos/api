@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "spacemesh/v2beta1/tx.proto";
+
+package spacemesh.v2beta1;
+
+message Block {
+  bytes id = 1; // block hash
+}

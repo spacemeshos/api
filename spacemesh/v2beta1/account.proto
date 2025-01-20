@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/api/visibility.proto";
+
+package spacemesh.v2beta1;
+
+message Account {
+  string address = 1; // account public address
+  AccountState current = 2; // current state
+  AccountState projected = 3; // projected state (includes pending txs)
+  string template = 4; // account template address
+}
+
+message AccountState {
+  uint64 counter = 1; // aka nonce
+  uint64 balance = 2; // account balance in smidge
+  uint32 layer = 3; // account balance as of layer X
+}
+
+message AccountRequest {
+  repeated string addresses = 1; // list of account addresses
+  uint64 offset = 2; // adjusts the starting point for data
+  uint64 limit = 3; // specifies max number of items to fetch// bech32 format including HRP
+};
+
+message AccountList {
+  repeated Account accounts = 1; // list of accounts
+}
+
+service AccountService {
+  option (google.api.api_visibility).restriction = "v2beta1";
+
+  // List of accounts
+  //
+  // List is a method that takes an "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve a list of accounts based on the provided request parameters.
+  rpc List(AccountRequest) returns (AccountList) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.AccountService/List"
+    };
+  };
+}
