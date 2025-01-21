@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package spacemesh.v2alpha1;
+package spacemesh.v2beta1;
 
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
@@ -172,13 +172,29 @@ message ProposalsResponse {
 }
 
 service SmeshingIdentitiesService {
-  option (google.api.api_visibility).restriction = "V2";
+  option (google.api.api_visibility).restriction = "v2beta1";
 
-  rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {}
+  rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/States"
+    };
+  }
 
-  rpc PoetInfo(PoetInfoRequest) returns (PoetInfoResponse) {}
+  rpc PoetInfo(PoetInfoRequest) returns (PoetInfoResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"
+    };
+  }
 
-  rpc Eligibilities(EligibilitiesRequest) returns (EligibilitiesResponse) {}
+  rpc Eligibilities(EligibilitiesRequest) returns (EligibilitiesResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"
+    };
+  }
 
-  rpc Proposals(ProposalsRequest) returns (ProposalsResponse) {}
+  rpc Proposals(ProposalsRequest) returns (ProposalsResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"
+    };
+  }
 }
