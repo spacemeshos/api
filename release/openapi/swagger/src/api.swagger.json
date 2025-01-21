@@ -45,7 +45,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1AccountList"
+              "$ref": "#/definitions/spacemeshv2alpha1AccountList"
             }
           },
           "default": {
@@ -71,7 +71,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1ActivationsCountRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1ActivationsCountRequest"
             }
           }
         ],
@@ -79,7 +79,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1ActivationsCountResponse"
+              "$ref": "#/definitions/spacemeshv2alpha1ActivationsCountResponse"
             }
           },
           "default": {
@@ -105,7 +105,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1HighestRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1HighestRequest"
             }
           }
         ],
@@ -139,7 +139,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1ActivationRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1ActivationRequest"
             }
           }
         ],
@@ -147,7 +147,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1ActivationList"
+              "$ref": "#/definitions/spacemeshv2alpha1ActivationList"
             }
           },
           "default": {
@@ -173,7 +173,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1LayerRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1LayerRequest"
             }
           }
         ],
@@ -181,7 +181,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1LayerList"
+              "$ref": "#/definitions/spacemeshv2alpha1LayerList"
             }
           },
           "default": {
@@ -215,7 +215,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1MalfeasanceList"
+              "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceList"
             }
           },
           "default": {
@@ -241,7 +241,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1NetworkInfoRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1NetworkInfoRequest"
             }
           }
         ],
@@ -275,7 +275,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1NodeStatusRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1NodeStatusRequest"
             }
           }
         ],
@@ -283,7 +283,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1NodeStatusResponse"
+              "$ref": "#/definitions/spacemeshv2alpha1NodeStatusResponse"
             }
           },
           "default": {
@@ -309,7 +309,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1RewardRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1RewardRequest"
             }
           }
         ],
@@ -317,7 +317,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1RewardList"
+              "$ref": "#/definitions/spacemeshv2alpha1RewardList"
             }
           },
           "default": {
@@ -471,7 +471,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1EstimateGasRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1EstimateGasRequest"
             }
           }
         ],
@@ -479,7 +479,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1EstimateGasResponse"
+              "$ref": "#/definitions/spacemeshv2alpha1EstimateGasResponse"
             }
           },
           "default": {
@@ -505,7 +505,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2alpha1TransactionRequest"
+              "$ref": "#/definitions/spacemeshv2alpha1TransactionRequest"
             }
           }
         ],
@@ -513,7 +513,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1TransactionList"
+              "$ref": "#/definitions/spacemeshv2alpha1TransactionList"
             }
           },
           "default": {
@@ -595,43 +595,6 @@
     }
   },
   "definitions": {
-    "MalfeasanceProofMalfeasanceDomain": {
-      "type": "string",
-      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs\n - DOMAIN_ACTIVATION: ATX related proofs\n - DOMAIN_BALLOT: Ballot related proofs\n - DOMAIN_HARE: Hare related proofs",
-      "default": "DOMAIN_UNSPECIFIED",
-      "enum": [
-        "DOMAIN_UNSPECIFIED",
-        "DOMAIN_ACTIVATION",
-        "DOMAIN_BALLOT",
-        "DOMAIN_HARE"
-      ]
-    },
-    "NodeStatusResponseSyncStatus": {
-      "type": "string",
-      "default": "SYNC_STATUS_UNSPECIFIED",
-      "enum": [
-        "SYNC_STATUS_UNSPECIFIED",
-        "SYNC_STATUS_OFFLINE",
-        "SYNC_STATUS_SYNCING",
-        "SYNC_STATUS_SYNCED"
-      ]
-    },
-    "TransactionTransactionType": {
-      "type": "string",
-      "default": "TRANSACTION_TYPE_UNSPECIFIED",
-      "enum": [
-        "TRANSACTION_TYPE_UNSPECIFIED",
-        "TRANSACTION_TYPE_SINGLE_SIG_SEND",
-        "TRANSACTION_TYPE_SINGLE_SIG_SPAWN",
-        "TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN",
-        "TRANSACTION_TYPE_MULTI_SIG_SEND",
-        "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
-        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
-        "TRANSACTION_TYPE_VESTING_SPAWN",
-        "TRANSACTION_TYPE_VAULT_SPAWN",
-        "TRANSACTION_TYPE_DRAIN_VAULT"
-      ]
-    },
     "googlerpcStatus": {
       "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors).",
       "type": "object",
@@ -684,6 +647,19 @@
         "template": {
           "type": "string",
           "title": "account template address"
+        }
+      }
+    },
+    "spacemeshv2alpha1AccountList": {
+      "type": "object",
+      "properties": {
+        "accounts": {
+          "type": "array",
+          "title": "list of accounts",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Account"
+          }
         }
       }
     },
@@ -762,6 +738,84 @@
         }
       }
     },
+    "spacemeshv2alpha1ActivationList": {
+      "type": "object",
+      "properties": {
+        "activations": {
+          "type": "array",
+          "title": "list of activations",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Activation"
+          }
+        }
+      }
+    },
+    "spacemeshv2alpha1ActivationRequest": {
+      "type": "object",
+      "properties": {
+        "coinbase": {
+          "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
+          "type": "string"
+        },
+        "endEpoch": {
+          "type": "integer",
+          "format": "int64",
+          "title": "ending epoch for the query"
+        },
+        "id": {
+          "type": "array",
+          "title": "list of activation IDs",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "smesherId": {
+          "type": "array",
+          "title": "list of smesher IDs",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "startEpoch": {
+          "type": "integer",
+          "format": "int64",
+          "title": "starting epoch for the query"
+        }
+      }
+    },
+    "spacemeshv2alpha1ActivationsCountRequest": {
+      "type": "object",
+      "properties": {
+        "epoch": {
+          "type": "integer",
+          "format": "int64",
+          "title": "epoch number"
+        }
+      }
+    },
+    "spacemeshv2alpha1ActivationsCountResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of activations for the specified epoch"
+        }
+      }
+    },
     "spacemeshv2alpha1Block": {
       "type": "object",
       "properties": {
@@ -769,6 +823,86 @@
           "type": "string",
           "format": "byte",
           "title": "block hash"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsDrainVault": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "vault": {
+          "type": "string"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsMultiSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": {
+          "type": "integer",
+          "format": "int64",
+          "title": "number of required signatures"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsSend": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "amount in smidge"
+        },
+        "destination": {
+          "type": "string",
+          "title": "recipient account"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsSingleSigSpawn": {
+      "type": "object",
+      "properties": {
+        "pubkey": {
+          "type": "string"
+        }
+      }
+    },
+    "spacemeshv2alpha1ContentsVaultSpawn": {
+      "type": "object",
+      "properties": {
+        "initialUnlockAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "owner": {
+          "type": "string",
+          "title": "owner account"
+        },
+        "totalAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "vestingEnd": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
+        },
+        "vestingStart": {
+          "type": "integer",
+          "format": "int64",
+          "title": "as layer number"
         }
       }
     },
@@ -797,6 +931,32 @@
           "format": "int64"
         }
       }
+    },
+    "spacemeshv2alpha1EstimateGasRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string",
+          "format": "byte",
+          "title": "signed binary transaction"
+        }
+      }
+    },
+    "spacemeshv2alpha1EstimateGasResponse": {
+      "type": "object",
+      "properties": {
+        "recommendedMaxGas": {
+          "type": "string",
+          "format": "uint64",
+          "title": "recommended max gas"
+        },
+        "status": {
+          "$ref": "#/definitions/googlerpcStatus"
+        }
+      }
+    },
+    "spacemeshv2alpha1HighestRequest": {
+      "type": "object"
     },
     "spacemeshv2alpha1HighestResponse": {
       "type": "object",
@@ -846,11 +1006,66 @@
         "LAYER_STATUS_VERIFIED"
       ]
     },
+    "spacemeshv2alpha1LayerList": {
+      "type": "object",
+      "properties": {
+        "layers": {
+          "type": "array",
+          "title": "list of layers",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Layer"
+          }
+        }
+      }
+    },
+    "spacemeshv2alpha1LayerRequest": {
+      "type": "object",
+      "properties": {
+        "endLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "ending layer for the query"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "sortOrder": {
+          "title": "specifies the sort order (default is ASC)",
+          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
+        },
+        "startLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "starting layer for the query"
+        }
+      }
+    },
+    "spacemeshv2alpha1MalfeasanceList": {
+      "type": "object",
+      "properties": {
+        "proofs": {
+          "type": "array",
+          "title": "list of malfeasance proofs",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
+          }
+        }
+      }
+    },
     "spacemeshv2alpha1MalfeasanceProof": {
       "type": "object",
       "properties": {
         "domain": {
-          "$ref": "#/definitions/MalfeasanceProofMalfeasanceDomain"
+          "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProofMalfeasanceDomain"
         },
         "properties": {
           "type": "object",
@@ -870,6 +1085,17 @@
           "title": "type of the malfeasance proof, depends on domain"
         }
       }
+    },
+    "spacemeshv2alpha1MalfeasanceProofMalfeasanceDomain": {
+      "type": "string",
+      "title": "- DOMAIN_UNSPECIFIED: for legacy proofs\n - DOMAIN_ACTIVATION: ATX related proofs\n - DOMAIN_BALLOT: Ballot related proofs\n - DOMAIN_HARE: Hare related proofs",
+      "default": "DOMAIN_UNSPECIFIED",
+      "enum": [
+        "DOMAIN_UNSPECIFIED",
+        "DOMAIN_ACTIVATION",
+        "DOMAIN_BALLOT",
+        "DOMAIN_HARE"
+      ]
     },
     "spacemeshv2alpha1MalfeasanceRequest": {
       "type": "object",
@@ -893,6 +1119,9 @@
           }
         }
       }
+    },
+    "spacemeshv2alpha1NetworkInfoRequest": {
+      "type": "object"
     },
     "spacemeshv2alpha1NetworkInfoResponse": {
       "type": "object",
@@ -929,6 +1158,53 @@
           "title": "number of layers per epoch"
         }
       }
+    },
+    "spacemeshv2alpha1NodeStatusRequest": {
+      "type": "object"
+    },
+    "spacemeshv2alpha1NodeStatusResponse": {
+      "type": "object",
+      "properties": {
+        "appliedLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "last layer node has applied to the state"
+        },
+        "connectedPeers": {
+          "type": "string",
+          "format": "uint64",
+          "title": "number of connected neighbors"
+        },
+        "currentLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "current layer, based on clock time"
+        },
+        "latestLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "latest layer node has seen from blocks"
+        },
+        "processedLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "last layer whose votes have been processed"
+        },
+        "status": {
+          "title": "node sync status",
+          "$ref": "#/definitions/spacemeshv2alpha1NodeStatusResponseSyncStatus"
+        }
+      }
+    },
+    "spacemeshv2alpha1NodeStatusResponseSyncStatus": {
+      "type": "string",
+      "default": "SYNC_STATUS_UNSPECIFIED",
+      "enum": [
+        "SYNC_STATUS_UNSPECIFIED",
+        "SYNC_STATUS_OFFLINE",
+        "SYNC_STATUS_SYNCING",
+        "SYNC_STATUS_SYNCED"
+      ]
     },
     "spacemeshv2alpha1Nonce": {
       "type": "object",
@@ -1032,6 +1308,65 @@
         }
       }
     },
+    "spacemeshv2alpha1RewardList": {
+      "type": "object",
+      "properties": {
+        "rewards": {
+          "type": "array",
+          "title": "list of rewards",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1Reward"
+          }
+        }
+      }
+    },
+    "spacemeshv2alpha1RewardRequest": {
+      "type": "object",
+      "properties": {
+        "coinbase": {
+          "type": "string",
+          "title": "filter by coinbase"
+        },
+        "endLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "ending layer for the query"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64",
+          "title": "specifies max number of items to fetch"
+        },
+        "offset": {
+          "type": "string",
+          "format": "uint64",
+          "title": "adjusts the starting point for data"
+        },
+        "smesher": {
+          "type": "string",
+          "format": "byte",
+          "title": "filter by smesher"
+        },
+        "sortOrder": {
+          "title": "specifies the sort order by layer (default is ASC)",
+          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
+        },
+        "startLayer": {
+          "type": "integer",
+          "format": "int64",
+          "title": "starting layer for the query"
+        }
+      }
+    },
+    "spacemeshv2alpha1SortOrder": {
+      "type": "string",
+      "default": "ASC",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    },
     "spacemeshv2alpha1SubmitTransactionRequest": {
       "type": "object",
       "properties": {
@@ -1061,7 +1396,7 @@
       "properties": {
         "contents": {
           "title": "parsed transaction contents",
-          "$ref": "#/definitions/v2alpha1TransactionContents"
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionContents"
         },
         "gasPrice": {
           "type": "string",
@@ -1102,7 +1437,109 @@
           "title": "template account address"
         },
         "type": {
-          "$ref": "#/definitions/TransactionTransactionType"
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionTransactionType"
+        }
+      }
+    },
+    "spacemeshv2alpha1TransactionContents": {
+      "type": "object",
+      "properties": {
+        "drainVault": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsDrainVault"
+        },
+        "multiSigSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsMultiSigSpawn"
+        },
+        "send": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsSend"
+        },
+        "singleSigSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsSingleSigSpawn"
+        },
+        "vaultSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsVaultSpawn"
+        },
+        "vestingSpawn": {
+          "$ref": "#/definitions/spacemeshv2alpha1ContentsMultiSigSpawn"
+        }
+      }
+    },
+    "spacemeshv2alpha1TransactionList": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "title": "list of transactions",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/spacemeshv2alpha1TransactionResponse"
+          }
+        }
+      }
+    },
+    "spacemeshv2alpha1TransactionRequest": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "title": "Filter by address (principal or recipient)"
+        },
+        "endLayer": {
+          "description": "Ending layer for transactions.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "includeResult": {
+          "description": "Whether to include result of transactions in response.",
+          "type": "boolean"
+        },
+        "includeState": {
+          "description": "Whether to include transaction state in response.",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "Specifies maximum number of items to fetch.",
+          "type": "string",
+          "format": "uint64"
+        },
+        "offset": {
+          "description": "Adjusts the starting point for data retrieval.",
+          "type": "string",
+          "format": "uint64"
+        },
+        "sortOrder": {
+          "title": "specifies the sort order by layer (default is ASC)",
+          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
+        },
+        "startLayer": {
+          "description": "Starting layer for transactions.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "txid": {
+          "description": "Filter: specific transaction IDs to filter.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "spacemeshv2alpha1TransactionResponse": {
+      "type": "object",
+      "properties": {
+        "tx": {
+          "title": "transaction",
+          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+        },
+        "txResult": {
+          "title": "optional transaction result",
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionResult"
+        },
+        "txState": {
+          "title": "optional transaction state",
+          "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
         }
       }
     },
@@ -1170,96 +1607,21 @@
         "TRANSACTION_STATE_INEFFECTUAL"
       ]
     },
-    "v2alpha1AccountList": {
-      "type": "object",
-      "properties": {
-        "accounts": {
-          "type": "array",
-          "title": "list of accounts",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Account"
-          }
-        }
-      }
-    },
-    "v2alpha1ActivationList": {
-      "type": "object",
-      "properties": {
-        "activations": {
-          "type": "array",
-          "title": "list of activations",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Activation"
-          }
-        }
-      }
-    },
-    "v2alpha1ActivationRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
-          "type": "string"
-        },
-        "endEpoch": {
-          "type": "integer",
-          "format": "int64",
-          "title": "ending epoch for the query"
-        },
-        "id": {
-          "type": "array",
-          "title": "list of activation IDs",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "smesherId": {
-          "type": "array",
-          "title": "list of smesher IDs",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "startEpoch": {
-          "type": "integer",
-          "format": "int64",
-          "title": "starting epoch for the query"
-        }
-      }
-    },
-    "v2alpha1ActivationsCountRequest": {
-      "type": "object",
-      "properties": {
-        "epoch": {
-          "type": "integer",
-          "format": "int64",
-          "title": "epoch number"
-        }
-      }
-    },
-    "v2alpha1ActivationsCountResponse": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "title": "number of activations for the specified epoch"
-        }
-      }
+    "spacemeshv2alpha1TransactionTransactionType": {
+      "type": "string",
+      "default": "TRANSACTION_TYPE_UNSPECIFIED",
+      "enum": [
+        "TRANSACTION_TYPE_UNSPECIFIED",
+        "TRANSACTION_TYPE_SINGLE_SIG_SEND",
+        "TRANSACTION_TYPE_SINGLE_SIG_SPAWN",
+        "TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SEND",
+        "TRANSACTION_TYPE_MULTI_SIG_SPAWN",
+        "TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN",
+        "TRANSACTION_TYPE_VESTING_SPAWN",
+        "TRANSACTION_TYPE_VAULT_SPAWN",
+        "TRANSACTION_TYPE_DRAIN_VAULT"
+      ]
     },
     "v2alpha1AtxBroadcastedState": {
       "type": "object",
@@ -1272,86 +1634,6 @@
     },
     "v2alpha1AtxReadyState": {
       "type": "object"
-    },
-    "v2alpha1ContentsDrainVault": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "destination": {
-          "type": "string"
-        },
-        "vault": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1ContentsMultiSigSpawn": {
-      "type": "object",
-      "properties": {
-        "pubkey": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "required": {
-          "type": "integer",
-          "format": "int64",
-          "title": "number of required signatures"
-        }
-      }
-    },
-    "v2alpha1ContentsSend": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "string",
-          "format": "uint64",
-          "title": "amount in smidge"
-        },
-        "destination": {
-          "type": "string",
-          "title": "recipient account"
-        }
-      }
-    },
-    "v2alpha1ContentsSingleSigSpawn": {
-      "type": "object",
-      "properties": {
-        "pubkey": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1ContentsVaultSpawn": {
-      "type": "object",
-      "properties": {
-        "initialUnlockAmount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "owner": {
-          "type": "string",
-          "title": "owner account"
-        },
-        "totalAmount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "vestingEnd": {
-          "type": "integer",
-          "format": "int64",
-          "title": "as layer number"
-        },
-        "vestingStart": {
-          "type": "integer",
-          "format": "int64",
-          "title": "as layer number"
-        }
-      }
     },
     "v2alpha1EligibilitiesRequest": {
       "type": "object"
@@ -1390,33 +1672,7 @@
         }
       }
     },
-    "v2alpha1EstimateGasRequest": {
-      "type": "object",
-      "properties": {
-        "transaction": {
-          "type": "string",
-          "format": "byte",
-          "title": "signed binary transaction"
-        }
-      }
-    },
-    "v2alpha1EstimateGasResponse": {
-      "type": "object",
-      "properties": {
-        "recommendedMaxGas": {
-          "type": "string",
-          "format": "uint64",
-          "title": "recommended max gas"
-        },
-        "status": {
-          "$ref": "#/definitions/googlerpcStatus"
-        }
-      }
-    },
     "v2alpha1GeneratingPostProofState": {
-      "type": "object"
-    },
-    "v2alpha1HighestRequest": {
       "type": "object"
     },
     "v2alpha1Identity": {
@@ -1544,101 +1800,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/v2alpha1Identity"
           }
-        }
-      }
-    },
-    "v2alpha1LayerList": {
-      "type": "object",
-      "properties": {
-        "layers": {
-          "type": "array",
-          "title": "list of layers",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Layer"
-          }
-        }
-      }
-    },
-    "v2alpha1LayerRequest": {
-      "type": "object",
-      "properties": {
-        "endLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "ending layer for the query"
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "starting layer for the query"
-        }
-      }
-    },
-    "v2alpha1MalfeasanceList": {
-      "type": "object",
-      "properties": {
-        "proofs": {
-          "type": "array",
-          "title": "list of malfeasance proofs",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
-          }
-        }
-      }
-    },
-    "v2alpha1NetworkInfoRequest": {
-      "type": "object"
-    },
-    "v2alpha1NodeStatusRequest": {
-      "type": "object"
-    },
-    "v2alpha1NodeStatusResponse": {
-      "type": "object",
-      "properties": {
-        "appliedLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "last layer node has applied to the state"
-        },
-        "connectedPeers": {
-          "type": "string",
-          "format": "uint64",
-          "title": "number of connected neighbors"
-        },
-        "currentLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "current layer, based on clock time"
-        },
-        "latestLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "latest layer node has seen from blocks"
-        },
-        "processedLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "last layer whose votes have been processed"
-        },
-        "status": {
-          "title": "node sync status",
-          "$ref": "#/definitions/NodeStatusResponseSyncStatus"
         }
       }
     },
@@ -1776,167 +1937,6 @@
       "properties": {
         "message": {
           "type": "string"
-        }
-      }
-    },
-    "v2alpha1RewardList": {
-      "type": "object",
-      "properties": {
-        "rewards": {
-          "type": "array",
-          "title": "list of rewards",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Reward"
-          }
-        }
-      }
-    },
-    "v2alpha1RewardRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "type": "string",
-          "title": "filter by coinbase"
-        },
-        "endLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "ending layer for the query"
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "smesher": {
-          "type": "string",
-          "format": "byte",
-          "title": "filter by smesher"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "starting layer for the query"
-        }
-      }
-    },
-    "v2alpha1SortOrder": {
-      "type": "string",
-      "default": "ASC",
-      "enum": [
-        "ASC",
-        "DESC"
-      ]
-    },
-    "v2alpha1TransactionContents": {
-      "type": "object",
-      "properties": {
-        "drainVault": {
-          "$ref": "#/definitions/v2alpha1ContentsDrainVault"
-        },
-        "multiSigSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
-        },
-        "send": {
-          "$ref": "#/definitions/v2alpha1ContentsSend"
-        },
-        "singleSigSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsSingleSigSpawn"
-        },
-        "vaultSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsVaultSpawn"
-        },
-        "vestingSpawn": {
-          "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
-        }
-      }
-    },
-    "v2alpha1TransactionList": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "title": "list of transactions",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1TransactionResponse"
-          }
-        }
-      }
-    },
-    "v2alpha1TransactionRequest": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string",
-          "title": "Filter by address (principal or recipient)"
-        },
-        "endLayer": {
-          "description": "Ending layer for transactions.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "includeResult": {
-          "description": "Whether to include result of transactions in response.",
-          "type": "boolean"
-        },
-        "includeState": {
-          "description": "Whether to include transaction state in response.",
-          "type": "boolean"
-        },
-        "limit": {
-          "description": "Specifies maximum number of items to fetch.",
-          "type": "string",
-          "format": "uint64"
-        },
-        "offset": {
-          "description": "Adjusts the starting point for data retrieval.",
-          "type": "string",
-          "format": "uint64"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/v2alpha1SortOrder"
-        },
-        "startLayer": {
-          "description": "Starting layer for transactions.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "txid": {
-          "description": "Filter: specific transaction IDs to filter.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      }
-    },
-    "v2alpha1TransactionResponse": {
-      "type": "object",
-      "properties": {
-        "tx": {
-          "title": "transaction",
-          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
-        },
-        "txResult": {
-          "title": "optional transaction result",
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionResult"
-        },
-        "txState": {
-          "title": "optional transaction state",
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
         }
       }
     },
