@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: spacemesh/v2alpha1/activation.proto
+// source: spacemesh/v2beta1/activation.proto
 
-package spacemeshv2alpha1
+package spacemeshv2beta1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ActivationStreamService_Stream_FullMethodName = "/spacemesh.v2alpha1.ActivationStreamService/Stream"
+	ActivationStreamService_Stream_FullMethodName = "/spacemesh.v2beta1.ActivationStreamService/Stream"
 )
 
 // ActivationStreamServiceClient is the client API for ActivationStreamService service.
@@ -120,7 +120,7 @@ func (x *activationStreamServiceStreamServer) Send(m *Activation) error {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ActivationStreamService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2alpha1.ActivationStreamService",
+	ServiceName: "spacemesh.v2beta1.ActivationStreamService",
 	HandlerType: (*ActivationStreamServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
@@ -130,13 +130,13 @@ var ActivationStreamService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "spacemesh/v2alpha1/activation.proto",
+	Metadata: "spacemesh/v2beta1/activation.proto",
 }
 
 const (
-	ActivationService_List_FullMethodName             = "/spacemesh.v2alpha1.ActivationService/List"
-	ActivationService_ActivationsCount_FullMethodName = "/spacemesh.v2alpha1.ActivationService/ActivationsCount"
-	ActivationService_Highest_FullMethodName          = "/spacemesh.v2alpha1.ActivationService/Highest"
+	ActivationService_List_FullMethodName             = "/spacemesh.v2beta1.ActivationService/List"
+	ActivationService_ActivationsCount_FullMethodName = "/spacemesh.v2beta1.ActivationService/ActivationsCount"
+	ActivationService_Highest_FullMethodName          = "/spacemesh.v2beta1.ActivationService/Highest"
 )
 
 // ActivationServiceClient is the client API for ActivationService service.
@@ -299,7 +299,7 @@ func _ActivationService_Highest_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ActivationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "spacemesh.v2alpha1.ActivationService",
+	ServiceName: "spacemesh.v2beta1.ActivationService",
 	HandlerType: (*ActivationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -316,5 +316,5 @@ var ActivationService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "spacemesh/v2alpha1/activation.proto",
+	Metadata: "spacemesh/v2beta1/activation.proto",
 }

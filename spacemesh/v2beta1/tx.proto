@@ -1,0 +1,205 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/rpc/status.proto";
+import "google/api/visibility.proto";
+import "spacemesh/v2beta1/v2beta1.proto";
+
+package spacemesh.v2beta1;
+
+// An immutable Spacemesh transaction.
+// do not include mutable data such as tx state or result.
+message Transaction {
+  bytes id = 1;
+  string principal = 2; // principal account address
+  string template = 3; // template account address
+  uint32 method = 4; // this is actually limited by uint8, but no type for that.
+  Nonce nonce = 5;
+  uint64 max_gas = 6; // max gas units consumed by tx
+  uint64 gas_price = 7; // fee per unit gas, in smidge
+  uint64 max_spend = 8;
+  bytes raw = 9;
+  enum TransactionType {
+    TRANSACTION_TYPE_UNSPECIFIED = 0;
+    TRANSACTION_TYPE_SINGLE_SIG_SEND = 1;
+    TRANSACTION_TYPE_SINGLE_SIG_SPAWN = 2;
+    TRANSACTION_TYPE_SINGLE_SIG_SELFSPAWN = 3 [deprecated = true];
+    TRANSACTION_TYPE_MULTI_SIG_SEND = 4;
+    TRANSACTION_TYPE_MULTI_SIG_SPAWN = 5;
+    TRANSACTION_TYPE_MULTI_SIG_SELFSPAWN = 6 [deprecated = true];
+    TRANSACTION_TYPE_VESTING_SPAWN = 7;
+    TRANSACTION_TYPE_VAULT_SPAWN = 8;
+    TRANSACTION_TYPE_DRAIN_VAULT = 9;
+  }
+  TransactionType type = 10;
+  TransactionContents contents = 11; // parsed transaction contents
+}
+
+message ContentsSend {
+  string destination = 1; // recipient account
+  uint64 amount = 2; // amount in smidge
+}
+
+message ContentsSingleSigSpawn {
+  string pubkey = 1;
+}
+
+message ContentsMultiSigSpawn {
+  uint32 required = 1; // number of required signatures
+  repeated string pubkey = 2;
+}
+
+message ContentsVaultSpawn {
+  string owner = 1; // owner account
+  uint64 total_amount = 2;
+  uint64 initial_unlock_amount = 3;
+  uint32 vesting_start = 4; // as layer number
+  uint32 vesting_end = 5; // as layer number
+}
+
+message ContentsDrainVault {
+  string vault = 1;
+  string destination = 2;
+  uint64 amount = 3;
+}
+
+message TransactionContents {
+  oneof contents {
+    ContentsSend send = 1;
+    ContentsSingleSigSpawn single_sig_spawn = 2;
+    ContentsMultiSigSpawn multi_sig_spawn = 3;
+    ContentsMultiSigSpawn vesting_spawn = 4;
+    ContentsVaultSpawn vault_spawn = 5;
+    ContentsDrainVault drain_vault = 6;
+  }
+}
+
+message Nonce {
+  uint64 counter = 1;
+}
+
+// TransactionState is the "journey" of a tx from mempool to block inclusion to
+// mesh to STF processing. To know whether or not the tx actually succeeded,
+// and its side effects, check tx_state.
+enum TransactionState {
+  TRANSACTION_STATE_UNSPECIFIED = 0; // default state
+  TRANSACTION_STATE_REJECTED = 1; // rejected from mempool due to, e.g., invalid syntax
+  TRANSACTION_STATE_INSUFFICIENT_FUNDS = 2; // rejected from mempool by funds check
+  TRANSACTION_STATE_CONFLICTING = 3; // rejected from mempool due to conflicting counter
+  TRANSACTION_STATE_MEMPOOL = 4; // in mempool but not on the mesh yet
+  TRANSACTION_STATE_MESH = 5; // submitted to the mesh
+  TRANSACTION_STATE_PROCESSED = 6; // processed by STF; check Receipt for success or failure
+  TRANSACTION_STATE_INEFFECTUAL = 7; // removed from mempool and will be forgotten and never executed
+}
+
+message TransactionResult {
+  enum Status {
+    TRANSACTION_STATUS_UNSPECIFIED = 0;
+    TRANSACTION_STATUS_SUCCESS = 1;
+    TRANSACTION_STATUS_FAILURE = 2;
+    TRANSACTION_STATUS_INVALID = 3;
+  }
+  Status status = 1; // status of the transaction
+  string message = 2;
+  uint64 gas_consumed = 3; // in units of gas
+  uint64 fee = 4; // in smidge
+  bytes block = 5; // block hash
+  uint32 layer = 6; // layer number
+  repeated string touched_addresses = 7; // addresses touched by the tx
+}
+
+message TransactionStreamRequest {
+  uint32 start_layer = 1; // Required: starting layer for transaction streaming.
+  optional uint32 end_layer = 2; // Ending layer for transaction streaming.
+  repeated bytes txid = 3; // Filter: specific transaction IDs.
+  optional string principal = 4; // Filter by principal address
+  bool watch = 5; // Continue watching for new transactions.
+}
+
+service TransactionStreamService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
+  rpc Stream(TransactionStreamRequest) returns (stream TransactionResponse);
+}
+
+message TransactionRequest {
+  optional uint32 start_layer = 1; // Starting layer for transactions.
+  optional uint32 end_layer = 2; // Ending layer for transactions.
+  repeated bytes txid = 3; // Filter: specific transaction IDs to filter.
+  optional string address = 4; // Filter by address (principal or recipient)
+  uint64 offset = 6; // Adjusts the starting point for data retrieval.
+  uint64 limit = 7; // Specifies maximum number of items to fetch.
+  bool include_state = 8; // Whether to include transaction state in response.
+  bool include_result = 9; // Whether to include result of transactions in response.
+  SortOrder sort_order = 10; // specifies the sort order by layer (default is ASC)
+}
+
+message TransactionResponse {
+  Transaction tx = 1; // transaction
+  TransactionResult tx_result = 2; // optional transaction result
+  optional TransactionState tx_state = 3; // optional transaction state
+}
+
+message TransactionList {
+  repeated TransactionResponse transactions = 1; // list of transactions
+}
+
+message ParseTransactionRequest {
+  bytes transaction = 1;  // signed binary transaction
+  bool verify = 2;        // if true signature verification will be executed
+}
+
+message ParseTransactionResponse {
+  google.rpc.Status status = 1;
+  Transaction tx = 2; // parsed transaction
+}
+
+message SubmitTransactionRequest {
+  bytes transaction = 1;  // signed binary transaction
+}
+
+message SubmitTransactionResponse {
+  google.rpc.Status status = 1;
+  bytes tx_id = 2; // transaction ID
+}
+
+message EstimateGasRequest {
+  bytes transaction = 1;  // signed binary transaction
+}
+
+message EstimateGasResponse {
+  google.rpc.Status status = 1;
+  uint64 recommended_max_gas = 2; // recommended max gas
+}
+
+service TransactionService {
+  option (google.api.api_visibility).restriction = "v2beta1";
+
+  // List of transactions
+  //
+  // List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve a list of transactions based on the provided request parameters.
+  rpc List(TransactionRequest) returns (TransactionList) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.TransactionService/List"
+    };
+  };
+
+  // Parse transaction
+  //
+  // ParseTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to parse a signed binary transaction and optionally verify its signature.
+  rpc ParseTransaction(ParseTransactionRequest) returns (ParseTransactionResponse);
+
+  // Submit transaction
+  //
+  // SubmitTransaction is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to submit a signed binary transaction to the network.
+  rpc SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse);
+
+  // Estimate gas for transaction
+  //
+  // EstimateGas is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to estimate the recommended maximum gas for a signed binary transaction.
+  rpc EstimateGas(EstimateGasRequest) returns (EstimateGasResponse);
+}

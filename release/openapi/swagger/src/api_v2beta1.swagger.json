@@ -19,12 +19,12 @@
       "name": "MIT License",
       "url": "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE"
     },
-    "version": "v2alpha1"
+    "version": "v2beta1"
   },
   "host": "testnet-api.spacemesh.network",
   "paths": {
-    "/spacemesh.v2alpha1.AccountService/List": {
-      "post": {
+    "/spacemesh.v2beta1.AccountService/List": {
+      "get": {
         "description": "List is a method that takes an \"AccountRequest\" body and returns an \"AccountList\".\nThis method is used to retrieve a list of accounts based on the provided request parameters.",
         "tags": [
           "AccountService"
@@ -33,19 +33,35 @@
         "operationId": "AccountService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1AccountRequest"
-            }
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "description": "list of account addresses",
+            "name": "addresses",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch// bech32 format including HRP",
+            "name": "limit",
+            "in": "query"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1AccountList"
+              "$ref": "#/definitions/spacemeshv2beta1AccountList"
             }
           },
           "default": {
@@ -57,8 +73,8 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.ActivationService/ActivationsCount": {
-      "post": {
+    "/spacemesh.v2beta1.ActivationService/ActivationsCount": {
+      "get": {
         "description": "ActivationsCount is a method that takes an \"ActivationsCountRequest\" body and returns an \"ActivationsCountResponse\".\nThis method is used to retrieve the count of activations for a specified epoch.",
         "tags": [
           "ActivationService"
@@ -67,19 +83,18 @@
         "operationId": "ActivationService_ActivationsCount",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1ActivationsCountRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "epoch number",
+            "name": "epoch",
+            "in": "query"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1ActivationsCountResponse"
+              "$ref": "#/definitions/spacemeshv2beta1ActivationsCountResponse"
             }
           },
           "default": {
@@ -91,29 +106,19 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.ActivationService/Highest": {
-      "post": {
+    "/spacemesh.v2beta1.ActivationService/Highest": {
+      "get": {
         "description": "Highest is a method that takes an \"HighestRequest\" body and returns an \"HighestResponse\".\nThis method is used to retrieve the activation with the highest tick count.",
         "tags": [
           "ActivationService"
         ],
         "summary": "Highest",
         "operationId": "ActivationService_Highest",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1HighestRequest"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1HighestResponse"
+              "$ref": "#/definitions/spacemeshv2beta1HighestResponse"
             }
           },
           "default": {
@@ -125,8 +130,8 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.ActivationService/List": {
-      "post": {
+    "/spacemesh.v2beta1.ActivationService/List": {
+      "get": {
         "description": "List is a method that takes an \"ActivationRequest\" body and returns an \"ActivationList\".\nThis method is used to retrieve a list of activations based on the provided request parameters.",
         "tags": [
           "ActivationService"
@@ -135,19 +140,67 @@
         "operationId": "ActivationService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1ActivationRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "starting epoch for the query",
+            "name": "startEpoch",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ending epoch for the query",
+            "name": "endEpoch",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "description": "list of activation IDs",
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "description": "list of smesher IDs",
+            "name": "smesherId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
+            "name": "coinbase",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch",
+            "name": "limit",
+            "in": "query"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1ActivationList"
+              "$ref": "#/definitions/spacemeshv2beta1ActivationList"
             }
           },
           "default": {
@@ -159,8 +212,8 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.LayerService/List": {
-      "post": {
+    "/spacemesh.v2beta1.LayerService/List": {
+      "get": {
         "description": "List is a method that takes a \"LayerRequest\" body and returns an \"LayerList\".\nThis method is used to retrieve a list of layers based on the provided request parameters.",
         "tags": [
           "LayerService"
@@ -169,19 +222,50 @@
         "operationId": "LayerService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1LayerRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "starting layer for the query",
+            "name": "startLayer",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "ending layer for the query",
+            "name": "endLayer",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "specifies the sort order (default is ASC)",
+            "name": "sortOrder",
+            "in": "query"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1LayerList"
+              "$ref": "#/definitions/spacemeshv2beta1LayerList"
             }
           },
           "default": {
@@ -193,8 +277,8 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.MalfeasanceService/List": {
-      "post": {
+    "/spacemesh.v2beta1.MalfeasanceService/List": {
+      "get": {
         "description": "List is a method that takes a \"MalfeasanceRequest\" body and returns an \"MalfeasanceList\".\nThis method is used to retrieve a list of malfeasance proofs based on the provided request parameters.",
         "tags": [
           "MalfeasanceService"
@@ -203,19 +287,36 @@
         "operationId": "MalfeasanceService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceRequest"
-            }
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "description": "list of smesher ids to fetch (can be empty for all)",
+            "name": "smesherId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch",
+            "name": "limit",
+            "in": "query"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceList"
+              "$ref": "#/definitions/spacemeshv2beta1MalfeasanceList"
             }
           },
           "default": {
@@ -227,29 +328,19 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.NetworkService/Info": {
-      "post": {
+    "/spacemesh.v2beta1.NetworkService/Info": {
+      "get": {
         "description": "Info is a method that returns an \"NetworkInfoResponse\".\nThis method is used to retrieve network information.",
         "tags": [
           "NetworkService"
         ],
         "summary": "Network information",
         "operationId": "NetworkService_Info",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1NetworkInfoRequest"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1NetworkInfoResponse"
+              "$ref": "#/definitions/spacemeshv2beta1NetworkInfoResponse"
             }
           },
           "default": {
@@ -261,29 +352,19 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.NodeService/Status": {
-      "post": {
+    "/spacemesh.v2beta1.NodeService/Status": {
+      "get": {
         "description": "Status is a method that returns an \"NodeStatusResponse\".\nThis method is used to retrieve node status information.",
         "tags": [
           "NodeService"
         ],
         "summary": "Node status",
         "operationId": "NodeService_Status",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1NodeStatusRequest"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1NodeStatusResponse"
+              "$ref": "#/definitions/spacemeshv2beta1NodeStatusResponse"
             }
           },
           "default": {
@@ -295,8 +376,8 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.RewardService/List": {
-      "post": {
+    "/spacemesh.v2beta1.RewardService/List": {
+      "get": {
         "description": "List is a method that takes a \"RewardRequest\" body and returns an \"RewardList\".\nThis method is used to retrieve a list of rewards based on the provided request parameters.",
         "tags": [
           "RewardService"
@@ -305,147 +386,63 @@
         "operationId": "RewardService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1RewardRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1RewardList"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "starting layer for the query",
+            "name": "startLayer",
+            "in": "query"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/Eligibilities": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_Eligibilities",
-        "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1EligibilitiesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1EligibilitiesResponse"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "ending layer for the query",
+            "name": "endLayer",
+            "in": "query"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/PoetInfo": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_PoetInfo",
-        "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1PoetInfoRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1PoetInfoResponse"
-            }
+            "type": "string",
+            "description": "filter by coinbase",
+            "name": "coinbase",
+            "in": "query"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/Proposals": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_Proposals",
-        "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1ProposalsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2alpha1ProposalsResponse"
-            }
+            "type": "string",
+            "format": "byte",
+            "description": "filter by smesher",
+            "name": "smesher",
+            "in": "query"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        }
-      }
-    },
-    "/spacemesh.v2alpha1.SmeshingIdentitiesService/States": {
-      "post": {
-        "tags": [
-          "SmeshingIdentitiesService"
-        ],
-        "operationId": "SmeshingIdentitiesService_States",
-        "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2alpha1IdentityStatesRequest"
-            }
+            "type": "string",
+            "format": "uint64",
+            "description": "adjusts the starting point for data",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "specifies max number of items to fetch",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "specifies the sort order by layer (default is ASC)",
+            "name": "sortOrder",
+            "in": "query"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2alpha1IdentityStatesResponse"
+              "$ref": "#/definitions/spacemeshv2beta1RewardList"
             }
           },
           "default": {
@@ -457,7 +454,7 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.TransactionService/EstimateGas": {
+    "/spacemesh.v2beta1.TransactionService/EstimateGas": {
       "post": {
         "description": "EstimateGas is a method that takes a \"EstimateGasRequest\" body and returns an \"EstimateGasResponse\".\nThis method is used to estimate the recommended maximum gas for a signed binary transaction.",
         "tags": [
@@ -471,7 +468,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1EstimateGasRequest"
+              "$ref": "#/definitions/spacemeshv2beta1EstimateGasRequest"
             }
           }
         ],
@@ -479,7 +476,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1EstimateGasResponse"
+              "$ref": "#/definitions/spacemeshv2beta1EstimateGasResponse"
             }
           },
           "default": {
@@ -491,8 +488,8 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.TransactionService/List": {
-      "post": {
+    "/spacemesh.v2beta1.TransactionService/List": {
+      "get": {
         "description": "List is a method that takes a \"TransactionRequest\" body and returns an \"TransactionList\".\nThis method is used to retrieve a list of transactions based on the provided request parameters.",
         "tags": [
           "TransactionService"
@@ -501,19 +498,79 @@
         "operationId": "TransactionService_List",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1TransactionRequest"
-            }
+            "type": "integer",
+            "format": "int64",
+            "description": "Starting layer for transactions.",
+            "name": "startLayer",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "Ending layer for transactions.",
+            "name": "endLayer",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "description": "Filter: specific transaction IDs to filter.",
+            "name": "txid",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "Filter by address (principal or recipient)",
+            "name": "address",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "Adjusts the starting point for data retrieval.",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "uint64",
+            "description": "Specifies maximum number of items to fetch.",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "Whether to include transaction state in response.",
+            "name": "includeState",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "Whether to include result of transactions in response.",
+            "name": "includeResult",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "specifies the sort order by layer (default is ASC)",
+            "name": "sortOrder",
+            "in": "query"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1TransactionList"
+              "$ref": "#/definitions/spacemeshv2beta1TransactionList"
             }
           },
           "default": {
@@ -525,7 +582,7 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.TransactionService/ParseTransaction": {
+    "/spacemesh.v2beta1.TransactionService/ParseTransaction": {
       "post": {
         "description": "ParseTransaction is a method that takes a \"ParseTransactionRequest\" body and returns an \"ParseTransactionResponse\".\nThis method is used to parse a signed binary transaction and optionally verify its signature.",
         "tags": [
@@ -539,7 +596,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1ParseTransactionRequest"
+              "$ref": "#/definitions/spacemeshv2beta1ParseTransactionRequest"
             }
           }
         ],
@@ -547,7 +604,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1ParseTransactionResponse"
+              "$ref": "#/definitions/spacemeshv2beta1ParseTransactionResponse"
             }
           },
           "default": {
@@ -559,7 +616,7 @@
         }
       }
     },
-    "/spacemesh.v2alpha1.TransactionService/SubmitTransaction": {
+    "/spacemesh.v2beta1.TransactionService/SubmitTransaction": {
       "post": {
         "description": "SubmitTransaction is a method that takes a \"SubmitTransactionRequest\" body and returns an \"SubmitTransactionResponse\".\nThis method is used to submit a signed binary transaction to the network.",
         "tags": [
@@ -573,7 +630,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1SubmitTransactionRequest"
+              "$ref": "#/definitions/spacemeshv2beta1SubmitTransactionRequest"
             }
           }
         ],
@@ -581,7 +638,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2alpha1SubmitTransactionResponse"
+              "$ref": "#/definitions/spacemeshv2beta1SubmitTransactionResponse"
             }
           },
           "default": {
@@ -629,7 +686,7 @@
       },
       "additionalProperties": {}
     },
-    "spacemeshv2alpha1Account": {
+    "spacemeshv2beta1Account": {
       "type": "object",
       "properties": {
         "address": {
@@ -638,11 +695,11 @@
         },
         "current": {
           "title": "current state",
-          "$ref": "#/definitions/spacemeshv2alpha1AccountState"
+          "$ref": "#/definitions/spacemeshv2beta1AccountState"
         },
         "projected": {
           "title": "projected state (includes pending txs)",
-          "$ref": "#/definitions/spacemeshv2alpha1AccountState"
+          "$ref": "#/definitions/spacemeshv2beta1AccountState"
         },
         "template": {
           "type": "string",
@@ -650,7 +707,7 @@
         }
       }
     },
-    "spacemeshv2alpha1AccountList": {
+    "spacemeshv2beta1AccountList": {
       "type": "object",
       "properties": {
         "accounts": {
@@ -658,34 +715,12 @@
           "title": "list of accounts",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Account"
+            "$ref": "#/definitions/spacemeshv2beta1Account"
           }
         }
       }
     },
-    "spacemeshv2alpha1AccountRequest": {
-      "type": "object",
-      "properties": {
-        "addresses": {
-          "type": "array",
-          "title": "list of account addresses",
-          "items": {
-            "type": "string"
-          }
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch// bech32 format including HRP"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        }
-      }
-    },
-    "spacemeshv2alpha1AccountState": {
+    "spacemeshv2beta1AccountState": {
       "type": "object",
       "properties": {
         "balance": {
@@ -705,7 +740,7 @@
         }
       }
     },
-    "spacemeshv2alpha1Activation": {
+    "spacemeshv2beta1Activation": {
       "type": "object",
       "properties": {
         "coinbase": {
@@ -738,7 +773,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ActivationList": {
+    "spacemeshv2beta1ActivationList": {
       "type": "object",
       "properties": {
         "activations": {
@@ -746,67 +781,12 @@
           "title": "list of activations",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Activation"
+            "$ref": "#/definitions/spacemeshv2beta1Activation"
           }
         }
       }
     },
-    "spacemeshv2alpha1ActivationRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "description": "`coinbase` filter is not supported by database index and will result in sequential scan.",
-          "type": "string"
-        },
-        "endEpoch": {
-          "type": "integer",
-          "format": "int64",
-          "title": "ending epoch for the query"
-        },
-        "id": {
-          "type": "array",
-          "title": "list of activation IDs",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "smesherId": {
-          "type": "array",
-          "title": "list of smesher IDs",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        },
-        "startEpoch": {
-          "type": "integer",
-          "format": "int64",
-          "title": "starting epoch for the query"
-        }
-      }
-    },
-    "spacemeshv2alpha1ActivationsCountRequest": {
-      "type": "object",
-      "properties": {
-        "epoch": {
-          "type": "integer",
-          "format": "int64",
-          "title": "epoch number"
-        }
-      }
-    },
-    "spacemeshv2alpha1ActivationsCountResponse": {
+    "spacemeshv2beta1ActivationsCountResponse": {
       "type": "object",
       "properties": {
         "count": {
@@ -816,7 +796,7 @@
         }
       }
     },
-    "spacemeshv2alpha1Block": {
+    "spacemeshv2beta1Block": {
       "type": "object",
       "properties": {
         "id": {
@@ -826,7 +806,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ContentsDrainVault": {
+    "spacemeshv2beta1ContentsDrainVault": {
       "type": "object",
       "properties": {
         "amount": {
@@ -841,7 +821,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ContentsMultiSigSpawn": {
+    "spacemeshv2beta1ContentsMultiSigSpawn": {
       "type": "object",
       "properties": {
         "pubkey": {
@@ -857,7 +837,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ContentsSend": {
+    "spacemeshv2beta1ContentsSend": {
       "type": "object",
       "properties": {
         "amount": {
@@ -871,7 +851,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ContentsSingleSigSpawn": {
+    "spacemeshv2beta1ContentsSingleSigSpawn": {
       "type": "object",
       "properties": {
         "pubkey": {
@@ -879,7 +859,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ContentsVaultSpawn": {
+    "spacemeshv2beta1ContentsVaultSpawn": {
       "type": "object",
       "properties": {
         "initialUnlockAmount": {
@@ -906,33 +886,7 @@
         }
       }
     },
-    "spacemeshv2alpha1Eligibilities": {
-      "type": "object",
-      "title": "Proposals and eligibilities",
-      "properties": {
-        "eligibilities": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1ProposalEligibility"
-          }
-        }
-      }
-    },
-    "spacemeshv2alpha1Eligibility": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "spacemeshv2alpha1EstimateGasRequest": {
+    "spacemeshv2beta1EstimateGasRequest": {
       "type": "object",
       "properties": {
         "transaction": {
@@ -942,7 +896,7 @@
         }
       }
     },
-    "spacemeshv2alpha1EstimateGasResponse": {
+    "spacemeshv2beta1EstimateGasResponse": {
       "type": "object",
       "properties": {
         "recommendedMaxGas": {
@@ -955,23 +909,20 @@
         }
       }
     },
-    "spacemeshv2alpha1HighestRequest": {
-      "type": "object"
-    },
-    "spacemeshv2alpha1HighestResponse": {
+    "spacemeshv2beta1HighestResponse": {
       "type": "object",
       "properties": {
         "activation": {
-          "$ref": "#/definitions/spacemeshv2alpha1Activation"
+          "$ref": "#/definitions/spacemeshv2beta1Activation"
         }
       }
     },
-    "spacemeshv2alpha1Layer": {
+    "spacemeshv2beta1Layer": {
       "type": "object",
       "properties": {
         "block": {
           "title": "layer's block",
-          "$ref": "#/definitions/spacemeshv2alpha1Block"
+          "$ref": "#/definitions/spacemeshv2beta1Block"
         },
         "consensusHash": {
           "type": "string"
@@ -992,11 +943,11 @@
           "title": "fingerprint of the computed state at the layer"
         },
         "status": {
-          "$ref": "#/definitions/spacemeshv2alpha1LayerLayerStatus"
+          "$ref": "#/definitions/spacemeshv2beta1LayerLayerStatus"
         }
       }
     },
-    "spacemeshv2alpha1LayerLayerStatus": {
+    "spacemeshv2beta1LayerLayerStatus": {
       "type": "string",
       "title": "- LAYER_STATUS_APPLIED: applied by hare\n - LAYER_STATUS_VERIFIED: verified by tortoise",
       "default": "LAYER_STATUS_UNSPECIFIED",
@@ -1006,7 +957,7 @@
         "LAYER_STATUS_VERIFIED"
       ]
     },
-    "spacemeshv2alpha1LayerList": {
+    "spacemeshv2beta1LayerList": {
       "type": "object",
       "properties": {
         "layers": {
@@ -1014,41 +965,12 @@
           "title": "list of layers",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Layer"
+            "$ref": "#/definitions/spacemeshv2beta1Layer"
           }
         }
       }
     },
-    "spacemeshv2alpha1LayerRequest": {
-      "type": "object",
-      "properties": {
-        "endLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "ending layer for the query"
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order (default is ASC)",
-          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "starting layer for the query"
-        }
-      }
-    },
-    "spacemeshv2alpha1MalfeasanceList": {
+    "spacemeshv2beta1MalfeasanceList": {
       "type": "object",
       "properties": {
         "proofs": {
@@ -1056,16 +978,16 @@
           "title": "list of malfeasance proofs",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProof"
+            "$ref": "#/definitions/spacemeshv2beta1MalfeasanceProof"
           }
         }
       }
     },
-    "spacemeshv2alpha1MalfeasanceProof": {
+    "spacemeshv2beta1MalfeasanceProof": {
       "type": "object",
       "properties": {
         "domain": {
-          "$ref": "#/definitions/spacemeshv2alpha1MalfeasanceProofMalfeasanceDomain"
+          "$ref": "#/definitions/spacemeshv2beta1MalfeasanceProofMalfeasanceDomain"
         },
         "properties": {
           "type": "object",
@@ -1086,7 +1008,7 @@
         }
       }
     },
-    "spacemeshv2alpha1MalfeasanceProofMalfeasanceDomain": {
+    "spacemeshv2beta1MalfeasanceProofMalfeasanceDomain": {
       "type": "string",
       "title": "- DOMAIN_UNSPECIFIED: for legacy proofs\n - DOMAIN_ACTIVATION: ATX related proofs\n - DOMAIN_BALLOT: Ballot related proofs\n - DOMAIN_HARE: Hare related proofs",
       "default": "DOMAIN_UNSPECIFIED",
@@ -1097,33 +1019,7 @@
         "DOMAIN_HARE"
       ]
     },
-    "spacemeshv2alpha1MalfeasanceRequest": {
-      "type": "object",
-      "properties": {
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "smesherId": {
-          "type": "array",
-          "title": "list of smesher ids to fetch (can be empty for all)",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      }
-    },
-    "spacemeshv2alpha1NetworkInfoRequest": {
-      "type": "object"
-    },
-    "spacemeshv2alpha1NetworkInfoResponse": {
+    "spacemeshv2beta1NetworkInfoResponse": {
       "type": "object",
       "properties": {
         "effectiveGenesisLayer": {
@@ -1159,10 +1055,7 @@
         }
       }
     },
-    "spacemeshv2alpha1NodeStatusRequest": {
-      "type": "object"
-    },
-    "spacemeshv2alpha1NodeStatusResponse": {
+    "spacemeshv2beta1NodeStatusResponse": {
       "type": "object",
       "properties": {
         "appliedLayer": {
@@ -1192,11 +1085,11 @@
         },
         "status": {
           "title": "node sync status",
-          "$ref": "#/definitions/spacemeshv2alpha1NodeStatusResponseSyncStatus"
+          "$ref": "#/definitions/spacemeshv2beta1NodeStatusResponseSyncStatus"
         }
       }
     },
-    "spacemeshv2alpha1NodeStatusResponseSyncStatus": {
+    "spacemeshv2beta1NodeStatusResponseSyncStatus": {
       "type": "string",
       "default": "SYNC_STATUS_UNSPECIFIED",
       "enum": [
@@ -1206,7 +1099,7 @@
         "SYNC_STATUS_SYNCED"
       ]
     },
-    "spacemeshv2alpha1Nonce": {
+    "spacemeshv2beta1Nonce": {
       "type": "object",
       "properties": {
         "counter": {
@@ -1215,7 +1108,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ParseTransactionRequest": {
+    "spacemeshv2beta1ParseTransactionRequest": {
       "type": "object",
       "properties": {
         "transaction": {
@@ -1229,7 +1122,7 @@
         }
       }
     },
-    "spacemeshv2alpha1ParseTransactionResponse": {
+    "spacemeshv2beta1ParseTransactionResponse": {
       "type": "object",
       "properties": {
         "status": {
@@ -1237,49 +1130,11 @@
         },
         "tx": {
           "title": "parsed transaction",
-          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+          "$ref": "#/definitions/spacemeshv2beta1Transaction"
         }
       }
     },
-    "spacemeshv2alpha1Proposal": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "proposal": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "spacemeshv2alpha1ProposalEligibility": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "spacemeshv2alpha1Proposals": {
-      "type": "object",
-      "properties": {
-        "proposals": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Proposal"
-          }
-        }
-      }
-    },
-    "spacemeshv2alpha1Reward": {
+    "spacemeshv2beta1Reward": {
       "type": "object",
       "properties": {
         "coinbase": {
@@ -1308,7 +1163,7 @@
         }
       }
     },
-    "spacemeshv2alpha1RewardList": {
+    "spacemeshv2beta1RewardList": {
       "type": "object",
       "properties": {
         "rewards": {
@@ -1316,58 +1171,12 @@
           "title": "list of rewards",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Reward"
+            "$ref": "#/definitions/spacemeshv2beta1Reward"
           }
         }
       }
     },
-    "spacemeshv2alpha1RewardRequest": {
-      "type": "object",
-      "properties": {
-        "coinbase": {
-          "type": "string",
-          "title": "filter by coinbase"
-        },
-        "endLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "ending layer for the query"
-        },
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "smesher": {
-          "type": "string",
-          "format": "byte",
-          "title": "filter by smesher"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
-        },
-        "startLayer": {
-          "type": "integer",
-          "format": "int64",
-          "title": "starting layer for the query"
-        }
-      }
-    },
-    "spacemeshv2alpha1SortOrder": {
-      "type": "string",
-      "default": "ASC",
-      "enum": [
-        "ASC",
-        "DESC"
-      ]
-    },
-    "spacemeshv2alpha1SubmitTransactionRequest": {
+    "spacemeshv2beta1SubmitTransactionRequest": {
       "type": "object",
       "properties": {
         "transaction": {
@@ -1377,7 +1186,7 @@
         }
       }
     },
-    "spacemeshv2alpha1SubmitTransactionResponse": {
+    "spacemeshv2beta1SubmitTransactionResponse": {
       "type": "object",
       "properties": {
         "status": {
@@ -1390,13 +1199,13 @@
         }
       }
     },
-    "spacemeshv2alpha1Transaction": {
+    "spacemeshv2beta1Transaction": {
       "description": "An immutable Spacemesh transaction.\ndo not include mutable data such as tx state or result.",
       "type": "object",
       "properties": {
         "contents": {
           "title": "parsed transaction contents",
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionContents"
+          "$ref": "#/definitions/spacemeshv2beta1TransactionContents"
         },
         "gasPrice": {
           "type": "string",
@@ -1422,7 +1231,7 @@
           "format": "int64"
         },
         "nonce": {
-          "$ref": "#/definitions/spacemeshv2alpha1Nonce"
+          "$ref": "#/definitions/spacemeshv2beta1Nonce"
         },
         "principal": {
           "type": "string",
@@ -1437,34 +1246,34 @@
           "title": "template account address"
         },
         "type": {
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionTransactionType"
+          "$ref": "#/definitions/spacemeshv2beta1TransactionTransactionType"
         }
       }
     },
-    "spacemeshv2alpha1TransactionContents": {
+    "spacemeshv2beta1TransactionContents": {
       "type": "object",
       "properties": {
         "drainVault": {
-          "$ref": "#/definitions/spacemeshv2alpha1ContentsDrainVault"
+          "$ref": "#/definitions/spacemeshv2beta1ContentsDrainVault"
         },
         "multiSigSpawn": {
-          "$ref": "#/definitions/spacemeshv2alpha1ContentsMultiSigSpawn"
+          "$ref": "#/definitions/spacemeshv2beta1ContentsMultiSigSpawn"
         },
         "send": {
-          "$ref": "#/definitions/spacemeshv2alpha1ContentsSend"
+          "$ref": "#/definitions/spacemeshv2beta1ContentsSend"
         },
         "singleSigSpawn": {
-          "$ref": "#/definitions/spacemeshv2alpha1ContentsSingleSigSpawn"
+          "$ref": "#/definitions/spacemeshv2beta1ContentsSingleSigSpawn"
         },
         "vaultSpawn": {
-          "$ref": "#/definitions/spacemeshv2alpha1ContentsVaultSpawn"
+          "$ref": "#/definitions/spacemeshv2beta1ContentsVaultSpawn"
         },
         "vestingSpawn": {
-          "$ref": "#/definitions/spacemeshv2alpha1ContentsMultiSigSpawn"
+          "$ref": "#/definitions/spacemeshv2beta1ContentsMultiSigSpawn"
         }
       }
     },
-    "spacemeshv2alpha1TransactionList": {
+    "spacemeshv2beta1TransactionList": {
       "type": "object",
       "properties": {
         "transactions": {
@@ -1472,78 +1281,29 @@
           "title": "list of transactions",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1TransactionResponse"
+            "$ref": "#/definitions/spacemeshv2beta1TransactionResponse"
           }
         }
       }
     },
-    "spacemeshv2alpha1TransactionRequest": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string",
-          "title": "Filter by address (principal or recipient)"
-        },
-        "endLayer": {
-          "description": "Ending layer for transactions.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "includeResult": {
-          "description": "Whether to include result of transactions in response.",
-          "type": "boolean"
-        },
-        "includeState": {
-          "description": "Whether to include transaction state in response.",
-          "type": "boolean"
-        },
-        "limit": {
-          "description": "Specifies maximum number of items to fetch.",
-          "type": "string",
-          "format": "uint64"
-        },
-        "offset": {
-          "description": "Adjusts the starting point for data retrieval.",
-          "type": "string",
-          "format": "uint64"
-        },
-        "sortOrder": {
-          "title": "specifies the sort order by layer (default is ASC)",
-          "$ref": "#/definitions/spacemeshv2alpha1SortOrder"
-        },
-        "startLayer": {
-          "description": "Starting layer for transactions.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "txid": {
-          "description": "Filter: specific transaction IDs to filter.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      }
-    },
-    "spacemeshv2alpha1TransactionResponse": {
+    "spacemeshv2beta1TransactionResponse": {
       "type": "object",
       "properties": {
         "tx": {
           "title": "transaction",
-          "$ref": "#/definitions/spacemeshv2alpha1Transaction"
+          "$ref": "#/definitions/spacemeshv2beta1Transaction"
         },
         "txResult": {
           "title": "optional transaction result",
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionResult"
+          "$ref": "#/definitions/spacemeshv2beta1TransactionResult"
         },
         "txState": {
           "title": "optional transaction state",
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionState"
+          "$ref": "#/definitions/spacemeshv2beta1TransactionState"
         }
       }
     },
-    "spacemeshv2alpha1TransactionResult": {
+    "spacemeshv2beta1TransactionResult": {
       "type": "object",
       "properties": {
         "block": {
@@ -1571,7 +1331,7 @@
         },
         "status": {
           "title": "status of the transaction",
-          "$ref": "#/definitions/spacemeshv2alpha1TransactionResultStatus"
+          "$ref": "#/definitions/spacemeshv2beta1TransactionResultStatus"
         },
         "touchedAddresses": {
           "type": "array",
@@ -1582,7 +1342,7 @@
         }
       }
     },
-    "spacemeshv2alpha1TransactionResultStatus": {
+    "spacemeshv2beta1TransactionResultStatus": {
       "type": "string",
       "default": "TRANSACTION_STATUS_UNSPECIFIED",
       "enum": [
@@ -1592,7 +1352,7 @@
         "TRANSACTION_STATUS_INVALID"
       ]
     },
-    "spacemeshv2alpha1TransactionState": {
+    "spacemeshv2beta1TransactionState": {
       "description": "TransactionState is the \"journey\" of a tx from mempool to block inclusion to\nmesh to STF processing. To know whether or not the tx actually succeeded,\nand its side effects, check tx_state.\n\n - TRANSACTION_STATE_UNSPECIFIED: default state\n - TRANSACTION_STATE_REJECTED: rejected from mempool due to, e.g., invalid syntax\n - TRANSACTION_STATE_INSUFFICIENT_FUNDS: rejected from mempool by funds check\n - TRANSACTION_STATE_CONFLICTING: rejected from mempool due to conflicting counter\n - TRANSACTION_STATE_MEMPOOL: in mempool but not on the mesh yet\n - TRANSACTION_STATE_MESH: submitted to the mesh\n - TRANSACTION_STATE_PROCESSED: processed by STF; check Receipt for success or failure\n - TRANSACTION_STATE_INEFFECTUAL: removed from mempool and will be forgotten and never executed",
       "type": "string",
       "default": "TRANSACTION_STATE_UNSPECIFIED",
@@ -1607,7 +1367,7 @@
         "TRANSACTION_STATE_INEFFECTUAL"
       ]
     },
-    "spacemeshv2alpha1TransactionTransactionType": {
+    "spacemeshv2beta1TransactionTransactionType": {
       "type": "string",
       "default": "TRANSACTION_TYPE_UNSPECIFIED",
       "enum": [
@@ -1622,342 +1382,6 @@
         "TRANSACTION_TYPE_VAULT_SPAWN",
         "TRANSACTION_TYPE_DRAIN_VAULT"
       ]
-    },
-    "v2alpha1AtxBroadcastedState": {
-      "type": "object",
-      "properties": {
-        "atxId": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "v2alpha1AtxReadyState": {
-      "type": "object"
-    },
-    "v2alpha1EligibilitiesRequest": {
-      "type": "object"
-    },
-    "v2alpha1EligibilitiesResponse": {
-      "type": "object",
-      "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2alpha1EpochEligibilities"
-          }
-        }
-      }
-    },
-    "v2alpha1Eligible": {
-      "type": "object",
-      "properties": {
-        "layers": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2alpha1Eligibility"
-          }
-        }
-      }
-    },
-    "v2alpha1EpochEligibilities": {
-      "type": "object",
-      "properties": {
-        "epochs": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2alpha1Eligibilities"
-          }
-        }
-      }
-    },
-    "v2alpha1GeneratingPostProofState": {
-      "type": "object"
-    },
-    "v2alpha1Identity": {
-      "type": "object",
-      "properties": {
-        "history": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1IdentityStateInfo"
-          }
-        }
-      }
-    },
-    "v2alpha1IdentityState": {
-      "type": "string",
-      "default": "UNSPECIFIED",
-      "enum": [
-        "UNSPECIFIED",
-        "WAIT_FOR_ATX_SYNCED",
-        "RETRYING",
-        "WAITING_FOR_POET_REGISTRATION_WINDOW",
-        "POET_CHALLENGE_READY",
-        "POET_REGISTERED",
-        "WAIT_FOR_POET_ROUND_END",
-        "POET_PROOF_RECEIVED",
-        "GENERATING_POST_PROOF",
-        "POST_PROOF_READY",
-        "ATX_READY",
-        "ATX_BROADCASTED",
-        "PROPOSAL_BUILD_FAILED",
-        "PROPOSAL_PUBLISH_FAILED",
-        "PROPOSAL_PUBLISHED",
-        "ELIGIBLE"
-      ]
-    },
-    "v2alpha1IdentityStateInfo": {
-      "type": "object",
-      "properties": {
-        "atxBroadcasted": {
-          "$ref": "#/definitions/v2alpha1AtxBroadcastedState"
-        },
-        "atxReady": {
-          "$ref": "#/definitions/v2alpha1AtxReadyState"
-        },
-        "eligible": {
-          "$ref": "#/definitions/v2alpha1Eligible"
-        },
-        "generatingPostProof": {
-          "$ref": "#/definitions/v2alpha1GeneratingPostProofState"
-        },
-        "poetChallengeReady": {
-          "$ref": "#/definitions/v2alpha1PoetChallengeReadyState"
-        },
-        "poetProofReceived": {
-          "$ref": "#/definitions/v2alpha1PoetProofReceivedState"
-        },
-        "poetRegistered": {
-          "$ref": "#/definitions/v2alpha1PoetRegisteredState"
-        },
-        "postProofReady": {
-          "$ref": "#/definitions/v2alpha1PostProofReadyState"
-        },
-        "proposalBuildFailed": {
-          "$ref": "#/definitions/v2alpha1ProposalBuildFailedState"
-        },
-        "proposalPublishFailed": {
-          "$ref": "#/definitions/v2alpha1ProposalPublishFailedState"
-        },
-        "proposalPublished": {
-          "$ref": "#/definitions/v2alpha1ProposalPublishedState"
-        },
-        "publishEpoch": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "retrying": {
-          "$ref": "#/definitions/v2alpha1RetryingState"
-        },
-        "state": {
-          "$ref": "#/definitions/v2alpha1IdentityState"
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "waitForAtxSynced": {
-          "$ref": "#/definitions/v2alpha1WaitForAtxSyncedState"
-        },
-        "waitForPoetRoundEnd": {
-          "$ref": "#/definitions/v2alpha1WaitForPoetRoundEndState"
-        },
-        "waitingForPoetRegistrationWindow": {
-          "$ref": "#/definitions/v2alpha1WaitingForPoetRegistrationWindowState"
-        }
-      }
-    },
-    "v2alpha1IdentityStatesRequest": {
-      "type": "object",
-      "properties": {
-        "limit": {
-          "type": "string",
-          "format": "uint64",
-          "title": "specifies max number of items to fetch"
-        },
-        "offset": {
-          "type": "string",
-          "format": "uint64",
-          "title": "adjusts the starting point for data"
-        },
-        "states": {
-          "type": "array",
-          "title": "list of identity states to filter by",
-          "items": {
-            "$ref": "#/definitions/v2alpha1IdentityState"
-          }
-        }
-      }
-    },
-    "v2alpha1IdentityStatesResponse": {
-      "type": "object",
-      "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2alpha1Identity"
-          }
-        }
-      }
-    },
-    "v2alpha1PoETRegistration": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string"
-        },
-        "challengeHash": {
-          "type": "string",
-          "format": "byte"
-        },
-        "roundEnd": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "roundId": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1PoetChallengeReadyState": {
-      "type": "object"
-    },
-    "v2alpha1PoetConfig": {
-      "type": "object",
-      "properties": {
-        "cycleGap": {
-          "type": "string"
-        },
-        "phaseShift": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1PoetInfoRequest": {
-      "type": "object",
-      "title": "PoetInfo rpc"
-    },
-    "v2alpha1PoetInfoResponse": {
-      "type": "object",
-      "properties": {
-        "config": {
-          "$ref": "#/definitions/v2alpha1PoetConfig"
-        },
-        "poets": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "v2alpha1PoetProofReceivedState": {
-      "type": "object",
-      "properties": {
-        "poetUrl": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1PoetRegisteredState": {
-      "type": "object",
-      "properties": {
-        "registrations": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2alpha1PoETRegistration"
-          }
-        }
-      }
-    },
-    "v2alpha1PostProofReadyState": {
-      "type": "object"
-    },
-    "v2alpha1ProposalBuildFailedState": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1ProposalPublishFailedState": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "message": {
-          "type": "string"
-        },
-        "proposal": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "v2alpha1ProposalPublishedState": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "proposal": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "v2alpha1ProposalsRequest": {
-      "type": "object"
-    },
-    "v2alpha1ProposalsResponse": {
-      "type": "object",
-      "properties": {
-        "proposals": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2alpha1Proposals"
-          }
-        }
-      }
-    },
-    "v2alpha1RetryingState": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "v2alpha1WaitForAtxSyncedState": {
-      "type": "object"
-    },
-    "v2alpha1WaitForPoetRoundEndState": {
-      "type": "object",
-      "properties": {
-        "publishEpochEnd": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "roundEnd": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "v2alpha1WaitingForPoetRegistrationWindowState": {
-      "type": "object"
     }
   },
   "tags": [
@@ -1984,9 +1408,6 @@
     },
     {
       "name": "RewardService"
-    },
-    {
-      "name": "SmeshingIdentitiesService"
     }
   ]
 }

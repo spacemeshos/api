@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/api/visibility.proto";
+import "spacemesh/v2beta1/v2beta1.proto";
+
+package spacemesh.v2beta1;
+
+message Reward {
+  uint32 layer = 1; // layer award was paid in
+  uint64 total = 2; // total reward paid in smidge (sum of tx fee and layer reward)
+  uint64 layer_reward = 3; // tx_fee = total - layer_reward
+  string coinbase = 5; // account awarded this reward
+  bytes smesher = 6;  // id of smesher who earned this reward
+}
+
+message RewardRequest {
+  uint32 start_layer = 1; // starting layer for the query
+  uint32 end_layer = 2; // ending layer for the query
+  oneof filter_by {
+    string coinbase = 3; // filter by coinbase
+    bytes smesher = 4; // filter by smesher
+  } // filter by coinbase or smesher
+  uint64 offset = 5; // adjusts the starting point for data
+  uint64 limit = 6; // specifies max number of items to fetch
+  SortOrder sort_order = 7; // specifies the sort order by layer (default is ASC)
+}
+
+message RewardList {
+  repeated Reward rewards = 1; // list of rewards
+}
+
+service RewardService {
+  option (google.api.api_visibility).restriction = "v2beta1";
+
+  // List of rewards
+  //
+  // List is a method that takes a "{{.RequestType.Name}}" body and returns an "{{.ResponseType.Name}}".
+  // This method is used to retrieve a list of rewards based on the provided request parameters.
+  rpc List(RewardRequest) returns (RewardList) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.RewardService/List"
+    };
+  };
+}
+
+message RewardStreamRequest {
+  uint32 start_layer = 1;
+  uint32 end_layer = 2;
+  oneof filter_by {
+    string coinbase = 3;
+    bytes smesher = 4;
+  }
+  bool watch = 5;
+}
+
+
+service RewardStreamService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
+  rpc Stream(RewardStreamRequest) returns (stream Reward);
+}
