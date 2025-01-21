@@ -3,9 +3,9 @@ module github.com/spacemeshos/api/release/go
 go 1.23.2
 
 require (
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.25.1
-	google.golang.org/genproto/googleapis/api v0.0.0-20241219192143-6b3ec007d9bb
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20241219192143-6b3ec007d9bb
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.0
+	google.golang.org/genproto/googleapis/api v0.0.0-20250115164207-1a7da9e5054f
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f
 	google.golang.org/grpc v1.69.4
 	google.golang.org/protobuf v1.36.3
 )
