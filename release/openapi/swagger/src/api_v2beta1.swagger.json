@@ -818,6 +818,70 @@
       },
       "additionalProperties": {}
     },
+    "smesherv2Eligibilities": {
+      "type": "object",
+      "title": "Proposals and eligibilities",
+      "properties": {
+        "eligibilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/smesherv2ProposalEligibility"
+          }
+        }
+      }
+    },
+    "smesherv2Eligibility": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "smesherv2Proposal": {
+      "type": "object",
+      "properties": {
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "proposal": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "smesherv2ProposalEligibility": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "layer": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "smesherv2Proposals": {
+      "type": "object",
+      "properties": {
+        "proposals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/smesherv2Proposal"
+          }
+        }
+      }
+    },
     "spacemeshv2beta1Account": {
       "type": "object",
       "properties": {
@@ -1018,40 +1082,14 @@
         }
       }
     },
-    "spacemeshv2beta1Eligibilities": {
-      "type": "object",
-      "title": "Proposals and eligibilities",
-      "properties": {
-        "eligibilities": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2beta1ProposalEligibility"
-          }
-        }
-      }
-    },
     "spacemeshv2beta1EligibilitiesResponse": {
       "type": "object",
       "properties": {
         "identities": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/v2beta1EpochEligibilities"
+            "$ref": "#/definitions/v2EpochEligibilities"
           }
-        }
-      }
-    },
-    "spacemeshv2beta1Eligibility": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "layer": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -1092,7 +1130,7 @@
         "identities": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/v2beta1Identity"
+            "$ref": "#/definitions/v2Identity"
           }
         }
       }
@@ -1318,50 +1356,12 @@
       "type": "object",
       "properties": {
         "config": {
-          "$ref": "#/definitions/v2beta1PoetConfig"
+          "$ref": "#/definitions/v2PoetConfig"
         },
         "poets": {
           "type": "array",
           "items": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "spacemeshv2beta1Proposal": {
-      "type": "object",
-      "properties": {
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "proposal": {
-          "type": "string",
-          "format": "byte"
-        }
-      }
-    },
-    "spacemeshv2beta1ProposalEligibility": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "layer": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "spacemeshv2beta1Proposals": {
-      "type": "object",
-      "properties": {
-        "proposals": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/spacemeshv2beta1Proposal"
           }
         }
       }
@@ -1372,7 +1372,7 @@
         "proposals": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2beta1Proposals"
+            "$ref": "#/definitions/smesherv2Proposals"
           }
         }
       }
@@ -1626,7 +1626,7 @@
         "TRANSACTION_TYPE_DRAIN_VAULT"
       ]
     },
-    "v2beta1AtxBroadcastedState": {
+    "v2AtxBroadcastedState": {
       "type": "object",
       "properties": {
         "atxId": {
@@ -1635,48 +1635,48 @@
         }
       }
     },
-    "v2beta1AtxReadyState": {
+    "v2AtxReadyState": {
       "type": "object"
     },
-    "v2beta1Eligible": {
+    "v2Eligible": {
       "type": "object",
       "properties": {
         "layers": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/spacemeshv2beta1Eligibility"
+            "$ref": "#/definitions/smesherv2Eligibility"
           }
         }
       }
     },
-    "v2beta1EpochEligibilities": {
+    "v2EpochEligibilities": {
       "type": "object",
       "properties": {
         "epochs": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2beta1Eligibilities"
+            "$ref": "#/definitions/smesherv2Eligibilities"
           }
         }
       }
     },
-    "v2beta1GeneratingPostProofState": {
+    "v2GeneratingPostProofState": {
       "type": "object"
     },
-    "v2beta1Identity": {
+    "v2Identity": {
       "type": "object",
       "properties": {
         "history": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v2beta1IdentityStateInfo"
+            "$ref": "#/definitions/v2IdentityStateInfo"
           }
         }
       }
     },
-    "v2beta1IdentityState": {
+    "v2IdentityState": {
       "type": "string",
       "default": "UNSPECIFIED",
       "enum": [
@@ -1698,68 +1698,68 @@
         "ELIGIBLE"
       ]
     },
-    "v2beta1IdentityStateInfo": {
+    "v2IdentityStateInfo": {
       "type": "object",
       "properties": {
         "atxBroadcasted": {
-          "$ref": "#/definitions/v2beta1AtxBroadcastedState"
+          "$ref": "#/definitions/v2AtxBroadcastedState"
         },
         "atxReady": {
-          "$ref": "#/definitions/v2beta1AtxReadyState"
+          "$ref": "#/definitions/v2AtxReadyState"
         },
         "eligible": {
-          "$ref": "#/definitions/v2beta1Eligible"
+          "$ref": "#/definitions/v2Eligible"
         },
         "generatingPostProof": {
-          "$ref": "#/definitions/v2beta1GeneratingPostProofState"
+          "$ref": "#/definitions/v2GeneratingPostProofState"
         },
         "poetChallengeReady": {
-          "$ref": "#/definitions/v2beta1PoetChallengeReadyState"
+          "$ref": "#/definitions/v2PoetChallengeReadyState"
         },
         "poetProofReceived": {
-          "$ref": "#/definitions/v2beta1PoetProofReceivedState"
+          "$ref": "#/definitions/v2PoetProofReceivedState"
         },
         "poetRegistered": {
-          "$ref": "#/definitions/v2beta1PoetRegisteredState"
+          "$ref": "#/definitions/v2PoetRegisteredState"
         },
         "postProofReady": {
-          "$ref": "#/definitions/v2beta1PostProofReadyState"
+          "$ref": "#/definitions/v2PostProofReadyState"
         },
         "proposalBuildFailed": {
-          "$ref": "#/definitions/v2beta1ProposalBuildFailedState"
+          "$ref": "#/definitions/v2ProposalBuildFailedState"
         },
         "proposalPublishFailed": {
-          "$ref": "#/definitions/v2beta1ProposalPublishFailedState"
+          "$ref": "#/definitions/v2ProposalPublishFailedState"
         },
         "proposalPublished": {
-          "$ref": "#/definitions/v2beta1ProposalPublishedState"
+          "$ref": "#/definitions/v2ProposalPublishedState"
         },
         "publishEpoch": {
           "type": "integer",
           "format": "int64"
         },
         "retrying": {
-          "$ref": "#/definitions/v2beta1RetryingState"
+          "$ref": "#/definitions/v2RetryingState"
         },
         "state": {
-          "$ref": "#/definitions/v2beta1IdentityState"
+          "$ref": "#/definitions/v2IdentityState"
         },
         "time": {
           "type": "string",
           "format": "date-time"
         },
         "waitForAtxSynced": {
-          "$ref": "#/definitions/v2beta1WaitForAtxSyncedState"
+          "$ref": "#/definitions/v2WaitForAtxSyncedState"
         },
         "waitForPoetRoundEnd": {
-          "$ref": "#/definitions/v2beta1WaitForPoetRoundEndState"
+          "$ref": "#/definitions/v2WaitForPoetRoundEndState"
         },
         "waitingForPoetRegistrationWindow": {
-          "$ref": "#/definitions/v2beta1WaitingForPoetRegistrationWindowState"
+          "$ref": "#/definitions/v2WaitingForPoetRegistrationWindowState"
         }
       }
     },
-    "v2beta1PoETRegistration": {
+    "v2PoETRegistration": {
       "type": "object",
       "properties": {
         "address": {
@@ -1778,10 +1778,10 @@
         }
       }
     },
-    "v2beta1PoetChallengeReadyState": {
+    "v2PoetChallengeReadyState": {
       "type": "object"
     },
-    "v2beta1PoetConfig": {
+    "v2PoetConfig": {
       "type": "object",
       "properties": {
         "cycleGap": {
@@ -1792,7 +1792,7 @@
         }
       }
     },
-    "v2beta1PoetProofReceivedState": {
+    "v2PoetProofReceivedState": {
       "type": "object",
       "properties": {
         "poetUrl": {
@@ -1800,22 +1800,22 @@
         }
       }
     },
-    "v2beta1PoetRegisteredState": {
+    "v2PoetRegisteredState": {
       "type": "object",
       "properties": {
         "registrations": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v2beta1PoETRegistration"
+            "$ref": "#/definitions/v2PoETRegistration"
           }
         }
       }
     },
-    "v2beta1PostProofReadyState": {
+    "v2PostProofReadyState": {
       "type": "object"
     },
-    "v2beta1ProposalBuildFailedState": {
+    "v2ProposalBuildFailedState": {
       "type": "object",
       "properties": {
         "layer": {
@@ -1827,7 +1827,7 @@
         }
       }
     },
-    "v2beta1ProposalPublishFailedState": {
+    "v2ProposalPublishFailedState": {
       "type": "object",
       "properties": {
         "layer": {
@@ -1843,7 +1843,7 @@
         }
       }
     },
-    "v2beta1ProposalPublishedState": {
+    "v2ProposalPublishedState": {
       "type": "object",
       "properties": {
         "layer": {
@@ -1856,7 +1856,7 @@
         }
       }
     },
-    "v2beta1RetryingState": {
+    "v2RetryingState": {
       "type": "object",
       "properties": {
         "message": {
@@ -1864,10 +1864,10 @@
         }
       }
     },
-    "v2beta1WaitForAtxSyncedState": {
+    "v2WaitForAtxSyncedState": {
       "type": "object"
     },
-    "v2beta1WaitForPoetRoundEndState": {
+    "v2WaitForPoetRoundEndState": {
       "type": "object",
       "properties": {
         "publishEpochEnd": {
@@ -1880,14 +1880,11 @@
         }
       }
     },
-    "v2beta1WaitingForPoetRegistrationWindowState": {
+    "v2WaitingForPoetRegistrationWindowState": {
       "type": "object"
     }
   },
   "tags": [
-    {
-      "name": "SmeshingIdentitiesService"
-    },
     {
       "name": "AccountService"
     },
@@ -1911,6 +1908,9 @@
     },
     {
       "name": "RewardService"
+    },
+    {
+      "name": "SmeshingIdentitiesService"
     }
   ]
 }

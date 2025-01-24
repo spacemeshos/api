@@ -8,16 +8,16 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
-import "spacemesh/v2beta1/smeshing_identities.proto";
+import "spacemesh/smesher/v2/smeshing_identities.proto";
 
 message IdentityStatesRequest {
-  repeated spacemesh.v2beta1.IdentityState states = 1; // list of identity states to filter by
+  repeated spacemesh.smesher.v2.IdentityState states = 1; // list of identity states to filter by
   uint64 offset = 2; // adjusts the starting point for data
   uint64 limit = 3; // specifies max number of items to fetch
 }
 
 message IdentityStatesResponse {
-  map<string, spacemesh.v2beta1.Identity> identities = 1;
+  map<string, spacemesh.smesher.v2.Identity> identities = 1;
 }
 
 // PoetInfo rpc
@@ -25,19 +25,19 @@ message PoetInfoRequest {}
 
 message PoetInfoResponse {
   repeated string poets = 1;
-  spacemesh.v2beta1.PoetConfig config = 2;
+  spacemesh.smesher.v2.PoetConfig config = 2;
 }
 
+// Proposals and eligibilities
 message EligibilitiesRequest {}
 
 message EligibilitiesResponse {
-  map<string, spacemesh.v2beta1.EpochEligibilities> identities = 1;
+  map<string, spacemesh.smesher.v2.EpochEligibilities> identities = 1;
 }
 
 message ProposalsRequest {}
-
 message ProposalsResponse {
-  map<string, spacemesh.v2beta1.Proposals> proposals = 1;
+  map<string, spacemesh.smesher.v2.Proposals> proposals = 1;
 }
 
 service SmeshingIdentitiesService {
