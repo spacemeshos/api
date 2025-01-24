@@ -464,7 +464,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1EligibilitiesResponse"
+              "$ref": "#/definitions/v2beta1EligibilitiesResponse"
             }
           },
           "default": {
@@ -486,7 +486,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1PoetInfoResponse"
+              "$ref": "#/definitions/v2beta1PoetInfoResponse"
             }
           },
           "default": {
@@ -508,7 +508,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1ProposalsResponse"
+              "$ref": "#/definitions/v2beta1ProposalsResponse"
             }
           },
           "default": {
@@ -574,7 +574,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1IdentityStatesResponse"
+              "$ref": "#/definitions/v2beta1IdentityStatesResponse"
             }
           },
           "default": {
@@ -1031,17 +1031,6 @@
         }
       }
     },
-    "spacemeshv2beta1EligibilitiesResponse": {
-      "type": "object",
-      "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2beta1EpochEligibilities"
-          }
-        }
-      }
-    },
     "spacemeshv2beta1Eligibility": {
       "type": "object",
       "properties": {
@@ -1083,17 +1072,6 @@
       "properties": {
         "activation": {
           "$ref": "#/definitions/spacemeshv2beta1Activation"
-        }
-      }
-    },
-    "spacemeshv2beta1IdentityStatesResponse": {
-      "type": "object",
-      "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2beta1Identity"
-          }
         }
       }
     },
@@ -1314,20 +1292,6 @@
         }
       }
     },
-    "spacemeshv2beta1PoetInfoResponse": {
-      "type": "object",
-      "properties": {
-        "config": {
-          "$ref": "#/definitions/v2beta1PoetConfig"
-        },
-        "poets": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "spacemeshv2beta1Proposal": {
       "type": "object",
       "properties": {
@@ -1362,17 +1326,6 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/spacemeshv2beta1Proposal"
-          }
-        }
-      }
-    },
-    "spacemeshv2beta1ProposalsResponse": {
-      "type": "object",
-      "properties": {
-        "proposals": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/spacemeshv2beta1Proposals"
           }
         }
       }
@@ -1638,6 +1591,17 @@
     "v2beta1AtxReadyState": {
       "type": "object"
     },
+    "v2beta1EligibilitiesResponse": {
+      "type": "object",
+      "properties": {
+        "identities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v2beta1EpochEligibilities"
+          }
+        }
+      }
+    },
     "v2beta1Eligible": {
       "type": "object",
       "properties": {
@@ -1759,6 +1723,17 @@
         }
       }
     },
+    "v2beta1IdentityStatesResponse": {
+      "type": "object",
+      "properties": {
+        "identities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v2beta1Identity"
+          }
+        }
+      }
+    },
     "v2beta1PoETRegistration": {
       "type": "object",
       "properties": {
@@ -1789,6 +1764,20 @@
         },
         "phaseShift": {
           "type": "string"
+        }
+      }
+    },
+    "v2beta1PoetInfoResponse": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/v2beta1PoetConfig"
+        },
+        "poets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1856,6 +1845,17 @@
         }
       }
     },
+    "v2beta1ProposalsResponse": {
+      "type": "object",
+      "properties": {
+        "proposals": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/spacemeshv2beta1Proposals"
+          }
+        }
+      }
+    },
     "v2beta1RetryingState": {
       "type": "object",
       "properties": {
@@ -1886,9 +1886,6 @@
   },
   "tags": [
     {
-      "name": "SmeshingIdentitiesService"
-    },
-    {
       "name": "AccountService"
     },
     {
@@ -1911,6 +1908,9 @@
     },
     {
       "name": "RewardService"
+    },
+    {
+      "name": "SmeshingIdentitiesService"
     }
   ]
 }
