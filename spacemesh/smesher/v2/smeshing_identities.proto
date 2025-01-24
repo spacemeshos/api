@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package spacemesh.smesher.v2;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+enum IdentityState {
+  UNSPECIFIED = 0;
+
+  WAIT_FOR_ATX_SYNCED = 1;
+  RETRYING = 2;
+
+  WAITING_FOR_POET_REGISTRATION_WINDOW = 3;
+  POET_CHALLENGE_READY = 4;
+  POET_REGISTERED = 5;
+  WAIT_FOR_POET_ROUND_END = 6;
+  POET_PROOF_RECEIVED = 7;
+
+  GENERATING_POST_PROOF = 8;
+  POST_PROOF_READY = 9;
+
+  ATX_READY = 10;
+  ATX_BROADCASTED = 11;
+
+
+  PROPOSAL_BUILD_FAILED = 12;
+  PROPOSAL_PUBLISH_FAILED = 13;
+  PROPOSAL_PUBLISHED = 14;
+
+  ELIGIBLE = 15;
+}
+
+message RetryingState {
+  string message = 1;
+}
+message WaitForAtxSyncedState {}
+message WaitingForPoetRegistrationWindowState {}
+message PoetChallengeReadyState {}
+
+message PoETRegistration {
+  bytes challenge_hash = 1;
+  string address = 2;
+  string round_id = 3;
+  google.protobuf.Timestamp round_end = 4;
+}
+message PoetRegisteredState {
+  repeated PoETRegistration registrations = 1;
+}
+
+message WaitForPoetRoundEndState {
+  google.protobuf.Timestamp round_end = 1;
+  google.protobuf.Timestamp publish_epoch_end = 2;
+}
+message PoetProofReceivedState {
+  string poet_url = 1;
+}
+message GeneratingPostProofState {}
+message PostProofReadyState {}
+message AtxReadyState {}
+message AtxBroadcastedState {
+  bytes atx_id = 1;
+}
+message ProposalBuildFailedState {
+  string message = 1;
+  uint32 layer = 2;
+}
+message ProposalPublishFailedState {
+  string message = 1;
+  bytes proposal = 2;
+  uint32 layer = 3;
+}
+message ProposalPublishedState {
+  bytes proposal = 1;
+  uint32 layer = 2;
+}
+
+message Eligibility {
+  uint32 layer = 1;
+  uint32 count = 2;
+}
+message Eligible {
+  repeated Eligibility layers = 2;
+}
+
+message IdentityStateInfo {
+  IdentityState state = 1;
+  optional uint32 publish_epoch = 2;
+  google.protobuf.Timestamp time = 3;
+  oneof metadata {
+    RetryingState retrying = 4;
+    WaitForAtxSyncedState wait_for_atx_synced = 5;
+    WaitingForPoetRegistrationWindowState waiting_for_poet_registration_window = 6;
+    PoetChallengeReadyState poet_challenge_ready = 7;
+    PoetRegisteredState poet_registered = 8;
+    WaitForPoetRoundEndState wait_for_poet_round_end = 9;
+    PoetProofReceivedState poet_proof_received = 10;
+    GeneratingPostProofState generating_post_proof = 11;
+    PostProofReadyState post_proof_ready = 12;
+    AtxReadyState atx_ready = 13;
+    AtxBroadcastedState atx_broadcasted = 14;
+    ProposalBuildFailedState proposal_build_failed = 15;
+    ProposalPublishFailedState proposal_publish_failed = 16;
+    ProposalPublishedState proposal_published = 17;
+    Eligible eligible = 18;
+  }
+}
+
+message Identity {
+  repeated IdentityStateInfo history = 1;
+}
+
+message PoetConfig {
+  google.protobuf.Duration phase_shift = 1;
+  google.protobuf.Duration cycle_gap = 2;
+}
+
+// Proposals and eligibilities
+message Eligibilities {
+  repeated ProposalEligibility eligibilities = 5;
+}
+
+message ProposalEligibility {
+  uint32 layer = 1;
+  uint32 count = 2;
+}
+
+message EpochEligibilities {
+  map<uint32, Eligibilities> epochs = 1;
+}
+
+message Proposal {
+  uint32 layer = 1;
+  bytes proposal = 2;
+}
+
+message Proposals {
+  repeated Proposal proposals = 1;
+}
