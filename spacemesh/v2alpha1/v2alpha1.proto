@@ -15,6 +15,21 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
       name: "MIT License",
       url: "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE",
     },
+    extensions: {
+      key: "x-logo",
+      value: {
+        struct_value: {
+          fields: {
+            key: "url",
+            value: { string_value: "https://docs.spacemesh.io/img/logo.png" }
+          }
+          fields: {
+            key: "altText",
+            value: { string_value: "Spacemesh Logo" }
+          }
+        },
+      },
+    }
   },
   schemes: HTTPS,
   consumes: "application/json",
