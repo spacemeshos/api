@@ -16,6 +16,7 @@ message AccountState {
   uint64 counter = 1; // aka nonce
   uint64 balance = 2; // account balance in smidge
   uint32 layer = 3; // account balance as of layer X
+  map<string, bytes> storage = 4; // account storage
 }
 
 message AccountRequest {

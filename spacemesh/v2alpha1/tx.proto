@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-import "google/rpc/status.proto";
-import "google/api/visibility.proto";
-import "spacemesh/v2alpha1/v2alpha1.proto";
-
 package spacemesh.v2alpha1;
+
+import "google/api/visibility.proto";
+import "google/rpc/status.proto";
+import "spacemesh/v2alpha1/v2alpha1.proto";
 
 // An immutable Spacemesh transaction.
 // do not include mutable data such as tx state or result.
@@ -30,6 +30,14 @@ message Transaction {
     TRANSACTION_TYPE_VAULT_SPAWN = 8;
     TRANSACTION_TYPE_DRAIN_VAULT = 9;
     TRANSACTION_TYPE_DEPLOY = 10;
+    TRANSACTION_TYPE_PROXY = 11;
+    TRANSACTION_TYPE_SPEND = 12;
+
+    TRANSACTION_TYPE_MINT_SPAWN = 20;
+
+
+    TRANSACTION_TYPE_TOKEN_WALLET_SPAWN = 30;
+    TRANSACTION_TYPE_TOKEN_WALLET_SEND_TOKEN = 31;
   }
   TransactionType type = 10;
   TransactionContents contents = 11; // parsed transaction contents
@@ -67,6 +75,30 @@ message ContentsDeploy {
   string template = 1; // deployed template address
 }
 
+message ContentsProxy {
+  string destination = 1; // recipient account
+  bytes method = 2;
+  uint64 amount = 3; // amount in smidge
+}
+
+message ContentsTokenWalletSendToken {
+  string destination = 1; // recipient account
+  uint64 amount = 2; // amount in smidge
+  string token_id = 3;
+}
+
+message ContentsMintSpawn {
+  string pubkey = 1;
+  uint64 max_supply = 2;
+  uint64 price = 3;
+}
+
+message ContentsTokenWalletSpawn {
+  string pubkey = 1;
+  string mint_template = 2;
+  string wallet_template = 3;
+}
+
 message TransactionContents {
   oneof contents {
     ContentsSend send = 1;
@@ -76,6 +108,12 @@ message TransactionContents {
     ContentsVaultSpawn vault_spawn = 5;
     ContentsDrainVault drain_vault = 6;
     ContentsDeploy deploy = 7;
+    ContentsProxy proxy = 8;
+
+    ContentsMintSpawn mint_spawn = 20;
+
+    ContentsTokenWalletSpawn token_wallet_spawn = 30;
+    ContentsTokenWalletSendToken token_wallet_send_token = 31;
   }
 }
 
@@ -150,8 +188,8 @@ message TransactionList {
 }
 
 message ParseTransactionRequest {
-  bytes transaction = 1;  // signed binary transaction
-  bool verify = 2;        // if true signature verification will be executed
+  bytes transaction = 1; // signed binary transaction
+  bool verify = 2; // if true signature verification will be executed
 }
 
 message ParseTransactionResponse {
@@ -160,7 +198,7 @@ message ParseTransactionResponse {
 }
 
 message SubmitTransactionRequest {
-  bytes transaction = 1;  // signed binary transaction
+  bytes transaction = 1; // signed binary transaction
 }
 
 message SubmitTransactionResponse {
@@ -169,7 +207,7 @@ message SubmitTransactionResponse {
 }
 
 message EstimateGasRequest {
-  bytes transaction = 1;  // signed binary transaction
+  bytes transaction = 1; // signed binary transaction
 }
 
 message EstimateGasResponse {

@@ -465,7 +465,12 @@
         "TRANSACTION_TYPE_VESTING_SPAWN",
         "TRANSACTION_TYPE_VAULT_SPAWN",
         "TRANSACTION_TYPE_DRAIN_VAULT",
-        "TRANSACTION_TYPE_DEPLOY"
+        "TRANSACTION_TYPE_DEPLOY",
+        "TRANSACTION_TYPE_PROXY",
+        "TRANSACTION_TYPE_SPEND",
+        "TRANSACTION_TYPE_MINT_SPAWN",
+        "TRANSACTION_TYPE_TOKEN_WALLET_SPAWN",
+        "TRANSACTION_TYPE_TOKEN_WALLET_SEND_TOKEN"
       ]
     },
     "googlerpcStatus": {
@@ -562,6 +567,14 @@
           "type": "integer",
           "format": "int64",
           "title": "account balance as of layer X"
+        },
+        "storage": {
+          "type": "object",
+          "title": "account storage",
+          "additionalProperties": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       }
     },
@@ -1049,6 +1062,22 @@
         }
       }
     },
+    "v2alpha1ContentsMintSpawn": {
+      "type": "object",
+      "properties": {
+        "maxSupply": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "price": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "pubkey": {
+          "type": "string"
+        }
+      }
+    },
     "v2alpha1ContentsMultiSigSpawn": {
       "type": "object",
       "properties": {
@@ -1062,6 +1091,24 @@
           "type": "integer",
           "format": "int64",
           "title": "number of required signatures"
+        }
+      }
+    },
+    "v2alpha1ContentsProxy": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "amount in smidge"
+        },
+        "destination": {
+          "type": "string",
+          "title": "recipient account"
+        },
+        "method": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },
@@ -1083,6 +1130,37 @@
       "type": "object",
       "properties": {
         "pubkey": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1ContentsTokenWalletSendToken": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "uint64",
+          "title": "amount in smidge"
+        },
+        "destination": {
+          "type": "string",
+          "title": "recipient account"
+        },
+        "tokenId": {
+          "type": "string"
+        }
+      }
+    },
+    "v2alpha1ContentsTokenWalletSpawn": {
+      "type": "object",
+      "properties": {
+        "mintTemplate": {
+          "type": "string"
+        },
+        "pubkey": {
+          "type": "string"
+        },
+        "walletTemplate": {
           "type": "string"
         }
       }
@@ -1300,14 +1378,26 @@
         "drainVault": {
           "$ref": "#/definitions/v2alpha1ContentsDrainVault"
         },
+        "mintSpawn": {
+          "$ref": "#/definitions/v2alpha1ContentsMintSpawn"
+        },
         "multiSigSpawn": {
           "$ref": "#/definitions/v2alpha1ContentsMultiSigSpawn"
+        },
+        "proxy": {
+          "$ref": "#/definitions/v2alpha1ContentsProxy"
         },
         "send": {
           "$ref": "#/definitions/v2alpha1ContentsSend"
         },
         "singleSigSpawn": {
           "$ref": "#/definitions/v2alpha1ContentsSingleSigSpawn"
+        },
+        "tokenWalletSendToken": {
+          "$ref": "#/definitions/v2alpha1ContentsTokenWalletSendToken"
+        },
+        "tokenWalletSpawn": {
+          "$ref": "#/definitions/v2alpha1ContentsTokenWalletSpawn"
         },
         "vaultSpawn": {
           "$ref": "#/definitions/v2alpha1ContentsVaultSpawn"
