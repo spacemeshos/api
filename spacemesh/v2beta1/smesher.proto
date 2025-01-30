@@ -1,8 +1,9 @@
 syntax = "proto3";
 
-import "spacemesh/v2beta1/version.proto";
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
+import "spacemesh/v2beta1/version.proto";
+
 package spacemesh.v2beta1;
 
 service SmesherService {
