@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package spacemesh.v2beta1;
+
+
+message VersionRequest {}
+
+message VersionResponse {
+  string version = 1; // semantic version of the node software
+}
+
+message BuildRequest {}
+
+message BuildResponse {
+  string build = 1; // git commit hash of the build
+}
+
+service SmesherService {
+  option (google.api.api_visibility).restriction = "INTERNAL";
+
+  rpc Version(VersionRequest) returns (VersionResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmesherService/Version"
+    };
+  }
+  rpc Build(BuildRequest) returns (BuildResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmesherService/Build"
+    };
+  }
+}
