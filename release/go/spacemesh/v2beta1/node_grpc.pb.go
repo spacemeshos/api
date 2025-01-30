@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	NodeService_Status_FullMethodName = "/spacemesh.v2beta1.NodeService/Status"
+	NodeService_Status_FullMethodName  = "/spacemesh.v2beta1.NodeService/Status"
+	NodeService_Version_FullMethodName = "/spacemesh.v2beta1.NodeService/Version"
+	NodeService_Build_FullMethodName   = "/spacemesh.v2beta1.NodeService/Build"
 )
 
 // NodeServiceClient is the client API for NodeService service.
@@ -31,6 +33,14 @@ type NodeServiceClient interface {
 	// Status is a method that returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve node status information.
 	Status(ctx context.Context, in *NodeStatusRequest, opts ...grpc.CallOption) (*NodeStatusResponse, error)
+	// Node version
+	//
+	// Version returns version information about the node software.
+	Version(ctx context.Context, in *VersionRequest, opts ...grpc.CallOption) (*VersionResponse, error)
+	// Node build
+	//
+	// Build returns the build of the node software.
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
 }
 
 type nodeServiceClient struct {
@@ -50,6 +60,24 @@ func (c *nodeServiceClient) Status(ctx context.Context, in *NodeStatusRequest, o
 	return out, nil
 }
 
+func (c *nodeServiceClient) Version(ctx context.Context, in *VersionRequest, opts ...grpc.CallOption) (*VersionResponse, error) {
+	out := new(VersionResponse)
+	err := c.cc.Invoke(ctx, NodeService_Version_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, NodeService_Build_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NodeServiceServer is the server API for NodeService service.
 // All implementations should embed UnimplementedNodeServiceServer
 // for forward compatibility
@@ -59,6 +87,14 @@ type NodeServiceServer interface {
 	// Status is a method that returns an "{{.ResponseType.Name}}".
 	// This method is used to retrieve node status information.
 	Status(context.Context, *NodeStatusRequest) (*NodeStatusResponse, error)
+	// Node version
+	//
+	// Version returns version information about the node software.
+	Version(context.Context, *VersionRequest) (*VersionResponse, error)
+	// Node build
+	//
+	// Build returns the build of the node software.
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
 }
 
 // UnimplementedNodeServiceServer should be embedded to have forward compatible implementations.
@@ -67,6 +103,12 @@ type UnimplementedNodeServiceServer struct {
 
 func (UnimplementedNodeServiceServer) Status(context.Context, *NodeStatusRequest) (*NodeStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
+}
+func (UnimplementedNodeServiceServer) Version(context.Context, *VersionRequest) (*VersionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Version not implemented")
+}
+func (UnimplementedNodeServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Build not implemented")
 }
 
 // UnsafeNodeServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -98,6 +140,42 @@ func _NodeService_Status_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NodeService_Version_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServiceServer).Version(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NodeService_Version_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServiceServer).Version(ctx, req.(*VersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NodeService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NodeService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NodeService_ServiceDesc is the grpc.ServiceDesc for NodeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -108,6 +186,14 @@ var NodeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Status",
 			Handler:    _NodeService_Status_Handler,
+		},
+		{
+			MethodName: "Version",
+			Handler:    _NodeService_Version_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _NodeService_Build_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
