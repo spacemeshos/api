@@ -54,7 +54,6 @@ message RewardStreamRequest {
   bool watch = 5;
 }
 
-
 service RewardStreamService {
   option (google.api.api_visibility).restriction = "INTERNAL";
 
