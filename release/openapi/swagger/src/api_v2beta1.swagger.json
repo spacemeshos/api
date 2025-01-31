@@ -364,7 +364,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1BuildResponse"
+              "$ref": "#/definitions/v2beta1NodeBuildResponse"
             }
           },
           "default": {
@@ -412,7 +412,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/spacemeshv2beta1VersionResponse"
+              "$ref": "#/definitions/v2beta1NodeVersionResponse"
             }
           },
           "default": {
@@ -983,15 +983,6 @@
           "type": "string",
           "format": "byte",
           "title": "block hash"
-        }
-      }
-    },
-    "spacemeshv2beta1BuildResponse": {
-      "type": "object",
-      "properties": {
-        "build": {
-          "type": "string",
-          "title": "git commit hash of the build"
         }
       }
     },
@@ -1636,15 +1627,6 @@
         "TRANSACTION_TYPE_DRAIN_VAULT"
       ]
     },
-    "spacemeshv2beta1VersionResponse": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "type": "string",
-          "title": "semantic version of the node software"
-        }
-      }
-    },
     "v2beta1AtxBroadcastedState": {
       "type": "object",
       "properties": {
@@ -1797,6 +1779,24 @@
           "additionalProperties": {
             "$ref": "#/definitions/v2beta1Identity"
           }
+        }
+      }
+    },
+    "v2beta1NodeBuildResponse": {
+      "type": "object",
+      "properties": {
+        "build": {
+          "type": "string",
+          "title": "git commit hash of the build"
+        }
+      }
+    },
+    "v2beta1NodeVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "semantic version of the node software"
         }
       }
     },

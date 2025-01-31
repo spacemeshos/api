@@ -36,11 +36,11 @@ type NodeServiceClient interface {
 	// Node version
 	//
 	// Version returns version information about the node software.
-	Version(ctx context.Context, in *VersionRequest, opts ...grpc.CallOption) (*VersionResponse, error)
+	Version(ctx context.Context, in *NodeVersionRequest, opts ...grpc.CallOption) (*NodeVersionResponse, error)
 	// Node build
 	//
 	// Build returns the build of the node software.
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+	Build(ctx context.Context, in *NodeBuildRequest, opts ...grpc.CallOption) (*NodeBuildResponse, error)
 }
 
 type nodeServiceClient struct {
@@ -60,8 +60,8 @@ func (c *nodeServiceClient) Status(ctx context.Context, in *NodeStatusRequest, o
 	return out, nil
 }
 
-func (c *nodeServiceClient) Version(ctx context.Context, in *VersionRequest, opts ...grpc.CallOption) (*VersionResponse, error) {
-	out := new(VersionResponse)
+func (c *nodeServiceClient) Version(ctx context.Context, in *NodeVersionRequest, opts ...grpc.CallOption) (*NodeVersionResponse, error) {
+	out := new(NodeVersionResponse)
 	err := c.cc.Invoke(ctx, NodeService_Version_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -69,8 +69,8 @@ func (c *nodeServiceClient) Version(ctx context.Context, in *VersionRequest, opt
 	return out, nil
 }
 
-func (c *nodeServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	out := new(BuildResponse)
+func (c *nodeServiceClient) Build(ctx context.Context, in *NodeBuildRequest, opts ...grpc.CallOption) (*NodeBuildResponse, error) {
+	out := new(NodeBuildResponse)
 	err := c.cc.Invoke(ctx, NodeService_Build_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -90,11 +90,11 @@ type NodeServiceServer interface {
 	// Node version
 	//
 	// Version returns version information about the node software.
-	Version(context.Context, *VersionRequest) (*VersionResponse, error)
+	Version(context.Context, *NodeVersionRequest) (*NodeVersionResponse, error)
 	// Node build
 	//
 	// Build returns the build of the node software.
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	Build(context.Context, *NodeBuildRequest) (*NodeBuildResponse, error)
 }
 
 // UnimplementedNodeServiceServer should be embedded to have forward compatible implementations.
@@ -104,10 +104,10 @@ type UnimplementedNodeServiceServer struct {
 func (UnimplementedNodeServiceServer) Status(context.Context, *NodeStatusRequest) (*NodeStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Status not implemented")
 }
-func (UnimplementedNodeServiceServer) Version(context.Context, *VersionRequest) (*VersionResponse, error) {
+func (UnimplementedNodeServiceServer) Version(context.Context, *NodeVersionRequest) (*NodeVersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Version not implemented")
 }
-func (UnimplementedNodeServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+func (UnimplementedNodeServiceServer) Build(context.Context, *NodeBuildRequest) (*NodeBuildResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Build not implemented")
 }
 
@@ -141,7 +141,7 @@ func _NodeService_Status_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _NodeService_Version_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VersionRequest)
+	in := new(NodeVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -153,13 +153,13 @@ func _NodeService_Version_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: NodeService_Version_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NodeServiceServer).Version(ctx, req.(*VersionRequest))
+		return srv.(NodeServiceServer).Version(ctx, req.(*NodeVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _NodeService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
+	in := new(NodeBuildRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -171,7 +171,7 @@ func _NodeService_Build_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: NodeService_Build_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NodeServiceServer).Build(ctx, req.(*BuildRequest))
+		return srv.(NodeServiceServer).Build(ctx, req.(*NodeBuildRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

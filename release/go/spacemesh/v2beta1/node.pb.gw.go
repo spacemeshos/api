@@ -50,7 +50,7 @@ func local_request_NodeService_Status_0(ctx context.Context, marshaler runtime.M
 }
 
 func request_NodeService_Version_0(ctx context.Context, marshaler runtime.Marshaler, client NodeServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq VersionRequest
+	var protoReq NodeVersionRequest
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.Version(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -59,7 +59,7 @@ func request_NodeService_Version_0(ctx context.Context, marshaler runtime.Marsha
 }
 
 func local_request_NodeService_Version_0(ctx context.Context, marshaler runtime.Marshaler, server NodeServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq VersionRequest
+	var protoReq NodeVersionRequest
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.Version(ctx, &protoReq)
@@ -68,7 +68,7 @@ func local_request_NodeService_Version_0(ctx context.Context, marshaler runtime.
 }
 
 func request_NodeService_Build_0(ctx context.Context, marshaler runtime.Marshaler, client NodeServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq BuildRequest
+	var protoReq NodeBuildRequest
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.Build(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -77,7 +77,7 @@ func request_NodeService_Build_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 func local_request_NodeService_Build_0(ctx context.Context, marshaler runtime.Marshaler, server NodeServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq BuildRequest
+	var protoReq NodeBuildRequest
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.Build(ctx, &protoReq)
