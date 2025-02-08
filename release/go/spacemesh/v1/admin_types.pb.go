@@ -22,6 +22,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
 type ConnectionInfo_Kind int32
 
 const (

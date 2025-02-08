@@ -1396,9 +1396,6 @@
       "name": "ActivationService"
     },
     {
-      "name": "TransactionService"
-    },
-    {
       "name": "LayerService"
     },
     {
@@ -1412,6 +1409,9 @@
     },
     {
       "name": "RewardService"
+    },
+    {
+      "name": "TransactionService"
     }
   ]
 }
