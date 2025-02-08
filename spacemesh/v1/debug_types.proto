@@ -2,7 +2,6 @@ syntax = "proto3";
 
 import "spacemesh/v1/global_state_types.proto";
 import "spacemesh/v1/types.proto";
-import "google/rpc/status.proto";
 
 package spacemesh.v1;
 
@@ -25,6 +24,7 @@ message NetworkInfoResponse {
     string id = 1;
     repeated string listen_addresses = 2;
     repeated string known_addresses = 3;
+    // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
     enum NATType {
         NATTypeUnknown = 0;
         Cone = 1;
@@ -32,6 +32,7 @@ message NetworkInfoResponse {
     }
     NATType nat_type_udp = 4;
     NATType nat_type_tcp = 5;
+    // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
     enum Reachability {
         ReachabilityUnknown = 0;
         Public = 1;
@@ -70,6 +71,7 @@ message Proposal {
     }
     bytes ballot = 7;
     repeated Eligibility eligibilities = 8;
+    // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
     enum Status {
         Created = 0;
         Included = 1;

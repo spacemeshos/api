@@ -178,6 +178,7 @@ message ConnectionInfo {
   string address = 1;
   google.protobuf.Duration uptime = 2;
   bool outbound = 3;
+  // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   enum Kind {
     Uknown = 0;
     Inbound = 1;
