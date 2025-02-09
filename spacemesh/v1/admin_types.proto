@@ -180,7 +180,7 @@ message ConnectionInfo {
   bool outbound = 3;
   // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   enum Kind {
-    Uknown = 0;
+    Unknown = 0;
     Inbound = 1;
     Outbound = 2;
     HPInbound = 3;
