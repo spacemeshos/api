@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "spacemesh/v1/types.proto";
-
 package spacemesh.v1;
 
 /*
@@ -80,7 +78,7 @@ message PostStatesRequest {}
 
 message PostState {
   enum State {
-    _UNUSED = 0;  // not used
+    UNUSED = 0;   // not used
     IDLE = 1;     // post-service is not needed
     PROVING = 2;  // ID is proving, post-service is needed
   }
