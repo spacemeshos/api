@@ -19,7 +19,7 @@ message SmeshingBuildResponse {
 
 
 service SmeshingService {
-  option (google.api.api_visibility).restriction = "INTERNAL";
+  option (google.api.api_visibility).restriction = "v2beta1";
 
   rpc Version(SmeshingVersionRequest) returns (SmeshingVersionResponse) {
     option (google.api.http) = {
