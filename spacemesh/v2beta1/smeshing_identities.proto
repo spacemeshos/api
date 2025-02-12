@@ -5,8 +5,9 @@ package spacemesh.v2beta1;
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
 import "google/protobuf/duration.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "spacemesh/v2beta1/v2beta1.proto";
 
 enum IdentityState {
   UNSPECIFIED = 0;
@@ -25,7 +26,6 @@ enum IdentityState {
 
   ATX_READY = 10;
   ATX_BROADCASTED = 11;
-
 
   PROPOSAL_BUILD_FAILED = 12;
   PROPOSAL_PUBLISH_FAILED = 13;
@@ -87,11 +87,11 @@ message Eligible {
 }
 
 message IdentityStateInfo {
-  IdentityState state = 1;
-  optional uint32 publish_epoch = 2;
-  google.protobuf.Timestamp time = 3;
+  bytes smesher = 1;
+  IdentityState state = 2;
+  optional uint32 publish_epoch = 3;
+  google.protobuf.Timestamp time = 4;
   oneof metadata {
-    RetryingState retrying = 4;
     WaitForAtxSyncedState wait_for_atx_synced = 5;
     WaitingForPoetRegistrationWindowState waiting_for_poet_registration_window = 6;
     PoetChallengeReadyState poet_challenge_ready = 7;
@@ -106,21 +106,29 @@ message IdentityStateInfo {
     ProposalPublishFailedState proposal_publish_failed = 16;
     ProposalPublishedState proposal_published = 17;
     Eligible eligible = 18;
+    RetryingState retrying = 19;
   }
-}
-
-message Identity {
-  repeated IdentityStateInfo history = 1;
 }
 
 message IdentityStatesRequest {
   repeated IdentityState states = 1; // list of identity states to filter by
-  uint64 offset = 2; // adjusts the starting point for data
-  uint64 limit = 3; // specifies max number of items to fetch
+  repeated bytes smeshers = 2;
+  // The timestamp of the oldest state to return.
+  // It's inclusive.
+  google.protobuf.Timestamp from = 3;
+  // The timestamp of the newest state to return.
+  // It's exclusive, meaning it will return states between [from; to).
+  google.protobuf.Timestamp to = 4;
+  // How many states to return at most.
+  uint64 limit = 5;
+  // The sorting order of states:
+  // - ASC:  from oldest to newest
+  // - DESC: from newest to oldest.
+  SortOrder order = 6;
 }
 
 message IdentityStatesResponse {
-  map<string, Identity> identities = 1;
+ repeated IdentityStateInfo states = 1;
 }
 
 // PoetInfo rpc
@@ -175,26 +183,18 @@ service SmeshingIdentitiesService {
   option (google.api.api_visibility).restriction = "v2beta1";
 
   rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/States"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/States"};
   }
 
   rpc PoetInfo(PoetInfoRequest) returns (PoetInfoResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"};
   }
 
   rpc Eligibilities(EligibilitiesRequest) returns (EligibilitiesResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"};
   }
 
   rpc Proposals(ProposalsRequest) returns (ProposalsResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"};
   }
 }

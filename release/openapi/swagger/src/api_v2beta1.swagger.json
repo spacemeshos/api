@@ -604,17 +604,45 @@
             "in": "query"
           },
           {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "name": "smeshers",
+            "in": "query"
+          },
+          {
             "type": "string",
-            "format": "uint64",
-            "description": "adjusts the starting point for data",
-            "name": "offset",
+            "format": "date-time",
+            "description": "The timestamp of the oldest state to return.\nIt's inclusive.",
+            "name": "from",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of the newest state to return.\nIt's exclusive, meaning it will return states between [from; to).",
+            "name": "to",
             "in": "query"
           },
           {
             "type": "string",
             "format": "uint64",
-            "description": "specifies max number of items to fetch",
+            "description": "How many states to return at most.",
             "name": "limit",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "The sorting order of states:\n- ASC:  from oldest to newest\n- DESC: from newest to oldest.",
+            "name": "order",
             "in": "query"
           }
         ],
@@ -1676,18 +1704,6 @@
     "v2beta1GeneratingPostProofState": {
       "type": "object"
     },
-    "v2beta1Identity": {
-      "type": "object",
-      "properties": {
-        "history": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2beta1IdentityStateInfo"
-          }
-        }
-      }
-    },
     "v2beta1IdentityState": {
       "type": "string",
       "default": "UNSPECIFIED",
@@ -1753,6 +1769,10 @@
         "retrying": {
           "$ref": "#/definitions/v2beta1RetryingState"
         },
+        "smesher": {
+          "type": "string",
+          "format": "byte"
+        },
         "state": {
           "$ref": "#/definitions/v2beta1IdentityState"
         },
@@ -1774,10 +1794,11 @@
     "v2beta1IdentityStatesResponse": {
       "type": "object",
       "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2beta1Identity"
+        "states": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2beta1IdentityStateInfo"
           }
         }
       }
