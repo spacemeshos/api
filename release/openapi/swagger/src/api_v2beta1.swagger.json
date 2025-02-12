@@ -662,6 +662,50 @@
         }
       }
     },
+    "/spacemesh.v2beta1.SmeshingService/Build": {
+      "get": {
+        "tags": [
+          "SmeshingService"
+        ],
+        "operationId": "SmeshingService_Build",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2beta1SmeshingBuildResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2beta1.SmeshingService/Version": {
+      "get": {
+        "tags": [
+          "SmeshingService"
+        ],
+        "operationId": "SmeshingService_Version",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2beta1SmeshingVersionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2beta1.TransactionService/EstimateGas": {
       "post": {
         "description": "EstimateGas is a method that takes a \"EstimateGasRequest\" body and returns an \"EstimateGasResponse\".\nThis method is used to estimate the recommended maximum gas for a signed binary transaction.",
@@ -1951,6 +1995,24 @@
         }
       }
     },
+    "v2beta1SmeshingBuildResponse": {
+      "type": "object",
+      "properties": {
+        "build": {
+          "type": "string",
+          "title": "git commit hash of the build"
+        }
+      }
+    },
+    "v2beta1SmeshingVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "semantic version of the node software"
+        }
+      }
+    },
     "v2beta1WaitForAtxSyncedState": {
       "type": "object"
     },
@@ -1995,6 +2057,9 @@
     },
     {
       "name": "RewardService"
+    },
+    {
+      "name": "SmeshingService"
     },
     {
       "name": "SmeshingIdentitiesService"
