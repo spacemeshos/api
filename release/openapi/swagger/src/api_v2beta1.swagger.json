@@ -606,14 +606,14 @@
           {
             "type": "string",
             "format": "date-time",
-            "description": "The timestamp of the first state to return.\nIt's inclusive.\nIf not specified, it will return:\n- from the oldest one if the order = ASC\n- from the newest one if the order = DESC.",
+            "description": "The timestamp of the oldest state to return.\nIt's inclusive.",
             "name": "from",
             "in": "query"
           },
           {
             "type": "string",
             "format": "date-time",
-            "description": "The timestamp of the last state to return.\nIt's exclusive, meaning it will return states between [from; to).",
+            "description": "The timestamp of the newest state to return.\nIt's exclusive, meaning it will return states between [from; to).",
             "name": "to",
             "in": "query"
           },
@@ -1694,18 +1694,6 @@
     "v2beta1GeneratingPostProofState": {
       "type": "object"
     },
-    "v2beta1Identity": {
-      "type": "object",
-      "properties": {
-        "history": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2beta1IdentityStateInfo"
-          }
-        }
-      }
-    },
     "v2beta1IdentityState": {
       "type": "string",
       "default": "UNSPECIFIED",
@@ -1742,6 +1730,10 @@
         },
         "generatingPostProof": {
           "$ref": "#/definitions/v2beta1GeneratingPostProofState"
+        },
+        "id": {
+          "type": "string",
+          "format": "byte"
         },
         "poetChallengeReady": {
           "$ref": "#/definitions/v2beta1PoetChallengeReadyState"
@@ -1792,10 +1784,11 @@
     "v2beta1IdentityStatesResponse": {
       "type": "object",
       "properties": {
-        "identities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/v2beta1Identity"
+        "states": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2beta1IdentityStateInfo"
           }
         }
       }
