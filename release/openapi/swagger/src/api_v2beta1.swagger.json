@@ -604,6 +604,16 @@
             "in": "query"
           },
           {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            },
+            "collectionFormat": "multi",
+            "name": "smeshers",
+            "in": "query"
+          },
+          {
             "type": "string",
             "format": "date-time",
             "description": "The timestamp of the oldest state to return.\nIt's inclusive.",
@@ -1731,10 +1741,6 @@
         "generatingPostProof": {
           "$ref": "#/definitions/v2beta1GeneratingPostProofState"
         },
-        "id": {
-          "type": "string",
-          "format": "byte"
-        },
         "poetChallengeReady": {
           "$ref": "#/definitions/v2beta1PoetChallengeReadyState"
         },
@@ -1762,6 +1768,10 @@
         },
         "retrying": {
           "$ref": "#/definitions/v2beta1RetryingState"
+        },
+        "smesher": {
+          "type": "string",
+          "format": "byte"
         },
         "state": {
           "$ref": "#/definitions/v2beta1IdentityState"

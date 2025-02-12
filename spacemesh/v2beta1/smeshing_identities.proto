@@ -87,7 +87,7 @@ message Eligible {
 }
 
 message IdentityStateInfo {
-  bytes id = 1;
+  bytes smesher = 1;
   IdentityState state = 2;
   optional uint32 publish_epoch = 3;
   google.protobuf.Timestamp time = 4;
@@ -112,18 +112,19 @@ message IdentityStateInfo {
 
 message IdentityStatesRequest {
   repeated IdentityState states = 1; // list of identity states to filter by
+  repeated bytes smeshers = 2;
   // The timestamp of the oldest state to return.
   // It's inclusive.
-  google.protobuf.Timestamp from = 2;
+  google.protobuf.Timestamp from = 3;
   // The timestamp of the newest state to return.
   // It's exclusive, meaning it will return states between [from; to).
-  google.protobuf.Timestamp to = 3;
+  google.protobuf.Timestamp to = 4;
   // How many states to return at most.
-  uint64 limit = 4;
+  uint64 limit = 5;
   // The sorting order of states:
   // - ASC:  from oldest to newest
   // - DESC: from newest to oldest.
-  SortOrder order = 5;
+  SortOrder order = 6;
 }
 
 message IdentityStatesResponse {
