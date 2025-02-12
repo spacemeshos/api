@@ -605,16 +605,34 @@
           },
           {
             "type": "string",
-            "format": "uint64",
-            "description": "adjusts the starting point for data",
-            "name": "offset",
+            "format": "date-time",
+            "description": "The timestamp of the first state to return.\nIt's inclusive.\nIf not specified, it will return:\n- from the oldest one if the order = ASC\n- from the newest one if the order = DESC.",
+            "name": "from",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of the last state to return.\nIt's exclusive, meaning it will return states between [from; to).",
+            "name": "to",
             "in": "query"
           },
           {
             "type": "string",
             "format": "uint64",
-            "description": "specifies max number of items to fetch",
+            "description": "How many states to return at most.",
             "name": "limit",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "default": "ASC",
+            "description": "The sorting order of states:\n- ASC:  from oldest to newest\n- DESC: from newest to oldest.",
+            "name": "order",
             "in": "query"
           }
         ],

@@ -5,8 +5,9 @@ package spacemesh.v2beta1;
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
 import "google/protobuf/duration.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "spacemesh/v2beta1/v2beta1.proto";
 
 enum IdentityState {
   UNSPECIFIED = 0;
@@ -25,7 +26,6 @@ enum IdentityState {
 
   ATX_READY = 10;
   ATX_BROADCASTED = 11;
-
 
   PROPOSAL_BUILD_FAILED = 12;
   PROPOSAL_PUBLISH_FAILED = 13;
@@ -115,8 +115,21 @@ message Identity {
 
 message IdentityStatesRequest {
   repeated IdentityState states = 1; // list of identity states to filter by
-  uint64 offset = 2; // adjusts the starting point for data
-  uint64 limit = 3; // specifies max number of items to fetch
+  // The timestamp of the first state to return.
+  // It's inclusive.
+  // If not specified, it will return:
+  // - from the oldest one if the order = ASC
+  // - from the newest one if the order = DESC.
+  google.protobuf.Timestamp from = 2;
+  // The timestamp of the last state to return.
+  // It's exclusive, meaning it will return states between [from; to).
+  google.protobuf.Timestamp to = 3;
+  // How many states to return at most.
+  uint64 limit = 4;
+  // The sorting order of states:
+  // - ASC:  from oldest to newest
+  // - DESC: from newest to oldest.
+  SortOrder order = 5;
 }
 
 message IdentityStatesResponse {
@@ -175,26 +188,18 @@ service SmeshingIdentitiesService {
   option (google.api.api_visibility).restriction = "v2beta1";
 
   rpc States(IdentityStatesRequest) returns (IdentityStatesResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/States"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/States"};
   }
 
   rpc PoetInfo(PoetInfoRequest) returns (PoetInfoResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"};
   }
 
   rpc Eligibilities(EligibilitiesRequest) returns (EligibilitiesResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"};
   }
 
   rpc Proposals(ProposalsRequest) returns (ProposalsResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"
-    };
+    option (google.api.http) = {get: "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"};
   }
 }
