@@ -1,9 +1,9 @@
 syntax = "proto3";
 
+package spacemesh.v2beta1;
+
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
-
-package spacemesh.v2beta1;
 
 message NodeStatusResponse {
   uint64 connected_peers = 1; // number of connected neighbors
@@ -33,7 +33,6 @@ message NodeBuildRequest {}
 message NodeBuildResponse {
   string build = 1; // git commit hash of the build
 }
-
 
 service NodeService {
   option (google.api.api_visibility).restriction = "v2beta1";

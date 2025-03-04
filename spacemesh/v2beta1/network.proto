@@ -1,9 +1,9 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
 import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
 
 package spacemesh.v2beta1;
 

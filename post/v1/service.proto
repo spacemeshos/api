@@ -8,7 +8,7 @@ message OperatorStatusRequest {}
 
 message OperatorStatusResponse {
   enum Status {
-    _UNUSED = 0;
+    UNUSED = 0;
     IDLE = 1;
     PROVING = 2;
   }

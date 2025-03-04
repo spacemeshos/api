@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "spacemesh/v2alpha1/tx.proto";
-
 package spacemesh.v2alpha1;
 
 message Block {

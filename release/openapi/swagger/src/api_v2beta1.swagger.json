@@ -19,7 +19,11 @@
       "name": "MIT License",
       "url": "https://github.com/spacemeshos/go-spacemesh/blob/develop/LICENSE"
     },
-    "version": "v2beta1"
+    "version": "v2beta1",
+    "x-logo": {
+      "altText": "Spacemesh Logo",
+      "url": "https://docs.spacemesh.io/img/logo.png"
+    }
   },
   "host": "testnet-api.spacemesh.network",
   "paths": {
@@ -2041,9 +2045,6 @@
       "name": "ActivationService"
     },
     {
-      "name": "TransactionService"
-    },
-    {
       "name": "LayerService"
     },
     {
@@ -2063,6 +2064,9 @@
     },
     {
       "name": "SmeshingIdentitiesService"
+    },
+    {
+      "name": "TransactionService"
     }
   ]
 }

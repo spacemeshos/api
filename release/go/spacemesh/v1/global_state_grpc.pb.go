@@ -19,14 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GlobalStateService_GlobalStateHash_FullMethodName     = "/spacemesh.v1.GlobalStateService/GlobalStateHash"
-	GlobalStateService_Account_FullMethodName             = "/spacemesh.v1.GlobalStateService/Account"
-	GlobalStateService_AccountDataQuery_FullMethodName    = "/spacemesh.v1.GlobalStateService/AccountDataQuery"
-	GlobalStateService_SmesherDataQuery_FullMethodName    = "/spacemesh.v1.GlobalStateService/SmesherDataQuery"
-	GlobalStateService_AccountDataStream_FullMethodName   = "/spacemesh.v1.GlobalStateService/AccountDataStream"
-	GlobalStateService_SmesherRewardStream_FullMethodName = "/spacemesh.v1.GlobalStateService/SmesherRewardStream"
-	GlobalStateService_AppEventStream_FullMethodName      = "/spacemesh.v1.GlobalStateService/AppEventStream"
-	GlobalStateService_GlobalStateStream_FullMethodName   = "/spacemesh.v1.GlobalStateService/GlobalStateStream"
+	GlobalStateService_GlobalStateHash_FullMethodName   = "/spacemesh.v1.GlobalStateService/GlobalStateHash"
+	GlobalStateService_Account_FullMethodName           = "/spacemesh.v1.GlobalStateService/Account"
+	GlobalStateService_AccountDataQuery_FullMethodName  = "/spacemesh.v1.GlobalStateService/AccountDataQuery"
+	GlobalStateService_AccountDataStream_FullMethodName = "/spacemesh.v1.GlobalStateService/AccountDataStream"
+	GlobalStateService_GlobalStateStream_FullMethodName = "/spacemesh.v1.GlobalStateService/GlobalStateStream"
 )
 
 // GlobalStateServiceClient is the client API for GlobalStateService service.
@@ -44,18 +41,9 @@ type GlobalStateServiceClient interface {
 	// If it is possible to index by layer then we should add param start_layer to
 	// AccountDataParams. Currently it will return data from genesis.
 	AccountDataQuery(ctx context.Context, in *AccountDataQueryRequest, opts ...grpc.CallOption) (*AccountDataQueryResponse, error)
-	// Query for smesher data. Currently returns smesher rewards.
-	// Note: Not supporting start_layer yet as it may require to index all rewards by
-	// smesher and by layer id or allow for queries from a layer and later....
-	SmesherDataQuery(ctx context.Context, in *SmesherDataQueryRequest, opts ...grpc.CallOption) (*SmesherDataQueryResponse, error)
 	// Get a stream of account related changes such as account balance change,
 	// tx receipts and rewards
 	AccountDataStream(ctx context.Context, in *AccountDataStreamRequest, opts ...grpc.CallOption) (GlobalStateService_AccountDataStreamClient, error)
-	// Rewards awarded to a smesher id
-	SmesherRewardStream(ctx context.Context, in *SmesherRewardStreamRequest, opts ...grpc.CallOption) (GlobalStateService_SmesherRewardStreamClient, error)
-	// App Events - emitted by app methods impl code trigged by an
-	// app transaction
-	AppEventStream(ctx context.Context, in *AppEventStreamRequest, opts ...grpc.CallOption) (GlobalStateService_AppEventStreamClient, error)
 	// New global state computed for a layer by the STF
 	GlobalStateStream(ctx context.Context, in *GlobalStateStreamRequest, opts ...grpc.CallOption) (GlobalStateService_GlobalStateStreamClient, error)
 }
@@ -95,15 +83,6 @@ func (c *globalStateServiceClient) AccountDataQuery(ctx context.Context, in *Acc
 	return out, nil
 }
 
-func (c *globalStateServiceClient) SmesherDataQuery(ctx context.Context, in *SmesherDataQueryRequest, opts ...grpc.CallOption) (*SmesherDataQueryResponse, error) {
-	out := new(SmesherDataQueryResponse)
-	err := c.cc.Invoke(ctx, GlobalStateService_SmesherDataQuery_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *globalStateServiceClient) AccountDataStream(ctx context.Context, in *AccountDataStreamRequest, opts ...grpc.CallOption) (GlobalStateService_AccountDataStreamClient, error) {
 	stream, err := c.cc.NewStream(ctx, &GlobalStateService_ServiceDesc.Streams[0], GlobalStateService_AccountDataStream_FullMethodName, opts...)
 	if err != nil {
@@ -136,72 +115,8 @@ func (x *globalStateServiceAccountDataStreamClient) Recv() (*AccountDataStreamRe
 	return m, nil
 }
 
-func (c *globalStateServiceClient) SmesherRewardStream(ctx context.Context, in *SmesherRewardStreamRequest, opts ...grpc.CallOption) (GlobalStateService_SmesherRewardStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &GlobalStateService_ServiceDesc.Streams[1], GlobalStateService_SmesherRewardStream_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &globalStateServiceSmesherRewardStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type GlobalStateService_SmesherRewardStreamClient interface {
-	Recv() (*SmesherRewardStreamResponse, error)
-	grpc.ClientStream
-}
-
-type globalStateServiceSmesherRewardStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *globalStateServiceSmesherRewardStreamClient) Recv() (*SmesherRewardStreamResponse, error) {
-	m := new(SmesherRewardStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *globalStateServiceClient) AppEventStream(ctx context.Context, in *AppEventStreamRequest, opts ...grpc.CallOption) (GlobalStateService_AppEventStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &GlobalStateService_ServiceDesc.Streams[2], GlobalStateService_AppEventStream_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &globalStateServiceAppEventStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type GlobalStateService_AppEventStreamClient interface {
-	Recv() (*AppEventStreamResponse, error)
-	grpc.ClientStream
-}
-
-type globalStateServiceAppEventStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *globalStateServiceAppEventStreamClient) Recv() (*AppEventStreamResponse, error) {
-	m := new(AppEventStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *globalStateServiceClient) GlobalStateStream(ctx context.Context, in *GlobalStateStreamRequest, opts ...grpc.CallOption) (GlobalStateService_GlobalStateStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &GlobalStateService_ServiceDesc.Streams[3], GlobalStateService_GlobalStateStream_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &GlobalStateService_ServiceDesc.Streams[1], GlobalStateService_GlobalStateStream_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -247,18 +162,9 @@ type GlobalStateServiceServer interface {
 	// If it is possible to index by layer then we should add param start_layer to
 	// AccountDataParams. Currently it will return data from genesis.
 	AccountDataQuery(context.Context, *AccountDataQueryRequest) (*AccountDataQueryResponse, error)
-	// Query for smesher data. Currently returns smesher rewards.
-	// Note: Not supporting start_layer yet as it may require to index all rewards by
-	// smesher and by layer id or allow for queries from a layer and later....
-	SmesherDataQuery(context.Context, *SmesherDataQueryRequest) (*SmesherDataQueryResponse, error)
 	// Get a stream of account related changes such as account balance change,
 	// tx receipts and rewards
 	AccountDataStream(*AccountDataStreamRequest, GlobalStateService_AccountDataStreamServer) error
-	// Rewards awarded to a smesher id
-	SmesherRewardStream(*SmesherRewardStreamRequest, GlobalStateService_SmesherRewardStreamServer) error
-	// App Events - emitted by app methods impl code trigged by an
-	// app transaction
-	AppEventStream(*AppEventStreamRequest, GlobalStateService_AppEventStreamServer) error
 	// New global state computed for a layer by the STF
 	GlobalStateStream(*GlobalStateStreamRequest, GlobalStateService_GlobalStateStreamServer) error
 }
@@ -276,17 +182,8 @@ func (UnimplementedGlobalStateServiceServer) Account(context.Context, *AccountRe
 func (UnimplementedGlobalStateServiceServer) AccountDataQuery(context.Context, *AccountDataQueryRequest) (*AccountDataQueryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AccountDataQuery not implemented")
 }
-func (UnimplementedGlobalStateServiceServer) SmesherDataQuery(context.Context, *SmesherDataQueryRequest) (*SmesherDataQueryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SmesherDataQuery not implemented")
-}
 func (UnimplementedGlobalStateServiceServer) AccountDataStream(*AccountDataStreamRequest, GlobalStateService_AccountDataStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method AccountDataStream not implemented")
-}
-func (UnimplementedGlobalStateServiceServer) SmesherRewardStream(*SmesherRewardStreamRequest, GlobalStateService_SmesherRewardStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method SmesherRewardStream not implemented")
-}
-func (UnimplementedGlobalStateServiceServer) AppEventStream(*AppEventStreamRequest, GlobalStateService_AppEventStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method AppEventStream not implemented")
 }
 func (UnimplementedGlobalStateServiceServer) GlobalStateStream(*GlobalStateStreamRequest, GlobalStateService_GlobalStateStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GlobalStateStream not implemented")
@@ -357,24 +254,6 @@ func _GlobalStateService_AccountDataQuery_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GlobalStateService_SmesherDataQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SmesherDataQueryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GlobalStateServiceServer).SmesherDataQuery(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GlobalStateService_SmesherDataQuery_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GlobalStateServiceServer).SmesherDataQuery(ctx, req.(*SmesherDataQueryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _GlobalStateService_AccountDataStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(AccountDataStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -393,48 +272,6 @@ type globalStateServiceAccountDataStreamServer struct {
 }
 
 func (x *globalStateServiceAccountDataStreamServer) Send(m *AccountDataStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _GlobalStateService_SmesherRewardStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SmesherRewardStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(GlobalStateServiceServer).SmesherRewardStream(m, &globalStateServiceSmesherRewardStreamServer{stream})
-}
-
-type GlobalStateService_SmesherRewardStreamServer interface {
-	Send(*SmesherRewardStreamResponse) error
-	grpc.ServerStream
-}
-
-type globalStateServiceSmesherRewardStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *globalStateServiceSmesherRewardStreamServer) Send(m *SmesherRewardStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _GlobalStateService_AppEventStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(AppEventStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(GlobalStateServiceServer).AppEventStream(m, &globalStateServiceAppEventStreamServer{stream})
-}
-
-type GlobalStateService_AppEventStreamServer interface {
-	Send(*AppEventStreamResponse) error
-	grpc.ServerStream
-}
-
-type globalStateServiceAppEventStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *globalStateServiceAppEventStreamServer) Send(m *AppEventStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -478,25 +315,11 @@ var GlobalStateService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "AccountDataQuery",
 			Handler:    _GlobalStateService_AccountDataQuery_Handler,
 		},
-		{
-			MethodName: "SmesherDataQuery",
-			Handler:    _GlobalStateService_SmesherDataQuery_Handler,
-		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "AccountDataStream",
 			Handler:       _GlobalStateService_AccountDataStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SmesherRewardStream",
-			Handler:       _GlobalStateService_SmesherRewardStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "AppEventStream",
-			Handler:       _GlobalStateService_AppEventStream_Handler,
 			ServerStreams: true,
 		},
 		{
