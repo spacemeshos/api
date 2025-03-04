@@ -5,7 +5,6 @@ package spacemesh.v2beta1;
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
 import "google/protobuf/duration.proto";
-import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "spacemesh/v2beta1/v2beta1.proto";
 
@@ -128,7 +127,7 @@ message IdentityStatesRequest {
 }
 
 message IdentityStatesResponse {
- repeated IdentityStateInfo states = 1;
+  repeated IdentityStateInfo states = 1;
 }
 
 // PoetInfo rpc
