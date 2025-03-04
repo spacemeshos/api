@@ -356,6 +356,30 @@
         }
       }
     },
+    "/spacemesh.v2beta1.NodeService/Build": {
+      "get": {
+        "description": "Build returns the build of the node software.",
+        "tags": [
+          "NodeService"
+        ],
+        "summary": "Node build",
+        "operationId": "NodeService_Build",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2beta1NodeBuildResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
     "/spacemesh.v2beta1.NodeService/Status": {
       "get": {
         "description": "Status is a method that returns an \"NodeStatusResponse\".\nThis method is used to retrieve node status information.",
@@ -369,6 +393,30 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/spacemeshv2beta1NodeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        }
+      }
+    },
+    "/spacemesh.v2beta1.NodeService/Version": {
+      "get": {
+        "description": "Version returns version information about the node software.",
+        "tags": [
+          "NodeService"
+        ],
+        "summary": "Node version",
+        "operationId": "NodeService_Version",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v2beta1NodeVersionResponse"
             }
           },
           "default": {
@@ -1800,6 +1848,24 @@
             "type": "object",
             "$ref": "#/definitions/v2beta1IdentityStateInfo"
           }
+        }
+      }
+    },
+    "v2beta1NodeBuildResponse": {
+      "type": "object",
+      "properties": {
+        "build": {
+          "type": "string",
+          "title": "git commit hash of the build"
+        }
+      }
+    },
+    "v2beta1NodeVersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "semantic version of the node software"
         }
       }
     },
