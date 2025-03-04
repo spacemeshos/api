@@ -87,25 +87,6 @@ message AccountDataQueryResponse {
     repeated AccountData account_item = 2;
 }
 
-message SmesherRewardStreamRequest {
-    SmesherId id = 1;
-}
-
-message SmesherRewardStreamResponse {
-    Reward reward = 1;
-}
-
-message SmesherDataQueryRequest {
-    SmesherId smesher_id = 1;
-    uint32 max_results = 2; // max numbers of results client would like to get
-    uint32 offset = 3; // return results from offset
-}
-
-message SmesherDataQueryResponse {
-    uint32 total_results = 1;
-    repeated Reward rewards = 2;
-}
-
 enum GlobalStateDataFlag {
     GLOBAL_STATE_DATA_FLAG_UNSPECIFIED = 0;
     GLOBAL_STATE_DATA_FLAG_TRANSACTION_RECEIPT = 1; // tx receipt generated
@@ -142,10 +123,4 @@ message GlobalStateData {
 
 message GlobalStateStreamResponse {
     GlobalStateData datum = 1;
-}
-
-message AppEventStreamRequest {}
-
-message AppEventStreamResponse {
-    AppEvent event = 1;
 }

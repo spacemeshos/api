@@ -38,40 +38,12 @@ message SetCoinbaseResponse {
     google.rpc.Status status = 1;
 }
 
-message MinGasResponse {
-    SimpleInt mingas = 1;
-}
-
-message SetMinGasRequest {
-    SimpleInt mingas = 1;
-}
-
-message SetMinGasResponse {
-    google.rpc.Status status = 1;
-}
-
-message SmesherIDResponse {
-    bytes public_key = 1;
-}
-
 message SmesherIDsResponse {
     repeated bytes public_keys = 1;
 }
 
 message CoinbaseResponse {
     AccountId account_id = 1;
-}
-
-message EstimatedRewardsRequest {}
-
-// Estimated rewards for the next epoch. Note that this is a global value that will be the
-// same for all smeshers, and is based on the default minimum commitment size and fixed
-// epoch length, both of which are network params.
-message EstimatedRewardsResponse {
-    // The amount of the total estimated reward in the next upcoming epoch
-    Amount amount = 1;
-    // The number of Post data commitment units that this estimated reward corresponds to (part of global config)
-    uint32 num_units = 2;
 }
 
 message PostSetupProvidersRequest {

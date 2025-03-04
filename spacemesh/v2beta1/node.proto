@@ -47,22 +47,4 @@ service NodeService {
       get: "/spacemesh.v2beta1.NodeService/Status"
     };
   }
-
-  // Node version
-  //
-  // Version returns version information about the node software.
-  rpc Version(NodeVersionRequest) returns (NodeVersionResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.NodeService/Version"
-    };
-  }
-
-  // Node build
-  //
-  // Build returns the build of the node software.
-  rpc Build(NodeBuildRequest) returns (NodeBuildResponse) {
-    option (google.api.http) = {
-      get: "/spacemesh.v2beta1.NodeService/Build"
-    };
-  }
 }

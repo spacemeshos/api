@@ -2,36 +2,20 @@ version: v1
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/grpc-ecosystem/grpc-gateway
-build:
 lint:
   use:
-    - MINIMAL
-    - ENUM_PASCAL_CASE
-    - FIELD_LOWER_SNAKE_CASE
-    - MESSAGE_PASCAL_CASE
-    - ONEOF_LOWER_SNAKE_CASE
-    - PACKAGE_LOWER_SNAKE_CASE
-    - RPC_PASCAL_CASE
-    - SERVICE_PASCAL_CASE
-    - PACKAGE_SAME_CSHARP_NAMESPACE
-    - PACKAGE_SAME_GO_PACKAGE
-    - PACKAGE_SAME_JAVA_MULTIPLE_FILES
-    - PACKAGE_SAME_JAVA_PACKAGE
-    - PACKAGE_SAME_PHP_NAMESPACE
-    - PACKAGE_SAME_RUBY_PACKAGE
-    - PACKAGE_SAME_SWIFT_PREFIX
-    - ENUM_FIRST_VALUE_ZERO
-    - ENUM_NO_ALLOW_ALIAS
-    - IMPORT_NO_WEAK
-    - IMPORT_NO_PUBLIC
+    - BASIC
     - FILE_LOWER_SNAKE_CASE
     - RPC_REQUEST_RESPONSE_UNIQUE
+    - PACKAGE_NO_IMPORT_CYCLE
     - PACKAGE_VERSION_SUFFIX
+    - PROTOVALIDATE
     - SERVICE_SUFFIX
   ignore:
     - google
   rpc_allow_google_protobuf_empty_requests: true
   rpc_allow_google_protobuf_empty_responses: true
+  allow_comment_ignores: true
 breaking:
   use:
     - WIRE_JSON
