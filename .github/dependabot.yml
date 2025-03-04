@@ -4,7 +4,10 @@ updates:
     directory: "/release/go"
     schedule:
       interval: "daily"
-
+  - package-ecosystem: npm
+    directory: "/release/openapi/swagger"
+    schedule:
+      interval: daily
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
