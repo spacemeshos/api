@@ -10,6 +10,7 @@ package spacemeshv1
 
 import (
 	"context"
+	"errors"
 	"io"
 	"net/http"
 
@@ -24,255 +25,240 @@ import (
 )
 
 // Suppress "imported and not used" errors
-var _ codes.Code
-var _ io.Reader
-var _ status.Status
-var _ = runtime.String
-var _ = utilities.NewDoubleArray
-var _ = metadata.Join
+var (
+	_ codes.Code
+	_ io.Reader
+	_ status.Status
+	_ = errors.New
+	_ = runtime.String
+	_ = utilities.NewDoubleArray
+	_ = metadata.Join
+)
 
 func request_MeshService_GenesisTime_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GenesisTimeRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq GenesisTimeRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.GenesisTime(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_GenesisTime_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GenesisTimeRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq GenesisTimeRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.GenesisTime(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_CurrentLayer_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CurrentLayerRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq CurrentLayerRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.CurrentLayer(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_CurrentLayer_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CurrentLayerRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq CurrentLayerRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.CurrentLayer(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_CurrentEpoch_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CurrentEpochRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq CurrentEpochRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.CurrentEpoch(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_CurrentEpoch_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CurrentEpochRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq CurrentEpochRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.CurrentEpoch(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_GenesisID_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GenesisIDRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq GenesisIDRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.GenesisID(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_GenesisID_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GenesisIDRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq GenesisIDRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.GenesisID(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_EpochNumLayers_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq EpochNumLayersRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq EpochNumLayersRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.EpochNumLayers(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_EpochNumLayers_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq EpochNumLayersRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq EpochNumLayersRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.EpochNumLayers(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_LayerDuration_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq LayerDurationRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq LayerDurationRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.LayerDuration(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_LayerDuration_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq LayerDurationRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq LayerDurationRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.LayerDuration(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_MaxTransactionsPerSecond_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MaxTransactionsPerSecondRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq MaxTransactionsPerSecondRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.MaxTransactionsPerSecond(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_MaxTransactionsPerSecond_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MaxTransactionsPerSecondRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq MaxTransactionsPerSecondRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.MaxTransactionsPerSecond(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_AccountMeshDataQuery_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq AccountMeshDataQueryRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq AccountMeshDataQueryRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.AccountMeshDataQuery(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_AccountMeshDataQuery_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq AccountMeshDataQueryRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq AccountMeshDataQueryRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.AccountMeshDataQuery(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_LayersQuery_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq LayersQueryRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq LayersQueryRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.LayersQuery(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_LayersQuery_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq LayersQueryRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq LayersQueryRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.LayersQuery(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_AccountMeshDataStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_AccountMeshDataStreamClient, runtime.ServerMetadata, error) {
-	var protoReq AccountMeshDataStreamRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq AccountMeshDataStreamRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.AccountMeshDataStream(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -283,17 +269,16 @@ func request_MeshService_AccountMeshDataStream_0(ctx context.Context, marshaler 
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
 func request_MeshService_LayerStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_LayerStreamClient, runtime.ServerMetadata, error) {
-	var protoReq LayerStreamRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq LayerStreamRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.LayerStream(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -304,17 +289,16 @@ func request_MeshService_LayerStream_0(ctx context.Context, marshaler runtime.Ma
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
 func request_MeshService_EpochStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_EpochStreamClient, runtime.ServerMetadata, error) {
-	var protoReq EpochStreamRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq EpochStreamRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.EpochStream(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -325,43 +309,40 @@ func request_MeshService_EpochStream_0(ctx context.Context, marshaler runtime.Ma
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
 func request_MeshService_MalfeasanceQuery_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MalfeasanceRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq MalfeasanceRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.MalfeasanceQuery(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_MeshService_MalfeasanceQuery_0(ctx context.Context, marshaler runtime.Marshaler, server MeshServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MalfeasanceRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq MalfeasanceRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.MalfeasanceQuery(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_MeshService_MalfeasanceStream_0(ctx context.Context, marshaler runtime.Marshaler, client MeshServiceClient, req *http.Request, pathParams map[string]string) (MeshService_MalfeasanceStreamClient, runtime.ServerMetadata, error) {
-	var protoReq MalfeasanceStreamRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq MalfeasanceStreamRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.MalfeasanceStream(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -372,24 +353,21 @@ func request_MeshService_MalfeasanceStream_0(ctx context.Context, marshaler runt
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
 // RegisterMeshServiceHandlerServer registers the http handlers for service MeshService to "mux".
 // UnaryRPC     :call MeshServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterMeshServiceHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server MeshServiceServer) error {
-
-	mux.Handle("POST", pattern_MeshService_GenesisTime_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_GenesisTime_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/v1/mesh/genesistime"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/v1/mesh/genesistime"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -401,20 +379,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_GenesisTime_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_CurrentLayer_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_CurrentLayer_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/v1/mesh/currentlayer"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/v1/mesh/currentlayer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -426,20 +399,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_CurrentLayer_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_CurrentEpoch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_CurrentEpoch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/v1/mesh/currentepoch"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/v1/mesh/currentepoch"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -451,20 +419,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_CurrentEpoch_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_GenesisID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_GenesisID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -476,20 +439,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_GenesisID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_EpochNumLayers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_EpochNumLayers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/v1/mesh/epochnumlayers"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/v1/mesh/epochnumlayers"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -501,20 +459,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_EpochNumLayers_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_LayerDuration_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_LayerDuration_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/v1/mesh/layerduration"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/v1/mesh/layerduration"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -526,20 +479,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_LayerDuration_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_MaxTransactionsPerSecond_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_MaxTransactionsPerSecond_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/v1/mesh/maxtransactionspersecond"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/v1/mesh/maxtransactionspersecond"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -551,20 +499,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_MaxTransactionsPerSecond_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_AccountMeshDataQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_AccountMeshDataQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/v1/mesh/accountmeshdataquery"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/v1/mesh/accountmeshdataquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -576,20 +519,15 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_AccountMeshDataQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_LayersQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_LayersQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/v1/mesh/layersquery"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/v1/mesh/layersquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -601,41 +539,36 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_LayersQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
-	mux.Handle("POST", pattern_MeshService_AccountMeshDataStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_AccountMeshDataStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_MeshService_LayerStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_LayerStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_MeshService_EpochStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_EpochStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
-
-	mux.Handle("POST", pattern_MeshService_MalfeasanceQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_MalfeasanceQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceQuery"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceQuery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -647,12 +580,10 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_MalfeasanceQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
-	mux.Handle("POST", pattern_MeshService_MalfeasanceStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_MalfeasanceStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -665,25 +596,24 @@ func RegisterMeshServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 // RegisterMeshServiceHandlerFromEndpoint is same as RegisterMeshServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterMeshServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
-
 	return RegisterMeshServiceHandler(ctx, mux, conn)
 }
 
@@ -697,16 +627,13 @@ func RegisterMeshServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "MeshServiceClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "MeshServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "MeshServiceClient" to call the correct interceptors.
+// "MeshServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client MeshServiceClient) error {
-
-	mux.Handle("POST", pattern_MeshService_GenesisTime_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_GenesisTime_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/v1/mesh/genesistime"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisTime", runtime.WithHTTPPathPattern("/v1/mesh/genesistime"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -717,18 +644,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_GenesisTime_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_CurrentLayer_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_CurrentLayer_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/v1/mesh/currentlayer"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentLayer", runtime.WithHTTPPathPattern("/v1/mesh/currentlayer"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -739,18 +661,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_CurrentLayer_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_CurrentEpoch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_CurrentEpoch_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/v1/mesh/currentepoch"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/CurrentEpoch", runtime.WithHTTPPathPattern("/v1/mesh/currentepoch"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -761,18 +678,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_CurrentEpoch_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_GenesisID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_GenesisID_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/GenesisID", runtime.WithHTTPPathPattern("/v1/mesh/genesisid"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -783,18 +695,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_GenesisID_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_EpochNumLayers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_EpochNumLayers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/v1/mesh/epochnumlayers"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochNumLayers", runtime.WithHTTPPathPattern("/v1/mesh/epochnumlayers"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -805,18 +712,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_EpochNumLayers_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_LayerDuration_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_LayerDuration_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/v1/mesh/layerduration"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerDuration", runtime.WithHTTPPathPattern("/v1/mesh/layerduration"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -827,18 +729,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_LayerDuration_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_MaxTransactionsPerSecond_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_MaxTransactionsPerSecond_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/v1/mesh/maxtransactionspersecond"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MaxTransactionsPerSecond", runtime.WithHTTPPathPattern("/v1/mesh/maxtransactionspersecond"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -849,18 +746,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_MaxTransactionsPerSecond_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_AccountMeshDataQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_AccountMeshDataQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/v1/mesh/accountmeshdataquery"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataQuery", runtime.WithHTTPPathPattern("/v1/mesh/accountmeshdataquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -871,18 +763,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_AccountMeshDataQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_LayersQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_LayersQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/v1/mesh/layersquery"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayersQuery", runtime.WithHTTPPathPattern("/v1/mesh/layersquery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -893,18 +780,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_LayersQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_AccountMeshDataStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_AccountMeshDataStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/AccountMeshDataStream"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/AccountMeshDataStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/AccountMeshDataStream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -915,18 +797,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_AccountMeshDataStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_LayerStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_LayerStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/LayerStream"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/LayerStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/LayerStream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -937,18 +814,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_LayerStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_EpochStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_EpochStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/EpochStream"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/EpochStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/EpochStream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -959,18 +831,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_EpochStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_MalfeasanceQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_MalfeasanceQuery_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceQuery"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceQuery", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceQuery"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -981,18 +848,13 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_MalfeasanceQuery_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_MeshService_MalfeasanceStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_MeshService_MalfeasanceStream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceStream"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v1.MeshService/MalfeasanceStream", runtime.WithHTTPPathPattern("/spacemesh.v1.MeshService/MalfeasanceStream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1003,70 +865,41 @@ func RegisterMeshServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_MeshService_MalfeasanceStream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
 	return nil
 }
 
 var (
-	pattern_MeshService_GenesisTime_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "genesistime"}, ""))
-
-	pattern_MeshService_CurrentLayer_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "currentlayer"}, ""))
-
-	pattern_MeshService_CurrentEpoch_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "currentepoch"}, ""))
-
-	pattern_MeshService_GenesisID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "genesisid"}, ""))
-
-	pattern_MeshService_EpochNumLayers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "epochnumlayers"}, ""))
-
-	pattern_MeshService_LayerDuration_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "layerduration"}, ""))
-
+	pattern_MeshService_GenesisTime_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "genesistime"}, ""))
+	pattern_MeshService_CurrentLayer_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "currentlayer"}, ""))
+	pattern_MeshService_CurrentEpoch_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "currentepoch"}, ""))
+	pattern_MeshService_GenesisID_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "genesisid"}, ""))
+	pattern_MeshService_EpochNumLayers_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "epochnumlayers"}, ""))
+	pattern_MeshService_LayerDuration_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "layerduration"}, ""))
 	pattern_MeshService_MaxTransactionsPerSecond_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "maxtransactionspersecond"}, ""))
-
-	pattern_MeshService_AccountMeshDataQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "accountmeshdataquery"}, ""))
-
-	pattern_MeshService_LayersQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "layersquery"}, ""))
-
-	pattern_MeshService_AccountMeshDataStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "AccountMeshDataStream"}, ""))
-
-	pattern_MeshService_LayerStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "LayerStream"}, ""))
-
-	pattern_MeshService_EpochStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "EpochStream"}, ""))
-
-	pattern_MeshService_MalfeasanceQuery_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "MalfeasanceQuery"}, ""))
-
-	pattern_MeshService_MalfeasanceStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "MalfeasanceStream"}, ""))
+	pattern_MeshService_AccountMeshDataQuery_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "accountmeshdataquery"}, ""))
+	pattern_MeshService_LayersQuery_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "mesh", "layersquery"}, ""))
+	pattern_MeshService_AccountMeshDataStream_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "AccountMeshDataStream"}, ""))
+	pattern_MeshService_LayerStream_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "LayerStream"}, ""))
+	pattern_MeshService_EpochStream_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "EpochStream"}, ""))
+	pattern_MeshService_MalfeasanceQuery_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "MalfeasanceQuery"}, ""))
+	pattern_MeshService_MalfeasanceStream_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v1.MeshService", "MalfeasanceStream"}, ""))
 )
 
 var (
-	forward_MeshService_GenesisTime_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_CurrentLayer_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_CurrentEpoch_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_GenesisID_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_EpochNumLayers_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_LayerDuration_0 = runtime.ForwardResponseMessage
-
+	forward_MeshService_GenesisTime_0              = runtime.ForwardResponseMessage
+	forward_MeshService_CurrentLayer_0             = runtime.ForwardResponseMessage
+	forward_MeshService_CurrentEpoch_0             = runtime.ForwardResponseMessage
+	forward_MeshService_GenesisID_0                = runtime.ForwardResponseMessage
+	forward_MeshService_EpochNumLayers_0           = runtime.ForwardResponseMessage
+	forward_MeshService_LayerDuration_0            = runtime.ForwardResponseMessage
 	forward_MeshService_MaxTransactionsPerSecond_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_AccountMeshDataQuery_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_LayersQuery_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_AccountMeshDataStream_0 = runtime.ForwardResponseStream
-
-	forward_MeshService_LayerStream_0 = runtime.ForwardResponseStream
-
-	forward_MeshService_EpochStream_0 = runtime.ForwardResponseStream
-
-	forward_MeshService_MalfeasanceQuery_0 = runtime.ForwardResponseMessage
-
-	forward_MeshService_MalfeasanceStream_0 = runtime.ForwardResponseStream
+	forward_MeshService_AccountMeshDataQuery_0     = runtime.ForwardResponseMessage
+	forward_MeshService_LayersQuery_0              = runtime.ForwardResponseMessage
+	forward_MeshService_AccountMeshDataStream_0    = runtime.ForwardResponseStream
+	forward_MeshService_LayerStream_0              = runtime.ForwardResponseStream
+	forward_MeshService_EpochStream_0              = runtime.ForwardResponseStream
+	forward_MeshService_MalfeasanceQuery_0         = runtime.ForwardResponseMessage
+	forward_MeshService_MalfeasanceStream_0        = runtime.ForwardResponseStream
 )
