@@ -10,6 +10,7 @@ package spacemeshv2beta1
 
 import (
 	"context"
+	"errors"
 	"io"
 	"net/http"
 
@@ -24,21 +25,24 @@ import (
 )
 
 // Suppress "imported and not used" errors
-var _ codes.Code
-var _ io.Reader
-var _ status.Status
-var _ = runtime.String
-var _ = utilities.NewDoubleArray
-var _ = metadata.Join
+var (
+	_ codes.Code
+	_ io.Reader
+	_ status.Status
+	_ = errors.New
+	_ = runtime.String
+	_ = utilities.NewDoubleArray
+	_ = metadata.Join
+)
 
 func request_ActivationStreamService_Stream_0(ctx context.Context, marshaler runtime.Marshaler, client ActivationStreamServiceClient, req *http.Request, pathParams map[string]string) (ActivationStreamService_StreamClient, runtime.ServerMetadata, error) {
-	var protoReq ActivationStreamRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq ActivationStreamRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.Stream(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -49,106 +53,100 @@ func request_ActivationStreamService_Stream_0(ctx context.Context, marshaler run
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
-var (
-	filter_ActivationService_List_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_ActivationService_List_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_ActivationService_List_0(ctx context.Context, marshaler runtime.Marshaler, client ActivationServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ActivationRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ActivationRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ActivationService_List_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.List(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_ActivationService_List_0(ctx context.Context, marshaler runtime.Marshaler, server ActivationServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ActivationRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ActivationRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ActivationService_List_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.List(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
-var (
-	filter_ActivationService_ActivationsCount_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_ActivationService_ActivationsCount_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_ActivationService_ActivationsCount_0(ctx context.Context, marshaler runtime.Marshaler, client ActivationServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ActivationsCountRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ActivationsCountRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ActivationService_ActivationsCount_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.ActivationsCount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_ActivationService_ActivationsCount_0(ctx context.Context, marshaler runtime.Marshaler, server ActivationServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ActivationsCountRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ActivationsCountRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ActivationService_ActivationsCount_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.ActivationsCount(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_ActivationService_Highest_0(ctx context.Context, marshaler runtime.Marshaler, client ActivationServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq HighestRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq HighestRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.Highest(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_ActivationService_Highest_0(ctx context.Context, marshaler runtime.Marshaler, server ActivationServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq HighestRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq HighestRequest
+		metadata runtime.ServerMetadata
+	)
 	msg, err := server.Highest(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 // RegisterActivationStreamServiceHandlerServer registers the http handlers for service ActivationStreamService to "mux".
 // UnaryRPC     :call ActivationStreamServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterActivationStreamServiceHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterActivationStreamServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ActivationStreamServiceServer) error {
-
-	mux.Handle("POST", pattern_ActivationStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_ActivationStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -162,17 +160,15 @@ func RegisterActivationStreamServiceHandlerServer(ctx context.Context, mux *runt
 // UnaryRPC     :call ActivationServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterActivationServiceHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterActivationServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ActivationServiceServer) error {
-
-	mux.Handle("GET", pattern_ActivationService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_ActivationService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/List"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -184,20 +180,15 @@ func RegisterActivationServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_ActivationService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_ActivationService_ActivationsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_ActivationService_ActivationsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/ActivationsCount", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/ActivationsCount"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/ActivationsCount", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/ActivationsCount"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -209,20 +200,15 @@ func RegisterActivationServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_ActivationService_ActivationsCount_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_ActivationService_Highest_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_ActivationService_Highest_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/Highest", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/Highest"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/Highest", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/Highest"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -234,9 +220,7 @@ func RegisterActivationServiceHandlerServer(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_ActivationService_Highest_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	return nil
@@ -245,25 +229,24 @@ func RegisterActivationServiceHandlerServer(ctx context.Context, mux *runtime.Se
 // RegisterActivationStreamServiceHandlerFromEndpoint is same as RegisterActivationStreamServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterActivationStreamServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
-
 	return RegisterActivationStreamServiceHandler(ctx, mux, conn)
 }
 
@@ -277,16 +260,13 @@ func RegisterActivationStreamServiceHandler(ctx context.Context, mux *runtime.Se
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ActivationStreamServiceClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ActivationStreamServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "ActivationStreamServiceClient" to call the correct interceptors.
+// "ActivationStreamServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterActivationStreamServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ActivationStreamServiceClient) error {
-
-	mux.Handle("POST", pattern_ActivationStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_ActivationStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationStreamService/Stream", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationStreamService/Stream"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationStreamService/Stream", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationStreamService/Stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -297,11 +277,8 @@ func RegisterActivationStreamServiceHandlerClient(ctx context.Context, mux *runt
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_ActivationStreamService_Stream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
 	return nil
 }
 
@@ -316,25 +293,24 @@ var (
 // RegisterActivationServiceHandlerFromEndpoint is same as RegisterActivationServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterActivationServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
-
 	return RegisterActivationServiceHandler(ctx, mux, conn)
 }
 
@@ -348,16 +324,13 @@ func RegisterActivationServiceHandler(ctx context.Context, mux *runtime.ServeMux
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ActivationServiceClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ActivationServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "ActivationServiceClient" to call the correct interceptors.
+// "ActivationServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterActivationServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ActivationServiceClient) error {
-
-	mux.Handle("GET", pattern_ActivationService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_ActivationService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/List"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -368,18 +341,13 @@ func RegisterActivationServiceHandlerClient(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_ActivationService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_ActivationService_ActivationsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_ActivationService_ActivationsCount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/ActivationsCount", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/ActivationsCount"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/ActivationsCount", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/ActivationsCount"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -390,18 +358,13 @@ func RegisterActivationServiceHandlerClient(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_ActivationService_ActivationsCount_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_ActivationService_Highest_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_ActivationService_Highest_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/Highest", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/Highest"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.ActivationService/Highest", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.ActivationService/Highest"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -412,26 +375,19 @@ func RegisterActivationServiceHandlerClient(ctx context.Context, mux *runtime.Se
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_ActivationService_Highest_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
 	return nil
 }
 
 var (
-	pattern_ActivationService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "List"}, ""))
-
+	pattern_ActivationService_List_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "List"}, ""))
 	pattern_ActivationService_ActivationsCount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "ActivationsCount"}, ""))
-
-	pattern_ActivationService_Highest_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "Highest"}, ""))
+	pattern_ActivationService_Highest_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.ActivationService", "Highest"}, ""))
 )
 
 var (
-	forward_ActivationService_List_0 = runtime.ForwardResponseMessage
-
+	forward_ActivationService_List_0             = runtime.ForwardResponseMessage
 	forward_ActivationService_ActivationsCount_0 = runtime.ForwardResponseMessage
-
-	forward_ActivationService_Highest_0 = runtime.ForwardResponseMessage
+	forward_ActivationService_Highest_0          = runtime.ForwardResponseMessage
 )
