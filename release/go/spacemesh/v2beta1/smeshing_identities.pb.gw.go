@@ -10,6 +10,7 @@ package spacemeshv2beta1
 
 import (
 	"context"
+	"errors"
 	"io"
 	"net/http"
 
@@ -24,118 +25,119 @@ import (
 )
 
 // Suppress "imported and not used" errors
-var _ codes.Code
-var _ io.Reader
-var _ status.Status
-var _ = runtime.String
-var _ = utilities.NewDoubleArray
-var _ = metadata.Join
-
 var (
-	filter_SmeshingIdentitiesService_States_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	_ codes.Code
+	_ io.Reader
+	_ status.Status
+	_ = errors.New
+	_ = runtime.String
+	_ = utilities.NewDoubleArray
+	_ = metadata.Join
 )
 
-func request_SmeshingIdentitiesService_States_0(ctx context.Context, marshaler runtime.Marshaler, client SmeshingIdentitiesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq IdentityStatesRequest
-	var metadata runtime.ServerMetadata
+var filter_SmeshingIdentitiesService_States_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
+func request_SmeshingIdentitiesService_States_0(ctx context.Context, marshaler runtime.Marshaler, client SmeshingIdentitiesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq IdentityStatesRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SmeshingIdentitiesService_States_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.States(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_SmeshingIdentitiesService_States_0(ctx context.Context, marshaler runtime.Marshaler, server SmeshingIdentitiesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq IdentityStatesRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq IdentityStatesRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_SmeshingIdentitiesService_States_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.States(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_SmeshingIdentitiesService_PoetInfo_0(ctx context.Context, marshaler runtime.Marshaler, client SmeshingIdentitiesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PoetInfoRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq PoetInfoRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.PoetInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_SmeshingIdentitiesService_PoetInfo_0(ctx context.Context, marshaler runtime.Marshaler, server SmeshingIdentitiesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PoetInfoRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq PoetInfoRequest
+		metadata runtime.ServerMetadata
+	)
 	msg, err := server.PoetInfo(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_SmeshingIdentitiesService_Eligibilities_0(ctx context.Context, marshaler runtime.Marshaler, client SmeshingIdentitiesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq EligibilitiesRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq EligibilitiesRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.Eligibilities(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_SmeshingIdentitiesService_Eligibilities_0(ctx context.Context, marshaler runtime.Marshaler, server SmeshingIdentitiesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq EligibilitiesRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq EligibilitiesRequest
+		metadata runtime.ServerMetadata
+	)
 	msg, err := server.Eligibilities(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_SmeshingIdentitiesService_Proposals_0(ctx context.Context, marshaler runtime.Marshaler, client SmeshingIdentitiesServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ProposalsRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ProposalsRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.Proposals(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_SmeshingIdentitiesService_Proposals_0(ctx context.Context, marshaler runtime.Marshaler, server SmeshingIdentitiesServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ProposalsRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq ProposalsRequest
+		metadata runtime.ServerMetadata
+	)
 	msg, err := server.Proposals(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 // RegisterSmeshingIdentitiesServiceHandlerServer registers the http handlers for service SmeshingIdentitiesService to "mux".
 // UnaryRPC     :call SmeshingIdentitiesServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterSmeshingIdentitiesServiceHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server SmeshingIdentitiesServiceServer) error {
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -147,20 +149,15 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_States_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -172,20 +169,15 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_PoetInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -197,20 +189,15 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_Eligibilities_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -222,9 +209,7 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_Proposals_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	return nil
@@ -233,25 +218,24 @@ func RegisterSmeshingIdentitiesServiceHandlerServer(ctx context.Context, mux *ru
 // RegisterSmeshingIdentitiesServiceHandlerFromEndpoint is same as RegisterSmeshingIdentitiesServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterSmeshingIdentitiesServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
-
 	return RegisterSmeshingIdentitiesServiceHandler(ctx, mux, conn)
 }
 
@@ -265,16 +249,13 @@ func RegisterSmeshingIdentitiesServiceHandler(ctx context.Context, mux *runtime.
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "SmeshingIdentitiesServiceClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "SmeshingIdentitiesServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "SmeshingIdentitiesServiceClient" to call the correct interceptors.
+// "SmeshingIdentitiesServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client SmeshingIdentitiesServiceClient) error {
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_States_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/States", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/States"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -285,18 +266,13 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_States_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_PoetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/PoetInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -307,18 +283,13 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_PoetInfo_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_Eligibilities_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Eligibilities"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -329,18 +300,13 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_Eligibilities_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("GET", pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_SmeshingIdentitiesService_Proposals_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.SmeshingIdentitiesService/Proposals"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -351,30 +317,21 @@ func RegisterSmeshingIdentitiesServiceHandlerClient(ctx context.Context, mux *ru
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_SmeshingIdentitiesService_Proposals_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
 	return nil
 }
 
 var (
-	pattern_SmeshingIdentitiesService_States_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.SmeshingIdentitiesService", "States"}, ""))
-
-	pattern_SmeshingIdentitiesService_PoetInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.SmeshingIdentitiesService", "PoetInfo"}, ""))
-
+	pattern_SmeshingIdentitiesService_States_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.SmeshingIdentitiesService", "States"}, ""))
+	pattern_SmeshingIdentitiesService_PoetInfo_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.SmeshingIdentitiesService", "PoetInfo"}, ""))
 	pattern_SmeshingIdentitiesService_Eligibilities_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.SmeshingIdentitiesService", "Eligibilities"}, ""))
-
-	pattern_SmeshingIdentitiesService_Proposals_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.SmeshingIdentitiesService", "Proposals"}, ""))
+	pattern_SmeshingIdentitiesService_Proposals_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.SmeshingIdentitiesService", "Proposals"}, ""))
 )
 
 var (
-	forward_SmeshingIdentitiesService_States_0 = runtime.ForwardResponseMessage
-
-	forward_SmeshingIdentitiesService_PoetInfo_0 = runtime.ForwardResponseMessage
-
+	forward_SmeshingIdentitiesService_States_0        = runtime.ForwardResponseMessage
+	forward_SmeshingIdentitiesService_PoetInfo_0      = runtime.ForwardResponseMessage
 	forward_SmeshingIdentitiesService_Eligibilities_0 = runtime.ForwardResponseMessage
-
-	forward_SmeshingIdentitiesService_Proposals_0 = runtime.ForwardResponseMessage
+	forward_SmeshingIdentitiesService_Proposals_0     = runtime.ForwardResponseMessage
 )

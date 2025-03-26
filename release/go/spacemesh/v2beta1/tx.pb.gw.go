@@ -10,6 +10,7 @@ package spacemeshv2beta1
 
 import (
 	"context"
+	"errors"
 	"io"
 	"net/http"
 
@@ -24,21 +25,24 @@ import (
 )
 
 // Suppress "imported and not used" errors
-var _ codes.Code
-var _ io.Reader
-var _ status.Status
-var _ = runtime.String
-var _ = utilities.NewDoubleArray
-var _ = metadata.Join
+var (
+	_ codes.Code
+	_ io.Reader
+	_ status.Status
+	_ = errors.New
+	_ = runtime.String
+	_ = utilities.NewDoubleArray
+	_ = metadata.Join
+)
 
 func request_TransactionStreamService_Stream_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionStreamServiceClient, req *http.Request, pathParams map[string]string) (TransactionStreamService_StreamClient, runtime.ServerMetadata, error) {
-	var protoReq TransactionStreamRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq TransactionStreamRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	stream, err := client.Stream(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -49,130 +53,120 @@ func request_TransactionStreamService_Stream_0(ctx context.Context, marshaler ru
 	}
 	metadata.HeaderMD = header
 	return stream, metadata, nil
-
 }
 
-var (
-	filter_TransactionService_List_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
+var filter_TransactionService_List_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_TransactionService_List_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq TransactionRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq TransactionRequest
+		metadata runtime.ServerMetadata
+	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_TransactionService_List_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.List(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_TransactionService_List_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq TransactionRequest
-	var metadata runtime.ServerMetadata
-
+	var (
+		protoReq TransactionRequest
+		metadata runtime.ServerMetadata
+	)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_TransactionService_List_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.List(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_TransactionService_ParseTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ParseTransactionRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq ParseTransactionRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.ParseTransaction(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_TransactionService_ParseTransaction_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ParseTransactionRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq ParseTransactionRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.ParseTransaction(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_TransactionService_SubmitTransaction_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SubmitTransactionRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq SubmitTransactionRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.SubmitTransaction(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_TransactionService_SubmitTransaction_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SubmitTransactionRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq SubmitTransactionRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.SubmitTransaction(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 func request_TransactionService_EstimateGas_0(ctx context.Context, marshaler runtime.Marshaler, client TransactionServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq EstimateGasRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq EstimateGasRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := client.EstimateGas(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
-
 }
 
 func local_request_TransactionService_EstimateGas_0(ctx context.Context, marshaler runtime.Marshaler, server TransactionServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq EstimateGasRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	var (
+		protoReq EstimateGasRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
 	msg, err := server.EstimateGas(ctx, &protoReq)
 	return msg, metadata, err
-
 }
 
 // RegisterTransactionStreamServiceHandlerServer registers the http handlers for service TransactionStreamService to "mux".
 // UnaryRPC     :call TransactionStreamServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterTransactionStreamServiceHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterTransactionStreamServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server TransactionStreamServiceServer) error {
-
-	mux.Handle("POST", pattern_TransactionStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -186,17 +180,15 @@ func RegisterTransactionStreamServiceHandlerServer(ctx context.Context, mux *run
 // UnaryRPC     :call TransactionServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterTransactionServiceHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server TransactionServiceServer) error {
-
-	mux.Handle("GET", pattern_TransactionService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_TransactionService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/List"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -208,20 +200,15 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_TransactionService_ParseTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionService_ParseTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/ParseTransaction"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/ParseTransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -233,20 +220,15 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_ParseTransaction_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_TransactionService_SubmitTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionService_SubmitTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/SubmitTransaction"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/SubmitTransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -258,20 +240,15 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_SubmitTransaction_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_TransactionService_EstimateGas_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionService_EstimateGas_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/EstimateGas", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/EstimateGas"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/EstimateGas", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/EstimateGas"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -283,9 +260,7 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_EstimateGas_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
 
 	return nil
@@ -294,25 +269,24 @@ func RegisterTransactionServiceHandlerServer(ctx context.Context, mux *runtime.S
 // RegisterTransactionStreamServiceHandlerFromEndpoint is same as RegisterTransactionStreamServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterTransactionStreamServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
-
 	return RegisterTransactionStreamServiceHandler(ctx, mux, conn)
 }
 
@@ -326,16 +300,13 @@ func RegisterTransactionStreamServiceHandler(ctx context.Context, mux *runtime.S
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "TransactionStreamServiceClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "TransactionStreamServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "TransactionStreamServiceClient" to call the correct interceptors.
+// "TransactionStreamServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterTransactionStreamServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client TransactionStreamServiceClient) error {
-
-	mux.Handle("POST", pattern_TransactionStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionStreamService_Stream_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionStreamService/Stream", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionStreamService/Stream"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionStreamService/Stream", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionStreamService/Stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -346,11 +317,8 @@ func RegisterTransactionStreamServiceHandlerClient(ctx context.Context, mux *run
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionStreamService_Stream_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
-
 	})
-
 	return nil
 }
 
@@ -365,25 +333,24 @@ var (
 // RegisterTransactionServiceHandlerFromEndpoint is same as RegisterTransactionServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterTransactionServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
-
 	return RegisterTransactionServiceHandler(ctx, mux, conn)
 }
 
@@ -397,16 +364,13 @@ func RegisterTransactionServiceHandler(ctx context.Context, mux *runtime.ServeMu
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "TransactionServiceClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "TransactionServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "TransactionServiceClient" to call the correct interceptors.
+// "TransactionServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client TransactionServiceClient) error {
-
-	mux.Handle("GET", pattern_TransactionService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_TransactionService_List_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/List"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/List", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/List"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -417,18 +381,13 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_List_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_TransactionService_ParseTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionService_ParseTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/ParseTransaction"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/ParseTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/ParseTransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -439,18 +398,13 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_ParseTransaction_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_TransactionService_SubmitTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionService_SubmitTransaction_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/SubmitTransaction"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/SubmitTransaction", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/SubmitTransaction"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -461,18 +415,13 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_SubmitTransaction_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
-	mux.Handle("POST", pattern_TransactionService_EstimateGas_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_TransactionService_EstimateGas_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/EstimateGas", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/EstimateGas"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/spacemesh.v2beta1.TransactionService/EstimateGas", runtime.WithHTTPPathPattern("/spacemesh.v2beta1.TransactionService/EstimateGas"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -483,30 +432,21 @@ func RegisterTransactionServiceHandlerClient(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-
 		forward_TransactionService_EstimateGas_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
 	})
-
 	return nil
 }
 
 var (
-	pattern_TransactionService_List_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.TransactionService", "List"}, ""))
-
-	pattern_TransactionService_ParseTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.TransactionService", "ParseTransaction"}, ""))
-
+	pattern_TransactionService_List_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.TransactionService", "List"}, ""))
+	pattern_TransactionService_ParseTransaction_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.TransactionService", "ParseTransaction"}, ""))
 	pattern_TransactionService_SubmitTransaction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.TransactionService", "SubmitTransaction"}, ""))
-
-	pattern_TransactionService_EstimateGas_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.TransactionService", "EstimateGas"}, ""))
+	pattern_TransactionService_EstimateGas_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"spacemesh.v2beta1.TransactionService", "EstimateGas"}, ""))
 )
 
 var (
-	forward_TransactionService_List_0 = runtime.ForwardResponseMessage
-
-	forward_TransactionService_ParseTransaction_0 = runtime.ForwardResponseMessage
-
+	forward_TransactionService_List_0              = runtime.ForwardResponseMessage
+	forward_TransactionService_ParseTransaction_0  = runtime.ForwardResponseMessage
 	forward_TransactionService_SubmitTransaction_0 = runtime.ForwardResponseMessage
-
-	forward_TransactionService_EstimateGas_0 = runtime.ForwardResponseMessage
+	forward_TransactionService_EstimateGas_0       = runtime.ForwardResponseMessage
 )

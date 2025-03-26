@@ -20,11 +20,11 @@ HTTPS_GIT := https://github.com/spacemeshos/api.git
 SSH_GIT := ssh://git@github.com/spacemeshos/api.git
 
 # This controls the version of buf to install and use.
-BUF_VERSION := 1.30.0
+BUF_VERSION := 1.50.1
 
-GRPC_JSON_PROXY_VERSION := v2.19.1
-PROTOC_GO_VERSION := v1.33.0
-PROTOC_GEN_GO_VERSION := v1.3.0
+GRPC_JSON_PROXY_VERSION := v2.26.3
+PROTOC_GO_VERSION := v1.36.6
+PROTOC_GEN_GO_VERSION := v1.5.1
 GO_SWAGGER_VERSION := v0.31.0
 
 # Everything below this line is meant to be static, i.e. only adjust the above variables. ###
@@ -65,9 +65,9 @@ $(BUF): protoc-plugins deps
 # Download protoc plugins
 protoc-plugins:
 	@go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@$(GRPC_JSON_PROXY_VERSION)
+	@go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@$(GRPC_JSON_PROXY_VERSION)
 	@go install google.golang.org/protobuf/cmd/protoc-gen-go@$(PROTOC_GO_VERSION)
 	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@$(PROTOC_GEN_GO_VERSION)
-	@go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@$(GRPC_JSON_PROXY_VERSION)
 .PHONY: protoc-plugins
 
 # Download go deps
