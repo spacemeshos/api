@@ -1,7 +1,6 @@
 module github.com/spacemeshos/api/release/go
 
-go 1.23.2
-toolchain go1.24.1
+go 1.24.1
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
