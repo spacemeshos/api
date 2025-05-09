@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/api/visibility.proto";
+
+package spacemesh.v2beta1;
+
+message SmeshingVersionRequest {}
+
+message SmeshingVersionResponse {
+  string version = 1; // semantic version of the node software
+}
+
+message SmeshingBuildRequest {}
+
+message SmeshingBuildResponse {
+  string build = 1; // git commit hash of the build
+}
+
+
+service SmeshingService {
+  option (google.api.api_visibility).restriction = "v2beta1";
+
+  rpc Version(SmeshingVersionRequest) returns (SmeshingVersionResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmeshingService/Version"
+    };
+  }
+  rpc Build(SmeshingBuildRequest) returns (SmeshingBuildResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.SmeshingService/Build"
+    };
+  }
+}

@@ -80,7 +80,7 @@ deps:
 
 .PHONY: local
 local: $(BUF)
-	buf breaking --against '.git#branch=master'
+	buf breaking --against '.git#branch=node-split-poc'
 
 # Linter only. This does not do breaking change detection.
 
@@ -93,7 +93,7 @@ lint: $(BUF)
 
 .PHONY: breaking
 breaking: $(BUF)
-	buf breaking --against "$(HTTPS_GIT)#branch=master"
+	buf breaking --against "$(HTTPS_GIT)#branch=node-split-poc"
 
 # Run all builds
 .PHONY: build

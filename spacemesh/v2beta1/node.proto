@@ -1,9 +1,9 @@
 syntax = "proto3";
 
+package spacemesh.v2beta1;
+
 import "google/api/annotations.proto";
 import "google/api/visibility.proto";
-
-package spacemesh.v2beta1;
 
 message NodeStatusResponse {
   uint64 connected_peers = 1; // number of connected neighbors
@@ -22,6 +22,18 @@ message NodeStatusResponse {
 
 message NodeStatusRequest {}
 
+message NodeVersionRequest {}
+
+message NodeVersionResponse {
+  string version = 1; // semantic version of the node software
+}
+
+message NodeBuildRequest {}
+
+message NodeBuildResponse {
+  string build = 1; // git commit hash of the build
+}
+
 service NodeService {
   option (google.api.api_visibility).restriction = "v2beta1";
 
@@ -32,6 +44,24 @@ service NodeService {
   rpc Status(NodeStatusRequest) returns (NodeStatusResponse) {
     option (google.api.http) = {
       get: "/spacemesh.v2beta1.NodeService/Status"
+    };
+  }
+
+  // Node version
+  //
+  // Version returns version information about the node software.
+  rpc Version(NodeVersionRequest) returns (NodeVersionResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.NodeService/Version"
+    };
+  }
+
+  // Node build
+  //
+  // Build returns the build of the node software.
+  rpc Build(NodeBuildRequest) returns (NodeBuildResponse) {
+    option (google.api.http) = {
+      get: "/spacemesh.v2beta1.NodeService/Build"
     };
   }
 }
