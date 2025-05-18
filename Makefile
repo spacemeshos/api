@@ -20,7 +20,7 @@ HTTPS_GIT := https://github.com/spacemeshos/api.git
 SSH_GIT := ssh://git@github.com/spacemeshos/api.git
 
 # This controls the version of buf to install and use.
-BUF_VERSION := 1.50.1
+BUF_VERSION := 1.53.0
 
 GRPC_JSON_PROXY_VERSION := v2.26.3
 PROTOC_GO_VERSION := v1.36.6

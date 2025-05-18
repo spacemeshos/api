@@ -30,7 +30,7 @@ const (
 // node.
 type PostServiceClient interface {
 	// Register is a bi-directional stream that allows a dedicated PoST node to connect to the spacemesh node.
-	// The node will send NodeRequets to PoST and the service will respond with ServiceResponses.
+	// The node will send NodeRequests to PoST and the service will respond with ServiceResponses.
 	Register(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ServiceResponse, NodeRequest], error)
 }
 
@@ -63,7 +63,7 @@ type PostService_RegisterClient = grpc.BidiStreamingClient[ServiceResponse, Node
 // node.
 type PostServiceServer interface {
 	// Register is a bi-directional stream that allows a dedicated PoST node to connect to the spacemesh node.
-	// The node will send NodeRequets to PoST and the service will respond with ServiceResponses.
+	// The node will send NodeRequests to PoST and the service will respond with ServiceResponses.
 	Register(grpc.BidiStreamingServer[ServiceResponse, NodeRequest]) error
 }
 

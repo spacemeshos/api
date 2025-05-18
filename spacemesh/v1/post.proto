@@ -11,7 +11,7 @@ service PostService {
   option (google.api.api_visibility).restriction = "V1";
 
   // Register is a bi-directional stream that allows a dedicated PoST node to connect to the spacemesh node.
-  // The node will send NodeRequets to PoST and the service will respond with ServiceResponses.
+  // The node will send NodeRequests to PoST and the service will respond with ServiceResponses.
   rpc Register(stream ServiceResponse) returns (stream NodeRequest);
 }
 
