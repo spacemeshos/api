@@ -21,6 +21,6 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "stream": "^0.0.3",
-    "swagger-ui": "^5.21.0"
+    "swagger-ui": "^5.22.0"
   }
 }
