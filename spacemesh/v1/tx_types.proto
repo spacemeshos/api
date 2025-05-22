@@ -43,7 +43,7 @@ message TransactionsStateStreamResponse {
 // and its side effects, check the Receipt in the GlobalStateService.
 message TransactionState {
     TransactionId id = 1;
-    enum TransactionState {
+    enum TransactionStateEnum {
         TRANSACTION_STATE_UNSPECIFIED = 0; // default state
         TRANSACTION_STATE_REJECTED = 1; // rejected from mempool due to, e.g., invalid syntax
         TRANSACTION_STATE_INSUFFICIENT_FUNDS = 2; // rejected from mempool by funds check
@@ -53,7 +53,7 @@ message TransactionState {
         TRANSACTION_STATE_PROCESSED = 6; // processed by STF; check Receipt for success or failure
         TRANSACTION_STATE_INEFFECTUAL = 7; // removed from mempool and will be forgotten and never executed
     }
-    TransactionState state = 2;
+    TransactionStateEnum state = 2;
 }
 
 // TransactionResultsRequest request object for results stream.
